@@ -1,9 +1,12 @@
 @echo off
-REM Activate the venv and start AnimaDex.
+REM Weeb Alexandria unified MCP server (stdio)
+setlocal
+set "PYTHONPATH="
+set "TAGLIB_DB=%~dp0tag_library.db"
 cd /d "%~dp0"
-if not exist .venv (
-    echo No .venv found -- run install.bat first.
+if not exist ".venv\Scripts\python.exe" (
+    echo [!] No se encontro .venv en WeebAlexandria.
     exit /b 1
 )
-call .venv\Scripts\activate.bat
-python -m animadex serve %*
+".venv\Scripts\python.exe" -m weeb_alexandria_mcp.server
+endlocal

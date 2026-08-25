@@ -9,6 +9,9 @@ data/
 *.db-wal
 *.db-shm
 
+# Raw source dumps (large, reproducible/downloaded data)
+raw/
+
 # Sample data backups
 *.bak
 *.csv.bak

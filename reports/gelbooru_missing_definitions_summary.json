@@ -1,0 +1,59 @@
+{
+  "threshold": 100,
+  "candidate_count": 9737,
+  "by_category": [
+    {
+      "category": "character",
+      "count": 5144,
+      "post_count_sum": 930269,
+      "max_post_count": 457
+    },
+    {
+      "category": "general",
+      "count": 3061,
+      "post_count_sum": 601652,
+      "max_post_count": 3947
+    },
+    {
+      "category": "copyright",
+      "count": 1532,
+      "post_count_sum": 279108,
+      "max_post_count": 3932
+    }
+  ],
+  "thresholds": {
+    "10000": [
+      0,
+      0
+    ],
+    "1000": [
+      6,
+      23552
+    ],
+    "500": [
+      6,
+      23552
+    ],
+    "100": [
+      9737,
+      1811029
+    ],
+    "50": [
+      21729,
+      2642643
+    ],
+    "10": [
+      90899,
+      4085482
+    ],
+    "0": [
+      664794,
+      5162159
+    ]
+  },
+  "active_relation_matches": {
+    "tag_aliases": 989,
+    "tag_implications": 287
+  },
+  "report": "C:\\Users\\johin\\Code_Library\\AI\\tag-library\\reports\\gelbooru_missing_definitions_ge100.csv"
+}
