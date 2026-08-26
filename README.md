@@ -1,5 +1,64 @@
 # Weeb Alexandria
 
+## Quick Start
+
+### 1. Get the project
+
+Clone the repository or download its source files into a local directory:
+
+```bash
+git clone https://github.com/<OWNER>/<REPOSITORY>.git "<WEEB_ALEXANDRIA_DIR>"
+```
+
+### 2. Download the database
+
+Download the public database snapshot from Hugging Face:
+
+```bash
+hf download <HF_DATASET_ID> tag_library.db \
+  --repo-type dataset \
+  --local-dir "<WEEB_ALEXANDRIA_DIR>"
+```
+
+The database must be located at:
+
+```text
+<WEEB_ALEXANDRIA_DIR>\tag_library.db
+```
+
+### 3. Connect it to Hermes
+
+Register the local stdio MCP server:
+
+```bash
+hermes mcp add weeb-alexandria \
+  --command "C:\\Windows\\System32\\cmd.exe" \
+  --args /d /c "<WEEB_ALEXANDRIA_DIR>\\run.bat"
+```
+
+### 4. Connect it to LM Studio
+
+Open **Program → Install → Edit mcp.json** and add:
+
+```json
+{
+  "mcpServers": {
+    "weeb-alexandria": {
+      "command": "C:\\Windows\\System32\\cmd.exe",
+      "args": [
+        "/d",
+        "/c",
+        "<WEEB_ALEXANDRIA_DIR>\\run.bat"
+      ]
+    }
+  }
+}
+```
+
+Start a new chat and confirm that the five Weeb Alexandria tools are available.
+
+## About the project
+
 Weeb Alexandria is a project that unifies anime, otaku, weeb, NSFW, and SFW knowledge into a single, simple, locally hosted knowledge base.
 
 It gives local AI agents access to reliable information about the topics you ask them about, helping them retrieve grounded data and reduce hallucinations in this area of knowledge.

@@ -1,5 +1,64 @@
 # Weeb Alexandria
 
+## クイックスタート
+
+### 1. プロジェクトを取得する
+
+リポジトリをクローンするか、ソースファイルをローカルディレクトリにダウンロードします。
+
+```bash
+git clone https://github.com/<OWNER>/<REPOSITORY>.git "<WEEB_ALEXANDRIA_DIR>"
+```
+
+### 2. データベースをダウンロードする
+
+Hugging Face から公開されているデータベーススナップショットをダウンロードします。
+
+```bash
+hf download <HF_DATASET_ID> tag_library.db \
+  --repo-type dataset \
+  --local-dir "<WEEB_ALEXANDRIA_DIR>"
+```
+
+データベースは次の場所に配置してください。
+
+```text
+<WEEB_ALEXANDRIA_DIR>\tag_library.db
+```
+
+### 3. Hermes に接続する
+
+ローカルの stdio MCP サーバーを登録します。
+
+```bash
+hermes mcp add weeb-alexandria \
+  --command "C:\\Windows\\System32\\cmd.exe" \
+  --args /d /c "<WEEB_ALEXANDRIA_DIR>\\run.bat"
+```
+
+### 4. LM Studio に接続する
+
+**Program → Install → Edit mcp.json** を開き、次の設定を追加します。
+
+```json
+{
+  "mcpServers": {
+    "weeb-alexandria": {
+      "command": "C:\\Windows\\System32\\cmd.exe",
+      "args": [
+        "/d",
+        "/c",
+        "<WEEB_ALEXANDRIA_DIR>\\run.bat"
+      ]
+    }
+  }
+}
+```
+
+新しいチャットを開始し、Weeb Alexandria の 5 つのツールが利用可能であることを確認してください。
+
+## プロジェクトについて
+
 Weeb Alexandria は、アニメ、オタク、Weeb、NSFW、SFW に関する知識を、シンプルでローカルに運用できる単一のナレッジベースへ統合するプロジェクトです。
 
 ローカル AI エージェントが質問に関連する信頼性の高い情報へアクセスできるようにし、根拠のあるデータの取得を助けることで、この知識分野におけるハルシネーションを減らすことを目的としています。
