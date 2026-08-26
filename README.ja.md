@@ -18,6 +18,16 @@ Weeb Alexandria は、アニメ、オタク、Weeb、NSFW、SFW に関する知�
 git clone https://github.com/NegativeMeta/weeb-alexandria.git "<WEEB_ALEXANDRIA_DIR>"
 ```
 
+#### 代替方法：Git CLI を使わない場合
+
+ブラウザで GitHub リポジトリを開きます。
+
+```text
+https://github.com/NegativeMeta/weeb-alexandria
+```
+
+**Code → Download ZIP** を選択してアーカイブを展開し、展開したフォルダーを `<WEEB_ALEXANDRIA_DIR>` として使用します。
+
 ### 2. データベースをダウンロードする
 
 Hugging Face から公開されているデータベーススナップショットをダウンロードします。
@@ -27,6 +37,16 @@ hf download negativemeta/weeb-alexandria tag_library.db \
   --repo-type dataset \
   --local-dir "<WEEB_ALEXANDRIA_DIR>"
 ```
+
+#### 代替方法：Hugging Face CLI を使わない場合
+
+ブラウザでデータセットを開きます。
+
+```text
+https://huggingface.co/datasets/negativemeta/weeb-alexandria
+```
+
+**Files and versions** を開き、`tag_library.db` をダウンロードして `<WEEB_ALEXANDRIA_DIR>` に配置します。
 
 データベースは次の場所に配置してください。
 

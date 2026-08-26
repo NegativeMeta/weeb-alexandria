@@ -18,6 +18,16 @@ Clone the repository or download its source files into a local directory:
 git clone https://github.com/NegativeMeta/weeb-alexandria.git "<WEEB_ALEXANDRIA_DIR>"
 ```
 
+#### Alternative: without the Git CLI
+
+Open the GitHub repository in a browser:
+
+```text
+https://github.com/NegativeMeta/weeb-alexandria
+```
+
+Select **Code → Download ZIP**, extract the archive, and use the extracted folder as `<WEEB_ALEXANDRIA_DIR>`.
+
 ### 2. Download the database
 
 Download the public database snapshot from Hugging Face:
@@ -27,6 +37,16 @@ hf download negativemeta/weeb-alexandria tag_library.db \
   --repo-type dataset \
   --local-dir "<WEEB_ALEXANDRIA_DIR>"
 ```
+
+#### Alternative: without the Hugging Face CLI
+
+Open the dataset in a browser:
+
+```text
+https://huggingface.co/datasets/negativemeta/weeb-alexandria
+```
+
+Open **Files and versions**, download `tag_library.db`, and place it in `<WEEB_ALEXANDRIA_DIR>`.
 
 The database must be located at:
 
