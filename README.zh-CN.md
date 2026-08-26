@@ -15,7 +15,7 @@ git clone https://github.com/NegativeMeta/weeb-alexandria.git "<WEEB_ALEXANDRIA_
 从 Hugging Face 下载公开的数据库快照：
 
 ```bash
-hf download <HF_DATASET_ID> tag_library.db \
+hf download negativemeta/weeb-alexandria tag_library.db \
   --repo-type dataset \
   --local-dir "<WEEB_ALEXANDRIA_DIR>"
 ```
