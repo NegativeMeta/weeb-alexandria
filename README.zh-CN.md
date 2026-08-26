@@ -173,6 +173,12 @@ Weeb Alexandria 在本地执行查询，不需要运行原始的 AnimaDex Flask 
 
 ## 术语表
 
-请参阅 [`GLOSSARY.md`](GLOSSARY.md) 了解数据库内容和 MCP 工具的简单说明。西班牙语版本位于 [`GLOSSARY.es.md`](GLOSSARY.es.md)。
+请参阅 [`GLOSSARY.zh-CN.md`](GLOSSARY.zh-CN.md) 了解数据库内容和 MCP 工具的简单说明。英文、西班牙语和日语版本位于 [`GLOSSARY.md`](GLOSSARY.md)、[`GLOSSARY.es.md`](GLOSSARY.es.md) 和 [`GLOSSARY.ja.md`](GLOSSARY.ja.md)。
 
-原始项目、数据来源、致谢和署名信息请参阅 [`CREDITS.md`](CREDITS.md)。
+## 致谢和数据来源
+
+- [AnimaDex](https://github.com/zetaneko/AnimaDex) — 结构化角色和艺术家数据。
+- [Danbooru](https://danbooru.donmai.us/) — wiki、标签元数据、别名、蕴含关系和流行度数据。
+- [e621](https://e621.net/) — wiki 和标签元数据。
+- [Gelbooru](https://gelbooru.com/) — wiki 和标签元数据。
+- [`CREDITS.md`](CREDITS.md) — 完整的致谢、署名和来源说明。

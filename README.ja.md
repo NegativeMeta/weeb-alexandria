@@ -173,6 +173,12 @@ Weeb Alexandria はローカルでクエリを実行するため、元の AnimaD
 
 ## 用語集
 
-データベースの内容と MCP ツールの簡単な説明は [`GLOSSARY.md`](GLOSSARY.md) を参照してください。スペイン語版は [`GLOSSARY.es.md`](GLOSSARY.es.md) です。
+データベースの内容と MCP ツールの簡単な説明は [`GLOSSARY.ja.md`](GLOSSARY.ja.md) を参照してください。英語、スペイン語、中国語簡体字版は [`GLOSSARY.md`](GLOSSARY.md)、[`GLOSSARY.es.md`](GLOSSARY.es.md)、[`GLOSSARY.zh-CN.md`](GLOSSARY.zh-CN.md) です。
 
-元のプロジェクト、情報源、謝辞、帰属表示については [`CREDITS.md`](CREDITS.md) を参照してください。
+## クレジットと情報源
+
+- [AnimaDex](https://github.com/zetaneko/AnimaDex) — 構造化されたキャラクター・アーティストデータ。
+- [Danbooru](https://danbooru.donmai.us/) — wiki、タグメタデータ、エイリアス、包含関係、人気度データ。
+- [e621](https://e621.net/) — wiki とタグメタデータ。
+- [Gelbooru](https://gelbooru.com/) — wiki とタグメタデータ。
+- [`CREDITS.md`](CREDITS.md) — 謝辞、帰属表示、情報源の詳細。

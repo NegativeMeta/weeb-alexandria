@@ -173,6 +173,12 @@ Weeb Alexandria realiza sus consultas localmente y no necesita el servidor Flask
 
 ## Glosario
 
-Consulta [`GLOSSARY.es.md`](GLOSSARY.es.md) para una explicación sencilla de la base y las herramientas del MCP. La versión en inglés está disponible en [`GLOSSARY.md`](GLOSSARY.md).
+Consulta [`GLOSSARY.es.md`](GLOSSARY.es.md) para una explicación sencilla de la base y las herramientas del MCP. También están disponibles las versiones en inglés, chino simplificado y japonés en [`GLOSSARY.md`](GLOSSARY.md), [`GLOSSARY.zh-CN.md`](GLOSSARY.zh-CN.md) y [`GLOSSARY.ja.md`](GLOSSARY.ja.md).
 
-Consulta [`CREDITS.md`](CREDITS.md) para conocer los proyectos originales, las fuentes de datos, los agradecimientos y la información de atribución.
+## Créditos y fuentes
+
+- [AnimaDex](https://github.com/zetaneko/AnimaDex) — datos estructurados de personajes y artistas.
+- [Danbooru](https://danbooru.donmai.us/) — wiki, metadata de tags, aliases, implicaciones y popularidad.
+- [e621](https://e621.net/) — wiki y metadata de tags.
+- [Gelbooru](https://gelbooru.com/) — wiki y metadata de tags.
+- [`CREDITS.md`](CREDITS.md) — agradecimientos, atribución y detalles completos de las fuentes.

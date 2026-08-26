@@ -189,6 +189,12 @@ Weeb Alexandria performs its queries locally and does not require the original A
 
 ## Glossary
 
-See [`GLOSSARY.md`](GLOSSARY.md) for a simple explanation of the database contents and MCP tools. A Spanish version is available in [`GLOSSARY.es.md`](GLOSSARY.es.md).
+See [`GLOSSARY.md`](GLOSSARY.md) for a simple explanation of the database contents and MCP tools. Spanish, Simplified Chinese, and Japanese versions are available in [`GLOSSARY.es.md`](GLOSSARY.es.md), [`GLOSSARY.zh-CN.md`](GLOSSARY.zh-CN.md), and [`GLOSSARY.ja.md`](GLOSSARY.ja.md).
 
-See [`CREDITS.md`](CREDITS.md) for the original projects, data sources, acknowledgements, and attribution information.
+## Credits and sources
+
+- [AnimaDex](https://github.com/zetaneko/AnimaDex) — structured character and artist data.
+- [Danbooru](https://danbooru.donmai.us/) — wiki, tag metadata, aliases, implications, and popularity data.
+- [e621](https://e621.net/) — wiki and tag metadata.
+- [Gelbooru](https://gelbooru.com/) — wiki and tag metadata.
+- [`CREDITS.md`](CREDITS.md) — full acknowledgements, attribution, and source details.
