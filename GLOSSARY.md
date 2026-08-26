@@ -68,6 +68,8 @@ Keeping the source helps users understand where a definition or relationship ori
 
 Character records describe known anime, manga, game, and other fictional characters.
 
+The character table is a curated, structured collection from the integrated AnimaDex data. It does **not** represent the total number of characters in the whole database. Many character names may exist as ordinary tags with wiki entries, aliases, popularity, or source information without having a structured character record.
+
 A character may include:
 
 - Character name.

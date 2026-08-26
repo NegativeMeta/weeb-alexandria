@@ -68,6 +68,8 @@ Conservar la fuente ayuda a entender de dónde salió una definición o relació
 
 Los registros de personajes describen personajes conocidos de anime, manga, videojuegos y otras obras de ficción.
 
+La tabla de personajes es una colección estructurada y seleccionada de los datos integrados de AnimaDex. **No representa la cantidad total de personajes de toda la base**. Muchos nombres de personajes pueden existir como tags normales con wiki, aliases, popularidad o información de fuentes sin tener una ficha estructurada de personaje.
+
 Un personaje puede incluir:
 
 - Nombre.

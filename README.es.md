@@ -20,8 +20,6 @@ El snapshot actual de `tag_library.db` contiene aproximadamente:
 - **25,000 aliases activos**
 - **24,000 implicaciones de tags**
 - **21,000 implicaciones activas**
-- **20 personajes**
-- **84 traits de personajes**
 - **10 artistas**
 
 Tamaño de la base: aproximadamente **866 MB**.

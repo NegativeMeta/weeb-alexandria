@@ -36,8 +36,6 @@ The current `tag_library.db` snapshot contains approximately:
 - **25,000 active aliases**
 - **24,000 tag implications**
 - **21,000 active implications**
-- **20 characters**
-- **84 character traits**
 - **10 artists**
 
 Database size: approximately **866 MB**.
@@ -179,5 +177,9 @@ Available tools:
 - `get_sources_status`
 
 Weeb Alexandria performs its queries locally and does not require the original AnimaDex Flask server.
+
+## Glossary
+
+See [`GLOSSARY.md`](GLOSSARY.md) for a simple explanation of the database contents and MCP tools. A Spanish version is available in [`GLOSSARY.es.md`](GLOSSARY.es.md).
 
 See `CREDITS.md` for the original projects and sources.
