@@ -164,4 +164,8 @@ Herramientas disponibles:
 
 Weeb Alexandria realiza sus consultas localmente y no necesita el servidor Flask original de AnimaDex.
 
+## Glosario
+
+Consulta [`GLOSSARY.es.md`](GLOSSARY.es.md) para una explicación sencilla de la base y las herramientas del MCP. La versión en inglés está disponible en [`GLOSSARY.md`](GLOSSARY.md).
+
 Consulta `CREDITS.md` para conocer los proyectos y fuentes originales.

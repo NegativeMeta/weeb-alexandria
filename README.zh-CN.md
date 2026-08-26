@@ -164,4 +164,8 @@ run.bat
 
 Weeb Alexandria 在本地执行查询，不需要运行原始的 AnimaDex Flask 服务器。
 
+## 术语表
+
+请参阅 [`GLOSSARY.md`](GLOSSARY.md) 了解数据库内容和 MCP 工具的简单说明。西班牙语版本位于 [`GLOSSARY.es.md`](GLOSSARY.es.md)。
+
 原始项目和数据来源请参阅 `CREDITS.md`。
