@@ -54,9 +54,11 @@ def _local_characters(con: sqlite3.Connection, query: str = "",
     """Busca personajes en las tablas migradas de AnimaDex."""
     clauses = []
     params: list[Any] = []
+    order_params: list[Any] = []
+    normalized = query.strip().lower().replace(" ", "_")
     if query:
         clauses.append("(c.name_lower LIKE ? OR c.character LIKE ? OR c.trigger LIKE ? OR c.core_tags LIKE ?)")
-        needle = f"%{query.lower()}%"
+        needle = f"%{normalized}%"
         params.extend([needle, needle, needle, needle])
     for value, column in ((copyright, "c.copyright"), (gender, "t.value")):
         if value:
@@ -71,7 +73,16 @@ def _local_characters(con: sqlite3.Connection, query: str = "",
             clauses.append("EXISTS (SELECT 1 FROM animadex_character_traits tx WHERE tx.character=c.character AND tx.facet=? AND (tx.value=? OR tx.label LIKE ?))")
             params.extend([facet, value, f"%{value}%"])
     where = (" WHERE " + " AND ".join(clauses)) if clauses else ""
-    order = "c.name_lower" if sort == "name" else "RANDOM()" if sort == "random" else "c.count DESC, c.name_lower"
+    if sort == "name":
+        order = "c.name_lower"
+    elif sort == "random":
+        order = "RANDOM()"
+    elif normalized:
+        order = "CASE WHEN lower(c.character)=? OR lower(c.name_lower)=? THEN 3 WHEN lower(c.character) LIKE ? OR lower(c.name_lower) LIKE ? THEN 2 ELSE 1 END DESC, c.count DESC, c.name_lower"
+        order_params = [normalized, normalized, f"{normalized}_%", f"{normalized}_%"]
+    else:
+        order = "c.count DESC, c.name_lower"
+    params = order_params + params
     params.append(max(1, min(int(limit), 100)))
     rows = con.execute(f"""
         SELECT c.character,c.name,c.copyright,c.trigger,c.core_tags,c.count,c.url
@@ -90,9 +101,22 @@ def _local_characters(con: sqlite3.Connection, query: str = "",
 
 
 def _local_artists(con: sqlite3.Connection, query: str = "", sort: str = "count", limit: int = 100) -> list[dict]:
-    needle=f"%{query.lower()}%"
-    order="a.name_lower" if sort == "name" else "RANDOM()" if sort == "random" else "a.count DESC, a.name_lower"
-    rows=con.execute(f"SELECT artist,name,trigger,count,score,url FROM animadex_artists a WHERE (?='' OR a.name_lower LIKE ? OR a.artist LIKE ? OR a.trigger LIKE ?) ORDER BY {order} LIMIT ?",(query,needle,needle,needle,max(1,min(int(limit),100)))).fetchall()
+    normalized=query.strip().lower().replace(" ", "_")
+    needle=f"%{normalized}%"
+    if sort == "name":
+        order="a.name_lower"
+        order_params=[]
+    elif sort == "random":
+        order="RANDOM()"
+        order_params=[]
+    elif normalized:
+        order="CASE WHEN lower(a.artist)=? OR lower(a.name_lower)=? THEN 3 WHEN lower(a.artist) LIKE ? OR lower(a.name_lower) LIKE ? THEN 2 ELSE 1 END DESC, a.count DESC, a.name_lower"
+        order_params=[normalized,normalized,f"{normalized}_%",f"{normalized}_%"]
+    else:
+        order="a.count DESC, a.name_lower"
+        order_params=[]
+    params=[normalized,needle,needle,needle]+order_params+[max(1,min(int(limit),100))]
+    rows=con.execute(f"SELECT artist,name,trigger,count,score,url FROM animadex_artists a WHERE (?='' OR a.name_lower LIKE ? OR a.artist LIKE ? OR a.trigger LIKE ?) ORDER BY {order} LIMIT ?",params).fetchall()
     return [dict(row) for row in rows]
 
 
@@ -105,15 +129,18 @@ def _local_copyrights(con: sqlite3.Connection, query: str = "", limit: int = 100
 def _tag_rows(con: sqlite3.Connection, query: str,
               category: Optional[str], limit: int) -> list[dict]:
     limit = max(1, min(int(limit), 100))
+    normalized = query.strip().lower().replace(" ", "_")
     sql = (
-        "SELECT name, category_name, post_count, site, aliases, nsfw "
-        "FROM tags WHERE name LIKE ?"
+        "SELECT name, category_name, post_count, site, aliases, nsfw, "
+        "CASE WHEN lower(name)=? THEN 3 "
+        "WHEN lower(name) LIKE ? THEN 2 ELSE 1 END AS relevance "
+        "FROM tags WHERE lower(name) LIKE ?"
     )
-    params: list[Any] = [f"%{query}%"]
+    params: list[Any] = [normalized, f"{normalized}_%", f"%{normalized}%"]
     if category:
         sql += " AND category_name = ?"
         params.append(category)
-    sql += " ORDER BY post_count DESC NULLS LAST LIMIT ?"
+    sql += " ORDER BY relevance DESC, post_count DESC NULLS LAST LIMIT ?"
     params.append(limit)
     rows = con.execute(sql, params).fetchall()
     merged: dict[str, dict] = {}
