@@ -1,3 +1,19 @@
+---
+pretty_name: Weeb Alexandria
+language:
+  - en
+  - es
+  - zh
+  - ja
+tags:
+  - anime
+  - otaku
+  - knowledge-base
+  - sqlite
+  - mcp
+  - image-generation
+---
+
 # Weeb Alexandria
 
 ## About the project
