@@ -175,4 +175,4 @@ Weeb Alexandria realiza sus consultas localmente y no necesita el servidor Flask
 
 Consulta [`GLOSSARY.es.md`](GLOSSARY.es.md) para una explicación sencilla de la base y las herramientas del MCP. La versión en inglés está disponible en [`GLOSSARY.md`](GLOSSARY.md).
 
-Consulta `CREDITS.md` para conocer los proyectos y fuentes originales.
+Consulta [`CREDITS.md`](CREDITS.md) para conocer los proyectos originales, las fuentes de datos, los agradecimientos y la información de atribución.

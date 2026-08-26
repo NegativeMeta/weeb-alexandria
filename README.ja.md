@@ -175,4 +175,4 @@ Weeb Alexandria はローカルでクエリを実行するため、元の AnimaD
 
 データベースの内容と MCP ツールの簡単な説明は [`GLOSSARY.md`](GLOSSARY.md) を参照してください。スペイン語版は [`GLOSSARY.es.md`](GLOSSARY.es.md) です。
 
-元のプロジェクトと情報源については `CREDITS.md` を参照してください。
+元のプロジェクト、情報源、謝辞、帰属表示については [`CREDITS.md`](CREDITS.md) を参照してください。

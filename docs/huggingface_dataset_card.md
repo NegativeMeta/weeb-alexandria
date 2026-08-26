@@ -191,4 +191,4 @@ Weeb Alexandria performs its queries locally and does not require the original A
 
 See [`GLOSSARY.md`](GLOSSARY.md) for a simple explanation of the database contents and MCP tools. A Spanish version is available in [`GLOSSARY.es.md`](GLOSSARY.es.md).
 
-See `CREDITS.md` for the original projects and sources.
+See [`CREDITS.md`](CREDITS.md) for the original projects, data sources, acknowledgements, and attribution information.
