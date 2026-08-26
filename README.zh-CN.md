@@ -7,7 +7,7 @@
 将仓库克隆或下载到本地目录：
 
 ```bash
-git clone https://github.com/<OWNER>/<REPOSITORY>.git "<WEEB_ALEXANDRIA_DIR>"
+git clone https://github.com/NegativeMeta/weeb-alexandria.git "<WEEB_ALEXANDRIA_DIR>"
 ```
 
 ### 2. 下载数据库

@@ -7,7 +7,7 @@
 Clona el repositorio o descarga sus archivos en una carpeta local:
 
 ```bash
-git clone https://github.com/<OWNER>/<REPOSITORY>.git "<WEEB_ALEXANDRIA_DIR>"
+git clone https://github.com/NegativeMeta/weeb-alexandria.git "<WEEB_ALEXANDRIA_DIR>"
 ```
 
 ### 2. Descargar la base de datos
