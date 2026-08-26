@@ -66,7 +66,7 @@ Conservar la fuente ayuda a entender de dónde salió una definición o relació
 
 ### Personajes
 
-Los registros de personajes describen personajes conocidos de anime, manga, videojuegos y otras obras de ficción.
+Las tags relacionadas con personajes pueden representar personajes de ficción aunque no tengan una ficha estructurada. La tabla general de tags contiene muchas más tags de personajes que la tabla seleccionada de personajes.
 
 La tabla de personajes es una colección estructurada y seleccionada de los datos integrados de AnimaDex. **No representa la cantidad total de personajes de toda la base**. Muchos nombres de personajes pueden existir como tags normales con wiki, aliases, popularidad o información de fuentes sin tener una ficha estructurada de personaje.
 
@@ -111,7 +111,9 @@ Ayudan a buscar personajes con características parecidas.
 
 ### Artistas
 
-Los registros de artistas contienen información sobre artistas y sus tags, triggers, popularidad y puntuaciones cuando están disponibles.
+Las tags relacionadas con artistas pueden representar artistas aunque no tengan una ficha estructurada. La tabla general de tags contiene muchas más tags de artistas que la tabla seleccionada de artistas.
+
+Los registros de artistas contienen información sobre artistas y sus tags, triggers, popularidad y puntuaciones cuando están disponibles. La tabla estructurada de artistas proviene de los datos integrados de AnimaDex y no debe interpretarse como la cantidad total de artistas representados por tags.
 
 Pueden ayudar a identificar un artista o preparar un prompt relacionado con su estilo.
 

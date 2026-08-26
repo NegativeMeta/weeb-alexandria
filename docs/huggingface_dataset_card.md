@@ -36,7 +36,6 @@ The current `tag_library.db` snapshot contains approximately:
 - **25,000 active aliases**
 - **24,000 tag implications**
 - **21,000 active implications**
-- **10 artists**
 
 Database size: approximately **866 MB**.
 

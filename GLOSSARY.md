@@ -66,7 +66,7 @@ Keeping the source helps users understand where a definition or relationship ori
 
 ### Characters
 
-Character records describe known anime, manga, game, and other fictional characters.
+Character-related tags can represent fictional characters even when they do not have a structured character record. The general tags table contains far more character tags than the curated character table.
 
 The character table is a curated, structured collection from the integrated AnimaDex data. It does **not** represent the total number of characters in the whole database. Many character names may exist as ordinary tags with wiki entries, aliases, popularity, or source information without having a structured character record.
 
@@ -111,7 +111,9 @@ Traits can help search for characters with similar visual characteristics.
 
 ### Artists
 
-Artist records contain information about artists and their associated tags, triggers, popularity, and scores when available.
+Artist-related tags can represent artists even when they do not have a structured artist record. The general tags table contains many more artist tags than the curated artist table.
+
+Artist records contain information about artists and their associated tags, triggers, popularity, and scores when available. The structured artist table comes from the integrated AnimaDex data and should not be interpreted as the total number of artists represented by tags.
 
 They can help identify an artist or prepare an artist-related prompt.
 
