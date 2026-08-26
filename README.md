@@ -1,5 +1,13 @@
 # Weeb Alexandria
 
+## About the project
+
+Weeb Alexandria is a project that unifies anime, otaku, weeb, NSFW, and SFW knowledge into a single, simple, locally hosted knowledge base.
+
+It gives local AI agents access to reliable information about the topics you ask them about, helping them retrieve grounded data and reduce hallucinations in this area of knowledge.
+
+The project combines tag definitions, aliases, implications, characters, franchises, artists, traits, sources, and other useful information for anime-related research and image generation.
+
 ## Quick Start
 
 ### 1. Get the project
@@ -56,14 +64,6 @@ Open **Program → Install → Edit mcp.json** and add:
 ```
 
 Start a new chat and confirm that the five Weeb Alexandria tools are available.
-
-## About the project
-
-Weeb Alexandria is a project that unifies anime, otaku, weeb, NSFW, and SFW knowledge into a single, simple, locally hosted knowledge base.
-
-It gives local AI agents access to reliable information about the topics you ask them about, helping them retrieve grounded data and reduce hallucinations in this area of knowledge.
-
-The project combines tag definitions, aliases, implications, characters, franchises, artists, traits, sources, and other useful information for anime-related research and image generation.
 
 ## Structure
 
