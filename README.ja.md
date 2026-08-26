@@ -104,6 +104,16 @@ hermes mcp add weeb-alexandria \
 
 新しいチャットを開始し、Weeb Alexandria の 5 つのツールが利用可能であることを確認してください。
 
+### 5. 会話で試す
+
+MCP ツールを手動で呼び出す必要はありません。モデルに自然な文章で質問できます。例えば：
+
+```text
+Inugami Korone がどのようなキャラクターか教えてください。Weeb Alexandria を使ってキャラクター情報と関連タグを確認しても構いません。
+```
+
+モデルは `get_character`、`search_characters`、`search_knowledge` など適切なツールを選び、結果を通常の言葉で説明できます。
+
 ## 構成
 
 ```text

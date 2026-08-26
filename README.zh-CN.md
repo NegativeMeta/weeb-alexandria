@@ -102,7 +102,17 @@ hermes mcp add weeb-alexandria \
 }
 ```
 
-打开一个新对话，并确认 Weeb Alexandria 的五个工具已经可用。
+开始新对话，并确认五个 Weeb Alexandria 工具可用。
+
+### 5. 在对话中试用
+
+你不需要手动调用 MCP 工具。可以直接用自然语言向模型提问，例如：
+
+```text
+告诉我 Inugami Korone 是什么样的。你可以使用 Weeb Alexandria 查询角色信息和相关标签。
+```
+
+模型可以选择合适的工具，例如 `get_character`、`search_characters` 或 `search_knowledge`，然后用普通语言解释结果。
 
 ## 项目结构
 

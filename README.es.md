@@ -102,7 +102,17 @@ Abre **Program → Install → Edit mcp.json** y añade:
 }
 ```
 
-Abre un chat nuevo y confirma que las cinco herramientas de Weeb Alexandria estén disponibles.
+Inicia un chat nuevo y confirma que las cinco herramientas de Weeb Alexandria están disponibles.
+
+### 5. Pruébalo en una conversación
+
+No necesitas llamar manualmente a las herramientas del MCP. Pídele algo al modelo de forma natural, por ejemplo:
+
+```text
+Dime cómo es Inugami Korone. Puedes usar Weeb Alexandria para consultar la información del personaje y sus tags relacionadas.
+```
+
+El modelo puede utilizar la herramienta adecuada, como `get_character`, `search_characters` o `search_knowledge`, y después explicar el resultado en lenguaje normal.
 
 ## Estructura
 

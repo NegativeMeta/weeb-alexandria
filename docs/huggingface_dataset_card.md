@@ -120,6 +120,16 @@ Open **Program → Install → Edit mcp.json** and add:
 
 Start a new chat and confirm that the five Weeb Alexandria tools are available.
 
+### 5. Try it in a conversation
+
+You do not need to call the MCP tools manually. Ask the model naturally, for example:
+
+```text
+Tell me what Inugami Korone looks like. You can use Weeb Alexandria to check the character information and relevant tags.
+```
+
+The model can use the appropriate Weeb Alexandria tool, such as `get_character`, `search_characters`, or `search_knowledge`, and then explain the result in normal language.
+
 ## Structure
 
 ```text
