@@ -8,6 +8,28 @@ Permite que los agentes de IA locales accedan a información confiable sobre los
 
 El proyecto combina definiciones de tags, aliases, implicaciones, personajes, franquicias, artistas, traits, fuentes y otra información útil para la investigación relacionada con anime y la generación de imágenes.
 
+## Snapshot actual
+
+El snapshot actual de `tag_library.db` contiene aproximadamente:
+
+- **1.42 millones de tags únicas**
+- **1.51 millones de registros de tags** entre las distintas fuentes
+- **673,000 entradas de wiki**
+- **592,000 entradas de wiki con definiciones**
+- **38,000 aliases de tags**
+- **25,000 aliases activos**
+- **24,000 implicaciones de tags**
+- **21,000 implicaciones activas**
+- **20 personajes**
+- **84 traits de personajes**
+- **10 artistas**
+
+Tamaño de la base: aproximadamente **866 MB**.
+
+Fecha del snapshot: **2026-08-25**.
+
+Estas cifras corresponden al snapshot publicado y pueden cambiar entre versiones.
+
 ## Inicio rápido
 
 ### 1. Obtener el proyecto
