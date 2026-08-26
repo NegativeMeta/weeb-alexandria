@@ -1,0 +1,66 @@
+# Weeb Alexandria
+
+Weeb Alexandria es un proyecto que unifica conocimiento anime, otaku, weeb, NSFW y SFW en una única base de conocimiento sencilla y alojada localmente.
+
+Permite que los agentes de IA locales accedan a información confiable sobre los temas que les consultes, ayudándolos a recuperar datos fundamentados y reducir las alucinaciones en esta área del conocimiento.
+
+El proyecto combina definiciones de tags, aliases, implicaciones, personajes, franquicias, artistas, traits, fuentes y otra información útil para la investigación relacionada con anime y la generación de imágenes.
+
+## Estructura
+
+```text
+WeebAlexandria/
+├── weeb_alexandria_mcp/   Servidor MCP activo
+├── .venv/                  Entorno Python del MCP
+├── tag_library.db          Base de conocimiento unificada
+├── raw/                    Fuentes descargadas
+│   ├── animadex/           Base original de AnimaDex
+│   ├── danbooru/
+│   ├── e621/               Wikis y tags procesados
+│   ├── gelbooru/
+│   └── danbooru_wiki_extra/
+├── reports/                Auditorías y listas de revisión
+├── scripts/                Scripts de mantenimiento y fusión
+├── data/backups/           Backups de la base
+├── CREDITS.md              Créditos y fuentes
+├── run.bat                 Launcher del MCP
+└── README.md
+```
+
+La aplicación web original de AnimaDex, el MCP antiguo y los assets visuales no forman parte del runtime activo. Se conservan de forma reversible en:
+
+```text
+C:\Users\johin\Code_Library\AI\WeebAlexandria_legacy_archive
+```
+
+## Bases de datos
+
+`tag_library.db` contiene:
+
+- Tags y categorías.
+- Definiciones de Danbooru, e621 y Gelbooru.
+- Aliases e implicaciones.
+- Definiciones sintéticas marcadas con `lang='llm'`.
+- Tablas migradas de AnimaDex para personajes, traits, artistas y LoRAs.
+
+`raw/animadex/animadex.db` se conserva con su nombre original como copia de referencia. El MCP activo utiliza las tablas migradas de AnimaDex dentro de `tag_library.db`.
+
+## MCP
+
+Launcher:
+
+```text
+run.bat
+```
+
+Herramientas disponibles:
+
+- `search_knowledge`
+- `get_tag_knowledge`
+- `search_characters`
+- `get_character`
+- `get_sources_status`
+
+Weeb Alexandria realiza sus consultas localmente y no necesita el servidor Flask original de AnimaDex.
+
+Consulta `CREDITS.md` para conocer los proyectos y fuentes originales.

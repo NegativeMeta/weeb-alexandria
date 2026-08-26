@@ -1,45 +1,49 @@
 # Weeb Alexandria
 
-Base de conocimiento unificada para generación e investigación de tags anime/booru.
+Weeb Alexandria is a project that unifies anime, otaku, weeb, NSFW, and SFW knowledge into a single, simple, locally hosted knowledge base.
 
-## Estructura
+It gives local AI agents access to reliable information about the topics you ask them about, helping them retrieve grounded data and reduce hallucinations in this area of knowledge.
+
+The project combines tag definitions, aliases, implications, characters, franchises, artists, traits, sources, and other useful information for anime-related research and image generation.
+
+## Structure
 
 ```text
 WeebAlexandria/
-├── weeb_alexandria_mcp/   MCP activo
-├── .venv/                  runtime Python del MCP
-├── tag_library.db          base principal unificada
-├── raw/                    fuentes descargadas
-│   ├── animadex/           base original de AnimaDex
+├── weeb_alexandria_mcp/   Active MCP server
+├── .venv/                  Python runtime for the MCP
+├── tag_library.db          Main unified knowledge base
+├── raw/                    Downloaded source data
+│   ├── animadex/           Original AnimaDex database
 │   ├── danbooru/
-│   ├── e621/               wikis y tags procesados
+│   ├── e621/               Processed wiki and tag data
 │   ├── gelbooru/
 │   └── danbooru_wiki_extra/
-├── reports/                auditorías y listas de revisión
-├── scripts/                mantenimiento y fusiones de datos
-├── data/backups/           backups de la base
-├── CREDITS.md              créditos y fuentes
-├── run.bat                 launcher del MCP
+├── reports/                Audits and review lists
+├── scripts/                Data maintenance and fusion scripts
+├── data/backups/           Database backups
+├── CREDITS.md              Credits and source information
+├── run.bat                 MCP launcher
 └── README.md
 ```
 
-El código web, el MCP antiguo y los assets visuales de AnimaDex no forman parte del runtime activo. Se conservan de forma reversible en:
+The original AnimaDex web application, legacy MCP, and visual assets are not part of the active runtime. They are preserved reversibly at:
 
 ```text
 C:\Users\johin\Code_Library\AI\WeebAlexandria_legacy_archive
 ```
 
-## Bases
+## Databases
 
-`tag_library.db` contiene:
+`tag_library.db` contains:
 
-- Tags y categorías.
-- Definiciones Danbooru, e621 y Gelbooru.
-- Aliases e implicaciones.
-- Definiciones sintéticas marcadas como `lang='llm'`.
-- Tablas migradas de AnimaDex: personajes, traits, artistas y LoRAs.
+- Tags and categories.
+- Danbooru, e621, and Gelbooru definitions.
+- Aliases and implications.
+- Synthetic definitions marked with `lang='llm'`.
+- Migrated AnimaDex tables for characters, traits, artists, and LoRAs.
 
-`raw/animadex/animadex.db` se conserva con su nombre original como copia de referencia; el MCP activo usa las tablas AnimaDex migradas dentro de `tag_library.db`.
+`raw/animadex/animadex.db` is preserved under its original name as a reference copy. The active MCP uses the migrated AnimaDex tables inside `tag_library.db`.
 
 ## MCP
 
@@ -49,7 +53,7 @@ Launcher:
 run.bat
 ```
 
-Herramientas:
+Available tools:
 
 - `search_knowledge`
 - `get_tag_knowledge`
@@ -57,6 +61,6 @@ Herramientas:
 - `get_character`
 - `get_sources_status`
 
-Weeb Alexandria consulta todo localmente y no necesita el servidor Flask original de AnimaDex.
+Weeb Alexandria performs its queries locally and does not require the original AnimaDex Flask server.
 
-Consulta `CREDITS.md` para los proyectos y fuentes originales.
+See `CREDITS.md` for the original projects and sources.
