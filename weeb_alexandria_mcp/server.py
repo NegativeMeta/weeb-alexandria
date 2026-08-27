@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import json
+import difflib
 import os
 import sqlite3
 import urllib.parse
@@ -20,6 +21,11 @@ ANIMADEX_BASE_URL = os.environ.get(
 ).rstrip("/")
 
 mcp = FastMCP("Weeb Alexandria")
+
+
+def _normalize_tag(value: str) -> str:
+    """Normalize human-written tag forms to the usual underscore form."""
+    return "_".join(value.strip().lower().replace("-", "_").split())
 
 
 def _db() -> sqlite3.Connection:
@@ -55,7 +61,7 @@ def _local_characters(con: sqlite3.Connection, query: str = "",
     clauses = []
     params: list[Any] = []
     order_params: list[Any] = []
-    normalized = query.strip().lower().replace(" ", "_")
+    normalized = _normalize_tag(query)
     if query:
         clauses.append("(c.name_lower LIKE ? OR c.character LIKE ? OR c.trigger LIKE ? OR c.core_tags LIKE ?)")
         needle = f"%{normalized}%"
@@ -129,7 +135,7 @@ def _local_copyrights(con: sqlite3.Connection, query: str = "", limit: int = 100
 def _tag_rows(con: sqlite3.Connection, query: str,
               category: Optional[str], limit: int) -> list[dict]:
     limit = max(1, min(int(limit), 100))
-    normalized = query.strip().lower().replace(" ", "_")
+    normalized = _normalize_tag(query)
     sql = (
         "SELECT name, category_name, post_count, site, aliases, nsfw, "
         "CASE WHEN lower(name)=? THEN 3 "
@@ -137,7 +143,11 @@ def _tag_rows(con: sqlite3.Connection, query: str,
         "FROM tags WHERE lower(name) LIKE ?"
     )
     params: list[Any] = [normalized, f"{normalized}_%", f"%{normalized}%"]
-    if category:
+    # Clients often call the general tag search with category="tag".
+    # The database stores concrete categories (general, character, artist,
+    # copyright, ...), so "tag" means all tag categories rather than a
+    # literal category_name value.
+    if category and category.lower() not in {"tag", "tags", "all"}:
         sql += " AND category_name = ?"
         params.append(category)
     sql += " ORDER BY relevance DESC, post_count DESC NULLS LAST LIMIT ?"
@@ -152,10 +162,81 @@ def _tag_rows(con: sqlite3.Connection, query: str,
             "sites": [],
             "aliases": row["aliases"] or "",
             "nsfw": False,
+            "match_type": ("exact" if row["name"].lower() == query.strip().lower()
+                           else "normalized" if row["name"].lower() == normalized
+                           else "prefix" if row["name"].lower().startswith(f"{normalized}_")
+                           else "partial"),
+            "confidence": ("high" if row["relevance"] == 3
+                           else "medium" if row["relevance"] == 2
+                           else "low"),
         })
         item["sites"].append(row["site"])
         item["nsfw"] = item["nsfw"] or bool(row["nsfw"])
     return list(merged.values())
+
+
+def _tag_suggestions(con: sqlite3.Connection, query: str,
+                     category: Optional[str], limit: int) -> list[dict]:
+    """Return likely tag names for a misspelled or non-canonical query."""
+    normalized = _normalize_tag(query)
+    if not normalized:
+        return []
+    first = normalized[0]
+    low_len = max(1, len(normalized) - 3)
+    high_len = len(normalized) + 8
+    where = "substr(lower(name), 1, 1) = ? AND length(name) BETWEEN ? AND ?"
+    params: list[Any] = [first, low_len, high_len]
+    if category and category.lower() not in {"tag", "tags", "all"}:
+        where += " AND category_name = ?"
+        params.append(category)
+    rows = con.execute(
+        f"SELECT name, category_name, post_count, site, aliases, nsfw "
+        f"FROM tags WHERE {where} ORDER BY post_count DESC NULLS LAST LIMIT 10000",
+        params,
+    ).fetchall()
+    scored: dict[str, tuple[float, dict]] = {}
+    for row in rows:
+        name = row["name"]
+        candidate = name.lower().replace("-", "_")
+        score = difflib.SequenceMatcher(None, normalized, candidate).ratio()
+        if score < 0.45:
+            continue
+        item = {
+            "name": name,
+            "category": row["category_name"],
+            "post_count": row["post_count"],
+            "site": row["site"],
+            "match_type": "fuzzy",
+            "confidence": "medium" if score >= 0.65 else "low",
+        }
+        previous = scored.get(name)
+        if previous is None or score > previous[0]:
+            scored[name] = (score, item)
+    fuzzy = [item for _, item in sorted(
+        scored.values(), key=lambda pair: (-pair[0], -(pair[1]["post_count"] or 0), pair[1]["name"])
+    )[:max(1, min(int(limit), 10))]]
+    return _alias_suggestions(con, query, limit) + fuzzy
+
+
+def _alias_suggestions(con: sqlite3.Connection, query: str,
+                       limit: int) -> list[dict]:
+    normalized = _normalize_tag(query)
+    rows = con.execute(
+        "SELECT antecedent_name, consequent_name FROM tag_aliases "
+        "WHERE status='active' AND (lower(antecedent_name)=? OR lower(consequent_name)=?) "
+        "ORDER BY antecedent_name, consequent_name LIMIT ?",
+        (normalized, normalized, max(1, min(int(limit), 10))),
+    ).fetchall()
+    suggestions = []
+    for row in rows:
+        candidate = (row["consequent_name"] if row["antecedent_name"].lower() == normalized
+                     else row["antecedent_name"])
+        suggestions.append({
+            "name": candidate,
+            "match_type": "alias",
+            "confidence": "high",
+        })
+    return suggestions
 
 
 @mcp.tool()
@@ -167,6 +248,10 @@ def search_knowledge(query: str, category: Optional[str] = None,
         con = _db()
         try:
             result["tag_library"] = {"results": _tag_rows(con, query, category, limit)}
+            if not result["tag_library"]["results"]:
+                result["tag_library"]["suggestions"] = _tag_suggestions(
+                    con, query, category, limit
+                )
             result["animadex"] = {
                 "characters": _local_characters(con, query, limit=limit),
                 "artists": _local_artists(con, query, limit=limit),
@@ -187,6 +272,7 @@ def get_tag_knowledge(tag: str, include_relations: bool = True,
     """
     con = _db()
     try:
+        tag = _normalize_tag(tag)
         tags = [dict(row) for row in con.execute(
             "SELECT site, name, category_name, post_count, aliases, nsfw "
             "FROM tags WHERE name = ? ORDER BY post_count DESC", (tag,)

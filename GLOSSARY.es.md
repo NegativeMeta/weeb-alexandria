@@ -150,7 +150,7 @@ Encuentra personajes de Genshin Impact
 Busca tags relacionadas con sostener una espada
 ```
 
-Los resultados priorizan coincidencias exactas, después coincidencias por prefijo y finalmente coincidencias parciales.
+Los resultados priorizan coincidencias exactas, después coincidencias por prefijo y finalmente coincidencias parciales. Si no encuentra un resultado directo, la herramienta también devuelve una lista `suggestions` con posibles tags para errores ortográficos o nombres no canónicos.
 
 ### `get_tag_knowledge`
 

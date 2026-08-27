@@ -150,7 +150,7 @@ Find characters from Genshin Impact
 Look for tags related to holding a sword
 ```
 
-Search results are ranked with exact matches first, followed by prefix and partial matches.
+Search results are ranked with exact matches first, followed by prefix and partial matches. If no direct result is found, the tool also returns a `suggestions` list with likely tag names for spelling mistakes or non-canonical names.
 
 ### `get_tag_knowledge`
 
