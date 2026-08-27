@@ -5,6 +5,7 @@ import json
 import difflib
 import math
 import os
+import re
 import sqlite3
 import urllib.parse
 import urllib.request
@@ -236,6 +237,53 @@ def _tag_suggestions(con: sqlite3.Connection, query: str,
     return _alias_suggestions(con, query, limit) + fuzzy
 
 
+def _resolve_canonical_tag(con: sqlite3.Connection, requested: str) -> tuple[str, Optional[dict]]:
+    """Follow active aliases and wiki ``Use X instead`` redirects safely."""
+    current = _normalize_tag(requested)
+    first_resolution = None
+    visited = set()
+    for _ in range(5):
+        if current in visited:
+            break
+        visited.add(current)
+        alias = con.execute(
+            "SELECT consequent_name FROM tag_aliases "
+            "WHERE antecedent_name = ? AND status='active' "
+            "ORDER BY consequent_name LIMIT 1", (current,)
+        ).fetchone()
+        if alias and alias["consequent_name"] != current:
+            target = _normalize_tag(alias["consequent_name"])
+            first_resolution = first_resolution or {
+                "from": current, "to": target, "type": "alias"
+            }
+            current = target
+            continue
+        wiki_rows = con.execute(
+            "SELECT body FROM wiki WHERE lower(title)=? ORDER BY CASE lang WHEN 'en' THEN 0 ELSE 1 END",
+            (current,),
+        ).fetchall()
+        target = None
+        for row in wiki_rows:
+            match = re.search(r"\buse\s+(?:\[\[)?([A-Za-z0-9_()/-]+)(?:\]\])?\s+instead\b",
+                              row["body"] or "", re.IGNORECASE)
+            if match:
+                candidate = _normalize_tag(match.group(1))
+                exists = con.execute(
+                    "SELECT 1 FROM tags WHERE lower(name)=? LIMIT 1", (candidate,)
+                ).fetchone()
+                if exists and candidate != current:
+                    target = candidate
+                    break
+        if target:
+            first_resolution = first_resolution or {
+                "from": current, "to": target, "type": "wiki_redirect"
+            }
+            current = target
+            continue
+        break
+    return current, first_resolution
+
+
 def _alias_suggestions(con: sqlite3.Connection, query: str,
                        limit: int) -> list[dict]:
     normalized = _normalize_tag(query)
@@ -290,7 +338,8 @@ def get_tag_knowledge(tag: str, include_relations: bool = True,
     """
     con = _db()
     try:
-        tag = _normalize_tag(tag)
+        requested_tag = _normalize_tag(tag)
+        tag, resolution = _resolve_canonical_tag(con, requested_tag)
         tags = [dict(row) for row in con.execute(
             "SELECT site, name, category_name, post_count, aliases, nsfw "
             "FROM tags WHERE name = ? ORDER BY post_count DESC", (tag,)
@@ -302,10 +351,13 @@ def get_tag_knowledge(tag: str, include_relations: bool = True,
         )]
         result: dict[str, Any] = {
             "found": bool(tags or definitions),
+            "requested_tag": requested_tag,
             "tag": tag,
             "tags": tags,
             "definitions": definitions,
         }
+        if resolution:
+            result["resolution"] = resolution
         if include_relations:
             status = " AND status = 'active'"
             params = [tag, tag, max(1, min(int(limit), 200))]
@@ -362,8 +414,17 @@ def get_character(slug: str) -> dict:
             ).fetchone()
             fallback = dict(tag) if tag else None
             recommendations = _tag_suggestions(con, slug, "character", 5)
+            canonical_recommendations = []
+            for item in recommendations:
+                canonical, item_resolution = _resolve_canonical_tag(con, item["name"])
+                canonical_item = dict(item)
+                canonical_item["name"] = canonical
+                if item_resolution:
+                    canonical_item["resolution"] = item_resolution
+                if not any(existing["name"] == canonical for existing in canonical_recommendations):
+                    canonical_recommendations.append(canonical_item)
             recommendation = next(
-                (item for item in recommendations
+                (item for item in canonical_recommendations
                  if item.get("category") == "character"),
                 None,
             )
@@ -381,7 +442,7 @@ def get_character(slug: str) -> dict:
                     + (" A likely character tag is included as a recommendation." if recommendation else "")
                 ),
                 "candidates": [row.get("slug") for row in rows[:10]],
-                "recommendations": recommendations,
+                "recommendations": canonical_recommendations,
             }
         match["loras"] = [dict(row) for row in con.execute(
             "SELECT model_id,name,url,thumb,published FROM animadex_loras WHERE character=? ORDER BY model_id",

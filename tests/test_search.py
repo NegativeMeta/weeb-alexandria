@@ -44,6 +44,19 @@ class SearchRegressionTests(unittest.TestCase):
         self.assertEqual(result["recommended_tag"], "houjou_satoko")
         self.assertEqual(result["recommendation"]["category"], "character")
 
+    def test_wiki_redirect_resolves_to_canonical_tag(self):
+        result = get_tag_knowledge("sakura_haruno")
+        self.assertTrue(result["found"])
+        self.assertEqual(result["requested_tag"], "sakura_haruno")
+        self.assertEqual(result["tag"], "haruno_sakura")
+        self.assertEqual(result["resolution"]["type"], "wiki_redirect")
+        self.assertEqual(result["tags"][0]["name"], "haruno_sakura")
+
+    def test_character_recommendation_is_canonicalized(self):
+        result = get_character("Sakura Naruto")
+        self.assertEqual(result["recommended_tag"], "haruno_sakura")
+        self.assertEqual(result["recommendation"]["name"], "haruno_sakura")
+
     def test_unknown_structured_character_can_fall_back_to_tag(self):
         result = get_character("wave_the_swallow")
         self.assertFalse(result["found"])
