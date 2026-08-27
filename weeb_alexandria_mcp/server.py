@@ -61,6 +61,43 @@ def _context_tags(tokens: list[str]) -> set[str]:
         context.close()
 
 
+def _context_work_map(tags: set[str], context_tokens: list[str]) -> dict[str, str]:
+    if not tags or not context_tokens or not os.path.exists(CONTEXT_DB):
+        return {}
+    context = sqlite3.connect(CONTEXT_DB)
+    try:
+        try:
+            result: dict[str, tuple[int, str]] = {}
+            names = list(tags)
+            for start in range(0, len(names), 500):
+                chunk = names[start:start + 500]
+                placeholders = ",".join("?" for _ in chunk)
+                rows = context.execute(
+                    "SELECT tag, work_tag, matched_terms, score FROM character_work_context "
+                    f"WHERE tag IN ({placeholders})",
+                    chunk,
+                ).fetchall()
+                for tag, work, matched_terms, score in rows:
+                    matched = set(matched_terms.split(","))
+                    if not matched.intersection(context_tokens):
+                        continue
+                    previous = result.get(tag)
+                    if (
+                        previous is None
+                        or score > previous[0]
+                        or (
+                            score == previous[0]
+                            and (len(work), work) < (len(previous[1]), previous[1])
+                        )
+                    ):
+                        result[tag] = (score, work)
+            return {tag: work for tag, (_, work) in result.items()}
+        except sqlite3.OperationalError:
+            return {}
+    finally:
+        context.close()
+
+
 def _copyright_tokens(con: sqlite3.Connection) -> set[str]:
     global _COPYRIGHT_TOKENS
     if _COPYRIGHT_TOKENS is None:
@@ -291,6 +328,7 @@ def _tag_suggestions(con: sqlite3.Connection, query: str,
         }
     else:
         context_names = set()
+    context_works = _context_work_map(context_names, context_tokens)
     if context_names:
         names = list(context_names)
         for start in range(0, len(names), 500):
@@ -351,6 +389,7 @@ def _tag_suggestions(con: sqlite3.Connection, query: str,
             "match_type": "fuzzy",
             "confidence": "medium" if score >= 0.65 and min(token_ratios) >= (0.8 if len(tokens) > 1 else 0.72) else "low",
             "context_match": bool(name.lower() in context_names),
+            "matched_work": context_works.get(name.lower()),
         }
         if item["context_match"] and any(
             token in candidate_tokens for token in tokens if token not in context_tokens
@@ -495,19 +534,23 @@ def get_tag_knowledge(tag: str, include_relations: bool = True,
             (tag,),
         )]
         if not tags and not definitions:
-            contextual = {
-                item["name"] for item in _tag_suggestions(con, requested_tag, "character", 10)
+            contextual_items = [
+                item for item in _tag_suggestions(con, requested_tag, "character", 10)
                 if item.get("match_type") == "contextual"
                 and item.get("confidence") == "high"
-            }
+            ]
+            contextual = {item["name"] for item in contextual_items}
             if len(contextual) == 1:
-                candidate = next(iter(contextual))
+                candidate_item = contextual_items[0]
+                candidate = candidate_item["name"]
                 tag, _ = _resolve_canonical_tag(con, candidate)
                 resolution = {
                     "from": requested_tag,
                     "to": tag,
                     "type": "contextual_character",
                 }
+                if candidate_item.get("matched_work"):
+                    resolution["matched_work"] = candidate_item["matched_work"]
                 tags = [dict(row) for row in con.execute(
                     "SELECT site, name, category_name, post_count, aliases, nsfw "
                     "FROM tags WHERE name = ? ORDER BY post_count DESC", (tag,)

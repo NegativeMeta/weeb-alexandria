@@ -86,6 +86,10 @@ class SearchRegressionTests(unittest.TestCase):
         self.assertTrue(result["found"])
         self.assertEqual(result["tag"], "furude_rika")
         self.assertEqual(result["resolution"]["type"], "contextual_character")
+        self.assertEqual(
+            result["resolution"]["matched_work"],
+            "higurashi_no_naku_koro_ni",
+        )
 
     def test_short_ambiguous_name_reports_candidates_without_selection(self):
         result = get_character("Sakura")
@@ -125,6 +129,29 @@ class SearchRegressionTests(unittest.TestCase):
     def test_context_index_resolves_work_name_to_character(self):
         result = get_character("Rika Higurashi")
         self.assertEqual(result["recommended_tag"], "furude_rika")
+
+    def test_contextual_recommendation_exposes_matched_work(self):
+        result = get_character("Rika Higurashi")
+        self.assertEqual(
+            result["recommendation"]["matched_work"],
+            "higurashi_no_naku_koro_ni",
+        )
+
+    def test_context_index_records_canonical_work_relation(self):
+        index = Path(__file__).parents[1] / "data" / "character_context.sqlite"
+        con = sqlite3.connect(index)
+        try:
+            relation = con.execute(
+                "SELECT work_tag FROM character_work_context "
+                "WHERE tag='furude_rika' AND work_tag='higurashi_no_naku_koro_ni'"
+            ).fetchone()
+            self.assertIsNotNone(relation)
+            metadata = con.execute(
+                "SELECT value FROM context_index_metadata WHERE key='source_db'"
+            ).fetchone()
+            self.assertIsNotNone(metadata)
+        finally:
+            con.close()
 
     def test_unknown_structured_character_can_fall_back_to_tag(self):
         result = get_character("wave_the_swallow")
