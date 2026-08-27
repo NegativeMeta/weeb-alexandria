@@ -90,6 +90,10 @@ class SearchRegressionTests(unittest.TestCase):
             with self.subTest(query=query):
                 self.assertEqual(get_character(query)["recommended_tag"], tag)
 
+    def test_context_index_resolves_work_name_to_character(self):
+        result = get_character("Rika Higurashi")
+        self.assertEqual(result["recommended_tag"], "furude_rika")
+
     def test_unknown_structured_character_can_fall_back_to_tag(self):
         result = get_character("wave_the_swallow")
         self.assertFalse(result["found"])

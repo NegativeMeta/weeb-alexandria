@@ -73,6 +73,16 @@ The database must be located at:
 <WEEB_ALEXANDRIA_DIR>\tag_library.db
 ```
 
+### 2.1 Build the character-context index (recommended)
+
+The derived index helps resolve queries such as `Rika Higurashi` by separating the character name from the franchise context:
+
+```bash
+.venv/Scripts/python.exe scripts/build_context_index.py
+```
+
+It creates `data/character_context.sqlite`, which is local/generated and is intentionally excluded from Git. Rebuild it after replacing `tag_library.db`.
+
 ### 3. Connect it to Hermes
 
 Register the local stdio MCP server:

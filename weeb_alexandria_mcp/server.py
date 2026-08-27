@@ -18,6 +18,9 @@ TAGLIB_DB = os.path.abspath(os.environ.get(
     "TAGLIB_DB",
     os.path.join(ROOT, "..", "tag_library.db"),
 ))
+CONTEXT_DB = os.path.abspath(os.environ.get(
+    "CONTEXT_DB", os.path.join(ROOT, "..", "data", "character_context.sqlite")
+))
 ANIMADEX_BASE_URL = os.environ.get(
     "ANIMADEX_BASE_URL", "http://127.0.0.1:5000"
 ).rstrip("/")
@@ -42,6 +45,19 @@ def _db() -> sqlite3.Connection:
     return con
 
 
+def _context_tags(tokens: list[str]) -> set[str]:
+    if not tokens or not os.path.exists(CONTEXT_DB):
+        return set()
+    context = sqlite3.connect(CONTEXT_DB)
+    try:
+        placeholders = ",".join("?" for _ in tokens)
+        rows = context.execute(
+            f"SELECT DISTINCT tag FROM character_context WHERE context IN ({placeholders})",
+            tokens,
+        ).fetchall()
+        return {row[0] for row in rows}
+    finally:
+        context.close()
 def _api_get(path: str, params: Optional[dict[str, Any]] = None) -> dict:
     url = ANIMADEX_BASE_URL + path
     clean = {k: v for k, v in (params or {}).items() if v is not None}
@@ -204,6 +220,43 @@ def _tag_suggestions(con: sqlite3.Connection, query: str,
         f"FROM tags WHERE {where} ORDER BY post_count DESC NULLS LAST LIMIT 20000",
         params,
     ).fetchall())
+    exact_character_tokens = {
+        token for token in tokens
+        if con.execute(
+            "SELECT 1 FROM tags WHERE category_name='character' AND lower(name)=? LIMIT 1",
+            (token,),
+        ).fetchone()
+    }
+    context_search_tokens = (
+        [token for token in tokens if token not in exact_character_tokens]
+        or tokens
+    )
+    context_tokens = []
+    for token in context_search_tokens:
+        if con.execute(
+            "SELECT 1 FROM tags WHERE category_name='copyright' AND ("
+            "lower(name)=? OR lower(name) LIKE ? ESCAPE '!' OR lower(name) LIKE ? ESCAPE '!'"
+            ") LIMIT 1",
+            (token, f"{token}!_%", f"%!_{token}"),
+        ).fetchone():
+            context_tokens.append(token)
+    context_names = _context_tags(context_tokens)
+    character_tokens = [token for token in tokens if token not in context_tokens]
+    if character_tokens:
+        context_names = {
+            name for name in context_names
+            if any(token in name.lower().split("_") for token in character_tokens)
+        }
+    if context_names:
+        names = list(context_names)
+        for start in range(0, len(names), 500):
+            chunk = names[start:start + 500]
+            placeholders = ",".join("?" for _ in chunk)
+            rows.extend(con.execute(
+                f"SELECT name, category_name, post_count, site, aliases, nsfw FROM tags "
+                f"WHERE category_name='character' AND lower(name) IN ({placeholders})",
+                chunk,
+            ).fetchall())
     wiki_context_names = set()
     for work, names in _WORK_NAME_HINTS.items():
         if work in normalized:
@@ -235,6 +288,10 @@ def _tag_suggestions(con: sqlite3.Connection, query: str,
         score += 0.25 * exact_token_score
         if name.lower() in wiki_context_names:
             score += 0.25
+        if name.lower() in context_names:
+            score += 0.30
+            if any(token in candidate_tokens for token in tokens if token not in context_tokens):
+                score += 1.5
         if row["category_name"] == "character":
             score += 0.08
             # When names are similarly close, prefer the established character
@@ -249,7 +306,13 @@ def _tag_suggestions(con: sqlite3.Connection, query: str,
             "site": row["site"],
             "match_type": "fuzzy",
             "confidence": "medium" if score >= 0.65 and min(token_ratios) >= (0.8 if len(tokens) > 1 else 0.72) else "low",
+            "context_match": bool(name.lower() in context_names),
         }
+        if item["context_match"] and any(
+            token in candidate_tokens for token in tokens if token not in context_tokens
+        ):
+            item["match_type"] = "contextual"
+            item["confidence"] = "high"
         previous = scored.get(name)
         if previous is None or score > previous[0]:
             scored[name] = (score, item)
@@ -490,7 +553,8 @@ def get_character(slug: str) -> dict:
                 if work in slug for name in names
             }
             contextual_characters.sort(
-                key=lambda item: (item["name"] not in hinted_characters,
+                key=lambda item: (not item.get("context_match", False),
+                                  item["name"] not in hinted_characters,
                                   "_(" in item["name"], -(item.get("post_count") or 0))
             )
             contextual_character = contextual_characters[0] if contextual_characters else None
