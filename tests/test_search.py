@@ -73,6 +73,11 @@ class SearchRegressionTests(unittest.TestCase):
         weak = next(row for row in suggestions if row["name"] == "anya_flormer")
         self.assertEqual(weak["confidence"], "low")
 
+    def test_contextual_variant_with_unique_wiki_is_preserved(self):
+        result = get_tag_knowledge("fuu_(samurai_champloo)")
+        self.assertEqual(result["tag"], "fuu_(samurai_champloo)")
+        self.assertTrue(any(item["body"] for item in result["definitions"]))
+
     def test_unknown_structured_character_can_fall_back_to_tag(self):
         result = get_character("wave_the_swallow")
         self.assertFalse(result["found"])

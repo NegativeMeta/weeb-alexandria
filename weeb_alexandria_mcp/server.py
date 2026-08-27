@@ -287,7 +287,11 @@ def _resolve_canonical_tag(con: sqlite3.Connection, requested: str) -> tuple[str
                 "SELECT 1 FROM tags WHERE lower(name)=? AND category_name='character' LIMIT 1",
                 (base,),
             ).fetchone()
-            if base_exists:
+            base_has_wiki = con.execute(
+                "SELECT 1 FROM wiki WHERE lower(title)=? AND trim(body) <> '' LIMIT 1",
+                (base,),
+            ).fetchone()
+            if base_exists and base_has_wiki:
                 first_resolution = first_resolution or {
                     "from": current, "to": base, "type": "variant_base"
                 }
