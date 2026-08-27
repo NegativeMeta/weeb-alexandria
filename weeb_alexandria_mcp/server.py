@@ -32,6 +32,7 @@ mcp = FastMCP("Weeb Alexandria")
 _WORK_NAME_HINTS = {
     "oshi_no_ko": {"hoshino_ai"},
 }
+_COPYRIGHT_TOKENS: Optional[set[str]] = None
 
 
 def _normalize_tag(value: str) -> str:
@@ -58,6 +59,20 @@ def _context_tags(tokens: list[str]) -> set[str]:
         return {row[0] for row in rows}
     finally:
         context.close()
+
+
+def _copyright_tokens(con: sqlite3.Connection) -> set[str]:
+    global _COPYRIGHT_TOKENS
+    if _COPYRIGHT_TOKENS is None:
+        _COPYRIGHT_TOKENS = set()
+        for row in con.execute(
+            "SELECT DISTINCT name FROM tags WHERE category_name='copyright'"
+        ):
+            _COPYRIGHT_TOKENS.update(
+                token for token in re.split(r"[_\s]+", row[0].lower())
+                if len(token) >= 3
+            )
+    return _COPYRIGHT_TOKENS
 def _api_get(path: str, params: Optional[dict[str, Any]] = None) -> dict:
     url = ANIMADEX_BASE_URL + path
     clean = {k: v for k, v in (params or {}).items() if v is not None}
@@ -207,23 +222,50 @@ def _tag_suggestions(con: sqlite3.Connection, query: str,
         return []
     tokens = [token for token in normalized.split("_") if len(token) >= 3]
     tokens = tokens or [normalized]
-    token_where = " OR ".join("lower(name) LIKE ? OR lower(aliases) LIKE ?" for _ in tokens)
-    length_where = "(substr(lower(name), 1, 1) = ? AND length(name) BETWEEN ? AND ?)"
-    where = f"({token_where} OR {length_where})"
-    params: list[Any] = [value for token in tokens for value in (f"%{token}%", f"%{token}%")]
-    params.extend([normalized[0], max(1, len(normalized) - 3), len(normalized) + 8])
+    category_filter = ""
+    category_params: list[Any] = []
     if category and category.lower() not in {"tag", "tags", "all"}:
-        where += " AND category_name = ?"
-        params.append(category)
-    rows = list(con.execute(
-        f"SELECT name, category_name, post_count, site, aliases, nsfw "
-        f"FROM tags WHERE {where} ORDER BY post_count DESC NULLS LAST LIMIT 20000",
-        params,
-    ).fetchall())
+        category_filter = " AND category_name = ?"
+        category_params.append(category)
+    rows: list[sqlite3.Row] = []
+    for token in tokens:
+        rows.extend(con.execute(
+            "SELECT name, category_name, post_count, site, aliases, nsfw "
+            f"FROM tags INDEXED BY idx_tags_name "
+            f"WHERE name >= ? AND name < ? AND name LIKE ?{category_filter} "
+            "ORDER BY post_count DESC NULLS LAST LIMIT 2000",
+            [token, token + "\uffff", f"{token}%", *category_params],
+        ).fetchall())
+    has_complete_name_candidate = any(
+        all(token in row["name"].lower().split("_") for token in tokens)
+        for row in rows
+    )
+    if len(tokens) > 1 and not has_complete_name_candidate:
+        for token in tokens:
+            rows.extend(con.execute(
+                "SELECT name, category_name, post_count, site, aliases, nsfw "
+                f"FROM tags WHERE name LIKE ? ESCAPE '!'{category_filter} "
+                "ORDER BY post_count DESC NULLS LAST LIMIT 2000",
+                [f"%!_{token}", *category_params],
+            ).fetchall())
+    if not rows:
+        # Expensive fuzzy fallback is reserved for misspellings with no
+        # indexed prefix/suffix candidates (e.g. ``swalow``).
+        token_where = " OR ".join("lower(name) LIKE ? OR lower(aliases) LIKE ?" for _ in tokens)
+        length_where = "(substr(lower(name), 1, 1) = ? AND length(name) BETWEEN ? AND ?)"
+        where = f"({token_where} OR {length_where}){category_filter}"
+        params: list[Any] = [value for token in tokens for value in (f"%{token}%", f"%{token}%")]
+        params.extend([normalized[0], max(1, len(normalized) - 3), len(normalized) + 8])
+        params.extend(category_params)
+        rows = list(con.execute(
+            f"SELECT name, category_name, post_count, site, aliases, nsfw "
+            f"FROM tags WHERE {where} ORDER BY post_count DESC NULLS LAST LIMIT 5000",
+            params,
+        ).fetchall())
     exact_character_tokens = {
         token for token in tokens
         if con.execute(
-            "SELECT 1 FROM tags WHERE category_name='character' AND lower(name)=? LIMIT 1",
+            "SELECT 1 FROM tags WHERE category_name='character' AND name=? LIMIT 1",
             (token,),
         ).fetchone()
     }
@@ -231,22 +273,24 @@ def _tag_suggestions(con: sqlite3.Connection, query: str,
         [token for token in tokens if token not in exact_character_tokens]
         or tokens
     )
-    context_tokens = []
-    for token in context_search_tokens:
-        if con.execute(
-            "SELECT 1 FROM tags WHERE category_name='copyright' AND ("
-            "lower(name)=? OR lower(name) LIKE ? ESCAPE '!' OR lower(name) LIKE ? ESCAPE '!'"
-            ") LIMIT 1",
-            (token, f"{token}!_%", f"%!_{token}"),
-        ).fetchone():
-            context_tokens.append(token)
-    context_names = _context_tags(context_tokens)
+    copyright_tokens = _copyright_tokens(con)
+    context_tokens = [
+        token for token in context_search_tokens
+        if token in copyright_tokens
+    ]
+    context_names: set[str] = set()
+    for token in context_tokens:
+        token_names = _context_tags([token])
+        if len(token_names) <= 5000:
+            context_names.update(token_names)
     character_tokens = [token for token in tokens if token not in context_tokens]
     if character_tokens:
         context_names = {
             name for name in context_names
             if any(token in name.lower().split("_") for token in character_tokens)
         }
+    else:
+        context_names = set()
     if context_names:
         names = list(context_names)
         for start in range(0, len(names), 500):
@@ -344,7 +388,7 @@ def _resolve_canonical_tag(con: sqlite3.Connection, requested: str) -> tuple[str
             current = target
             continue
         wiki_rows = con.execute(
-            "SELECT body FROM wiki WHERE lower(title)=? ORDER BY CASE lang WHEN 'en' THEN 0 ELSE 1 END",
+            "SELECT body FROM wiki WHERE title=? ORDER BY CASE lang WHEN 'en' THEN 0 ELSE 1 END",
             (current,),
         ).fetchall()
         target = None
@@ -354,7 +398,7 @@ def _resolve_canonical_tag(con: sqlite3.Connection, requested: str) -> tuple[str
             if match:
                 candidate = _normalize_tag(match.group(1))
                 exists = con.execute(
-                    "SELECT 1 FROM tags WHERE lower(name)=? LIMIT 1", (candidate,)
+                    "SELECT 1 FROM tags WHERE name=? LIMIT 1", (candidate,)
                 ).fetchone()
                 if exists and candidate != current:
                     target = candidate
@@ -368,11 +412,11 @@ def _resolve_canonical_tag(con: sqlite3.Connection, requested: str) -> tuple[str
         if "_(" in current and current.endswith(")"):
             base = current.split("_(", 1)[0]
             base_exists = con.execute(
-                "SELECT 1 FROM tags WHERE lower(name)=? AND category_name='character' LIMIT 1",
+                "SELECT 1 FROM tags WHERE name=? AND category_name='character' LIMIT 1",
                 (base,),
             ).fetchone()
             base_has_wiki = con.execute(
-                "SELECT 1 FROM wiki WHERE lower(title)=? AND trim(body) <> '' LIMIT 1",
+                "SELECT 1 FROM wiki WHERE title=? AND trim(body) <> '' LIMIT 1",
                 (base,),
             ).fetchone()
             if base_exists and base_has_wiki:
@@ -534,7 +578,7 @@ def get_character(slug: str) -> dict:
         if not match:
             tag = con.execute(
                 "SELECT name, category_name, post_count, site, aliases, nsfw "
-                "FROM tags WHERE lower(name)=? ORDER BY post_count DESC LIMIT 1",
+                "FROM tags WHERE name=? ORDER BY post_count DESC LIMIT 1",
                 (slug,),
             ).fetchone()
             fallback = dict(tag) if tag else None
