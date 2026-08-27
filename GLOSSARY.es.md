@@ -214,6 +214,8 @@ Ejemplo:
 Obtén el registro completo de hatsune_miku
 ```
 
+Si no encuentra una ficha estructurada, `get_character` también busca una tag exacta con el mismo nombre. Así el modelo puede distinguir entre “el personaje no existe en la base” y “el personaje existe como tag, pero no tiene una ficha enriquecida de AnimaDex”.
+
 ### `get_sources_status`
 
 Sirve para comprobar si las fuentes locales y la base están disponibles.

@@ -333,11 +333,28 @@ def get_character(slug: str) -> dict:
     """Obtiene el registro completo de un personaje migrado de AnimaDex."""
     con = _db()
     try:
+        slug = _normalize_tag(slug)
         rows = _local_characters(con, slug, limit=100)
         match = next((row for row in rows if row.get("slug") == slug), None)
         if not match:
-            return {"found": False, "slug": slug,
-                    "candidates": [row.get("slug") for row in rows[:10]]}
+            tag = con.execute(
+                "SELECT name, category_name, post_count, site, aliases, nsfw "
+                "FROM tags WHERE lower(name)=? ORDER BY post_count DESC LIMIT 1",
+                (slug,),
+            ).fetchone()
+            fallback = dict(tag) if tag else None
+            return {
+                "found": False,
+                "slug": slug,
+                "tag_match": bool(fallback),
+                "tag": fallback,
+                "message": (
+                    "This name exists as a tag but has no structured AnimaDex character record."
+                    if fallback else
+                    "No structured character record or exact character tag was found."
+                ),
+                "candidates": [row.get("slug") for row in rows[:10]],
+            }
         match["loras"] = [dict(row) for row in con.execute(
             "SELECT model_id,name,url,thumb,published FROM animadex_loras WHERE character=? ORDER BY model_id",
             (slug,)).fetchall()]

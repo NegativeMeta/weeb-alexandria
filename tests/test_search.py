@@ -5,6 +5,7 @@ from pathlib import Path
 from weeb_alexandria_mcp.server import (
     _tag_rows,
     _tag_suggestions,
+    get_character,
     get_tag_knowledge,
 )
 
@@ -36,6 +37,12 @@ class SearchRegressionTests(unittest.TestCase):
         suggestions = _tag_suggestions(self.con, "fingers_in_mouth", "tag", 5)
         self.assertTrue(any(row["name"] == "finger_in_own_mouth" and row["match_type"] == "alias"
                             for row in suggestions))
+
+    def test_unknown_structured_character_can_fall_back_to_tag(self):
+        result = get_character("wave_the_swallow")
+        self.assertFalse(result["found"])
+        self.assertTrue(result["tag_match"])
+        self.assertEqual(result["tag"]["name"], "wave_the_swallow")
 
 
 if __name__ == "__main__":

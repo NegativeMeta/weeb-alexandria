@@ -214,6 +214,8 @@ Example:
 Get the complete record for hatsune_miku
 ```
 
+If a structured character record is not found, `get_character` also checks for an exact tag with the same name. This lets the model distinguish between "the character is unknown" and "the character exists as a tag but has no enriched AnimaDex record".
+
 ### `get_sources_status`
 
 Use this to check whether the local sources and database are available.
