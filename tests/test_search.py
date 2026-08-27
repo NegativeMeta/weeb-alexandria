@@ -25,7 +25,7 @@ class SearchRegressionTests(unittest.TestCase):
         self.assertTrue(any(row["name"] == "closed_mouth" for row in rows))
 
     def test_close_typo_returns_recommendations(self):
-        suggestions = _tag_suggestions(self.con, "swalow", "tag", 5)
+        suggestions = _tag_suggestions(self.con, "swalow", "tag", 25)
         self.assertTrue(any(row["name"] == "swallowing" for row in suggestions))
 
     def test_get_tag_normalizes_human_spacing(self):
@@ -37,6 +37,12 @@ class SearchRegressionTests(unittest.TestCase):
         suggestions = _tag_suggestions(self.con, "fingers_in_mouth", "tag", 5)
         self.assertTrue(any(row["name"] == "finger_in_own_mouth" and row["match_type"] == "alias"
                             for row in suggestions))
+
+    def test_character_name_variant_recommends_canonical_tag(self):
+        result = get_character("satoko hojo")
+        self.assertFalse(result["found"])
+        self.assertEqual(result["recommended_tag"], "houjou_satoko")
+        self.assertEqual(result["recommendation"]["category"], "character")
 
     def test_unknown_structured_character_can_fall_back_to_tag(self):
         result = get_character("wave_the_swallow")

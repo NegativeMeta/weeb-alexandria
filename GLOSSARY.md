@@ -214,7 +214,7 @@ Example:
 Get the complete record for hatsune_miku
 ```
 
-If a structured character record is not found, `get_character` also checks for an exact tag with the same name. This lets the model distinguish between "the character is unknown" and "the character exists as a tag but has no enriched AnimaDex record".
+When a character name is written in a familiar but non-canonical form, `get_character` can recommend a likely character tag by comparing name parts, allowing reordered names and small spelling variants. For example, `satoko hojo` can recommend `houjou_satoko`. The recommendation is not treated as a structured AnimaDex record until the canonical tag is queried.
 
 ### `get_sources_status`
 

@@ -214,7 +214,7 @@ Ejemplo:
 Obtén el registro completo de hatsune_miku
 ```
 
-Si no encuentra una ficha estructurada, `get_character` también busca una tag exacta con el mismo nombre. Así el modelo puede distinguir entre “el personaje no existe en la base” y “el personaje existe como tag, pero no tiene una ficha enriquecida de AnimaDex”.
+Cuando el nombre de un personaje está escrito de una forma conocida pero no canónica, `get_character` puede recomendar una tag probable comparando sus partes, permitiendo invertir el orden y tolerar pequeñas variaciones. Por ejemplo, `satoko hojo` puede recomendar `houjou_satoko`. La recomendación no se considera una ficha estructurada de AnimaDex hasta consultar la tag canónica.
 
 ### `get_sources_status`
 

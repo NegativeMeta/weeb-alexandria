@@ -3,6 +3,7 @@ from __future__ import annotations
 
 import json
 import difflib
+import math
 import os
 import sqlite3
 import urllib.parse
@@ -181,24 +182,41 @@ def _tag_suggestions(con: sqlite3.Connection, query: str,
     normalized = _normalize_tag(query)
     if not normalized:
         return []
-    first = normalized[0]
-    low_len = max(1, len(normalized) - 3)
-    high_len = len(normalized) + 8
-    where = "substr(lower(name), 1, 1) = ? AND length(name) BETWEEN ? AND ?"
-    params: list[Any] = [first, low_len, high_len]
+    tokens = [token for token in normalized.split("_") if len(token) >= 3]
+    tokens = tokens or [normalized]
+    token_where = " OR ".join("lower(name) LIKE ?" for _ in tokens)
+    length_where = "(substr(lower(name), 1, 1) = ? AND length(name) BETWEEN ? AND ?)"
+    where = f"({token_where} OR {length_where})"
+    params: list[Any] = [f"%{token}%" for token in tokens]
+    params.extend([normalized[0], max(1, len(normalized) - 3), len(normalized) + 8])
     if category and category.lower() not in {"tag", "tags", "all"}:
         where += " AND category_name = ?"
         params.append(category)
     rows = con.execute(
         f"SELECT name, category_name, post_count, site, aliases, nsfw "
-        f"FROM tags WHERE {where} ORDER BY post_count DESC NULLS LAST LIMIT 10000",
+        f"FROM tags WHERE {where} ORDER BY post_count DESC NULLS LAST LIMIT 20000",
         params,
     ).fetchall()
     scored: dict[str, tuple[float, dict]] = {}
     for row in rows:
         name = row["name"]
         candidate = name.lower().replace("-", "_")
-        score = difflib.SequenceMatcher(None, normalized, candidate).ratio()
+        candidate_tokens = [token for token in candidate.split("_") if token]
+        token_score = sum(
+            max(difflib.SequenceMatcher(None, token, other).ratio()
+                for other in candidate_tokens)
+            for token in tokens
+        ) / len(tokens)
+        score = 0.6 * token_score + 0.4 * difflib.SequenceMatcher(
+            None, normalized, candidate
+        ).ratio()
+        exact_token_score = sum(token in candidate_tokens for token in tokens) / len(tokens)
+        score += 0.25 * exact_token_score
+        if row["category_name"] == "character":
+            score += 0.08
+            # When names are similarly close, prefer the established character
+            # tag with meaningful coverage over a one-post coincidence.
+            score += 0.03 * math.log10(1 + (row["post_count"] or 0))
         if score < 0.45:
             continue
         item = {
@@ -214,7 +232,7 @@ def _tag_suggestions(con: sqlite3.Connection, query: str,
             scored[name] = (score, item)
     fuzzy = [item for _, item in sorted(
         scored.values(), key=lambda pair: (-pair[0], -(pair[1]["post_count"] or 0), pair[1]["name"])
-    )[:max(1, min(int(limit), 10))]]
+    )[:max(1, min(int(limit), 25))]]
     return _alias_suggestions(con, query, limit) + fuzzy
 
 
@@ -343,17 +361,27 @@ def get_character(slug: str) -> dict:
                 (slug,),
             ).fetchone()
             fallback = dict(tag) if tag else None
+            recommendations = _tag_suggestions(con, slug, "character", 5)
+            recommendation = next(
+                (item for item in recommendations
+                 if item.get("category") == "character"),
+                None,
+            )
             return {
                 "found": False,
                 "slug": slug,
                 "tag_match": bool(fallback),
                 "tag": fallback,
+                "recommended_tag": recommendation["name"] if recommendation else None,
+                "recommendation": recommendation,
                 "message": (
                     "This name exists as a tag but has no structured AnimaDex character record."
                     if fallback else
                     "No structured character record or exact character tag was found."
+                    + (" A likely character tag is included as a recommendation." if recommendation else "")
                 ),
                 "candidates": [row.get("slug") for row in rows[:10]],
+                "recommendations": recommendations,
             }
         match["loras"] = [dict(row) for row in con.execute(
             "SELECT model_id,name,url,thumb,published FROM animadex_loras WHERE character=? ORDER BY model_id",
