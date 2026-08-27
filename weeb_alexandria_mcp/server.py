@@ -450,6 +450,29 @@ def get_tag_knowledge(tag: str, include_relations: bool = True,
             "FROM wiki WHERE title = ? ORDER BY CASE lang WHEN 'en' THEN 0 ELSE 1 END, site",
             (tag,),
         )]
+        if not tags and not definitions:
+            contextual = {
+                item["name"] for item in _tag_suggestions(con, requested_tag, "character", 10)
+                if item.get("match_type") == "contextual"
+                and item.get("confidence") == "high"
+            }
+            if len(contextual) == 1:
+                candidate = next(iter(contextual))
+                tag, _ = _resolve_canonical_tag(con, candidate)
+                resolution = {
+                    "from": requested_tag,
+                    "to": tag,
+                    "type": "contextual_character",
+                }
+                tags = [dict(row) for row in con.execute(
+                    "SELECT site, name, category_name, post_count, aliases, nsfw "
+                    "FROM tags WHERE name = ? ORDER BY post_count DESC", (tag,)
+                )]
+                definitions = [dict(row) for row in con.execute(
+                    "SELECT site, title, body, other_names, lang, post_count "
+                    "FROM wiki WHERE title = ? ORDER BY CASE lang WHEN 'en' THEN 0 ELSE 1 END, site",
+                    (tag,),
+                )]
         result: dict[str, Any] = {
             "found": bool(tags or definitions),
             "requested_tag": requested_tag,

@@ -7,6 +7,7 @@ from weeb_alexandria_mcp.server import (
     _tag_suggestions,
     get_character,
     get_tag_knowledge,
+    search_knowledge,
 )
 
 DB = Path(__file__).parents[1] / "tag_library.db"
@@ -72,6 +73,19 @@ class SearchRegressionTests(unittest.TestCase):
         suggestions = _tag_suggestions(self.con, "anya forger", "character", 10)
         weak = next(row for row in suggestions if row["name"] == "anya_flormer")
         self.assertEqual(weak["confidence"], "low")
+
+    def test_search_knowledge_exposes_contextual_character(self):
+        result = search_knowledge("Rika Higurashi", category="character", limit=10)
+        suggestions = result["tag_library"].get("suggestions", [])
+        candidate = next(item for item in suggestions if item["name"] == "furude_rika")
+        self.assertEqual(candidate["match_type"], "contextual")
+        self.assertEqual(candidate["confidence"], "high")
+
+    def test_get_tag_knowledge_resolves_unique_contextual_character(self):
+        result = get_tag_knowledge("Rika Higurashi")
+        self.assertTrue(result["found"])
+        self.assertEqual(result["tag"], "furude_rika")
+        self.assertEqual(result["resolution"]["type"], "contextual_character")
 
     def test_short_ambiguous_name_reports_candidates_without_selection(self):
         result = get_character("Sakura")
