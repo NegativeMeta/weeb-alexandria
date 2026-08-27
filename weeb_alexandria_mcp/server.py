@@ -573,14 +573,42 @@ def get_character(slug: str) -> dict:
                  if item.get("category") == "character"),
                 None,
             )))
+            strong_character_names = {
+                item["name"] for item in canonical_recommendations
+                if item.get("category") == "character"
+                and item.get("confidence") in {"medium", "high"}
+            }
+            has_contextual_evidence = (
+                len(slug.split("_")) > 1
+                and any(
+                    item.get("context_match") or item.get("match_type") == "contextual"
+                    for item in canonical_recommendations
+                )
+            )
+            ambiguous = (
+                len(slug) <= 7
+                and "_" not in slug
+                and len(strong_character_names) >= 2
+                and not has_contextual_evidence
+            )
+            if ambiguous:
+                recommendation = None
             return {
                 "found": False,
                 "slug": slug,
                 "tag_match": bool(fallback),
+                "ambiguous": ambiguous,
                 "tag": fallback,
                 "recommended_tag": recommendation["name"] if recommendation else None,
                 "recommendation": recommendation,
+                "ambiguity": ({
+                    "reason": "short_name_multiple_character_candidates",
+                    "candidates": sorted(strong_character_names),
+                    "message": "Provide a franchise or other context to select one character."
+                } if ambiguous else None),
                 "message": (
+                    "The character name is ambiguous. Provide a franchise or other context."
+                    if ambiguous else
                     "This name exists as a tag but has no structured AnimaDex character record."
                     if fallback else
                     "No structured character record or exact character tag was found."

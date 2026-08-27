@@ -73,6 +73,24 @@ class SearchRegressionTests(unittest.TestCase):
         weak = next(row for row in suggestions if row["name"] == "anya_flormer")
         self.assertEqual(weak["confidence"], "low")
 
+    def test_short_ambiguous_name_reports_candidates_without_selection(self):
+        result = get_character("Sakura")
+        self.assertTrue(result["ambiguous"])
+        self.assertIsNone(result["recommended_tag"])
+        self.assertGreaterEqual(len(result["recommendations"]), 2)
+
+    def test_short_character_name_without_context_is_ambiguous(self):
+        result = get_character("Rem")
+        self.assertTrue(result["ambiguous"])
+        self.assertIsNone(result["recommended_tag"])
+        self.assertGreaterEqual(len(result["recommendations"]), 2)
+
+    def test_short_general_name_is_ambiguous_even_with_exact_tag(self):
+        result = get_character("Cream")
+        self.assertTrue(result["ambiguous"])
+        self.assertIsNone(result["recommended_tag"])
+        self.assertGreaterEqual(len(result["recommendations"]), 2)
+
     def test_contextual_variant_with_unique_wiki_is_preserved(self):
         result = get_tag_knowledge("fuu_(samurai_champloo)")
         self.assertEqual(result["tag"], "fuu_(samurai_champloo)")
