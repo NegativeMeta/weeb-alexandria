@@ -73,6 +73,22 @@ https://huggingface.co/datasets/negativemeta/weeb-alexandria
 <WEEB_ALEXANDRIA_DIR>\tag_library.db
 ```
 
+### 2.1 构建角色上下文索引（推荐）
+
+派生索引可以通过分离角色名称和作品上下文来解析类似 `Rika Higurashi` 的查询。它还会记录规范作品关系，例如：
+
+```text
+furude_rika → higurashi_no_naku_koro_ni
+```
+
+使用以下命令构建或重新构建：
+
+```bash
+.venv/Scripts/python.exe scripts/build_context_index.py
+```
+
+该命令会创建 `data/character_context.sqlite`，其中包含 `character_context`、`character_work_context` 和 `context_index_metadata` 表。该索引是本地生成文件，并且特意排除在 Git 之外；替换 `tag_library.db` 后应重新生成。元数据会记录源数据库大小和索引模式版本。
+
 ### 3. 连接到 Hermes
 
 注册本地 stdio MCP 服务器：
@@ -129,6 +145,8 @@ WeebAlexandria/
 │   └── danbooru_wiki_extra/
 ├── reports/                审计报告和人工审核列表
 ├── scripts/                数据维护和融合脚本
+├── data/character_context.sqlite
+│                           派生角色上下文索引（本地）
 ├── data/backups/           数据库备份
 ├── CREDITS.md              致谢和来源信息
 ├── run.bat                 MCP 启动脚本

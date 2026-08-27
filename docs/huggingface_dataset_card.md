@@ -89,6 +89,22 @@ The database must be located at:
 <WEEB_ALEXANDRIA_DIR>\tag_library.db
 ```
 
+### 2.1 Build the character-context index (recommended)
+
+The derived index helps resolve queries such as `Rika Higurashi` by separating the character name from the franchise context. It also records canonical work relations such as:
+
+```text
+furude_rika → higurashi_no_naku_koro_ni
+```
+
+Build or rebuild it with:
+
+```bash
+.venv/Scripts/python.exe scripts/build_context_index.py
+```
+
+It creates `data/character_context.sqlite` with the `character_context`, `character_work_context`, and `context_index_metadata` tables. The index is local/generated, intentionally excluded from Git and this dataset upload, and should be rebuilt after replacing `tag_library.db`. Metadata records the source database size and index schema version.
+
 ### 3. Connect it to Hermes
 
 Register the local stdio MCP server:
@@ -128,7 +144,11 @@ You do not need to call the MCP tools manually. Ask the model naturally, for exa
 Tell me what Inugami Korone looks like. You can use Weeb Alexandria to check the character information and relevant tags.
 ```
 
-The model can use the appropriate Weeb Alexandria tool, such as `get_character`, `search_characters`, or `search_knowledge`, and then explain the result in normal language.
+## Credits, provenance, and licensing
+
+See [`CREDITS.md`](https://github.com/NegativeMeta/weeb-alexandria/blob/main/CREDITS.md) for source attribution and the redistribution notice. The repository MIT license applies to project software and documentation only to the extent that the project can license those materials; it is not a blanket license for all records in this dataset. Upstream terms and source-specific attribution requirements remain applicable. Synthetic definitions marked with `lang='llm'` are project-generated additions.
+
+The derived character-context index is a local build artifact and is not included in this dataset upload. Rebuild it from `tag_library.db` with `scripts/build_context_index.py` when needed.
 
 ## Structure
 
@@ -145,6 +165,8 @@ WeebAlexandria/
 │   └── danbooru_wiki_extra/
 ├── reports/                Audits and review lists
 ├── scripts/                Data maintenance and fusion scripts
+├── data/character_context.sqlite
+│                           Derived character-context index (local)
 ├── data/backups/           Database backups
 ├── CREDITS.md              Credits and source information
 ├── run.bat                 MCP launcher

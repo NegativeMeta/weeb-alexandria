@@ -34,3 +34,13 @@ The following integration work belongs to this project:
 - AnimaDex character/trait/artist migration.
 - Unified MCP tools in `weeb_alexandria_mcp`.
 - Audit reports under `reports/`.
+
+## Licensing and redistribution
+
+The repository `LICENSE` is the MIT license for project software and documentation to the extent that the project has the right to license those materials. It is **not** a blanket license for every record in `tag_library.db`, files under `raw/`, or the published Hugging Face dataset.
+
+This release combines project-authored integration code and schemas with copied or derived records from upstream sources. Source-specific terms, licenses, attribution requirements, and redistribution restrictions remain applicable to the relevant records. Synthetic definitions marked with `lang='llm'` are project-generated additions and should not be mistaken for upstream statements.
+
+Before redistributing the complete database or extracting upstream-derived records, review the current terms and licensing information for each source. If permission or applicable terms are unclear, do not assume that redistribution is allowed. The repository license retains the upstream AnimaDex copyright notice; it should not be interpreted as a claim that Weeb Alexandria owns third-party data.
+
+The derived `data/character_context.sqlite` index is generated from the database snapshot and is intentionally kept outside GitHub. Its metadata identifies the source database size and index schema version.

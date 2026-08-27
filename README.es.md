@@ -73,6 +73,22 @@ La base debe quedar en:
 <WEEB_ALEXANDRIA_DIR>\tag_library.db
 ```
 
+### 2.1 Construir el índice de contexto de personajes (recomendado)
+
+El índice derivado ayuda a resolver consultas como `Rika Higurashi` separando el nombre del personaje del contexto de su franquicia. También registra relaciones canónicas de obras, por ejemplo:
+
+```text
+furude_rika → higurashi_no_naku_koro_ni
+```
+
+Constrúyelo o regénéralo con:
+
+```bash
+.venv/Scripts/python.exe scripts/build_context_index.py
+```
+
+Crea `data/character_context.sqlite` con las tablas `character_context`, `character_work_context` y `context_index_metadata`. El índice es local/generado, está excluido intencionalmente de Git y debe regenerarse después de reemplazar `tag_library.db`. La metadata registra el tamaño de la base de origen y la versión del esquema del índice.
+
 ### 3. Conectarlo a Hermes
 
 Registra el servidor MCP local por stdio:
@@ -129,6 +145,8 @@ WeebAlexandria/
 │   └── danbooru_wiki_extra/
 ├── reports/                Auditorías y listas de revisión
 ├── scripts/                Scripts de mantenimiento y fusión
+├── data/character_context.sqlite
+│                           Índice de contexto derivado (local)
 ├── data/backups/           Backups de la base
 ├── CREDITS.md              Créditos y fuentes
 ├── run.bat                 Launcher del MCP

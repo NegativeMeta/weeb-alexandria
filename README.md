@@ -75,13 +75,19 @@ The database must be located at:
 
 ### 2.1 Build the character-context index (recommended)
 
-The derived index helps resolve queries such as `Rika Higurashi` by separating the character name from the franchise context:
+The derived index helps resolve queries such as `Rika Higurashi` by separating the character name from the franchise context. It also records canonical work relations such as:
+
+```text
+furude_rika → higurashi_no_naku_koro_ni
+```
+
+Build or rebuild it with:
 
 ```bash
 .venv/Scripts/python.exe scripts/build_context_index.py
 ```
 
-It creates `data/character_context.sqlite`, which is local/generated and is intentionally excluded from Git. Rebuild it after replacing `tag_library.db`.
+It creates `data/character_context.sqlite` with the `character_context`, `character_work_context`, and `context_index_metadata` tables. The index is local/generated, intentionally excluded from Git, and should be rebuilt after replacing `tag_library.db`. Metadata records the source database size and index schema version.
 
 ### 3. Connect it to Hermes
 
@@ -139,6 +145,8 @@ WeebAlexandria/
 │   └── danbooru_wiki_extra/
 ├── reports/                Audits and review lists
 ├── scripts/                Data maintenance and fusion scripts
+├── data/character_context.sqlite
+│                           Derived character-context index (local)
 ├── data/backups/           Database backups
 ├── CREDITS.md              Credits and source information
 ├── run.bat                 MCP launcher

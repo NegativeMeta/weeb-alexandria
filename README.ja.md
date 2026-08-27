@@ -73,6 +73,22 @@ https://huggingface.co/datasets/negativemeta/weeb-alexandria
 <WEEB_ALEXANDRIA_DIR>\tag_library.db
 ```
 
+### 2.1 キャラクター・コンテキスト索引を構築する（推奨）
+
+派生索引は、キャラクター名と作品のコンテキストを分離することで、`Rika Higurashi` のようなクエリを解決しやすくします。また、次のような正規作品の関係も記録します。
+
+```text
+furude_rika → higurashi_no_naku_koro_ni
+```
+
+次のコマンドで構築または再構築します。
+
+```bash
+.venv/Scripts/python.exe scripts/build_context_index.py
+```
+
+`character_context`、`character_work_context`、`context_index_metadata` テーブルを含む `data/character_context.sqlite` が作成されます。この索引はローカルで生成されるファイルで、Git には意図的に含めていません。`tag_library.db` を置き換えた後は再構築してください。メタデータには、元データベースのサイズと索引スキーマのバージョンが記録されます。
+
 ### 3. Hermes に接続する
 
 ローカルの stdio MCP サーバーを登録します。
@@ -129,6 +145,8 @@ WeebAlexandria/
 │   └── danbooru_wiki_extra/
 ├── reports/                監査結果と手動レビューリスト
 ├── scripts/                データ保守・統合スクリプト
+├── data/character_context.sqlite
+│                           派生キャラクター・コンテキスト索引（ローカル）
 ├── data/backups/           データベースのバックアップ
 ├── CREDITS.md              クレジットと情報源
 ├── run.bat                 MCP 起動スクリプト
