@@ -1,291 +1,176 @@
-# Weeb Alexandria — AnimaDex Value Analysis
+# Historical Structured-Data Analysis and Migration Record
 
 **Date:** 2026-08-27  
-**Audience:** Future agents and maintainers  
-**Scope:** Determine which migrated AnimaDex tables and fields provide real value beyond `tags`, `wiki`, aliases, and implications.  
-**Sources inspected:** `tag_library.db`, `raw/animadex/animadex.db`, `weeb_alexandria_mcp/server.py`, and the local AnimaDex import/build metadata.  
-**Status:** Evidence-based audit; no schema changes are made by this document.
+**Status:** migration completed and verified
+**Purpose:** record what was retained from the historical structured export, what was discarded, and how the active runtime became independent of its legacy schema.
 
-## Executive conclusion
+## Executive result
 
-The migrated AnimaDex data is useful as a **small structured enrichment layer**, not as a complete character or artist catalogue.
+The active Weeb Alexandria database no longer contains or queries the legacy `animadex_*` tables.
 
-The highest-value material is:
+The useful structured information was copied into an owned schema:
 
-1. `animadex_characters`: curated character identity, franchise association, prompt-ready core tags, and source links.
-2. `animadex_character_traits`: normalized facet/value/label records that make structured filtering possible.
-3. The original AnimaDex asset/search metadata (`imgname`, `thumbname`, `search_blob`, `image_version`) that was not migrated into the active database.
+| Owned table | Current rows | Purpose |
+|---|---:|---|
+| `character_profiles` | 20 | Curated character identity, work, trigger, core tags, count, and URL |
+| `trait_definitions` | 24 | Unique facet/value/label definitions |
+| `character_traits` | 84 | Character-to-trait assignments with evidence and confidence |
+| `trait_system_metadata` | 6 | Schema and seed metadata |
 
-The lower-value material is:
+The 84 assignments come from four initial facets: `gender`, `eye_color`, `hair_color`, and `hair_length`. Repeated values are stored once in `trait_definitions` and referenced by `trait_slug`.
 
-- `animadex_artists`: useful as a generation/style catalogue, but only 10 rows are present.
-- `animadex_artist_categories`: empty.
-- `animadex_categories`: empty.
-- `animadex_loras`: empty, so the current `get_character` response always returns an empty `loras` list.
+`raw/animadex/animadex.db` remains outside the runtime as an audit and recovery source. The MCP server does not open it. The one-time migration script can read it when a future rebuild needs to recover the initial seed.
 
-The 20 characters and 10 artists must not be presented as global totals. The general `tags` table remains the broad source of character and artist coverage.
+## Decision and scope
 
-## Inventory observed
+The historical structured data was useful as a seed, but it was not a complete character or artist catalogue. The long-term system is therefore based on:
 
-| Table | Rows | Current value | Recommendation |
-|---|---:|---|---|
-| `animadex_characters` | 20 | Structured identity, copyright, trigger, core prompt tags, count, URL | Keep and expose as curated enrichment |
-| `animadex_character_traits` | 84 | Four structured facets: gender, eye color, hair color, hair length | Keep; this is the strongest unique capability |
-| `animadex_artists` | 10 | Artist trigger, popularity snapshot, URL, style-catalogue seed | Keep as auxiliary data; expand only from a complete export |
-| `animadex_artist_categories` | 0 | No current information | Preserve schema for compatibility, do not advertise as populated |
-| `animadex_categories` | 0 | No current information | Preserve schema for compatibility, do not advertise as populated |
-| `animadex_loras` | 0 | No LoRA associations | Preserve only if future imports will populate it |
+- the broad `tags` table for discovery;
+- `wiki`, aliases, implications, and source metadata for context;
+- the derived character-context index for franchise resolution;
+- the owned profile/trait tables for curated structured enrichment.
 
-The original `raw/animadex/animadex.db` contains the same row counts. Its file size is 110,592 bytes, compared with 866,381,824 bytes for `tag_library.db`.
+A missing owned profile does not mean that a character is missing from the database. It can still exist as a normal character tag with wiki, aliases, popularity, or context evidence.
 
-## What `animadex_characters` contributes
+## Pre-migration inventory
 
-### Structured identity and work association
+The source snapshot contained:
 
-Each of the 20 rows has non-empty values for:
+| Legacy table | Rows | Disposition |
+|---|---:|---|
+| `animadex_characters` | 20 | Mapped to `character_profiles` |
+| `animadex_character_traits` | 84 | Mapped to `trait_definitions` and `character_traits` |
+| `animadex_artists` | 10 | Not retained as a separate table; artist discovery uses global `tags` |
+| `animadex_loras` | 0 | Discarded as empty; `get_character` keeps an empty compatibility list |
+| `animadex_categories` | 0 | Discarded as empty |
+| `animadex_artist_categories` | 0 | Discarded as empty |
 
-- canonical character slug;
-- human-readable name;
-- normalized display name;
-- canonical copyright/work slug;
-- human-readable copyright/work name;
-- generation/search trigger;
-- prompt-oriented `core_tags`;
-- AnimaDex/Danbooru count snapshot;
-- direct Danbooru search URL.
+The historical 20 profiles were never treated as the total character universe. The general database contains substantially broader character and artist tag coverage.
 
-There are 13 distinct copyright/work values among the 20 characters. The character-to-work relationship is useful for contextual resolution and generation, although the same work tags are usually also present in the general `tags` table.
+## Field mapping
 
-### Coverage is partial and inconsistent
+### Character profiles
 
-Against the active unified database:
+| Historical field | Owned field | Notes |
+|---|---|---|
+| `character` | `character_tag` | Stable tag key |
+| `name` | `display_name` | Human-readable name |
+| normalized name | `display_name_normalized` | Search normalization using tag-style separators |
+| `copyright` | `work_tag` | Work/franchise tag |
+| `copyright_name` | `work_name` | Human-readable work name |
+| `trigger` | `trigger` | Search/prompt trigger |
+| `core_tags` | `core_tags` | Curated prompt-oriented bundle |
+| `count` | `source_count` | Historical popularity snapshot |
+| `url` | `source_url` | Convenience source link |
 
-- 19/20 AnimaDex character slugs have some exact row in `tags`.
-- 17/20 have exact `category_name='character'` rows.
-- 17/20 have exact wiki rows.
-- 19/20 have an exact work/copyright tag row.
+The owned schema also records `provenance` and `confidence`. The initial rows use `legacy_curated_seed` provenance and `high` confidence as a statement about the migration quality, not as a claim that the upstream snapshot is complete or current.
 
-The exceptions demonstrate why the tables are useful as enrichment but cannot be treated as authority for the entire database:
+### Traits
 
-- `9s_(nier_automata)` has no exact active tag row.
-- `2b_(nier_automata)` is present as an alias rather than an active character tag.
-- `emilia_(re_zero)` is present as a `general` tag rather than a character/copyright tag in the current snapshot.
-
-### `core_tags` is valuable as a bundled prompt preset
-
-There are 143 core-tag tokens across the 20 characters. All 143 match existing tag names after the expected space-to-underscore normalization.
-
-That means the individual terms are not necessarily unique to AnimaDex, but the **curated bundle and its ordering** are useful for:
-
-- image-generation prompts;
-- quick character summaries;
-- UI cards;
-- fallback character recommendations;
-- reproducible generation presets.
-
-The active server currently returns these terms as `tags` from `get_character`, preserving their human-readable form. A future enhancement could also return a separate canonical `tag_slugs` list instead of forcing clients to normalize phrases themselves.
-
-### Counts and URLs are convenience fields, not unique facts
-
-The AnimaDex `count` is a useful popularity snapshot, but it does not consistently equal the highest current `tags.post_count` value. Differences are expected because the sources and snapshots are not identical.
-
-The URL is convenient but derivable from the Danbooru slug. It should not be treated as the primary identity key.
-
-## What `animadex_character_traits` contributes
-
-This table contains 84 rows for all 20 characters and four facets:
-
-| Facet | Rows | Characters |
-|---|---:|---:|
-| `eye_color` | 22 | 20 |
-| `gender` | 20 | 20 |
-| `hair_color` | 21 | 20 |
-| `hair_length` | 21 | 20 |
-
-Each record has:
-
-- a character key;
-- a stable facet name;
-- a tag-like value such as `white hair`;
-- a user-facing label such as `White`.
-
-The values correspond to general tags after normalization (`white hair` → `white_hair`), but the **facet/value/label structure does not exist in that form in the general tag tables**. This is the clearest reason to keep the AnimaDex character layer.
-
-The current MCP uses these rows to implement filters such as:
+Each historical trait row is normalized into a stable `trait_slug`, for example:
 
 ```text
-hair_color=white  → 4 characters
-hair_length=short → 5 characters
-eye_color=red     → 5 characters
-gender=1boy       → 2 characters
-copyright=genshin_impact → 5 characters
+white hair -> white_hair
 ```
 
-This is a real capability difference from a plain tag search: the client can request a semantic facet instead of manually composing tag conditions.
+`trait_definitions` stores the facet, original tag-like value, user-facing label, aliases, provenance, confidence, and status. `character_traits` stores the character key, trait key, evidence tag, provenance, and confidence.
 
-## What `animadex_artists` contributes
+This preserves the semantic filtering capability without requiring the historical table names or schema.
 
-The current table contains only 10 artists. All 10 have:
+## Data deliberately not migrated
 
-- an exact tag row;
-- `category_name='artist'`;
-- a non-empty trigger;
-- a count snapshot;
-- a direct Danbooru search URL.
+The raw structured export also had asset/search fields that were not part of the active runtime:
 
-Only 3 of the 10 have exact wiki rows, and every `score` value is null. Therefore this is currently a **small style-catalogue seed**, not a complete artist knowledge source.
+- `imgname`
+- `thumbname`
+- `search_blob`
+- `image_version`
 
-It is still useful for the image-generation workflow because the trigger and URL provide a ready-to-use style entry. It becomes substantially more valuable only after importing a complete, versioned AnimaDex artist export.
+No corresponding image asset pipeline is shipped in the active project. `search_blob` is reproducible from searchable fields, and `image_version` was not informative in the inspected snapshot. The raw database remains available if a future asset migration is justified.
 
-## Data omitted during migration
+No artist table was recreated because the historical artist sample contained only 10 rows and the global `tags` table is the broader, canonical discovery surface for artist tags. No LoRA table was recreated because the source contained zero LoRA associations.
 
-The common columns of the raw and migrated character rows are byte-for-byte identical, and the common columns of the raw and migrated artist rows are also identical. However, the raw database contains additional non-empty columns that are missing from `tag_library.db`:
+## Runtime changes
 
-### Characters
+`weeb_alexandria_mcp/server.py` now:
 
-```text
-imgname
-thumbname
-search_blob
-image_version
-```
+- reads structured characters from `character_profiles`;
+- resolves semantic filters through `character_traits` joined to `trait_definitions`;
+- reads artist and copyright discovery from global `tags` plus owned-profile coverage;
+- returns the structured search namespace as `entities` instead of the former legacy namespace;
+- reports `structured_mode: owned_local_tables` from `get_sources_status`;
+- keeps tag/wiki/context fallback behavior for characters without an owned profile;
+- never opens `raw/animadex/animadex.db`.
 
-All 20 characters have non-empty, distinct `imgname`, `thumbname`, and `search_blob` values. `image_version` is present for all 20 rows but currently has only one distinct value: `0`.
+The `get_character` response still includes `loras: []` for compatibility, but there is no active legacy LoRA table behind it.
 
-Example filenames include:
-
-```text
-hatsune miku, vocaloid.png
-hatsune miku, vocaloid.webp
-```
-
-### Artists
-
-The same four columns are present for all 10 raw artist rows:
-
-```text
-imgname
-thumbname
-search_blob
-image_version
-```
-
-All `imgname`, `thumbname`, and `search_blob` values are non-empty and distinct. `image_version` is again constant at `0`.
-
-### Interpretation
-
-These omitted fields have different levels of value:
-
-- `imgname` and `thumbname`: useful if the image/thumb asset pipeline is restored. No PNG files were found in the active repository, so they are currently pointers without corresponding shipped assets.
-- `search_blob`: useful as a prebuilt search field, but it is reproducible from the other columns and should not be treated as canonical data.
-- `image_version`: useful for cache invalidation after an asset pipeline exists, but currently constant and therefore not informative.
-
-## Raw database versus migrated tables
-
-The migration preserved the row data for the shared columns, but not the complete raw schema:
-
-- `characters`: 20 raw rows and 20 migrated rows; 4 raw columns omitted.
-- `traits`: 84 raw rows and 84 migrated rows; rows and columns identical.
-- `artists`: 10 raw rows and 10 migrated rows; 4 raw columns omitted.
-- `artist_categories`: 0 rows in both.
-- `loras`: 0 rows in both.
-- `categories`: 0 rows in both.
-
-The raw database metadata contains only:
-
-```text
-characters_built_at = 2026-07-11 20:13:24
-artists_built_at    = 2026-07-11 20:13:24
-```
-
-It does not identify a catalogue version, upstream commit, source license snapshot, or source row count beyond the tables themselves. Future imports should add explicit provenance metadata.
-
-## Where the active MCP uses AnimaDex
-
-The current server uses the migrated tables in these paths:
-
-- `search_knowledge`: returns AnimaDex characters, artists, and copyright aggregates alongside general tag results.
-- `search_characters`: uses `animadex_characters` and `animadex_character_traits` for semantic filtering.
-- `get_character`: returns the structured character record, core tags, traits, and the currently empty LoRA list.
-- `get_sources_status`: reports counts for the migrated AnimaDex tables.
-
-There is no current endpoint dedicated to `animadex_artist_categories` or `animadex_categories`, and the LoRA endpoint is structurally present but has no rows to return.
-
-## Recommended extraction priorities
-
-### Priority 1 — Keep the structured character layer
-
-Keep `animadex_characters` and `animadex_character_traits` in the active database. Treat them as a curated/structured subset, not as the complete character universe.
-
-Preserve:
-
-- character-to-work relation;
-- trigger;
-- core prompt tags;
-- facet/value/label traits;
-- source count and URL as provenance/convenience fields.
-
-### Priority 2 — Restore the omitted asset/search metadata selectively
-
-If the AnimaDex image catalogue or UI is revived, migrate the four omitted fields into either:
-
-- the two active tables; or
-- a separate `animadex_assets` table keyed by character/artist.
-
-Prefer a separate asset table if asset versions, local paths, CDN URLs, or multiple resolutions will be added later. Do not migrate `search_blob` as an unquestioned source of truth; regenerate it or replace it with a proper indexed search field.
-
-### Priority 3 — Add provenance metadata
-
-Future imports should record at least:
-
-- source catalogue version or export version;
-- build timestamp;
-- upstream source URL;
-- row counts;
-- source database hash or size;
-- schema version;
-- whether image assets were included.
-
-This should apply both to the raw AnimaDex copy and the migrated tables.
-
-### Priority 4 — Expand artists only with a complete export
-
-Retain the current artist table for compatibility and generation support, but do not spend effort building artist-specific ranking or category logic around 10 rows and null scores. First obtain/import a complete, versioned catalogue.
-
-### Priority 5 — Defer empty tables
-
-Do not delete `animadex_loras`, `animadex_categories`, or `animadex_artist_categories` immediately because their presence preserves compatibility with the original schema and current response shape. Mark them as empty/unavailable until an import actually populates them.
-
-## Do not infer
-
-- The 20 AnimaDex characters are not all characters in Weeb Alexandria.
-- A missing AnimaDex row does not mean the character is absent from `tags`.
-- An AnimaDex count is not automatically the current canonical popularity count.
-- `core_tags` is a curated prompt preset, not an exhaustive list of every valid appearance tag.
-- The MIT repository license automatically covers upstream-derived database records.
-- The raw image filenames prove that the corresponding image files are available; the active repository currently has no PNG assets.
-
-## Suggested next implementation tasks
-
-1. Add an explicit `animadex_provenance` table or metadata keys for catalogue version and build information.
-2. Add a regression test ensuring `search_characters` keeps using facet/value/label filters.
-3. Decide whether asset fields belong in the active character/artist tables or a separate `animadex_assets` table.
-4. Return both human-readable `tags` and normalized `tag_slugs` from `get_character`.
-5. Keep global character discovery in `tags`/wiki/context indexes, using AnimaDex only for structured enrichment.
-6. Revisit the empty LoRA/category tables only after importing a source snapshot that contains those records.
-
-## Reproduction commands
+## Migration and recovery commands
 
 From the repository root:
 
 ```bash
-.venv/Scripts/python.exe -m unittest tests.test_search -v
-.venv/Scripts/python.exe scripts/build_context_index.py
+# Seed the owned tables from the current database while legacy tables exist.
+.venv/Scripts/python.exe scripts/migrate_owned_traits.py
+
+# One-time removal after the server and tests use the owned schema.
+.venv/Scripts/python.exe scripts/migrate_owned_traits.py --drop-legacy
+
+# Recover/reseed the owned tables from the preserved raw source.
+.venv/Scripts/python.exe scripts/migrate_owned_traits.py \
+  --source raw/animadex/animadex.db
 ```
 
-The database audit used read-only SQLite queries against:
+The `--drop-legacy` operation was executed only after a separate checkpoint copy was made and validated. The active database passed `PRAGMA integrity_check` after the drop. The local checkpoint is outside the repository and is not published.
+
+## Verification evidence
+
+The completed migration was verified with:
+
+```bash
+.venv/Scripts/python.exe -m unittest tests.test_search -v
+```
+
+Result: **27 tests passed**.
+
+The regression suite covers:
+
+- existence of the owned tables;
+- profile and trait retrieval for `hatsune_miku`;
+- semantic filtering (`hair_color=white`);
+- the `entities` search namespace;
+- source-status reporting;
+- removal of all `animadex_*` tables;
+- aliases, redirects, fuzzy confidence, ambiguity, and franchise context.
+
+The active database verification reported:
 
 ```text
-tag_library.db
-raw/animadex/animadex.db
+PRAGMA integrity_check = ok
+legacy animadex_* tables = []
+character_profiles = 20
+trait_definitions = 24
+character_traits = 84
+raw/animadex/animadex.db = present
 ```
+
+## Future owned-system work
+
+The current tables are a migrated seed, not the final automatic trait extractor. Future iterations can extend the owned vocabulary and evidence model with:
+
+- clothing and accessories;
+- species and non-human attributes;
+- color and hairstyle refinements;
+- explicit source records and timestamps;
+- per-source evidence rather than one seed provenance value;
+- human review state and conflict handling;
+- canonical tag validation against the global tag library;
+- optional normalized `tag_slugs` alongside the human-readable `core_tags`.
+
+Those additions should extend the owned schema and keep global tag discovery independent from curated profile coverage.
+
+## Related files
+
+- `weeb_alexandria_mcp/owned_schema.py` — owned schema definition.
+- `scripts/migrate_owned_traits.py` — one-time seed migration/recovery utility.
+- `tests/test_search.py` — runtime and migration regressions.
+- `raw/animadex/animadex.db` — preserved audit/recovery source, not runtime input.

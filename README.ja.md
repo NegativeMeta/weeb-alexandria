@@ -167,9 +167,12 @@ C:\Users\johin\Code_Library\AI\WeebAlexandria_legacy_archive
 - Danbooru、e621、Gelbooru の定義。
 - エイリアスと包含関係。
 - `lang='llm'` としてマークされた合成定義。
-- AnimaDex から移行したキャラクター、特徴、アーティスト、LoRA のテーブル。
+- Weeb Alexandria 所有の構造化キャラクタープロファイルと特徴マッピング（`character_profiles`、`trait_definitions`、`character_traits`）。
+- アーティストと作品の検索はグローバルな `tags` テーブルを使用します。
 
-`raw/animadex/animadex.db` は元の名前のまま参照用コピーとして保存されています。アクティブな MCP は `tag_library.db` 内に移行された AnimaDex のテーブルを使用します。
+`raw/animadex/animadex.db` は初期シードの監査・復旧専用として元の名前のまま保存されています。アクティブな MCP はこのファイルを開かず、旧構造化テーブルにも依存しません。
+
+履歴シードと移行記録は [`docs/ANIMADEX_VALUE_ANALYSIS.md`](docs/ANIMADEX_VALUE_ANALYSIS.md) に記載しています。`search_knowledge` は構造化結果を `entities` 名前空間で返します。
 
 ## MCP
 
@@ -195,7 +198,7 @@ Weeb Alexandria はローカルでクエリを実行するため、元の AnimaD
 
 ## クレジットと情報源
 
-- [AnimaDex](https://github.com/zetaneko/AnimaDex) — 構造化されたキャラクター・アーティストデータ。
+- [AnimaDex](https://github.com/zetaneko/AnimaDex) — 小規模な構造化シードの履歴上の情報源。帰属と移行の出所のために保持しており、アクティブなランタイム依存ではありません。
 - [Danbooru](https://danbooru.donmai.us/) — wiki、タグメタデータ、エイリアス、包含関係、人気度データ。
 - [e621](https://e621.net/) — wiki とタグメタデータ。
 - [Gelbooru](https://gelbooru.com/) — wiki とタグメタデータ。

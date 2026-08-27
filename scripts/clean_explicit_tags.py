@@ -5,11 +5,11 @@ Reuses the EXCLUDED_WORDS blocklist + sanitize_tags() from
 generate_dataset.py, so the stored metadata matches what the generator now
 produces. The original CSV is preserved as danbooru_character.csv.bak.
 
-After running this, re-run build_db.py so the database picks up the
+After running this, re-run `scripts/build_db.py` so the database picks up the
 cleaned tags:
-    python webapp/build_db.py characters
+    python scripts/build_db.py
 
-Usage (run from the project folder, E:\\AnimaCharDb):
+Usage (run from the project folder):
     python clean_explicit_tags.py
 """
 
@@ -20,7 +20,7 @@ import sys
 
 from generate_dataset import sanitize_tags
 
-CSV_PATH = os.environ.get("ANIMADEX_CSV", "danbooru_character.csv")
+CSV_PATH = os.environ.get("WEEB_ALEXANDRIA_CSV", "danbooru_character.csv")
 
 
 def _count(tag_string):

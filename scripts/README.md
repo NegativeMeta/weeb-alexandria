@@ -1,7 +1,7 @@
 # Scripts
 
-Standalone helper scripts that live outside the `animadex` Python
-package. They are not imported by the web app; they're tools you run
+Standalone helper scripts used by the active Weeb Alexandria data
+pipeline. They are not imported by the MCP server; they are tools you run
 by hand (or get shelled out to by the orchestrator).
 
 ## `generate_dataset.py`
@@ -21,6 +21,14 @@ the orchestrator doesn't care what's inside.
 
 ## `clean_explicit_tags.py`
 
-One-off helper that strips NSFW / explicit tags from a danbooru
-character CSV. Run it on your source CSV before feeding it to
-`python -m animadex pipeline`.
+One-off helper that strips NSFW / explicit tags from a Danbooru character CSV. Run it on your source CSV before feeding it to a compatible local importer.
+
+## `migrate_owned_traits.py`
+
+One-time migration utility for the owned structured character schema. It
+copies the historical character and trait seed into
+`character_profiles`, `trait_definitions`, and `character_traits`. After
+the server and tests have been switched over, `--drop-legacy` removes the
+old structured tables from the active database. The preserved raw database
+can be supplied with `--source` for recovery; it is not opened by the MCP
+runtime.

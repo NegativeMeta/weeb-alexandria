@@ -1,17 +1,15 @@
-"""Weeb Alexandria: unified AnimaDex + tag-library MCP facade."""
+"""Weeb Alexandria: unified owned profiles + tag-library MCP facade."""
 from __future__ import annotations
 
-import json
 import difflib
 import math
 import os
 import re
 import sqlite3
-import urllib.parse
-import urllib.request
 from typing import Any, Optional
 
 from mcp.server.fastmcp import FastMCP
+from weeb_alexandria_mcp.owned_schema import ensure_owned_schema
 
 ROOT = os.path.dirname(os.path.abspath(__file__))
 TAGLIB_DB = os.path.abspath(os.environ.get(
@@ -21,9 +19,6 @@ TAGLIB_DB = os.path.abspath(os.environ.get(
 CONTEXT_DB = os.path.abspath(os.environ.get(
     "CONTEXT_DB", os.path.join(ROOT, "..", "data", "character_context.sqlite")
 ))
-ANIMADEX_BASE_URL = os.environ.get(
-    "ANIMADEX_BASE_URL", "http://127.0.0.1:5000"
-).rstrip("/")
 
 mcp = FastMCP("Weeb Alexandria")
 
@@ -33,6 +28,7 @@ _WORK_NAME_HINTS = {
     "oshi_no_ko": {"hoshino_ai"},
 }
 _COPYRIGHT_TOKENS: Optional[set[str]] = None
+_OWNED_SCHEMA_READY = False
 
 
 def _normalize_tag(value: str) -> str:
@@ -41,8 +37,12 @@ def _normalize_tag(value: str) -> str:
 
 
 def _db() -> sqlite3.Connection:
+    global _OWNED_SCHEMA_READY
     con = sqlite3.connect(TAGLIB_DB)
     con.row_factory = sqlite3.Row
+    if not _OWNED_SCHEMA_READY:
+        ensure_owned_schema(con)
+        _OWNED_SCHEMA_READY = True
     return con
 
 
@@ -110,21 +110,6 @@ def _copyright_tokens(con: sqlite3.Connection) -> set[str]:
                 if len(token) >= 3
             )
     return _COPYRIGHT_TOKENS
-def _api_get(path: str, params: Optional[dict[str, Any]] = None) -> dict:
-    url = ANIMADEX_BASE_URL + path
-    clean = {k: v for k, v in (params or {}).items() if v is not None}
-    if clean:
-        url += "?" + urllib.parse.urlencode(clean, doseq=True)
-    req = urllib.request.Request(url, headers={"Accept": "application/json"})
-    with urllib.request.urlopen(req, timeout=20) as response:
-        return json.loads(response.read().decode("utf-8"))
-
-
-def _absolute(url: str) -> str:
-    if url.startswith(("http://", "https://")):
-        return url
-    return ANIMADEX_BASE_URL + url
-
 
 def _local_characters(con: sqlite3.Connection, query: str = "",
                       copyright: Optional[str] = None,
@@ -133,78 +118,154 @@ def _local_characters(con: sqlite3.Connection, query: str = "",
                       eye_color: Optional[str] = None,
                       gender: Optional[str] = None,
                       sort: str = "count", limit: int = 100) -> list[dict]:
-    """Busca personajes en las tablas migradas de AnimaDex."""
+    """Search the owned structured character profiles and trait mappings."""
     clauses = []
     params: list[Any] = []
     order_params: list[Any] = []
     normalized = _normalize_tag(query)
     if query:
-        clauses.append("(c.name_lower LIKE ? OR c.character LIKE ? OR c.trigger LIKE ? OR c.core_tags LIKE ?)")
+        clauses.append(
+            "(c.display_name_normalized LIKE ? OR c.character_tag LIKE ? "
+            "OR c.trigger LIKE ? OR c.core_tags LIKE ?)"
+        )
         needle = f"%{normalized}%"
         params.extend([needle, needle, needle, needle])
-    for value, column in ((copyright, "c.copyright"), (gender, "t.value")):
+    if copyright:
+        work = _normalize_tag(copyright)
+        clauses.append("(c.work_tag = ? OR c.work_tag LIKE ? OR c.work_name LIKE ?)")
+        params.extend([work, f"%{work}%", f"%{copyright}%"])
+    for value, facet in (
+        (hair_color, "hair_color"),
+        (hair_length, "hair_length"),
+        (eye_color, "eye_color"),
+        (gender, "gender"),
+    ):
         if value:
-            if column == "t.value":
-                clauses.append("EXISTS (SELECT 1 FROM animadex_character_traits tx WHERE tx.character=c.character AND tx.facet='gender' AND tx.value=?)")
-                params.append(value)
-            else:
-                clauses.append(f"{column} LIKE ?")
-                params.append(f"%{value}%")
-    for value, facet in ((hair_color, "hair_color"), (hair_length, "hair_length"), (eye_color, "eye_color")):
-        if value:
-            clauses.append("EXISTS (SELECT 1 FROM animadex_character_traits tx WHERE tx.character=c.character AND tx.facet=? AND (tx.value=? OR tx.label LIKE ?))")
-            params.extend([facet, value, f"%{value}%"])
+            trait_value = _normalize_tag(value)
+            clauses.append(
+                "EXISTS ("
+                "SELECT 1 FROM character_traits ct "
+                "JOIN trait_definitions td ON td.trait_slug = ct.trait_slug "
+                "WHERE ct.character_tag = c.character_tag "
+                "AND td.facet = ? AND td.status = 'active' "
+                "AND (td.trait_slug = ? OR td.value LIKE ? OR td.label LIKE ?)"
+                ")"
+            )
+            params.extend([facet, trait_value, f"%{value}%", f"%{value}%"])
     where = (" WHERE " + " AND ".join(clauses)) if clauses else ""
     if sort == "name":
-        order = "c.name_lower"
+        order = "c.display_name_normalized"
     elif sort == "random":
         order = "RANDOM()"
     elif normalized:
-        order = "CASE WHEN lower(c.character)=? OR lower(c.name_lower)=? THEN 3 WHEN lower(c.character) LIKE ? OR lower(c.name_lower) LIKE ? THEN 2 ELSE 1 END DESC, c.count DESC, c.name_lower"
+        order = (
+            "CASE WHEN c.character_tag = ? OR c.display_name_normalized = ? THEN 3 "
+            "WHEN c.character_tag LIKE ? OR c.display_name_normalized LIKE ? THEN 2 "
+            "ELSE 1 END DESC, c.source_count DESC, c.display_name_normalized"
+        )
         order_params = [normalized, normalized, f"{normalized}_%", f"{normalized}_%"]
     else:
-        order = "c.count DESC, c.name_lower"
-    params = order_params + params
+        order = "c.source_count DESC, c.display_name_normalized"
+    params = params + order_params
     params.append(max(1, min(int(limit), 100)))
     rows = con.execute(f"""
-        SELECT c.character,c.name,c.copyright,c.trigger,c.core_tags,c.count,c.url
-        FROM animadex_characters c {where} ORDER BY {order} LIMIT ?
+        SELECT c.character_tag AS character, c.display_name AS name,
+               c.work_tag AS copyright, c.work_name AS copyright_name,
+               c.trigger, c.core_tags, c.source_count AS count,
+               c.source_url AS url, c.provenance AS profile_provenance,
+               c.confidence AS profile_confidence
+        FROM character_profiles c {where} ORDER BY {order} LIMIT ?
     """, params).fetchall()
-    out=[]
+    out = []
     for row in rows:
-        item=dict(row)
+        item = dict(row)
         item["slug"] = item.pop("character")
-        item["tags"] = item.pop("core_tags").split(", ") if item.get("core_tags") else []
+        item["tags"] = [tag.strip() for tag in item.pop("core_tags").split(",") if tag.strip()]
         item["traits"] = [dict(t) for t in con.execute(
-            "SELECT facet,value,label FROM animadex_character_traits WHERE character=? ORDER BY facet,value",
-            (item["slug"],)).fetchall()]
+            "SELECT td.facet, td.value, td.label, ct.evidence_tag, "
+            "ct.provenance, ct.confidence "
+            "FROM character_traits ct "
+            "JOIN trait_definitions td ON td.trait_slug = ct.trait_slug "
+            "WHERE ct.character_tag = ? AND td.status = 'active' "
+            "ORDER BY td.facet, td.value",
+            (item["slug"],),
+        ).fetchall()]
         out.append(item)
     return out
 
 
 def _local_artists(con: sqlite3.Connection, query: str = "", sort: str = "count", limit: int = 100) -> list[dict]:
-    normalized=query.strip().lower().replace(" ", "_")
-    needle=f"%{normalized}%"
+    """Return artist tags from the unified tag library."""
+    normalized = _normalize_tag(query)
+    clauses = ["t.category_name = 'artist'"]
+    params: list[Any] = []
+    if normalized:
+        # The range lets SQLite use idx_tags_name before applying the
+        # category filter, avoiding a scan of every artist row.
+        clauses.append("t.name >= ? AND t.name < ? AND t.name LIKE ?")
+        params.extend([normalized, normalized + "\uffff", normalized + "%"])
     if sort == "name":
-        order="a.name_lower"
-        order_params=[]
+        order = "t.name"
+        order_params: list[Any] = []
     elif sort == "random":
-        order="RANDOM()"
-        order_params=[]
+        order = "RANDOM()"
+        order_params = []
     elif normalized:
-        order="CASE WHEN lower(a.artist)=? OR lower(a.name_lower)=? THEN 3 WHEN lower(a.artist) LIKE ? OR lower(a.name_lower) LIKE ? THEN 2 ELSE 1 END DESC, a.count DESC, a.name_lower"
-        order_params=[normalized,normalized,f"{normalized}_%",f"{normalized}_%"]
+        order = (
+            "CASE WHEN t.name = ? THEN 3 ELSE 2 END DESC, "
+            "MAX(COALESCE(t.post_count, 0)) DESC, t.name"
+        )
+        order_params = [normalized]
     else:
-        order="a.count DESC, a.name_lower"
-        order_params=[]
-    params=[normalized,needle,needle,needle]+order_params+[max(1,min(int(limit),100))]
-    rows=con.execute(f"SELECT artist,name,trigger,count,score,url FROM animadex_artists a WHERE (?='' OR a.name_lower LIKE ? OR a.artist LIKE ? OR a.trigger LIKE ?) ORDER BY {order} LIMIT ?",params).fetchall()
-    return [dict(row) for row in rows]
+        order = "MAX(COALESCE(t.post_count, 0)) DESC, t.name"
+        order_params = []
+    params.extend(order_params)
+    params.append(max(1, min(int(limit), 100)))
+    rows = con.execute(f"""
+        SELECT t.name AS artist, MAX(COALESCE(t.post_count, 0)) AS count
+        FROM tags AS t INDEXED BY idx_tags_name WHERE {' AND '.join(clauses)}
+        GROUP BY t.name ORDER BY {order} LIMIT ?
+    """, params).fetchall()
+    return [
+        {
+            "artist": row["artist"],
+            "name": row["artist"].replace("_", " "),
+            "trigger": row["artist"],
+            "count": row["count"],
+            "score": None,
+            "url": f"https://danbooru.donmai.us/posts?tags={row['artist']}",
+        }
+        for row in rows
+    ]
 
 
 def _local_copyrights(con: sqlite3.Connection, query: str = "", limit: int = 100) -> list[dict]:
-    needle=f"%{query.lower()}%"
-    rows=con.execute("SELECT copyright AS name, COUNT(*) AS character_count, SUM(count) AS post_count FROM animadex_characters WHERE (?='' OR lower(copyright) LIKE ? OR lower(copyright_name) LIKE ?) GROUP BY copyright,copyright_name ORDER BY post_count DESC LIMIT ?",(query,needle,needle,max(1,min(int(limit),100)))).fetchall()
+    """Aggregate copyright/work tags and their owned-profile coverage."""
+    normalized = _normalize_tag(query)
+    clauses = ["t.category_name = 'copyright'"]
+    params: list[Any] = []
+    if normalized:
+        # Use the name index for the prefix range; the category predicate is
+        # applied only to the small candidate range.
+        clauses.append("t.name >= ? AND t.name < ? AND t.name LIKE ?")
+        params.extend([normalized, normalized + "\uffff", normalized + "%"])
+    if normalized:
+        order = (
+            "CASE WHEN t.name = ? THEN 3 ELSE 2 END DESC, "
+            "MAX(COALESCE(t.post_count, 0)) DESC, t.name"
+        )
+        params.append(normalized)
+    else:
+        order = "MAX(COALESCE(t.post_count, 0)) DESC, t.name"
+    params.append(max(1, min(int(limit), 100)))
+    rows = con.execute(f"""
+        SELECT t.name, COUNT(DISTINCT p.character_tag) AS character_count,
+               MAX(COALESCE(t.post_count, 0)) AS post_count
+        FROM tags AS t INDEXED BY idx_tags_name
+        LEFT JOIN character_profiles p ON p.work_tag = t.name
+        WHERE {' AND '.join(clauses)}
+        GROUP BY t.name ORDER BY {order} LIMIT ?
+    """, params).fetchall()
     return [dict(row) for row in rows]
 
 
@@ -493,7 +554,7 @@ def _alias_suggestions(con: sqlite3.Connection, query: str,
 def search_knowledge(query: str, category: Optional[str] = None,
                      limit: int = 25) -> dict:
     """Busca tags, personajes, artistas y franquicias en la base unificada."""
-    result: dict[str, Any] = {"query": query, "tag_library": {}, "animadex": {}}
+    result: dict[str, Any] = {"query": query, "tag_library": {}, "entities": {}}
     try:
         con = _db()
         try:
@@ -502,11 +563,32 @@ def search_knowledge(query: str, category: Optional[str] = None,
                 result["tag_library"]["suggestions"] = _tag_suggestions(
                     con, query, category, limit
                 )
-            result["animadex"] = {
-                "characters": _local_characters(con, query, limit=limit),
-                "artists": _local_artists(con, query, limit=limit),
-                "copyrights": _local_copyrights(con, query, limit=limit),
-            }
+            category_key = (category or "").strip().lower()
+            if category_key in {"character", "characters"}:
+                entities = {
+                    "characters": _local_characters(con, query, limit=limit),
+                    "artists": [],
+                    "copyrights": [],
+                }
+            elif category_key in {"artist", "artists"}:
+                entities = {
+                    "characters": [],
+                    "artists": _local_artists(con, query, limit=limit),
+                    "copyrights": [],
+                }
+            elif category_key in {"copyright", "copyrights", "franchise", "franchises"}:
+                entities = {
+                    "characters": [],
+                    "artists": [],
+                    "copyrights": _local_copyrights(con, query, limit=limit),
+                }
+            else:
+                entities = {
+                    "characters": _local_characters(con, query, limit=limit),
+                    "artists": _local_artists(con, query, limit=limit),
+                    "copyrights": _local_copyrights(con, query, limit=limit),
+                }
+            result["entities"] = entities
         finally:
             con.close()
     except Exception as exc:
@@ -594,7 +676,7 @@ def search_characters(q: str = "", copyright: Optional[str] = None,
                        eye_color: Optional[str] = None,
                        gender: Optional[str] = None,
                        sort: str = "count", page: int = 1) -> dict:
-    """Busca personajes en las tablas AnimaDex migradas."""
+    """Search characters in the owned profile and trait tables."""
     con = _db()
     try:
         all_rows = _local_characters(con, q, copyright, hair_color, hair_length,
@@ -611,7 +693,7 @@ def search_characters(q: str = "", copyright: Optional[str] = None,
 
 @mcp.tool()
 def get_character(slug: str) -> dict:
-    """Obtiene el registro completo de un personaje migrado de AnimaDex."""
+    """Return a complete owned character profile."""
     con = _db()
     try:
         requested_slug = slug
@@ -719,7 +801,7 @@ def get_character(slug: str) -> dict:
                 "message": (
                     "The character name is ambiguous. Provide a franchise or other context."
                     if ambiguous else
-                    "This name exists as a tag but has no structured AnimaDex character record."
+                    "This name exists as a tag but has no owned structured character profile."
                     if fallback else
                     "No structured character record or exact character tag was found."
                     + (" A likely character tag is included as a recommendation." if recommendation else "")
@@ -727,9 +809,9 @@ def get_character(slug: str) -> dict:
                 "candidates": [row.get("slug") for row in rows[:10]],
                 "recommendations": canonical_recommendations,
             }
-        match["loras"] = [dict(row) for row in con.execute(
-            "SELECT model_id,name,url,thumb,published FROM animadex_loras WHERE character=? ORDER BY model_id",
-            (slug,)).fetchall()]
+        # Kept as an empty compatibility field until the owned profile schema
+        # gains an explicit model-association table.
+        match["loras"] = []
         return {"found": True, **match}
     finally:
         con.close()
@@ -742,12 +824,12 @@ def get_sources_status() -> dict:
     try:
         counts = {}
         for table in ("tags", "wiki", "tag_aliases", "tag_implications",
-                      "animadex_characters", "animadex_character_traits",
-                      "animadex_artists", "animadex_loras"):
+                      "character_profiles", "trait_definitions",
+                      "character_traits", "trait_system_metadata"):
             counts[table] = con.execute(f"SELECT count(*) FROM {table}").fetchone()[0]
         return {"name": "Weeb Alexandria", "db": TAGLIB_DB,
                 "exists": os.path.exists(TAGLIB_DB), "counts": counts,
-                "animadex_mode": "migrated_local_tables"}
+                "structured_mode": "owned_local_tables"}
     finally:
         con.close()
 

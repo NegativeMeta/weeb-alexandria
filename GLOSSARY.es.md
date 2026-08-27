@@ -68,7 +68,7 @@ Conservar la fuente ayuda a entender de dónde salió una definición o relació
 
 Las tags relacionadas con personajes pueden representar personajes de ficción aunque no tengan una ficha estructurada. La tabla general de tags contiene muchas más tags de personajes que la tabla seleccionada de personajes.
 
-La tabla de personajes es una colección estructurada y seleccionada de los datos integrados de AnimaDex. **No representa la cantidad total de personajes de toda la base**. Muchos nombres de personajes pueden existir como tags normales con wiki, aliases, popularidad o información de fuentes sin tener una ficha estructurada de personaje.
+La tabla propia de perfiles de personajes es una semilla estructurada y seleccionada conservada de una exportación histórica. **No representa la cantidad total de personajes de toda la base**. Muchos nombres pueden existir como tags normales con wiki, aliases, popularidad o información de fuentes sin tener un perfil estructurado propio.
 
 Un personaje puede incluir:
 
@@ -113,13 +113,13 @@ Ayudan a buscar personajes con características parecidas.
 
 Las tags relacionadas con artistas pueden representar artistas aunque no tengan una ficha estructurada. La tabla general de tags contiene muchas más tags de artistas que la tabla seleccionada de artistas.
 
-Los registros de artistas contienen información sobre artistas y sus tags, triggers, popularidad y puntuaciones cuando están disponibles. La tabla estructurada de artistas proviene de los datos integrados de AnimaDex y no debe interpretarse como la cantidad total de artistas representados por tags.
+Los resultados de artistas se obtienen desde la tabla global `tags` y pueden incluir nombres, popularidad y cobertura por fuente. No deben interpretarse como un catálogo completo o separado de artistas seleccionados.
 
 Pueden ayudar a identificar un artista o preparar un prompt relacionado con su estilo.
 
 ### LoRAs
 
-Las LoRAs son complementos opcionales para modelos de generación de imágenes. Weeb Alexandria tiene un espacio para información de LoRAs, pero el snapshot actual no contiene registros publicados de LoRAs.
+Las LoRAs son complementos opcionales para modelos de generación de imágenes. El snapshot actual no contiene asociaciones publicadas de LoRAs.
 
 ### NSFW y SFW
 
@@ -150,7 +150,7 @@ Encuentra personajes de Genshin Impact
 Busca tags relacionadas con sostener una espada
 ```
 
-Los resultados priorizan coincidencias exactas, después coincidencias por prefijo y finalmente coincidencias parciales. Si no encuentra un resultado directo, la herramienta también devuelve una lista `suggestions` con posibles tags para errores ortográficos o nombres no canónicos.
+Los resultados priorizan coincidencias exactas, después coincidencias por prefijo y finalmente coincidencias parciales. Los resultados estructurados de personajes, artistas y franquicias aparecen dentro de `entities`. Si no encuentra un resultado directo, la herramienta también devuelve una lista `suggestions` con posibles tags para errores ortográficos o nombres no canónicos.
 
 ### `get_tag_knowledge`
 
@@ -214,7 +214,7 @@ Ejemplo:
 Obtén el registro completo de hatsune_miku
 ```
 
-Cuando el nombre de un personaje está escrito de una forma conocida pero no canónica, `get_character` puede recomendar una tag probable comparando sus partes, permitiendo invertir el orden y tolerar pequeñas variaciones. Por ejemplo, `satoko hojo` puede recomendar `houjou_satoko`. La recomendación no se considera una ficha estructurada de AnimaDex hasta consultar la tag canónica.
+Cuando el nombre de un personaje está escrito de una forma conocida pero no canónica, `get_character` puede recomendar una tag probable comparando sus partes, permitiendo invertir el orden y tolerar pequeñas variaciones. Por ejemplo, `satoko hojo` puede recomendar `houjou_satoko`. La recomendación no se considera un perfil estructurado propio hasta consultar la tag canónica.
 
 ### `get_sources_status`
 

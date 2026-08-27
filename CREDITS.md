@@ -6,7 +6,7 @@
 
 Original project: [zetaneko/AnimaDex](https://github.com/zetaneko/AnimaDex)
 
-Used here as the source of structured character, trait, artist, copyright, trigger, and frequency data. The original application code and gallery assets are preserved outside the active project in the local legacy archive. The archive location is intentionally not part of the public documentation because it depends on each installation.
+Used as the historical source of the initial structured character/trait seed. That seed is now stored in Weeb Alexandria-owned `character_profiles`, `trait_definitions`, and `character_traits` tables. The original application code and gallery assets are preserved outside the active project in the local legacy archive. The active runtime does not depend on the upstream schema or server.
 
 ### Thanks to the source projects
 
@@ -18,10 +18,10 @@ Please consult each source's current terms, licenses, and attribution requiremen
 
 Weeb Alexandria contains data collected or derived from the following sources. Their respective terms and licenses apply to the data where applicable:
 
-- **Danbooru** — wiki pages, tag metadata, aliases, implications, popularity counts, and the structured AnimaDex-compatible data used for character and artist records: https://danbooru.donmai.us/
+- **Danbooru** — wiki pages, tag metadata, aliases, implications, popularity counts, and source records used to validate the structured seed: https://danbooru.donmai.us/
 - **e621** — wiki pages and tag metadata used to enrich definitions and tag coverage: https://e621.net/
 - **Gelbooru** — wiki pages and tag metadata used as an additional source for definitions and coverage: https://gelbooru.com/
-- **AnimaDex** — structured character, trait, artist, copyright, trigger, and frequency data integrated into the unified database: https://github.com/zetaneko/AnimaDex
+- **AnimaDex** — historical source of the structured character/trait seed and migration provenance: https://github.com/zetaneko/AnimaDex
 - Public datasets used during enrichment are retained under `raw/` with their source-specific files.
 
 ## Weeb Alexandria additions
@@ -31,7 +31,8 @@ The following integration work belongs to this project:
 - Unified SQLite knowledge base.
 - Cross-source definition fusion.
 - Alias and implication tables exposed through MCP.
-- AnimaDex character/trait/artist migration.
+- Owned character-profile and trait schema, including the one-time seed migration.
+- Global tag-based artist and copyright discovery.
 - Unified MCP tools in `weeb_alexandria_mcp`.
 - Audit reports under `reports/`.
 

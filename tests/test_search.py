@@ -6,7 +6,9 @@ from weeb_alexandria_mcp.server import (
     _tag_rows,
     _tag_suggestions,
     get_character,
+    get_sources_status,
     get_tag_knowledge,
+    search_characters,
     search_knowledge,
 )
 
@@ -20,6 +22,50 @@ class SearchRegressionTests(unittest.TestCase):
 
     def tearDown(self):
         self.con.close()
+
+    def test_owned_trait_tables_are_present(self):
+        names = {
+            row[0] for row in self.con.execute(
+                "SELECT name FROM sqlite_master WHERE type='table'"
+            )
+        }
+        self.assertTrue({"character_profiles", "trait_definitions", "character_traits"} <= names)
+
+    def test_get_character_reads_owned_profile_and_traits(self):
+        result = get_character("hatsune_miku")
+        self.assertTrue(result["found"])
+        self.assertEqual(result["slug"], "hatsune_miku")
+        self.assertEqual(result["profile_provenance"], "legacy_curated_seed")
+        self.assertIn("aqua hair", {item["value"] for item in result["traits"]})
+        self.assertTrue(all(item["evidence_tag"] for item in result["traits"]))
+        self.assertTrue(all(item["confidence"] == "high" for item in result["traits"]))
+        self.assertIn("twintails", result["tags"])
+
+    def test_search_characters_uses_owned_trait_filters(self):
+        result = search_characters(hair_color="white")
+        self.assertEqual(result["total"], 4)
+        self.assertIn("frieren", {item["slug"] for item in result["results"]})
+
+    def test_search_knowledge_exposes_owned_entities_namespace(self):
+        result = search_knowledge("hatsune miku", category="character", limit=5)
+        self.assertIn("entities", result)
+        self.assertNotIn("animadex", result)
+        self.assertTrue(result["entities"]["characters"])
+
+    def test_sources_status_reports_owned_schema(self):
+        result = get_sources_status()
+        self.assertEqual(result["structured_mode"], "owned_local_tables")
+        self.assertNotIn("animadex_mode", result)
+        self.assertIn("character_profiles", result["counts"])
+        self.assertIn("trait_system_metadata", result["counts"])
+
+    def test_legacy_structured_tables_are_removed_after_migration(self):
+        names = {
+            row[0] for row in self.con.execute(
+                "SELECT name FROM sqlite_master WHERE type='table'"
+            )
+        }
+        self.assertFalse(any(name.startswith("animadex_") for name in names))
 
     def test_tag_category_alias_returns_general_tags(self):
         rows = _tag_rows(self.con, "closed mouth", "tag", 25)

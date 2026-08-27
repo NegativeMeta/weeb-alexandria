@@ -26,8 +26,13 @@ import csv
 import json
 import os
 import sqlite3
+import sys
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+sys.path.insert(0, ROOT)
+
+from weeb_alexandria_mcp.owned_schema import ensure_owned_schema  # noqa: E402
+
 RAW = os.path.join(ROOT, "raw", "danbooru")
 RAW_GEL = os.path.join(ROOT, "raw", "gelbooru")
 DB = os.path.join(ROOT, "tag_library.db")
@@ -50,6 +55,7 @@ CAT_NAME = {
 
 def main():
     con = sqlite3.connect(DB)
+    ensure_owned_schema(con)
     cur = con.cursor()
     cur.executescript(
         """

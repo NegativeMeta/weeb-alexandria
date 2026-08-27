@@ -68,7 +68,7 @@ Keeping the source helps users understand where a definition or relationship ori
 
 Character-related tags can represent fictional characters even when they do not have a structured character record. The general tags table contains far more character tags than the curated character table.
 
-The character table is a curated, structured collection from the integrated AnimaDex data. It does **not** represent the total number of characters in the whole database. Many character names may exist as ordinary tags with wiki entries, aliases, popularity, or source information without having a structured character record.
+The owned character-profile table is a curated, structured seed retained from a historical structured export. It does **not** represent the total number of characters in the whole database. Many character names may exist as ordinary tags with wiki entries, aliases, popularity, or source information without having an owned structured profile.
 
 A character may include:
 
@@ -113,13 +113,13 @@ Traits can help search for characters with similar visual characteristics.
 
 Artist-related tags can represent artists even when they do not have a structured artist record. The general tags table contains many more artist tags than the curated artist table.
 
-Artist records contain information about artists and their associated tags, triggers, popularity, and scores when available. The structured artist table comes from the integrated AnimaDex data and should not be interpreted as the total number of artists represented by tags.
+Artist results are obtained from the global `tags` table and can include artist names, popularity, and source coverage. They should not be interpreted as a complete or separately curated artist catalogue.
 
 They can help identify an artist or prepare an artist-related prompt.
 
 ### LoRAs
 
-LoRAs are optional model add-ons used by image-generation systems. Weeb Alexandria has a place for LoRA information, but the current database snapshot does not contain published LoRA records.
+LoRAs are optional model add-ons used by image-generation systems. The current database snapshot does not contain published LoRA associations.
 
 ### NSFW and SFW
 
@@ -150,7 +150,7 @@ Find characters from Genshin Impact
 Look for tags related to holding a sword
 ```
 
-Search results are ranked with exact matches first, followed by prefix and partial matches. If no direct result is found, the tool also returns a `suggestions` list with likely tag names for spelling mistakes or non-canonical names.
+Search results are ranked with exact matches first, followed by prefix and partial matches. Structured character, artist, and franchise results appear under `entities`. If no direct result is found, the tool also returns a `suggestions` list with likely tag names for spelling mistakes or non-canonical names.
 
 ### `get_tag_knowledge`
 
@@ -214,7 +214,7 @@ Example:
 Get the complete record for hatsune_miku
 ```
 
-When a character name is written in a familiar but non-canonical form, `get_character` can recommend a likely character tag by comparing name parts, allowing reordered names and small spelling variants. For example, `satoko hojo` can recommend `houjou_satoko`. The recommendation is not treated as a structured AnimaDex record until the canonical tag is queried.
+When a character name is written in a familiar but non-canonical form, `get_character` can recommend a likely character tag by comparing name parts, allowing reordered names and small spelling variants. For example, `satoko hojo` can recommend `houjou_satoko`. The recommendation is not treated as an owned structured profile until the canonical tag is queried.
 
 ### `get_sources_status`
 

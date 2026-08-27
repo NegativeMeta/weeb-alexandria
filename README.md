@@ -167,9 +167,12 @@ C:\Users\johin\Code_Library\AI\WeebAlexandria_legacy_archive
 - Danbooru, e621, and Gelbooru definitions.
 - Aliases and implications.
 - Synthetic definitions marked with `lang='llm'`.
-- Migrated AnimaDex tables for characters, traits, artists, and LoRAs.
+- Owned structured character profiles and trait mappings (`character_profiles`, `trait_definitions`, and `character_traits`).
+- Artist and copyright discovery from the global `tags` table.
 
-`raw/animadex/animadex.db` is preserved under its original name as a reference copy. The active MCP uses the migrated AnimaDex tables inside `tag_library.db`.
+`raw/animadex/animadex.db` is preserved under its original name for audit and seed recovery only. The active MCP does not open it and does not require any legacy structured tables.
+
+The historical structured seed and migration record are documented in [`docs/ANIMADEX_VALUE_ANALYSIS.md`](docs/ANIMADEX_VALUE_ANALYSIS.md). `search_knowledge` returns structured results under the `entities` namespace.
 
 ## MCP
 
@@ -195,7 +198,7 @@ See [`GLOSSARY.md`](GLOSSARY.md) for a simple explanation of the database conten
 
 ## Credits and sources
 
-- [AnimaDex](https://github.com/zetaneko/AnimaDex) — structured character and artist data.
+- [AnimaDex](https://github.com/zetaneko/AnimaDex) — historical source of the small structured seed; retained for attribution and migration provenance, not as an active runtime dependency.
 - [Danbooru](https://danbooru.donmai.us/) — wiki, tag metadata, aliases, implications, and popularity data.
 - [e621](https://e621.net/) — wiki and tag metadata.
 - [Gelbooru](https://gelbooru.com/) — wiki and tag metadata.

@@ -167,9 +167,12 @@ C:\Users\johin\Code_Library\AI\WeebAlexandria_legacy_archive
 - Danbooru、e621 和 Gelbooru 的定义。
 - 别名和蕴含关系。
 - 标记为 `lang='llm'` 的合成定义。
-- 从 AnimaDex 迁移的角色、特征、艺术家和 LoRA 数据表。
+- Weeb Alexandria 自有的结构化角色档案和特征映射（`character_profiles`、`trait_definitions`、`character_traits`）。
+- 艺术家和作品搜索使用全局 `tags` 表。
 
-`raw/animadex/animadex.db` 使用原始名称保存，作为参考副本。活跃的 MCP 使用 `tag_library.db` 中迁移后的 AnimaDex 数据表。
+`raw/animadex/animadex.db` 保留原始名称，仅用于审计和恢复初始种子。活跃的 MCP 不会打开它，也不需要任何旧版结构化数据表。
+
+历史种子和迁移记录见 [`docs/ANIMADEX_VALUE_ANALYSIS.md`](docs/ANIMADEX_VALUE_ANALYSIS.md)。`search_knowledge` 会在 `entities` 命名空间下返回结构化结果。
 
 ## MCP
 
@@ -195,7 +198,7 @@ Weeb Alexandria 在本地执行查询，不需要运行原始的 AnimaDex Flask 
 
 ## 致谢和数据来源
 
-- [AnimaDex](https://github.com/zetaneko/AnimaDex) — 结构化角色和艺术家数据。
+- [AnimaDex](https://github.com/zetaneko/AnimaDex) — 小型结构化种子的历史来源；保留用于署名和迁移溯源，但不是活跃运行时依赖。
 - [Danbooru](https://danbooru.donmai.us/) — wiki、标签元数据、别名、蕴含关系和流行度数据。
 - [e621](https://e621.net/) — wiki 和标签元数据。
 - [Gelbooru](https://gelbooru.com/) — wiki 和标签元数据。
