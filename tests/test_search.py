@@ -78,6 +78,18 @@ class SearchRegressionTests(unittest.TestCase):
         self.assertEqual(result["tag"], "fuu_(samurai_champloo)")
         self.assertTrue(any(item["body"] for item in result["definitions"]))
 
+    def test_contextual_character_queries_use_aliases_and_work_context(self):
+        expected = {
+            "marin kitagawa": "kitagawa_marin",
+            "rem re zero": "rem_(re:zero)",
+            "marine hololive": "houshou_marine",
+            "korone hololive": "inugami_korone",
+            "ai oshi no ko": "hoshino_ai",
+        }
+        for query, tag in expected.items():
+            with self.subTest(query=query):
+                self.assertEqual(get_character(query)["recommended_tag"], tag)
+
     def test_unknown_structured_character_can_fall_back_to_tag(self):
         result = get_character("wave_the_swallow")
         self.assertFalse(result["found"])

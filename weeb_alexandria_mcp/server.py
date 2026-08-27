@@ -24,6 +24,12 @@ ANIMADEX_BASE_URL = os.environ.get(
 
 mcp = FastMCP("Weeb Alexandria")
 
+# A small set of natural-language franchise hints that are not consistently
+# copied into every source's alias column.
+_WORK_NAME_HINTS = {
+    "oshi_no_ko": {"hoshino_ai"},
+}
+
 
 def _normalize_tag(value: str) -> str:
     """Normalize human-written tag forms to the usual underscore form."""
@@ -185,35 +191,50 @@ def _tag_suggestions(con: sqlite3.Connection, query: str,
         return []
     tokens = [token for token in normalized.split("_") if len(token) >= 3]
     tokens = tokens or [normalized]
-    token_where = " OR ".join("lower(name) LIKE ?" for _ in tokens)
+    token_where = " OR ".join("lower(name) LIKE ? OR lower(aliases) LIKE ?" for _ in tokens)
     length_where = "(substr(lower(name), 1, 1) = ? AND length(name) BETWEEN ? AND ?)"
     where = f"({token_where} OR {length_where})"
-    params: list[Any] = [f"%{token}%" for token in tokens]
+    params: list[Any] = [value for token in tokens for value in (f"%{token}%", f"%{token}%")]
     params.extend([normalized[0], max(1, len(normalized) - 3), len(normalized) + 8])
     if category and category.lower() not in {"tag", "tags", "all"}:
         where += " AND category_name = ?"
         params.append(category)
-    rows = con.execute(
+    rows = list(con.execute(
         f"SELECT name, category_name, post_count, site, aliases, nsfw "
         f"FROM tags WHERE {where} ORDER BY post_count DESC NULLS LAST LIMIT 20000",
         params,
-    ).fetchall()
+    ).fetchall())
+    wiki_context_names = set()
+    for work, names in _WORK_NAME_HINTS.items():
+        if work in normalized:
+            wiki_context_names.update(names)
+            for hinted_name in names:
+                hinted_rows = con.execute(
+                    "SELECT name, category_name, post_count, site, aliases, nsfw "
+                    "FROM tags WHERE lower(name)=?", (hinted_name,)
+                ).fetchall()
+                rows.extend(hinted_rows)
     scored: dict[str, tuple[float, dict]] = {}
     for row in rows:
         name = row["name"]
         candidate = name.lower().replace("-", "_")
         candidate_tokens = [token for token in candidate.split("_") if token]
+        alias_text = row["aliases"] or ""
+        alias_tokens = [token for token in re.split(r"[\s,]+", alias_text.lower()) if token]
+        match_tokens = candidate_tokens + alias_tokens
         token_ratios = [
             max(difflib.SequenceMatcher(None, token, other).ratio()
-                for other in candidate_tokens)
+                for other in match_tokens)
             for token in tokens
         ]
         token_score = sum(token_ratios) / len(tokens)
         score = 0.6 * token_score + 0.4 * difflib.SequenceMatcher(
             None, normalized, candidate
         ).ratio()
-        exact_token_score = sum(token in candidate_tokens for token in tokens) / len(tokens)
+        exact_token_score = sum(token in match_tokens for token in tokens) / len(tokens)
         score += 0.25 * exact_token_score
+        if name.lower() in wiki_context_names:
+            score += 0.25
         if row["category_name"] == "character":
             score += 0.08
             # When names are similarly close, prefer the established character
@@ -447,12 +468,39 @@ def get_character(slug: str) -> dict:
             for item in recommendations:
                 canonical, item_resolution = _resolve_canonical_tag(con, item["name"])
                 canonical_item = dict(item)
-                canonical_item["name"] = canonical
-                if item_resolution:
+                variant_suffix = ""
+                if "_(" in item["name"] and item["name"].endswith(")"):
+                    variant_suffix = item["name"].split("_(", 1)[1][:-1].lower()
+                preserve_context = (
+                    item_resolution and item_resolution.get("type") == "variant_base"
+                    and any(token in variant_suffix for token in slug.split("_") if len(token) >= 2)
+                )
+                canonical_item["name"] = item["name"] if preserve_context else canonical
+                if item_resolution and not preserve_context:
                     canonical_item["resolution"] = item_resolution
                 if not any(existing["name"] == canonical for existing in canonical_recommendations):
                     canonical_recommendations.append(canonical_item)
-            recommendation = next(
+            contextual_characters = [
+                item for item in canonical_recommendations
+                if item.get("category") == "character"
+                and item.get("confidence") in {"medium", "high"}
+            ]
+            hinted_characters = {
+                name for work, names in _WORK_NAME_HINTS.items()
+                if work in slug for name in names
+            }
+            contextual_characters.sort(
+                key=lambda item: (item["name"] not in hinted_characters,
+                                  "_(" in item["name"], -(item.get("post_count") or 0))
+            )
+            contextual_character = contextual_characters[0] if contextual_characters else None
+            hinted_recommendation = next(
+                (item for item in contextual_characters if item["name"] in hinted_characters),
+                None,
+            )
+            recommendation = (hinted_recommendation or (contextual_character if fallback and
+                              fallback.get("category_name") == "general" and
+                              contextual_character else next(
                 (item for item in canonical_recommendations
                  if item.get("confidence") == "high"),
                 None,
@@ -460,7 +508,7 @@ def get_character(slug: str) -> dict:
                 (item for item in canonical_recommendations
                  if item.get("category") == "character"),
                 None,
-            )
+            )))
             return {
                 "found": False,
                 "slug": slug,
