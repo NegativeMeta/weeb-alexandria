@@ -57,6 +57,11 @@ class SearchRegressionTests(unittest.TestCase):
         self.assertEqual(result["recommended_tag"], "haruno_sakura")
         self.assertEqual(result["recommendation"]["name"], "haruno_sakura")
 
+    def test_character_variant_recommends_base_tag(self):
+        result = get_character("okayu hololive")
+        self.assertEqual(result["recommended_tag"], "nekomata_okayu")
+        self.assertEqual(result["recommendation"]["category"], "character")
+
     def test_unknown_structured_character_can_fall_back_to_tag(self):
         result = get_character("wave_the_swallow")
         self.assertFalse(result["found"])

@@ -280,6 +280,18 @@ def _resolve_canonical_tag(con: sqlite3.Connection, requested: str) -> tuple[str
             }
             current = target
             continue
+        if "_(" in current and current.endswith(")"):
+            base = current.split("_(", 1)[0]
+            base_exists = con.execute(
+                "SELECT 1 FROM tags WHERE lower(name)=? AND category_name='character' LIMIT 1",
+                (base,),
+            ).fetchone()
+            if base_exists:
+                first_resolution = first_resolution or {
+                    "from": current, "to": base, "type": "variant_base"
+                }
+                current = base
+                continue
         break
     return current, first_resolution
 
