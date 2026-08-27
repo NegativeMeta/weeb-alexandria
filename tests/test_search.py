@@ -62,6 +62,17 @@ class SearchRegressionTests(unittest.TestCase):
         self.assertEqual(result["recommended_tag"], "nekomata_okayu")
         self.assertEqual(result["recommendation"]["category"], "character")
 
+    def test_exact_general_tag_beats_weak_fuzzy_character_matches(self):
+        result = get_character("Anya Forger")
+        self.assertEqual(result["recommended_tag"], "anya_forger")
+        self.assertEqual(result["recommendation"]["confidence"], "high")
+        self.assertEqual(result["recommendation"]["match_type"], "normalized")
+
+    def test_weak_multiword_fuzzy_match_is_low_confidence(self):
+        suggestions = _tag_suggestions(self.con, "anya forger", "character", 10)
+        weak = next(row for row in suggestions if row["name"] == "anya_flormer")
+        self.assertEqual(weak["confidence"], "low")
+
     def test_unknown_structured_character_can_fall_back_to_tag(self):
         result = get_character("wave_the_swallow")
         self.assertFalse(result["found"])

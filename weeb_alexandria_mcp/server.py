@@ -203,11 +203,12 @@ def _tag_suggestions(con: sqlite3.Connection, query: str,
         name = row["name"]
         candidate = name.lower().replace("-", "_")
         candidate_tokens = [token for token in candidate.split("_") if token]
-        token_score = sum(
+        token_ratios = [
             max(difflib.SequenceMatcher(None, token, other).ratio()
                 for other in candidate_tokens)
             for token in tokens
-        ) / len(tokens)
+        ]
+        token_score = sum(token_ratios) / len(tokens)
         score = 0.6 * token_score + 0.4 * difflib.SequenceMatcher(
             None, normalized, candidate
         ).ratio()
@@ -226,7 +227,7 @@ def _tag_suggestions(con: sqlite3.Connection, query: str,
             "post_count": row["post_count"],
             "site": row["site"],
             "match_type": "fuzzy",
-            "confidence": "medium" if score >= 0.65 else "low",
+            "confidence": "medium" if score >= 0.65 and min(token_ratios) >= (0.8 if len(tokens) > 1 else 0.72) else "low",
         }
         previous = scored.get(name)
         if previous is None or score > previous[0]:
@@ -415,6 +416,7 @@ def get_character(slug: str) -> dict:
     """Obtiene el registro completo de un personaje migrado de AnimaDex."""
     con = _db()
     try:
+        requested_slug = slug
         slug = _normalize_tag(slug)
         rows = _local_characters(con, slug, limit=100)
         match = next((row for row in rows if row.get("slug") == slug), None)
@@ -426,6 +428,17 @@ def get_character(slug: str) -> dict:
             ).fetchone()
             fallback = dict(tag) if tag else None
             recommendations = _tag_suggestions(con, slug, "character", 5)
+            if fallback and fallback.get("category_name") != "alias":
+                exact_item = {
+                    "name": fallback["name"],
+                    "category": fallback["category_name"],
+                    "post_count": fallback["post_count"],
+                    "site": fallback["site"],
+                    "match_type": ("exact" if fallback["name"] == requested_slug
+                                   else "normalized"),
+                    "confidence": "high",
+                }
+                recommendations.insert(0, exact_item)
             canonical_recommendations = []
             for item in recommendations:
                 canonical, item_resolution = _resolve_canonical_tag(con, item["name"])
@@ -436,6 +449,10 @@ def get_character(slug: str) -> dict:
                 if not any(existing["name"] == canonical for existing in canonical_recommendations):
                     canonical_recommendations.append(canonical_item)
             recommendation = next(
+                (item for item in canonical_recommendations
+                 if item.get("confidence") == "high"),
+                None,
+            ) or next(
                 (item for item in canonical_recommendations
                  if item.get("category") == "character"),
                 None,
