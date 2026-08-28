@@ -235,3 +235,21 @@ ranking:
 Candidate generation produced 529 observations and 242 candidates. Only
 source-reviewed base features were promoted. Named outfits, shared agency
 uniforms, mascots, and fan marks remain deferred.
+
+## Thirteenth Hololive batch
+
+The next five valid female talents were processed by independent post-volume
+ranking. `roboco-san` was excluded as an alias of the already published
+internal profile `roboco`.
+
+| Rank | Character | Danbooru | Gelbooru | e621 | Independent total | Result |
+|---:|---|---:|---:|---:|---:|---|
+| 1 | `yozora_mel` | 988 | 1,198 | 0 | 2,186 | Base published; historical terminated talent; 10 features; 1 open conflict |
+| 2 | `ayunda_risu` | 896 | 1,196 | 0 | 2,092 | Base published; 10 features |
+| 3 | `kobo_kanaeru` | 836 | 1,202 | 0 | 2,038 | Base published; 9 features |
+| 4 | `todoroki_hajime` | 636 | 1,294 | 0 | 1,930 | Base published; 5 features |
+| 5 | `vestia_zeta` | 731 | 1,133 | 0 | 1,864 | Base published; 10 features |
+
+Candidate generation produced 1,292 observations and 519 candidates. Only
+source-reviewed base features were promoted. Named outfits, shared agency
+uniforms, mascots, and fan marks remain deferred.
