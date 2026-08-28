@@ -218,3 +218,20 @@ ranking:
 Candidate generation produced 903 observations and 349 candidates. Only
 source-reviewed base features were promoted. Named outfits, shared agency
 uniforms, mascots, and fan marks remain deferred.
+
+## Twelfth Hololive batch
+
+The next five valid female talents were processed by independent post-volume
+ranking:
+
+| Rank | Character | Danbooru | Gelbooru | e621 | Independent total | Result |
+|---:|---|---:|---:|---:|---:|---|
+| 1 | `roboco-san` | 1,089 | 1,441 | 0 | 2,530 | Base published internally as `roboco`; 8 features; 1 open conflict |
+| 2 | `ichijou_ririka` | 941 | 1,544 | 0 | 2,485 | Base published; 8 features |
+| 3 | `otonose_kanade` | 724 | 1,583 | 0 | 2,307 | Base published; 10 features |
+| 4 | `kaela_kovalskia` | 910 | 1,314 | 0 | 2,224 | Base published; 8 features |
+| 5 | `juufuutei_raden` | 814 | 1,394 | 0 | 2,208 | Base published; 8 features; 1 open conflict |
+
+Candidate generation produced 529 observations and 242 candidates. Only
+source-reviewed base features were promoted. Named outfits, shared agency
+uniforms, mascots, and fan marks remain deferred.
