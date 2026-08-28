@@ -253,3 +253,20 @@ internal profile `roboco`.
 Candidate generation produced 1,292 observations and 519 candidates. Only
 source-reviewed base features were promoted. Named outfits, shared agency
 uniforms, mascots, and fan marks remain deferred.
+
+## Fourteenth Hololive batch
+
+The next five valid female talents were processed by independent post-volume
+ranking:
+
+| Rank | Character | Danbooru | Gelbooru | e621 | Independent total | Result |
+|---:|---|---:|---:|---:|---:|---|
+| 1 | `anya_melfissa` | 760 | 1,075 | 0 | 1,835 | Base published; 9 features; 1 open conflict |
+| 2 | `airani_iofifteen` | 709 | 981 | 0 | 1,690 | Base published; 11 features |
+| 3 | `hiodoshi_ao` | 683 | 956 | 0 | 1,639 | Base published; historical graduated talent; 5 features |
+| 4 | `rindo_chihaya` | 0 | 1,004 | 0 | 1,004 | Base published; 7 features |
+| 5 | `mano_aloe` | 436 | 495 | 0 | 931 | Base published; historical former talent; 7 features |
+
+Candidate generation produced 761 observations and 322 candidates. Only
+source-reviewed base features were promoted. Named outfits, shared agency
+uniforms, mascots, and fan marks remain deferred.
