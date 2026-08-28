@@ -152,3 +152,19 @@ The next five base talents were processed by independent post-volume ranking:
 Candidate generation produced 1,244 observations and 582 candidates. Only
 source-reviewed base features were promoted. Named outfits, shared agency
 uniforms, mascots, and fan marks remain deferred.
+
+## Eighth Hololive batch
+
+The next five base talents were processed by independent post-volume ranking:
+
+| Rank | Character | Danbooru | Gelbooru | e621 | Independent total | Result |
+|---:|---|---:|---:|---:|---:|---|
+| 1 | `kiryu_coco` | 3,584 | 3,979 | 0 | 7,563 | Base published; historical graduated talent; 12 features |
+| 2 | `kazama_iroha` | 3,040 | 4,172 | 0 | 7,212 | Base published; 12 features; 2 open conflicts |
+| 3 | `koseki_bijou` | 2,331 | 4,457 | 0 | 6,788 | Base published; 10 features |
+| 4 | `omaru_polka` | 2,776 | 3,443 | 0 | 6,219 | Base published; 13 features |
+| 5 | `raora_panthera` | 1,830 | 4,323 | 0 | 6,153 | Base published; 11 features; 1 open conflict |
+
+Candidate generation produced 1,151 observations and 463 candidates. Only
+source-reviewed base features were promoted. Named outfits, shared agency
+uniforms, mascots, and fan marks remain deferred.
