@@ -270,3 +270,21 @@ ranking:
 Candidate generation produced 761 observations and 322 candidates. Only
 source-reviewed base features were promoted. Named outfits, shared agency
 uniforms, mascots, and fan marks remain deferred.
+
+## Fifteenth Hololive batch
+
+The next five valid female talents were processed by independent post-volume
+ranking. `kagura_mea` was excluded as a Paryi Project talent, while staff,
+mascots, family members, and alternate forms were excluded from the roster.
+
+| Rank | Character | Danbooru | Gelbooru | e621 | Independent total | Result |
+|---:|---|---:|---:|---:|---:|---|
+| 1 | `kikirara_vivi` | 0 | 869 | 0 | 869 | Base published; 9 features |
+| 2 | `mizumiya_su` | 0 | 670 | 0 | 670 | Base published; 7 features |
+| 3 | `koganei_niko` | 0 | 596 | 0 | 596 | Base published; 7 features |
+| 4 | `isaki_riona` | 0 | 361 | 0 | 361 | Base published; 9 features |
+| 5 | `civia` | 0 | 59 | 0 | 59 | Base published; historical Hololive China graduate; 1 feature |
+
+Candidate generation produced 287 observations and 104 candidates. Only
+source-reviewed base features were promoted. FLOW GLOW uniforms, mascots,
+shared agency outfits, fan marks, and other variants remain deferred.
