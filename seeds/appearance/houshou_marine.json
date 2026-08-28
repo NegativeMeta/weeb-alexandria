@@ -1,0 +1,19 @@
+{
+  "character_tag":"houshou_marine",
+  "sources":[
+    {"id":"danbooru:wiki:houshou_marine","source_site":"danbooru","source_kind":"wiki","source_key":"houshou_marine","source_url":"https://danbooru.donmai.us/wiki_pages/houshou_marine.json","source_tier":1,"title":"Houshou Marine","excerpt":"Marine has heterochromia: left eye red and right eye yellow, usually concealed by a black eyepatch. She has long red hair tied into twintails with red ribbons. The arrow-through-heart logo appears on clothing and accessories.","captured_at":"2026-08-28"},
+    {"id":"gelbooru:wiki:houshou_marine","source_site":"gelbooru","source_kind":"wiki","source_key":"houshou_marine","source_url":"https://gelbooru.com/index.php?page=wiki&s=view&id=houshou_marine","source_tier":1,"title":"Houshou Marine","excerpt":"A red-haired pirate girl with a pirate hat and red clothing. She wears an eyepatch over her right eye; when both eyes are exposed she is heterochromic.","captured_at":"2026-08-28"}
+  ],
+  "profiles":[{"appearance_key":"houshou_marine::default","variant_tag":"houshou_marine","display_name":"Base appearance","appearance_kind":"default","is_default":true,"status":"published","confidence":"high","provenance":"danbooru_gelbooru_wiki_reviewed","notes":"Base visual identity only. Pirate clothing, hats, eyepatch styling, and named official costumes are isolated for later profiles.","features":[
+    {"facet":"hair","value":"Long hair","canonical_tag":"long_hair","source_refs":["danbooru:wiki:houshou_marine","gelbooru:wiki:houshou_marine"]},
+    {"facet":"hair","value":"Red hair","canonical_tag":"red_hair","source_refs":["danbooru:wiki:houshou_marine","gelbooru:wiki:houshou_marine"]},
+    {"facet":"hair_accessory","value":"Twintails","canonical_tag":"twintails","source_refs":["danbooru:wiki:houshou_marine"]},
+    {"facet":"hair_accessory","value":"Red hair ribbons","canonical_tag":"red_ribbon","source_refs":["danbooru:wiki:houshou_marine"]},
+    {"facet":"eyes","value":"Heterochromia","canonical_tag":"heterochromia","source_refs":["danbooru:wiki:houshou_marine","gelbooru:wiki:houshou_marine"]},
+    {"facet":"eyes","value":"Red left eye","canonical_tag":"red_eyes","source_refs":["danbooru:wiki:houshou_marine"]},
+    {"facet":"eyes","value":"Yellow right eye","canonical_tag":"yellow_eyes","source_refs":["danbooru:wiki:houshou_marine"]},
+    {"facet":"face","value":"Eyepatch","canonical_tag":"eyepatch","source_refs":["danbooru:wiki:houshou_marine","gelbooru:wiki:houshou_marine"]},
+    {"facet":"body","value":"Large breasts","canonical_tag":"large_breasts","source_refs":["danbooru:wiki:houshou_marine"]},
+    {"facet":"accessories","value":"Arrow-through-heart motif","canonical_tag":"arrow_through_heart","source_refs":["danbooru:wiki:houshou_marine"]}
+  ]}]
+}

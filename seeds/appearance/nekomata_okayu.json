@@ -1,0 +1,21 @@
+{
+  "character_tag":"nekomata_okayu",
+  "sources":[
+    {"id":"danbooru:wiki:nekomata_okayu","source_site":"danbooru","source_kind":"wiki","source_key":"nekomata_okayu","source_url":"https://danbooru.donmai.us/wiki_pages/nekomata_okayu.json","source_tier":1,"title":"Nekomata Okayu","excerpt":"Okayu has purple eyes and short purple messy hair with double-parted bangs, crossed bangs between her eyes, and an ahoge. As a cat girl she has cat ears, cat tail, cat mouth, and a black animal collar.","captured_at":"2026-08-28"},
+    {"id":"gelbooru:wiki:nekomata_okayu","source_site":"gelbooru","source_kind":"wiki","source_key":"nekomata_okayu","source_url":"https://gelbooru.com/index.php?page=wiki&s=view&id=nekomata_okayu","source_tier":1,"title":"Nekomata Okayu","excerpt":"A cat girl with short purple hair who wears a black and purple hoodie and white pants.","captured_at":"2026-08-28"}
+  ],
+  "profiles":[{"appearance_key":"nekomata_okayu::default","variant_tag":"nekomata_okayu","display_name":"Base appearance","appearance_kind":"default","is_default":true,"status":"published","confidence":"high","provenance":"danbooru_gelbooru_wiki_reviewed","notes":"Base identity only. Hoodie/pants, shared uniforms, and named official costumes remain separate.","features":[
+    {"facet":"species","value":"Cat girl","canonical_tag":"cat_girl","source_refs":["danbooru:wiki:nekomata_okayu","gelbooru:wiki:nekomata_okayu"]},
+    {"facet":"ears","value":"Cat ears","canonical_tag":"cat_ears","source_refs":["danbooru:wiki:nekomata_okayu"]},
+    {"facet":"tail","value":"Cat tail","canonical_tag":"cat_tail","source_refs":["danbooru:wiki:nekomata_okayu"]},
+    {"facet":"face","value":"Cat mouth","canonical_tag":"cat_mouth","source_refs":["danbooru:wiki:nekomata_okayu"]},
+    {"facet":"eyes","value":"Purple eyes","canonical_tag":"purple_eyes","source_refs":["danbooru:wiki:nekomata_okayu"]},
+    {"facet":"hair","value":"Short hair","canonical_tag":"short_hair","source_refs":["danbooru:wiki:nekomata_okayu","gelbooru:wiki:nekomata_okayu"]},
+    {"facet":"hair","value":"Purple hair","canonical_tag":"purple_hair","source_refs":["danbooru:wiki:nekomata_okayu","gelbooru:wiki:nekomata_okayu"]},
+    {"facet":"hair","value":"Messy hair","canonical_tag":"messy_hair","source_refs":["danbooru:wiki:nekomata_okayu"]},
+    {"facet":"hair","value":"Hair between eyes","canonical_tag":"hair_between_eyes","source_refs":["danbooru:wiki:nekomata_okayu"]},
+    {"facet":"hair_accessory","value":"Ahoge","canonical_tag":"ahoge","source_refs":["danbooru:wiki:nekomata_okayu"]},
+    {"facet":"hair_accessory","value":"Crossed bangs","canonical_tag":"crossed_bangs","source_refs":["danbooru:wiki:nekomata_okayu"]},
+    {"facet":"neck","value":"Black animal collar","canonical_tag":"animal_collar","source_refs":["danbooru:wiki:nekomata_okayu"]}
+  ]}]
+}

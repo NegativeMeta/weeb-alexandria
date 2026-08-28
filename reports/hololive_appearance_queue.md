@@ -2,7 +2,7 @@
 
 **Date:** 2026-08-28
 **Priority:** Hololive talents before the general post-volume queue
-**Status:** dedicated queue created; first review batch generated
+**Status:** five base profiles promoted; outfit review deferred
 
 ## Scope
 
@@ -33,8 +33,15 @@ observations: 2,252
 candidates: 920
 ```
 
-These are pending candidates only. No Hololive appearance profile was
-promoted in this operation.
+Five base profiles were promoted after source review:
+
+| Character | Profile | Features | Conflicts |
+|---|---|---:|---:|
+| `houshou_marine` | base | 10 | 0 |
+| `shirakami_fubuki` | base | 14 | 1 |
+| `hoshimachi_suisei` | base | 8 | 0 |
+| `usada_pekora` | base | 15 | 1 |
+| `nekomata_okayu` | base | 12 | 0 |
 
 ## Review warnings
 

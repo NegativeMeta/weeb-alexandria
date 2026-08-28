@@ -1,0 +1,24 @@
+{
+  "character_tag":"usada_pekora",
+  "sources":[
+    {"id":"danbooru:wiki:usada_pekora","source_site":"danbooru","source_kind":"wiki","source_key":"usada_pekora","source_url":"https://danbooru.donmai.us/wiki_pages/usada_pekora.json","source_tier":1,"title":"Usada Pekora","excerpt":"Pekora has rabbit ears and a rabbit tail, orange or red eyes with rabbit-shaped pupils, long blue-and-white two-tone hair, twin braids with carrot hair ornaments, sidelocks, parted hair, and swept bangs.","captured_at":"2026-08-28"},
+    {"id":"gelbooru:wiki:usada_pekora","source_site":"gelbooru","source_kind":"wiki","source_key":"usada_pekora","source_url":"https://gelbooru.com/index.php?page=wiki&s=view&id=usada_pekora","source_tier":1,"title":"Usada Pekora","excerpt":"A bunny girl with long blue-and-white hair in twin braids with carrot hair ornaments; her muffler is the separate Don-chan character.","captured_at":"2026-08-28"}
+  ],
+  "profiles":[{"appearance_key":"usada_pekora::default","variant_tag":"usada_pekora","display_name":"Base appearance","appearance_kind":"default","is_default":true,"status":"published","confidence":"high","provenance":"danbooru_gelbooru_wiki_reviewed","notes":"Base identity only. Don-chan, shared uniforms, and named official costumes remain separate.","conflicts":[{"conflict_key":"base_eye_color","facet":"eyes","alternatives":["orange_eyes","red_eyes"],"status":"open","reason":"Danbooru documents orange or red eyes; both are retained as alternatives.","source_refs":["danbooru:wiki:usada_pekora"]}],"features":[
+    {"facet":"species","value":"Rabbit girl","canonical_tag":"rabbit_girl","source_refs":["danbooru:wiki:usada_pekora","gelbooru:wiki:usada_pekora"]},
+    {"facet":"ears","value":"Rabbit ears","canonical_tag":"rabbit_ears","source_refs":["danbooru:wiki:usada_pekora"]},
+    {"facet":"ears","value":"Extra human ears","canonical_tag":"extra_ears","source_refs":["danbooru:wiki:usada_pekora"]},
+    {"facet":"tail","value":"Rabbit tail","canonical_tag":"rabbit_tail","source_refs":["danbooru:wiki:usada_pekora"]},
+    {"facet":"hair","value":"Long hair","canonical_tag":"long_hair","source_refs":["danbooru:wiki:usada_pekora","gelbooru:wiki:usada_pekora"]},
+    {"facet":"hair","value":"Blue hair","canonical_tag":"blue_hair","source_refs":["danbooru:wiki:usada_pekora","gelbooru:wiki:usada_pekora"]},
+    {"facet":"hair","value":"White hair","canonical_tag":"white_hair","source_refs":["danbooru:wiki:usada_pekora","gelbooru:wiki:usada_pekora"]},
+    {"facet":"hair","value":"Two-tone hair","canonical_tag":"two-tone_hair","source_refs":["danbooru:wiki:usada_pekora"]},
+    {"facet":"hair_accessory","value":"Twin braids","canonical_tag":"twin_braids","source_refs":["danbooru:wiki:usada_pekora","gelbooru:wiki:usada_pekora"]},
+    {"facet":"hair_accessory","value":"Carrot hair ornaments","canonical_tag":"carrot_hair_ornament","source_refs":["danbooru:wiki:usada_pekora","gelbooru:wiki:usada_pekora"]},
+    {"facet":"hair_accessory","value":"Sidelocks","canonical_tag":"sidelocks","source_refs":["danbooru:wiki:usada_pekora"]},
+    {"facet":"hair_accessory","value":"Swept bangs","canonical_tag":"swept_bangs","source_refs":["danbooru:wiki:usada_pekora"]},
+    {"facet":"eyes","value":"Orange eyes","canonical_tag":"orange_eyes","role":"alternative","source_refs":["danbooru:wiki:usada_pekora"]},
+    {"facet":"eyes","value":"Red eyes","canonical_tag":"red_eyes","role":"alternative","source_refs":["danbooru:wiki:usada_pekora"]},
+    {"facet":"eyes","value":"Rabbit-shaped pupils","canonical_tag":"rabbit_pupils","source_refs":["danbooru:wiki:usada_pekora"]}
+  ]}]
+}

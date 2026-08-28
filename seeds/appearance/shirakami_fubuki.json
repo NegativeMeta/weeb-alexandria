@@ -1,0 +1,23 @@
+{
+  "character_tag":"shirakami_fubuki",
+  "sources":[
+    {"id":"danbooru:wiki:shirakami_fubuki","source_site":"danbooru","source_kind":"wiki","source_key":"shirakami_fubuki","source_url":"https://danbooru.donmai.us/wiki_pages/shirakami_fubuki.json","source_tier":1,"title":"Shirakami Fubuki","excerpt":"Fubuki is a white and black fox girl with fox ears, a left-ear piercing, and a white black-tipped fox tail with a pentagram near the tip. She has aqua eyes and long white or grey hair with an ahoge, double-parted bangs, low ponytail, black ribbon, sidelocks, and side braid.","captured_at":"2026-08-28"},
+    {"id":"gelbooru:wiki:shirakami_fubuki","source_site":"gelbooru","source_kind":"wiki","source_key":"shirakami_fubuki","source_url":"https://gelbooru.com/index.php?page=wiki&s=view&id=shirakami_fubuki","source_tier":1,"title":"Shirakami Fubuki","excerpt":"A white-haired fox girl and member of Hololive Gamers.","captured_at":"2026-08-28"}
+  ],
+  "profiles":[{"appearance_key":"shirakami_fubuki::default","variant_tag":"shirakami_fubuki","display_name":"Base appearance","appearance_kind":"default","is_default":true,"status":"published","confidence":"high","provenance":"danbooru_gelbooru_wiki_reviewed","notes":"Base identity only. Shared Hololive uniforms, game collaborations, and named costumes are excluded from this profile.","conflicts":[{"conflict_key":"base_hair_color","facet":"hair","alternatives":["white_hair","grey_hair"],"status":"open","reason":"Danbooru documents white or grey hair; Gelbooru summarizes it as white hair.","source_refs":["danbooru:wiki:shirakami_fubuki","gelbooru:wiki:shirakami_fubuki"]}],"features":[
+    {"facet":"species","value":"Fox girl","canonical_tag":"fox_girl","source_refs":["danbooru:wiki:shirakami_fubuki"]},
+    {"facet":"ears","value":"Fox ears","canonical_tag":"fox_ears","source_refs":["danbooru:wiki:shirakami_fubuki"]},
+    {"facet":"ears","value":"Animal ear piercing","canonical_tag":"animal_ear_piercing","source_refs":["danbooru:wiki:shirakami_fubuki"]},
+    {"facet":"tail","value":"Fox tail","canonical_tag":"fox_tail","source_refs":["danbooru:wiki:shirakami_fubuki"]},
+    {"facet":"tail","value":"Black-tipped tail","canonical_tag":"black_tail","source_refs":["danbooru:wiki:shirakami_fubuki"]},
+    {"facet":"eyes","value":"Aqua eyes","canonical_tag":"aqua_eyes","source_refs":["danbooru:wiki:shirakami_fubuki"]},
+    {"facet":"hair","value":"Long hair","canonical_tag":"long_hair","source_refs":["danbooru:wiki:shirakami_fubuki"]},
+    {"facet":"hair","value":"White hair","canonical_tag":"white_hair","role":"alternative","source_refs":["danbooru:wiki:shirakami_fubuki","gelbooru:wiki:shirakami_fubuki"]},
+    {"facet":"hair","value":"Grey hair","canonical_tag":"grey_hair","role":"alternative","source_refs":["danbooru:wiki:shirakami_fubuki"]},
+    {"facet":"hair_accessory","value":"Ahoge","canonical_tag":"ahoge","source_refs":["danbooru:wiki:shirakami_fubuki"]},
+    {"facet":"hair_accessory","value":"Low ponytail","canonical_tag":"low_ponytail","source_refs":["danbooru:wiki:shirakami_fubuki"]},
+    {"facet":"hair_accessory","value":"Black hair ribbon","canonical_tag":"black_ribbon","source_refs":["danbooru:wiki:shirakami_fubuki"]},
+    {"facet":"hair_accessory","value":"Side braid","canonical_tag":"side_braid","source_refs":["danbooru:wiki:shirakami_fubuki"]},
+    {"facet":"hair_accessory","value":"Sidelocks","canonical_tag":"sidelocks","source_refs":["danbooru:wiki:shirakami_fubuki"]}
+  ]}]
+}
