@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import difflib
+import hashlib
 import math
 import os
 import re
@@ -32,7 +33,14 @@ _WORK_NAME_HINTS = {
 }
 _COPYRIGHT_TOKENS: Optional[set[str]] = None
 _OWNED_SCHEMA_READY = False
-_SOURCE_STATUS_CACHE: Optional[tuple[tuple[int, int], dict[str, int]]] = None
+_SourceCacheKey = tuple[str, tuple[tuple[int, int], ...]]
+_SOURCE_HASH_CACHE: Optional[tuple[_SourceCacheKey, str]] = None
+_SOURCE_TAG_COUNT_CACHE: Optional[tuple[_SourceCacheKey, int]] = None
+_FTS_VALIDATION_CACHE: Optional[tuple[_SourceCacheKey, tuple[int, int], bool]] = None
+_CONTEXT_VALIDATION_CACHE: Optional[tuple[_SourceCacheKey, tuple[int, int], bool]] = None
+_SOURCE_STATUS_CACHE: Optional[tuple[_SourceCacheKey, dict[str, int]]] = None
+_FTS_SCHEMA_VERSION = "1"
+_CONTEXT_SCHEMA_VERSION = "3"
 
 
 def _normalize_tag(value: str) -> str:
@@ -50,10 +58,161 @@ def _db() -> sqlite3.Connection:
     return con
 
 
+def _file_signature(path: str) -> tuple[int, int]:
+    try:
+        stat = os.stat(path)
+    except OSError:
+        return (-1, -1)
+    return (stat.st_size, stat.st_mtime_ns)
+
+
+def _database_signature() -> tuple[tuple[int, int], ...]:
+    """Return the source database signature, including SQLite sidecars."""
+    return tuple(
+        _file_signature(TAGLIB_DB + suffix)
+        for suffix in ("", "-wal", "-shm")
+    )
+
+
+def _source_cache_key() -> _SourceCacheKey:
+    return (os.path.abspath(TAGLIB_DB), _database_signature())
+
+
+def _source_sha256() -> Optional[str]:
+    global _SOURCE_HASH_CACHE
+    cache_key = _source_cache_key()
+    signature = cache_key[1]
+    if signature[0][0] < 0:
+        return None
+    if _SOURCE_HASH_CACHE and _SOURCE_HASH_CACHE[0] == cache_key:
+        return _SOURCE_HASH_CACHE[1]
+    digest = hashlib.sha256()
+    try:
+        with open(TAGLIB_DB, "rb") as handle:
+            for chunk in iter(lambda: handle.read(1024 * 1024), b""):
+                digest.update(chunk)
+    except OSError:
+        return None
+    if _source_cache_key() != cache_key:
+        return None
+    value = digest.hexdigest()
+    _SOURCE_HASH_CACHE = (cache_key, value)
+    return value
+
+
+def _source_tag_count(con: sqlite3.Connection) -> Optional[int]:
+    global _SOURCE_TAG_COUNT_CACHE
+    cache_key = _source_cache_key()
+    if _SOURCE_TAG_COUNT_CACHE and _SOURCE_TAG_COUNT_CACHE[0] == cache_key:
+        return _SOURCE_TAG_COUNT_CACHE[1]
+    try:
+        count = int(con.execute("SELECT count(*) FROM tags").fetchone()[0])
+    except (sqlite3.Error, TypeError, ValueError):
+        return None
+    _SOURCE_TAG_COUNT_CACHE = (cache_key, count)
+    return count
+
+
+def _derived_metadata_matches(
+    derived: sqlite3.Connection,
+    metadata_table: str,
+    schema_version: str,
+    row_counts: Optional[dict[str, str]] = None,
+    source_con: Optional[sqlite3.Connection] = None,
+) -> bool:
+    """Validate a generated index against the current source snapshot."""
+    try:
+        metadata = dict(derived.execute(
+            f"SELECT key, value FROM {metadata_table}"
+        ).fetchall())
+        required = {"schema_version", "source_db", "source_size", "source_sha256"}
+        if not required <= metadata.keys():
+            return False
+        if metadata["schema_version"] != schema_version:
+            return False
+        if os.path.abspath(metadata["source_db"]) != os.path.abspath(TAGLIB_DB):
+            return False
+        if metadata["source_size"] != str(_file_signature(TAGLIB_DB)[0]):
+            return False
+        source_hash = _source_sha256()
+        if not source_hash or metadata["source_sha256"] != source_hash:
+            return False
+        for table, metadata_key in (row_counts or {}).items():
+            if metadata_key not in metadata:
+                return False
+            expected = int(metadata[metadata_key])
+            actual = int(derived.execute(
+                f"SELECT count(*) FROM {table}"
+            ).fetchone()[0])
+            if actual != expected:
+                return False
+        if source_con is not None and "indexed_rows" in metadata:
+            source_count = _source_tag_count(source_con)
+            actual = int(derived.execute(
+                "SELECT count(*) FROM tag_search"
+            ).fetchone()[0])
+            if source_count is None or actual != int(metadata["indexed_rows"]):
+                return False
+            if actual != source_count:
+                return False
+        wal_size = _file_signature(TAGLIB_DB + "-wal")[0]
+        wal_mtime_ns = _file_signature(TAGLIB_DB + "-wal")[1]
+        if wal_size > 0 and (
+            "source_wal_size" not in metadata
+            or "source_wal_mtime_ns" not in metadata
+        ):
+            return False
+        if "source_wal_size" in metadata and metadata["source_wal_size"] != str(wal_size):
+            return False
+        if ("source_wal_mtime_ns" in metadata
+                and metadata["source_wal_mtime_ns"] != str(wal_mtime_ns)):
+            return False
+        return True
+    except (OSError, sqlite3.Error, TypeError, ValueError):
+        return False
+
+
+def _open_valid_context() -> Optional[sqlite3.Connection]:
+    global _CONTEXT_VALIDATION_CACHE
+    if not os.path.isfile(CONTEXT_DB):
+        return None
+    source_key = _source_cache_key()
+    context_signature = _file_signature(CONTEXT_DB)
+    context: Optional[sqlite3.Connection] = None
+    try:
+        context = sqlite3.connect(CONTEXT_DB)
+        context.row_factory = sqlite3.Row
+        cached = (
+            _CONTEXT_VALIDATION_CACHE
+            and _CONTEXT_VALIDATION_CACHE[0] == source_key
+            and _CONTEXT_VALIDATION_CACHE[1] == context_signature
+        )
+        valid = (
+            _CONTEXT_VALIDATION_CACHE[2] if cached else _derived_metadata_matches(
+                context,
+                "context_index_metadata",
+                _CONTEXT_SCHEMA_VERSION,
+                {"character_context": "context_rows", "character_work_context": "work_rows"},
+            )
+        )
+        _CONTEXT_VALIDATION_CACHE = (source_key, context_signature, valid)
+        if not valid:
+            context.close()
+            return None
+        return context
+    except (OSError, sqlite3.Error):
+        _CONTEXT_VALIDATION_CACHE = (source_key, context_signature, False)
+        if context is not None:
+            context.close()
+        return None
+
+
 def _context_tags(tokens: list[str]) -> set[str]:
-    if not tokens or not os.path.exists(CONTEXT_DB):
+    if not tokens:
         return set()
-    context = sqlite3.connect(CONTEXT_DB)
+    context = _open_valid_context()
+    if context is None:
+        return set()
     try:
         placeholders = ",".join("?" for _ in tokens)
         rows = context.execute(
@@ -61,46 +220,48 @@ def _context_tags(tokens: list[str]) -> set[str]:
             tokens,
         ).fetchall()
         return {row[0] for row in rows}
+    except sqlite3.Error:
+        return set()
     finally:
         context.close()
 
 
 def _context_work_map(tags: set[str], context_tokens: list[str]) -> dict[str, str]:
-    if not tags or not context_tokens or not os.path.exists(CONTEXT_DB):
+    if not tags or not context_tokens:
         return {}
-    context = sqlite3.connect(CONTEXT_DB)
+    context = _open_valid_context()
+    if context is None:
+        return {}
     try:
-        try:
-            result: dict[str, tuple[int, str]] = {}
-            names = list(tags)
-            for start in range(0, len(names), 500):
-                chunk = names[start:start + 500]
-                placeholders = ",".join("?" for _ in chunk)
-                rows = context.execute(
-                    "SELECT tag, work_tag, matched_terms, score FROM character_work_context "
-                    f"WHERE tag IN ({placeholders})",
-                    chunk,
-                ).fetchall()
-                for tag, work, matched_terms, score in rows:
-                    matched = set(matched_terms.split(","))
-                    if not matched.intersection(context_tokens):
-                        continue
-                    previous = result.get(tag)
-                    if (
-                        previous is None
-                        or score > previous[0]
-                        or (
-                            score == previous[0]
-                            and (len(work), work) < (len(previous[1]), previous[1])
-                        )
-                    ):
-                        result[tag] = (score, work)
-            return {tag: work for tag, (_, work) in result.items()}
-        except sqlite3.OperationalError:
-            return {}
+        result: dict[str, tuple[int, str]] = {}
+        names = list(tags)
+        for start in range(0, len(names), 500):
+            chunk = names[start:start + 500]
+            placeholders = ",".join("?" for _ in chunk)
+            rows = context.execute(
+                "SELECT tag, work_tag, matched_terms, score FROM character_work_context "
+                f"WHERE tag IN ({placeholders})",
+                chunk,
+            ).fetchall()
+            for tag, work, matched_terms, score in rows:
+                matched = set(matched_terms.split(","))
+                if not matched.intersection(context_tokens):
+                    continue
+                previous = result.get(tag)
+                if (
+                    previous is None
+                    or score > previous[0]
+                    or (
+                        score == previous[0]
+                        and (len(work), work) < (len(previous[1]), previous[1])
+                    )
+                ):
+                    result[tag] = (score, work)
+        return {tag: work for tag, (_, work) in result.items()}
+    except sqlite3.Error:
+        return {}
     finally:
         context.close()
-
 
 def _copyright_tokens(con: sqlite3.Connection) -> set[str]:
     global _COPYRIGHT_TOKENS
@@ -319,8 +480,13 @@ def _merge_tag_rows(rows: list[sqlite3.Row], query: str,
         if site and site not in item["sites"]:
             item["sites"].append(site)
         item["nsfw"] = item["nsfw"] or bool(row["nsfw"])
-        if (row["post_count"] or 0) > (item["post_count"] or 0):
-            item["post_count"] = row["post_count"]
+        incoming_count = row["post_count"]
+        current_count = item["post_count"]
+        if ((incoming_count is not None and current_count is None)
+                or (incoming_count is not None and current_count is not None
+                    and incoming_count > current_count)):
+            item["category"] = row["category_name"]
+            item["post_count"] = incoming_count
         if not item["aliases"] and row["aliases"]:
             item["aliases"] = row["aliases"]
 
@@ -353,39 +519,87 @@ def _legacy_tag_rows(con: sqlite3.Connection, query: str,
 
 def _fts_match_query(query: str) -> str:
     normalized = _normalize_tag(query)
-    tokens = re.findall(r"[a-z0-9][a-z0-9:+!/-]*", normalized, re.IGNORECASE)
+    tokens = re.findall(r"[^\W_][\w:+!/-]*", normalized, re.UNICODE)
     return " AND ".join(
         f'"{token.replace(chr(34), chr(34) * 2)}"*' for token in tokens
     )
 
 
-def _fts_tag_rows(query: str, category: Optional[str], limit: int) -> Optional[list[sqlite3.Row]]:
-    if not os.path.exists(SEARCH_DB):
+def _fts_tag_rows(con: sqlite3.Connection, query: str,
+                  category: Optional[str], limit: int) -> Optional[list[sqlite3.Row]]:
+    if not os.path.isfile(SEARCH_DB):
         return None
     match_query = _fts_match_query(query)
     if not match_query:
-        return []
-    search = sqlite3.connect(SEARCH_DB)
-    search.row_factory = sqlite3.Row
+        return None
+    search: Optional[sqlite3.Connection] = None
     try:
+        search = sqlite3.connect(SEARCH_DB)
+        search.row_factory = sqlite3.Row
         search.execute("PRAGMA query_only = ON")
-        sql = (
-            "SELECT site, name, category_name, post_count, aliases, nsfw "
-            "FROM tag_search WHERE tag_search MATCH ?"
+        source_key = _source_cache_key()
+        search_signature = _file_signature(SEARCH_DB)
+        global _FTS_VALIDATION_CACHE
+        cached = (
+            _FTS_VALIDATION_CACHE
+            and _FTS_VALIDATION_CACHE[0] == source_key
+            and _FTS_VALIDATION_CACHE[1] == search_signature
         )
-        params: list[Any] = [match_query]
+        valid = (
+            _FTS_VALIDATION_CACHE[2] if cached else _derived_metadata_matches(
+                search,
+                "tag_search_metadata",
+                _FTS_SCHEMA_VERSION,
+                source_con=con,
+            )
+        )
+        _FTS_VALIDATION_CACHE = (source_key, search_signature, valid)
+        if not valid:
+            return None
+        category_clause = ""
+        outer_category_clause = ""
+        category_params: list[Any] = []
+        outer_category_params: list[Any] = []
         if category and category.lower() not in {"tag", "tags", "all"}:
-            sql += " AND category_name = ?"
-            params.append(category)
-        sql += (
-            " ORDER BY bm25(tag_search), post_count DESC NULLS LAST, name LIMIT ?"
+            category_clause = " AND category_name = ?"
+            outer_category_clause = " WHERE t.category_name = ?"
+            category_params.append(category)
+            outer_category_params.append(category)
+        candidate_limit = max(50, min(limit * 4, 400))
+        sql = (
+            "WITH matched_names AS ("
+            "SELECT name, MIN(rank) AS rank, "
+            "MAX(COALESCE(post_count, 0)) AS max_count "
+            "FROM tag_search WHERE tag_search MATCH ?"
+            f"{category_clause} GROUP BY name "
+            "ORDER BY rank, max_count DESC, name LIMIT ?"
+            ") SELECT t.site, t.name, t.category_name, t.post_count, t.aliases, t.nsfw "
+            "FROM tag_search AS t JOIN matched_names AS m ON m.name = t.name"
+            f"{outer_category_clause} "
+            "ORDER BY m.rank, m.max_count DESC, t.post_count DESC NULLS LAST, t.name, t.site"
         )
-        params.append(max(50, min(limit * 4, 400)))
+        params: list[Any] = [
+            match_query, *category_params, candidate_limit, *outer_category_params
+        ]
         return search.execute(sql, params).fetchall()
-    except sqlite3.Error:
+    except (OSError, sqlite3.Error):
         return None
     finally:
-        search.close()
+        if search is not None:
+            search.close()
+
+
+def _exact_tag_rows(con: sqlite3.Connection, normalized: str,
+                    category: Optional[str]) -> list[sqlite3.Row]:
+    sql = (
+        "SELECT name, category_name, post_count, site, aliases, nsfw "
+        "FROM tags INDEXED BY idx_tags_name WHERE name = ?"
+    )
+    params: list[Any] = [normalized]
+    if category and category.lower() not in {"tag", "tags", "all"}:
+        sql += " AND category_name = ?"
+        params.append(category)
+    return con.execute(sql, params).fetchall()
 
 
 def _indexed_prefix_rows(con: sqlite3.Connection, normalized: str,
@@ -415,7 +629,11 @@ def _tag_rows(con: sqlite3.Connection, query: str,
     if not normalized:
         return _legacy_tag_rows(con, query, category, limit)
 
-    fts_rows = _fts_tag_rows(query, category, limit)
+    exact_rows = _exact_tag_rows(con, normalized, category)
+    if exact_rows:
+        return _merge_tag_rows(exact_rows, query, normalized, limit)
+
+    fts_rows = _fts_tag_rows(con, query, category, limit)
     if fts_rows is None:
         # Keep installations without the derived index fully compatible.
         return _legacy_tag_rows(con, query, category, limit)
@@ -943,20 +1161,12 @@ def get_character(slug: str) -> dict:
         con.close()
 
 
-def _database_signature() -> tuple[int, int]:
-    try:
-        stat = os.stat(TAGLIB_DB)
-    except OSError:
-        return (-1, -1)
-    return (stat.st_size, stat.st_mtime_ns)
-
-
 @mcp.tool()
 def get_sources_status() -> dict:
     """Comprueba las fuentes locales de Weeb Alexandria."""
     global _SOURCE_STATUS_CACHE
-    signature = _database_signature()
-    if _SOURCE_STATUS_CACHE and _SOURCE_STATUS_CACHE[0] == signature:
+    source_key = _source_cache_key()
+    if _SOURCE_STATUS_CACHE and _SOURCE_STATUS_CACHE[0] == source_key:
         return {
             "name": "Weeb Alexandria",
             "db": TAGLIB_DB,
@@ -968,6 +1178,9 @@ def get_sources_status() -> dict:
 
     con = _db()
     try:
+        # ensure_owned_schema() may modify a newly opened database; capture the
+        # signature after that initialization before storing the cache entry.
+        signature = _source_cache_key()
         counts = {}
         for table in ("tags", "wiki", "tag_aliases", "tag_implications",
                       "character_profiles", "trait_definitions",

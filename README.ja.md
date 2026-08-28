@@ -87,7 +87,7 @@ furude_rika → higurashi_no_naku_koro_ni
 .venv/Scripts/python.exe scripts/build_context_index.py
 ```
 
-`character_context`、`character_work_context`、`context_index_metadata` テーブルを含む `data/character_context.sqlite` が作成されます。この索引はローカルで生成されるファイルで、Git には意図的に含めていません。`tag_library.db` を置き換えた後は再構築してください。メタデータには、元データベースのサイズ、SHA-256、索引スキーマのバージョンが記録されます。
+`character_context`、`character_work_context`、`context_index_metadata` テーブルを含む `data/character_context.sqlite` が作成されます。この索引はローカルで生成されるファイルで、Git には意図的に含めていません。`tag_library.db` を置き換えた後は再構築してください。メタデータには、元データベースのサイズ、SHA-256、sidecar の状態、行数、索引スキーマのバージョンが記録されます。MCP は古い、または不完全なコンテキスト索引を無視し、通常の解決処理にフォールバックします。
 
 ### 2.2 タグ検索索引を構築する（推奨）
 
@@ -97,7 +97,7 @@ furude_rika → higurashi_no_naku_koro_ni
 .venv/Scripts/python.exe scripts/build_search_index.py
 ```
 
-`data/tag_search.sqlite` が作成され、元データベースの SHA-256 が保存されます。このファイルは Git には意図的に含めていません。索引が存在する場合、MCP は自動的に使用し、存在しない場合はメイン SQLite クエリにフォールバックします。
+`data/tag_search.sqlite` が作成され、元データベースの SHA-256 とインデックス行数が保存されます。このファイルは Git には意図的に含めていません。MCP はこれらの値（SQLite の sidecar ファイルを含む）を検証し、索引がない、古い、不完全、壊れている、または開けない場合はメイン SQLite クエリへ自動的にフォールバックします。
 
 ### 3. Hermes に接続する
 

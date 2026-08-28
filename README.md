@@ -87,7 +87,7 @@ Build or rebuild it with:
 .venv/Scripts/python.exe scripts/build_context_index.py
 ```
 
-It creates `data/character_context.sqlite` with the `character_context`, `character_work_context`, and `context_index_metadata` tables. The index is local/generated, intentionally excluded from Git, and should be rebuilt after replacing `tag_library.db`. Metadata records the source database size, SHA-256, and index schema version.
+It creates `data/character_context.sqlite` with the `character_context`, `character_work_context`, and `context_index_metadata` tables. The index is local/generated, intentionally excluded from Git, and should be rebuilt after replacing `tag_library.db`. Metadata records the source database size, SHA-256, sidecar state, row counts, and index schema version. The MCP ignores stale or incomplete context indexes and falls back to its regular resolution path.
 
 ### 2.2 Build the tag-search index (recommended)
 
@@ -97,7 +97,7 @@ The optional FTS5 index accelerates partial searches over tag names and aliases.
 .venv/Scripts/python.exe scripts/build_search_index.py
 ```
 
-It creates `data/tag_search.sqlite`, stores the source SHA-256, and is intentionally excluded from Git. The MCP uses it automatically when present and falls back to the main SQLite queries when it is absent.
+It creates `data/tag_search.sqlite`, stores the source SHA-256 and indexed row count, and is intentionally excluded from Git. The MCP validates those values (including SQLite sidecars) and automatically falls back to the main SQLite queries when the index is missing, stale, partial, malformed, or unopenable.
 
 ### 3. Connect it to Hermes
 

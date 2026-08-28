@@ -87,7 +87,7 @@ Constrúyelo o regénéralo con:
 .venv/Scripts/python.exe scripts/build_context_index.py
 ```
 
-Crea `data/character_context.sqlite` con las tablas `character_context`, `character_work_context` y `context_index_metadata`. El índice es local/generado, está excluido intencionalmente de Git y debe regenerarse después de reemplazar `tag_library.db`. La metadata registra el tamaño de la base de origen, su SHA-256 y la versión del esquema del índice.
+Crea `data/character_context.sqlite` con las tablas `character_context`, `character_work_context` y `context_index_metadata`. El índice es local/generado, está excluido intencionalmente de Git y debe regenerarse después de reemplazar `tag_library.db`. La metadata registra el tamaño, SHA-256, estado de sidecars, conteos de filas y versión del esquema de la base de origen. El MCP ignora índices de contexto obsoletos o incompletos y vuelve a su ruta normal de resolución.
 
 ### 2.2 Construir el índice de búsqueda de tags (recomendado)
 
@@ -97,7 +97,7 @@ El índice FTS5 opcional acelera las búsquedas parciales sobre nombres y aliase
 .venv/Scripts/python.exe scripts/build_search_index.py
 ```
 
-Crea `data/tag_search.sqlite`, guarda el SHA-256 de la base de origen y está excluido intencionalmente de Git. El MCP lo usa automáticamente cuando está presente y vuelve a las consultas SQLite principales si falta.
+Crea `data/tag_search.sqlite`, guarda el SHA-256 de la base de origen y el conteo de filas indexadas, y está excluido intencionalmente de Git. El MCP valida esos valores (incluidos los sidecars de SQLite) y vuelve automáticamente a las consultas SQLite principales si el índice falta, está obsoleto, incompleto, malformado o no se puede abrir.
 
 ### 3. Conectarlo a Hermes
 

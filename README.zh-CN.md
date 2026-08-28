@@ -87,7 +87,7 @@ furude_rika → higurashi_no_naku_koro_ni
 .venv/Scripts/python.exe scripts/build_context_index.py
 ```
 
-该命令会创建 `data/character_context.sqlite`，其中包含 `character_context`、`character_work_context` 和 `context_index_metadata` 表。该索引是本地生成文件，并且特意排除在 Git 之外；替换 `tag_library.db` 后应重新生成。元数据会记录源数据库大小、SHA-256 和索引模式版本。
+该命令会创建 `data/character_context.sqlite`，其中包含 `character_context`、`character_work_context` 和 `context_index_metadata` 表。该索引是本地生成文件，并且特意排除在 Git 之外；替换 `tag_library.db` 后应重新生成。元数据会记录源数据库大小、SHA-256、sidecar 状态、行数和索引模式版本。MCP 会忽略过期或不完整的上下文索引，并回退到常规解析路径。
 
 ### 2.2 构建标签搜索索引（推荐）
 
@@ -97,7 +97,7 @@ furude_rika → higurashi_no_naku_koro_ni
 .venv/Scripts/python.exe scripts/build_search_index.py
 ```
 
-该命令会创建 `data/tag_search.sqlite` 并保存源数据库的 SHA-256。该文件特意排除在 Git 之外。索引存在时，MCP 会自动使用它；如果索引缺失，则回退到主 SQLite 查询。
+该命令会创建 `data/tag_search.sqlite`，保存源数据库的 SHA-256 和已索引行数，并且特意排除在 Git 之外。MCP 会验证这些值（包括 SQLite sidecar 文件）；如果索引缺失、过期、不完整、格式错误或无法打开，就会自动回退到主 SQLite 查询。
 
 ### 3. 连接到 Hermes
 

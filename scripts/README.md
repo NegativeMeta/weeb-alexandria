@@ -23,6 +23,14 @@ the orchestrator doesn't care what's inside.
 
 One-off helper that strips NSFW / explicit tags from a Danbooru character CSV. Run it on your source CSV before feeding it to a compatible local importer.
 
+## `build_context_index.py`
+
+Builds the derived character/franchise context index at `data/character_context.sqlite`. It records the source SHA-256, SQLite sidecar state, row counts, and schema version. The builder writes a temporary database and replaces the previous output only after a successful build.
+
+```bash
+.venv/Scripts/python.exe scripts/build_context_index.py
+```
+
 ## `build_search_index.py`
 
 Builds the optional derived SQLite FTS5 index used for fast partial tag and alias searches:
@@ -31,7 +39,7 @@ Builds the optional derived SQLite FTS5 index used for fast partial tag and alia
 .venv/Scripts/python.exe scripts/build_search_index.py
 ```
 
-The output is `data/tag_search.sqlite`. It is reproducible from `tag_library.db`, records the source SHA-256, and is excluded from Git because it is a generated artifact.
+The output is `data/tag_search.sqlite`. It is reproducible from `tag_library.db`, records the source SHA-256 and indexed row count, and is excluded from Git because it is a generated artifact. The builder writes to a temporary database and replaces the previous output only after a successful build.
 
 ## `migrate_owned_traits.py`
 

@@ -1,3 +1,4 @@
+import hashlib
 import sqlite3
 import tempfile
 import unittest
@@ -7,6 +8,7 @@ import weeb_alexandria_mcp.server as server_module
 from weeb_alexandria_mcp.server import (
     _tag_rows,
     _tag_suggestions,
+    _context_tags,
     get_character,
     get_sources_status,
     get_tag_knowledge,
@@ -24,6 +26,52 @@ class SearchRegressionTests(unittest.TestCase):
 
     def tearDown(self):
         self.con.close()
+
+    @staticmethod
+    def _create_tag_source(path, rows):
+        source = sqlite3.connect(path)
+        source.executescript(
+            """
+            CREATE TABLE tags (
+                site TEXT NOT NULL,
+                name TEXT NOT NULL,
+                category_name TEXT NOT NULL,
+                post_count INTEGER,
+                aliases TEXT,
+                nsfw INTEGER
+            );
+            CREATE INDEX idx_tags_name ON tags(name);
+            """
+        )
+        source.executemany(
+            "INSERT INTO tags VALUES (?, ?, ?, ?, ?, ?)", rows
+        )
+        source.commit()
+        source.close()
+
+    @staticmethod
+    def _swap_runtime_paths(taglib, search=None, context=None):
+        names = (
+            "TAGLIB_DB", "SEARCH_DB", "CONTEXT_DB", "_SOURCE_HASH_CACHE",
+            "_SOURCE_TAG_COUNT_CACHE", "_FTS_VALIDATION_CACHE",
+            "_CONTEXT_VALIDATION_CACHE", "_SOURCE_STATUS_CACHE",
+        )
+        previous = {name: getattr(server_module, name, None) for name in names}
+        server_module.TAGLIB_DB = str(taglib)
+        if search is not None:
+            server_module.SEARCH_DB = str(search)
+        if context is not None:
+            server_module.CONTEXT_DB = str(context)
+        for name in names[3:]:
+            if hasattr(server_module, name):
+                setattr(server_module, name, None)
+        return previous
+
+    @staticmethod
+    def _restore_runtime_paths(previous):
+        for name, value in previous.items():
+            if hasattr(server_module, name):
+                setattr(server_module, name, value)
 
     def test_owned_trait_tables_are_present(self):
         names = {
@@ -86,30 +134,218 @@ class SearchRegressionTests(unittest.TestCase):
         self.assertTrue(any(row["name"] == "closed_mouth" for row in rows))
 
     def test_tag_rows_uses_optional_fts_index(self):
+        from scripts.build_search_index import build
+
         with tempfile.TemporaryDirectory() as tmp:
-            search_path = Path(tmp) / "tag_search.sqlite"
-            search = sqlite3.connect(search_path)
-            search.execute(
-                "CREATE VIRTUAL TABLE tag_search USING fts5("
-                "site UNINDEXED, name, category_name UNINDEXED, "
-                "post_count UNINDEXED, aliases, nsfw UNINDEXED)"
-            )
-            search.execute(
-                "INSERT INTO tag_search(site, name, category_name, post_count, aliases, nsfw) "
-                "VALUES (?, ?, ?, ?, ?, ?)",
+            root = Path(tmp)
+            source_path = root / "source.sqlite"
+            search_path = root / "tag_search.sqlite"
+            self._create_tag_source(source_path, [
                 ("test", "ftsneedle_character", "character", 10, "needle alias", 0),
-            )
-            search.commit()
-            previous = getattr(server_module, "SEARCH_DB", None)
+            ])
+            build(source_path, search_path)
+            source = sqlite3.connect(source_path)
+            source.row_factory = sqlite3.Row
+            previous_paths = self._swap_runtime_paths(source_path, search_path)
             try:
-                server_module.SEARCH_DB = str(search_path)
-                rows = _tag_rows(self.con, "ftsneedle", "character", 5)
+                rows = _tag_rows(source, "ftsneedle", "character", 5)
             finally:
-                server_module.SEARCH_DB = previous
-                search.close()
+                self._restore_runtime_paths(previous_paths)
+                source.close()
         self.assertTrue(rows)
         self.assertEqual(rows[0]["name"], "ftsneedle_character")
         self.assertEqual(rows[0]["match_type"], "prefix")
+
+    def test_stale_fts_index_falls_back_to_current_source(self):
+        from scripts.build_search_index import build
+
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            source_path = root / "source.sqlite"
+            search_path = root / "tag_search.sqlite"
+            self._create_tag_source(source_path, [
+                ("test", "old_tag", "general", 10, "", 0),
+            ])
+            build(source_path, search_path)
+            source = sqlite3.connect(source_path)
+            source.execute("DELETE FROM tags")
+            source.execute(
+                "INSERT INTO tags VALUES (?, ?, ?, ?, ?, ?)",
+                ("test", "new_tag", "general", 10, "", 0),
+            )
+            source.commit()
+            source.row_factory = sqlite3.Row
+            previous_paths = self._swap_runtime_paths(source_path, search_path)
+            try:
+                stale_rows = _tag_rows(source, "old_tag", "tag", 5)
+                current_rows = _tag_rows(source, "new_tag", "tag", 5)
+            finally:
+                self._restore_runtime_paths(previous_paths)
+                source.close()
+        self.assertFalse(stale_rows)
+        self.assertTrue(current_rows)
+        self.assertEqual(current_rows[0]["name"], "new_tag")
+
+    def test_partial_fts_index_falls_back_to_source_rows(self):
+        from scripts.build_search_index import build
+
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            source_path = root / "source.sqlite"
+            search_path = root / "tag_search.sqlite"
+            self._create_tag_source(source_path, [
+                ("test", "first_tag", "general", 10, "", 0),
+                ("test", "second_tag", "general", 9, "", 0),
+            ])
+            build(source_path, search_path)
+            search = sqlite3.connect(search_path)
+            search.execute("DELETE FROM tag_search WHERE name = 'second_tag'")
+            search.commit()
+            search.close()
+            source = sqlite3.connect(source_path)
+            source.row_factory = sqlite3.Row
+            previous_paths = self._swap_runtime_paths(source_path, search_path)
+            try:
+                rows = _tag_rows(source, "cond_tag", "tag", 5)
+            finally:
+                self._restore_runtime_paths(previous_paths)
+                source.close()
+        self.assertTrue(rows)
+        self.assertEqual(rows[0]["name"], "second_tag")
+
+    def test_unopenable_fts_path_falls_back_to_sqlite(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            search_path = Path(tmp) / "tag_search.sqlite"
+            search_path.mkdir()
+            previous = server_module.SEARCH_DB
+            try:
+                server_module.SEARCH_DB = str(search_path)
+                rows = _tag_rows(self.con, "closed mouth", "tag", 5)
+            finally:
+                server_module.SEARCH_DB = previous
+        self.assertTrue(rows)
+        self.assertEqual(rows[0]["name"], "closed_mouth")
+
+    def test_unicode_alias_is_searchable_with_fts(self):
+        from scripts.build_search_index import build
+
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            source_path = root / "source.sqlite"
+            search_path = root / "tag_search.sqlite"
+            self._create_tag_source(source_path, [
+                ("test", "cat_tag", "general", 10, "猫咪", 0),
+            ])
+            build(source_path, search_path)
+            source = sqlite3.connect(source_path)
+            source.row_factory = sqlite3.Row
+            previous_paths = self._swap_runtime_paths(source_path, search_path)
+            try:
+                rows = _tag_rows(source, "猫咪", "tag", 5)
+            finally:
+                self._restore_runtime_paths(previous_paths)
+                source.close()
+        self.assertTrue(rows)
+        self.assertEqual(rows[0]["name"], "cat_tag")
+
+    def test_fts_duplicate_uses_highest_count_representative(self):
+        from scripts.build_search_index import build
+
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            source_path = root / "source.sqlite"
+            search_path = root / "tag_search.sqlite"
+            self._create_tag_source(source_path, [
+                ("general-site", "deep_throat", "general", 28213, "", 0),
+                ("alias-site", "deep_throat", "alias", 7838, "old alias", 0),
+            ])
+            build(source_path, search_path)
+            source = sqlite3.connect(source_path)
+            source.row_factory = sqlite3.Row
+            previous_paths = self._swap_runtime_paths(source_path, search_path)
+            try:
+                rows = _tag_rows(source, "thro", "tag", 5)
+            finally:
+                self._restore_runtime_paths(previous_paths)
+                source.close()
+        candidate = next(row for row in rows if row["name"] == "deep_throat")
+        self.assertEqual(candidate["category"], "general")
+        self.assertEqual(candidate["post_count"], 28213)
+        self.assertEqual(set(candidate["sites"]), {"general-site", "alias-site"})
+
+    def test_context_index_with_stale_source_hash_is_ignored(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            source_path = root / "source.sqlite"
+            context_path = root / "character_context.sqlite"
+            self._create_tag_source(source_path, [
+                ("test", "old_character", "character", 10, "", 0),
+            ])
+            source_hash = hashlib.sha256(source_path.read_bytes()).hexdigest()
+            context = sqlite3.connect(context_path)
+            context.executescript(
+                """
+                CREATE TABLE character_context(tag TEXT, context TEXT, source TEXT);
+                CREATE TABLE character_work_context(
+                    tag TEXT, work_tag TEXT, matched_terms TEXT, score INTEGER, source TEXT
+                );
+                CREATE TABLE context_index_metadata(key TEXT PRIMARY KEY, value TEXT NOT NULL);
+                """
+            )
+            context.execute(
+                "INSERT INTO character_context VALUES (?, ?, ?)",
+                ("old_character", "old_work", "test"),
+            )
+            context.executemany(
+                "INSERT INTO context_index_metadata VALUES (?, ?)",
+                [("schema_version", "3"), ("source_db", str(source_path.resolve())),
+                 ("source_size", str(source_path.stat().st_size)),
+                 ("source_sha256", source_hash), ("source_wal_size", "-1"),
+                 ("source_wal_mtime_ns", "-1"), ("character_wiki_rows", "1"),
+                 ("context_rows", "1"), ("work_rows", "0")],
+            )
+            context.commit()
+            context.close()
+            source = sqlite3.connect(source_path)
+            source.execute("UPDATE tags SET name='new_character'")
+            source.commit()
+            previous_paths = self._swap_runtime_paths(source_path, None, context_path)
+            try:
+                names = _context_tags(["old_work"])
+            finally:
+                self._restore_runtime_paths(previous_paths)
+                source.close()
+        self.assertEqual(names, set())
+
+    def test_search_index_builder_preserves_existing_output_on_failure(self):
+        from scripts.build_search_index import build
+
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            source_path = root / "invalid.sqlite"
+            output_path = root / "tag_search.sqlite"
+            sqlite3.connect(source_path).close()
+            output_path.write_bytes(b"previous-index")
+            with self.assertRaises(sqlite3.OperationalError):
+                build(source_path, output_path)
+            self.assertEqual(output_path.read_bytes(), b"previous-index")
+
+    def test_context_index_builder_preserves_existing_output_on_failure(self):
+        from scripts.build_context_index import build
+
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            source_path = root / "invalid.sqlite"
+            output_path = root / "character_context.sqlite"
+            sqlite3.connect(source_path).close()
+            output_path.write_bytes(b"previous-index")
+            with self.assertRaises(sqlite3.OperationalError):
+                build(source_path, output_path)
+            self.assertEqual(output_path.read_bytes(), b"previous-index")
+            with self.assertRaises(ValueError):
+                build(source_path, source_path)
+            self.assertTrue(source_path.exists())
+
 
     def test_tag_rows_deduplicates_sites_when_prefix_and_fts_overlap(self):
         rows = _tag_rows(self.con, "hatsune miku", "character", 5)

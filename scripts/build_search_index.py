@@ -3,6 +3,7 @@ from __future__ import annotations
 
 import argparse
 import hashlib
+import os
 import sqlite3
 from pathlib import Path
 
@@ -20,11 +21,23 @@ def sha256(path: Path) -> str:
     return digest.hexdigest()
 
 
-def _remove_database(path: Path) -> None:
-    for suffix in ("", "-wal", "-shm"):
+def _remove_artifacts(path: Path, include_main: bool = True) -> None:
+    suffixes = ("", "-wal", "-shm") if include_main else ("-wal", "-shm")
+    for suffix in suffixes:
         candidate = Path(str(path) + suffix)
-        if candidate.exists():
-            candidate.unlink()
+        if not candidate.exists():
+            continue
+        if candidate.is_dir():
+            raise IsADirectoryError(candidate)
+        candidate.unlink()
+
+
+def _sidecar_signature(path: Path, suffix: str) -> tuple[int, int]:
+    try:
+        stat = Path(str(path) + suffix).stat()
+    except OSError:
+        return (-1, -1)
+    return stat.st_size, stat.st_mtime_ns
 
 
 def build(source: Path, output: Path) -> tuple[int, str]:
@@ -35,17 +48,20 @@ def build(source: Path, output: Path) -> tuple[int, str]:
         raise ValueError("The FTS5 index must be separate from the source database")
     if not source.exists():
         raise FileNotFoundError(source)
+    if output.is_dir():
+        raise IsADirectoryError(output)
 
     output.parent.mkdir(parents=True, exist_ok=True)
     temporary = Path(str(output) + ".tmp")
-    _remove_database(temporary)
+    _remove_artifacts(temporary)
 
     source_hash = sha256(source)
     src = sqlite3.connect(str(source))
     src.row_factory = sqlite3.Row
-    out = sqlite3.connect(str(temporary))
-    total = 0
+    out: sqlite3.Connection | None = None
     try:
+        out = sqlite3.connect(str(temporary))
+        total = 0
         out.execute("PRAGMA journal_mode=DELETE")
         out.execute("PRAGMA synchronous=NORMAL")
         out.executescript(
@@ -96,6 +112,8 @@ def build(source: Path, output: Path) -> tuple[int, str]:
             "source_db": str(source),
             "source_size": str(source.stat().st_size),
             "source_sha256": source_hash,
+            "source_wal_size": str(_sidecar_signature(source, "-wal")[0]),
+            "source_wal_mtime_ns": str(_sidecar_signature(source, "-wal")[1]),
             "indexed_rows": str(total),
         }
         out.executemany(
@@ -103,12 +121,24 @@ def build(source: Path, output: Path) -> tuple[int, str]:
             metadata.items(),
         )
         out.commit()
-    finally:
+    except BaseException:
+        if out is not None:
+            out.close()
         src.close()
-        out.close()
+        try:
+            _remove_artifacts(temporary)
+        except OSError:
+            pass
+        raise
+    else:
+        if out is not None:
+            out.close()
+        src.close()
 
-    _remove_database(output)
+    # os.replace/Path.replace is atomic on one filesystem. If it fails, the
+    # previous output remains intact and the temporary can be inspected/retried.
     temporary.replace(output)
+    _remove_artifacts(output, include_main=False)
     return total, source_hash
 
 
