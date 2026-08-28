@@ -1,0 +1,17 @@
+{
+  "character_tag":"cirno",
+  "sources":[
+    {"id":"danbooru:wiki:cirno","source_site":"danbooru","source_kind":"wiki","source_key":"cirno","source_url":"https://danbooru.donmai.us/wiki_pages/cirno.json","source_tier":1,"title":"Cirno","excerpt":"Cirno has short blue hair, blue eyes, ice wings, and wears a blue dress with puffy short sleeves. Tanned Cirno is a separate appearance in Hidden Star in Four Seasons.","captured_at":"2026-08-28"},
+    {"id":"gelbooru:wiki:cirno","source_site":"gelbooru","source_kind":"wiki","source_key":"cirno","source_url":"https://gelbooru.com/index.php?page=wiki&s=view&id=cirno","source_tier":1,"title":"Cirno","excerpt":"Cirno is an ice fairy from the Touhou series. The ⑨ meme and personality descriptions are metadata, not visual features.","captured_at":"2026-08-28"}
+  ],
+  "profiles":[
+    {"appearance_key":"cirno::default","variant_tag":"cirno","display_name":"Base appearance","appearance_kind":"default","is_default":true,"status":"published","replace_features":true,"confidence":"high","provenance":"danbooru_gelbooru_wiki_reviewed","notes":"Base Cirno appearance only. Tanned Cirno, aged-up/fan-made forms, memes, and gameplay metadata remain separate.","features":[
+      {"facet":"hair","value":"Short hair","canonical_tag":"short_hair","source_refs":["danbooru:wiki:cirno"]},
+      {"facet":"hair","value":"Blue hair","canonical_tag":"blue_hair","source_refs":["danbooru:wiki:cirno"]},
+      {"facet":"eyes","value":"Blue eyes","canonical_tag":"blue_eyes","source_refs":["danbooru:wiki:cirno"]},
+      {"facet":"wings","value":"Ice wings","canonical_tag":"ice_wings","source_refs":["danbooru:wiki:cirno"]},
+      {"facet":"dress","value":"Blue dress","canonical_tag":"blue_dress","source_refs":["danbooru:wiki:cirno"]},
+      {"facet":"sleeves","value":"Puffy short sleeves","canonical_tag":"puffy_short_sleeves","source_refs":["danbooru:wiki:cirno"]}
+    ]}
+  ]
+}

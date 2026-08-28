@@ -1,0 +1,33 @@
+{
+  "character_tag":"izayoi_sakuya",
+  "sources":[
+    {"id":"danbooru:wiki:izayoi_sakuya","source_site":"danbooru","source_kind":"wiki","source_key":"izayoi_sakuya","source_url":"https://danbooru.donmai.us/wiki_pages/izayoi_sakuya.json","source_tier":1,"title":"Izayoi Sakuya","excerpt":"Sakuya has medium-length grey hair with twin braids tied with green bows. Her eye color is usually blue or red. She wears a maid headdress, black bowtie, blue vest and skirt or blue pinafore dress over a white collared shirt, white waist apron, white socks, and black shoes or brown boots.","captured_at":"2026-08-28"},
+    {"id":"gelbooru:wiki:izayoi_sakuya","source_site":"gelbooru","source_kind":"wiki","source_key":"izayoi_sakuya","source_url":"https://gelbooru.com/index.php?page=wiki&s=view&id=izayoi_sakuya","source_tier":1,"title":"Izayoi Sakuya","excerpt":"Sakuya is the chief maid of the Scarlet Devil Mansion and is consistently depicted as a maid character.","captured_at":"2026-08-28"}
+  ],
+  "profiles":[
+    {"appearance_key":"izayoi_sakuya::default","variant_tag":"izayoi_sakuya","display_name":"Base appearance","appearance_kind":"default","is_default":true,"status":"published","replace_features":true,"confidence":"high","provenance":"danbooru_gelbooru_wiki_reviewed","notes":"Base maid appearance only. Breast-padding jokes, knives, memes, caricatures, and unrelated characters are not appearance features.","conflicts":[
+      {"conflict_key":"base_eye_color","facet":"eyes","alternatives":["blue_eyes","red_eyes"],"status":"open","reason":"The Danbooru wiki states that Sakuya's eye color varies and is usually blue or red.","source_refs":["danbooru:wiki:izayoi_sakuya"]},
+      {"conflict_key":"base_outfit_form","facet":"dress","alternatives":["blue_vest+blue_skirt","blue_pinafore_dress"],"status":"open","reason":"The documented maid outfit appears either as a matching vest and skirt or as a pinafore dress.","source_refs":["danbooru:wiki:izayoi_sakuya"]},
+      {"conflict_key":"base_footwear","facet":"footwear","alternatives":["black_shoes","brown_boots"],"status":"open","reason":"The documented outfit permits black shoes or brown boots.","source_refs":["danbooru:wiki:izayoi_sakuya"]}
+    ],"features":[
+      {"facet":"hair","value":"Grey hair","canonical_tag":"grey_hair","source_refs":["danbooru:wiki:izayoi_sakuya"]},
+      {"facet":"hair","value":"Medium-length hair","canonical_tag":"medium_hair","source_refs":["danbooru:wiki:izayoi_sakuya"]},
+      {"facet":"hair_accessory","value":"Twin braids","canonical_tag":"twin_braids","source_refs":["danbooru:wiki:izayoi_sakuya"]},
+      {"facet":"hair_accessory","value":"Green hair bows","canonical_tag":"green_bow","source_refs":["danbooru:wiki:izayoi_sakuya"]},
+      {"facet":"eyes","value":"Blue eyes (documented alternative)","canonical_tag":"blue_eyes","source_refs":["danbooru:wiki:izayoi_sakuya"]},
+      {"facet":"eyes","value":"Red eyes (documented alternative)","canonical_tag":"red_eyes","source_refs":["danbooru:wiki:izayoi_sakuya"]},
+      {"facet":"headwear","value":"Maid headdress","canonical_tag":"maid_headdress","source_refs":["danbooru:wiki:izayoi_sakuya"]},
+      {"facet":"neck","value":"Black bowtie","canonical_tag":"black_bowtie","source_refs":["danbooru:wiki:izayoi_sakuya"]},
+      {"facet":"jacket","value":"Blue vest (documented alternative)","canonical_tag":"blue_vest","source_refs":["danbooru:wiki:izayoi_sakuya"]},
+      {"facet":"lower_body","value":"Blue skirt (documented alternative)","canonical_tag":"blue_skirt","source_refs":["danbooru:wiki:izayoi_sakuya"]},
+      {"facet":"dress","value":"Blue pinafore dress (documented alternative)","canonical_tag":"blue_dress","source_refs":["danbooru:wiki:izayoi_sakuya"]},
+      {"facet":"upper_body","value":"White collared shirt","canonical_tag":"white_shirt","source_refs":["danbooru:wiki:izayoi_sakuya"]},
+      {"facet":"sleeves","value":"Puffy short sleeves","canonical_tag":"puffy_short_sleeves","source_refs":["danbooru:wiki:izayoi_sakuya"]},
+      {"facet":"accessories","value":"White waist apron","canonical_tag":"white_apron","source_refs":["danbooru:wiki:izayoi_sakuya"]},
+      {"facet":"accessories","value":"Waist apron","canonical_tag":"waist_apron","source_refs":["danbooru:wiki:izayoi_sakuya"]},
+      {"facet":"legwear","value":"White socks","canonical_tag":"white_socks","source_refs":["danbooru:wiki:izayoi_sakuya"]},
+      {"facet":"footwear","value":"Black shoes (documented alternative)","canonical_tag":"black_shoes","source_refs":["danbooru:wiki:izayoi_sakuya"]},
+      {"facet":"footwear","value":"Brown boots (documented alternative)","canonical_tag":"brown_boots","source_refs":["danbooru:wiki:izayoi_sakuya"]}
+    ]}
+  ]
+}

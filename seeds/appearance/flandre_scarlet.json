@@ -1,0 +1,28 @@
+{
+  "character_tag": "flandre_scarlet",
+  "sources": [
+    {"id":"danbooru:wiki:flandre_scarlet","source_site":"danbooru","source_kind":"wiki","source_key":"flandre_scarlet","source_url":"https://danbooru.donmai.us/wiki_pages/flandre_scarlet.json","source_tier":1,"title":"Flandre Scarlet","excerpt":"Flandre is distinguished by her multicolored crystal wings. Her appearance reference is linked from the official profile post.","captured_at":"2026-08-28"},
+    {"id":"gelbooru:wiki:flandre_scarlet","source_site":"gelbooru","source_kind":"wiki","source_key":"flandre_scarlet","source_url":"https://gelbooru.com/index.php?page=wiki&s=view&id=flandre_scarlet","source_tier":1,"title":"Flandre Scarlet","excerpt":"Flandre is most often depicted with a mob cap, one-side-up hair on the left, blonde hair, red eyes, and peculiar wings.","captured_at":"2026-08-28"},
+    {"id":"e621:wiki:flandre_scarlet","source_site":"e621","source_kind":"wiki","source_key":"flandre_scarlet","source_url":"https://e621.net/wiki_pages/flandre_scarlet.json","source_tier":1,"title":"Flandre Scarlet","excerpt":"She has red eyes and short blonde hair tied into a single ponytail on her left side. She wears a red skirt and vest, a yellow neckerchief, a pink shirt, and a pink mob cap with a red ribbon. Her wings appear to be made of iron and prism shards.","captured_at":"2026-08-28"}
+  ],
+  "profiles": [
+    {"appearance_key":"flandre_scarlet::default","variant_tag":"flandre_scarlet","display_name":"Base appearance","appearance_kind":"default","is_default":true,"status":"published","replace_features":true,"confidence":"high","provenance":"danbooru_gelbooru_e621_wiki_reviewed","notes":"Base Flandre design only. Laevatein and fan-made variations remain separate; wing material/color descriptions are retained as documented alternatives.","conflicts":[
+      {"conflict_key":"wing_material_and_color","facet":"wings","alternatives":["multicolored_crystal_wings","iron_prism_shard_wings"],"status":"open","reason":"Danbooru describes multicolored crystal wings while e621 describes iron and prism shards; these descriptions are preserved without forcing a single material label.","source_refs":["danbooru:wiki:flandre_scarlet","e621:wiki:flandre_scarlet"]},
+      {"conflict_key":"left_hair_tie_style","facet":"hair_accessory","alternatives":["one_side_up","single_ponytail"],"status":"open","reason":"Gelbooru and e621 describe the same left-side tied hair using different tag vocabulary.","source_refs":["gelbooru:wiki:flandre_scarlet","e621:wiki:flandre_scarlet"]}
+    ],"features":[
+      {"facet":"hair","value":"Blonde hair","canonical_tag":"blonde_hair","source_refs":["gelbooru:wiki:flandre_scarlet","e621:wiki:flandre_scarlet"]},
+      {"facet":"hair","value":"Short hair","canonical_tag":"short_hair","source_refs":["e621:wiki:flandre_scarlet"]},
+      {"facet":"hair_accessory","value":"One-side-up hair on the left","canonical_tag":"one_side_up","source_refs":["gelbooru:wiki:flandre_scarlet"]},
+      {"facet":"hair_accessory","value":"Single left-side ponytail","canonical_tag":"single_ponytail","source_refs":["e621:wiki:flandre_scarlet"]},
+      {"facet":"eyes","value":"Red eyes","canonical_tag":"red_eyes","source_refs":["e621:wiki:flandre_scarlet","gelbooru:wiki:flandre_scarlet"]},
+      {"facet":"headwear","value":"Pink mob cap","canonical_tag":"mob_cap","source_refs":["gelbooru:wiki:flandre_scarlet","e621:wiki:flandre_scarlet"]},
+      {"facet":"accessories","value":"Red hat ribbon","canonical_tag":"red_ribbon","source_refs":["e621:wiki:flandre_scarlet"]},
+      {"facet":"wings","value":"Multicolored crystal wings","canonical_tag":"crystal_wings","source_refs":["danbooru:wiki:flandre_scarlet"]},
+      {"facet":"wings","value":"Prism shard wings","canonical_tag":"prism_wings","source_refs":["e621:wiki:flandre_scarlet"]},
+      {"facet":"upper_body","value":"Pink shirt","canonical_tag":"pink_shirt","source_refs":["e621:wiki:flandre_scarlet"]},
+      {"facet":"jacket","value":"Red vest","canonical_tag":"red_vest","source_refs":["e621:wiki:flandre_scarlet"]},
+      {"facet":"neck","value":"Yellow neckerchief","canonical_tag":"yellow_neckerchief","source_refs":["e621:wiki:flandre_scarlet"]},
+      {"facet":"lower_body","value":"Red skirt","canonical_tag":"red_skirt","source_refs":["e621:wiki:flandre_scarlet"]}
+    ]}
+  ]
+}
