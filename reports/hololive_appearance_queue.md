@@ -413,3 +413,9 @@ appearance traits. `saigyouji_yuyuko` remains deferred because the available
 appearance evidence was limited to partial headwear details. The published
 subset contained 18 features and zero conflicts. Alternative forms, weapons,
 pets and ambiguous fan depictions remain separate or excluded.
+
+## Fourth general popularity batch
+
+`hong_meiling` was reviewed and published with 8 base appearance features and
+zero conflicts. Dragon/panda variants, weapons, and props remain excluded from
+the base profile.
