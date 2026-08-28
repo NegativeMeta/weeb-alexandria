@@ -118,11 +118,19 @@ tag_library.db (reviewed/published canonical rows)
 appearance_runtime.py → get_character_appearance()
 ```
 
-### Step 1 — Select a small batch
+### Step 1 — Rank and select a small batch
 
-Start with five characters that deliberately exercise different risks:
-straightforward appearance, complex outfit, accessories/body markers, multiple
-variants, and contradictory or sparse evidence. Do not start with a mass import.
+Rank existing canonical characters by the sum of their `post_count` values
+across the independent `danbooru`, `gelbooru`, and `e621` tag rows. Do not count
+`combined` as a fourth source. Preserve the per-site counts and use them to
+spot source imbalance. Post volume determines processing order and expected
+utility; it is never visual evidence and never promotes a feature.
+
+Start with the top five characters, then process later groups of 5, 10, and
+25 only after the previous group passes review. If a tie or data-quality issue
+would make the batch redundant, choose the next ranked character and record the
+reason. Keep at least one difficult case in each batch when practical, but do
+not replace a much more popular character solely to make the batch look varied.
 
 ### Step 2 — Build candidates
 
@@ -199,15 +207,17 @@ A short, reliable card is better than an exhaustive contaminated card.
 
 ## 7. First population batch
 
-Korone remains the golden card and regression reference. The first new batch is:
+Korone remains the golden card and regression reference. The first new batch is
+ordered by the current sum of independent Danbooru + Gelbooru `post_count`
+values (the snapshot has no counted e621 row for these profiles):
 
-| Character | Why it is included | Main review risk |
-|---|---|---|
-| `2b_(nier_automata)` | Complex recognizable design | Outfit/accessory boundaries and sparse exact wiki evidence |
-| `ganyu_(genshin_impact)` | Distinctive horns, hair, flower, and costume | Separate identity traits from outfit-specific features |
-| `hatsune_miku` | Iconic hair and many fanart costumes | Variant contamination and over-broad hair/clothing tags |
-| `hakurei_reimu` | Strong visual identity with conflicting legacy color tags | Contradictory evidence and canonical feature selection |
-| `yor_briar` | Clear base outfit and accessories | Distinguishing canonical clothing from pose/weapon context |
+| Order | Character | Posts | Main review risk |
+|---:|---|---:|---|
+| 1 | `hatsune_miku` | 220,172 | Many contextual variants; separate canonical design from products, collaborations, and cosplay. |
+| 2 | `hakurei_reimu` | 135,508 | Conflicting color/accessory evidence and multiple named variants. |
+| 3 | `kirisame_marisa` | 113,210 | Distinguish stable witch outfit features from props and fanart variations. |
+| 4 | `artoria_pendragon_(fate)` | 76,468 | Armor, clothing, hair, and Fate-context variants must remain scoped. |
+| 5 | `souryuu_asuka_langley` | 40,141 | Separate stable identity features from plugsuit and other outfit variants. |
 
 The first batch is a **candidate and review batch**, not an automatic publication
 batch. Its initial output should be measured by evidence quality, rejected
