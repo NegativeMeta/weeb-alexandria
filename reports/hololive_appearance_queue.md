@@ -104,3 +104,19 @@ The next five base talents were processed by independent post-volume ranking:
 Candidate generation produced 2,101 observations and 862 candidates. Only
 source-reviewed base features were promoted. Named outfits, shared agency
 uniforms, mascots, and fan marks remain deferred.
+
+## Fifth Hololive batch
+
+The next five base talents were processed by independent post-volume ranking:
+
+| Rank | Character | Danbooru | Gelbooru | Independent total | Result |
+|---:|---|---:|---:|---:|---|
+| 1 | `hakos_baelz` | 4,643 | 6,811 | 11,454 | Base published; 11 features |
+| 2 | `shishiro_botan` | 5,040 | 6,354 | 11,394 | Base published; 12 features |
+| 3 | `shiori_novella` | 3,630 | 7,010 | 10,640 | Base published; 7 features |
+| 4 | `nerissa_ravencroft` | 3,605 | 6,807 | 10,412 | Base published; 11 features; 1 open conflict |
+| 5 | `la+_darknesss` | 4,445 | 5,860 | 10,305 | Base published; 11 features |
+
+Candidate generation produced 1,228 observations and 510 candidates. Only
+source-reviewed base features were promoted. Named outfits, shared agency
+uniforms, mascots, and fan marks remain deferred.
