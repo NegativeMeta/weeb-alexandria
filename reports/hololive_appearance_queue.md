@@ -168,3 +168,19 @@ The next five base talents were processed by independent post-volume ranking:
 Candidate generation produced 1,151 observations and 463 candidates. Only
 source-reviewed base features were promoted. Named outfits, shared agency
 uniforms, mascots, and fan marks remain deferred.
+
+## Ninth Hololive batch
+
+The next five base talents were processed by independent post-volume ranking:
+
+| Rank | Character | Danbooru | Gelbooru | e621 | Independent total | Result |
+|---:|---|---:|---:|---:|---:|---|
+| 1 | `tsunomaki_watame` | 2,648 | 3,381 | 0 | 6,029 | Base published; 11 features |
+| 2 | `momosuzu_nene` | 2,356 | 3,499 | 0 | 5,855 | Base published; 7 features |
+| 3 | `akai_haato` | 2,477 | 2,901 | 0 | 5,378 | Base published; 8 features; 1 open conflict |
+| 4 | `takane_lui` | 2,211 | 3,089 | 0 | 5,300 | Base published; 9 features; 1 open conflict |
+| 5 | `yuzuki_choco` | 2,010 | 2,718 | 0 | 4,728 | Base published; 15 features; 1 open conflict |
+
+Candidate generation produced 1,674 observations and 686 candidates. Only
+source-reviewed base features were promoted. Named outfits, shared agency
+uniforms, mascots, and fan marks remain deferred.
