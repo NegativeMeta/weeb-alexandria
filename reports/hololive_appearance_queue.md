@@ -402,3 +402,11 @@ computes `total = danbooru + gelbooru + e621`. The corrected next ten are:
 `remilia_scarlet` and `miku_hatsune` remain explicitly deferred and are not
 silently displaced by this ranking. The candidate builder was rerun for the
 ten corrected characters: 830 observations and 309 candidates.
+
+## Third general popularity batch
+
+The first five corrected candidates were reviewed and published:
+`fujiwara_no_mokou` (2 features), `akemi_homura` (6), `kaname_madoka` (6),
+`inubashiri_momiji` (6), and `saigyouji_yuyuko` (3). The batch contained 23
+published features and zero conflicts. Alternative forms, weapons, pets and
+ambiguous fan depictions remain separate or excluded.
