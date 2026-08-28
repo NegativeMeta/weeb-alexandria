@@ -378,3 +378,27 @@ staff, variants, and meta/player avatars.
 Candidate generation produced 171 observations and 85 candidates. All five
 base profiles were published with 45 reviewed features and zero conflicts.
 Props, pets, weapons, and named outfit variants remain separate or excluded.
+
+## General queue ranking correction
+
+The earlier manual SQL ranking was discarded because its `total` alias was
+ambiguous in the aggregation query. The reproducible ranking now aggregates
+`post_count` in Python after selecting only the three independent sites, then
+computes `total = danbooru + gelbooru + e621`. The corrected next ten are:
+
+| Rank | Character | Danbooru | Gelbooru | e621 | Total |
+|---:|---|---:|---:|---:|---:|
+| 1 | `fujiwara_no_mokou` | 20,005 | 25,903 | 0 | 45,908 |
+| 2 | `akemi_homura` | 16,576 | 27,142 | 0 | 43,718 |
+| 3 | `kaname_madoka` | 15,972 | 27,078 | 0 | 43,050 |
+| 4 | `inubashiri_momiji` | 18,030 | 23,850 | 0 | 41,880 |
+| 5 | `saigyouji_yuyuko` | 15,972 | 25,180 | 0 | 41,152 |
+| 6 | `hong_meiling` | 16,410 | 22,822 | 0 | 39,232 |
+| 7 | `kagamine_rin` | 12,455 | 25,035 | 0 | 37,490 |
+| 8 | `altria_pendragon_(fate)` | 0 | 36,848 | 0 | 36,848 |
+| 9 | `mash_kyrielight` | 15,840 | 20,217 | 0 | 36,057 |
+| 10 | `link` | 11,732 | 24,276 | 0 | 36,008 |
+
+`remilia_scarlet` and `miku_hatsune` remain explicitly deferred and are not
+silently displaced by this ranking. The candidate builder was rerun for the
+ten corrected characters: 830 observations and 309 candidates.
