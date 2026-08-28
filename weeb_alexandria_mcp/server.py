@@ -10,6 +10,7 @@ import sqlite3
 from typing import Any, Optional
 
 from mcp.server.fastmcp import FastMCP
+from weeb_alexandria_mcp.appearance_runtime import get_appearance_payload
 from weeb_alexandria_mcp.owned_schema import ensure_owned_schema
 
 ROOT = os.path.dirname(os.path.abspath(__file__))
@@ -1252,10 +1253,189 @@ def get_character(slug: str) -> dict:
                 "candidates": [row.get("slug") for row in rows[:10]],
                 "recommendations": canonical_recommendations,
             }
-        # Kept as an empty compatibility field until the owned profile schema
-        # gains an explicit model-association table.
+        # Appearance is additive: legacy character fields remain unchanged.
+        match["appearance"] = get_appearance_payload(con, slug)
         match["loras"] = []
         return {"found": True, **match}
+    finally:
+        con.close()
+
+
+
+def _resolve_appearance_target(con: sqlite3.Connection, character: str,
+                               variant: Optional[str] = None) -> dict[str, Any]:
+    """Resolve a character or an exact appearance variant without weak guessing."""
+    requested = _normalize_tag(character)
+    requested_variant = _normalize_tag(variant) if variant else None
+    status_params = ("reviewed", "published")
+
+    if requested_variant:
+        direct_variant = con.execute(
+            """SELECT character_tag FROM character_appearance_profiles
+               WHERE variant_tag=? AND status IN (?, ?)
+               ORDER BY is_default DESC, character_tag""",
+            (requested_variant, *status_params),
+        ).fetchall()
+        names = sorted({row["character_tag"] for row in direct_variant})
+        if len(names) == 1:
+            return {
+                "character_tag": names[0],
+                "variant": requested_variant,
+                "resolution": ({
+                    "from": requested_variant,
+                    "to": names[0],
+                    "type": "appearance_variant",
+                } if requested_variant != names[0] else None),
+            }
+        if len(names) > 1:
+            return {
+                "ambiguous": True,
+                "candidates": names,
+                "message": "The appearance variant matches more than one character.",
+            }
+
+    if not requested_variant:
+        variant_as_character = con.execute(
+            """SELECT character_tag, variant_tag FROM character_appearance_profiles
+               WHERE variant_tag=? AND status IN (?, ?)
+               ORDER BY character_tag LIMIT 2""",
+            (requested, *status_params),
+        ).fetchall()
+        variant_pairs = sorted({
+            (row["character_tag"], row["variant_tag"])
+            for row in variant_as_character
+        })
+        if len(variant_pairs) == 1:
+            resolved_character, resolved_variant = variant_pairs[0]
+            return {
+                "character_tag": resolved_character,
+                "variant": (resolved_variant
+                             if resolved_variant != resolved_character else None),
+                "resolution": ({
+                    "from": requested,
+                    "to": resolved_character,
+                    "type": "appearance_variant",
+                } if resolved_variant != resolved_character else None),
+            }
+        if len(variant_pairs) > 1:
+            return {
+                "ambiguous": True,
+                "candidates": sorted({pair[0] for pair in variant_pairs}),
+                "message": "The appearance variant matches more than one character.",
+            }
+
+    direct_profiles = con.execute(
+        """SELECT character_tag FROM character_appearance_profiles
+           WHERE character_tag=? AND status IN (?, ?)
+           ORDER BY is_default DESC LIMIT 2""",
+        (requested, *status_params),
+    ).fetchall()
+    if direct_profiles:
+        return {"character_tag": direct_profiles[0]["character_tag"],
+                "variant": requested_variant}
+
+    owned = con.execute(
+        """SELECT character_tag FROM character_profiles
+           WHERE character_tag=? OR display_name_normalized=? OR trigger=?
+           ORDER BY character_tag LIMIT 2""",
+        (requested, requested, requested),
+    ).fetchall()
+    owned_names = sorted({row["character_tag"] for row in owned})
+    if len(owned_names) == 1:
+        return {"character_tag": owned_names[0], "variant": requested_variant}
+    if len(owned_names) > 1:
+        return {
+            "ambiguous": True,
+            "candidates": owned_names,
+            "message": "Provide a franchise or other context to select one character.",
+        }
+
+    exact_tag = con.execute(
+        "SELECT name FROM tags WHERE name=? AND category_name='character' "
+        "ORDER BY post_count DESC LIMIT 2",
+        (requested,),
+    ).fetchall()
+    exact_names = sorted({row["name"] for row in exact_tag})
+    if len(exact_names) == 1:
+        return {"character_tag": exact_names[0], "variant": requested_variant}
+    if len(exact_names) > 1:
+        return {
+            "ambiguous": True,
+            "candidates": exact_names,
+            "message": "Provide a franchise or other context to select one character.",
+        }
+
+    suggestions = _tag_suggestions(con, requested, "character", 10)
+    contextual_names = sorted({
+        item["name"] for item in suggestions
+        if item.get("category") == "character"
+        and item.get("confidence") == "high"
+        and item.get("match_type") in {"exact", "normalized", "contextual"}
+    })
+    if len(contextual_names) == 1:
+        resolution = {
+            "from": requested,
+            "to": contextual_names[0],
+            "type": "contextual_character",
+        }
+        return {
+            "character_tag": contextual_names[0],
+            "variant": requested_variant,
+            "resolution": resolution,
+        }
+    if len(contextual_names) > 1:
+        return {
+            "ambiguous": True,
+            "candidates": contextual_names,
+            "message": "Provide a franchise or other context to select one character.",
+        }
+    return {
+        "ambiguous": False,
+        "candidates": [item["name"] for item in suggestions[:10]],
+        "message": "No canonical character tag was found.",
+    }
+
+
+@mcp.tool()
+def get_character_appearance(character: str, variant: Optional[str] = None,
+                              include_evidence: bool = True,
+                              limit: int = 100) -> dict:
+    """Return canonical appearance and outfit cards with source evidence."""
+    con = _db()
+    try:
+        target = _resolve_appearance_target(con, character, variant)
+        base = {
+            "requested_character": character,
+            "requested_variant": variant,
+        }
+        if target.get("ambiguous"):
+            return {
+                **base,
+                "found": False,
+                "ambiguous": True,
+                "candidates": target.get("candidates", []),
+                "message": target.get("message"),
+            }
+        character_tag = target.get("character_tag")
+        if not character_tag:
+            return {
+                **base,
+                "found": False,
+                "ambiguous": False,
+                "candidates": target.get("candidates", []),
+                "message": target.get("message"),
+            }
+        result = get_appearance_payload(
+            con,
+            character_tag,
+            target.get("variant"),
+            include_evidence,
+            limit,
+        )
+        result = {**base, **result}
+        if target.get("resolution"):
+            result["resolution"] = target["resolution"]
+        return result
     finally:
         con.close()
 
@@ -1283,7 +1463,12 @@ def get_sources_status() -> dict:
         counts = {}
         for table in ("tags", "wiki", "tag_aliases", "tag_implications",
                       "character_profiles", "trait_definitions",
-                      "character_traits", "trait_system_metadata"):
+                      "character_traits", "trait_system_metadata",
+                      "character_appearance_profiles",
+                      "character_appearance_features",
+                      "character_appearance_sources",
+                      "character_appearance_feature_sources",
+                      "appearance_schema_metadata"):
             counts[table] = con.execute(f"SELECT count(*) FROM {table}").fetchone()[0]
         _SOURCE_STATUS_CACHE = (signature, dict(counts))
         return {"name": "Weeb Alexandria", "db": TAGLIB_DB,

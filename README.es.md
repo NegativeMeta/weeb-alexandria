@@ -6,7 +6,7 @@ Weeb Alexandria es un proyecto que unifica conocimiento anime, otaku, weeb, NSFW
 
 Permite que los agentes de IA locales accedan a información confiable sobre los temas que les consultes, ayudándolos a recuperar datos fundamentados y reducir las alucinaciones en esta área del conocimiento.
 
-El proyecto combina definiciones de tags, aliases, implicaciones, personajes, franquicias, artistas, traits, fuentes y otra información útil para la investigación relacionada con anime y la generación de imágenes.
+El proyecto combina definiciones de tags, aliases, implicaciones, personajes, franquicias, artistas, traits, cards de apariencia/vestimenta, fuentes y otra información útil para la investigación relacionada con anime y la generación de imágenes.
 
 ## Snapshot actual
 
@@ -128,7 +128,7 @@ Abre **Program → Install → Edit mcp.json** y añade:
 }
 ```
 
-Inicia un chat nuevo y confirma que las cinco herramientas de Weeb Alexandria están disponibles.
+Inicia un chat nuevo y confirma que las seis herramientas de Weeb Alexandria están disponibles.
 
 ### 5. Pruébalo en una conversación
 
@@ -155,6 +155,27 @@ Si `search_knowledge` recibe varias tags unidas en una sola consulta, por ejempl
 
 Las tags conocidas de varias palabras, como `red face` y `closed mouth`, permanecen intactas. Las consultas contextuales de personajes o franquicias, como `Fuwawa Hololive` y `Mococo Hololive`, se conservan sin dividirse.
 
+## Cards de apariencia y vestimenta
+
+La apariencia se divide entre un perfil base y perfiles separados para cada outfit o variante. Las filas canónicas viven en `tag_library.db`:
+
+- `character_appearance_profiles`: una fila por apariencia base o variante.
+- `character_appearance_features`: una fila por faceta/tag, como `hair`, `eyes`, `dress` o `footwear`.
+- `character_appearance_sources`: catálogo de fuentes Danbooru, Gelbooru, posts de referencia y semillas revisadas.
+- `character_appearance_feature_sources`: evidencia, conteos y conflictos por característica.
+
+`data/character_appearance.sqlite` contiene observaciones y candidatos `pending` generados desde wikis y muestras de posts capturadas. Los candidatos no se exponen como hechos canónicos hasta que se revisan y promocionan explícitamente.
+
+```bash
+.venv/Scripts/python.exe scripts/build_appearance_candidates.py \\
+  --character inugami_korone
+
+.venv/Scripts/python.exe scripts/promote_appearance.py \\
+  --input seeds/appearance/inugami_korone.json
+```
+
+La herramienta MCP es `get_character_appearance(character, variant=None, include_evidence=True, limit=100)`. `get_character_appearance("inugami_korone")` devuelve la apariencia base y los perfiles revisados de `1st_costume`, `street` y `new_year` sin mezclar sus prendas.
+
 ## Estructura
 
 ```text
@@ -164,14 +185,18 @@ WeebAlexandria/
 ├── tag_library.db          Base de conocimiento unificada
 ├── raw/                    Fuentes descargadas
 │   ├── animadex/           Base original de AnimaDex
+│   ├── appearance/         Wikis/posts de apariencia capturados
 │   ├── danbooru/
 │   ├── e621/               Wikis y tags procesados
 │   ├── gelbooru/
 │   └── danbooru_wiki_extra/
 ├── reports/                Auditorías y listas de revisión
 ├── scripts/                Scripts de mantenimiento y fusión
+├── seeds/appearance/       Semillas de apariencia revisadas
 ├── data/character_context.sqlite
 │                           Índice de contexto derivado (local)
+├── data/character_appearance.sqlite
+│                           Observaciones/candidatos derivados (local)
 ├── data/tag_search.sqlite
 │                           Índice FTS5 opcional de búsqueda (local)
 ├── data/backups/           Backups de la base
@@ -195,6 +220,7 @@ C:\Users\johin\Code_Library\AI\WeebAlexandria_legacy_archive
 - Aliases e implicaciones.
 - Definiciones sintéticas marcadas con `lang='llm'`.
 - Perfiles estructurados propios y relaciones de traits (`character_profiles`, `trait_definitions` y `character_traits`).
+- Perfiles canónicos de apariencia/vestimenta y procedencia por feature (`character_appearance_profiles`, `character_appearance_features`, `character_appearance_sources` y `character_appearance_feature_sources`).
 - Búsqueda de artistas y franquicias desde la tabla global `tags`.
 
 `raw/animadex/animadex.db` se conserva con su nombre original solo para auditoría y recuperación de la semilla. El MCP activo no lo abre ni necesita tablas estructuradas legacy.
@@ -215,6 +241,7 @@ Herramientas disponibles:
 - `get_tag_knowledge`
 - `search_characters`
 - `get_character`
+- `get_character_appearance`
 - `get_sources_status`
 
 Weeb Alexandria realiza sus consultas localmente y no necesita el servidor Flask original de AnimaDex.

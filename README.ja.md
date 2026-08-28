@@ -6,7 +6,7 @@ Weeb Alexandria は、アニメ、オタク、Weeb、NSFW、SFW に関する知�
 
 ローカル AI エージェントが質問に関連する信頼性の高い情報へアクセスできるようにし、根拠のあるデータの取得を助けることで、この知識分野におけるハルシネーションを減らすことを目的としています。
 
-このプロジェクトには、タグの定義、エイリアス、包含関係、キャラクター、作品シリーズ、アーティスト、特徴、情報源、そしてアニメ研究や画像生成に役立つその他の情報が統合されています。
+このプロジェクトには、タグの定義、エイリアス、包含関係、キャラクター、作品シリーズ、アーティスト、特徴、外見／衣装カード、情報源、そしてアニメ研究や画像生成に役立つその他の情報が統合されています。
 
 ## 現在のスナップショット
 
@@ -128,7 +128,7 @@ hermes mcp add weeb-alexandria \
 }
 ```
 
-新しいチャットを開始し、Weeb Alexandria の 5 つのツールが利用可能であることを確認してください。
+新しいチャットを開始し、Weeb Alexandria の 6 つのツールが利用可能であることを確認してください。
 
 ### 5. 会話で試す
 
@@ -154,6 +154,27 @@ Inugami Korone がどのようなキャラクターか教えてください。We
 ```
 
 `red face` や `closed mouth` のように既知の複数語タグは分割せず、そのまま扱います。`Fuwawa Hololive` や `Mococo Hololive` のようなキャラクター／作品コンテキストのクエリも分割せず保持します。
+
+## 外見・衣装カード
+
+外見データは、基礎外見と衣装／バリエーションごとの独立したプロフィールに分けています。正規化されたデータは `tag_library.db` に保存されます。
+
+- `character_appearance_profiles`：基礎外見または衣装バリエーションごとに 1 行。
+- `character_appearance_features`：`hair`、`eyes`、`dress`、`footwear` など、ファセット／タグごとに 1 行。
+- `character_appearance_sources`：Danbooru、Gelbooru、参照ポスト、レビュー済みシードの出典カタログ。
+- `character_appearance_feature_sources`：各特徴の根拠、件数、競合情報。
+
+任意の `data/character_appearance.sqlite` には、収集済み wiki／ポストサンプルから生成した観測値と `pending` 候補が入ります。候補は明示的にレビューして昇格するまで、MCP の正規事実として公開されません。
+
+```bash
+.venv/Scripts/python.exe scripts/build_appearance_candidates.py \\
+  --character inugami_korone
+
+.venv/Scripts/python.exe scripts/promote_appearance.py \\
+  --input seeds/appearance/inugami_korone.json
+```
+
+MCP ツールは `get_character_appearance(character, variant=None, include_evidence=True, limit=100)` です。`get_character_appearance("inugami_korone")` は基礎外見とレビュー済みの `1st_costume`、`street`、`new_year` を返し、異なる衣装の特徴を混在させません。
 
 ## 構成
 

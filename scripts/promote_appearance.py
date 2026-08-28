@@ -1,0 +1,268 @@
+#!/usr/bin/env python3
+"""Promote an explicitly reviewed appearance seed into the owned schema.
+
+This is intentionally separate from the statistical candidate builder. The
+input must name every source used by every published feature.
+"""
+from __future__ import annotations
+
+import argparse
+import json
+import sqlite3
+from datetime import datetime, timezone
+from pathlib import Path
+import sys
+from typing import Any
+
+ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT))
+
+from weeb_alexandria_mcp.appearance_schema import (  # noqa: E402
+    appearance_kind_for_variant,
+    ensure_appearance_schema,
+    humanize_tag,
+    normalize_tag,
+)
+from weeb_alexandria_mcp.owned_schema import ensure_owned_schema  # noqa: E402
+
+DEFAULT_DB = ROOT / "tag_library.db"
+
+
+def read_seed(path: Path) -> dict[str, Any]:
+    with path.open("r", encoding="utf-8") as handle:
+        data = json.load(handle)
+    if not isinstance(data, dict):
+        raise ValueError("appearance seed must be a JSON object")
+    if not data.get("character_tag"):
+        raise ValueError("appearance seed requires character_tag")
+    if not isinstance(data.get("sources"), list) or not data["sources"]:
+        raise ValueError("appearance seed requires a non-empty sources list")
+    if not isinstance(data.get("profiles"), list) or not data["profiles"]:
+        raise ValueError("appearance seed requires a non-empty profiles list")
+    return data
+
+
+def stable_appearance_key(character_tag: str, variant_tag: str) -> str:
+    return (
+        f"{character_tag}::default"
+        if variant_tag == character_tag
+        else f"{character_tag}::{variant_tag}"
+    )
+
+
+def source_ref(source: dict[str, Any]) -> str:
+    return str(source.get("id") or "")
+
+
+def upsert_source(con: sqlite3.Connection, source: dict[str, Any]) -> int:
+    required = ("id", "source_site", "source_kind", "source_key", "source_tier")
+    missing = [key for key in required if source.get(key) in (None, "")]
+    if missing:
+        raise ValueError(f"source missing required fields: {', '.join(missing)}")
+    con.execute(
+        """INSERT INTO character_appearance_sources(
+            source_site, source_kind, source_key, source_url, source_tier,
+            title, excerpt, captured_at, source_sha256
+        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+        ON CONFLICT(source_site, source_kind, source_key) DO UPDATE SET
+            source_url=excluded.source_url,
+            source_tier=excluded.source_tier,
+            title=excluded.title,
+            excerpt=excluded.excerpt,
+            captured_at=excluded.captured_at,
+            source_sha256=excluded.source_sha256""",
+        (
+            normalize_tag(str(source["source_site"])),
+            normalize_tag(str(source["source_kind"])),
+            str(source["source_key"]),
+            str(source.get("source_url", "")),
+            int(source["source_tier"]),
+            str(source.get("title", "")),
+            str(source.get("excerpt", "")),
+            str(source.get("captured_at", "")),
+            str(source.get("source_sha256", "")),
+        ),
+    )
+    row = con.execute(
+        """SELECT source_id FROM character_appearance_sources
+           WHERE source_site=? AND source_kind=? AND source_key=?""",
+        (
+            normalize_tag(str(source["source_site"])),
+            normalize_tag(str(source["source_kind"])),
+            str(source["source_key"]),
+        ),
+    ).fetchone()
+    if row is None:
+        raise RuntimeError(f"could not retrieve source {source_ref(source)}")
+    return int(row[0])
+
+
+def upsert_profile(con: sqlite3.Connection, character_tag: str,
+                   profile: dict[str, Any]) -> str:
+    variant_tag = normalize_tag(str(profile.get("variant_tag", "") or character_tag))
+    key = str(profile.get("appearance_key") or stable_appearance_key(character_tag, variant_tag))
+    kind = str(profile.get("appearance_kind") or appearance_kind_for_variant(variant_tag, character_tag))
+    con.execute(
+        """INSERT INTO character_appearance_profiles(
+            appearance_key, character_tag, variant_tag, display_name,
+            appearance_kind, is_default, status, confidence, provenance, notes
+        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+        ON CONFLICT(appearance_key) DO UPDATE SET
+            character_tag=excluded.character_tag,
+            variant_tag=excluded.variant_tag,
+            display_name=excluded.display_name,
+            appearance_kind=excluded.appearance_kind,
+            is_default=excluded.is_default,
+            status=excluded.status,
+            confidence=excluded.confidence,
+            provenance=excluded.provenance,
+            notes=excluded.notes""",
+        (
+            key,
+            character_tag,
+            variant_tag,
+            str(profile.get("display_name") or variant_tag),
+            kind,
+            int(bool(profile.get("is_default", variant_tag == character_tag))),
+            str(profile.get("status", "published")),
+            str(profile.get("confidence", "high")),
+            str(profile.get("provenance", "booru_reviewed")),
+            str(profile.get("notes", "")),
+        ),
+    )
+    return key
+
+
+def promote(db: Path, seed_path: Path) -> dict[str, int]:
+    data = read_seed(seed_path)
+    character_tag = normalize_tag(str(data["character_tag"]))
+    con = sqlite3.connect(db)
+    con.row_factory = sqlite3.Row
+    try:
+        ensure_owned_schema(con)
+        con.execute("BEGIN")
+        sources: dict[str, int] = {}
+        for source in data["sources"]:
+            if not isinstance(source, dict):
+                raise ValueError("each source must be a JSON object")
+            ref = source_ref(source)
+            if not ref or ref in sources:
+                raise ValueError(f"source ids must be unique and non-empty: {ref!r}")
+            sources[ref] = upsert_source(con, source)
+
+        profile_count = 0
+        feature_count = 0
+        link_count = 0
+        for profile in data["profiles"]:
+            if not isinstance(profile, dict):
+                raise ValueError("each profile must be a JSON object")
+            profile_key = upsert_profile(con, character_tag, profile)
+            profile_count += 1
+            features = profile.get("features", [])
+            if not isinstance(features, list):
+                raise ValueError(f"features must be a list for {profile_key}")
+            for feature in features:
+                if not isinstance(feature, dict):
+                    raise ValueError(f"feature must be an object for {profile_key}")
+                canonical_tag = normalize_tag(str(feature.get("canonical_tag", "")))
+                facet = normalize_tag(str(feature.get("facet", "")))
+                source_refs = feature.get("source_refs", [])
+                if not canonical_tag or not facet:
+                    raise ValueError(f"feature requires facet and canonical_tag for {profile_key}")
+                if not isinstance(source_refs, list) or not source_refs:
+                    raise ValueError(f"published feature has no evidence: {profile_key}/{canonical_tag}")
+                missing = sorted(set(str(ref) for ref in source_refs) - sources.keys())
+                if missing:
+                    raise ValueError(f"unknown source refs for {profile_key}/{canonical_tag}: {missing}")
+                con.execute(
+                    """INSERT INTO character_appearance_features(
+                        appearance_key, facet, value, canonical_tag, role, status,
+                        confidence, display_order
+                    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+                    ON CONFLICT(appearance_key, facet, canonical_tag) DO UPDATE SET
+                        value=excluded.value,
+                        role=excluded.role,
+                        status=excluded.status,
+                        confidence=excluded.confidence,
+                        display_order=excluded.display_order""",
+                    (
+                        profile_key,
+                        facet,
+                        str(feature.get("value") or humanize_tag(canonical_tag)),
+                        canonical_tag,
+                        str(feature.get("role", "present")),
+                        str(feature.get("status", "published")),
+                        str(feature.get("confidence", "high")),
+                        int(feature.get("display_order", 0)),
+                    ),
+                )
+                feature_row = con.execute(
+                    """SELECT feature_id FROM character_appearance_features
+                       WHERE appearance_key=? AND facet=? AND canonical_tag=?""",
+                    (profile_key, facet, canonical_tag),
+                ).fetchone()
+                if feature_row is None:
+                    raise RuntimeError(f"could not retrieve feature {profile_key}/{canonical_tag}")
+                feature_id = int(feature_row[0])
+                feature_count += 1
+                for ref in source_refs:
+                    evidence = feature.get("evidence", {})
+                    if not isinstance(evidence, dict):
+                        evidence = {}
+                    con.execute(
+                        """INSERT INTO character_appearance_feature_sources(
+                            feature_id, source_id, polarity, observed_tag,
+                            support_count, sample_size, evidence_text, confidence
+                        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+                        ON CONFLICT(feature_id, source_id) DO UPDATE SET
+                            polarity=excluded.polarity,
+                            observed_tag=excluded.observed_tag,
+                            support_count=excluded.support_count,
+                            sample_size=excluded.sample_size,
+                            evidence_text=excluded.evidence_text,
+                            confidence=excluded.confidence""",
+                        (
+                            feature_id,
+                            sources[str(ref)],
+                            str(evidence.get("polarity", "supports")),
+                            normalize_tag(str(evidence.get("observed_tag", canonical_tag))),
+                            evidence.get("support_count"),
+                            evidence.get("sample_size"),
+                            str(evidence.get("text", "Reviewed from the cited source.")),
+                            str(evidence.get("confidence", feature.get("confidence", "high"))),
+                        ),
+                    )
+                    link_count += 1
+        con.execute(
+            "INSERT OR REPLACE INTO appearance_schema_metadata(key, value) VALUES (?, ?)",
+            ("last_promoted_seed", str(seed_path.resolve())),
+        )
+        con.execute(
+            "INSERT OR REPLACE INTO appearance_schema_metadata(key, value) VALUES (?, ?)",
+            ("last_promoted_at", datetime.now(timezone.utc).isoformat()),
+        )
+        con.commit()
+        return {
+            "profiles": profile_count,
+            "features": feature_count,
+            "evidence_links": link_count,
+            "sources": len(sources),
+        }
+    except Exception:
+        con.rollback()
+        raise
+    finally:
+        con.close()
+
+
+def main() -> None:
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--db", type=Path, default=DEFAULT_DB)
+    parser.add_argument("--input", type=Path, required=True)
+    args = parser.parse_args()
+    for key, value in promote(args.db, args.input).items():
+        print(f"{key}: {value}")
+
+
+if __name__ == "__main__":
+    main()

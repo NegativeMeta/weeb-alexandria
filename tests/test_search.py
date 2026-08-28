@@ -10,6 +10,7 @@ from weeb_alexandria_mcp.server import (
     _tag_suggestions,
     _context_tags,
     get_character,
+    get_character_appearance,
     get_sources_status,
     get_tag_knowledge,
     search_characters,
@@ -597,6 +598,174 @@ class SearchRegressionTests(unittest.TestCase):
         self.assertFalse(result["found"])
         self.assertTrue(result["tag_match"])
         self.assertEqual(result["tag"]["name"], "wave_the_swallow")
+
+    def test_korone_appearance_card_has_base_and_isolated_outfits(self):
+        result = get_character_appearance("inugami_korone")
+        self.assertTrue(result["found"])
+        self.assertEqual(result["character_tag"], "inugami_korone")
+        profiles = {item["variant_tag"]: item for item in result["profiles"]}
+        self.assertEqual(
+            set(profiles),
+            {
+                "inugami_korone",
+                "inugami_korone_(1st_costume)",
+                "inugami_korone_(street)",
+                "inugami_korone_(new_year)",
+            },
+        )
+        base_tags = {
+            feature["canonical_tag"]
+            for features in profiles["inugami_korone"]["features"].values()
+            for feature in features
+        }
+        default_tags = {
+            feature["canonical_tag"]
+            for features in profiles["inugami_korone_(1st_costume)"]["features"].values()
+            for feature in features
+        }
+        street_tags = {
+            feature["canonical_tag"]
+            for features in profiles["inugami_korone_(street)"]["features"].values()
+            for feature in features
+        }
+        self.assertIn("dog_girl", base_tags)
+        self.assertIn("brown_hair", base_tags)
+        self.assertIn("white_dress", default_tags)
+        self.assertIn("yellow_jacket", default_tags)
+        self.assertIn("red_skirt", street_tags)
+        self.assertNotIn("white_dress", base_tags)
+        self.assertNotIn("red_skirt", base_tags)
+        self.assertEqual(
+            {source["source_site"] for source in profiles["inugami_korone_(1st_costume)"]["sources"]},
+            {"danbooru", "gelbooru"},
+        )
+        self.assertTrue(profiles["inugami_korone_(1st_costume)"]["evidence"])
+
+    def test_appearance_variant_can_be_passed_as_character_argument(self):
+        result = get_character_appearance(
+            "inugami_korone_(new_year)", include_evidence=False
+        )
+        self.assertTrue(result["found"])
+        self.assertEqual(result["character_tag"], "inugami_korone")
+        self.assertEqual(result["variant"], "inugami_korone_(new_year)")
+        self.assertEqual(result["profile_count"], 1)
+        self.assertEqual(result["profiles"][0]["variant_tag"], "inugami_korone_(new_year)")
+        self.assertEqual(result["profiles"][0]["evidence"], [])
+        self.assertEqual(result["profiles"][0]["sources"], [])
+
+    def test_get_character_exposes_appearance_additively(self):
+        result = get_character("hatsune_miku")
+        self.assertTrue(result["found"])
+        self.assertIn("appearance", result)
+        self.assertTrue(result["appearance"]["found"])
+        self.assertEqual(result["appearance"]["profiles"][0]["is_default"], True)
+
+    def test_appearance_migration_is_idempotent(self):
+        from scripts.migrate_appearance_profiles import migrate
+        from weeb_alexandria_mcp.owned_schema import SCHEMA_SQL
+
+        with tempfile.TemporaryDirectory() as tmp:
+            path = Path(tmp) / "source.sqlite"
+            con = sqlite3.connect(path)
+            con.executescript(SCHEMA_SQL)
+            con.execute(
+                """INSERT INTO character_profiles(
+                    character_tag, display_name, display_name_normalized,
+                    core_tags, provenance, confidence
+                ) VALUES (?, ?, ?, ?, ?, ?)""",
+                ("fixture_character", "Fixture Character", "fixture_character",
+                 "brown_hair, blue_eyes", "fixture", "high"),
+            )
+            con.commit()
+            con.close()
+            first = migrate(path)
+            second = migrate(path)
+            con = sqlite3.connect(path)
+            counts = {
+                table: con.execute(f"SELECT count(*) FROM {table}").fetchone()[0]
+                for table in (
+                    "character_appearance_profiles",
+                    "character_appearance_features",
+                    "character_appearance_sources",
+                    "character_appearance_feature_sources",
+                )
+            }
+            integrity = con.execute("PRAGMA integrity_check").fetchone()[0]
+            con.close()
+        self.assertEqual(first, second)
+        self.assertEqual(counts, {
+            "character_appearance_profiles": 1,
+            "character_appearance_features": 2,
+            "character_appearance_sources": 1,
+            "character_appearance_feature_sources": 2,
+        })
+        self.assertEqual(integrity, "ok")
+
+    def test_appearance_candidate_builder_separates_sources_and_excludes_metadata(self):
+        import json
+        from scripts.build_appearance_candidates import build
+        from weeb_alexandria_mcp.appearance_schema import infer_facet
+
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            source_path = root / "source.sqlite"
+            output_path = root / "character_appearance.sqlite"
+            source = sqlite3.connect(source_path)
+            source.executescript(
+                """
+                CREATE TABLE tags(
+                    site TEXT NOT NULL, name TEXT NOT NULL,
+                    category_name TEXT, post_count INTEGER,
+                    aliases TEXT, nsfw INTEGER
+                );
+                CREATE TABLE wiki(site TEXT NOT NULL, title TEXT NOT NULL, body TEXT);
+                INSERT INTO tags VALUES
+                    ('danbooru', 'white_dress', 'general', 10, '', 0),
+                    ('danbooru', 'red_dress', 'general', 8, '', 0),
+                    ('danbooru', 'artist_name', 'artist', 100, '', 0),
+                    ('danbooru', 'test_character', 'character', 100, '', 0),
+                    ('danbooru', 'test_character_(outfit)', 'character', 5, '', 0);
+                INSERT INTO wiki VALUES
+                    ('danbooru', 'test_character_(outfit)', '[[white dress]] [[artist name]]');
+                """
+            )
+            source.commit()
+            source.close()
+            post_path = root / "danbooru_posts.jsonl"
+            post_path.write_text(json.dumps({
+                "id": 7,
+                "tag_string_character": "test_character test_character_(outfit)",
+                "tag_string_general": "white_dress red_dress",
+                "tag_string_artist": "artist_name",
+                "tag_string_meta": "official_art",
+                "source_site": "danbooru",
+            }) + "\n", encoding="utf-8")
+            result = build(
+                source_path,
+                output_path,
+                ["test_character"],
+                [post_path],
+            )
+            con = sqlite3.connect(output_path)
+            white = con.execute(
+                """SELECT source_kind, support_count, sample_size
+                   FROM appearance_tag_observations
+                   WHERE observed_tag='white_dress'
+                   ORDER BY source_kind"""
+            ).fetchall()
+            all_tags = {
+                row[0] for row in con.execute(
+                    "SELECT observed_tag FROM appearance_tag_observations"
+                )
+            }
+            integrity = con.execute("PRAGMA integrity_check").fetchone()[0]
+            con.close()
+        self.assertGreaterEqual(result["observations"], 2)
+        self.assertIn(("reference_post", 1, 1), white)
+        self.assertNotIn("artist_name", all_tags)
+        self.assertNotIn("official_art", all_tags)
+        self.assertEqual(integrity, "ok")
+        self.assertEqual(infer_facet("hair_between_eyes"), "hair")
 
 
 if __name__ == "__main__":

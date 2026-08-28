@@ -7,6 +7,11 @@ from __future__ import annotations
 
 import sqlite3
 
+from weeb_alexandria_mcp.appearance_schema import (
+    APPEARANCE_SCHEMA_SQL,
+    DEFAULT_METADATA,
+)
+
 OWNED_SCHEMA_VERSION = "1"
 
 SCHEMA_SQL = """
@@ -66,13 +71,18 @@ CREATE TABLE IF NOT EXISTS trait_system_metadata (
 
 
 def ensure_owned_schema(con: sqlite3.Connection) -> None:
-    """Create the independent profile/trait tables if they are absent."""
+    """Create the independent profile, trait, and appearance tables."""
     con.executescript(SCHEMA_SQL)
+    con.executescript(APPEARANCE_SCHEMA_SQL)
     con.executemany(
         "INSERT OR IGNORE INTO trait_system_metadata(key, value) VALUES (?, ?)",
         [
             ("schema_version", OWNED_SCHEMA_VERSION),
             ("system", "owned_character_traits"),
         ],
+    )
+    con.executemany(
+        "INSERT OR IGNORE INTO appearance_schema_metadata(key, value) VALUES (?, ?)",
+        list(DEFAULT_METADATA.items()),
     )
     con.commit()

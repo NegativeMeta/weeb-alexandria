@@ -6,7 +6,7 @@ Weeb Alexandria 是一个项目，旨在将动漫、御宅族、Weeb、NSFW 和 
 
 它可以让本地 AI 智能体访问与用户问题相关的可靠信息，帮助智能体获取有依据的数据，并减少其在这一知识领域中的幻觉。
 
-该项目整合了标签定义、别名、蕴含关系、角色、作品系列、艺术家、特征、数据来源，以及其他适用于动漫研究和图像生成的有用信息。
+该项目整合了标签定义、别名、蕴含关系、角色、作品系列、艺术家、特征、外观/服装卡片、数据来源，以及其他适用于动漫研究和图像生成的有用信息。
 
 ## 当前快照
 
@@ -128,7 +128,7 @@ hermes mcp add weeb-alexandria \
 }
 ```
 
-开始新对话，并确认五个 Weeb Alexandria 工具可用。
+开始新对话，并确认六个 Weeb Alexandria 工具可用。
 
 ### 5. 在对话中试用
 
@@ -155,6 +155,27 @@ hermes mcp add weeb-alexandria \
 
 已知的多词标签（例如 `red face` 和 `closed mouth`）会保持完整。角色或作品系列的上下文查询（例如 `Fuwawa Hololive` 和 `Mococo Hololive`）也会保留，不会被拆分。
 
+## 外观与服装卡片
+
+外观数据分为基础外观以及彼此独立的服装/变体档案。规范数据位于 `tag_library.db`：
+
+- `character_appearance_profiles`：每个基础外观或服装变体一行。
+- `character_appearance_features`：每个外观 facet/tag 一行，例如 `hair`、`eyes`、`dress` 或 `footwear`。
+- `character_appearance_sources`：Danbooru、Gelbooru、参考帖子和已审核种子的来源目录。
+- `character_appearance_feature_sources`：每个特征的证据、计数和冲突。
+
+可选的 `data/character_appearance.sqlite` 保存从已捕获 wiki/帖子样本生成的观测值和 `pending` 候选。候选必须经过明确审核和提升，才会作为 MCP 的规范事实公开。
+
+```bash
+.venv/Scripts/python.exe scripts/build_appearance_candidates.py \\
+  --character inugami_korone
+
+.venv/Scripts/python.exe scripts/promote_appearance.py \\
+  --input seeds/appearance/inugami_korone.json
+```
+
+MCP 工具为 `get_character_appearance(character, variant=None, include_evidence=True, limit=100)`。例如 `get_character_appearance("inugami_korone")` 会返回基础外观以及已审核的 `1st_costume`、`street` 和 `new_year` 档案，不会混合不同服装的特征。
+
 ## 项目结构
 
 ```text
@@ -164,14 +185,18 @@ WeebAlexandria/
 ├── tag_library.db          统一的主知识库
 ├── raw/                    下载的原始来源数据
 │   ├── animadex/           AnimaDex 原始数据库
+│   ├── appearance/         已捕获的外观 wiki/帖子
 │   ├── danbooru/
 │   ├── e621/               已处理的 wiki 和标签数据
 │   ├── gelbooru/
 │   └── danbooru_wiki_extra/
 ├── reports/                审计报告和人工审核列表
 ├── scripts/                数据维护和融合脚本
+├── seeds/appearance/       已审核的外观种子
 ├── data/character_context.sqlite
 │                           派生角色上下文索引（本地）
+├── data/character_appearance.sqlite
+│                           派生外观观测/候选数据库（本地）
 ├── data/tag_search.sqlite
 │                           可选的 FTS5 标签搜索索引（本地）
 ├── data/backups/           数据库备份
@@ -195,6 +220,7 @@ C:\Users\johin\Code_Library\AI\WeebAlexandria_legacy_archive
 - 别名和蕴含关系。
 - 标记为 `lang='llm'` 的合成定义。
 - Weeb Alexandria 自有的结构化角色档案和特征映射（`character_profiles`、`trait_definitions`、`character_traits`）。
+- 规范的外观/服装档案和 feature 级来源信息（`character_appearance_profiles`、`character_appearance_features`、`character_appearance_sources`、`character_appearance_feature_sources`）。
 - 艺术家和作品搜索使用全局 `tags` 表。
 
 `raw/animadex/animadex.db` 保留原始名称，仅用于审计和恢复初始种子。活跃的 MCP 不会打开它，也不需要任何旧版结构化数据表。
@@ -215,6 +241,7 @@ run.bat
 - `get_tag_knowledge`
 - `search_characters`
 - `get_character`
+- `get_character_appearance`
 - `get_sources_status`
 
 Weeb Alexandria 在本地执行查询，不需要运行原始的 AnimaDex Flask 服务器。
