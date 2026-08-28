@@ -423,7 +423,8 @@ the base profile.
 ## Fifth general popularity batch
 
 `kagamine_rin` (10 features), `mash_kyrielight` (9), and `link` (2) were
-published after source review. `altria_pendragon_(fate)` was deferred because
-no usable local wiki evidence was available. The published subset contained 21
-features and zero conflicts. Vocaloid design variants, Mash's named costumes,
-and Link's game-specific incarnations remain separate or excluded.
+published after source review. `altria_pendragon_(fate)` was not published as a
+new profile; it resolves by canonical alias to the existing
+`artoria_pendragon_(fate)` profile. The published subset contained 21 features
+and zero conflicts. Vocaloid design variants, Mash's named costumes, and
+Link's game-specific incarnations remain separate or excluded.
