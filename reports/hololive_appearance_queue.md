@@ -340,3 +340,23 @@ The batch generated 81 observations and 25 candidates. `Enma-chan` and
 `Kroma_(Ouro Kronii)` remain deferred because their local wiki entries confirm
 staff identity but do not provide enough deterministic visual evidence. Named
 A-chan and Nodoka costumes remain separate variants.
+
+## First general popularity batch
+
+The general queue was ranked by independent post counts from Danbooru,
+Gelbooru, and e621, excluding `combined` counts and already-published
+appearance profiles.
+
+| Rank | Character | Danbooru | Gelbooru | e621 | Total |
+|---:|---|---:|---:|---:|---:|
+| 1 | `remilia_scarlet` | 37,210 | 52,939 | 0 | 90,149 |
+| 2 | `miku_hatsune` | 0 | 88,545 | 0 | 88,545 |
+| 3 | `konpaku_youmu` | 24,801 | 36,535 | 0 | 61,336 |
+| 4 | `kochiya_sanae` | 22,692 | 35,763 | 0 | 58,455 |
+| 5 | `patchouli_knowledge` | 23,201 | 33,460 | 0 | 56,661 |
+
+Candidate generation produced 126 observations and 60 candidates. `konpaku_youmu`,
+`kochiya_sanae`, and `patchouli_knowledge` were published with 34 reviewed
+base features and zero conflicts. `remilia_scarlet` and `miku_hatsune` remain
+deferred because the local candidate/evidence projection was insufficient for
+an auditable base profile; popularity alone was not used as visual evidence.
