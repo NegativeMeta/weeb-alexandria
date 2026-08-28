@@ -62,9 +62,12 @@ appearance tables. It never drops existing tables:
 ```
 
 The migration creates a default appearance for each existing owned profile,
-links each feature to a `legacy_profile` source, validates counts, and can be
-run repeatedly without duplicating rows. Back up `tag_library.db` before the
-first migration.
+normalizes legacy facets such as `eye_color` and `hair_length`, links each
+feature to a `legacy_profile` source, merges duplicate feature evidence, validates
+every expected profile/feature/link inside the transaction, and can be run
+repeatedly without duplicating rows. A normalization collision is rejected
+before migration data is written. Back up `tag_library.db` before the first
+migration.
 
 ## `build_appearance_candidates.py`
 
@@ -81,8 +84,11 @@ post JSON/JSONL captures:
 It writes source-specific observations and `pending` candidates. Wiki and
 official/reference-post evidence stay separate from frequency samples; artist,
 copyright, character, alias, and metadata categories are excluded from visual
-candidates. The output is atomically replaced only after a valid SQLite build
-and is never read by the MCP as canonical data.
+candidates. Duplicate post records are counted once per source key. A post
+with multiple possible outfit variants must provide `variant_tag`; otherwise
+the builder rejects it instead of guessing. The output is atomically replaced
+only after a valid SQLite build and a stable source-database fingerprint is
+confirmed, and it is never read by the MCP as canonical data.
 
 ## `promote_appearance.py`
 
@@ -93,7 +99,9 @@ Promotes an explicitly reviewed JSON seed into the canonical appearance tables:
   --input seeds/appearance/inugami_korone.json
 ```
 
-Every feature must name at least one source reference. Promotion is performed
-in one transaction and can be repeated safely. The example seed contains the
-Korone base appearance plus isolated `1st_costume`, `street`, and `new_year`
-profiles. Do not promote raw candidates without human/source review.
+The character must already exist as an owned profile or canonical character
+tag. Profile keys and variant prefixes are checked, and every feature must
+name at least one source reference. Promotion is performed in one transaction
+and can be repeated safely. The example seed contains the Korone base
+appearance plus isolated `1st_costume`, `street`, and `new_year` profiles. Do
+not promote raw candidates without human/source review.

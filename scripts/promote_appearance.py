@@ -54,6 +54,76 @@ def source_ref(source: dict[str, Any]) -> str:
     return str(source.get("id") or "")
 
 
+_PUBLISHED_STATUSES = {"reviewed", "published"}
+
+
+def validate_registered_character(con: sqlite3.Connection, character_tag: str) -> None:
+    owned = con.execute(
+        "SELECT 1 FROM character_profiles WHERE character_tag=? LIMIT 1",
+        (character_tag,),
+    ).fetchone()
+    canonical = con.execute(
+        """SELECT 1 FROM tags
+           WHERE name=? AND category_name='character' LIMIT 1""",
+        (character_tag,),
+    ).fetchone()
+    if owned is None and canonical is None:
+        raise ValueError(
+            f"character_tag is not registered as an owned profile or canonical character tag: "
+            f"{character_tag}"
+        )
+
+
+def validate_seed_profiles(character_tag: str, profiles: list[Any]) -> None:
+    seen_profile_keys: set[str] = set()
+    for profile in profiles:
+        if not isinstance(profile, dict):
+            raise ValueError("each profile must be a JSON object")
+        variant_tag = normalize_tag(str(profile.get("variant_tag", "") or character_tag))
+        expected_key = stable_appearance_key(character_tag, variant_tag)
+        profile_key = str(profile.get("appearance_key") or expected_key)
+        if profile_key != expected_key:
+            raise ValueError(
+                f"appearance_key must be {expected_key!r} for profile {variant_tag!r}"
+            )
+        if variant_tag != character_tag and not variant_tag.startswith(character_tag + "_("):
+            raise ValueError(
+                f"variant_tag {variant_tag!r} is not scoped to {character_tag!r}"
+            )
+        status = str(profile.get("status", "published"))
+        if status not in _PUBLISHED_STATUSES:
+            raise ValueError(
+                f"profile {profile_key} must be reviewed or published, got {status!r}"
+            )
+        if profile_key in seen_profile_keys:
+            raise ValueError(f"duplicate appearance profile in seed: {profile_key}")
+        seen_profile_keys.add(profile_key)
+        features = profile.get("features", [])
+        if not isinstance(features, list):
+            raise ValueError(f"features must be a list for {profile_key}")
+        seen_tags: set[str] = set()
+        for feature in features:
+            if not isinstance(feature, dict):
+                raise ValueError(f"feature must be an object for {profile_key}")
+            canonical_tag = normalize_tag(str(feature.get("canonical_tag", "")))
+            facet = normalize_tag(str(feature.get("facet", "")))
+            if not canonical_tag or not facet:
+                raise ValueError(
+                    f"feature requires facet and canonical_tag for {profile_key}"
+                )
+            if canonical_tag in seen_tags:
+                raise ValueError(
+                    f"duplicate canonical_tag in profile {profile_key}: {canonical_tag}"
+                )
+            seen_tags.add(canonical_tag)
+            feature_status = str(feature.get("status", "published"))
+            if feature_status not in _PUBLISHED_STATUSES:
+                raise ValueError(
+                    f"feature {profile_key}/{canonical_tag} must be reviewed or published, "
+                    f"got {feature_status!r}"
+                )
+
+
 def upsert_source(con: sqlite3.Connection, source: dict[str, Any]) -> int:
     required = ("id", "source_site", "source_kind", "source_key", "source_tier")
     missing = [key for key in required if source.get(key) in (None, "")]
@@ -140,6 +210,8 @@ def promote(db: Path, seed_path: Path) -> dict[str, int]:
     con.row_factory = sqlite3.Row
     try:
         ensure_owned_schema(con)
+        validate_registered_character(con, character_tag)
+        validate_seed_profiles(character_tag, data["profiles"])
         con.execute("BEGIN")
         sources: dict[str, int] = {}
         for source in data["sources"]:

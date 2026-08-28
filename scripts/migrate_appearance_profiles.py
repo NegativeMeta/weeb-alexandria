@@ -35,6 +35,79 @@ def parse_tags(value: str) -> list[str]:
     return result
 
 
+_LEGACY_FACET_MAP = {
+    "eye_color": "eyes",
+    "hair_color": "hair",
+    "hair_length": "hair",
+    "hair_style": "hair",
+    "ear_type": "ears",
+    "tail_type": "tail",
+    "accessory": "accessories",
+}
+_CANONICAL_FACETS = {
+    "hair", "eyes", "skin", "face", "species", "ears", "horns", "tail",
+    "body", "markings", "headwear", "hair_accessory", "neck", "upper_body",
+    "lower_body", "dress", "jacket", "sleeves", "gloves", "legwear",
+    "footwear", "jewelry", "accessories", "props", "unclassified",
+}
+
+
+def canonical_facet(facet: str, tag: str) -> str:
+    normalized = normalize_tag(facet)
+    normalized = _LEGACY_FACET_MAP.get(normalized, normalized)
+    if normalized in _CANONICAL_FACETS:
+        return normalized
+    return infer_facet(tag) or "unclassified"
+
+
+def _deduplicate_existing_features(con: sqlite3.Connection) -> int:
+    rows = con.execute(
+        """SELECT feature_id, appearance_key, facet, canonical_tag
+           FROM character_appearance_features
+           WHERE status <> 'retired'
+           ORDER BY feature_id"""
+    ).fetchall()
+    groups: dict[tuple[str, str], list[sqlite3.Row]] = {}
+    for row in rows:
+        groups.setdefault((row["appearance_key"], row["canonical_tag"]), []).append(row)
+
+    removed = 0
+    for (_, canonical_tag), group in groups.items():
+        target_facet = canonical_facet(group[0]["facet"], canonical_tag)
+        keeper = next(
+            (row for row in group if row["facet"] == target_facet),
+            group[0],
+        )
+        if keeper["facet"] != target_facet:
+            con.execute(
+                "UPDATE character_appearance_features SET facet=? WHERE feature_id=?",
+                (target_facet, keeper["feature_id"]),
+            )
+        for duplicate in group:
+            if duplicate["feature_id"] == keeper["feature_id"]:
+                continue
+            con.execute(
+                """INSERT OR IGNORE INTO character_appearance_feature_sources(
+                       feature_id, source_id, polarity, observed_tag, support_count,
+                       sample_size, evidence_text, confidence
+                   ) SELECT ?, source_id, polarity, observed_tag, support_count,
+                            sample_size, evidence_text, confidence
+                   FROM character_appearance_feature_sources
+                   WHERE feature_id=?""",
+                (keeper["feature_id"], duplicate["feature_id"]),
+            )
+            con.execute(
+                "DELETE FROM character_appearance_feature_sources WHERE feature_id=?",
+                (duplicate["feature_id"],),
+            )
+            con.execute(
+                "DELETE FROM character_appearance_features WHERE feature_id=?",
+                (duplicate["feature_id"],),
+            )
+            removed += 1
+    return removed
+
+
 def source_id_for(con: sqlite3.Connection, character_tag: str,
                   source_url: str) -> int:
     con.execute(
@@ -67,7 +140,7 @@ def upsert_feature(con: sqlite3.Connection, appearance_key_value: str,
     canonical_tag = normalize_tag(tag)
     if not canonical_tag:
         raise ValueError("appearance feature cannot have an empty tag")
-    feature_facet = facet or infer_facet(canonical_tag) or "unclassified"
+    feature_facet = canonical_facet(facet, canonical_tag)
     con.execute(
         """INSERT INTO character_appearance_features(
             appearance_key, facet, value, canonical_tag, role, status,
@@ -120,6 +193,23 @@ def migrate(db: Path) -> dict[str, int]:
         ).fetchall()
         if not profiles:
             raise RuntimeError("no character_profiles rows found")
+
+        normalized_profile_tags: dict[str, str] = {}
+        expected_profile_keys: set[str] = set()
+        for row in profiles:
+            raw_tag = str(row["character_tag"] or "")
+            character_tag = normalize_tag(raw_tag)
+            if not character_tag:
+                raise ValueError("character_profiles contains an empty character_tag")
+            previous = normalized_profile_tags.get(character_tag)
+            if previous and previous != raw_tag:
+                raise ValueError(
+                    "character_tag normalization collision: "
+                    f"{previous!r} and {raw_tag!r} both normalize to {character_tag!r}"
+                )
+            normalized_profile_tags[character_tag] = raw_tag
+            expected_profile_keys.add(appearance_key(character_tag))
+
         trait_rows = con.execute(
             """SELECT ct.character_tag, ct.evidence_tag, ct.provenance,
                       ct.confidence, td.facet, td.value, td.label
@@ -130,9 +220,29 @@ def migrate(db: Path) -> dict[str, int]:
         ).fetchall()
         traits_by_character: dict[str, list[sqlite3.Row]] = {}
         for row in trait_rows:
-            traits_by_character.setdefault(row["character_tag"], []).append(row)
+            character_tag = normalize_tag(row["character_tag"] or "")
+            traits_by_character.setdefault(character_tag, []).append(row)
+
+        expected_features: set[tuple[str, str, str]] = set()
+        for row in profiles:
+            character_tag = normalize_tag(row["character_tag"])
+            key = appearance_key(character_tag)
+            for tag in parse_tags(row["core_tags"]):
+                expected_features.add((
+                    key, canonical_facet(infer_facet(tag), tag), tag,
+                ))
+            for trait in traits_by_character.get(character_tag, []):
+                tag = normalize_tag(trait["evidence_tag"] or trait["value"])
+                if not tag:
+                    raise ValueError(
+                        f"character trait for {character_tag} has no evidence tag or value"
+                    )
+                expected_features.add((
+                    key, canonical_facet(trait["facet"] or "", tag), tag,
+                ))
 
         con.execute("BEGIN")
+        deduplicated_features = _deduplicate_existing_features(con)
         for row in profiles:
             character_tag = normalize_tag(row["character_tag"])
             key = appearance_key(character_tag)
@@ -156,7 +266,7 @@ def migrate(db: Path) -> dict[str, int]:
                 feature_id = upsert_feature(
                     con,
                     key,
-                    infer_facet(tag) or "unclassified",
+                    infer_facet(tag),
                     tag,
                     humanize_tag(tag),
                     row["confidence"] or "high",
@@ -173,7 +283,7 @@ def migrate(db: Path) -> dict[str, int]:
                 feature_id = upsert_feature(
                     con,
                     key,
-                    trait["facet"] or "unclassified",
+                    canonical_facet(trait["facet"] or "", tag),
                     tag,
                     trait["value"] or humanize_tag(tag),
                     trait["confidence"] or "high",
@@ -194,7 +304,6 @@ def migrate(db: Path) -> dict[str, int]:
             "INSERT OR REPLACE INTO appearance_schema_metadata(key, value) VALUES (?, ?)",
             ("seed_profile_count", str(len(profiles))),
         )
-        con.commit()
 
         actual_profiles = con.execute(
             "SELECT count(*) FROM character_appearance_profiles WHERE status <> 'retired'"
@@ -212,11 +321,41 @@ def migrate(db: Path) -> dict[str, int]:
                  ON fs.feature_id=f.feature_id
                WHERE f.status <> 'retired'"""
         ).fetchone()[0]
-        if actual_profiles < len(profiles) or actual_features < linked_features:
-            raise RuntimeError(
-                f"appearance migration validation failed: profiles={actual_profiles}, "
-                f"features={actual_features}, linked_features={linked_features}"
+        actual_profile_keys = {
+            row[0] for row in con.execute(
+                """SELECT appearance_key FROM character_appearance_profiles
+                   WHERE status <> 'retired'"""
             )
+        }
+        missing_profiles = sorted(expected_profile_keys - actual_profile_keys)
+        missing_features: list[str] = []
+        unlinked_features: list[str] = []
+        for key, facet, tag in sorted(expected_features):
+            feature = con.execute(
+                """SELECT feature_id FROM character_appearance_features
+                   WHERE appearance_key=? AND facet=? AND canonical_tag=?
+                     AND status <> 'retired'""",
+                (key, facet, tag),
+            ).fetchone()
+            label = f"{key}/{facet}/{tag}"
+            if feature is None:
+                missing_features.append(label)
+                continue
+            linked = con.execute(
+                """SELECT 1 FROM character_appearance_feature_sources
+                   WHERE feature_id=? LIMIT 1""",
+                (feature[0],),
+            ).fetchone()
+            if linked is None:
+                unlinked_features.append(label)
+        if missing_profiles or missing_features or unlinked_features:
+            raise RuntimeError(
+                "appearance migration validation failed: "
+                f"missing_profiles={missing_profiles[:5]}, "
+                f"missing_features={missing_features[:5]}, "
+                f"unlinked_features={unlinked_features[:5]}"
+            )
+        con.commit()
         return {
             "source_profiles": len(profiles),
             "source_traits": len(trait_rows),
@@ -224,6 +363,7 @@ def migrate(db: Path) -> dict[str, int]:
             "appearance_features": actual_features,
             "appearance_sources": actual_sources,
             "linked_features": linked_features,
+            "deduplicated_features": deduplicated_features,
         }
     except Exception:
         con.rollback()

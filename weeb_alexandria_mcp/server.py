@@ -1262,108 +1262,147 @@ def get_character(slug: str) -> dict:
 
 
 
-def _resolve_appearance_target(con: sqlite3.Connection, character: str,
-                               variant: Optional[str] = None) -> dict[str, Any]:
-    """Resolve a character or an exact appearance variant without weak guessing."""
-    requested = _normalize_tag(character)
-    requested_variant = _normalize_tag(variant) if variant else None
+def _resolve_appearance_identity(con: sqlite3.Connection, requested: str) -> dict[str, Any]:
+    """Resolve one character while preserving appearance-specific aliases."""
     status_params = ("reviewed", "published")
+    current = _normalize_tag(requested)
+    first_resolution: Optional[dict[str, Any]] = None
+    visited: set[str] = set()
 
-    if requested_variant:
-        direct_variant = con.execute(
+    for _ in range(5):
+        if not current or current in visited:
+            break
+        visited.add(current)
+
+        direct_profile = con.execute(
             """SELECT character_tag FROM character_appearance_profiles
-               WHERE variant_tag=? AND status IN (?, ?)
-               ORDER BY is_default DESC, character_tag""",
-            (requested_variant, *status_params),
-        ).fetchall()
-        names = sorted({row["character_tag"] for row in direct_variant})
-        if len(names) == 1:
+               WHERE character_tag=? AND status IN (?, ?)
+               ORDER BY is_default DESC LIMIT 1""",
+            (current, *status_params),
+        ).fetchone()
+        if direct_profile:
             return {
-                "character_tag": names[0],
-                "variant": requested_variant,
-                "resolution": ({
-                    "from": requested_variant,
-                    "to": names[0],
-                    "type": "appearance_variant",
-                } if requested_variant != names[0] else None),
+                "character_tag": direct_profile["character_tag"],
+                "variant": None,
+                "resolution": first_resolution,
             }
-        if len(names) > 1:
+
+        owned = con.execute(
+            """SELECT character_tag FROM character_profiles
+               WHERE character_tag=? OR display_name_normalized=? OR trigger=?
+               ORDER BY character_tag LIMIT 2""",
+            (current, current, current),
+        ).fetchall()
+        owned_names = sorted({row["character_tag"] for row in owned})
+        if len(owned_names) > 1:
             return {
                 "ambiguous": True,
-                "candidates": names,
-                "message": "The appearance variant matches more than one character.",
+                "candidates": owned_names,
+                "message": "Provide a franchise or other context to select one character.",
+            }
+        if len(owned_names) == 1:
+            return {
+                "character_tag": owned_names[0],
+                "variant": None,
+                "resolution": first_resolution,
             }
 
-    if not requested_variant:
-        variant_as_character = con.execute(
+        variant_profiles = con.execute(
             """SELECT character_tag, variant_tag FROM character_appearance_profiles
                WHERE variant_tag=? AND status IN (?, ?)
                ORDER BY character_tag LIMIT 2""",
-            (requested, *status_params),
+            (current, *status_params),
         ).fetchall()
         variant_pairs = sorted({
             (row["character_tag"], row["variant_tag"])
-            for row in variant_as_character
+            for row in variant_profiles
         })
-        if len(variant_pairs) == 1:
-            resolved_character, resolved_variant = variant_pairs[0]
-            return {
-                "character_tag": resolved_character,
-                "variant": (resolved_variant
-                             if resolved_variant != resolved_character else None),
-                "resolution": ({
-                    "from": requested,
-                    "to": resolved_character,
-                    "type": "appearance_variant",
-                } if resolved_variant != resolved_character else None),
-            }
         if len(variant_pairs) > 1:
             return {
                 "ambiguous": True,
                 "candidates": sorted({pair[0] for pair in variant_pairs}),
                 "message": "The appearance variant matches more than one character.",
             }
+        if len(variant_pairs) == 1:
+            resolved_character, resolved_variant = variant_pairs[0]
+            return {
+                "character_tag": resolved_character,
+                "variant": resolved_variant,
+                "resolution": first_resolution or {
+                    "from": current,
+                    "to": resolved_character,
+                    "type": "appearance_variant",
+                },
+            }
 
-    direct_profiles = con.execute(
-        """SELECT character_tag FROM character_appearance_profiles
-           WHERE character_tag=? AND status IN (?, ?)
-           ORDER BY is_default DESC LIMIT 2""",
-        (requested, *status_params),
-    ).fetchall()
-    if direct_profiles:
-        return {"character_tag": direct_profiles[0]["character_tag"],
-                "variant": requested_variant}
+        # Follow active aliases before accepting an exact tag. This preserves
+        # an appearance profile whose canonical name is the alias target.
+        alias = con.execute(
+            """SELECT consequent_name FROM tag_aliases
+               WHERE antecedent_name=? AND status='active'
+               ORDER BY consequent_name LIMIT 1""",
+            (current,),
+        ).fetchone()
+        if alias:
+            target = _normalize_tag(alias["consequent_name"])
+            if target and target != current:
+                first_resolution = first_resolution or {
+                    "from": current,
+                    "to": target,
+                    "type": "alias",
+                }
+                current = target
+                continue
 
-    owned = con.execute(
-        """SELECT character_tag FROM character_profiles
-           WHERE character_tag=? OR display_name_normalized=? OR trigger=?
-           ORDER BY character_tag LIMIT 2""",
-        (requested, requested, requested),
-    ).fetchall()
-    owned_names = sorted({row["character_tag"] for row in owned})
-    if len(owned_names) == 1:
-        return {"character_tag": owned_names[0], "variant": requested_variant}
-    if len(owned_names) > 1:
-        return {
-            "ambiguous": True,
-            "candidates": owned_names,
-            "message": "Provide a franchise or other context to select one character.",
-        }
+        redirect_rows = con.execute(
+            "SELECT body FROM wiki WHERE title=? "
+            "ORDER BY CASE lang WHEN 'en' THEN 0 ELSE 1 END",
+            (current,),
+        ).fetchall()
+        redirect_target = None
+        for row in redirect_rows:
+            match = re.search(
+                r"\buse\s+(?:\[\[)?([A-Za-z0-9_()/-]+)(?:\]\])?\s+instead\b",
+                row["body"] or "",
+                re.IGNORECASE,
+            )
+            if match:
+                candidate = _normalize_tag(match.group(1))
+                exists = con.execute(
+                    "SELECT 1 FROM tags WHERE name=? LIMIT 1", (candidate,)
+                ).fetchone()
+                if exists and candidate != current:
+                    redirect_target = candidate
+                    break
+        if redirect_target:
+            first_resolution = first_resolution or {
+                "from": current,
+                "to": redirect_target,
+                "type": "wiki_redirect",
+            }
+            current = redirect_target
+            continue
 
-    exact_tag = con.execute(
-        "SELECT name FROM tags WHERE name=? AND category_name='character' "
-        "ORDER BY post_count DESC LIMIT 2",
-        (requested,),
-    ).fetchall()
-    exact_names = sorted({row["name"] for row in exact_tag})
-    if len(exact_names) == 1:
-        return {"character_tag": exact_names[0], "variant": requested_variant}
-    if len(exact_names) > 1:
-        return {
-            "ambiguous": True,
-            "candidates": exact_names,
-            "message": "Provide a franchise or other context to select one character.",
-        }
+        exact_tag = con.execute(
+            """SELECT name FROM tags
+               WHERE name=? AND category_name='character'
+               ORDER BY post_count DESC LIMIT 2""",
+            (current,),
+        ).fetchall()
+        exact_names = sorted({row["name"] for row in exact_tag})
+        if len(exact_names) == 1:
+            return {
+                "character_tag": exact_names[0],
+                "variant": None,
+                "resolution": first_resolution,
+            }
+        if len(exact_names) > 1:
+            return {
+                "ambiguous": True,
+                "candidates": exact_names,
+                "message": "Provide a franchise or other context to select one character.",
+            }
+        break
 
     suggestions = _tag_suggestions(con, requested, "character", 10)
     contextual_names = sorted({
@@ -1373,15 +1412,14 @@ def _resolve_appearance_target(con: sqlite3.Connection, character: str,
         and item.get("match_type") in {"exact", "normalized", "contextual"}
     })
     if len(contextual_names) == 1:
-        resolution = {
-            "from": requested,
-            "to": contextual_names[0],
-            "type": "contextual_character",
-        }
         return {
             "character_tag": contextual_names[0],
-            "variant": requested_variant,
-            "resolution": resolution,
+            "variant": None,
+            "resolution": {
+                "from": requested,
+                "to": contextual_names[0],
+                "type": "contextual_character",
+            },
         }
     if len(contextual_names) > 1:
         return {
@@ -1394,6 +1432,39 @@ def _resolve_appearance_target(con: sqlite3.Connection, character: str,
         "candidates": [item["name"] for item in suggestions[:10]],
         "message": "No canonical character tag was found.",
     }
+
+
+def _resolve_appearance_target(con: sqlite3.Connection, character: str,
+                               variant: Optional[str] = None) -> dict[str, Any]:
+    """Resolve a character, then scope an optional variant to that character."""
+    requested = _normalize_tag(character)
+    requested_variant = _normalize_tag(variant) if variant else None
+    identity = _resolve_appearance_identity(con, requested)
+    if identity.get("ambiguous") or not identity.get("character_tag"):
+        return identity
+
+    character_tag = identity["character_tag"]
+    resolved_variant = requested_variant or identity.get("variant")
+    if requested_variant:
+        scoped = con.execute(
+            """SELECT 1 FROM character_appearance_profiles
+               WHERE character_tag=? AND variant_tag=?
+                 AND status IN ('reviewed', 'published')
+               LIMIT 1""",
+            (character_tag, requested_variant),
+        ).fetchone()
+        # A missing variant remains scoped to this character. The projection
+        # will return available_variants instead of leaking another character.
+        if not scoped:
+            resolved_variant = requested_variant
+
+    result = {
+        "character_tag": character_tag,
+        "variant": resolved_variant,
+    }
+    if identity.get("resolution"):
+        result["resolution"] = identity["resolution"]
+    return result
 
 
 @mcp.tool()

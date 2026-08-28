@@ -159,7 +159,6 @@ def post_record_tags(record: dict[str, Any]) -> list[str]:
         for key in ("general", "tag_string_general", "general_tags"):
             if key in tags:
                 return _as_tag_list(tags[key])
-        return []
     for key in ("tag_string_general", "general_tags"):
         if key in record:
             return _as_tag_list(record[key])
@@ -185,16 +184,31 @@ def load_post_jsonl(path: Path, selected: set[str], captured_at: str) -> list[di
             character_tag = normalize_tag(record.get("character_tag", ""))
             if not character_tag:
                 matching = sorted(selected.intersection(character_values))
+                if len(matching) > 1:
+                    raise ValueError(
+                        f"{path}:{line_number}: ambiguous character tags {matching}; "
+                        "provide character_tag explicitly"
+                    )
                 character_tag = matching[0] if matching else ""
             if not character_tag or (selected and character_tag not in selected):
                 continue
             variant_tag = normalize_tag(record.get("variant_tag", ""))
+            variants = sorted(
+                tag for tag in character_values
+                if tag != character_tag and tag.startswith(character_tag + "_(")
+            )
             if not variant_tag:
-                variants = sorted(
-                    tag for tag in character_values
-                    if tag != character_tag and tag.startswith(character_tag + "_(")
-                )
+                if len(variants) > 1:
+                    raise ValueError(
+                        f"{path}:{line_number}: ambiguous variants {variants}; "
+                        "provide variant_tag explicitly"
+                    )
                 variant_tag = variants[0] if variants else character_tag
+            elif variant_tag != character_tag and not variant_tag.startswith(character_tag + "_("):
+                raise ValueError(
+                    f"{path}:{line_number}: variant_tag {variant_tag!r} is not scoped "
+                    f"to character_tag {character_tag!r}"
+                )
             source_site = normalize_tag(record.get("source_site", ""))
             if not source_site:
                 source_site = "danbooru" if "danbooru" in path_text else path.stem
@@ -230,19 +244,23 @@ def load_post_jsonl(path: Path, selected: set[str], captured_at: str) -> list[di
 def aggregate_observations(rows: list[dict[str, Any]]) -> list[dict[str, Any]]:
     grouped: dict[tuple[str, str, str, str, str], dict[str, Any]] = {}
     sample_keys: dict[tuple[str, str, str, str], set[str]] = defaultdict(set)
+    support_keys: dict[tuple[str, str, str, str, str], set[str]] = defaultdict(set)
     for row in rows:
         key = (
             row["character_tag"], row["variant_tag"], row["source_site"],
             row["source_kind"], row["observed_tag"],
         )
         sample_key = key[:-1]
-        sample_keys[sample_key].add(str(row["source_key"]))
+        source_key = str(row["source_key"])
+        sample_keys[sample_key].add(source_key)
         item = grouped.get(key)
         if item is None:
             item = dict(row)
             item["support_count"] = 0
             grouped[key] = item
-        item["support_count"] += int(row.get("support_count", 1))
+        if source_key not in support_keys[key]:
+            support_keys[key].add(source_key)
+            item["support_count"] += 1
         item["evidence_text"] = row.get("evidence_text", item.get("evidence_text", ""))
         item["source_url"] = row.get("source_url", item.get("source_url", ""))
     for key, item in grouped.items():
@@ -296,7 +314,8 @@ def build_candidates(observations: list[dict[str, Any]], created_at: str) -> lis
 
 
 def write_derived(output: Path, db: Path, observations: list[dict[str, Any]],
-                  candidates: list[dict[str, Any]], built_at: str) -> None:
+                  candidates: list[dict[str, Any]], built_at: str,
+                  source_size: int, source_sha256: str) -> None:
     output.parent.mkdir(parents=True, exist_ok=True)
     fd, temp_name = tempfile.mkstemp(prefix=f".{output.name}.", suffix=".tmp", dir=output.parent)
     os.close(fd)
@@ -332,8 +351,8 @@ def write_derived(output: Path, db: Path, observations: list[dict[str, Any]],
             "schema_version": "1",
             "built_at": built_at,
             "source_db": str(db.resolve()),
-            "source_size": str(db.stat().st_size),
-            "source_sha256": sha256_file(db),
+            "source_size": str(source_size),
+            "source_sha256": source_sha256,
             "observation_rows": str(len(observations)),
             "candidate_rows": str(len(candidates)),
         }
@@ -361,7 +380,11 @@ def build(db: Path, output: Path, characters: list[str],
     selected = {normalize_tag(value) for value in characters if normalize_tag(value)}
     if not selected:
         raise ValueError("at least one --character is required")
+    if db.resolve() == output.resolve():
+        raise ValueError("derived output must not overwrite the source database")
     captured_at = datetime.now(timezone.utc).isoformat()
+    source_size = db.stat().st_size
+    source_sha256 = sha256_file(db)
     con = sqlite3.connect(db)
     try:
         observations: list[dict[str, Any]] = []
@@ -371,9 +394,16 @@ def build(db: Path, output: Path, characters: list[str],
         con.close()
     for path in post_jsonl:
         observations.extend(load_post_jsonl(path, selected, captured_at))
+    if db.stat().st_size != source_size or sha256_file(db) != source_sha256:
+        raise RuntimeError(
+            "source database changed while building appearance candidates; retry from a stable snapshot"
+        )
     aggregated = aggregate_observations(observations)
     candidates = build_candidates(aggregated, captured_at)
-    write_derived(output, db, aggregated, candidates, captured_at)
+    write_derived(
+        output, db, aggregated, candidates, captured_at,
+        source_size, source_sha256,
+    )
     return {
         "characters": len(selected),
         "observations": len(aggregated),

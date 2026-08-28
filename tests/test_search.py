@@ -1,4 +1,5 @@
 import hashlib
+import json
 import sqlite3
 import tempfile
 import unittest
@@ -653,6 +654,132 @@ class SearchRegressionTests(unittest.TestCase):
         self.assertEqual(result["profiles"][0]["evidence"], [])
         self.assertEqual(result["profiles"][0]["sources"], [])
 
+    def test_appearance_variant_is_scoped_to_requested_character(self):
+        result = get_character_appearance(
+            "hatsune_miku",
+            variant="inugami_korone_(new_year)",
+            include_evidence=False,
+        )
+        self.assertFalse(result["found"])
+        self.assertEqual(result["character_tag"], "hatsune_miku")
+        self.assertEqual(result["profiles"], [])
+        self.assertNotIn("inugami_korone", result.get("character_tag", ""))
+
+    def test_appearance_resolves_active_alias_to_canonical_profile(self):
+        result = get_character_appearance("ganyu", include_evidence=False)
+        self.assertTrue(result["found"])
+        self.assertEqual(result["character_tag"], "ganyu_(genshin_impact)")
+        self.assertEqual(result["resolution"]["type"], "alias")
+
+    def test_appearance_migration_rejects_normalization_collisions_atomically(self):
+        from scripts.migrate_appearance_profiles import migrate
+        from weeb_alexandria_mcp.owned_schema import SCHEMA_SQL
+
+        with tempfile.TemporaryDirectory() as tmp:
+            path = Path(tmp) / "collision.sqlite"
+            con = sqlite3.connect(path)
+            con.executescript(SCHEMA_SQL)
+            con.executemany(
+                """INSERT INTO character_profiles(
+                    character_tag, display_name, display_name_normalized
+                ) VALUES (?, ?, ?)""",
+                [
+                    ("Foo-Bar", "Foo Bar", "foo_bar"),
+                    ("foo_bar", "Foo Bar 2", "foo_bar"),
+                ],
+            )
+            con.commit()
+            con.close()
+            with self.assertRaises(ValueError):
+                migrate(path)
+            con = sqlite3.connect(path)
+            appearance_count = con.execute(
+                "SELECT count(*) FROM character_appearance_profiles"
+            ).fetchone()[0]
+            con.close()
+        self.assertEqual(appearance_count, 0)
+
+    def test_appearance_migration_normalizes_legacy_facets_and_deduplicates(self):
+        from scripts.migrate_appearance_profiles import migrate
+        from weeb_alexandria_mcp.owned_schema import SCHEMA_SQL
+
+        with tempfile.TemporaryDirectory() as tmp:
+            path = Path(tmp) / "legacy_facets.sqlite"
+            con = sqlite3.connect(path)
+            con.executescript(SCHEMA_SQL)
+            con.execute(
+                """INSERT INTO character_profiles(
+                    character_tag, display_name, display_name_normalized,
+                    core_tags, provenance, confidence
+                ) VALUES (?, ?, ?, ?, ?, ?)""",
+                ("fixture_character", "Fixture Character", "fixture_character",
+                 "blue_eyes", "fixture", "high"),
+            )
+            con.execute(
+                """INSERT INTO trait_definitions(
+                    trait_slug, facet, value, label, status
+                ) VALUES (?, ?, ?, ?, 'active')""",
+                ("blue_eyes_trait", "eye_color", "blue eyes", "Blue eyes"),
+            )
+            con.execute(
+                """INSERT INTO character_traits(
+                    character_tag, trait_slug, evidence_tag
+                ) VALUES (?, ?, ?)""",
+                ("fixture_character", "blue_eyes_trait", "blue_eyes"),
+            )
+            con.commit()
+            con.close()
+            migrate(path)
+            con = sqlite3.connect(path)
+            rows = con.execute(
+                """SELECT facet, canonical_tag FROM character_appearance_features
+                   WHERE appearance_key='fixture_character::default'"""
+            ).fetchall()
+            con.close()
+        self.assertEqual(rows, [("eyes", "blue_eyes")])
+
+    def test_promote_rejects_unregistered_character_before_writes(self):
+        from scripts.promote_appearance import promote
+        from weeb_alexandria_mcp.owned_schema import SCHEMA_SQL
+
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            db_path = root / "promote.sqlite"
+            seed_path = root / "seed.json"
+            con = sqlite3.connect(db_path)
+            con.executescript(SCHEMA_SQL)
+            con.execute(
+                "CREATE TABLE tags(site TEXT, name TEXT, category_name TEXT)"
+            )
+            con.commit()
+            con.close()
+            seed_path.write_text(json.dumps({
+                "character_tag": "unregistered_character",
+                "sources": [{
+                    "id": "source-1", "source_site": "danbooru",
+                    "source_kind": "wiki", "source_key": "fixture",
+                    "source_tier": 1, "source_url": "https://example.invalid/wiki",
+                }],
+                "profiles": [{
+                    "variant_tag": "unregistered_character",
+                    "status": "published",
+                    "features": [{
+                        "facet": "hair", "canonical_tag": "brown_hair",
+                        "source_refs": ["source-1"],
+                    }],
+                }],
+            }), encoding="utf-8")
+            with self.assertRaises(ValueError):
+                promote(db_path, seed_path)
+            con = sqlite3.connect(db_path)
+            counts = [con.execute(f"SELECT count(*) FROM {table}").fetchone()[0]
+                      for table in (
+                          "character_appearance_profiles",
+                          "character_appearance_sources",
+                      )]
+            con.close()
+        self.assertEqual(counts, [0, 0])
+
     def test_get_character_exposes_appearance_additively(self):
         result = get_character("hatsune_miku")
         self.assertTrue(result["found"])
@@ -732,14 +859,17 @@ class SearchRegressionTests(unittest.TestCase):
             source.commit()
             source.close()
             post_path = root / "danbooru_posts.jsonl"
-            post_path.write_text(json.dumps({
+            post_record = json.dumps({
                 "id": 7,
                 "tag_string_character": "test_character test_character_(outfit)",
                 "tag_string_general": "white_dress red_dress",
                 "tag_string_artist": "artist_name",
                 "tag_string_meta": "official_art",
                 "source_site": "danbooru",
-            }) + "\n", encoding="utf-8")
+            })
+            post_path.write_text(
+                post_record + "\n" + post_record + "\n", encoding="utf-8"
+            )
             result = build(
                 source_path,
                 output_path,
@@ -766,6 +896,33 @@ class SearchRegressionTests(unittest.TestCase):
         self.assertNotIn("official_art", all_tags)
         self.assertEqual(integrity, "ok")
         self.assertEqual(infer_facet("hair_between_eyes"), "hair")
+
+    def test_appearance_builder_rejects_ambiguous_post_variants(self):
+        from scripts.build_appearance_candidates import build
+
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            source_path = root / "source.sqlite"
+            output_path = root / "character_appearance.sqlite"
+            source = sqlite3.connect(source_path)
+            source.executescript(
+                """
+                CREATE TABLE wiki(site TEXT NOT NULL, title TEXT NOT NULL, body TEXT);
+                """
+            )
+            source.commit()
+            source.close()
+            post_path = root / "ambiguous_posts.jsonl"
+            post_path.write_text(json.dumps({
+                "id": 8,
+                "tag_string_character": (
+                    "test_character test_character_(a) test_character_(b)"
+                ),
+                "tag_string_general": "white_dress",
+                "source_site": "danbooru",
+            }) + "\n", encoding="utf-8")
+            with self.assertRaises(ValueError):
+                build(source_path, output_path, ["test_character"], [post_path])
 
 
 if __name__ == "__main__":
