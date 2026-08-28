@@ -288,3 +288,20 @@ mascots, family members, and alternate forms were excluded from the roster.
 Candidate generation produced 287 observations and 104 candidates. Only
 source-reviewed base features were promoted. FLOW GLOW uniforms, mascots,
 shared agency outfits, fan marks, and other variants remain deferred.
+
+## Sixteenth Hololive batch
+
+The remaining eligible historical female talents were processed. The batch
+was intentionally reduced to three entities because the next higher-volume
+tags were staff, mascots, family members, alternate forms, or non-Hololive
+talents.
+
+| Rank | Character | Danbooru | Gelbooru | e621 | Independent total | Result |
+|---:|---|---:|---:|---:|---:|---|
+| 1 | `artia` | 0 | 55 | 0 | 55 | Historical Hololive China graduate; base published with 2 features |
+| 2 | `spade_echo` | 0 | 51 | 0 | 51 | Deferred: historical identity confirmed, but no deterministic visual evidence |
+| 3 | `hitomi_chris` | 0 | 7 | 0 | 7 | Historical terminated talent; base published with 3 features |
+
+Candidate generation produced 6 observations and 1 candidate. Five features
+were promoted from reviewed evidence. `spade_echo` remains deferred rather
+than receiving speculative attributes.
