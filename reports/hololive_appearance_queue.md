@@ -405,8 +405,11 @@ ten corrected characters: 830 observations and 309 candidates.
 
 ## Third general popularity batch
 
-The first five corrected candidates were reviewed and published:
-`fujiwara_no_mokou` (2 features), `akemi_homura` (6), `kaname_madoka` (6),
-`inubashiri_momiji` (6), and `saigyouji_yuyuko` (3). The batch contained 23
-published features and zero conflicts. Alternative forms, weapons, pets and
-ambiguous fan depictions remain separate or excluded.
+The first five corrected candidates were reviewed. Three profiles were
+published: `akemi_homura` (6 features), `kaname_madoka` (6), and
+`inubashiri_momiji` (6). `fujiwara_no_mokou` remains deferred because the local
+sources confirmed identity and pyromancy but did not provide deterministic base
+appearance traits. `saigyouji_yuyuko` remains deferred because the available
+appearance evidence was limited to partial headwear details. The published
+subset contained 18 features and zero conflicts. Alternative forms, weapons,
+pets and ambiguous fan depictions remain separate or excluded.
