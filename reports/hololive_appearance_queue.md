@@ -120,3 +120,19 @@ The next five base talents were processed by independent post-volume ranking:
 Candidate generation produced 1,228 observations and 510 candidates. Only
 source-reviewed base features were promoted. Named outfits, shared agency
 uniforms, mascots, and fan marks remain deferred.
+
+## Sixth Hololive batch
+
+The next five base talents were processed by independent post-volume ranking:
+
+| Rank | Character | Danbooru | Gelbooru | Independent total | Result |
+|---:|---|---:|---:|---:|---|
+| 1 | `ceres_fauna` | 4,571 | 5,512 | 10,083 | Base published; graduated 2025; 12 features |
+| 2 | `murasaki_shion` | 4,416 | 5,255 | 9,671 | Base published; graduated 2025; 9 features |
+| 3 | `nakiri_ayame` | 4,141 | 5,367 | 9,508 | Base published; 12 features; 1 open conflict |
+| 4 | `shiranui_flare` | 4,125 | 4,960 | 9,085 | Base published; 9 features |
+| 5 | `fuwawa_abyssgard` | 3,340 | 5,484 | 8,824 | Base published; 13 features |
+
+Candidate generation produced 1,430 observations and 617 candidates. Only
+source-reviewed base features were promoted. Named outfits, shared agency
+uniforms, mascots, and fan marks remain deferred.
