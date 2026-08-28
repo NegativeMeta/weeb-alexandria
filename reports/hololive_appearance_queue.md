@@ -360,3 +360,21 @@ Candidate generation produced 126 observations and 60 candidates. `konpaku_youmu
 base features and zero conflicts. `remilia_scarlet` and `miku_hatsune` remain
 deferred because the local candidate/evidence projection was insufficient for
 an auditable base profile; popularity alone was not used as visual evidence.
+
+## Second general popularity batch
+
+The next eligible characters were selected using the same independent
+Danbooru + Gelbooru + e621 ranking, excluding published profiles, Hololive,
+staff, variants, and meta/player avatars.
+
+| Rank | Character | Danbooru | Gelbooru | e621 | Total |
+|---:|---|---:|---:|---:|---:|
+| 1 | `alice_margatroid` | 22,250 | 33,750 | 0 | 56,000 |
+| 2 | `yakumo_yukari` | 22,361 | 32,810 | 0 | 55,171 |
+| 3 | `shameimaru_aya` | 20,938 | 28,943 | 0 | 49,881 |
+| 4 | `komeiji_satori` | 19,223 | 26,877 | 0 | 46,100 |
+| 5 | `reisen_udongein_inaba` | 19,130 | 26,783 | 0 | 45,913 |
+
+Candidate generation produced 171 observations and 85 candidates. All five
+base profiles were published with 45 reviewed features and zero conflicts.
+Props, pets, weapons, and named outfit variants remain separate or excluded.
