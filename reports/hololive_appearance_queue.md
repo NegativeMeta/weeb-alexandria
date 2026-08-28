@@ -136,3 +136,19 @@ The next five base talents were processed by independent post-volume ranking:
 Candidate generation produced 1,430 observations and 617 candidates. Only
 source-reviewed base features were promoted. Named outfits, shared agency
 uniforms, mascots, and fan marks remain deferred.
+
+## Seventh Hololive batch
+
+The next five base talents were processed by independent post-volume ranking:
+
+| Rank | Character | Danbooru | Gelbooru | e621 | Independent total | Result |
+|---:|---|---:|---:|---:|---:|---|
+| 1 | `uruha_rushia` | 4,057 | 4,685 | 0 | 8,742 | Base published; historical terminated talent; 9 features; 1 open conflict |
+| 2 | `ninomae_ina'nis` | 8,690 | 0 | 0 | 8,690 | Base published; 13 features; 1 open conflict |
+| 3 | `mococo_abyssgard` | 3,283 | 5,377 | 0 | 8,660 | Base published; 13 features |
+| 4 | `hakui_koyori` | 3,408 | 4,918 | 0 | 8,326 | Base published; 12 features |
+| 5 | `natsuiro_matsuri` | 3,507 | 4,580 | 0 | 8,087 | Base published; 10 features; 1 open conflict |
+
+Candidate generation produced 1,244 observations and 582 candidates. Only
+source-reviewed base features were promoted. Named outfits, shared agency
+uniforms, mascots, and fan marks remain deferred.
