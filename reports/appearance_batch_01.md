@@ -1,6 +1,6 @@
 # Appearance population — Batch 01
 
-**Status:** candidate generation complete; human review pending
+**Status:** Miku base reviewed and published; remaining batch candidates pending
 **Date:** 2026-08-28
 **Source:** local `tag_library.db` wiki snapshot
 **Canonical output:** `data/character_appearance.sqlite` (derived, not published)
@@ -46,20 +46,21 @@ Observed result:
 | `kirisame_marisa` | 59 | 10 | 40 | 0 | Review base and named variants; keep props/outfits scoped. |
 | `artoria_pendragon_(fate)` | 24 | 1 | 4 | 0 | Review the base profile first; no variant inferred. |
 | `souryuu_asuka_langley` | 12 | 2 | 0 | 0 | Hold: observations exist but no deterministic visual facets passed classification. |
-| **Total** | **444** | — | **189** | **0** | **No automatic publication.** |
+| **Total** | **444** | — | **189** | **0** | **One reviewed base profile published; no variants auto-published.** |
 
 The derived SQLite output passed `PRAGMA integrity_check = ok`.
-All candidates remain `status='pending'` and are not exposed as canonical MCP
-facts.
+All remaining candidates remain `status='pending'` and are not exposed as canonical MCP
+facts. Miku's base profile is published with 13 reviewed features; three legacy
+features were retained as `retired` for audit.
 
 ## Review order
 
-1. Review the base profiles for Miku, Reimu, Marisa, Artoria, and Asuka.
-2. For Miku, select only a small set of clearly defined visual variants;
+1. Miku base is complete. Review only a small set of clearly defined Miku variants;
    product pages, collaborations, software versions, and cosplay do not become
    profiles automatically.
-3. For Reimu and Marisa, record conflicting colors or accessories as source
-   conflicts rather than resolving them by popularity.
+2. Review Reimu's base and named variants, recording conflicting colors or
+   accessories as source conflicts rather than resolving them by popularity.
+3. Review Marisa's base and named variants, keeping props and outfits scoped.
 4. For Artoria, separate Fate identity/context from armor and outfit features.
 5. Investigate Asuka's 12 observations and either add an explicit classifier,
    capture stronger evidence, or defer the card; do not publish from zero
@@ -74,5 +75,5 @@ facts.
 - pending visual candidates: `189`;
 - candidates with missing facet: `0`;
 - candidate-only statistical publication: `0`;
-- canonical promotions from this batch: `0`;
+- canonical promotions from this batch: `1` (Miku base only);
 - derived database integrity: `ok`.

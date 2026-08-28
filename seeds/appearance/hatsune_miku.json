@@ -1,0 +1,67 @@
+{
+  "character_tag": "hatsune_miku",
+  "sources": [
+    {
+      "id": "danbooru:wiki:hatsune_miku",
+      "source_site": "danbooru",
+      "source_kind": "wiki",
+      "source_key": "hatsune_miku",
+      "source_url": "https://danbooru.donmai.us/wiki_pages/hatsune_miku.json",
+      "source_tier": 1,
+      "title": "Hatsune Miku",
+      "excerpt": "She is recognizable by her very long aqua twintails and aqua eyes. Her typical outfit includes a grey or white sleeveless collared shirt, aqua or blue necktie, black detached sleeves, black pleated miniskirt, black thigh boots, shoulder tattoo, and square-shaped hair ornaments.",
+      "captured_at": "2026-08-28"
+    },
+    {
+      "id": "gelbooru:wiki:hatsune_miku",
+      "source_site": "gelbooru",
+      "source_kind": "wiki",
+      "source_key": "hatsune_miku",
+      "source_url": "https://gelbooru.com/index.php?page=wiki&s=view&id=hatsune_miku",
+      "source_tier": 1,
+      "title": "Hatsune Miku",
+      "excerpt": "She is depicted with aqua_hair tied into twintails and usually wears a black_skirt, sleeveless shirt, necktie, detached_sleeves and boots.",
+      "captured_at": "2026-08-28"
+    },
+    {
+      "id": "e621:wiki:hatsune_miku",
+      "source_site": "e621",
+      "source_kind": "wiki",
+      "source_key": "hatsune_miku",
+      "source_url": "https://e621.net/wiki_pages/hatsune_miku.json",
+      "source_tier": 1,
+      "title": "Hatsune Miku",
+      "excerpt": "Miku is easily recognizable by her iconic long twintail hairstyle and her outfit, typically a short black skirt with thighhighs, grey/white shirt, and turquoise tie.",
+      "captured_at": "2026-08-28"
+    }
+  ],
+  "profiles": [
+    {
+      "appearance_key": "hatsune_miku::default",
+      "variant_tag": "hatsune_miku",
+      "display_name": "Base appearance",
+      "appearance_kind": "default",
+      "is_default": true,
+      "status": "published",
+      "replace_features": true,
+      "confidence": "high",
+      "provenance": "danbooru_gelbooru_e621_wiki_reviewed",
+      "notes": "Stable base design only. Blue alternatives, products, collaborations, software versions, and cosplay remain outside this profile until separately reviewed.",
+      "features": [
+        {"facet": "hair", "value": "Aqua hair", "canonical_tag": "aqua_hair", "source_refs": ["danbooru:wiki:hatsune_miku", "gelbooru:wiki:hatsune_miku"]},
+        {"facet": "hair", "value": "Very long hair", "canonical_tag": "very_long_hair", "source_refs": ["danbooru:wiki:hatsune_miku", "e621:wiki:hatsune_miku"]},
+        {"facet": "hair_accessory", "value": "Twintails", "canonical_tag": "twintails", "source_refs": ["danbooru:wiki:hatsune_miku", "gelbooru:wiki:hatsune_miku", "e621:wiki:hatsune_miku"]},
+        {"facet": "eyes", "value": "Aqua eyes", "canonical_tag": "aqua_eyes", "source_refs": ["danbooru:wiki:hatsune_miku"]},
+        {"facet": "upper_body", "value": "Sleeveless shirt", "canonical_tag": "sleeveless_shirt", "source_refs": ["danbooru:wiki:hatsune_miku", "gelbooru:wiki:hatsune_miku"]},
+        {"facet": "neck", "value": "Aqua necktie", "canonical_tag": "aqua_necktie", "source_refs": ["danbooru:wiki:hatsune_miku", "e621:wiki:hatsune_miku"]},
+        {"facet": "sleeves", "value": "Detached sleeves", "canonical_tag": "detached_sleeves", "source_refs": ["danbooru:wiki:hatsune_miku", "gelbooru:wiki:hatsune_miku"]},
+        {"facet": "lower_body", "value": "Black skirt", "canonical_tag": "black_skirt", "source_refs": ["danbooru:wiki:hatsune_miku", "gelbooru:wiki:hatsune_miku", "e621:wiki:hatsune_miku"]},
+        {"facet": "lower_body", "value": "Pleated skirt", "canonical_tag": "pleated_skirt", "source_refs": ["danbooru:wiki:hatsune_miku"]},
+        {"facet": "lower_body", "value": "Miniskirt", "canonical_tag": "miniskirt", "source_refs": ["danbooru:wiki:hatsune_miku"]},
+        {"facet": "footwear", "value": "Black boots", "canonical_tag": "black_boots", "source_refs": ["danbooru:wiki:hatsune_miku", "gelbooru:wiki:hatsune_miku"]},
+        {"facet": "footwear", "value": "Thigh boots", "canonical_tag": "thigh_boots", "source_refs": ["danbooru:wiki:hatsune_miku", "e621:wiki:hatsune_miku"]},
+        {"facet": "hair_accessory", "value": "Square hair ornaments", "canonical_tag": "hair_ornament", "source_refs": ["danbooru:wiki:hatsune_miku", "gelbooru:wiki:hatsune_miku"]}
+      ]
+    }
+  ]
+}

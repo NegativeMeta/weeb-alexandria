@@ -233,6 +233,25 @@ def promote(db: Path, seed_path: Path) -> dict[str, int]:
             features = profile.get("features", [])
             if not isinstance(features, list):
                 raise ValueError(f"features must be a list for {profile_key}")
+            if profile.get("replace_features", False):
+                seed_tags = {
+                    normalize_tag(str(feature.get("canonical_tag", "")))
+                    for feature in features
+                    if isinstance(feature, dict)
+                }
+                if not seed_tags:
+                    raise ValueError(
+                        f"replace_features requires at least one feature for {profile_key}"
+                    )
+                placeholders = ",".join("?" for _ in seed_tags)
+                con.execute(
+                    f"""UPDATE character_appearance_features
+                        SET status='retired'
+                        WHERE appearance_key=?
+                          AND status<>'retired'
+                          AND canonical_tag NOT IN ({placeholders})""",
+                    [profile_key, *sorted(seed_tags)],
+                )
             for feature in features:
                 if not isinstance(feature, dict):
                     raise ValueError(f"feature must be an object for {profile_key}")

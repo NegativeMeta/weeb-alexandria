@@ -780,6 +780,66 @@ class SearchRegressionTests(unittest.TestCase):
             con.close()
         self.assertEqual(counts, [0, 0])
 
+    def test_promote_replace_features_retires_unreviewed_legacy_rows(self):
+        from scripts.promote_appearance import promote
+        from weeb_alexandria_mcp.owned_schema import SCHEMA_SQL, ensure_owned_schema
+
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            db_path = root / "promote_replace.sqlite"
+            seed_path = root / "seed.json"
+            con = sqlite3.connect(db_path)
+            con.executescript(SCHEMA_SQL)
+            ensure_owned_schema(con)
+            con.execute(
+                "CREATE TABLE tags(site TEXT, name TEXT, category_name TEXT)"
+            )
+            con.execute(
+                "INSERT INTO tags VALUES ('danbooru', 'fixture_character', 'character')"
+            )
+            con.execute(
+                """INSERT INTO character_appearance_profiles(
+                    appearance_key, character_tag, variant_tag, display_name,
+                    appearance_kind, is_default, status, confidence, provenance
+                ) VALUES (?, ?, ?, ?, 'default', 1, 'published', 'high', 'legacy')""",
+                (
+                    "fixture_character::default", "fixture_character",
+                    "fixture_character", "Fixture Character",
+                ),
+            )
+            con.execute(
+                """INSERT INTO character_appearance_features(
+                    appearance_key, facet, value, canonical_tag, role, status, confidence
+                ) VALUES (?, 'eyes', 'Blue eyes', 'blue_eyes', 'present', 'published', 'high')""",
+                ("fixture_character::default",),
+            )
+            con.commit()
+            con.close()
+            seed_path.write_text(json.dumps({
+                "character_tag": "fixture_character",
+                "sources": [{
+                    "id": "source-1", "source_site": "danbooru",
+                    "source_kind": "wiki", "source_key": "fixture",
+                    "source_tier": 1,
+                }],
+                "profiles": [{
+                    "variant_tag": "fixture_character",
+                    "status": "published", "replace_features": True,
+                    "features": [{
+                        "facet": "eyes", "canonical_tag": "green_eyes",
+                        "source_refs": ["source-1"],
+                    }],
+                }],
+            }), encoding="utf-8")
+            promote(db_path, seed_path)
+            con = sqlite3.connect(db_path)
+            rows = dict(con.execute(
+                "SELECT canonical_tag, status FROM character_appearance_features "
+                "WHERE appearance_key='fixture_character::default'"
+            ).fetchall())
+            con.close()
+        self.assertEqual(rows, {"blue_eyes": "retired", "green_eyes": "published"})
+
     def test_get_character_exposes_appearance_additively(self):
         result = get_character("hatsune_miku")
         self.assertTrue(result["found"])

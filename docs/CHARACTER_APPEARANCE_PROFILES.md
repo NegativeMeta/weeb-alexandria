@@ -167,8 +167,10 @@ variant-ambiguous, or unsupported by evidence.
 
 Seeds are the review boundary. A seed must contain the canonical character,
 explicit profiles, source catalog, and feature-to-source links. Keep the base
-profile and each outfit separate. Never hand-edit `tag_library.db` to publish a
-candidate.
+profile and each outfit separate. When a seed is a complete replacement of a
+legacy profile, set `replace_features: true`; omitted legacy features are marked
+`retired` for audit rather than deleted. Never hand-edit `tag_library.db` to
+publish a candidate.
 
 ### Step 5 — Promote and verify
 
