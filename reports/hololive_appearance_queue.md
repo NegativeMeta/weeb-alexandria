@@ -71,3 +71,20 @@ ranking:
 Candidate generation for this batch produced 1,893 observations and 758
 candidates. Only source-reviewed base features were promoted. Named outfits,
 shared agency uniforms, mascots, and fan marks remain deferred.
+
+## Third Hololive batch
+
+The next five base talents were processed by the same independent post-volume
+ranking:
+
+| Rank | Character | Danbooru | Gelbooru | Independent total | Result |
+|---:|---|---:|---:|---:|---|
+| 1 | `mori_calliope` | 8,630 | 11,918 | 20,548 | Base published; 10 features; 1 open conflict |
+| 2 | `takanashi_kiara` | 7,193 | 9,660 | 16,853 | Base published; 9 features |
+| 3 | `nanashi_mumei` | 7,785 | 9,006 | 16,791 | Base published; graduated 2025; 8 features |
+| 4 | `ookami_mio` | 5,869 | 7,846 | 13,715 | Base published; 11 features |
+| 5 | `watson_amelia` | 6,179 | 7,108 | 13,287 | Base published; affiliate status; 9 features |
+
+Candidate generation produced 1,871 observations and 732 candidates. Only
+source-reviewed base features were promoted. Named outfits, shared agency
+uniforms, mascots, and fan marks remain deferred.
