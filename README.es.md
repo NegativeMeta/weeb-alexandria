@@ -140,6 +140,21 @@ Dime cómo es Inugami Korone. Puedes usar Weeb Alexandria para consultar la info
 
 El modelo puede utilizar la herramienta adecuada, como `get_character`, `search_characters` o `search_knowledge`, y después explicar el resultado en lenguaje normal.
 
+### Búsquedas con varias tags
+
+Si `search_knowledge` recibe varias tags unidas en una sola consulta, por ejemplo `blushing red face`, puede devolver `query_mode: "multi_tag"`, partes separadas en `tag_library.query_parts` y una `query_recommendation` de nivel superior. El agente debe leer `query_recommendation.queries`, llamar a `search_knowledge` una vez por cada consulta y combinar los resultados solo después de realizar esas búsquedas independientes.
+
+```json
+{
+  "query_recommendation": {
+    "action": "search_each_tag_separately",
+    "queries": ["blushing", "red face"]
+  }
+}
+```
+
+Las tags conocidas de varias palabras, como `red face` y `closed mouth`, permanecen intactas. Las consultas contextuales de personajes o franquicias, como `Fuwawa Hololive` y `Mococo Hololive`, se conservan sin dividirse.
+
 ## Estructura
 
 ```text

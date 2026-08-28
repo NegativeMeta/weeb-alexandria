@@ -140,6 +140,21 @@ Tell me what Inugami Korone looks like. You can use Weeb Alexandria to check the
 
 The model can use the appropriate Weeb Alexandria tool, such as `get_character`, `search_characters`, or `search_knowledge`, and then explain the result in normal language.
 
+### Multi-tag searches
+
+If `search_knowledge` receives several tags joined in one query, for example `blushing red face`, it can return `query_mode: "multi_tag"`, separate `tag_library.query_parts`, and a top-level `query_recommendation`. Agents should read `query_recommendation.queries`, call `search_knowledge` once for each query, and combine the results only after those independent searches.
+
+```json
+{
+  "query_recommendation": {
+    "action": "search_each_tag_separately",
+    "queries": ["blushing", "red face"]
+  }
+}
+```
+
+Known multi-word tags such as `red face` and `closed mouth` remain intact. Contextual character or franchise queries such as `Fuwawa Hololive` and `Mococo Hololive` are preserved instead of being split.
+
 ## Structure
 
 ```text

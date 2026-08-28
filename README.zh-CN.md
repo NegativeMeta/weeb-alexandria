@@ -140,6 +140,21 @@ hermes mcp add weeb-alexandria \
 
 模型可以选择合适的工具，例如 `get_character`、`search_characters` 或 `search_knowledge`，然后用普通语言解释结果。
 
+### 多标签搜索
+
+如果 `search_knowledge` 收到的是多个连在一起的标签，例如 `blushing red face`，它可能返回 `query_mode: "multi_tag"`、`tag_library.query_parts` 中的独立部分，以及顶层的 `query_recommendation`。智能体应读取 `query_recommendation.queries`，针对每个查询分别调用一次 `search_knowledge`，然后再合并这些独立搜索的结果。
+
+```json
+{
+  "query_recommendation": {
+    "action": "search_each_tag_separately",
+    "queries": ["blushing", "red face"]
+  }
+}
+```
+
+已知的多词标签（例如 `red face` 和 `closed mouth`）会保持完整。角色或作品系列的上下文查询（例如 `Fuwawa Hololive` 和 `Mococo Hololive`）也会保留，不会被拆分。
+
 ## 项目结构
 
 ```text

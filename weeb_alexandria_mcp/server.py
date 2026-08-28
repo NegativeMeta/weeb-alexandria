@@ -894,6 +894,92 @@ def _alias_suggestions(con: sqlite3.Connection, query: str,
     return suggestions
 
 
+def _query_tag_segments(con: sqlite3.Connection, query: str,
+                        category: Optional[str]) -> list[str]:
+    """Find known tag phrases inside a glued multi-tag query.
+
+    The full-query resolver runs first. This helper is only used after that
+    resolver found no strong result, so legitimate multi-word tags such as
+    ``red face`` remain intact.
+    """
+    separator = re.compile(r"[,;|+\n]+")
+    if separator.search(query):
+        parts = [part.strip() for part in separator.split(query) if part.strip()]
+        if len(parts) < 2:
+            return []
+        if all(_exact_tag_rows(con, _normalize_tag(part), category) for part in parts):
+            return parts
+        return []
+
+    words = re.findall(r"[^\W_]+", query, re.UNICODE)
+    if len(words) < 2 or len(words) > 12:
+        return []
+    known_spans: dict[tuple[int, int], bool] = {}
+    for start in range(len(words)):
+        for end in range(start + 1, min(len(words), start + 5) + 1):
+            phrase = " ".join(words[start:end])
+            known_spans[(start, end)] = bool(
+                _exact_tag_rows(con, _normalize_tag(phrase), category)
+            )
+
+    best: list[list[str] | None] = [None] * (len(words) + 1)
+    best[-1] = []
+    for start in range(len(words) - 1, -1, -1):
+        candidates: list[list[str]] = []
+        for end in range(start + 1, min(len(words), start + 5) + 1):
+            if not known_spans.get((start, end)) or best[end] is None:
+                continue
+            candidates.append([" ".join(words[start:end]), *best[end]])
+        if candidates:
+            best[start] = min(candidates, key=lambda parts: (len(parts), -max(
+                len(part.split()) for part in parts
+            )))
+    segments = best[0]
+    return segments if segments and len(segments) >= 2 else []
+
+
+def _has_strong_tag_recommendation(suggestions: list[dict]) -> bool:
+    return any(
+        item.get("confidence") == "high"
+        and item.get("match_type") in {"exact", "normalized", "contextual"}
+        for item in suggestions
+    )
+
+
+def _multi_tag_part(con: sqlite3.Connection, query: str,
+                    category: Optional[str], limit: int) -> dict[str, Any]:
+    rows = _tag_rows(con, query, category, limit)
+    return {
+        "query": query,
+        "results": rows,
+        "suggestions": [] if rows else _tag_suggestions(con, query, category, limit),
+    }
+
+
+def _multi_tag_response(con: sqlite3.Connection, query: str,
+                        parts: list[str], category: Optional[str],
+                        limit: int) -> dict[str, Any]:
+    part_results = [
+        _multi_tag_part(con, part, category, limit) for part in parts
+    ]
+    recommendation = {
+        "action": "search_each_tag_separately",
+        "original_query": query,
+        "queries": parts,
+        "message": (
+            "This looks like multiple tags in one query. Search each recommended "
+            "tag separately and combine the results for better recall."
+        ),
+    }
+    return {
+        "results": [],
+        "suggestions": [],
+        "query_mode": "multi_tag",
+        "query_parts": part_results,
+        "recommendation": recommendation,
+    }
+
+
 @mcp.tool()
 def search_knowledge(query: str, category: Optional[str] = None,
                      limit: int = 25) -> dict:
@@ -902,11 +988,24 @@ def search_knowledge(query: str, category: Optional[str] = None,
     try:
         con = _db()
         try:
-            result["tag_library"] = {"results": _tag_rows(con, query, category, limit)}
-            if not result["tag_library"]["results"]:
-                result["tag_library"]["suggestions"] = _tag_suggestions(
-                    con, query, category, limit
-                )
+            tag_results = _tag_rows(con, query, category, limit)
+            result["tag_library"] = {"results": tag_results}
+            if not tag_results:
+                full_suggestions = _tag_suggestions(con, query, category, limit)
+                parts = _query_tag_segments(con, query, category)
+                explicit_separator = bool(re.search(r"[,;|+\n]", query))
+                if parts and (
+                    explicit_separator
+                    or not _has_strong_tag_recommendation(full_suggestions)
+                ):
+                    result["tag_library"] = _multi_tag_response(
+                        con, query, parts, category, limit
+                    )
+                    result["query_recommendation"] = result["tag_library"][
+                        "recommendation"
+                    ]
+                else:
+                    result["tag_library"]["suggestions"] = full_suggestions
             category_key = (category or "").strip().lower()
             if category_key in {"character", "characters"}:
                 entities = {

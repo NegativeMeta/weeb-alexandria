@@ -133,6 +133,56 @@ class SearchRegressionTests(unittest.TestCase):
         rows = _tag_rows(self.con, "closed mouth", "tag", 25)
         self.assertTrue(any(row["name"] == "closed_mouth" for row in rows))
 
+    def test_multi_tag_query_returns_separate_search_recommendation(self):
+        result = search_knowledge("blushing red face", category="tag", limit=10)
+        self.assertEqual(result["tag_library"]["query_mode"], "multi_tag")
+        parts = result["tag_library"]["query_parts"]
+        self.assertEqual([part["query"] for part in parts], ["blushing", "red face"])
+        self.assertEqual(parts[0]["results"][0]["name"], "blushing")
+        self.assertEqual(parts[1]["results"][0]["name"], "red_face")
+        recommendation = result["query_recommendation"]
+        self.assertEqual(recommendation["action"], "search_each_tag_separately")
+        self.assertEqual(recommendation["queries"], ["blushing", "red face"])
+
+    def test_known_multiword_tag_is_not_split(self):
+        result = search_knowledge("red face", category="tag", limit=10)
+        self.assertNotIn("query_mode", result["tag_library"])
+        self.assertEqual(result["tag_library"]["results"][0]["name"], "red_face")
+
+    def test_contextual_query_is_not_split(self):
+        result = search_knowledge("Fuwawa Hololive", category="character", limit=10)
+        self.assertNotIn("query_mode", result["tag_library"])
+        candidate = result["tag_library"]["suggestions"][0]
+        self.assertEqual(candidate["name"], "fuwawa_abyssgard")
+        self.assertEqual(candidate["match_type"], "contextual")
+
+    def test_explicit_separator_splits_known_tags(self):
+        result = search_knowledge("blushing, red face", category="tag", limit=10)
+        self.assertEqual(result["tag_library"]["query_mode"], "multi_tag")
+        self.assertEqual(
+            [part["query"] for part in result["tag_library"]["query_parts"]],
+            ["blushing", "red face"],
+        )
+
+    def test_flash_and_red_face_are_split_as_independent_tags(self):
+        result = search_knowledge("flash red face", category="tag", limit=10)
+        self.assertEqual(result["tag_library"]["query_mode"], "multi_tag")
+        self.assertEqual(
+            [part["query"] for part in result["tag_library"]["query_parts"]],
+            ["flash", "red face"],
+        )
+        self.assertEqual(
+            result["query_recommendation"]["action"],
+            "search_each_tag_separately",
+        )
+
+    def test_mococo_contextual_query_is_not_split(self):
+        result = search_knowledge("Mococo Hololive", category="character", limit=10)
+        self.assertNotIn("query_mode", result["tag_library"])
+        candidate = result["tag_library"]["suggestions"][0]
+        self.assertEqual(candidate["name"], "mococo_abyssgard")
+        self.assertEqual(candidate["match_type"], "contextual")
+
     def test_tag_rows_uses_optional_fts_index(self):
         from scripts.build_search_index import build
 

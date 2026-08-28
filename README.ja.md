@@ -140,6 +140,21 @@ Inugami Korone がどのようなキャラクターか教えてください。We
 
 モデルは `get_character`、`search_characters`、`search_knowledge` など適切なツールを選び、結果を通常の言葉で説明できます。
 
+### 複数タグの検索
+
+`search_knowledge` に `blushing red face` のような複数のタグを連結したクエリを渡すと、`query_mode: "multi_tag"`、`tag_library.query_parts` の分割結果、トップレベルの `query_recommendation` が返る場合があります。エージェントは `query_recommendation.queries` を読み、それぞれのクエリについて `search_knowledge` を個別に一度ずつ呼び出し、その後で独立した検索結果をまとめてください。
+
+```json
+{
+  "query_recommendation": {
+    "action": "search_each_tag_separately",
+    "queries": ["blushing", "red face"]
+  }
+}
+```
+
+`red face` や `closed mouth` のように既知の複数語タグは分割せず、そのまま扱います。`Fuwawa Hololive` や `Mococo Hololive` のようなキャラクター／作品コンテキストのクエリも分割せず保持します。
+
 ## 構成
 
 ```text
