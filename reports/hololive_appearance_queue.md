@@ -201,3 +201,20 @@ ranking. `pekomama` was excluded as a family/non-talent entity.
 Candidate generation produced 1,555 observations and 654 candidates. Only
 source-reviewed base features were promoted. Named outfits, shared agency
 uniforms, mascots, and fan marks remain deferred.
+
+## Eleventh Hololive batch
+
+The next five valid female talents were processed by independent post-volume
+ranking:
+
+| Rank | Character | Danbooru | Gelbooru | e621 | Independent total | Result |
+|---:|---|---:|---:|---:|---:|---|
+| 1 | `cecilia_immergreen` | 1,078 | 2,391 | 0 | 3,469 | Base published; 10 features; 1 open conflict |
+| 2 | `tsukumo_sana` | 1,460 | 1,800 | 0 | 3,260 | Base published; historical graduated talent; 8 features |
+| 3 | `elizabeth_rose_bloodflame` | 1,081 | 2,080 | 0 | 3,161 | Base published; 9 features |
+| 4 | `pavolia_reine` | 1,346 | 1,811 | 0 | 3,157 | Base published; 10 features |
+| 5 | `aki_rosenthal` | 1,172 | 1,572 | 0 | 2,744 | Base published; 7 features |
+
+Candidate generation produced 903 observations and 349 candidates. Only
+source-reviewed base features were promoted. Named outfits, shared agency
+uniforms, mascots, and fan marks remain deferred.
