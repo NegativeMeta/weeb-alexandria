@@ -88,3 +88,19 @@ ranking:
 Candidate generation produced 1,871 observations and 732 candidates. Only
 source-reviewed base features were promoted. Named outfits, shared agency
 uniforms, mascots, and fan marks remain deferred.
+
+## Fourth Hololive batch
+
+The next five base talents were processed by independent post-volume ranking:
+
+| Rank | Character | Danbooru | Gelbooru | Independent total | Result |
+|---:|---|---:|---:|---:|---|
+| 1 | `amane_kanata` | 5,657 | 7,570 | 13,227 | Base published; graduated 2025; 11 features; 1 open conflict |
+| 2 | `oozora_subaru` | 5,665 | 7,344 | 13,009 | Base published; 9 features; 2 open conflicts |
+| 3 | `shirogane_noel` | 5,682 | 7,181 | 12,863 | Base published; 11 features |
+| 4 | `sakamata_chloe` | 5,767 | 7,009 | 12,776 | Base published; affiliate status; 11 features |
+| 5 | `yukihana_lamy` | 5,169 | 7,433 | 12,602 | Base published; 13 features |
+
+Candidate generation produced 2,101 observations and 862 candidates. Only
+source-reviewed base features were promoted. Named outfits, shared agency
+uniforms, mascots, and fan marks remain deferred.
