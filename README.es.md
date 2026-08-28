@@ -176,6 +176,8 @@ La apariencia se divide entre un perfil base y perfiles separados para cada outf
 
 La herramienta MCP es `get_character_appearance(character, variant=None, include_evidence=True, limit=100)`. `get_character_appearance("inugami_korone")` devuelve la apariencia base y los perfiles revisados de `1st_costume`, `street` y `new_year` sin mezclar sus prendas.
 
+Para el contrato completo de cada profile, las reglas de evidencia, la checklist de revisión y la primera tanda de cinco personajes, consulta [`docs/CHARACTER_APPEARANCE_PROFILES.md`](docs/CHARACTER_APPEARANCE_PROFILES.md).
+
 ## Estructura
 
 ```text

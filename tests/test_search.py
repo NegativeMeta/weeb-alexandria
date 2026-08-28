@@ -849,11 +849,14 @@ class SearchRegressionTests(unittest.TestCase):
                 INSERT INTO tags VALUES
                     ('danbooru', 'white_dress', 'general', 10, '', 0),
                     ('danbooru', 'red_dress', 'general', 8, '', 0),
+                    ('danbooru', 'sunset', 'general', 20, '', 0),
                     ('danbooru', 'artist_name', 'artist', 100, '', 0),
                     ('danbooru', 'test_character', 'character', 100, '', 0),
                     ('danbooru', 'test_character_(outfit)', 'character', 5, '', 0);
                 INSERT INTO wiki VALUES
-                    ('danbooru', 'test_character_(outfit)', '[[white dress]] [[artist name]]');
+                    ('danbooru', 'test_character_(outfit)', '[[white dress]] [[artist name]] [[sunset]]');
+                INSERT INTO wiki VALUES
+                    ('danbooru', 'testXcharacter_(wrong)', '[[white dress]]');
                 """
             )
             source.commit()
@@ -888,12 +891,20 @@ class SearchRegressionTests(unittest.TestCase):
                     "SELECT observed_tag FROM appearance_tag_observations"
                 )
             }
+            candidate_facets = {
+                row[0] for row in con.execute(
+                    "SELECT facet FROM appearance_candidates"
+                )
+            }
+            wiki_white = next(row for row in white if row[0] == "wiki")
             integrity = con.execute("PRAGMA integrity_check").fetchone()[0]
             con.close()
         self.assertGreaterEqual(result["observations"], 2)
         self.assertIn(("reference_post", 1, 1), white)
+        self.assertEqual(tuple(wiki_white), ("wiki", 1, 1))
         self.assertNotIn("artist_name", all_tags)
         self.assertNotIn("official_art", all_tags)
+        self.assertNotIn("", candidate_facets)
         self.assertEqual(integrity, "ok")
         self.assertEqual(infer_facet("hair_between_eyes"), "hair")
 

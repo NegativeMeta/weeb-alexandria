@@ -196,6 +196,8 @@ get_character_appearance(character, variant=None, include_evidence=True, limit=1
 
 For example, `get_character_appearance("inugami_korone")` returns the base appearance plus the reviewed `1st_costume`, `street`, and `new_year` profiles. Clothing from one variant is not merged into another variant's base profile.
 
+For the complete profile contract, evidence rules, review checklist, and first five-character batch, see [`docs/CHARACTER_APPEARANCE_PROFILES.md`](docs/CHARACTER_APPEARANCE_PROFILES.md).
+
 ## Structure
 
 ```text

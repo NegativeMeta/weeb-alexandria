@@ -101,13 +101,17 @@ def read_tag_categories(con: sqlite3.Connection, site: str,
     return {row[0]: (row[1] or "").strip().lower() for row in rows}
 
 
+def escape_like(value: str) -> str:
+    return value.replace("\\", "\\\\").replace("%", "\\%").replace("_", "\\_")
+
+
 def wiki_observations(con: sqlite3.Connection, character_tag: str,
                       captured_at: str) -> list[dict[str, Any]]:
     rows = con.execute(
         """SELECT site, title, body FROM wiki
            WHERE title=? OR title LIKE ? ESCAPE '\\'
            ORDER BY site, title""",
-        (character_tag, character_tag + r"\_(%"),
+        (character_tag, escape_like(character_tag) + r"\_(%"),
     ).fetchall()
     result: list[dict[str, Any]] = []
     for site, title, body in rows:
@@ -281,6 +285,10 @@ def build_candidates(observations: list[dict[str, Any]], created_at: str) -> lis
     tier_weight = {"wiki": 1.0, "reference_post": 1.0, "post_sample": 0.7}
     for (character_tag, variant_tag, canonical_tag), evidence in sorted(grouped.items()):
         facet = next((row["facet_guess"] for row in evidence if row["facet_guess"]), "")
+        if not facet:
+            # Unknown/non-visual tags remain auditable observations, but must
+            # not become appearance candidates requiring human cleanup.
+            continue
         primary = any(row["source_kind"] in {"wiki", "reference_post"} for row in evidence)
         support = sum(float(row["support_ratio"]) * tier_weight.get(row["source_kind"], 0.5)
                       for row in evidence)
