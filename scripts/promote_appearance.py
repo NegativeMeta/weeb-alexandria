@@ -57,7 +57,9 @@ def source_ref(source: dict[str, Any]) -> str:
 _PUBLISHED_STATUSES = {"reviewed", "published"}
 
 
-def validate_registered_character(con: sqlite3.Connection, character_tag: str) -> None:
+def validate_registered_character(
+    con: sqlite3.Connection, character_tag: str, raw_character_tag: str | None = None
+) -> None:
     owned = con.execute(
         "SELECT 1 FROM character_profiles WHERE character_tag=? LIMIT 1",
         (character_tag,),
@@ -67,6 +69,12 @@ def validate_registered_character(con: sqlite3.Connection, character_tag: str) -
            WHERE name=? AND category_name='character' LIMIT 1""",
         (character_tag,),
     ).fetchone()
+    if canonical is None and raw_character_tag and raw_character_tag != character_tag:
+        canonical = con.execute(
+            """SELECT 1 FROM tags
+               WHERE name=? AND category_name='character' LIMIT 1""",
+            (raw_character_tag,),
+        ).fetchone()
     if owned is None and canonical is None:
         raise ValueError(
             f"character_tag is not registered as an owned profile or canonical character tag: "
@@ -248,7 +256,7 @@ def promote(db: Path, seed_path: Path) -> dict[str, int]:
     con.row_factory = sqlite3.Row
     try:
         ensure_owned_schema(con)
-        validate_registered_character(con, character_tag)
+        validate_registered_character(con, character_tag, str(data["character_tag"]))
         validate_seed_profiles(character_tag, data["profiles"])
         con.execute("BEGIN")
         sources: dict[str, int] = {}

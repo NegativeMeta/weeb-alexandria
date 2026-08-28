@@ -323,3 +323,20 @@ Candidate generation produced 47 observations and 23 candidates. Only current
 base features were promoted. AZKi historical designs, IRyS 1.0, costumes,
 mascots, fanbase entities, and shared agency outfits remain separate or
 excluded variants.
+
+## First female Hololive staff batch
+
+The staff scope includes female staff and managers with a documented visual
+character design, including historical/retired staff. Male, non-binary or
+unconfirmed staff were not included. The following profiles were published:
+
+| Staff | Canonical tag | Result |
+|---|---|---|
+| A-chan / Friend A | `a-chan_(hololive)` | Historical base published; 5 features |
+| Harusaki Nodoka | `harusaki_nodoka` | Historical base published; 8 features |
+| Jenma-chan | `jenma-chan` | Base published; 3 features |
+
+The batch generated 81 observations and 25 candidates. `Enma-chan` and
+`Kroma_(Ouro Kronii)` remain deferred because their local wiki entries confirm
+staff identity but do not provide enough deterministic visual evidence. Named
+A-chan and Nodoka costumes remain separate variants.
