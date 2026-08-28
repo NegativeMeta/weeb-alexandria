@@ -55,12 +55,19 @@ The same applies to school uniforms, casual outfits, stage costumes, memes,
 fan marks, mascots, and tags originating from multi-character posts. Frequency
 alone is not evidence.
 
-## Next steps
+## Second Hololive batch
 
-1. Review the five source sets character by character.
-2. Separate base appearance from named outfits and group uniforms.
-3. Record conflicts instead of resolving them by frequency.
-4. Create one reviewed seed per accepted character.
-5. Promote only reviewed seeds.
-6. Rebuild all derived indexes and run the full test/MCP validation once this
-   batch is complete.
+The next five base talents were processed by the same independent post-volume
+ranking:
+
+| Rank | Character | Danbooru | Gelbooru | Independent total | Result |
+|---:|---|---:|---:|---:|---|
+| 1 | `gawr_gura` | 13,514 | 17,354 | 30,868 | Base published; graduated 2025; 1 open conflict |
+| 2 | `ouro_kronii` | 7,831 | 13,722 | 21,553 | Base published; 11 features; 1 open conflict |
+| 3 | `minato_aqua` | 8,168 | 9,418 | 17,586 | Base published; graduated 2024; 12 features |
+| 4 | `tokoyami_towa` | 7,505 | 9,714 | 17,219 | Base published; 12 features |
+| 5 | `sakura_miko` | 7,673 | 9,535 | 17,208 | Base published; 10 features |
+
+Candidate generation for this batch produced 1,893 observations and 758
+candidates. Only source-reviewed base features were promoted. Named outfits,
+shared agency uniforms, mascots, and fan marks remain deferred.
