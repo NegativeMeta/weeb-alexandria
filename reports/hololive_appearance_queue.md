@@ -184,3 +184,20 @@ The next five base talents were processed by independent post-volume ranking:
 Candidate generation produced 1,674 observations and 686 candidates. Only
 source-reviewed base features were promoted. Named outfits, shared agency
 uniforms, mascots, and fan marks remain deferred.
+
+## Tenth Hololive batch
+
+The next five valid female talents were processed by independent post-volume
+ranking. `pekomama` was excluded as a family/non-talent entity.
+
+| Rank | Character | Danbooru | Gelbooru | e621 | Independent total | Result |
+|---:|---|---:|---:|---:|---:|---|
+| 1 | `himemori_luna` | 1,990 | 2,632 | 0 | 4,622 | Base published; 9 features |
+| 2 | `kureiji_ollie` | 1,774 | 2,332 | 0 | 4,106 | Base published; 15 features |
+| 3 | `tokino_sora` | 1,732 | 2,352 | 0 | 4,084 | Base published; 7 features; 1 open conflict |
+| 4 | `gigi_murin` | 1,199 | 2,763 | 0 | 3,962 | Base published; 9 features |
+| 5 | `moona_hoshinova` | 1,576 | 2,096 | 0 | 3,672 | Base published; 6 features |
+
+Candidate generation produced 1,555 observations and 654 candidates. Only
+source-reviewed base features were promoted. Named outfits, shared agency
+uniforms, mascots, and fan marks remain deferred.
