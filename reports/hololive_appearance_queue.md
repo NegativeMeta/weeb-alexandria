@@ -419,3 +419,11 @@ pets and ambiguous fan depictions remain separate or excluded.
 `hong_meiling` was reviewed and published with 8 base appearance features and
 zero conflicts. Dragon/panda variants, weapons, and props remain excluded from
 the base profile.
+
+## Fifth general popularity batch
+
+`kagamine_rin` (10 features), `mash_kyrielight` (9), and `link` (2) were
+published after source review. `altria_pendragon_(fate)` was deferred because
+no usable local wiki evidence was available. The published subset contained 21
+features and zero conflicts. Vocaloid design variants, Mash's named costumes,
+and Link's game-specific incarnations remain separate or excluded.
