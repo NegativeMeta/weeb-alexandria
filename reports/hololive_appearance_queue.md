@@ -305,3 +305,21 @@ talents.
 Candidate generation produced 6 observations and 1 candidate. Five features
 were promoted from reviewed evidence. `spade_echo` remains deferred rather
 than receiving speculative attributes.
+
+## Seventeenth Hololive batch
+
+Official-roster reconciliation identified `AZKi` and `IRyS` as the remaining
+idol profiles. Their canonical local tags are `azki_(hololive)` and
+`irys_(hololive)`; generic `azki` and `irys` rows are non-character/collision
+tags. The official holoAN announcers `Izuki Michiru`, `Hanazono Sayaka`, and
+`Kazeshiro Yuki` were intentionally excluded from the idol scope.
+
+| Character | Canonical tag | Result |
+|---|---|---|
+| AZKi | `azki_(hololive)` | Current base published; 10 features |
+| IRyS | `irys_(hololive)` | Current base published; 10 features |
+
+Candidate generation produced 47 observations and 23 candidates. Only current
+base features were promoted. AZKi historical designs, IRyS 1.0, costumes,
+mascots, fanbase entities, and shared agency outfits remain separate or
+excluded variants.
