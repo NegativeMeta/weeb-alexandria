@@ -87,7 +87,17 @@ furude_rika → higurashi_no_naku_koro_ni
 .venv/Scripts/python.exe scripts/build_context_index.py
 ```
 
-`character_context`、`character_work_context`、`context_index_metadata` テーブルを含む `data/character_context.sqlite` が作成されます。この索引はローカルで生成されるファイルで、Git には意図的に含めていません。`tag_library.db` を置き換えた後は再構築してください。メタデータには、元データベースのサイズと索引スキーマのバージョンが記録されます。
+`character_context`、`character_work_context`、`context_index_metadata` テーブルを含む `data/character_context.sqlite` が作成されます。この索引はローカルで生成されるファイルで、Git には意図的に含めていません。`tag_library.db` を置き換えた後は再構築してください。メタデータには、元データベースのサイズ、SHA-256、索引スキーマのバージョンが記録されます。
+
+### 2.2 タグ検索索引を構築する（推奨）
+
+オプションの FTS5 索引は、タグ名とエイリアスの部分一致検索を高速化します。`tag_library.db` を置き換えた後、次のコマンドで構築または再構築します。
+
+```bash
+.venv/Scripts/python.exe scripts/build_search_index.py
+```
+
+`data/tag_search.sqlite` が作成され、元データベースの SHA-256 が保存されます。このファイルは Git には意図的に含めていません。索引が存在する場合、MCP は自動的に使用し、存在しない場合はメイン SQLite クエリにフォールバックします。
 
 ### 3. Hermes に接続する
 
@@ -147,6 +157,8 @@ WeebAlexandria/
 ├── scripts/                データ保守・統合スクリプト
 ├── data/character_context.sqlite
 │                           派生キャラクター・コンテキスト索引（ローカル）
+├── data/tag_search.sqlite
+│                           オプションの FTS5 タグ検索索引（ローカル）
 ├── data/backups/           データベースのバックアップ
 ├── CREDITS.md              クレジットと情報源
 ├── run.bat                 MCP 起動スクリプト

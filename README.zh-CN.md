@@ -87,7 +87,17 @@ furude_rika → higurashi_no_naku_koro_ni
 .venv/Scripts/python.exe scripts/build_context_index.py
 ```
 
-该命令会创建 `data/character_context.sqlite`，其中包含 `character_context`、`character_work_context` 和 `context_index_metadata` 表。该索引是本地生成文件，并且特意排除在 Git 之外；替换 `tag_library.db` 后应重新生成。元数据会记录源数据库大小和索引模式版本。
+该命令会创建 `data/character_context.sqlite`，其中包含 `character_context`、`character_work_context` 和 `context_index_metadata` 表。该索引是本地生成文件，并且特意排除在 Git 之外；替换 `tag_library.db` 后应重新生成。元数据会记录源数据库大小、SHA-256 和索引模式版本。
+
+### 2.2 构建标签搜索索引（推荐）
+
+可选的 FTS5 索引可以加速标签名称和别名的部分搜索。替换 `tag_library.db` 后使用以下命令构建或重新构建：
+
+```bash
+.venv/Scripts/python.exe scripts/build_search_index.py
+```
+
+该命令会创建 `data/tag_search.sqlite` 并保存源数据库的 SHA-256。该文件特意排除在 Git 之外。索引存在时，MCP 会自动使用它；如果索引缺失，则回退到主 SQLite 查询。
 
 ### 3. 连接到 Hermes
 
@@ -147,6 +157,8 @@ WeebAlexandria/
 ├── scripts/                数据维护和融合脚本
 ├── data/character_context.sqlite
 │                           派生角色上下文索引（本地）
+├── data/tag_search.sqlite
+│                           可选的 FTS5 标签搜索索引（本地）
 ├── data/backups/           数据库备份
 ├── CREDITS.md              致谢和来源信息
 ├── run.bat                 MCP 启动脚本

@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import argparse
+import hashlib
 import re
 import sqlite3
 from pathlib import Path
@@ -24,6 +25,14 @@ def terms(value: str) -> set[str]:
     }
 
 
+def sha256(path: Path) -> str:
+    digest = hashlib.sha256()
+    with path.open("rb") as handle:
+        for chunk in iter(lambda: handle.read(1024 * 1024), b""):
+            digest.update(chunk)
+    return digest.hexdigest()
+
+
 def build(source: Path, output: Path) -> tuple[int, int]:
     output.parent.mkdir(parents=True, exist_ok=True)
     for suffix in ("", "-wal", "-shm"):
@@ -43,7 +52,8 @@ def build(source: Path, output: Path) -> tuple[int, int]:
             source TEXT NOT NULL,
             PRIMARY KEY(tag, context, source)
         );
-        CREATE INDEX idx_character_context_context ON character_context(context);
+        CREATE INDEX idx_character_context_context_tag
+            ON character_context(context, tag);
         CREATE INDEX idx_character_context_tag ON character_context(tag);
         CREATE TABLE character_work_context (
             tag TEXT NOT NULL,
@@ -53,7 +63,8 @@ def build(source: Path, output: Path) -> tuple[int, int]:
             source TEXT NOT NULL,
             PRIMARY KEY(tag, work_tag, source)
         );
-        CREATE INDEX idx_character_work_context_tag ON character_work_context(tag);
+        CREATE INDEX idx_character_work_context_tag_cover
+            ON character_work_context(tag, score DESC, work_tag, matched_terms);
         CREATE INDEX idx_character_work_context_work ON character_work_context(work_tag);
         CREATE TABLE context_index_metadata (
             key TEXT PRIMARY KEY,
@@ -160,6 +171,7 @@ def build(source: Path, output: Path) -> tuple[int, int]:
         "schema_version": "2",
         "source_db": str(source.resolve()),
         "source_size": str(stat.st_size),
+        "source_sha256": sha256(source),
         "character_wiki_rows": str(character_wiki_rows),
     }
     out.executemany(

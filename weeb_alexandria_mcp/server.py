@@ -19,6 +19,9 @@ TAGLIB_DB = os.path.abspath(os.environ.get(
 CONTEXT_DB = os.path.abspath(os.environ.get(
     "CONTEXT_DB", os.path.join(ROOT, "..", "data", "character_context.sqlite")
 ))
+SEARCH_DB = os.path.abspath(os.environ.get(
+    "SEARCH_DB", os.path.join(ROOT, "..", "data", "tag_search.sqlite")
+))
 
 mcp = FastMCP("Weeb Alexandria")
 
@@ -29,6 +32,7 @@ _WORK_NAME_HINTS = {
 }
 _COPYRIGHT_TOKENS: Optional[set[str]] = None
 _OWNED_SCHEMA_READY = False
+_SOURCE_STATUS_CACHE: Optional[tuple[tuple[int, int], dict[str, int]]] = None
 
 
 def _normalize_tag(value: str) -> str:
@@ -269,47 +273,154 @@ def _local_copyrights(con: sqlite3.Connection, query: str = "", limit: int = 100
     return [dict(row) for row in rows]
 
 
+def _tag_match(name: str, query: str, normalized: str) -> tuple[str, int]:
+    lowered = name.lower()
+    raw = query.strip().lower()
+    if lowered == raw:
+        return "exact", 3
+    if lowered == normalized:
+        return "normalized", 3
+    if normalized and lowered.startswith(f"{normalized}_"):
+        return "prefix", 2
+    return "partial", 1
+
+
+def _merge_tag_rows(rows: list[sqlite3.Row], query: str,
+                    normalized: str, limit: int) -> list[dict]:
+    merged: dict[str, dict] = {}
+    for row in rows:
+        name = row["name"]
+        if not name:
+            continue
+        match_type, relevance = _tag_match(name, query, normalized)
+        item = merged.get(name)
+        if item is None:
+            item = {
+                "name": name,
+                "category": row["category_name"],
+                "post_count": row["post_count"],
+                "sites": [],
+                "aliases": row["aliases"] or "",
+                "nsfw": False,
+                "match_type": match_type,
+                "confidence": ("high" if relevance == 3
+                               else "medium" if relevance == 2
+                               else "low"),
+                "_relevance": relevance,
+            }
+            merged[name] = item
+        elif relevance > item["_relevance"]:
+            item["_relevance"] = relevance
+            item["match_type"] = match_type
+            item["confidence"] = ("high" if relevance == 3
+                                   else "medium" if relevance == 2
+                                   else "low")
+        site = row["site"]
+        if site and site not in item["sites"]:
+            item["sites"].append(site)
+        item["nsfw"] = item["nsfw"] or bool(row["nsfw"])
+        if (row["post_count"] or 0) > (item["post_count"] or 0):
+            item["post_count"] = row["post_count"]
+        if not item["aliases"] and row["aliases"]:
+            item["aliases"] = row["aliases"]
+
+    result = sorted(
+        merged.values(),
+        key=lambda item: (-item["_relevance"],
+                          -(item["post_count"] or 0), item["name"]),
+    )[:limit]
+    for item in result:
+        item.pop("_relevance", None)
+    return result
+
+
+def _legacy_tag_rows(con: sqlite3.Connection, query: str,
+                     category: Optional[str], limit: int) -> list[dict]:
+    normalized = _normalize_tag(query)
+    sql = (
+        "SELECT name, category_name, post_count, site, aliases, nsfw "
+        "FROM tags WHERE lower(name) LIKE ?"
+    )
+    params: list[Any] = [f"%{normalized}%"]
+    if category and category.lower() not in {"tag", "tags", "all"}:
+        sql += " AND category_name = ?"
+        params.append(category)
+    sql += " ORDER BY post_count DESC NULLS LAST, name LIMIT ?"
+    params.append(limit)
+    rows = con.execute(sql, params).fetchall()
+    return _merge_tag_rows(rows, query, normalized, limit)
+
+
+def _fts_match_query(query: str) -> str:
+    normalized = _normalize_tag(query)
+    tokens = re.findall(r"[a-z0-9][a-z0-9:+!/-]*", normalized, re.IGNORECASE)
+    return " AND ".join(
+        f'"{token.replace(chr(34), chr(34) * 2)}"*' for token in tokens
+    )
+
+
+def _fts_tag_rows(query: str, category: Optional[str], limit: int) -> Optional[list[sqlite3.Row]]:
+    if not os.path.exists(SEARCH_DB):
+        return None
+    match_query = _fts_match_query(query)
+    if not match_query:
+        return []
+    search = sqlite3.connect(SEARCH_DB)
+    search.row_factory = sqlite3.Row
+    try:
+        search.execute("PRAGMA query_only = ON")
+        sql = (
+            "SELECT site, name, category_name, post_count, aliases, nsfw "
+            "FROM tag_search WHERE tag_search MATCH ?"
+        )
+        params: list[Any] = [match_query]
+        if category and category.lower() not in {"tag", "tags", "all"}:
+            sql += " AND category_name = ?"
+            params.append(category)
+        sql += (
+            " ORDER BY bm25(tag_search), post_count DESC NULLS LAST, name LIMIT ?"
+        )
+        params.append(max(50, min(limit * 4, 400)))
+        return search.execute(sql, params).fetchall()
+    except sqlite3.Error:
+        return None
+    finally:
+        search.close()
+
+
+def _indexed_prefix_rows(con: sqlite3.Connection, normalized: str,
+                         category: Optional[str], limit: int) -> list[sqlite3.Row]:
+    sql = (
+        "SELECT name, category_name, post_count, site, aliases, nsfw "
+        "FROM tags INDEXED BY idx_tags_name "
+        "WHERE name >= ? AND name < ? AND name LIKE ?"
+    )
+    params: list[Any] = [normalized, normalized + "\uffff", normalized + "%"]
+    if category and category.lower() not in {"tag", "tags", "all"}:
+        sql += " AND category_name = ?"
+        params.append(category)
+    sql += (
+        " ORDER BY CASE WHEN name = ? THEN 3 "
+        "WHEN name LIKE ? THEN 2 ELSE 1 END DESC, "
+        "post_count DESC NULLS LAST, name LIMIT ?"
+    )
+    params.extend([normalized, normalized + "%", limit])
+    return con.execute(sql, params).fetchall()
+
+
 def _tag_rows(con: sqlite3.Connection, query: str,
               category: Optional[str], limit: int) -> list[dict]:
     limit = max(1, min(int(limit), 100))
     normalized = _normalize_tag(query)
-    sql = (
-        "SELECT name, category_name, post_count, site, aliases, nsfw, "
-        "CASE WHEN lower(name)=? THEN 3 "
-        "WHEN lower(name) LIKE ? THEN 2 ELSE 1 END AS relevance "
-        "FROM tags WHERE lower(name) LIKE ?"
-    )
-    params: list[Any] = [normalized, f"{normalized}_%", f"%{normalized}%"]
-    # Clients often call the general tag search with category="tag".
-    # The database stores concrete categories (general, character, artist,
-    # copyright, ...), so "tag" means all tag categories rather than a
-    # literal category_name value.
-    if category and category.lower() not in {"tag", "tags", "all"}:
-        sql += " AND category_name = ?"
-        params.append(category)
-    sql += " ORDER BY relevance DESC, post_count DESC NULLS LAST LIMIT ?"
-    params.append(limit)
-    rows = con.execute(sql, params).fetchall()
-    merged: dict[str, dict] = {}
-    for row in rows:
-        item = merged.setdefault(row["name"], {
-            "name": row["name"],
-            "category": row["category_name"],
-            "post_count": row["post_count"],
-            "sites": [],
-            "aliases": row["aliases"] or "",
-            "nsfw": False,
-            "match_type": ("exact" if row["name"].lower() == query.strip().lower()
-                           else "normalized" if row["name"].lower() == normalized
-                           else "prefix" if row["name"].lower().startswith(f"{normalized}_")
-                           else "partial"),
-            "confidence": ("high" if row["relevance"] == 3
-                           else "medium" if row["relevance"] == 2
-                           else "low"),
-        })
-        item["sites"].append(row["site"])
-        item["nsfw"] = item["nsfw"] or bool(row["nsfw"])
-    return list(merged.values())
+    if not normalized:
+        return _legacy_tag_rows(con, query, category, limit)
+
+    fts_rows = _fts_tag_rows(query, category, limit)
+    if fts_rows is None:
+        # Keep installations without the derived index fully compatible.
+        return _legacy_tag_rows(con, query, category, limit)
+    prefix_rows = _indexed_prefix_rows(con, normalized, category, limit)
+    return _merge_tag_rows(prefix_rows + fts_rows, query, normalized, limit)
 
 
 def _tag_suggestions(con: sqlite3.Connection, query: str,
@@ -347,8 +458,23 @@ def _tag_suggestions(con: sqlite3.Connection, query: str,
                 [f"%!_{token}", *category_params],
             ).fetchall())
     if not rows:
+        # Before the expensive substring fallback, use a short indexed prefix
+        # to obtain a bounded fuzzy candidate set (e.g. ``swa`` for
+        # ``swalow``). Names are canonical lowercase tags in this database.
+        for token in tokens:
+            if len(token) < 3:
+                continue
+            prefix = token[:3]
+            rows.extend(con.execute(
+                "SELECT name, category_name, post_count, site, aliases, nsfw "
+                f"FROM tags INDEXED BY idx_tags_name "
+                f"WHERE name >= ? AND name < ? AND name LIKE ?{category_filter} "
+                "ORDER BY post_count DESC NULLS LAST LIMIT 2000",
+                [prefix, prefix + "\uffff", prefix + "%", *category_params],
+            ).fetchall())
+    if not rows:
         # Expensive fuzzy fallback is reserved for misspellings with no
-        # indexed prefix/suffix candidates (e.g. ``swalow``).
+        # indexed short-prefix candidates.
         token_where = " OR ".join("lower(name) LIKE ? OR lower(aliases) LIKE ?" for _ in tokens)
         length_where = "(substr(lower(name), 1, 1) = ? AND length(name) BETWEEN ? AND ?)"
         where = f"({token_where} OR {length_where}){category_filter}"
@@ -817,9 +943,29 @@ def get_character(slug: str) -> dict:
         con.close()
 
 
+def _database_signature() -> tuple[int, int]:
+    try:
+        stat = os.stat(TAGLIB_DB)
+    except OSError:
+        return (-1, -1)
+    return (stat.st_size, stat.st_mtime_ns)
+
+
 @mcp.tool()
 def get_sources_status() -> dict:
     """Comprueba las fuentes locales de Weeb Alexandria."""
+    global _SOURCE_STATUS_CACHE
+    signature = _database_signature()
+    if _SOURCE_STATUS_CACHE and _SOURCE_STATUS_CACHE[0] == signature:
+        return {
+            "name": "Weeb Alexandria",
+            "db": TAGLIB_DB,
+            "exists": os.path.exists(TAGLIB_DB),
+            "counts": dict(_SOURCE_STATUS_CACHE[1]),
+            "structured_mode": "owned_local_tables",
+            "cached": True,
+        }
+
     con = _db()
     try:
         counts = {}
@@ -827,9 +973,10 @@ def get_sources_status() -> dict:
                       "character_profiles", "trait_definitions",
                       "character_traits", "trait_system_metadata"):
             counts[table] = con.execute(f"SELECT count(*) FROM {table}").fetchone()[0]
+        _SOURCE_STATUS_CACHE = (signature, dict(counts))
         return {"name": "Weeb Alexandria", "db": TAGLIB_DB,
                 "exists": os.path.exists(TAGLIB_DB), "counts": counts,
-                "structured_mode": "owned_local_tables"}
+                "structured_mode": "owned_local_tables", "cached": False}
     finally:
         con.close()
 

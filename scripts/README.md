@@ -23,6 +23,16 @@ the orchestrator doesn't care what's inside.
 
 One-off helper that strips NSFW / explicit tags from a Danbooru character CSV. Run it on your source CSV before feeding it to a compatible local importer.
 
+## `build_search_index.py`
+
+Builds the optional derived SQLite FTS5 index used for fast partial tag and alias searches:
+
+```bash
+.venv/Scripts/python.exe scripts/build_search_index.py
+```
+
+The output is `data/tag_search.sqlite`. It is reproducible from `tag_library.db`, records the source SHA-256, and is excluded from Git because it is a generated artifact.
+
 ## `migrate_owned_traits.py`
 
 One-time migration utility for the owned structured character schema. It

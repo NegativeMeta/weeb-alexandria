@@ -87,7 +87,17 @@ Constrúyelo o regénéralo con:
 .venv/Scripts/python.exe scripts/build_context_index.py
 ```
 
-Crea `data/character_context.sqlite` con las tablas `character_context`, `character_work_context` y `context_index_metadata`. El índice es local/generado, está excluido intencionalmente de Git y debe regenerarse después de reemplazar `tag_library.db`. La metadata registra el tamaño de la base de origen y la versión del esquema del índice.
+Crea `data/character_context.sqlite` con las tablas `character_context`, `character_work_context` y `context_index_metadata`. El índice es local/generado, está excluido intencionalmente de Git y debe regenerarse después de reemplazar `tag_library.db`. La metadata registra el tamaño de la base de origen, su SHA-256 y la versión del esquema del índice.
+
+### 2.2 Construir el índice de búsqueda de tags (recomendado)
+
+El índice FTS5 opcional acelera las búsquedas parciales sobre nombres y aliases de tags. Constrúyelo o regénéralo después de reemplazar `tag_library.db`:
+
+```bash
+.venv/Scripts/python.exe scripts/build_search_index.py
+```
+
+Crea `data/tag_search.sqlite`, guarda el SHA-256 de la base de origen y está excluido intencionalmente de Git. El MCP lo usa automáticamente cuando está presente y vuelve a las consultas SQLite principales si falta.
 
 ### 3. Conectarlo a Hermes
 
@@ -147,6 +157,8 @@ WeebAlexandria/
 ├── scripts/                Scripts de mantenimiento y fusión
 ├── data/character_context.sqlite
 │                           Índice de contexto derivado (local)
+├── data/tag_search.sqlite
+│                           Índice FTS5 opcional de búsqueda (local)
 ├── data/backups/           Backups de la base
 ├── CREDITS.md              Créditos y fuentes
 ├── run.bat                 Launcher del MCP

@@ -1,7 +1,9 @@
 import sqlite3
+import tempfile
 import unittest
 from pathlib import Path
 
+import weeb_alexandria_mcp.server as server_module
 from weeb_alexandria_mcp.server import (
     _tag_rows,
     _tag_suggestions,
@@ -59,6 +61,18 @@ class SearchRegressionTests(unittest.TestCase):
         self.assertIn("character_profiles", result["counts"])
         self.assertIn("trait_system_metadata", result["counts"])
 
+    def test_sources_status_uses_memory_cache_until_database_changes(self):
+        previous = getattr(server_module, "_SOURCE_STATUS_CACHE", None)
+        try:
+            server_module._SOURCE_STATUS_CACHE = None
+            first = get_sources_status()
+            second = get_sources_status()
+            self.assertFalse(first["cached"])
+            self.assertTrue(second["cached"])
+            self.assertEqual(first["counts"], second["counts"])
+        finally:
+            server_module._SOURCE_STATUS_CACHE = previous
+
     def test_legacy_structured_tables_are_removed_after_migration(self):
         names = {
             row[0] for row in self.con.execute(
@@ -70,6 +84,80 @@ class SearchRegressionTests(unittest.TestCase):
     def test_tag_category_alias_returns_general_tags(self):
         rows = _tag_rows(self.con, "closed mouth", "tag", 25)
         self.assertTrue(any(row["name"] == "closed_mouth" for row in rows))
+
+    def test_tag_rows_uses_optional_fts_index(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            search_path = Path(tmp) / "tag_search.sqlite"
+            search = sqlite3.connect(search_path)
+            search.execute(
+                "CREATE VIRTUAL TABLE tag_search USING fts5("
+                "site UNINDEXED, name, category_name UNINDEXED, "
+                "post_count UNINDEXED, aliases, nsfw UNINDEXED)"
+            )
+            search.execute(
+                "INSERT INTO tag_search(site, name, category_name, post_count, aliases, nsfw) "
+                "VALUES (?, ?, ?, ?, ?, ?)",
+                ("test", "ftsneedle_character", "character", 10, "needle alias", 0),
+            )
+            search.commit()
+            previous = getattr(server_module, "SEARCH_DB", None)
+            try:
+                server_module.SEARCH_DB = str(search_path)
+                rows = _tag_rows(self.con, "ftsneedle", "character", 5)
+            finally:
+                server_module.SEARCH_DB = previous
+                search.close()
+        self.assertTrue(rows)
+        self.assertEqual(rows[0]["name"], "ftsneedle_character")
+        self.assertEqual(rows[0]["match_type"], "prefix")
+
+    def test_tag_rows_deduplicates_sites_when_prefix_and_fts_overlap(self):
+        rows = _tag_rows(self.con, "hatsune miku", "character", 5)
+        self.assertTrue(rows)
+        self.assertTrue(all(
+            len(row["sites"]) == len(set(row["sites"])) for row in rows
+        ))
+
+    def test_search_index_builder_copies_rows_and_records_source_hash(self):
+        from scripts.build_search_index import build
+
+        with tempfile.TemporaryDirectory() as tmp:
+            source_path = Path(tmp) / "source.sqlite"
+            output_path = Path(tmp) / "tag_search.sqlite"
+            source = sqlite3.connect(source_path)
+            source.executescript(
+                """
+                CREATE TABLE tags (
+                    site TEXT NOT NULL,
+                    name TEXT NOT NULL,
+                    category_name TEXT NOT NULL,
+                    post_count INTEGER,
+                    aliases TEXT,
+                    nsfw INTEGER
+                );
+                INSERT INTO tags VALUES
+                    ('test', 'ftsneedle_character', 'character', 10, 'needle alias', 0),
+                    ('test', 'other_tag', 'general', 2, '', 0);
+                """
+            )
+            source.commit()
+            source.close()
+            source_size = str(source_path.stat().st_size)
+            build(source_path, output_path)
+            search = sqlite3.connect(output_path)
+            try:
+                rows = search.execute(
+                    "SELECT name FROM tag_search WHERE tag_search MATCH ?",
+                    ("ftsneedle*",),
+                ).fetchall()
+                metadata = dict(search.execute(
+                    "SELECT key, value FROM tag_search_metadata"
+                ).fetchall())
+            finally:
+                search.close()
+        self.assertEqual(rows, [("ftsneedle_character",)])
+        self.assertEqual(metadata["source_size"], source_size)
+        self.assertTrue(metadata["source_sha256"])
 
     def test_close_typo_returns_recommendations(self):
         suggestions = _tag_suggestions(self.con, "swalow", "tag", 25)
@@ -198,6 +286,25 @@ class SearchRegressionTests(unittest.TestCase):
             self.assertIsNotNone(metadata)
         finally:
             con.close()
+
+    def test_context_index_has_covering_lookup_indexes(self):
+        index = Path(__file__).parents[1] / "data" / "character_context.sqlite"
+        con = sqlite3.connect(index)
+        try:
+            context_indexes = {
+                row[1] for row in con.execute(
+                    "PRAGMA index_list('character_context')"
+                )
+            }
+            work_indexes = {
+                row[1] for row in con.execute(
+                    "PRAGMA index_list('character_work_context')"
+                )
+            }
+        finally:
+            con.close()
+        self.assertIn("idx_character_context_context_tag", context_indexes)
+        self.assertIn("idx_character_work_context_tag_cover", work_indexes)
 
     def test_unknown_structured_character_can_fall_back_to_tag(self):
         result = get_character("wave_the_swallow")
