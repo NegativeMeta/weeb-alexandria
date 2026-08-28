@@ -203,6 +203,44 @@ def upsert_profile(con: sqlite3.Connection, character_tag: str,
     return key
 
 
+def upsert_conflicts(con: sqlite3.Connection, profile_key: str,
+                     conflicts: list[Any], source_ids: dict[str, int]) -> int:
+    if not isinstance(conflicts, list):
+        raise ValueError(f"conflicts must be a list for {profile_key}")
+    count = 0
+    for conflict in conflicts:
+        if not isinstance(conflict, dict):
+            raise ValueError(f"conflict must be an object for {profile_key}")
+        key = normalize_tag(str(conflict.get("conflict_key", "")))
+        facet = normalize_tag(str(conflict.get("facet", "")))
+        alternatives = conflict.get("alternatives", [])
+        refs = conflict.get("source_refs", [])
+        if not key or not facet or not isinstance(alternatives, list) or len(alternatives) < 2:
+            raise ValueError(f"conflict requires key, facet, and two alternatives for {profile_key}")
+        if not isinstance(refs, list) or not refs:
+            raise ValueError(f"conflict has no evidence: {profile_key}/{key}")
+        missing = sorted(set(str(ref) for ref in refs) - source_ids.keys())
+        if missing:
+            raise ValueError(f"unknown conflict source refs for {profile_key}/{key}: {missing}")
+        con.execute(
+            """INSERT INTO character_appearance_conflicts(
+                appearance_key, facet, conflict_key, alternatives_json, status,
+                reason, source_refs_json, resolution_note
+            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+            ON CONFLICT(appearance_key, conflict_key) DO UPDATE SET
+                facet=excluded.facet, alternatives_json=excluded.alternatives_json,
+                status=excluded.status, reason=excluded.reason,
+                source_refs_json=excluded.source_refs_json,
+                resolution_note=excluded.resolution_note""",
+            (profile_key, facet, key, json.dumps(alternatives, sort_keys=True),
+             str(conflict.get("status", "open")), str(conflict.get("reason", "")),
+             json.dumps([str(ref) for ref in refs], sort_keys=True),
+             str(conflict.get("resolution_note", ""))),
+        )
+        count += 1
+    return count
+
+
 def promote(db: Path, seed_path: Path) -> dict[str, int]:
     data = read_seed(seed_path)
     character_tag = normalize_tag(str(data["character_tag"]))
@@ -225,6 +263,7 @@ def promote(db: Path, seed_path: Path) -> dict[str, int]:
         profile_count = 0
         feature_count = 0
         link_count = 0
+        conflict_count = 0
         for profile in data["profiles"]:
             if not isinstance(profile, dict):
                 raise ValueError("each profile must be a JSON object")
@@ -324,6 +363,9 @@ def promote(db: Path, seed_path: Path) -> dict[str, int]:
                         ),
                     )
                     link_count += 1
+            conflict_count += upsert_conflicts(
+                con, profile_key, profile.get("conflicts", []), sources
+            )
         con.execute(
             "INSERT OR REPLACE INTO appearance_schema_metadata(key, value) VALUES (?, ?)",
             ("last_promoted_seed", str(seed_path.resolve())),
@@ -338,6 +380,7 @@ def promote(db: Path, seed_path: Path) -> dict[str, int]:
             "features": feature_count,
             "evidence_links": link_count,
             "sources": len(sources),
+            "conflicts": conflict_count,
         }
     except Exception:
         con.rollback()

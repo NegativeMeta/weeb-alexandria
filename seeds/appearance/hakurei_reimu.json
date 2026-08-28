@@ -1,0 +1,124 @@
+{
+  "character_tag": "hakurei_reimu",
+  "sources": [
+    {
+      "id": "danbooru:wiki:hakurei_reimu",
+      "source_site": "danbooru",
+      "source_kind": "wiki",
+      "source_key": "hakurei_reimu",
+      "source_url": "https://danbooru.donmai.us/wiki_pages/hakurei_reimu.json",
+      "source_tier": 1,
+      "title": "Hakurei Reimu",
+      "excerpt": "Her hair color is usually brown or black and her eye colors vary between red, black, or brown. Her signature accessories are a frilled red hair bow, frilled hair tubes on her sidelocks, and a yellow ascot. Her outfit is a sleeveless red shirt with frilled collar, detached white sleeves, matching frilled red skirt, white socks, and brown loafers or black Mary Janes.",
+      "captured_at": "2026-08-28"
+    },
+    {
+      "id": "gelbooru:wiki:hakurei_reimu",
+      "source_site": "gelbooru",
+      "source_kind": "wiki",
+      "source_key": "hakurei_reimu",
+      "source_url": "https://gelbooru.com/index.php?page=wiki&s=view&id=hakurei_reimu",
+      "source_tier": 1,
+      "title": "Hakurei Reimu",
+      "excerpt": "Reimu wears signature hair tubes, hair bow, and detached sleeves.",
+      "captured_at": "2026-08-28"
+    },
+    {
+      "id": "e621:wiki:hakurei_reimu",
+      "source_site": "e621",
+      "source_kind": "wiki",
+      "source_key": "hakurei_reimu",
+      "source_url": "https://e621.net/wiki_pages/hakurei_reimu.json",
+      "source_tier": 1,
+      "title": "Hakurei Reimu",
+      "excerpt": "One of Gensoukyou's shrine maidens and a main protagonist in the Touhou Project video game series. The cosplay tag is separate from the character tag.",
+      "captured_at": "2026-08-28"
+    },
+    {
+      "id": "danbooru:wiki:hakurei_reimu_(pc-98)",
+      "source_site": "danbooru",
+      "source_kind": "wiki",
+      "source_key": "hakurei_reimu_(pc-98)",
+      "source_url": "https://danbooru.donmai.us/wiki_pages/hakurei_reimu_(pc-98).json",
+      "source_tier": 1,
+      "title": "Hakurei Reimu (PC-98)",
+      "excerpt": "Classic Reimu has long hair, purple hair, purple eyes, and a more traditional miko outfit with a white top and no yellow ascot. She is not generally considered a separate character from Windows-era Reimu.",
+      "captured_at": "2026-08-28"
+    },
+    {
+      "id": "gelbooru:wiki:hakurei_reimu_(pc-98)",
+      "source_site": "gelbooru",
+      "source_kind": "wiki",
+      "source_key": "hakurei_reimu_(pc-98)",
+      "source_url": "https://gelbooru.com/index.php?page=wiki&s=view&id=hakurei_reimu_(pc-98)",
+      "source_tier": 1,
+      "title": "Hakurei Reimu (PC-98)",
+      "excerpt": "Classic Reimu is usually distinguished by purple hair and a more traditional miko outfit.",
+      "captured_at": "2026-08-28"
+    }
+  ],
+  "profiles": [
+    {
+      "appearance_key": "hakurei_reimu::default",
+      "variant_tag": "hakurei_reimu",
+      "display_name": "Windows-era base appearance",
+      "appearance_kind": "default",
+      "is_default": true,
+      "status": "published",
+      "replace_features": true,
+      "confidence": "high",
+      "provenance": "danbooru_gelbooru_e621_wiki_reviewed",
+      "notes": "The sources explicitly document color variation: brown or black hair and red, black, or brown eyes. These are retained as documented conflicts rather than collapsed by frequency. PC-98, Seihou, LostWord, cosplay, and other named variants remain separate.",
+      "conflicts": [
+        {"conflict_key": "base_hair_color", "facet": "hair", "alternatives": ["brown_hair", "black_hair"], "status": "open", "reason": "The Danbooru wiki explicitly states that both brown and black hair are commonly depicted for the base design.", "source_refs": ["danbooru:wiki:hakurei_reimu"]},
+        {"conflict_key": "base_eye_color", "facet": "eyes", "alternatives": ["red_eyes", "black_eyes", "brown_eyes"], "status": "open", "reason": "The Danbooru wiki explicitly lists red, black, and brown eye colors for the base design.", "source_refs": ["danbooru:wiki:hakurei_reimu"]},
+        {"conflict_key": "base_footwear", "facet": "footwear", "alternatives": ["brown_shoes", "mary_janes"], "status": "open", "reason": "The documented outfit permits brown loafers or black Mary Janes.", "source_refs": ["danbooru:wiki:hakurei_reimu"]},
+        {"conflict_key": "base_shirt_cut", "facet": "upper_body", "alternatives": ["crop_top", "sleeveless_shirt"], "status": "open", "reason": "The documented outfit varies between a cropped or midriff-baring shirt and a non-cropped sleeveless shirt.", "source_refs": ["danbooru:wiki:hakurei_reimu"]}
+      ],
+      "features": [
+        {"facet": "hair", "value": "Brown hair (documented alternative)", "canonical_tag": "brown_hair", "source_refs": ["danbooru:wiki:hakurei_reimu"]},
+        {"facet": "hair", "value": "Black hair (documented alternative)", "canonical_tag": "black_hair", "source_refs": ["danbooru:wiki:hakurei_reimu"]},
+        {"facet": "eyes", "value": "Red eyes (documented alternative)", "canonical_tag": "red_eyes", "source_refs": ["danbooru:wiki:hakurei_reimu"]},
+        {"facet": "eyes", "value": "Black eyes (documented alternative)", "canonical_tag": "black_eyes", "source_refs": ["danbooru:wiki:hakurei_reimu"]},
+        {"facet": "eyes", "value": "Brown eyes (documented alternative)", "canonical_tag": "brown_eyes", "source_refs": ["danbooru:wiki:hakurei_reimu"]},
+        {"facet": "hair_accessory", "value": "Frilled hair tubes", "canonical_tag": "frilled_hair_tubes", "source_refs": ["danbooru:wiki:hakurei_reimu", "gelbooru:wiki:hakurei_reimu"]},
+        {"facet": "hair_accessory", "value": "Sidelocks", "canonical_tag": "sidelocks", "source_refs": ["danbooru:wiki:hakurei_reimu"]},
+        {"facet": "hair_accessory", "value": "Hair bow", "canonical_tag": "hair_bow", "source_refs": ["danbooru:wiki:hakurei_reimu", "gelbooru:wiki:hakurei_reimu"]},
+        {"facet": "accessories", "value": "Frilled bow", "canonical_tag": "frilled_bow", "source_refs": ["danbooru:wiki:hakurei_reimu"]},
+        {"facet": "accessories", "value": "Red bow", "canonical_tag": "red_bow", "source_refs": ["danbooru:wiki:hakurei_reimu"]},
+        {"facet": "neck", "value": "Yellow ascot", "canonical_tag": "yellow_ascot", "source_refs": ["danbooru:wiki:hakurei_reimu"]},
+        {"facet": "upper_body", "value": "Sleeveless red shirt", "canonical_tag": "red_shirt", "source_refs": ["danbooru:wiki:hakurei_reimu"]},
+        {"facet": "upper_body", "value": "Sleeveless shirt", "canonical_tag": "sleeveless_shirt", "source_refs": ["danbooru:wiki:hakurei_reimu"]},
+        {"facet": "upper_body", "value": "Crop top or exposed midriff (documented alternative)", "canonical_tag": "crop_top", "source_refs": ["danbooru:wiki:hakurei_reimu"]},
+        {"facet": "neck", "value": "Frilled shirt collar", "canonical_tag": "frilled_shirt_collar", "source_refs": ["danbooru:wiki:hakurei_reimu"]},
+        {"facet": "sleeves", "value": "Detached sleeves", "canonical_tag": "detached_sleeves", "source_refs": ["danbooru:wiki:hakurei_reimu", "gelbooru:wiki:hakurei_reimu"]},
+        {"facet": "sleeves", "value": "White sleeves", "canonical_tag": "white_sleeves", "source_refs": ["danbooru:wiki:hakurei_reimu"]},
+        {"facet": "lower_body", "value": "Frilled red skirt", "canonical_tag": "frilled_skirt", "source_refs": ["danbooru:wiki:hakurei_reimu"]},
+        {"facet": "lower_body", "value": "Red skirt", "canonical_tag": "red_skirt", "source_refs": ["danbooru:wiki:hakurei_reimu"]},
+        {"facet": "legwear", "value": "White socks", "canonical_tag": "white_socks", "source_refs": ["danbooru:wiki:hakurei_reimu"]},
+        {"facet": "footwear", "value": "Brown shoes or loafers (documented alternative)", "canonical_tag": "brown_shoes", "source_refs": ["danbooru:wiki:hakurei_reimu"]},
+        {"facet": "footwear", "value": "Black Mary Janes (documented alternative)", "canonical_tag": "mary_janes", "source_refs": ["danbooru:wiki:hakurei_reimu"]}
+      ]
+    },
+    {
+      "appearance_key": "hakurei_reimu::hakurei_reimu_(pc_98)",
+      "variant_tag": "hakurei_reimu_(pc_98)",
+      "display_name": "PC-98 / Classic Reimu",
+      "appearance_kind": "variant",
+      "is_default": false,
+      "status": "published",
+      "replace_features": true,
+      "confidence": "high",
+      "provenance": "danbooru_gelbooru_wiki_reviewed",
+      "notes": "PC-98 is a contextual appearance variant of Reimu, not a separate character. Its distinguishing traits are isolated here.",
+      "features": [
+        {"facet": "hair", "value": "Long hair", "canonical_tag": "long_hair", "source_refs": ["danbooru:wiki:hakurei_reimu_(pc-98)"]},
+        {"facet": "hair", "value": "Purple hair", "canonical_tag": "purple_hair", "source_refs": ["danbooru:wiki:hakurei_reimu_(pc-98)", "gelbooru:wiki:hakurei_reimu_(pc-98)"]},
+        {"facet": "eyes", "value": "Purple eyes", "canonical_tag": "purple_eyes", "source_refs": ["danbooru:wiki:hakurei_reimu_(pc-98)"]},
+        {"facet": "outfit", "value": "Traditional miko outfit", "canonical_tag": "miko", "source_refs": ["danbooru:wiki:hakurei_reimu_(pc-98)", "gelbooru:wiki:hakurei_reimu_(pc-98)"]},
+        {"facet": "upper_body", "value": "White top", "canonical_tag": "white_shirt", "source_refs": ["danbooru:wiki:hakurei_reimu_(pc-98)"]},
+        {"facet": "neck", "value": "No yellow ascot", "canonical_tag": "no_ascot", "role": "absent", "source_refs": ["danbooru:wiki:hakurei_reimu_(pc-98)"]}
+      ]
+    }
+  ]
+}

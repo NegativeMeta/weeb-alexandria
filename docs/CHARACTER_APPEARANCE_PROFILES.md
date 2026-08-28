@@ -98,6 +98,11 @@ Every published feature must link to one or more sources through
 `combined` is a derived aggregation, not a source. Preserve source identity,
 counts, sample size, and conflicts independently.
 
+The `character_appearance_conflicts` table records every unresolved ambiguity
+with a conflict key, facet, alternatives, status, reason, source references, and
+future resolution note. Conflicts are never silently discarded; they remain open
+until a later review resolves them.
+
 ## 5. Candidate-to-publication workflow
 
 ```text

@@ -42,16 +42,21 @@ Observed result:
 | Character | Observations | Variants observed | Candidates | Empty facets | Decision |
 |---|---:|---:|---:|---:|---|
 | `hatsune_miku` | 296 | 47 | 117 | 0 | Triage variants aggressively; do not create one profile per wiki page. |
-| `hakurei_reimu` | 53 | 6 | 28 | 0 | Review base, PC-98, and named variants separately. |
-| `kirisame_marisa` | 59 | 10 | 40 | 0 | Review base and named variants; keep props/outfits scoped. |
-| `artoria_pendragon_(fate)` | 24 | 1 | 4 | 0 | Review the base profile first; no variant inferred. |
-| `souryuu_asuka_langley` | 12 | 2 | 0 | 0 | Hold: observations exist but no deterministic visual facets passed classification. |
-| **Total** | **444** | — | **189** | **0** | **One reviewed base profile published; no variants auto-published.** |
+| `hakurei_reimu` | 53 | 6 | 28 | 0 | Base and PC-98 profiles reviewed and published; color alternatives remain documented conflicts. |
+| `kirisame_marisa` | 59 | 10 | 40 | 0 | Windows base, PC-98, and Seihou profiles reviewed and published; LostWord/cosplay variants remain separate. |
+| `artoria_pendragon_(fate)` | 24 | 1 | 4 | 0 | Saber base reviewed and published with core hair, eyes, dress, sleeves, and armor; other classes remain separate. |
+| `souryuu_asuka_langley` | 12 | 2 | 0 | 0 | Deferred: observations contain nationality/personality/meme/cosplay metadata but no visual evidence. |
+| **Total** | **444** | — | **189** | **0** | **Four characters reviewed; Asuka deferred; no unreviewed variants auto-published.** |
 
 The derived SQLite output passed `PRAGMA integrity_check = ok`.
 All remaining candidates remain `status='pending'` and are not exposed as canonical MCP
 facts. Miku's base profile is published with 13 reviewed features; three legacy
-features were retained as `retired` for audit.
+features were retained as `retired` for audit. Reimu's base and PC-98 profiles are
+published with 28 reviewed features total; no cosplay or LostWord variants were
+published. Marisa's Windows, PC-98, and Seihou profiles are
+published with 35 reviewed features total; one PC-98 design conflict remains open.
+Artoria's Saber base profile is published with 8 reviewed features; no class or
+armor variants were inferred from the batch evidence.
 
 ## Review order
 
@@ -75,5 +80,5 @@ features were retained as `retired` for audit.
 - pending visual candidates: `189`;
 - candidates with missing facet: `0`;
 - candidate-only statistical publication: `0`;
-- canonical promotions from this batch: `1` (Miku base only);
+- canonical promotions from this batch: `4` characters (Miku, Reimu, Marisa, Artoria);
 - derived database integrity: `ok`.

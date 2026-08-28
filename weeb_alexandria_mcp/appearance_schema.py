@@ -77,6 +77,21 @@ CREATE TABLE IF NOT EXISTS appearance_schema_metadata (
     key TEXT PRIMARY KEY,
     value TEXT NOT NULL
 );
+
+CREATE TABLE IF NOT EXISTS character_appearance_conflicts (
+    conflict_id INTEGER PRIMARY KEY,
+    appearance_key TEXT NOT NULL,
+    facet TEXT NOT NULL,
+    conflict_key TEXT NOT NULL,
+    alternatives_json TEXT NOT NULL,
+    status TEXT NOT NULL DEFAULT 'open',
+    reason TEXT NOT NULL,
+    source_refs_json TEXT NOT NULL DEFAULT '[]',
+    resolution_note TEXT NOT NULL DEFAULT '',
+    UNIQUE(appearance_key, conflict_key)
+);
+CREATE INDEX IF NOT EXISTS idx_appearance_conflicts_profile
+    ON character_appearance_conflicts(appearance_key, status);
 """
 
 DEFAULT_METADATA = {
