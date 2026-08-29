@@ -14,7 +14,10 @@ sys.path.insert(0, str(ROOT))
 from weeb_alexandria_mcp.appearance_schema import normalize_tag  # noqa: E402
 
 SITES = ("danbooru", "gelbooru", "e621")
-EXCLUDED = {"remilia_scarlet", "miku_hatsune", "sensei_(blue_archive)", "admiral_(kancolle)"}
+EXCLUDED = {
+    "remilia_scarlet", "miku_hatsune", "sensei_(blue_archive)",
+    "admiral_(kancolle)", "fujiwara_no_mokou", "saigyouji_yuyuko",
+}
 
 
 def rank(db: Path, limit: int) -> list[dict[str, int | str]]:
@@ -23,6 +26,14 @@ def rank(db: Path, limit: int) -> list[dict[str, int | str]]:
     published = {r[0] for r in con.execute(
         "SELECT character_tag FROM character_appearance_profiles WHERE status='published'"
     )}
+    aliases_to_published = {
+        r[0] for r in con.execute(
+            "SELECT antecedent_name FROM tag_aliases "
+            "WHERE status='active' AND consequent_name IN (%s)" %
+            ",".join("?" for _ in published), tuple(published)
+        )
+    } if published else set()
+    excluded_names = EXCLUDED | aliases_to_published
     counts: dict[str, dict[str, int]] = defaultdict(lambda: defaultdict(int))
     for row in con.execute(
         "SELECT site, name, post_count FROM tags "
@@ -32,7 +43,7 @@ def rank(db: Path, limit: int) -> list[dict[str, int | str]]:
 
     result = []
     for name, sites in counts.items():
-        if name in EXCLUDED or name in published or normalize_tag(name) in published:
+        if name in excluded_names or name in published or normalize_tag(name) in published:
             continue
         low = name.lower()
         if any(token in low for token in ("hololive", "_costume", "_(cosplay)")):
