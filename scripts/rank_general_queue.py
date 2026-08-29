@@ -24,7 +24,8 @@ EXCLUDED = {
     "pikachu", "inkling_player_character",
     "kamishirasawa_keine", "houraisan_kaguya",
     "ibuki_suika", "koakuma",
-    "cloud_strife",
+    "cloud_strife", "artoria_pendragon_(saber)_(fate)",
+    "aether_(genshin_impact)",
 }
 
 

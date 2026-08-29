@@ -535,3 +535,15 @@ The ranked candidates were `inaba_tewi` (23,545), `nazrin` (23,180),
 sources mix original, Remake, Kingdom Hearts, Smash and crossover designs
 without a sufficiently isolated base projection. Rabbit, Touhou, Blue Archive
 and Genshin alternate forms remain separate or excluded.
+
+## Sixteenth general popularity batch
+
+The ranked candidates were `artoria_pendragon_(saber)_(fate)` (22,725),
+`abigail_williams_(fate)` (22,689), `yae_miko` (22,250),
+`aether_(genshin_impact)` (22,164), and `kasane_teto` (22,002). Candidate
+generation produced 122 observations and 38 candidates. `abigail_williams_(fate)`
+(7 features), `yae_miko` (4), and `kasane_teto` (7) were published: 18 features
+and zero conflicts. `artoria_pendragon_(saber)_(fate)` and
+`aether_(genshin_impact)` were deferred because their local projections
+produced no structured visual candidates. Alternate Fate forms, Genshin
+outfits, and voice-engine versions remain separate or excluded.
