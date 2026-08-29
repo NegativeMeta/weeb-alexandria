@@ -448,3 +448,12 @@ fandom/context material, insufficient for a deterministic base card.
 and abilities but not enough visual appearance traits. The published subset
 contained 11 features and zero conflicts. Regional, time-skip, arc-specific,
 and other named variants remain separate or excluded.
+
+## Eighth general popularity batch
+
+`kaga_(kancolle)` (7 features), `moriya_suwako` (8), `princess_zelda` (4), and
+`chen` (7) were published after source review. `warrior_of_light_(ff14)` was
+deferred because it combines player-created avatars and does not define one
+stable visual identity. The published subset contained 26 features and zero
+conflicts. Remodels, game-specific incarnations, rigging, and contextual
+variants remain separate or excluded.
