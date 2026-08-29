@@ -499,3 +499,15 @@ and `2b_(nier:automata)` (7) were published: 17 features and zero conflicts.
 customizable Inkling Boy/Girl avatar rather than one stable identity. Pokémon
 forms/cosplay, Fate alternate costumes, Mami magical-girl attire, and 2B
 alternate/damaged variants remain separate or excluded.
+
+## Thirteenth general popularity batch
+
+The ranked candidates were `kamishirasawa_keine` (25,318), `mystia_lorelei`
+(25,220), `houraisan_kaguya` (24,907), `fujimaru_ritsuka_(female)` (24,806),
+and `firefly_(honkai:_star_rail)` (24,398). Candidate generation produced 228
+observations and 74 candidates. `mystia_lorelei` (8 features),
+`fujimaru_ritsuka_(female)` (9), and `firefly_(honkai:_star_rail)` (10) were
+published: 27 features and zero conflicts. `kamishirasawa_keine` and
+`houraisan_kaguya` were deferred because their local projections produced no
+structured visual candidates. Bird, lunar, seasonal, alternate-costume and
+SAM/armor variants remain separate or excluded.
