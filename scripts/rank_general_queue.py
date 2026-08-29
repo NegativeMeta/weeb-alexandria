@@ -20,6 +20,8 @@ EXCLUDED = {
     "konpaku_youmu_(ghost)", "rumia", "reiuji_utsuho",
     "warrior_of_light_(ff14)",
     "scaramouche_(genshin_impact)", "doodle_sensei_(blue_archive)",
+    "tatara_kogasa", "hinanawi_tenshi", "trailblazer_(honkai:_star_rail)",
+    "pikachu", "inkling_player_character",
 }
 
 

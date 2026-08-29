@@ -486,3 +486,16 @@ visual detail, and `trailblazer_(honkai:_star_rail)` combines selectable male
 and female protagonists. The published subset contained 15 features and zero
 conflicts. Magical-girl, fan, seasonal, remodel and alternate protagonist
 variants remain separate or excluded.
+
+## Twelfth general popularity batch
+
+The ranked candidates were `pikachu` (26,558), `fujimaru_ritsuka_(male)` (26,213),
+`inkling_player_character` (25,836), `tomoe_mami` (25,407), and
+`2b_(nier:automata)` (25,352). Candidate generation produced 392 observations
+and 111 candidates. `fujimaru_ritsuka_(male)` (4 features), `tomoe_mami` (6),
+and `2b_(nier:automata)` (7) were published: 17 features and zero conflicts.
+`pikachu` was deferred because the local appearance projection yielded only
+`pikachu_tail`, while `inkling_player_character` was deferred because it is a
+customizable Inkling Boy/Girl avatar rather than one stable identity. Pokémon
+forms/cosplay, Fate alternate costumes, Mami magical-girl attire, and 2B
+alternate/damaged variants remain separate or excluded.
