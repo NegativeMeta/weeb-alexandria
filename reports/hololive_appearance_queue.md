@@ -467,3 +467,12 @@ deferred because the local wiki only redirects to separate incarnations such as
 Wanderer and Kabukimono, without a stable appearance profile of its own.
 Mega/shiny Gardevoir, Blue Archive alternate costumes, Yuuka's PC-98 design,
 and other named variants remain separate or excluded.
+
+## Tenth general popularity batch
+
+`shigure_(kancolle)` (5 features), `gotoh_hitori` (7), `hibiki_(kancolle)` (5),
+and `hina_(blue_archive)` (9) were published after source review. The
+published subset contained 26 features and zero conflicts. `doodle_sensei_(blue_archive)`
+was deferred because it is a meta-caricature of the player avatar rather than
+an independent stable character identity. Seasonal, remodel, costume and
+contextual variants remain separate or excluded.
