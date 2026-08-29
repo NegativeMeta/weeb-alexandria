@@ -428,3 +428,11 @@ new profile; it resolves by canonical alias to the existing
 `artoria_pendragon_(fate)` profile. The published subset contained 21 features
 and zero conflicts. Vocaloid design variants, Mash's named costumes, and
 Link's game-specific incarnations remain separate or excluded.
+
+## Sixth general popularity batch
+
+The next five ranked characters were reviewed and published:
+`tifa_lockhart` (7 features), `shimakaze_(kancolle)` (7), `kaenbyou_rin` (6),
+`saber_(fate)` (6), and `yakumo_ran` (3). The batch contained 29 published
+features and zero conflicts. Remake, Advent Children, Leyte Gulf, Fate/Zero,
+and other named or game-specific variants remain separate or excluded.
