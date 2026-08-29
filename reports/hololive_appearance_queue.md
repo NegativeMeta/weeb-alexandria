@@ -572,3 +572,15 @@ and 30 candidates. `nero_claudius_(fate)` (6 features), `houjuu_nue` (7), and
 projections did not provide sufficient structured base-appearance candidates.
 Fate alternate costumes, Nue shapeshift forms, Street Fighter designs and
 Kongou remodels remain separate or excluded.
+
+## Nineteenth general popularity batch
+
+The ranked candidates were `nico_robin` (20,577), `ayanami_rei` (20,513),
+`dawn_(pokemon)` (20,220), `yuudachi_(kancolle)` (20,080), and
+`hijiri_byakuren` (20,013). Candidate generation produced 117 observations and
+51 candidates. `nico_robin` (4 features), `dawn_(pokemon)` (11), and
+`yuudachi_(kancolle)` (6, pre-remodel only) were published: 21 features and zero
+conflicts. `ayanami_rei` produced no structured visual candidates, while
+`hijiri_byakuren` produced only partial hair evidence; both were deferred.
+One Piece time-skip, Pokémon alternate outfits, and Yuudachi remodels remain
+separate or excluded.

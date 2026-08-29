@@ -28,6 +28,7 @@ EXCLUDED = {
     "aether_(genshin_impact)", "princess_peach", "inkling_girl",
     "illyasviel_von_einzbern", "chun-li",
     "nero_claudius_(fate)", "houjuu_nue",
+    "ayanami_rei", "hijiri_byakuren",
 }
 
 
