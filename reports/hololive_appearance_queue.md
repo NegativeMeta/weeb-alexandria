@@ -426,8 +426,8 @@ the base profile.
 published after source review. `altria_pendragon_(fate)` was not published as a
 new profile; it resolves by canonical alias to the existing
 `artoria_pendragon_(fate)` profile. The published subset contained 21 features
-and zero conflicts. Vocaloid design variants, Mash's named costumes, and
-Link's game-specific incarnations remain separate or excluded.
+and zero conflicts. Vocaloid design variants, Mash's named costumes, and Link's
+game-specific incarnations remain separate or excluded.
 
 ## Sixth general popularity batch
 
@@ -436,3 +436,15 @@ The next five ranked characters were reviewed and published:
 `saber_(fate)` (6), and `yakumo_ran` (3). The batch contained 29 published
 features and zero conflicts. Remake, Advent Children, Leyte Gulf, Fate/Zero,
 and other named or game-specific variants remain separate or excluded.
+
+## Seventh general popularity batch
+
+`lumine_(genshin_impact)` (8 features) and `nami_(one_piece)` (3) were
+published after source review. `konpaku_youmu_(ghost)` was deferred because it
+is a ghost-half entity without a stable independent appearance profile.
+`rumia` was deferred because the local evidence exposed only a ribbon and
+fandom/context material, insufficient for a deterministic base card.
+`reiuji_utsuho` was deferred because the available sources described identity
+and abilities but not enough visual appearance traits. The published subset
+contained 11 features and zero conflicts. Regional, time-skip, arc-specific,
+and other named variants remain separate or excluded.
