@@ -29,7 +29,8 @@ EXCLUDED = {
     "illyasviel_von_einzbern", "chun-li",
     "nero_claudius_(fate)", "houjuu_nue",
     "ayanami_rei", "hijiri_byakuren",
-    "samus_aran",
+    "samus_aran", "akemi_homura_(magical_girl)",
+    "zhongli_(genshin_impact)", "doctor_(arknights)",
 }
 
 

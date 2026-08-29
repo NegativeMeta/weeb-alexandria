@@ -597,3 +597,17 @@ because the local projection mixed power armor, bodysuit and alternate outfit
 forms without a sufficiently isolated base card. Kancolle remodels, Toki's
 Abi-Eshuh exoskeleton, Fate route variants and Makima's Control Devil form
 remain separate or excluded.
+
+## Twenty-first general popularity batch
+
+The ranked candidates were `rem_(re:zero)` (19,395), `hamakaze_(kancolle)`
+(19,381), `zhongli_(genshin_impact)` (19,068), `mizuhashi_parsee` (18,986),
+and `doctor_(arknights)` (18,831). Candidate generation produced 68
+observations and 36 candidates. `rem_(re:zero)` (6 features),
+`hamakaze_(kancolle)` (7), and `mizuhashi_parsee` (7) were published: 20
+features and zero conflicts. `zhongli_(genshin_impact)` was deferred because
+no structured visual candidates were produced. `doctor_(arknights)` was
+deferred because it is a player avatar without an explicit canonical
+appearance. Rem alternate outfits, Kancolle remodels, Zhongli alternate forms,
+Touhou fan contexts and Arknights Doctor depictions remain separate or
+excluded.
