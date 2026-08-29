@@ -457,3 +457,13 @@ deferred because it combines player-created avatars and does not define one
 stable visual identity. The published subset contained 26 features and zero
 conflicts. Remodels, game-specific incarnations, rigging, and contextual
 variants remain separate or excluded.
+
+## Ninth general popularity batch
+
+`gardevoir` (3 features), `asuna_(blue_archive)` (8), `kazami_yuuka` (5), and
+`yuuka_(blue_archive)` (9) were published after source review. They produced 25
+published features and zero conflicts. `scaramouche_(genshin_impact)` was
+deferred because the local wiki only redirects to separate incarnations such as
+Wanderer and Kabukimono, without a stable appearance profile of its own.
+Mega/shiny Gardevoir, Blue Archive alternate costumes, Yuuka's PC-98 design,
+and other named variants remain separate or excluded.

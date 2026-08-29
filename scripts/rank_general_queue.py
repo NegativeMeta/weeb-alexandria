@@ -18,6 +18,7 @@ EXCLUDED = {
     "remilia_scarlet", "miku_hatsune", "sensei_(blue_archive)",
     "admiral_(kancolle)", "fujiwara_no_mokou", "saigyouji_yuyuko",
     "konpaku_youmu_(ghost)", "rumia", "reiuji_utsuho",
+    "warrior_of_light_(ff14)",
 }
 
 
