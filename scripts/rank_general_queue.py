@@ -19,7 +19,7 @@ EXCLUDED = {
     "admiral_(kancolle)", "fujiwara_no_mokou", "saigyouji_yuyuko",
     "konpaku_youmu_(ghost)", "rumia", "reiuji_utsuho",
     "warrior_of_light_(ff14)",
-    "scaramouche_(genshin_impact)",
+    "scaramouche_(genshin_impact)", "doodle_sensei_(blue_archive)",
 }
 
 

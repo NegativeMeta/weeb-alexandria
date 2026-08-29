@@ -476,3 +476,13 @@ published subset contained 26 features and zero conflicts. `doodle_sensei_(blue_
 was deferred because it is a meta-caricature of the player avatar rather than
 an independent stable character identity. Seasonal, remodel, costume and
 contextual variants remain separate or excluded.
+
+## Eleventh general popularity batch
+
+`miki_sayaka` (6 features) and `kawashiro_nitori` (9) were published after
+source review. The batch reduced to two profiles because `tatara_kogasa` had
+evidence centered on the umbrella/props, `hinanawi_tenshi` had insufficient
+visual detail, and `trailblazer_(honkai:_star_rail)` combines selectable male
+and female protagonists. The published subset contained 15 features and zero
+conflicts. Magical-girl, fan, seasonal, remodel and alternate protagonist
+variants remain separate or excluded.
