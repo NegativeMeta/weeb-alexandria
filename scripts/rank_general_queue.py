@@ -24,6 +24,7 @@ EXCLUDED = {
     "pikachu", "inkling_player_character",
     "kamishirasawa_keine", "houraisan_kaguya",
     "ibuki_suika", "koakuma",
+    "cloud_strife",
 }
 
 

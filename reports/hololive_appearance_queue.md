@@ -523,3 +523,15 @@ lack of structured visual candidates, while `koakuma` was deferred because her
 name and appearance are not official/stable and the local evidence is largely
 fanon. Vocaloid modules, magical-girl/witch forms, and Blue Archive alternate
 costumes remain separate or excluded.
+
+## Fifteenth general popularity batch
+
+The ranked candidates were `inaba_tewi` (23,545), `nazrin` (23,180),
+`hoshino_(blue_archive)` (23,099), `furina_(genshin_impact)` (22,934), and
+`cloud_strife` (22,729). Candidate generation produced 329 observations and
+132 candidates. `inaba_tewi` (8 features), `nazrin` (12),
+`hoshino_(blue_archive)` (9), and `furina_(genshin_impact)` (8) were published:
+37 features and zero conflicts. `cloud_strife` was deferred because the local
+sources mix original, Remake, Kingdom Hearts, Smash and crossover designs
+without a sufficiently isolated base projection. Rabbit, Touhou, Blue Archive
+and Genshin alternate forms remain separate or excluded.
