@@ -547,3 +547,16 @@ and zero conflicts. `artoria_pendragon_(saber)_(fate)` and
 `aether_(genshin_impact)` were deferred because their local projections
 produced no structured visual candidates. Alternate Fate forms, Genshin
 outfits, and voice-engine versions remain separate or excluded.
+
+## Seventeenth general popularity batch
+
+The ranked candidates were `princess_peach` (21,770), `inkling_girl` (21,653),
+`shiroko_(blue_archive)` (21,427), `megurine_luka` (21,375), and
+`rio_(blue_archive)` (21,013). Candidate generation produced 467 observations
+and 152 candidates. `shiroko_(blue_archive)` (10 features), `megurine_luka`
+(9), and `rio_(blue_archive)` (9) were published: 28 features and zero
+conflicts. `princess_peach` was deferred because the local projection mixed
+many transformations, games and outfits; `inkling_girl` was deferred because
+it is a customizable player avatar whose face, hair, skin tone and clothing can
+vary. Alternate Blue Archive costumes, Vocaloid modules and Mario outfits
+remain separate or excluded.

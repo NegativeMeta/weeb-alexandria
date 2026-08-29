@@ -25,7 +25,7 @@ EXCLUDED = {
     "kamishirasawa_keine", "houraisan_kaguya",
     "ibuki_suika", "koakuma",
     "cloud_strife", "artoria_pendragon_(saber)_(fate)",
-    "aether_(genshin_impact)",
+    "aether_(genshin_impact)", "princess_peach", "inkling_girl",
 }
 
 
