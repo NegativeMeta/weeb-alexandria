@@ -511,3 +511,15 @@ published: 27 features and zero conflicts. `kamishirasawa_keine` and
 `houraisan_kaguya` were deferred because their local projections produced no
 structured visual candidates. Bird, lunar, seasonal, alternate-costume and
 SAM/armor variants remain separate or excluded.
+
+## Fourteenth general popularity batch
+
+The ranked candidates were `ibuki_suika` (24,108), `koakuma` (24,050),
+`kagamine_len` (23,976), `sakura_kyoko` (23,683), and `mika_(blue_archive)`
+(23,614). Candidate generation produced 316 observations and 120 candidates.
+`kagamine_len` (9 features), `sakura_kyoko` (9), and `mika_(blue_archive)` (11)
+were published: 29 features and zero conflicts. `ibuki_suika` was deferred for
+lack of structured visual candidates, while `koakuma` was deferred because her
+name and appearance are not official/stable and the local evidence is largely
+fanon. Vocaloid modules, magical-girl/witch forms, and Blue Archive alternate
+costumes remain separate or excluded.

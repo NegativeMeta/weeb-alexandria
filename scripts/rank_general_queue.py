@@ -23,6 +23,7 @@ EXCLUDED = {
     "tatara_kogasa", "hinanawi_tenshi", "trailblazer_(honkai:_star_rail)",
     "pikachu", "inkling_player_character",
     "kamishirasawa_keine", "houraisan_kaguya",
+    "ibuki_suika", "koakuma",
 }
 
 
