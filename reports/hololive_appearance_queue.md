@@ -611,3 +611,16 @@ deferred because it is a player avatar without an explicit canonical
 appearance. Rem alternate outfits, Kancolle remodels, Zhongli alternate forms,
 Touhou fan contexts and Arknights Doctor depictions remain separate or
 excluded.
+
+## Twenty-second general popularity batch
+
+The ranked candidates were `may_(pokemon)` (18,830), `fubuki_(kancolle)`
+(18,761), `aerith_gainsborough` (18,710), `amiya_(arknights)` (18,618), and
+`suzumiya_haruhi` (18,539). Candidate generation produced 357 observations
+and 159 candidates. `may_(pokemon)` (7 features, ORAS scope),
+`fubuki_(kancolle)` (7), and `suzumiya_haruhi` (6) were published: 20 features
+and zero conflicts. `aerith_gainsborough` was deferred because Compilation,
+Remake, Kingdom Hearts and many outfits were mixed. `amiya_(arknights)` was
+deferred because the local projection did not sufficiently isolate the default
+design from skins. Pokémon game variants, Kancolle rigging/remodels and
+Haruhi alternate outfits remain separate or excluded.

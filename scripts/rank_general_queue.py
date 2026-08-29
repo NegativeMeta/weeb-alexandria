@@ -31,6 +31,7 @@ EXCLUDED = {
     "ayanami_rei", "hijiri_byakuren",
     "samus_aran", "akemi_homura_(magical_girl)",
     "zhongli_(genshin_impact)", "doctor_(arknights)",
+    "aerith_gainsborough", "amiya_(arknights)",
 }
 
 
