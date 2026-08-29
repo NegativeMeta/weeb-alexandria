@@ -29,6 +29,7 @@ EXCLUDED = {
     "illyasviel_von_einzbern", "chun-li",
     "nero_claudius_(fate)", "houjuu_nue",
     "ayanami_rei", "hijiri_byakuren",
+    "samus_aran",
 }
 
 

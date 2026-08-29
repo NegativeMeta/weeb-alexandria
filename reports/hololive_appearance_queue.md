@@ -584,3 +584,16 @@ conflicts. `ayanami_rei` produced no structured visual candidates, while
 `hijiri_byakuren` produced only partial hair evidence; both were deferred.
 One Piece time-skip, Pokémon alternate outfits, and Yuudachi remodels remain
 separate or excluded.
+
+## Twentieth general popularity batch
+
+The ranked candidates were `inazuma_(kancolle)` (19,788), `toki_(blue_archive)`
+(19,702), `samus_aran` (19,661), `tohsaka_rin` (19,600), and
+`makima_(chainsaw_man)` (19,471). Candidate generation produced 195
+observations and 72 candidates. `inazuma_(kancolle)` (6 features),
+`toki_(blue_archive)` (7), `tohsaka_rin` (6), and `makima_(chainsaw_man)` (6)
+were published: 25 features and zero conflicts. `samus_aran` was deferred
+because the local projection mixed power armor, bodysuit and alternate outfit
+forms without a sufficiently isolated base card. Kancolle remodels, Toki's
+Abi-Eshuh exoskeleton, Fate route variants and Makima's Control Devil form
+remain separate or excluded.
