@@ -560,3 +560,15 @@ many transformations, games and outfits; `inkling_girl` was deferred because
 it is a customizable player avatar whose face, hair, skin tone and clothing can
 vary. Alternate Blue Archive costumes, Vocaloid modules and Mario outfits
 remain separate or excluded.
+
+## Eighteenth general popularity batch
+
+The ranked candidates were `nero_claudius_(fate)` (20,848), `houjuu_nue`
+(20,716), `illyasviel_von_einzbern` (20,716), `chun-li` (20,667), and
+`kongou_(kancolle)` (20,631). Candidate generation produced 144 observations
+and 30 candidates. `nero_claudius_(fate)` (6 features), `houjuu_nue` (7), and
+`kongou_(kancolle)` (8) were published: 21 features and zero conflicts.
+`illyasviel_von_einzbern` and `chun-li` were deferred because their local
+projections did not provide sufficient structured base-appearance candidates.
+Fate alternate costumes, Nue shapeshift forms, Street Fighter designs and
+Kongou remodels remain separate or excluded.

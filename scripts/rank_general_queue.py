@@ -26,6 +26,8 @@ EXCLUDED = {
     "ibuki_suika", "koakuma",
     "cloud_strife", "artoria_pendragon_(saber)_(fate)",
     "aether_(genshin_impact)", "princess_peach", "inkling_girl",
+    "illyasviel_von_einzbern", "chun-li",
+    "nero_claudius_(fate)", "houjuu_nue",
 }
 
 
