@@ -873,6 +873,7 @@ class SearchRegressionTests(unittest.TestCase):
                 for table in (
                     "character_appearance_profiles",
                     "character_appearance_features",
+                    "appearance_feature_catalog",
                     "character_appearance_sources",
                     "character_appearance_feature_sources",
                 )
@@ -883,10 +884,110 @@ class SearchRegressionTests(unittest.TestCase):
         self.assertEqual(counts, {
             "character_appearance_profiles": 1,
             "character_appearance_features": 2,
+            "appearance_feature_catalog": 2,
             "character_appearance_sources": 1,
             "character_appearance_feature_sources": 2,
         })
         self.assertEqual(integrity, "ok")
+
+    def test_appearance_catalog_deduplicates_shared_tags_and_keeps_links(self):
+        catalog = self.con.execute(
+            """SELECT catalog_id FROM appearance_feature_catalog
+               WHERE canonical_tag='black_hair'"""
+        ).fetchall()
+        self.assertEqual(len(catalog), 1)
+        catalog_id = catalog[0][0]
+        assignment_count = self.con.execute(
+            """SELECT count(*) FROM character_appearance_features
+               WHERE canonical_tag='black_hair' AND status='published'"""
+        ).fetchone()[0]
+        linked_count = self.con.execute(
+            """SELECT count(*) FROM character_appearance_features
+               WHERE catalog_id=? AND canonical_tag='black_hair'
+                 AND status='published'""",
+            (catalog_id,),
+        ).fetchone()[0]
+        self.assertGreater(assignment_count, 1)
+        self.assertEqual(linked_count, assignment_count)
+        self.assertEqual(
+            self.con.execute(
+                """SELECT count(*) FROM character_appearance_features f
+                   LEFT JOIN appearance_feature_catalog c
+                     ON c.catalog_id=f.catalog_id
+                    AND c.canonical_tag=f.canonical_tag
+                   WHERE f.status <> 'retired' AND c.catalog_id IS NULL"""
+            ).fetchone()[0],
+            0,
+        )
+
+    def test_appearance_normalizer_deduplicates_legacy_facets_idempotently(self):
+        from scripts.normalize_appearance_features import normalize
+        from weeb_alexandria_mcp.owned_schema import SCHEMA_SQL, ensure_owned_schema
+
+        with tempfile.TemporaryDirectory() as tmp:
+            path = Path(tmp) / "normalize.sqlite"
+            con = sqlite3.connect(path)
+            con.executescript(SCHEMA_SQL)
+            ensure_owned_schema(con)
+            con.executemany(
+                """INSERT INTO character_appearance_sources(
+                    source_site, source_kind, source_key, source_tier
+                ) VALUES (?, ?, ?, ?)""",
+                [
+                    ("test", "wiki", "one", 1),
+                    ("test", "wiki", "two", 1),
+                ],
+            )
+            con.executemany(
+                """INSERT INTO character_appearance_features(
+                    appearance_key, facet, value, canonical_tag,
+                    status, confidence
+                ) VALUES (?, ?, ?, ?, 'published', 'high')""",
+                [
+                    ("fixture::default", "eye_color", "Blue eyes", "blue_eyes"),
+                    ("fixture::default", "eyes", "Blue eyes", "blue_eyes"),
+                ],
+            )
+            feature_ids = [
+                row[0] for row in con.execute(
+                    "SELECT feature_id FROM character_appearance_features"
+                )
+            ]
+            source_ids = [
+                row[0] for row in con.execute(
+                    "SELECT source_id FROM character_appearance_sources"
+                )
+            ]
+            con.executemany(
+                """INSERT INTO character_appearance_feature_sources(
+                    feature_id, source_id, evidence_text
+                ) VALUES (?, ?, ?)""",
+                [
+                    (feature_ids[0], source_ids[0], "Evidence one"),
+                    (feature_ids[1], source_ids[1], "Evidence two"),
+                ],
+            )
+            con.commit()
+            con.close()
+            first = normalize(path)
+            second = normalize(path)
+            con = sqlite3.connect(path)
+            associations = con.execute(
+                """SELECT facet, canonical_tag, catalog_id
+                   FROM character_appearance_features"""
+            ).fetchall()
+            evidence_count = con.execute(
+                "SELECT count(*) FROM character_appearance_feature_sources"
+            ).fetchone()[0]
+            catalog_count = con.execute(
+                "SELECT count(*) FROM appearance_feature_catalog"
+            ).fetchone()[0]
+            con.close()
+        self.assertEqual(first["deduplicated_features"], 1)
+        self.assertEqual(second["deduplicated_features"], 0)
+        self.assertEqual(associations, [("eyes", "blue_eyes", associations[0][2])])
+        self.assertEqual(evidence_count, 2)
+        self.assertEqual(catalog_count, 1)
 
     def test_appearance_candidate_builder_separates_sources_and_excludes_metadata(self):
         import json
@@ -994,6 +1095,96 @@ class SearchRegressionTests(unittest.TestCase):
             }) + "\n", encoding="utf-8")
             with self.assertRaises(ValueError):
                 build(source_path, output_path, ["test_character"], [post_path])
+
+    def test_appearance_facet_normalizer_reclassifies_and_is_idempotent(self):
+        from scripts.normalize_appearance_facets import normalize_facets
+        from weeb_alexandria_mcp.owned_schema import SCHEMA_SQL, ensure_owned_schema
+
+        with tempfile.TemporaryDirectory() as tmp:
+            path = Path(tmp) / "facets.sqlite"
+            con = sqlite3.connect(path)
+            con.executescript(SCHEMA_SQL)
+            ensure_owned_schema(con)
+            con.execute(
+                """INSERT INTO character_appearance_sources(
+                    source_site, source_kind, source_key, source_tier
+                ) VALUES ('test', 'wiki', 'fixture', 1)"""
+            )
+            source_id = con.execute(
+                "SELECT source_id FROM character_appearance_sources"
+            ).fetchone()[0]
+            con.executemany(
+                """INSERT INTO character_appearance_features(
+                    appearance_key, facet, value, canonical_tag,
+                    status, confidence
+                ) VALUES ('fixture::default', 'unclassified', ?, ?, 'published', 'high')""",
+                [
+                    ("Crystal wings", "crystal_wings"),
+                    ("Dancer", "dancer"),
+                    ("White wings", "white_wings"),
+                ],
+            )
+            feature_ids = [
+                row[0] for row in con.execute(
+                    "SELECT feature_id FROM character_appearance_features ORDER BY feature_id"
+                )
+            ]
+            con.executemany(
+                """INSERT INTO character_appearance_feature_sources(
+                    feature_id, source_id, evidence_text
+                ) VALUES (?, ?, ?)""",
+                [(feature_id, source_id, "Reviewed fixture evidence") for feature_id in feature_ids],
+            )
+            con.commit()
+            con.close()
+
+            first = normalize_facets(path)
+            second = normalize_facets(path)
+            con = sqlite3.connect(path)
+            rows = con.execute(
+                """SELECT facet, canonical_tag, facet_id
+                   FROM character_appearance_features
+                   ORDER BY canonical_tag"""
+            ).fetchall()
+            evidence_count = con.execute(
+                "SELECT count(*) FROM character_appearance_feature_sources"
+            ).fetchone()[0]
+            schema_version = con.execute(
+                "SELECT value FROM appearance_schema_metadata WHERE key='schema_version'"
+            ).fetchone()[0]
+            con.close()
+        self.assertEqual(first["facet_changes"], 3)
+        self.assertEqual(second["facet_changes"], 0)
+        self.assertEqual(
+            [(facet, tag) for facet, tag, _facet_id in rows],
+            [("wings", "crystal_wings"), ("context", "dancer"), ("wings", "white_wings")],
+        )
+        self.assertTrue(all(facet_id is not None for _, _, facet_id in rows))
+        self.assertEqual(evidence_count, 3)
+        self.assertEqual(schema_version, "3")
+
+    def test_appearance_runtime_exposes_facet_metadata_for_new_facets(self):
+        from weeb_alexandria_mcp.appearance_schema import infer_facet
+
+        self.assertEqual(infer_facet("angel_wings"), "wings")
+        self.assertEqual(infer_facet("scar"), "markings")
+        self.assertEqual(infer_facet("dancer"), "context")
+        row = self.con.execute(
+            """SELECT p.character_tag FROM character_appearance_profiles p
+               JOIN character_appearance_features f
+                 ON f.appearance_key=p.appearance_key
+               WHERE p.status IN ('reviewed', 'published')
+                 AND f.status IN ('reviewed', 'published')
+                 AND f.facet='wings'
+               ORDER BY p.character_tag LIMIT 1"""
+        ).fetchone()
+        self.assertIsNotNone(row)
+        result = get_character_appearance(row[0], include_evidence=False)
+        self.assertTrue(result["found"])
+        profile = result["profiles"][0]
+        self.assertIn("wings", profile["features"])
+        self.assertEqual(profile["facet_metadata"]["wings"]["group"], "visual")
+        self.assertTrue(profile["facet_metadata"]["wings"]["is_visual"])
 
 
 if __name__ == "__main__":

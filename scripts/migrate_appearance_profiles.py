@@ -12,10 +12,15 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 
 from weeb_alexandria_mcp.appearance_schema import (  # noqa: E402
+    canonical_facet as schema_canonical_facet,
     ensure_appearance_schema,
     infer_facet,
     humanize_tag,
     normalize_tag,
+    sync_appearance_facet_catalog,
+    sync_appearance_feature_catalog,
+    upsert_appearance_facet_catalog,
+    upsert_appearance_feature_catalog,
 )
 from weeb_alexandria_mcp.owned_schema import ensure_owned_schema  # noqa: E402
 
@@ -48,16 +53,14 @@ _CANONICAL_FACETS = {
     "hair", "eyes", "skin", "face", "species", "ears", "horns", "tail",
     "body", "markings", "headwear", "hair_accessory", "neck", "upper_body",
     "lower_body", "dress", "jacket", "sleeves", "gloves", "legwear",
-    "footwear", "jewelry", "accessories", "props", "unclassified",
+    "footwear", "jewelry", "accessories", "props", "wings", "effects",
+    "context", "expression", "unclassified",
 }
 
 
 def canonical_facet(facet: str, tag: str) -> str:
-    normalized = normalize_tag(facet)
-    normalized = _LEGACY_FACET_MAP.get(normalized, normalized)
-    if normalized in _CANONICAL_FACETS:
-        return normalized
-    return infer_facet(tag) or "unclassified"
+    normalized = _LEGACY_FACET_MAP.get(normalize_tag(facet), normalize_tag(facet))
+    return schema_canonical_facet(normalized, tag)
 
 
 def _deduplicate_existing_features(con: sqlite3.Connection) -> int:
@@ -141,18 +144,27 @@ def upsert_feature(con: sqlite3.Connection, appearance_key_value: str,
     if not canonical_tag:
         raise ValueError("appearance feature cannot have an empty tag")
     feature_facet = canonical_facet(facet, canonical_tag)
+    facet_id = upsert_appearance_facet_catalog(con, feature_facet)
+    catalog_id = upsert_appearance_feature_catalog(
+        con, canonical_tag, feature_facet, value,
+        "legacy_appearance_migration", confidence,
+    )
     con.execute(
         """INSERT INTO character_appearance_features(
-            appearance_key, facet, value, canonical_tag, role, status,
-            confidence, display_order
-        ) VALUES (?, ?, ?, ?, 'present', 'published', ?, 0)
+            catalog_id, facet_id, appearance_key, facet, value, canonical_tag,
+            role, status, confidence, display_order
+        ) VALUES (?, ?, ?, ?, ?, ?, 'present', 'published', ?, 0)
         ON CONFLICT(appearance_key, facet, canonical_tag) DO UPDATE SET
+            catalog_id=excluded.catalog_id,
+            facet_id=excluded.facet_id,
             value=excluded.value,
             confidence=CASE
                 WHEN character_appearance_features.confidence='high' THEN 'high'
                 ELSE excluded.confidence
             END""",
         (
+            catalog_id,
+            facet_id,
             appearance_key_value,
             feature_facet,
             value or humanize_tag(canonical_tag),
@@ -243,6 +255,7 @@ def migrate(db: Path) -> dict[str, int]:
 
         con.execute("BEGIN")
         deduplicated_features = _deduplicate_existing_features(con)
+        sync_appearance_facet_catalog(con)
         for row in profiles:
             character_tag = normalize_tag(row["character_tag"])
             key = appearance_key(character_tag)
@@ -296,6 +309,7 @@ def migrate(db: Path) -> dict[str, int]:
                     "Migrated from character_traits and trait_definitions.",
                 )
 
+        catalog_count = sync_appearance_feature_catalog(con)
         con.execute(
             "INSERT OR REPLACE INTO appearance_schema_metadata(key, value) VALUES (?, ?)",
             ("migrated_at", datetime.now(timezone.utc).isoformat()),
@@ -320,6 +334,12 @@ def migrate(db: Path) -> dict[str, int]:
                JOIN character_appearance_feature_sources fs
                  ON fs.feature_id=f.feature_id
                WHERE f.status <> 'retired'"""
+        ).fetchone()[0]
+        unlinked_catalog_features = con.execute(
+            """SELECT count(*) FROM character_appearance_features f
+               LEFT JOIN appearance_feature_catalog c
+                 ON c.catalog_id=f.catalog_id AND c.canonical_tag=f.canonical_tag
+               WHERE f.status <> 'retired' AND c.catalog_id IS NULL"""
         ).fetchone()[0]
         actual_profile_keys = {
             row[0] for row in con.execute(
@@ -348,12 +368,13 @@ def migrate(db: Path) -> dict[str, int]:
             ).fetchone()
             if linked is None:
                 unlinked_features.append(label)
-        if missing_profiles or missing_features or unlinked_features:
+        if missing_profiles or missing_features or unlinked_features or unlinked_catalog_features:
             raise RuntimeError(
                 "appearance migration validation failed: "
                 f"missing_profiles={missing_profiles[:5]}, "
                 f"missing_features={missing_features[:5]}, "
-                f"unlinked_features={unlinked_features[:5]}"
+                f"unlinked_features={unlinked_features[:5]}, "
+                f"unlinked_catalog_features={unlinked_catalog_features}"
             )
         con.commit()
         return {
@@ -364,6 +385,7 @@ def migrate(db: Path) -> dict[str, int]:
             "appearance_sources": actual_sources,
             "linked_features": linked_features,
             "deduplicated_features": deduplicated_features,
+            "catalog_features": catalog_count,
         }
     except Exception:
         con.rollback()

@@ -5,7 +5,7 @@ import re
 import sqlite3
 from typing import Optional
 
-APPEARANCE_SCHEMA_VERSION = "1"
+APPEARANCE_SCHEMA_VERSION = "3"
 
 APPEARANCE_SCHEMA_SQL = """
 CREATE TABLE IF NOT EXISTS character_appearance_profiles (
@@ -26,8 +26,34 @@ CREATE INDEX IF NOT EXISTS idx_appearance_profiles_character
 CREATE INDEX IF NOT EXISTS idx_appearance_profiles_variant
     ON character_appearance_profiles(variant_tag, status);
 
+CREATE TABLE IF NOT EXISTS appearance_facet_catalog (
+    facet_id INTEGER PRIMARY KEY,
+    facet_key TEXT NOT NULL UNIQUE,
+    facet_group TEXT NOT NULL,
+    is_visual INTEGER NOT NULL DEFAULT 1,
+    description TEXT NOT NULL DEFAULT '',
+    status TEXT NOT NULL DEFAULT 'active'
+);
+CREATE INDEX IF NOT EXISTS idx_appearance_facet_catalog_group
+    ON appearance_facet_catalog(facet_group, is_visual, status);
+
+CREATE TABLE IF NOT EXISTS appearance_feature_catalog (
+    catalog_id INTEGER PRIMARY KEY,
+    canonical_tag TEXT NOT NULL UNIQUE,
+    default_facet TEXT NOT NULL,
+    default_value TEXT NOT NULL,
+    label TEXT NOT NULL,
+    provenance TEXT NOT NULL DEFAULT 'appearance_normalization',
+    confidence TEXT NOT NULL DEFAULT 'medium',
+    status TEXT NOT NULL DEFAULT 'active'
+);
+CREATE INDEX IF NOT EXISTS idx_appearance_catalog_tag
+    ON appearance_feature_catalog(canonical_tag, status);
+
 CREATE TABLE IF NOT EXISTS character_appearance_features (
     feature_id INTEGER PRIMARY KEY,
+    catalog_id INTEGER REFERENCES appearance_feature_catalog(catalog_id),
+    facet_id INTEGER REFERENCES appearance_facet_catalog(facet_id),
     appearance_key TEXT NOT NULL,
     facet TEXT NOT NULL,
     value TEXT NOT NULL,
@@ -100,6 +126,39 @@ DEFAULT_METADATA = {
     "source_policy": "danbooru_gelbooru_primary",
 }
 
+DEFAULT_FACETS = {
+    "hair": ("visual", 1, "Color, length, and general hair characteristics."),
+    "hair_accessory": ("visual", 1, "Hairstyles and items attached to the hair."),
+    "eyes": ("visual", 1, "Eye color and visible eye structure."),
+    "face": ("visual", 1, "Visible facial features and face-worn items."),
+    "ears": ("visual", 1, "Ear shape and extra ears."),
+    "horns": ("visual", 1, "Horns, antlers, and similar head appendages."),
+    "headwear": ("visual", 1, "Hats, helmets, halos, and head-worn items."),
+    "neck": ("visual", 1, "Collars, chokers, ties, and neckwear."),
+    "dress": ("visual", 1, "Dresses, uniforms, robes, and full garments."),
+    "jacket": ("visual", 1, "Coats, jackets, capes, and outer layers."),
+    "upper_body": ("visual", 1, "Shirts, tops, tunics, and upper-body clothing."),
+    "lower_body": ("visual", 1, "Skirts, pants, shorts, and lower-body clothing."),
+    "sleeves": ("visual", 1, "Sleeves and arm coverings."),
+    "gloves": ("visual", 1, "Gloves and hand coverings."),
+    "legwear": ("visual", 1, "Socks, stockings, tights, and thigh-highs."),
+    "footwear": ("visual", 1, "Shoes, boots, sandals, and other footwear."),
+    "jewelry": ("visual", 1, "Jewelry and ornamental metalwork."),
+    "accessories": ("visual", 1, "General wearable accessories."),
+    "props": ("visual", 1, "Held or carried objects."),
+    "wings": ("visual", 1, "Wings and wing-like appendages."),
+    "tail": ("visual", 1, "Tails and tail-like appendages."),
+    "markings": ("visual", 1, "Scars, birthmarks, tattoos, and body markings."),
+    "effects": ("visual", 1, "Visible energy, fire, glow, or other effects."),
+    "body": ("identity", 1, "Body shape and physical form."),
+    "skin": ("identity", 1, "Skin tone and skin material."),
+    "species": ("identity", 1, "Species or biological design identity."),
+    "gender": ("identity", 1, "Gender or presentation metadata."),
+    "context": ("context", 0, "Role, occupation, style, or non-visual context."),
+    "expression": ("context", 0, "Facial expression or pose-related metadata."),
+    "unclassified": ("review", 1, "Temporary review bucket for unresolved facets."),
+}
+
 # These values are intentionally conservative. Unknown tags remain candidates
 # with an empty facet instead of being silently assigned to a wrong category.
 _GENDER_TAGS = {"1boy", "1girl", "1other", "no_humans"}
@@ -134,6 +193,57 @@ _CLOTHING_FACETS = (
     ("props", ("vial", "potion", "weapon", "flower", "bone", "kadomatsu")),
 )
 
+_EXPLICIT_FACETS = {
+    "pointy_ears": "ears",
+    "floppy_ears": "ears",
+    "mouse_ears": "ears",
+    "rabbit_ears": "ears",
+    "cat_ears": "ears",
+    "extra_ears": "ears",
+    "blindfold": "face",
+    "glasses": "face",
+    "third_eye": "face",
+    "serafuku": "dress",
+    "black_serafuku": "dress",
+    "gown": "dress",
+    "japanese_clothes": "dress",
+    "plugsuit": "dress",
+    "robe": "dress",
+    "black_suit": "dress",
+    "black_blazer": "jacket",
+    "haori": "jacket",
+    "green_tunic": "upper_body",
+    "orange_neckerchief": "neck",
+    "pink_neckerchief": "neck",
+    "red_neckerchief": "neck",
+    "double_halo": "headwear",
+    "halo": "headwear",
+    "pink_halo": "headwear",
+    "bamboo": "props",
+    "leaf": "props",
+    "plum_blossoms": "props",
+    "scar": "markings",
+    "suspenders": "accessories",
+    "blue_fire": "effects",
+    "short_sleeves": "sleeves",
+    "black_thighhighs": "legwear",
+    "bow_(weapon)": "props",
+    "collared_shirt": "upper_body",
+    "frilled_shirt_collar": "neck",
+    "earrings": "jewelry",
+    "headgear": "headwear",
+    "mob_cap": "headwear",
+    "mole_on_breast": "body",
+    "miko": "context",
+    "nontraditional_miko": "context",
+    "samurai": "context",
+    "dancer": "context",
+    "detective": "context",
+    "necromancer": "context",
+    "ouji_fashion": "context",
+    "jitome": "expression",
+}
+
 
 def normalize_tag(value: str) -> str:
     """Normalize human-written tag text without changing tag semantics."""
@@ -155,6 +265,10 @@ def infer_facet(tag: str, category: Optional[str] = None) -> str:
     category_key = (category or "").strip().lower()
     if not normalized or category_key in {"meta", "artist", "copyright", "character", "alias"}:
         return ""
+    if normalized in _EXPLICIT_FACETS:
+        return _EXPLICIT_FACETS[normalized]
+    if normalized.endswith("_wings") or normalized == "wings":
+        return "wings"
     if normalized in _GENDER_TAGS:
         return "gender"
     if normalized in {"hair_between_eyes", "hair_over_one_eye", "hair_over_eye"}:
@@ -179,14 +293,220 @@ def infer_facet(tag: str, category: Optional[str] = None) -> str:
     return ""
 
 
+def canonical_facet(facet: str, tag: str) -> str:
+    """Choose a controlled facet while preserving ambiguous assignments."""
+    normalized_facet = normalize_tag(facet)
+    normalized_tag = normalize_tag(tag)
+    explicit = _EXPLICIT_FACETS.get(normalized_tag)
+    if explicit:
+        return explicit
+    if normalized_tag.endswith("_wings") or normalized_tag == "wings":
+        return "wings"
+    if normalized_facet in DEFAULT_FACETS:
+        return normalized_facet
+    return infer_facet(normalized_tag) or "unclassified"
+
+
+def upsert_appearance_facet_catalog(
+    con: sqlite3.Connection,
+    facet: str,
+    facet_group: Optional[str] = None,
+    is_visual: Optional[int] = None,
+    description: Optional[str] = None,
+) -> int:
+    """Return the stable catalog row for one controlled appearance facet."""
+    facet_key = normalize_tag(facet)
+    if not facet_key:
+        raise ValueError("appearance facet entries require a facet key")
+    default_group, default_visual, default_description = DEFAULT_FACETS.get(
+        facet_key, ("review", 1, "Facet requires review.")
+    )
+    group = str(facet_group or default_group)
+    visual = int(default_visual if is_visual is None else bool(is_visual))
+    detail = str(description if description is not None else default_description)
+    con.execute(
+        """INSERT INTO appearance_facet_catalog(
+               facet_key, facet_group, is_visual, description, status
+           ) VALUES (?, ?, ?, ?, 'active')
+           ON CONFLICT(facet_key) DO UPDATE SET
+               facet_group=excluded.facet_group,
+               is_visual=excluded.is_visual,
+               description=excluded.description,
+               status='active'
+           WHERE appearance_facet_catalog.facet_group <> excluded.facet_group
+              OR appearance_facet_catalog.is_visual <> excluded.is_visual
+              OR appearance_facet_catalog.description <> excluded.description
+              OR appearance_facet_catalog.status <> 'active'""",
+        (facet_key, group, visual, detail),
+    )
+    row = con.execute(
+        "SELECT facet_id FROM appearance_facet_catalog WHERE facet_key=?",
+        (facet_key,),
+    ).fetchone()
+    if row is None:
+        raise RuntimeError(f"could not retrieve appearance facet {facet_key}")
+    return int(row[0])
+
+
+def sync_appearance_facet_catalog(con: sqlite3.Connection) -> int:
+    """Seed the facet dictionary and backfill links for every feature row."""
+    for facet_key, (group, visual, description) in DEFAULT_FACETS.items():
+        upsert_appearance_facet_catalog(con, facet_key, group, visual, description)
+    rows = con.execute(
+        "SELECT DISTINCT facet FROM character_appearance_features WHERE facet <> '' ORDER BY facet"
+    ).fetchall()
+    for row in rows:
+        upsert_appearance_facet_catalog(con, row[0])
+    con.execute(
+        """UPDATE character_appearance_features
+           SET facet_id=(
+               SELECT facet_id FROM appearance_facet_catalog c
+               WHERE c.facet_key=character_appearance_features.facet
+           )
+           WHERE facet <> '' AND (
+               facet_id IS NULL OR facet_id <> (
+                   SELECT facet_id FROM appearance_facet_catalog c
+                   WHERE c.facet_key=character_appearance_features.facet
+               )
+           )"""
+    )
+    return len(rows)
+
+
 def ensure_appearance_schema(con: sqlite3.Connection) -> None:
     """Create the owned appearance schema and immutable policy defaults."""
     con.executescript(APPEARANCE_SCHEMA_SQL)
+    columns = {
+        row[1] for row in con.execute(
+            "PRAGMA table_info(character_appearance_features)"
+        )
+    }
+    if "catalog_id" not in columns:
+        con.execute(
+            "ALTER TABLE character_appearance_features ADD COLUMN "
+            "catalog_id INTEGER REFERENCES appearance_feature_catalog(catalog_id)"
+        )
+    if "facet_id" not in columns:
+        con.execute(
+            "ALTER TABLE character_appearance_features ADD COLUMN "
+            "facet_id INTEGER REFERENCES appearance_facet_catalog(facet_id)"
+        )
+    con.execute(
+        "CREATE INDEX IF NOT EXISTS idx_appearance_features_catalog "
+        "ON character_appearance_features(catalog_id, status)"
+    )
+    con.execute(
+        "CREATE INDEX IF NOT EXISTS idx_appearance_features_facet "
+        "ON character_appearance_features(facet_id, status)"
+    )
+    sync_appearance_facet_catalog(con)
+    sync_appearance_feature_catalog(con)
     con.executemany(
-        "INSERT OR IGNORE INTO appearance_schema_metadata(key, value) VALUES (?, ?)",
+        """INSERT INTO appearance_schema_metadata(key, value) VALUES (?, ?)
+           ON CONFLICT(key) DO UPDATE SET value=excluded.value
+           WHERE appearance_schema_metadata.value <> excluded.value""",
         list(DEFAULT_METADATA.items()),
     )
     con.commit()
+
+
+def upsert_appearance_feature_catalog(
+    con: sqlite3.Connection,
+    canonical_tag: str,
+    facet: str,
+    value: str,
+    provenance: str = "appearance_normalization",
+    confidence: str = "medium",
+) -> int:
+    """Return the stable global catalog row for one canonical appearance tag."""
+    canonical_tag = normalize_tag(canonical_tag)
+    facet = normalize_tag(facet) or "unclassified"
+    if not canonical_tag:
+        raise ValueError("appearance catalog entries require a canonical tag")
+    display_value = str(value or humanize_tag(canonical_tag))
+    con.execute(
+        """INSERT INTO appearance_feature_catalog(
+               canonical_tag, default_facet, default_value, label,
+               provenance, confidence, status
+           ) VALUES (?, ?, ?, ?, ?, ?, 'active')
+           ON CONFLICT(canonical_tag) DO UPDATE SET
+               default_facet=excluded.default_facet,
+               default_value=excluded.default_value,
+               label=excluded.label,
+               provenance=CASE
+                   WHEN excluded.provenance='promoted_appearance_seed'
+                   THEN excluded.provenance
+                   ELSE appearance_feature_catalog.provenance
+               END,
+               confidence=CASE
+                   WHEN appearance_feature_catalog.confidence='high' THEN 'high'
+                   ELSE excluded.confidence
+               END,
+               status='active'
+           WHERE appearance_feature_catalog.default_facet <> excluded.default_facet
+              OR appearance_feature_catalog.default_value <> excluded.default_value
+              OR appearance_feature_catalog.label <> excluded.label
+              OR (excluded.provenance='promoted_appearance_seed'
+                  AND appearance_feature_catalog.provenance <> excluded.provenance)
+              OR (appearance_feature_catalog.confidence <> 'high'
+                  AND appearance_feature_catalog.confidence <> excluded.confidence)
+              OR appearance_feature_catalog.status <> 'active'""",
+        (canonical_tag, facet, display_value, humanize_tag(canonical_tag),
+         provenance, confidence),
+    )
+    row = con.execute(
+        "SELECT catalog_id FROM appearance_feature_catalog WHERE canonical_tag=?",
+        (canonical_tag,),
+    ).fetchone()
+    if row is None:
+        raise RuntimeError(f"could not retrieve catalog tag {canonical_tag}")
+    return int(row[0])
+
+
+def sync_appearance_feature_catalog(con: sqlite3.Connection) -> int:
+    """Backfill and repair catalog links for legacy or newly imported rows."""
+    rows = con.execute(
+        """SELECT f.canonical_tag, f.facet, f.value, f.confidence
+           FROM character_appearance_features f
+           JOIN (
+               SELECT canonical_tag, MIN(feature_id) AS feature_id
+               FROM character_appearance_features
+               WHERE canonical_tag <> '' AND status <> 'retired'
+               GROUP BY canonical_tag
+           ) first_row ON first_row.feature_id=f.feature_id
+           ORDER BY f.feature_id"""
+    ).fetchall()
+    for row in rows:
+        upsert_appearance_feature_catalog(
+            con, row[0], row[1], row[2], "appearance_normalization", row[3]
+        )
+    con.execute(
+        """UPDATE character_appearance_features
+           SET catalog_id=(
+               SELECT catalog_id FROM appearance_feature_catalog c
+               WHERE c.canonical_tag=character_appearance_features.canonical_tag
+           )
+           WHERE canonical_tag <> '' AND (
+               catalog_id IS NULL OR catalog_id <> (
+                   SELECT catalog_id FROM appearance_feature_catalog c
+                   WHERE c.canonical_tag=character_appearance_features.canonical_tag
+               )
+           )"""
+    )
+    con.execute(
+        """UPDATE appearance_feature_catalog
+           SET status=CASE WHEN EXISTS (
+               SELECT 1 FROM character_appearance_features f
+               WHERE f.canonical_tag=appearance_feature_catalog.canonical_tag
+                 AND f.status <> 'retired'
+           ) THEN 'active' ELSE 'retired' END
+           WHERE status <> CASE WHEN EXISTS (
+               SELECT 1 FROM character_appearance_features f
+               WHERE f.canonical_tag=appearance_feature_catalog.canonical_tag
+                 AND f.status <> 'retired'
+           ) THEN 'active' ELSE 'retired' END"""
+    )
+    return len(rows)
 
 
 def appearance_kind_for_variant(variant_tag: str, character_tag: str) -> str:

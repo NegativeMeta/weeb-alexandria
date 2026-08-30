@@ -18,10 +18,13 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 
 from weeb_alexandria_mcp.appearance_schema import (  # noqa: E402
+    DEFAULT_FACETS,
     appearance_kind_for_variant,
     ensure_appearance_schema,
     humanize_tag,
     normalize_tag,
+    upsert_appearance_facet_catalog,
+    upsert_appearance_feature_catalog,
 )
 from weeb_alexandria_mcp.owned_schema import ensure_owned_schema  # noqa: E402
 
@@ -119,6 +122,8 @@ def validate_seed_profiles(character_tag: str, profiles: list[Any]) -> None:
                 raise ValueError(
                     f"feature requires facet and canonical_tag for {profile_key}"
                 )
+            if facet not in DEFAULT_FACETS:
+                raise ValueError(f"unknown appearance facet for {profile_key}/{canonical_tag}: {facet}")
             if canonical_tag in seen_tags:
                 raise ValueError(
                     f"duplicate canonical_tag in profile {profile_key}: {canonical_tag}"
@@ -307,23 +312,38 @@ def promote(db: Path, seed_path: Path) -> dict[str, int]:
                 source_refs = feature.get("source_refs", [])
                 if not canonical_tag or not facet:
                     raise ValueError(f"feature requires facet and canonical_tag for {profile_key}")
+                if facet not in DEFAULT_FACETS:
+                    raise ValueError(f"unknown appearance facet for {profile_key}/{canonical_tag}: {facet}")
                 if not isinstance(source_refs, list) or not source_refs:
                     raise ValueError(f"published feature has no evidence: {profile_key}/{canonical_tag}")
                 missing = sorted(set(str(ref) for ref in source_refs) - sources.keys())
                 if missing:
                     raise ValueError(f"unknown source refs for {profile_key}/{canonical_tag}: {missing}")
+                facet_id = upsert_appearance_facet_catalog(con, facet)
+                catalog_id = upsert_appearance_feature_catalog(
+                    con,
+                    canonical_tag,
+                    facet,
+                    str(feature.get("value") or humanize_tag(canonical_tag)),
+                    "promoted_appearance_seed",
+                    str(feature.get("confidence", "high")),
+                )
                 con.execute(
                     """INSERT INTO character_appearance_features(
-                        appearance_key, facet, value, canonical_tag, role, status,
-                        confidence, display_order
-                    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+                        catalog_id, facet_id, appearance_key, facet, value, canonical_tag,
+                        role, status, confidence, display_order
+                    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
                     ON CONFLICT(appearance_key, facet, canonical_tag) DO UPDATE SET
+                        catalog_id=excluded.catalog_id,
+                        facet_id=excluded.facet_id,
                         value=excluded.value,
                         role=excluded.role,
                         status=excluded.status,
                         confidence=excluded.confidence,
                         display_order=excluded.display_order""",
                     (
+                        catalog_id,
+                        facet_id,
                         profile_key,
                         facet,
                         str(feature.get("value") or humanize_tag(canonical_tag)),

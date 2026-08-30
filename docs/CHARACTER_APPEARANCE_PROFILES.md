@@ -57,7 +57,8 @@ exactly one profile:
 | Field | Requirement |
 |---|---|
 | `appearance_key` | Must reference the profile being described. |
-| `facet` | Controlled visual facet such as `hair`, `eyes`, `face`, `clothing`, `dress`, `skirt`, `footwear`, `accessory`, or `body`. |
+| `facet` | Controlled facet such as `hair`, `eyes`, `face`, `dress`, `upper_body`, `footwear`, `wings`, `markings`, `effects`, `body`, or `context`. The catalog is defined by `appearance_facet_catalog`; legacy names such as `clothing` and `hair_style` are not valid for new seeds. |
+| `facet_id` | Stable link to `appearance_facet_catalog`; `facet` remains as a compatibility cache. |
 | `canonical_tag` | One normalized tag that describes the feature. Preserve legitimate multi-word tags. |
 | `polarity` | `supports` for confirmed presence; `contradicts` only when a source explicitly conflicts. |
 | `status` | `reviewed` or `published` for canonical data; candidates remain `pending` in the derived DB. |
@@ -97,6 +98,24 @@ Every published feature must link to one or more sources through
 `character_appearance_feature_sources`. Keep site-specific evidence separate:
 `combined` is a derived aggregation, not a source. Preserve source identity,
 counts, sample size, and conflicts independently.
+
+### Facet taxonomy
+
+Facets classify where or what kind of appearance fact a feature describes. The
+same canonical tag may have many profile assignments, but each assignment has
+one scoped facet. The catalog also records the semantic group:
+
+- `visual`: hair, hair accessories, eyes, face, ears, horns, headwear, neck,
+  dress, jacket, upper/lower body, sleeves, gloves, legwear, footwear, jewelry,
+  accessories, props, wings, tail, markings, and effects;
+- `identity`: body, skin, species, and gender metadata;
+- `context`: roles, occupations, styles, or expressions that are retained for
+  audit but are not visual clothing/anatomy facts;
+- `review`: the temporary `unclassified` bucket, which must not remain on an
+  active canonical association after normalization.
+
+The MCP keeps the existing `features` grouping and additively returns
+`facet_metadata`, including each facet's group and visual flag.
 
 The `character_appearance_conflicts` table records every unresolved ambiguity
 with a conflict key, facet, alternatives, status, reason, source references, and

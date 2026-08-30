@@ -161,6 +161,7 @@ La apariencia se divide entre un perfil base y perfiles separados para cada outf
 
 - `character_appearance_profiles`: una fila por apariencia base o variante.
 - `character_appearance_features`: una fila por faceta/tag, como `hair`, `eyes`, `dress` o `footwear`.
+- `appearance_facet_catalog`: catálogo controlado de facetas y grupos semánticos (`visual`, `identity`, `context`).
 - `character_appearance_sources`: catálogo de fuentes Danbooru, Gelbooru, posts de referencia y semillas revisadas.
 - `character_appearance_feature_sources`: evidencia, conteos y conflictos por característica.
 
@@ -173,6 +174,8 @@ La apariencia se divide entre un perfil base y perfiles separados para cada outf
 .venv/Scripts/python.exe scripts/promote_appearance.py \\
   --input seeds/appearance/inugami_korone.json
 ```
+
+La taxonomía controlada incluye facetas de apéndices como `wings`, detalles visuales como `markings` y `effects`, y facetas de auditoría no visual como `context` y `expression`. Las nuevas seeds deben usar los nombres del catálogo; nombres heredados como `clothing` y `hair_style` se normalizan antes de promocionar. El MCP conserva la agrupación existente en `features` y añade `facet_metadata`.
 
 La herramienta MCP es `get_character_appearance(character, variant=None, include_evidence=True, limit=100)`. `get_character_appearance("inugami_korone")` devuelve la apariencia base y los perfiles revisados de `1st_costume`, `street` y `new_year` sin mezclar sus prendas.
 

@@ -37,17 +37,31 @@ def _feature_dict(row: sqlite3.Row) -> dict[str, Any]:
 def _appearance_profile(con: sqlite3.Connection, profile: sqlite3.Row,
                         include_evidence: bool, limit: int) -> dict[str, Any]:
     feature_rows = con.execute(
-        """SELECT feature_id, facet, value, canonical_tag, role, status,
-                  confidence, display_order
-           FROM character_appearance_features
-           WHERE appearance_key=? AND status IN (?, ?)
-           ORDER BY facet, display_order, canonical_tag
+        """SELECT f.feature_id,
+                  COALESCE(fc.facet_key, f.facet) AS facet,
+                  COALESCE(fc.facet_group, 'review') AS facet_group,
+                  COALESCE(fc.is_visual, 1) AS is_visual,
+                  COALESCE(fc.description, '') AS facet_description,
+                  f.value,
+                  COALESCE(c.canonical_tag, f.canonical_tag) AS canonical_tag,
+                  f.role, f.status, f.confidence, f.display_order
+           FROM character_appearance_features f
+           LEFT JOIN appearance_feature_catalog c ON c.catalog_id=f.catalog_id
+           LEFT JOIN appearance_facet_catalog fc ON fc.facet_id=f.facet_id
+           WHERE f.appearance_key=? AND f.status IN (?, ?)
+           ORDER BY f.facet, f.display_order, c.canonical_tag, f.canonical_tag
            LIMIT ?""",
         (profile["appearance_key"], *PUBLISHED_STATUSES, limit),
     ).fetchall()
     grouped: dict[str, list[dict[str, Any]]] = defaultdict(list)
+    facet_metadata: dict[str, dict[str, Any]] = {}
     for row in feature_rows:
         grouped[row["facet"]].append(_feature_dict(row))
+        facet_metadata[row["facet"]] = {
+            "group": row["facet_group"],
+            "is_visual": bool(row["is_visual"]),
+            "description": row["facet_description"],
+        }
 
     result: dict[str, Any] = {
         "appearance_key": profile["appearance_key"],
@@ -61,6 +75,7 @@ def _appearance_profile(con: sqlite3.Connection, profile: sqlite3.Row,
         "provenance": profile["provenance"],
         "notes": profile["notes"],
         "features": dict(grouped),
+        "facet_metadata": facet_metadata,
         "feature_count": len(feature_rows),
         "sources": [],
         "evidence": [],
@@ -69,13 +84,16 @@ def _appearance_profile(con: sqlite3.Connection, profile: sqlite3.Row,
         return result
 
     source_rows = con.execute(
-        """SELECT fs.feature_id, f.facet, f.canonical_tag,
+        """SELECT fs.feature_id, COALESCE(fc.facet_key, f.facet) AS facet,
+                  COALESCE(c.canonical_tag, f.canonical_tag) AS canonical_tag,
                   fs.polarity, fs.observed_tag, fs.support_count,
                   fs.sample_size, fs.evidence_text, fs.confidence AS evidence_confidence,
                   s.source_site, s.source_kind, s.source_key, s.source_url,
                   s.source_tier, s.title, s.excerpt, s.captured_at
            FROM character_appearance_feature_sources fs
            JOIN character_appearance_features f ON f.feature_id=fs.feature_id
+           LEFT JOIN appearance_feature_catalog c ON c.catalog_id=f.catalog_id
+           LEFT JOIN appearance_facet_catalog fc ON fc.facet_id=f.facet_id
            JOIN character_appearance_sources s ON s.source_id=fs.source_id
            WHERE f.appearance_key=? AND f.status IN (?, ?)
            ORDER BY f.facet, f.canonical_tag, s.source_tier, s.source_site,

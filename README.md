@@ -161,6 +161,7 @@ Appearance data is split into a base profile and separate outfit/variant profile
 
 - `character_appearance_profiles` — one row per base appearance or outfit variant.
 - `character_appearance_features` — one row per facet/tag, such as `hair`, `eyes`, `dress`, or `footwear`.
+- `appearance_facet_catalog` — controlled facet definitions and semantic groups (`visual`, `identity`, `context`).
 - `character_appearance_sources` — source catalog for Danbooru, Gelbooru, reference posts, and curated seeds.
 - `character_appearance_feature_sources` — feature-level evidence, counts, and conflicts.
 
@@ -195,6 +196,12 @@ get_character_appearance(character, variant=None, include_evidence=True, limit=1
 ```
 
 For example, `get_character_appearance("inugami_korone")` returns the base appearance plus the reviewed `1st_costume`, `street`, and `new_year` profiles. Clothing from one variant is not merged into another variant's base profile.
+
+The controlled taxonomy includes appendage facets such as `wings`, visual detail
+facets such as `markings` and `effects`, and non-visual audit facets such as
+`context` and `expression`. New seeds must use the catalog names; legacy names
+such as `clothing` and `hair_style` are normalized before promotion. The MCP
+keeps the existing `features` grouping and additively returns `facet_metadata`.
 
 For the complete profile contract, evidence rules, review checklist, and first five-character batch, see [`docs/CHARACTER_APPEARANCE_PROFILES.md`](docs/CHARACTER_APPEARANCE_PROFILES.md).
 

@@ -1537,6 +1537,8 @@ def get_sources_status() -> dict:
                       "character_traits", "trait_system_metadata",
                       "character_appearance_profiles",
                       "character_appearance_features",
+                      "appearance_feature_catalog",
+                      "appearance_facet_catalog",
                       "character_appearance_sources",
                       "character_appearance_feature_sources",
                       "appearance_schema_metadata"):

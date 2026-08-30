@@ -8,8 +8,8 @@ from __future__ import annotations
 import sqlite3
 
 from weeb_alexandria_mcp.appearance_schema import (
-    APPEARANCE_SCHEMA_SQL,
     DEFAULT_METADATA,
+    ensure_appearance_schema,
 )
 
 OWNED_SCHEMA_VERSION = "1"
@@ -73,7 +73,7 @@ CREATE TABLE IF NOT EXISTS trait_system_metadata (
 def ensure_owned_schema(con: sqlite3.Connection) -> None:
     """Create the independent profile, trait, and appearance tables."""
     con.executescript(SCHEMA_SQL)
-    con.executescript(APPEARANCE_SCHEMA_SQL)
+    ensure_appearance_schema(con)
     con.executemany(
         "INSERT OR IGNORE INTO trait_system_metadata(key, value) VALUES (?, ?)",
         [
