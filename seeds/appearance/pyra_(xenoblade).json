@@ -1,0 +1,132 @@
+{
+  "character_tag": "pyra_(xenoblade)",
+  "sources": [
+    {
+      "id": "danbooru:wiki:pyra_(xenoblade)",
+      "source_site": "danbooru",
+      "source_kind": "wiki",
+      "source_key": "pyra_(xenoblade)",
+      "source_url": "https://danbooru.donmai.us/wiki_pages/pyra_(xenoblade).json",
+      "source_tier": 1,
+      "title": "Pyra",
+      "excerpt": "Pyra has red hair in a short bob cut with swept bangs and red eyes. Her base outfit includes red short shorts, black fingerless gloves, a tiara, earrings and red thighhighs.",
+      "captured_at": "2026-08-29"
+    },
+    {
+      "id": "gelbooru:wiki:pyra_(xenoblade)",
+      "source_site": "gelbooru",
+      "source_kind": "wiki",
+      "source_key": "pyra_(xenoblade)",
+      "source_url": "https://gelbooru.com/index.php?page=wiki&s=view&id=pyra_(xenoblade)",
+      "source_tier": 1,
+      "title": "Pyra",
+      "excerpt": "Pyra's default design has short red hair, red eyes, black fingerless gloves, earrings, red short shorts and red thighhighs. Disguised and Pro Swimmer outfits are alternate costumes.",
+      "captured_at": "2026-08-29"
+    }
+  ],
+  "profiles": [
+    {
+      "appearance_key": "pyra_(xenoblade)::default",
+      "variant_tag": "pyra_(xenoblade)",
+      "display_name": "Default Xenoblade Chronicles 2 appearance",
+      "appearance_kind": "default",
+      "is_default": true,
+      "status": "published",
+      "confidence": "high",
+      "provenance": "danbooru_gelbooru_wiki_reviewed",
+      "notes": "Default Pyra design only; Disguised, Pro Swimmer and other alternate costumes excluded.",
+      "features": [
+        {
+          "facet": "eyes",
+          "canonical_tag": "red_eyes",
+          "value": "Red eyes",
+          "source_refs": [
+            "danbooru:wiki:pyra_(xenoblade)",
+            "gelbooru:wiki:pyra_(xenoblade)"
+          ]
+        },
+        {
+          "facet": "hair",
+          "canonical_tag": "red_hair",
+          "value": "Red hair",
+          "source_refs": [
+            "danbooru:wiki:pyra_(xenoblade)",
+            "gelbooru:wiki:pyra_(xenoblade)"
+          ]
+        },
+        {
+          "facet": "hair",
+          "canonical_tag": "short_hair",
+          "value": "Short bob-cut hair",
+          "source_refs": [
+            "danbooru:wiki:pyra_(xenoblade)",
+            "gelbooru:wiki:pyra_(xenoblade)"
+          ]
+        },
+        {
+          "facet": "hair",
+          "canonical_tag": "swept_bangs",
+          "value": "Swept bangs",
+          "source_refs": [
+            "danbooru:wiki:pyra_(xenoblade)",
+            "gelbooru:wiki:pyra_(xenoblade)"
+          ]
+        },
+        {
+          "facet": "lower_body",
+          "canonical_tag": "red_shorts",
+          "value": "Red short shorts",
+          "source_refs": [
+            "danbooru:wiki:pyra_(xenoblade)",
+            "gelbooru:wiki:pyra_(xenoblade)"
+          ]
+        },
+        {
+          "facet": "lower_body",
+          "canonical_tag": "short_shorts",
+          "value": "Short shorts",
+          "source_refs": [
+            "danbooru:wiki:pyra_(xenoblade)",
+            "gelbooru:wiki:pyra_(xenoblade)"
+          ]
+        },
+        {
+          "facet": "gloves",
+          "canonical_tag": "black_gloves",
+          "value": "Black gloves",
+          "source_refs": [
+            "danbooru:wiki:pyra_(xenoblade)",
+            "gelbooru:wiki:pyra_(xenoblade)"
+          ]
+        },
+        {
+          "facet": "gloves",
+          "canonical_tag": "fingerless_gloves",
+          "value": "Fingerless gloves",
+          "source_refs": [
+            "danbooru:wiki:pyra_(xenoblade)",
+            "gelbooru:wiki:pyra_(xenoblade)"
+          ]
+        },
+        {
+          "facet": "jewelry",
+          "canonical_tag": "earrings",
+          "value": "Earrings",
+          "source_refs": [
+            "danbooru:wiki:pyra_(xenoblade)",
+            "gelbooru:wiki:pyra_(xenoblade)"
+          ]
+        },
+        {
+          "facet": "legwear",
+          "canonical_tag": "red_thighhighs",
+          "value": "Red thighhighs",
+          "source_refs": [
+            "danbooru:wiki:pyra_(xenoblade)",
+            "gelbooru:wiki:pyra_(xenoblade)"
+          ]
+        }
+      ]
+    }
+  ]
+}

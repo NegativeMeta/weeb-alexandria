@@ -1,0 +1,114 @@
+{
+  "character_tag": "lillie_(pokemon)",
+  "sources": [
+    {
+      "id": "danbooru:wiki:lillie_(pokemon)",
+      "source_site": "danbooru",
+      "source_kind": "wiki",
+      "source_key": "lillie_(pokemon)",
+      "source_url": "https://danbooru.donmai.us/wiki_pages/lillie_(pokemon).json",
+      "source_tier": 1,
+      "title": "Lillie",
+      "excerpt": "Lillie has long blonde hair with blunt bangs and green eyes. Her first official outfit includes a sleeveless white dress and white knee boots, sometimes with a white sun hat.",
+      "captured_at": "2026-08-29"
+    },
+    {
+      "id": "gelbooru:wiki:lillie_(pokemon)",
+      "source_site": "gelbooru",
+      "source_kind": "wiki",
+      "source_key": "lillie_(pokemon)",
+      "source_url": "https://gelbooru.com/index.php?page=wiki&s=view&id=lillie_(pokemon)",
+      "source_tier": 1,
+      "title": "Lillie",
+      "excerpt": "First appearance: long blonde hair, blunt bangs, green eyes, white hat, sleeveless white dress and white boots. The second game outfit is separate.",
+      "captured_at": "2026-08-29"
+    }
+  ],
+  "profiles": [
+    {
+      "appearance_key": "lillie_(pokemon)::default",
+      "variant_tag": "lillie_(pokemon)",
+      "display_name": "Sun and Moon first outfit",
+      "appearance_kind": "default",
+      "is_default": true,
+      "status": "published",
+      "confidence": "high",
+      "provenance": "danbooru_gelbooru_wiki_reviewed",
+      "notes": "Scoped to Lillie's first official Sun and Moon outfit: sleeveless white dress with optional white sun hat and knee boots. Second game outfit, anime depictions and cosplay remain separate.",
+      "features": [
+        {
+          "facet": "eyes",
+          "canonical_tag": "green_eyes",
+          "value": "Green eyes",
+          "source_refs": [
+            "danbooru:wiki:lillie_(pokemon)",
+            "gelbooru:wiki:lillie_(pokemon)"
+          ]
+        },
+        {
+          "facet": "hair",
+          "canonical_tag": "long_hair",
+          "value": "Long blonde hair",
+          "source_refs": [
+            "danbooru:wiki:lillie_(pokemon)",
+            "gelbooru:wiki:lillie_(pokemon)"
+          ]
+        },
+        {
+          "facet": "hair",
+          "canonical_tag": "blonde_hair",
+          "value": "Blonde hair",
+          "source_refs": [
+            "danbooru:wiki:lillie_(pokemon)",
+            "gelbooru:wiki:lillie_(pokemon)"
+          ]
+        },
+        {
+          "facet": "hair",
+          "canonical_tag": "blunt_bangs",
+          "value": "Blunt bangs",
+          "source_refs": [
+            "danbooru:wiki:lillie_(pokemon)",
+            "gelbooru:wiki:lillie_(pokemon)"
+          ]
+        },
+        {
+          "facet": "dress",
+          "canonical_tag": "sleeveless_dress",
+          "value": "Sleeveless dress",
+          "source_refs": [
+            "danbooru:wiki:lillie_(pokemon)",
+            "gelbooru:wiki:lillie_(pokemon)"
+          ]
+        },
+        {
+          "facet": "dress",
+          "canonical_tag": "white_dress",
+          "value": "White dress",
+          "source_refs": [
+            "danbooru:wiki:lillie_(pokemon)",
+            "gelbooru:wiki:lillie_(pokemon)"
+          ]
+        },
+        {
+          "facet": "footwear",
+          "canonical_tag": "white_boots",
+          "value": "White knee boots",
+          "source_refs": [
+            "danbooru:wiki:lillie_(pokemon)",
+            "gelbooru:wiki:lillie_(pokemon)"
+          ]
+        },
+        {
+          "facet": "headwear",
+          "canonical_tag": "white_hat",
+          "value": "White sun hat",
+          "source_refs": [
+            "danbooru:wiki:lillie_(pokemon)",
+            "gelbooru:wiki:lillie_(pokemon)"
+          ]
+        }
+      ]
+    }
+  ]
+}

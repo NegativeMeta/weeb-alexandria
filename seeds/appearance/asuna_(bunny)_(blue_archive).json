@@ -1,0 +1,91 @@
+{
+  "character_tag": "asuna_(bunny)_(blue_archive)",
+  "sources": [
+    {
+      "id": "danbooru:wiki:asuna_(bunny)_(blue_archive)",
+      "source_site": "danbooru",
+      "source_kind": "wiki",
+      "source_key": "asuna_(bunny)_(blue_archive)",
+      "source_url": "https://danbooru.donmai.us/wiki_pages/asuna_(bunny)_(blue_archive).json",
+      "source_tier": 1,
+      "title": "Asuna (Bunny)",
+      "excerpt": "The official alternate costume and an alternate playable variant of Blue Archive's Asuna. Asuna wears the typical playboy bunny set, with turquoise leotard and a set of thighband pantyhose. She also wears white gloves and blue hair ribbon. Asuna's trademark mole on her left breast is shown in clear detail.",
+      "captured_at": "2026-08-29"
+    },
+    {
+      "id": "gelbooru:wiki:asuna_(bunny)_(blue_archive)",
+      "source_site": "gelbooru",
+      "source_kind": "wiki",
+      "source_key": "asuna_(bunny)_(blue_archive)",
+      "source_url": "https://gelbooru.com/index.php?page=wiki&s=view&id=asuna_(bunny)_(blue_archive)",
+      "source_tier": 1,
+      "title": "Asuna (Bunny)",
+      "excerpt": "An official alternate costume for Asuna. Official art identifies the playboy bunny costume.",
+      "captured_at": "2026-08-29"
+    }
+  ],
+  "profiles": [
+    {
+      "appearance_key": "asuna_(bunny)_(blue_archive)::default",
+      "variant_tag": "asuna_(bunny)_(blue_archive)",
+      "display_name": "Bunny costume appearance",
+      "appearance_kind": "costume",
+      "is_default": true,
+      "status": "published",
+      "confidence": "high",
+      "provenance": "danbooru_gelbooru_wiki_reviewed",
+      "notes": "Explicit official alternate costume; scoped to the bunny variant and not merged with base Asuna.",
+      "features": [
+        {
+          "facet": "species",
+          "canonical_tag": "playboy_bunny",
+          "value": "Playboy bunny costume",
+          "source_refs": [
+            "danbooru:wiki:asuna_(bunny)_(blue_archive)",
+            "gelbooru:wiki:asuna_(bunny)_(blue_archive)"
+          ]
+        },
+        {
+          "facet": "upper_body",
+          "canonical_tag": "blue_leotard",
+          "value": "Turquoise leotard",
+          "source_refs": [
+            "danbooru:wiki:asuna_(bunny)_(blue_archive)"
+          ]
+        },
+        {
+          "facet": "legwear",
+          "canonical_tag": "thighband_pantyhose",
+          "value": "Thighband pantyhose",
+          "source_refs": [
+            "danbooru:wiki:asuna_(bunny)_(blue_archive)"
+          ]
+        },
+        {
+          "facet": "gloves",
+          "canonical_tag": "white_gloves",
+          "value": "White gloves",
+          "source_refs": [
+            "danbooru:wiki:asuna_(bunny)_(blue_archive)"
+          ]
+        },
+        {
+          "facet": "hair_accessory",
+          "canonical_tag": "blue_ribbon",
+          "value": "Blue hair ribbon",
+          "source_refs": [
+            "danbooru:wiki:asuna_(bunny)_(blue_archive)"
+          ]
+        },
+        {
+          "facet": "body",
+          "canonical_tag": "mole_on_breast",
+          "value": "Mole on left breast",
+          "source_refs": [
+            "danbooru:wiki:asuna_(bunny)_(blue_archive)"
+          ]
+        }
+      ]
+    }
+  ]
+}

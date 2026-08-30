@@ -1,0 +1,101 @@
+{
+  "character_tag": "shiranui_mai",
+  "sources": [
+    {
+      "id": "danbooru:wiki:shiranui_mai",
+      "source_site": "danbooru",
+      "source_kind": "wiki",
+      "source_key": "shiranui_mai",
+      "source_url": "https://danbooru.donmai.us/wiki_pages/shiranui_mai.json",
+      "source_tier": 1,
+      "title": "Shiranui Mai",
+      "excerpt": "Mai's most famous outfit is a sleeveless kimono. She has brown eyes and commonly wears long brown hair in a ponytail tied with an ornamental hairpin.",
+      "captured_at": "2026-08-29"
+    },
+    {
+      "id": "gelbooru:wiki:shiranui_mai",
+      "source_site": "gelbooru",
+      "source_kind": "wiki",
+      "source_key": "shiranui_mai",
+      "source_url": "https://gelbooru.com/index.php?page=wiki&s=view&id=shiranui_mai",
+      "source_tier": 1,
+      "title": "Shiranui Mai",
+      "excerpt": "Mai is commonly depicted as a red-clad ninja with long brown hair and a ponytail; alternate outfits and short-haired Maximum Impact designs are separate.",
+      "captured_at": "2026-08-29"
+    }
+  ],
+  "profiles": [
+    {
+      "appearance_key": "shiranui_mai::default",
+      "variant_tag": "shiranui_mai",
+      "display_name": "Common sleeveless kimono appearance",
+      "appearance_kind": "default",
+      "is_default": true,
+      "status": "published",
+      "confidence": "high",
+      "provenance": "danbooru_gelbooru_wiki_reviewed",
+      "notes": "Common base appearance only; game-specific alternate outfits, Maximum Impact short hair and crossover variants excluded.",
+      "features": [
+        {
+          "facet": "eyes",
+          "canonical_tag": "brown_eyes",
+          "value": "Brown eyes",
+          "source_refs": [
+            "danbooru:wiki:shiranui_mai"
+          ]
+        },
+        {
+          "facet": "hair",
+          "canonical_tag": "long_hair",
+          "value": "Long hair",
+          "source_refs": [
+            "danbooru:wiki:shiranui_mai",
+            "gelbooru:wiki:shiranui_mai"
+          ]
+        },
+        {
+          "facet": "hair",
+          "canonical_tag": "brown_hair",
+          "value": "Brown hair",
+          "source_refs": [
+            "danbooru:wiki:shiranui_mai",
+            "gelbooru:wiki:shiranui_mai"
+          ]
+        },
+        {
+          "facet": "hair",
+          "canonical_tag": "ponytail",
+          "value": "Ponytail",
+          "source_refs": [
+            "danbooru:wiki:shiranui_mai",
+            "gelbooru:wiki:shiranui_mai"
+          ]
+        },
+        {
+          "facet": "hair_accessory",
+          "canonical_tag": "black_hairpin",
+          "value": "Ornamental hairpin",
+          "source_refs": [
+            "danbooru:wiki:shiranui_mai"
+          ]
+        },
+        {
+          "facet": "dress",
+          "canonical_tag": "sleeveless_kimono",
+          "value": "Sleeveless kimono",
+          "source_refs": [
+            "danbooru:wiki:shiranui_mai"
+          ]
+        },
+        {
+          "facet": "accessories",
+          "canonical_tag": "folding_fan",
+          "value": "Folding fan",
+          "source_refs": [
+            "danbooru:wiki:shiranui_mai"
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,114 @@
+{
+  "character_tag": "nanami_chiaki",
+  "sources": [
+    {
+      "id": "danbooru:wiki:nanami_chiaki",
+      "source_site": "danbooru",
+      "source_kind": "wiki",
+      "source_key": "nanami_chiaki",
+      "source_url": "https://danbooru.donmai.us/wiki_pages/nanami_chiaki.json",
+      "source_tier": 1,
+      "title": "Nanami Chiaki",
+      "excerpt": "Chiaki wears a pleated brown skirt, black over-knee socks, a pink neck ribbon, a tucked collared dress shirt and a black-and-white hooded jacket. The local source records pink or light-brown medium flipped hair, so hair color is not resolved here.",
+      "captured_at": "2026-08-29"
+    },
+    {
+      "id": "gelbooru:wiki:nanami_chiaki",
+      "source_site": "gelbooru",
+      "source_kind": "wiki",
+      "source_key": "nanami_chiaki",
+      "source_url": "https://gelbooru.com/index.php?page=wiki&s=view&id=nanami_chiaki",
+      "source_tier": 1,
+      "title": "Nanami Chiaki",
+      "excerpt": "Nanami's visual novel design uses a hoodie, backpack and beige pleated skirt; anime depictions use a serafuku. Alternate depictions are separate.",
+      "captured_at": "2026-08-29"
+    }
+  ],
+  "profiles": [
+    {
+      "appearance_key": "nanami_chiaki::default",
+      "variant_tag": "nanami_chiaki",
+      "display_name": "Danganronpa 2 gamer appearance",
+      "appearance_kind": "default",
+      "is_default": true,
+      "status": "published",
+      "confidence": "medium",
+      "provenance": "danbooru_gelbooru_wiki_reviewed",
+      "notes": "Shared Danganronpa 2 visual traits only. Hair-color alternatives, anime serafuku, bikini and other variants remain unresolved or separate.",
+      "features": [
+        {
+          "facet": "hair",
+          "canonical_tag": "medium_hair",
+          "value": "Medium-length hair",
+          "source_refs": [
+            "danbooru:wiki:nanami_chiaki"
+          ]
+        },
+        {
+          "facet": "hair",
+          "canonical_tag": "flipped_hair",
+          "value": "Flipped hair",
+          "source_refs": [
+            "danbooru:wiki:nanami_chiaki"
+          ]
+        },
+        {
+          "facet": "hair_accessory",
+          "canonical_tag": "pink_ribbon",
+          "value": "Pink neck ribbon",
+          "source_refs": [
+            "danbooru:wiki:nanami_chiaki"
+          ]
+        },
+        {
+          "facet": "dress",
+          "canonical_tag": "dress_shirt",
+          "value": "Dress shirt",
+          "source_refs": [
+            "danbooru:wiki:nanami_chiaki"
+          ]
+        },
+        {
+          "facet": "upper_body",
+          "canonical_tag": "collared_shirt",
+          "value": "Collared shirt",
+          "source_refs": [
+            "danbooru:wiki:nanami_chiaki"
+          ]
+        },
+        {
+          "facet": "lower_body",
+          "canonical_tag": "pleated_skirt",
+          "value": "Pleated skirt",
+          "source_refs": [
+            "danbooru:wiki:nanami_chiaki"
+          ]
+        },
+        {
+          "facet": "lower_body",
+          "canonical_tag": "brown_skirt",
+          "value": "Brown skirt",
+          "source_refs": [
+            "danbooru:wiki:nanami_chiaki"
+          ]
+        },
+        {
+          "facet": "legwear",
+          "canonical_tag": "black_thighhighs",
+          "value": "Black over-knee socks",
+          "source_refs": [
+            "danbooru:wiki:nanami_chiaki"
+          ]
+        },
+        {
+          "facet": "jacket",
+          "canonical_tag": "hooded_jacket",
+          "value": "Hooded jacket",
+          "source_refs": [
+            "danbooru:wiki:nanami_chiaki"
+          ]
+        }
+      ]
+    }
+  ]
+}

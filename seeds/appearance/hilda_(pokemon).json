@@ -1,0 +1,159 @@
+{
+  "character_tag": "hilda_(pokemon)",
+  "sources": [
+    {
+      "id": "danbooru:wiki:hilda_(pokemon)",
+      "source_site": "danbooru",
+      "source_kind": "wiki",
+      "source_key": "hilda_(pokemon)",
+      "source_url": "https://danbooru.donmai.us/wiki_pages/hilda_(pokemon).json",
+      "source_tier": 1,
+      "title": "Hilda",
+      "excerpt": "Hilda has blue eyes, long curly brown hair in a high ponytail with sidelocks and a baseball cap. She wears a black vest over a sleeveless white shirt or tank top, denim short shorts and brown boots.",
+      "captured_at": "2026-08-29"
+    },
+    {
+      "id": "gelbooru:wiki:hilda_(pokemon)",
+      "source_site": "gelbooru",
+      "source_kind": "wiki",
+      "source_key": "hilda_(pokemon)",
+      "source_url": "https://gelbooru.com/index.php?page=wiki&s=view&id=hilda_(pokemon)",
+      "source_tier": 1,
+      "title": "Hilda",
+      "excerpt": "Black and White default Hilda design: blue eyes, long curly brown high ponytail with sidelocks, baseball cap, black vest, sleeveless white shirt, denim shorts and brown boots.",
+      "captured_at": "2026-08-29"
+    }
+  ],
+  "profiles": [
+    {
+      "appearance_key": "hilda_(pokemon)::default",
+      "variant_tag": "hilda_(pokemon)",
+      "display_name": "Black and White trainer appearance",
+      "appearance_kind": "default",
+      "is_default": true,
+      "status": "published",
+      "confidence": "high",
+      "provenance": "danbooru_gelbooru_wiki_reviewed",
+      "notes": "Black and White default design; Pokémon Masters and alternate outfits excluded.",
+      "features": [
+        {
+          "facet": "eyes",
+          "canonical_tag": "blue_eyes",
+          "value": "Blue eyes",
+          "source_refs": [
+            "danbooru:wiki:hilda_(pokemon)",
+            "gelbooru:wiki:hilda_(pokemon)"
+          ]
+        },
+        {
+          "facet": "hair",
+          "canonical_tag": "long_hair",
+          "value": "Long hair",
+          "source_refs": [
+            "danbooru:wiki:hilda_(pokemon)",
+            "gelbooru:wiki:hilda_(pokemon)"
+          ]
+        },
+        {
+          "facet": "hair",
+          "canonical_tag": "curly_hair",
+          "value": "Curly hair",
+          "source_refs": [
+            "danbooru:wiki:hilda_(pokemon)",
+            "gelbooru:wiki:hilda_(pokemon)"
+          ]
+        },
+        {
+          "facet": "hair",
+          "canonical_tag": "brown_hair",
+          "value": "Brown hair",
+          "source_refs": [
+            "danbooru:wiki:hilda_(pokemon)",
+            "gelbooru:wiki:hilda_(pokemon)"
+          ]
+        },
+        {
+          "facet": "hair",
+          "canonical_tag": "high_ponytail",
+          "value": "High ponytail",
+          "source_refs": [
+            "danbooru:wiki:hilda_(pokemon)",
+            "gelbooru:wiki:hilda_(pokemon)"
+          ]
+        },
+        {
+          "facet": "hair_accessory",
+          "canonical_tag": "sidelocks",
+          "value": "Sidelocks",
+          "source_refs": [
+            "danbooru:wiki:hilda_(pokemon)",
+            "gelbooru:wiki:hilda_(pokemon)"
+          ]
+        },
+        {
+          "facet": "headwear",
+          "canonical_tag": "baseball_cap",
+          "value": "Baseball cap",
+          "source_refs": [
+            "danbooru:wiki:hilda_(pokemon)",
+            "gelbooru:wiki:hilda_(pokemon)"
+          ]
+        },
+        {
+          "facet": "jacket",
+          "canonical_tag": "black_vest",
+          "value": "Black vest",
+          "source_refs": [
+            "danbooru:wiki:hilda_(pokemon)",
+            "gelbooru:wiki:hilda_(pokemon)"
+          ]
+        },
+        {
+          "facet": "upper_body",
+          "canonical_tag": "sleeveless_shirt",
+          "value": "Sleeveless shirt",
+          "source_refs": [
+            "danbooru:wiki:hilda_(pokemon)",
+            "gelbooru:wiki:hilda_(pokemon)"
+          ]
+        },
+        {
+          "facet": "upper_body",
+          "canonical_tag": "white_shirt",
+          "value": "White shirt",
+          "source_refs": [
+            "danbooru:wiki:hilda_(pokemon)",
+            "gelbooru:wiki:hilda_(pokemon)"
+          ]
+        },
+        {
+          "facet": "lower_body",
+          "canonical_tag": "denim_shorts",
+          "value": "Denim short shorts",
+          "source_refs": [
+            "danbooru:wiki:hilda_(pokemon)",
+            "gelbooru:wiki:hilda_(pokemon)"
+          ]
+        },
+        {
+          "facet": "lower_body",
+          "canonical_tag": "short_shorts",
+          "value": "Short shorts",
+          "source_refs": [
+            "danbooru:wiki:hilda_(pokemon)",
+            "gelbooru:wiki:hilda_(pokemon)"
+          ]
+        },
+        {
+          "facet": "footwear",
+          "canonical_tag": "brown_boots",
+          "value": "Brown boots",
+          "source_refs": [
+            "danbooru:wiki:hilda_(pokemon)",
+            "gelbooru:wiki:hilda_(pokemon)"
+          ]
+        }
+      ]
+    }
+  ]
+}

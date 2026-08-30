@@ -1,0 +1,114 @@
+{
+  "character_tag": "koharu_(blue_archive)",
+  "sources": [
+    {
+      "id": "danbooru:wiki:koharu_(blue_archive)",
+      "source_site": "danbooru",
+      "source_kind": "wiki",
+      "source_key": "koharu_(blue_archive)",
+      "source_url": "https://danbooru.donmai.us/wiki_pages/koharu_(blue_archive).json",
+      "source_tier": 1,
+      "title": "Koharu",
+      "excerpt": "Koharu has pink medium hair in low twintails. Her default uniform has pink trim; she wears a beret, black cardigan, pink skirt, white sailor collar and loose white socks.",
+      "captured_at": "2026-08-29"
+    },
+    {
+      "id": "gelbooru:wiki:koharu_(blue_archive)",
+      "source_site": "gelbooru",
+      "source_kind": "wiki",
+      "source_key": "koharu_(blue_archive)",
+      "source_url": "https://gelbooru.com/index.php?page=wiki&s=view&id=koharu_(blue_archive)",
+      "source_tier": 1,
+      "title": "Koharu",
+      "excerpt": "Default Koharu design is distinct from her swimsuit skin: pink low twintails, beret, black cardigan, pink skirt, white sailor collar and white socks.",
+      "captured_at": "2026-08-29"
+    }
+  ],
+  "profiles": [
+    {
+      "appearance_key": "koharu_(blue_archive)::default",
+      "variant_tag": "koharu_(blue_archive)",
+      "display_name": "Default Make-Up Work Club appearance",
+      "appearance_kind": "default",
+      "is_default": true,
+      "status": "published",
+      "confidence": "high",
+      "provenance": "danbooru_gelbooru_wiki_reviewed",
+      "notes": "Default design only; swimsuit and other Blue Archive skins excluded.",
+      "features": [
+        {
+          "facet": "hair",
+          "canonical_tag": "medium_hair",
+          "value": "Medium hair",
+          "source_refs": [
+            "danbooru:wiki:koharu_(blue_archive)",
+            "gelbooru:wiki:koharu_(blue_archive)"
+          ]
+        },
+        {
+          "facet": "hair",
+          "canonical_tag": "pink_hair",
+          "value": "Pink hair",
+          "source_refs": [
+            "danbooru:wiki:koharu_(blue_archive)",
+            "gelbooru:wiki:koharu_(blue_archive)"
+          ]
+        },
+        {
+          "facet": "hair",
+          "canonical_tag": "low_twintails",
+          "value": "Low twintails",
+          "source_refs": [
+            "danbooru:wiki:koharu_(blue_archive)",
+            "gelbooru:wiki:koharu_(blue_archive)"
+          ]
+        },
+        {
+          "facet": "headwear",
+          "canonical_tag": "beret",
+          "value": "Beret",
+          "source_refs": [
+            "danbooru:wiki:koharu_(blue_archive)",
+            "gelbooru:wiki:koharu_(blue_archive)"
+          ]
+        },
+        {
+          "facet": "jacket",
+          "canonical_tag": "black_cardigan",
+          "value": "Black cardigan",
+          "source_refs": [
+            "danbooru:wiki:koharu_(blue_archive)",
+            "gelbooru:wiki:koharu_(blue_archive)"
+          ]
+        },
+        {
+          "facet": "lower_body",
+          "canonical_tag": "pink_skirt",
+          "value": "Pink skirt",
+          "source_refs": [
+            "danbooru:wiki:koharu_(blue_archive)",
+            "gelbooru:wiki:koharu_(blue_archive)"
+          ]
+        },
+        {
+          "facet": "neck",
+          "canonical_tag": "white_sailor_collar",
+          "value": "White sailor collar",
+          "source_refs": [
+            "danbooru:wiki:koharu_(blue_archive)",
+            "gelbooru:wiki:koharu_(blue_archive)"
+          ]
+        },
+        {
+          "facet": "legwear",
+          "canonical_tag": "white_socks",
+          "value": "White socks",
+          "source_refs": [
+            "danbooru:wiki:koharu_(blue_archive)",
+            "gelbooru:wiki:koharu_(blue_archive)"
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,186 @@
+{
+  "character_tag": "kisaki_(blue_archive)",
+  "sources": [
+    {
+      "id": "danbooru:wiki:kisaki_(blue_archive)",
+      "source_site": "danbooru",
+      "source_kind": "wiki",
+      "source_key": "kisaki_(blue_archive)",
+      "source_url": "https://danbooru.donmai.us/wiki_pages/kisaki_(blue_archive).json",
+      "source_tier": 1,
+      "title": "Ryuuge Kisaki",
+      "excerpt": "Kisaki has a dragon-shaped halo, long black hair and grey eyes. Her regular hairstyle has double buns with braided bases becoming twintails held by butterfly hair ornaments. Her outfit is a short black sleeveless china dress with a grey vertical-striped coat, black half gloves and black pumps.",
+      "captured_at": "2026-08-29"
+    },
+    {
+      "id": "gelbooru:wiki:kisaki_(blue_archive)",
+      "source_site": "gelbooru",
+      "source_kind": "wiki",
+      "source_key": "kisaki_(blue_archive)",
+      "source_url": "https://gelbooru.com/index.php?page=wiki&s=view&id=kisaki_(blue_archive)",
+      "source_tier": 1,
+      "title": "Ryuuge Kisaki",
+      "excerpt": "Default Kisaki design: dragon-shaped halo, long black hair, grey eyes, double buns with braided bases turning into twintails, butterfly hair ornaments, short black sleeveless china dress, grey coat, black half gloves and black pumps.",
+      "captured_at": "2026-08-29"
+    }
+  ],
+  "profiles": [
+    {
+      "appearance_key": "kisaki_(blue_archive)::default",
+      "variant_tag": "kisaki_(blue_archive)",
+      "display_name": "Default Xuanlong Office appearance",
+      "appearance_kind": "default",
+      "is_default": true,
+      "status": "published",
+      "confidence": "high",
+      "provenance": "danbooru_gelbooru_wiki_reviewed",
+      "notes": "Default design only; skins, event outfits, weapon and pose/context tags excluded.",
+      "features": [
+        {
+          "facet": "eyes",
+          "canonical_tag": "grey_eyes",
+          "value": "Grey eyes",
+          "source_refs": [
+            "danbooru:wiki:kisaki_(blue_archive)",
+            "gelbooru:wiki:kisaki_(blue_archive)"
+          ]
+        },
+        {
+          "facet": "hair",
+          "canonical_tag": "long_hair",
+          "value": "Long black hair",
+          "source_refs": [
+            "danbooru:wiki:kisaki_(blue_archive)",
+            "gelbooru:wiki:kisaki_(blue_archive)"
+          ]
+        },
+        {
+          "facet": "hair",
+          "canonical_tag": "black_hair",
+          "value": "Black hair",
+          "source_refs": [
+            "danbooru:wiki:kisaki_(blue_archive)",
+            "gelbooru:wiki:kisaki_(blue_archive)"
+          ]
+        },
+        {
+          "facet": "hair",
+          "canonical_tag": "double_bun",
+          "value": "Double buns",
+          "source_refs": [
+            "danbooru:wiki:kisaki_(blue_archive)",
+            "gelbooru:wiki:kisaki_(blue_archive)"
+          ]
+        },
+        {
+          "facet": "hair",
+          "canonical_tag": "bun_with_braided_base",
+          "value": "Buns with braided bases",
+          "source_refs": [
+            "danbooru:wiki:kisaki_(blue_archive)",
+            "gelbooru:wiki:kisaki_(blue_archive)"
+          ]
+        },
+        {
+          "facet": "hair",
+          "canonical_tag": "twintails",
+          "value": "Twintails",
+          "source_refs": [
+            "danbooru:wiki:kisaki_(blue_archive)",
+            "gelbooru:wiki:kisaki_(blue_archive)"
+          ]
+        },
+        {
+          "facet": "hair_accessory",
+          "canonical_tag": "butterfly_hair_ornament",
+          "value": "Butterfly hair ornaments",
+          "source_refs": [
+            "danbooru:wiki:kisaki_(blue_archive)",
+            "gelbooru:wiki:kisaki_(blue_archive)"
+          ]
+        },
+        {
+          "facet": "dress",
+          "canonical_tag": "short_dress",
+          "value": "Short dress",
+          "source_refs": [
+            "danbooru:wiki:kisaki_(blue_archive)",
+            "gelbooru:wiki:kisaki_(blue_archive)"
+          ]
+        },
+        {
+          "facet": "dress",
+          "canonical_tag": "black_dress",
+          "value": "Black dress",
+          "source_refs": [
+            "danbooru:wiki:kisaki_(blue_archive)",
+            "gelbooru:wiki:kisaki_(blue_archive)"
+          ]
+        },
+        {
+          "facet": "dress",
+          "canonical_tag": "sleeveless_dress",
+          "value": "Sleeveless dress",
+          "source_refs": [
+            "danbooru:wiki:kisaki_(blue_archive)",
+            "gelbooru:wiki:kisaki_(blue_archive)"
+          ]
+        },
+        {
+          "facet": "dress",
+          "canonical_tag": "china_dress",
+          "value": "China dress",
+          "source_refs": [
+            "danbooru:wiki:kisaki_(blue_archive)",
+            "gelbooru:wiki:kisaki_(blue_archive)"
+          ]
+        },
+        {
+          "facet": "accessories",
+          "canonical_tag": "dragon_print",
+          "value": "Dragon print",
+          "source_refs": [
+            "danbooru:wiki:kisaki_(blue_archive)",
+            "gelbooru:wiki:kisaki_(blue_archive)"
+          ]
+        },
+        {
+          "facet": "jacket",
+          "canonical_tag": "grey_coat",
+          "value": "Grey coat",
+          "source_refs": [
+            "danbooru:wiki:kisaki_(blue_archive)",
+            "gelbooru:wiki:kisaki_(blue_archive)"
+          ]
+        },
+        {
+          "facet": "gloves",
+          "canonical_tag": "black_gloves",
+          "value": "Black gloves",
+          "source_refs": [
+            "danbooru:wiki:kisaki_(blue_archive)",
+            "gelbooru:wiki:kisaki_(blue_archive)"
+          ]
+        },
+        {
+          "facet": "gloves",
+          "canonical_tag": "half_gloves",
+          "value": "Half gloves",
+          "source_refs": [
+            "danbooru:wiki:kisaki_(blue_archive)",
+            "gelbooru:wiki:kisaki_(blue_archive)"
+          ]
+        },
+        {
+          "facet": "footwear",
+          "canonical_tag": "black_shoes",
+          "value": "Black pumps",
+          "source_refs": [
+            "danbooru:wiki:kisaki_(blue_archive)",
+            "gelbooru:wiki:kisaki_(blue_archive)"
+          ]
+        }
+      ]
+    }
+  ]
+}

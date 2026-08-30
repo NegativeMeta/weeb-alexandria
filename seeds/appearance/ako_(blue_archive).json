@@ -1,0 +1,229 @@
+{
+  "character_tag": "ako_(blue_archive)",
+  "sources": [
+    {
+      "id": "danbooru:wiki:ako_(blue_archive)",
+      "source_site": "danbooru",
+      "source_kind": "wiki",
+      "source_key": "ako_(blue_archive)",
+      "source_url": "https://danbooru.donmai.us/wiki_pages/ako_(blue_archive).json",
+      "source_tier": 1,
+      "title": "Ako",
+      "excerpt": "She has an aqua to blue crescent halo, medium to long wavy blue hair, and blue eyes. Her regular hairstyle has sidelocks going behind her ears and over her shoulders, double-parted bangs going between her eyes, and is decorated with a black bow hairband with a red hair ribbon. She wears black earrings. Her regular outfit consists of a white sideless collared shirt, a long-sleeved double-breasted blue jacket, black half gloves, a black pencil miniskirt, black thighhighs and black platform shoes.",
+      "captured_at": "2026-08-30"
+    },
+    {
+      "id": "gelbooru:wiki:ako_(blue_archive)",
+      "source_site": "gelbooru",
+      "source_kind": "wiki",
+      "source_key": "ako_(blue_archive)",
+      "source_url": "https://gelbooru.com/index.php?page=wiki&s=view&id=ako_(blue_archive)",
+      "source_tier": 1,
+      "title": "Ako",
+      "excerpt": "She has an aqua to blue crescent halo, medium to long wavy blue hair, and blue eyes. Her regular hairstyle has sidelocks, double-parted bangs, and a black bow hairband with a red hair ribbon.",
+      "captured_at": "2026-08-30"
+    }
+  ],
+  "profiles": [
+    {
+      "appearance_key": "ako_(blue_archive)::default",
+      "variant_tag": "ako_(blue_archive)",
+      "display_name": "Default Prefect Team appearance",
+      "appearance_kind": "default",
+      "is_default": true,
+      "status": "published",
+      "confidence": "high",
+      "provenance": "danbooru_gelbooru_wiki_reviewed",
+      "notes": "Regular/base outfit only; Track and Dress variants excluded.",
+      "features": [
+        {
+          "facet": "headwear",
+          "canonical_tag": "crescent_halo",
+          "value": "Crescent halo",
+          "source_refs": [
+            "danbooru:wiki:ako_(blue_archive)",
+            "gelbooru:wiki:ako_(blue_archive)"
+          ]
+        },
+        {
+          "facet": "headwear",
+          "canonical_tag": "blue_halo",
+          "value": "Blue halo",
+          "source_refs": [
+            "danbooru:wiki:ako_(blue_archive)",
+            "gelbooru:wiki:ako_(blue_archive)"
+          ]
+        },
+        {
+          "facet": "hair",
+          "canonical_tag": "medium_hair",
+          "value": "Medium hair",
+          "source_refs": [
+            "danbooru:wiki:ako_(blue_archive)",
+            "gelbooru:wiki:ako_(blue_archive)"
+          ]
+        },
+        {
+          "facet": "hair",
+          "canonical_tag": "long_hair",
+          "value": "Long hair",
+          "source_refs": [
+            "danbooru:wiki:ako_(blue_archive)",
+            "gelbooru:wiki:ako_(blue_archive)"
+          ]
+        },
+        {
+          "facet": "hair",
+          "canonical_tag": "wavy_hair",
+          "value": "Wavy hair",
+          "source_refs": [
+            "danbooru:wiki:ako_(blue_archive)",
+            "gelbooru:wiki:ako_(blue_archive)"
+          ]
+        },
+        {
+          "facet": "hair",
+          "canonical_tag": "blue_hair",
+          "value": "Blue hair",
+          "source_refs": [
+            "danbooru:wiki:ako_(blue_archive)",
+            "gelbooru:wiki:ako_(blue_archive)"
+          ]
+        },
+        {
+          "facet": "hair_accessory",
+          "canonical_tag": "sidelocks",
+          "value": "Sidelocks",
+          "source_refs": [
+            "danbooru:wiki:ako_(blue_archive)",
+            "gelbooru:wiki:ako_(blue_archive)"
+          ]
+        },
+        {
+          "facet": "hair_accessory",
+          "canonical_tag": "double_parted_bangs",
+          "value": "Double-parted bangs",
+          "source_refs": [
+            "danbooru:wiki:ako_(blue_archive)",
+            "gelbooru:wiki:ako_(blue_archive)"
+          ]
+        },
+        {
+          "facet": "hair_accessory",
+          "canonical_tag": "black_hairband",
+          "value": "Black hairband",
+          "source_refs": [
+            "danbooru:wiki:ako_(blue_archive)",
+            "gelbooru:wiki:ako_(blue_archive)"
+          ]
+        },
+        {
+          "facet": "hair_accessory",
+          "canonical_tag": "red_ribbon",
+          "value": "Red hair ribbon",
+          "source_refs": [
+            "danbooru:wiki:ako_(blue_archive)",
+            "gelbooru:wiki:ako_(blue_archive)"
+          ]
+        },
+        {
+          "facet": "eyes",
+          "canonical_tag": "blue_eyes",
+          "value": "Blue eyes",
+          "source_refs": [
+            "danbooru:wiki:ako_(blue_archive)",
+            "gelbooru:wiki:ako_(blue_archive)"
+          ]
+        },
+        {
+          "facet": "jewelry",
+          "canonical_tag": "earrings",
+          "value": "Earrings",
+          "source_refs": [
+            "danbooru:wiki:ako_(blue_archive)"
+          ]
+        },
+        {
+          "facet": "upper_body",
+          "canonical_tag": "white_shirt",
+          "value": "White shirt",
+          "source_refs": [
+            "danbooru:wiki:ako_(blue_archive)"
+          ]
+        },
+        {
+          "facet": "upper_body",
+          "canonical_tag": "sideless_shirt",
+          "value": "Sideless shirt",
+          "source_refs": [
+            "danbooru:wiki:ako_(blue_archive)"
+          ]
+        },
+        {
+          "facet": "upper_body",
+          "canonical_tag": "double_breasted",
+          "value": "Double-breasted jacket",
+          "source_refs": [
+            "danbooru:wiki:ako_(blue_archive)"
+          ]
+        },
+        {
+          "facet": "jacket",
+          "canonical_tag": "blue_jacket",
+          "value": "Blue jacket",
+          "source_refs": [
+            "danbooru:wiki:ako_(blue_archive)"
+          ]
+        },
+        {
+          "facet": "gloves",
+          "canonical_tag": "black_gloves",
+          "value": "Black gloves",
+          "source_refs": [
+            "danbooru:wiki:ako_(blue_archive)"
+          ]
+        },
+        {
+          "facet": "gloves",
+          "canonical_tag": "half_gloves",
+          "value": "Half gloves",
+          "source_refs": [
+            "danbooru:wiki:ako_(blue_archive)"
+          ]
+        },
+        {
+          "facet": "lower_body",
+          "canonical_tag": "black_skirt",
+          "value": "Black skirt",
+          "source_refs": [
+            "danbooru:wiki:ako_(blue_archive)"
+          ]
+        },
+        {
+          "facet": "lower_body",
+          "canonical_tag": "pencil_skirt",
+          "value": "Pencil skirt",
+          "source_refs": [
+            "danbooru:wiki:ako_(blue_archive)"
+          ]
+        },
+        {
+          "facet": "legwear",
+          "canonical_tag": "black_thighhighs",
+          "value": "Black thighhighs",
+          "source_refs": [
+            "danbooru:wiki:ako_(blue_archive)"
+          ]
+        },
+        {
+          "facet": "footwear",
+          "canonical_tag": "platform_footwear",
+          "value": "Platform shoes",
+          "source_refs": [
+            "danbooru:wiki:ako_(blue_archive)"
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,86 @@
+{
+  "character_tag": "matoi_ryuuko",
+  "sources": [
+    {
+      "id": "danbooru:wiki:matoi_ryuuko",
+      "source_site": "danbooru",
+      "source_kind": "wiki",
+      "source_key": "matoi_ryuuko",
+      "source_url": "https://danbooru.donmai.us/wiki_pages/matoi_ryuuko.json",
+      "source_tier": 1,
+      "title": "Matoi Ryuuko",
+      "excerpt": "Ryuuko has short, streaked black hair with a red highlight. In normal state, Senketsu is essentially a serafuku with suspenders and a pleated skirt; transformed states change dramatically.",
+      "captured_at": "2026-08-29"
+    },
+    {
+      "id": "gelbooru:wiki:matoi_ryuuko",
+      "source_site": "gelbooru",
+      "source_kind": "wiki",
+      "source_key": "matoi_ryuuko",
+      "source_url": "https://gelbooru.com/index.php?page=wiki&s=view&id=matoi_ryuuko",
+      "source_tier": 1,
+      "title": "Matoi Ryuuko",
+      "excerpt": "Ryuuko has two-tone black and red short hair. Her clothing varies between normal Senketsu, transformed Senketsu and letterman-jacket depictions.",
+      "captured_at": "2026-08-29"
+    }
+  ],
+  "profiles": [
+    {
+      "appearance_key": "matoi_ryuuko::default",
+      "variant_tag": "matoi_ryuuko",
+      "display_name": "Normal Senketsu appearance",
+      "appearance_kind": "default",
+      "is_default": true,
+      "status": "published",
+      "confidence": "medium",
+      "provenance": "danbooru_gelbooru_wiki_reviewed",
+      "notes": "Normal Senketsu state only; transformed Senketsu, letterman jacket and other alternate depictions excluded.",
+      "features": [
+        {
+          "facet": "hair",
+          "canonical_tag": "short_hair",
+          "value": "Short hair",
+          "source_refs": [
+            "danbooru:wiki:matoi_ryuuko",
+            "gelbooru:wiki:matoi_ryuuko"
+          ]
+        },
+        {
+          "facet": "hair",
+          "canonical_tag": "black_hair",
+          "value": "Black hair",
+          "source_refs": [
+            "danbooru:wiki:matoi_ryuuko",
+            "gelbooru:wiki:matoi_ryuuko"
+          ]
+        },
+        {
+          "facet": "hair",
+          "canonical_tag": "red_hair",
+          "value": "Red highlight",
+          "source_refs": [
+            "danbooru:wiki:matoi_ryuuko",
+            "gelbooru:wiki:matoi_ryuuko"
+          ]
+        },
+        {
+          "facet": "hair",
+          "canonical_tag": "streaked_hair",
+          "value": "Streaked hair",
+          "source_refs": [
+            "danbooru:wiki:matoi_ryuuko",
+            "gelbooru:wiki:matoi_ryuuko"
+          ]
+        },
+        {
+          "facet": "lower_body",
+          "canonical_tag": "pleated_skirt",
+          "value": "Pleated skirt",
+          "source_refs": [
+            "danbooru:wiki:matoi_ryuuko"
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,124 @@
+{
+  "character_tag": "inoue_takina",
+  "sources": [
+    {
+      "id": "danbooru:wiki:inoue_takina",
+      "source_site": "danbooru",
+      "source_kind": "wiki",
+      "source_key": "inoue_takina",
+      "source_url": "https://danbooru.donmai.us/wiki_pages/inoue_takina.json",
+      "source_tier": 1,
+      "title": "Inoue Takina",
+      "excerpt": "She has purple eyes and long black hair with bangs. She wears the lycoris uniform that consists of a two-tone blue and grey pleated dress, white collared shirt with a green neck ribbon, and a blue belt.",
+      "captured_at": "2026-08-30"
+    },
+    {
+      "id": "gelbooru:wiki:inoue_takina",
+      "source_site": "gelbooru",
+      "source_kind": "wiki",
+      "source_key": "inoue_takina",
+      "source_url": "https://gelbooru.com/index.php?page=wiki&s=view&id=inoue_takina",
+      "source_tier": 1,
+      "title": "Inoue Takina",
+      "excerpt": "A black-haired teen girl who wears a blue school uniform. She has long hair.",
+      "captured_at": "2026-08-30"
+    }
+  ],
+  "profiles": [
+    {
+      "appearance_key": "inoue_takina::default",
+      "variant_tag": "inoue_takina",
+      "display_name": "Default Lycoris uniform appearance",
+      "appearance_kind": "default",
+      "is_default": true,
+      "status": "published",
+      "confidence": "high",
+      "provenance": "danbooru_gelbooru_wiki_reviewed",
+      "notes": "Lycoris uniform only; Cafe LycoReco, kimono and other costumes excluded.",
+      "features": [
+        {
+          "facet": "eyes",
+          "canonical_tag": "purple_eyes",
+          "value": "Purple eyes",
+          "source_refs": [
+            "danbooru:wiki:inoue_takina"
+          ]
+        },
+        {
+          "facet": "hair",
+          "canonical_tag": "long_hair",
+          "value": "Long hair",
+          "source_refs": [
+            "danbooru:wiki:inoue_takina",
+            "gelbooru:wiki:inoue_takina"
+          ]
+        },
+        {
+          "facet": "hair",
+          "canonical_tag": "black_hair",
+          "value": "Black hair",
+          "source_refs": [
+            "danbooru:wiki:inoue_takina",
+            "gelbooru:wiki:inoue_takina"
+          ]
+        },
+        {
+          "facet": "dress",
+          "canonical_tag": "blue_dress",
+          "value": "Blue dress",
+          "source_refs": [
+            "danbooru:wiki:inoue_takina"
+          ]
+        },
+        {
+          "facet": "dress",
+          "canonical_tag": "grey_dress",
+          "value": "Grey dress",
+          "source_refs": [
+            "danbooru:wiki:inoue_takina"
+          ]
+        },
+        {
+          "facet": "dress",
+          "canonical_tag": "pleated_dress",
+          "value": "Pleated dress",
+          "source_refs": [
+            "danbooru:wiki:inoue_takina"
+          ]
+        },
+        {
+          "facet": "upper_body",
+          "canonical_tag": "white_shirt",
+          "value": "White shirt",
+          "source_refs": [
+            "danbooru:wiki:inoue_takina"
+          ]
+        },
+        {
+          "facet": "upper_body",
+          "canonical_tag": "collared_shirt",
+          "value": "Collared shirt",
+          "source_refs": [
+            "danbooru:wiki:inoue_takina"
+          ]
+        },
+        {
+          "facet": "neck",
+          "canonical_tag": "green_ribbon",
+          "value": "Green neck ribbon",
+          "source_refs": [
+            "danbooru:wiki:inoue_takina"
+          ]
+        },
+        {
+          "facet": "accessories",
+          "canonical_tag": "blue_belt",
+          "value": "Blue belt",
+          "source_refs": [
+            "danbooru:wiki:inoue_takina"
+          ]
+        }
+      ]
+    }
+  ]
+}

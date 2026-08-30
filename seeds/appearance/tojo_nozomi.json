@@ -1,0 +1,114 @@
+{
+  "character_tag": "tojo_nozomi",
+  "sources": [
+    {
+      "id": "danbooru:wiki:tojo_nozomi",
+      "source_site": "danbooru",
+      "source_kind": "wiki",
+      "source_key": "tojo_nozomi",
+      "source_url": "https://danbooru.donmai.us/wiki_pages/tojo_nozomi.json",
+      "source_tier": 1,
+      "title": "Nozomi Tojo",
+      "excerpt": "Nozomi has long purple hair in low twintails with a hair scrunchie, parted/swept bangs and aqua eyes.",
+      "captured_at": "2026-08-29"
+    },
+    {
+      "id": "gelbooru:wiki:tojo_nozomi",
+      "source_site": "gelbooru",
+      "source_kind": "wiki",
+      "source_key": "tojo_nozomi",
+      "source_url": "https://gelbooru.com/index.php?page=wiki&s=view&id=tojo_nozomi",
+      "source_tier": 1,
+      "title": "Nozomi Tojo",
+      "excerpt": "The wiki confirms the same base hair, bangs, accessory and eye traits.",
+      "captured_at": "2026-08-29"
+    }
+  ],
+  "profiles": [
+    {
+      "appearance_key": "tojo_nozomi::default",
+      "variant_tag": "tojo_nozomi",
+      "display_name": "Default school appearance",
+      "appearance_kind": "default",
+      "is_default": true,
+      "status": "published",
+      "confidence": "high",
+      "provenance": "danbooru_gelbooru_wiki_reviewed",
+      "notes": "Base visual traits only; idol costumes and miko clothing excluded.",
+      "features": [
+        {
+          "facet": "eyes",
+          "canonical_tag": "aqua_eyes",
+          "value": "Aqua eyes",
+          "source_refs": [
+            "danbooru:wiki:tojo_nozomi",
+            "gelbooru:wiki:tojo_nozomi"
+          ]
+        },
+        {
+          "facet": "hair",
+          "canonical_tag": "long_hair",
+          "value": "Long hair",
+          "source_refs": [
+            "danbooru:wiki:tojo_nozomi",
+            "gelbooru:wiki:tojo_nozomi"
+          ]
+        },
+        {
+          "facet": "hair",
+          "canonical_tag": "purple_hair",
+          "value": "Purple hair",
+          "source_refs": [
+            "danbooru:wiki:tojo_nozomi",
+            "gelbooru:wiki:tojo_nozomi"
+          ]
+        },
+        {
+          "facet": "hair",
+          "canonical_tag": "low_twintails",
+          "value": "Low twintails",
+          "source_refs": [
+            "danbooru:wiki:tojo_nozomi",
+            "gelbooru:wiki:tojo_nozomi"
+          ]
+        },
+        {
+          "facet": "hair_accessory",
+          "canonical_tag": "hair_scrunchie",
+          "value": "Hair scrunchie",
+          "source_refs": [
+            "danbooru:wiki:tojo_nozomi",
+            "gelbooru:wiki:tojo_nozomi"
+          ]
+        },
+        {
+          "facet": "hair",
+          "canonical_tag": "parted_bangs",
+          "value": "Parted bangs",
+          "source_refs": [
+            "danbooru:wiki:tojo_nozomi",
+            "gelbooru:wiki:tojo_nozomi"
+          ]
+        },
+        {
+          "facet": "hair",
+          "canonical_tag": "swept_bangs",
+          "value": "Swept bangs",
+          "source_refs": [
+            "danbooru:wiki:tojo_nozomi",
+            "gelbooru:wiki:tojo_nozomi"
+          ]
+        },
+        {
+          "facet": "legwear",
+          "canonical_tag": "black_thighhighs",
+          "value": "Black thighhighs",
+          "source_refs": [
+            "danbooru:wiki:tojo_nozomi",
+            "gelbooru:wiki:tojo_nozomi"
+          ]
+        }
+      ]
+    }
+  ]
+}

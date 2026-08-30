@@ -1,0 +1,104 @@
+{
+  "character_tag": "stelle_(honkai:_star_rail)",
+  "sources": [
+    {
+      "id": "danbooru:wiki:stelle_(honkai:_star_rail)",
+      "source_site": "danbooru",
+      "source_kind": "wiki",
+      "source_key": "stelle_(honkai:_star_rail)",
+      "source_url": "https://danbooru.donmai.us/wiki_pages/stelle_(honkai:_star_rail).json",
+      "source_tier": 1,
+      "title": "Stelle",
+      "excerpt": "Stelle's outfit consists of a white shirt, black jacket with the Nameless badge, black skirt and black high-heel ankle boots.",
+      "captured_at": "2026-08-29"
+    },
+    {
+      "id": "gelbooru:wiki:stelle_(honkai:_star_rail)",
+      "source_site": "gelbooru",
+      "source_kind": "wiki",
+      "source_key": "stelle_(honkai:_star_rail)",
+      "source_url": "https://gelbooru.com/index.php?page=wiki&s=view&id=stelle_(honkai:_star_rail)",
+      "source_tier": 1,
+      "title": "Stelle",
+      "excerpt": "Default Stelle design uses a white shirt, black jacket, black skirt, black gloves and black high-heel ankle boots.",
+      "captured_at": "2026-08-29"
+    }
+  ],
+  "profiles": [
+    {
+      "appearance_key": "stelle_(honkai:_star_rail)::default",
+      "variant_tag": "stelle_(honkai:_star_rail)",
+      "display_name": "Default Trailblazer appearance",
+      "appearance_kind": "default",
+      "is_default": true,
+      "status": "published",
+      "confidence": "high",
+      "provenance": "danbooru_gelbooru_wiki_reviewed",
+      "notes": "Default female Trailblazer design only; named costumes and alternate protagonist variants excluded.",
+      "features": [
+        {
+          "facet": "upper_body",
+          "canonical_tag": "white_shirt",
+          "value": "White shirt",
+          "source_refs": [
+            "danbooru:wiki:stelle_(honkai:_star_rail)",
+            "gelbooru:wiki:stelle_(honkai:_star_rail)"
+          ]
+        },
+        {
+          "facet": "jacket",
+          "canonical_tag": "black_jacket",
+          "value": "Black jacket",
+          "source_refs": [
+            "danbooru:wiki:stelle_(honkai:_star_rail)",
+            "gelbooru:wiki:stelle_(honkai:_star_rail)"
+          ]
+        },
+        {
+          "facet": "lower_body",
+          "canonical_tag": "black_skirt",
+          "value": "Black skirt",
+          "source_refs": [
+            "danbooru:wiki:stelle_(honkai:_star_rail)",
+            "gelbooru:wiki:stelle_(honkai:_star_rail)"
+          ]
+        },
+        {
+          "facet": "footwear",
+          "canonical_tag": "ankle_boots",
+          "value": "Ankle boots",
+          "source_refs": [
+            "danbooru:wiki:stelle_(honkai:_star_rail)",
+            "gelbooru:wiki:stelle_(honkai:_star_rail)"
+          ]
+        },
+        {
+          "facet": "footwear",
+          "canonical_tag": "black_boots",
+          "value": "Black boots",
+          "source_refs": [
+            "danbooru:wiki:stelle_(honkai:_star_rail)",
+            "gelbooru:wiki:stelle_(honkai:_star_rail)"
+          ]
+        },
+        {
+          "facet": "footwear",
+          "canonical_tag": "high_heel_boots",
+          "value": "High-heel boots",
+          "source_refs": [
+            "danbooru:wiki:stelle_(honkai:_star_rail)",
+            "gelbooru:wiki:stelle_(honkai:_star_rail)"
+          ]
+        },
+        {
+          "facet": "gloves",
+          "canonical_tag": "black_gloves",
+          "value": "Black gloves",
+          "source_refs": [
+            "gelbooru:wiki:stelle_(honkai:_star_rail)"
+          ]
+        }
+      ]
+    }
+  ]
+}

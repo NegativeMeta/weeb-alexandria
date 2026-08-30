@@ -624,3 +624,798 @@ Remake, Kingdom Hearts and many outfits were mixed. `amiya_(arknights)` was
 deferred because the local projection did not sufficiently isolate the default
 design from skins. Pokémon game variants, Kancolle rigging/remodels and
 Haruhi alternate outfits remain separate or excluded.
+
+## Twenty-third general popularity batch
+
+The next five eligible characters were selected by the reproducible independent
+Danbooru + Gelbooru + e621 ranker after excluding published profiles, aliases,
+variants and prior deferred identities:
+
+| Rank | Character | Danbooru | Gelbooru | e621 | Total |
+|---:|---|---:|---:|---:|---:|
+| 1 | `yasaka_kanako` | 7,253 | 11,274 | 0 | 18,527 |
+| 2 | `lillie_(pokemon)` | 6,391 | 12,133 | 0 | 18,524 |
+| 3 | `mona_(genshin_impact)` | 7,530 | 10,925 | 0 | 18,455 |
+| 4 | `kisaki_(blue_archive)` | 7,118 | 11,298 | 0 | 18,416 |
+| 5 | `yagokoro_eirin` | 7,470 | 10,937 | 0 | 18,407 |
+
+Candidate generation produced **102 observations** and **33 visual candidates**.
+`lillie_(pokemon)` was published with 8 reviewed base features, scoped to the
+first official Sun and Moon outfit. `kisaki_(blue_archive)` was published with
+16 reviewed default-design features. The published subset contains 24 new
+features and zero conflicts; both promotions were repeated successfully with
+unchanged counts.
+
+`yasaka_kanako`, `mona_(genshin_impact)`, and `yagokoro_eirin` were deferred:
+the local snapshot did not produce enough structured visual candidates for an
+auditable base profile. Their ranked names were added to the explicit exclusion
+ledger; popularity and prose-only wiki material were not used to invent traits.
+Lillie's second official outfit, Pokémon variants, Kisaki skins, and other
+named outfits remain separate or excluded.
+
+The source database passed `PRAGMA integrity_check = ok`; active duplicate
+features, published features without evidence, cross-character variants, and
+open conflicts without source references all returned zero rows. The derived
+context and search indexes were rebuilt. The full `unittest` suite passed with
+58 tests, and real MCP stdio probes returned published profiles for Lillie and
+Kisaki.
+
+## Twenty-fourth general popularity batch
+
+The next five ranking positions were reconciled against the canonical database
+and the explicit exclusion ledger. `manjuu_(azur_lane)` was excluded as an
+Azur Lane mascot, so the next valid character (`akagi_(kancolle)`) was included
+to keep the batch at five selected entities:
+
+| Rank | Character | Danbooru | Gelbooru | e621 | Total |
+|---:|---|---:|---:|---:|---:|
+| 1 | `jeanne_d&#039;arc_(fate)` | 0 | 18,400 | 0 | 18,400 |
+| 2 | `shiranui_mai` | 3,758 | 14,415 | 0 | 18,173 |
+| 3 | `kagiyama_hina` | 6,794 | 11,370 | 0 | 18,164 |
+| 4 | `pyra_(xenoblade)` | 6,314 | 11,834 | 0 | 18,148 |
+| 5 | `akagi_(kancolle)` | 7,143 | 10,864 | 0 | 18,007 |
+
+Candidate generation produced **92 observations** and **33 visual candidates**.
+`shiranui_mai` was published with 7 reviewed base features,
+`pyra_(xenoblade)` with 10, and `akagi_(kancolle)` with 7: **24 new features**
+and zero conflicts. Each seed was promoted twice with unchanged counts.
+
+`jeanne_d&#039;arc_(fate)` was deferred because the local entry only states an
+iconic maid depiction and supplies no structured appearance evidence.
+`kagiyama_hina` was deferred because the local projection contains only partial
+or prose-only visual information. The mascot `manjuu_(azur_lane)` was excluded
+from the general character queue. All three decisions were added to the
+ranker's exclusion ledger; no traits were inferred from popularity alone.
+
+The source and derived SQLite databases passed integrity checks. Active feature
+duplicates, published features without evidence, cross-character variants, and
+open conflicts without source references all returned zero rows. Context and
+search indexes were rebuilt successfully. The existing 58-test `unittest`
+suite and real MCP probes remain green from the previous batch boundary.
+
+## Twenty-fifth general popularity batch
+
+The next five ranked characters were reconciled against the canonical database
+and exclusion ledger:
+
+| Rank | Character | Danbooru | Gelbooru | e621 | Total |
+|---:|---|---:|---:|---:|---:|
+| 1 | `nanami_chiaki` | 4,928 | 13,055 | 0 | 17,983 |
+| 2 | `scathach_(fate)` | 8,143 | 9,819 | 0 | 17,962 |
+| 3 | `tenryuu_(kancolle)` | 7,125 | 10,804 | 0 | 17,929 |
+| 4 | `rosa_(pokemon)` | 6,051 | 11,817 | 0 | 17,868 |
+| 5 | `misty_(pokemon)` | 2,901 | 14,960 | 0 | 17,861 |
+
+Candidate generation produced **151 observations** and **70 visual candidates**.
+`nanami_chiaki` was published with 9 scoped features, `scathach_(fate)` with 4,
+`tenryuu_(kancolle)` with 7, and `rosa_(pokemon)` with 12: **32 new features**
+and zero conflicts. Each seed was promoted twice with unchanged counts.
+
+`misty_(pokemon)` was deferred because the local sources mix the classic anime,
+game swimwear, and multiple media-specific outfits without one sufficiently
+isolated base design. Nanami's conflicting hair-color descriptions were not
+collapsed into an unsupported color claim. Alternate costumes, remodels,
+incarnations and game-specific variants remain separate or excluded.
+
+The source and derived SQLite databases passed integrity checks. Active feature
+duplicates, published features without evidence, and cross-character variants
+returned zero rows. Context and search indexes were rebuilt successfully. The
+full `unittest` suite and real MCP verification are run at the batch boundary.
+
+## Twenty-sixth general popularity batch
+
+The next five ranked characters were reconciled against the canonical database
+and exclusion ledger:
+
+| Rank | Character | Danbooru | Gelbooru | e621 | Total |
+|---:|---|---:|---:|---:|---:|
+| 1 | `akiyama_mio` | 6,178 | 11,674 | 0 | 17,852 |
+| 2 | `stelle_(honkai:_star_rail)` | 7,336 | 10,487 | 0 | 17,823 |
+| 3 | `matoi_ryuuko` | 6,053 | 11,763 | 0 | 17,816 |
+| 4 | `kashima_(kancolle)` | 8,228 | 9,527 | 0 | 17,755 |
+| 5 | `nishizumi_miho` | 7,527 | 10,153 | 0 | 17,680 |
+
+Candidate generation produced **102 observations** and **32 visual candidates**.
+`stelle_(honkai:_star_rail)` was published with 7 reviewed features,
+`matoi_ryuuko` with 5, and `kashima_(kancolle)` with 11: **23 new features**
+and zero conflicts. Each seed was promoted twice with unchanged counts.
+
+`akiyama_mio` and `nishizumi_miho` were deferred because their local wiki
+projections contained identity/context material but no sufficient structured
+visual candidates for an auditable base card. Their exact identifiers were
+added to the exclusion ledger. Stelle's colon-bearing identifier required a
+filesystem-safe seed filename (`stelle_(honkai_star_rail).json`); the canonical
+tag remains unchanged inside the seed and database. Costumes, transformed
+states, remodels and game-specific variants remain separate or excluded.
+
+The source and derived SQLite databases passed integrity checks. Active feature
+duplicates, published features without evidence, and cross-character variants
+returned zero rows. Context and search indexes were rebuilt successfully.
+
+## Twenty-seventh general popularity batch
+
+The next five ranked characters were reconciled against the canonical database
+and exclusion ledger:
+
+| Rank | Character | Danbooru | Gelbooru | e621 | Total |
+|---:|---|---:|---:|---:|---:|
+| 1 | `agnes_tachyon_(umamusume)` | 6,434 | 11,192 | 0 | 17,626 |
+| 2 | `mari_(blue_archive)` | 7,239 | 10,213 | 0 | 17,452 |
+| 3 | `elysia_(honkai_impact)` | 5,049 | 12,021 | 0 | 17,070 |
+| 4 | `aris_(blue_archive)` | 6,904 | 10,097 | 0 | 17,001 |
+| 5 | `usami_renko` | 6,013 | 10,905 | 0 | 16,918 |
+
+Candidate generation produced **44 observations** and **17 visual candidates**.
+`agnes_tachyon_(umamusume)` was published with 3 reviewed base features,
+`elysia_(honkai_impact)` with 3, and `usami_renko` with 5: **11 new features**
+and zero conflicts. Each seed was promoted twice with unchanged counts.
+
+`mari_(blue_archive)` was deferred because the local projection exposed only a
+species observation, not a sufficient default visual card. `aris_(blue_archive)`
+was deferred because the only structured candidate was a contextual uniform;
+identity and weapon metadata were not promoted as appearance traits. Both exact
+identifiers were added to the exclusion ledger. Agnes's shared Tracen uniform,
+Elysia's battlesuits/Herrscher depiction and Renko's contextual alternatives
+remain separate or excluded.
+
+The source and derived SQLite databases passed integrity checks. Active feature
+duplicates, published features without evidence, and cross-character variants
+returned zero rows. Context and search indexes were rebuilt successfully.
+
+## Twenty-eighth general popularity batch
+
+The next five ranked characters were reconciled against the canonical database
+and exclusion ledger:
+
+| Rank | Character | Danbooru | Gelbooru | e621 | Total |
+|---:|---|---:|---:|---:|---:|
+| 1 | `ikazuchi_(kancolle)` | 6,982 | 9,877 | 0 | 16,859 |
+| 2 | `daiyousei` | 6,980 | 9,760 | 0 | 16,740 |
+| 3 | `nishikino_maki` | 5,960 | 10,768 | 0 | 16,728 |
+| 4 | `koharu_(blue_archive)` | 7,204 | 9,517 | 0 | 16,721 |
+| 5 | `hilda_(pokemon)` | 5,080 | 11,453 | 0 | 16,533 |
+
+Candidate generation produced **138 observations** and **53 visual candidates**.
+`ikazuchi_(kancolle)` was published with 10 reviewed features,
+`koharu_(blue_archive)` with 8, and `hilda_(pokemon)` with 13: **31 new
+features** and zero conflicts. Each seed was promoted twice with unchanged
+counts.
+
+`daiyousei` was deferred because the local evidence presents conflicting eye
+colors and substantial fanon/partial material. `nishikino_maki` was deferred
+because only two deterministic visual candidates were available. Both exact
+identifiers were added to the exclusion ledger; no traits were inferred from
+popularity alone. Remodels, swimsuits, event outfits, fanon designs and other
+game/media variants remain separate or excluded.
+
+The source and derived SQLite databases passed integrity checks. Active feature
+duplicates, published features without evidence, and cross-character variants
+returned zero rows. Context and search indexes were rebuilt successfully.
+
+## Twenty-ninth general popularity batch (expanded to ten)
+
+After five consecutive five-character batches passed review and verification,
+the queue size was expanded to ten characters. Ranking remained based only on
+independent Danbooru, Gelbooru and e621 post counts:
+
+| Rank | Character | Danbooru | Gelbooru | e621 | Total |
+|---:|---|---:|---:|---:|---:|
+| 1 | `haruna_(kancolle)` | 7,396 | 9,117 | 0 | 16,513 |
+| 2 | `tojo_nozomi` | 5,749 | 10,764 | 0 | 16,513 |
+| 3 | `nakano_azusa` | 6,242 | 10,244 | 0 | 16,486 |
+| 4 | `asuka_langley_souryuu` | 0 | 16,471 | 0 | 16,471 |
+| 5 | `kazusa_(blue_archive)` | 6,763 | 9,705 | 0 | 16,468 |
+| 6 | `imaizumi_kagerou` | 7,528 | 8,898 | 0 | 16,426 |
+| 7 | `akatsuki_(kancolle)` | 7,052 | 9,222 | 0 | 16,274 |
+| 8 | `fate_testarossa` | 5,065 | 11,181 | 0 | 16,246 |
+| 9 | `kinomoto_sakura` | 4,967 | 11,215 | 0 | 16,182 |
+| 10 | `cynthia_(pokemon)` | 5,036 | 11,063 | 0 | 16,099 |
+
+Candidate generation produced **1,234 observations** and **612 visual
+candidates**. Published profiles: `haruna_(kancolle)` with 8 features,
+`tojo_nozomi` with 8, `nakano_azusa` with 7, `imaizumi_kagerou` with 9,
+`akatsuki_(kancolle)` with 6, and `cynthia_(pokemon)` with 9: **47 new
+features**, zero conflicts, and 12 source records. Each seed was promoted
+twice with unchanged counts.
+
+Deferred profiles: `asuka_langley_souryuu` had zero local candidates;
+`kazusa_(blue_archive)` had only metadata and no visual candidates;
+`fate_testarossa` mixed states and outfits without a sufficiently isolated base;
+and `kinomoto_sakura` had 537 mixed costume candidates, so no default was
+inferred. Exact identifiers were added to the exclusion ledger. Uniforms,
+seasonal costumes, remodels, magical states, stage outfits and other variants
+remain separate or excluded.
+
+## Thirtieth general popularity batch (expanded to ten)
+
+The queue continued at ten characters after the previous expanded batch passed
+review, idempotence, MCP, integrity and test gates:
+
+| Rank | Character | Danbooru | Gelbooru | e621 | Total |
+|---:|---|---:|---:|---:|---:|
+| 1 | `suzuya_(kancolle)` | 7,152 | 8,947 | 0 | 16,099 |
+| 2 | `kayoko_(blue_archive)` | 6,188 | 9,905 | 0 | 16,093 |
+| 3 | `maribel_hearn` | 5,680 | 10,340 | 0 | 16,020 |
+| 4 | `yazawa_nico` | 5,449 | 10,502 | 0 | 15,951 |
+| 5 | `marnie_(pokemon)` | 6,253 | 9,678 | 0 | 15,931 |
+| 6 | `manhattan_cafe_(umamusume)` | 5,237 | 10,621 | 0 | 15,858 |
+| 7 | `keqing_(genshin_impact)` | 7,067 | 8,771 | 0 | 15,838 |
+| 8 | `kaname_madoka_(magical_girl)` | 5,728 | 9,940 | 0 | 15,668 |
+| 9 | `shiki_eiki` | 6,474 | 9,188 | 0 | 15,662 |
+| 10 | `morrigan_aensland` | 4,650 | 10,998 | 0 | 15,648 |
+
+Candidate generation produced **224 observations** and **82 visual candidates**.
+Published profiles: `suzuya_(kancolle)` with 8 features, `marnie_(pokemon)`
+with 9, `kaname_madoka_(magical_girl)` with 9, and `shiki_eiki` with 11:
+**37 new features**, zero conflicts, and 8 source records. Each seed was
+promoted twice with unchanged counts.
+
+Deferred profiles: `kayoko_(blue_archive)` had zero visual candidates;
+`maribel_hearn` had conflicting eye colors and variant headwear; `yazawa_nico`
+had only three structured visual traits; `manhattan_cafe_(umamusume)` exposed
+only a shared school uniform; `keqing_(genshin_impact)` had zero local visual
+candidates; and `morrigan_aensland` had conflicting eye colors with insufficient
+base evidence. Exact identifiers were added to the exclusion ledger. Costumes,
+skins, uniforms, remodels, magical states and other variants remain separate or
+excluded.
+
+The source and derived SQLite databases passed integrity checks. Active feature
+duplicates and published features without evidence returned zero rows. Context
+and search indexes were rebuilt serially after all promotions; the full
+`unittest` suite passed with 58 tests, and real MCP probes confirmed all four
+published profiles while deferred profiles remained unpublished.
+
+## Thirty-first general popularity batch (expanded to ten)
+
+The queue remained at ten characters after the expanded batch passed all review
+and verification gates:
+
+| Rank | Character | Danbooru | Gelbooru | e621 | Total |
+|---:|---|---:|---:|---:|---:|
+| 1 | `fern_(sousou_no_frieren)` | 5,786 | 9,819 | 0 | 15,605 |
+| 2 | `yuzuki_yukari` | 6,164 | 9,409 | 0 | 15,573 |
+| 3 | `wanderer_(genshin_impact)` | 3,919 | 11,598 | 0 | 15,517 |
+| 4 | `zuikaku_(kancolle)` | 6,493 | 8,983 | 0 | 15,476 |
+| 5 | `toyosatomimi_no_miko` | 6,486 | 8,936 | 0 | 15,422 |
+| 6 | `mythra_(xenoblade)` | 5,548 | 9,849 | 0 | 15,397 |
+| 7 | `wriggle_nightbug` | 6,245 | 9,079 | 0 | 15,324 |
+| 8 | `producer_(idolmaster)` | 6,370 | 8,806 | 0 | 15,176 |
+| 9 | `onozuka_komachi` | 5,905 | 9,130 | 0 | 15,035 |
+| 10 | `hirasawa_yui` | 5,278 | 9,671 | 0 | 14,949 |
+
+Candidate generation produced **340 observations** and **134 visual
+candidates**. Published profiles: `fern_(sousou_no_frieren)` with 8 features,
+`mythra_(xenoblade)` with 8, `wriggle_nightbug` with 9, and `hirasawa_yui`
+with 7: **32 new features**, zero conflicts, and 8 source records. Each seed
+was promoted twice with unchanged counts.
+
+Deferred profiles: `yuzuki_yukari` mixed voicebank designs;
+`wanderer_(genshin_impact)` had zero visual candidates; `zuikaku_(kancolle)`
+had conflicting eye colors; `toyosatomimi_no_miko` mixed base and cape variants;
+`producer_(idolmaster)` is an unseen player/avatar entity; and `onozuka_komachi`
+had zero visual candidates. Exact identifiers were added to the exclusion
+ledger. Alternate costumes, game forms, shared uniforms and other variants
+remain separate or excluded.
+
+The source and derived SQLite databases passed integrity checks. Active feature
+duplicates and published features without evidence returned zero rows. Context
+and search indexes were rebuilt serially after all promotions; the full
+`unittest` suite passed with 58 tests, and real MCP probes confirmed all four
+published profiles while deferred profiles remained unpublished.
+
+## Thirty-second general popularity batch (expanded to ten)
+
+The queue remained at ten characters after the expanded batch passed all review
+and verification gates:
+
+| Rank | Character | Danbooru | Gelbooru | e621 | Total |
+|---:|---|---:|---:|---:|---:|
+| 1 | `shanghai_doll` | 6,148 | 8,796 | 0 | 14,944 |
+| 2 | `kafuu_chino` | 6,420 | 8,514 | 0 | 14,934 |
+| 3 | `hoshiguma_yuugi` | 6,210 | 8,688 | 0 | 14,898 |
+| 4 | `sonoda_umi` | 5,272 | 9,622 | 0 | 14,894 |
+| 5 | `astolfo_(fate)` | 5,803 | 9,079 | 0 | 14,882 |
+| 6 | `kita_ikuyo` | 6,071 | 8,743 | 0 | 14,814 |
+| 7 | `monkey_d._luffy` | 2,772 | 12,003 | 0 | 14,775 |
+| 8 | `midoriya_izuku` | 3,087 | 11,660 | 0 | 14,747 |
+| 9 | `ayase_eli` | 5,254 | 9,308 | 0 | 14,562 |
+| 10 | `karin_(blue_archive)` | 6,066 | 8,446 | 0 | 14,512 |
+
+Candidate generation produced **180 observations** and **70 visual candidates**.
+Published profiles: `hoshiguma_yuugi` with 9 features, `kita_ikuyo` with 11,
+and `karin_(blue_archive)` with 11: **31 new features**, zero conflicts, and
+6 source records. Each seed was promoted twice with unchanged counts.
+
+Deferred profiles: `shanghai_doll` is an associated familiar/entity rather than
+an independent character; `kafuu_chino` had only one candidate; `sonoda_umi`
+had five partial traits; `astolfo_(fate)` had insufficient base evidence;
+`monkey_d._luffy` had only a hat candidate; `midoriya_izuku` was centered on a
+contextual suit; and `ayase_eli` had only six partial traits. Exact identifiers
+were added to the exclusion ledger. Costumes, game states, uniforms, props and
+other contextual variants remain separate or excluded.
+
+The source and derived SQLite databases passed integrity checks. Active feature
+duplicates and published features without evidence returned zero rows. Context
+and search indexes were rebuilt serially after all promotions; the full
+`unittest` suite passed with 58 tests, and real MCP probes confirmed all three
+published profiles while deferred profiles remained unpublished.
+
+## Thirty-third general popularity batch (expanded to ten)
+
+The queue remained at ten characters after the expanded batch passed all review
+and verification gates:
+
+| Rank | Character | Danbooru | Gelbooru | e621 | Total |
+|---:|---|---:|---:|---:|---:|
+| 1 | `shuten_douji_(fate)` | 6,381 | 8,063 | 0 | 14,444 |
+| 2 | `nagato_(kancolle)` | 6,150 | 8,293 | 0 | 14,443 |
+| 3 | `texas_(arknights)` | 6,508 | 7,908 | 0 | 14,416 |
+| 4 | `venti_(genshin_impact)` | 5,885 | 8,520 | 0 | 14,405 |
+| 5 | `mononobe_no_futo` | 5,773 | 8,602 | 0 | 14,375 |
+| 6 | `hyuuga_hinata` | 2,140 | 12,226 | 0 | 14,366 |
+| 7 | `watanabe_you` | 4,467 | 9,793 | 0 | 14,260 |
+| 8 | `aqua_(konosuba)` | 4,995 | 9,241 | 0 | 14,236 |
+| 9 | `kirby` | 3,916 | 10,278 | 0 | 14,194 |
+| 10 | `okita_souji_(fate)` | 6,420 | 7,718 | 0 | 14,138 |
+
+Candidate generation produced **193 observations** and **62 visual candidates**.
+Published profiles: `nagato_(kancolle)` with 9 features, `venti_(genshin_impact)`
+with 10, and `aqua_(konosuba)` with 13: **32 new features**, zero conflicts,
+and 6 source records. Each seed was promoted twice with unchanged counts.
+
+Deferred profiles: `shuten_douji_(fate)` had six partial traits;
+`texas_(arknights)` had zero visual candidates; `mononobe_no_futo` had
+conflicting eye colors; `hyuuga_hinata` had zero candidates; `watanabe_you` had
+four partial traits mixed with swimwear; `kirby` had no structured visual
+candidates; and `okita_souji_(fate)` had zero candidates. Exact identifiers were
+added to the exclusion ledger. Alternate costumes, game states, props and other
+contextual variants remain separate or excluded.
+
+The source and derived SQLite databases passed integrity checks. Active feature
+duplicates and published features without evidence returned zero rows. Context
+and search indexes were rebuilt serially after all promotions; the full
+`unittest` suite passed with 58 tests, and real MCP probes confirmed all three
+published profiles while deferred profiles remained unpublished.
+
+## Thirty-fourth general popularity batch (expanded to ten)
+
+The queue remained at ten characters after the expanded batch passed all review
+and verification gates:
+
+| Rank | Character | Danbooru | Gelbooru | e621 | Total |
+|---:|---|---:|---:|---:|---:|
+| 1 | `kamisato_ayaka` | 6,196 | 7,867 | 0 | 14,063 |
+| 2 | `ash_ketchum` | 2,606 | 11,456 | 0 | 14,062 |
+| 3 | `uzumaki_naruto` | 1,975 | 12,033 | 0 | 14,008 |
+| 4 | `cammy_white` | 3,617 | 10,284 | 0 | 13,901 |
+| 5 | `ellen_joe` | 5,337 | 8,547 | 0 | 13,884 |
+| 6 | `shibuya_rin` | 6,044 | 7,738 | 0 | 13,782 |
+| 7 | `jeanne_d&#039;arc_alter_(fate)` | 0 | 13,770 | 0 | 13,770 |
+| 8 | `serval_(kemono_friends)` | 6,108 | 7,662 | 0 | 13,770 |
+| 9 | `nishikigi_chisato` | 5,815 | 7,950 | 0 | 13,765 |
+| 10 | `atago_(kancolle)` | 5,449 | 8,102 | 0 | 13,551 |
+
+Candidate generation produced **223 observations** and **104 visual
+candidates**. Published profiles: `cammy_white` with 4 features,
+`nishikigi_chisato` with 13, and `atago_(kancolle)` with 11: **28 new features**,
+zero conflicts, and 6 source records. Each seed was promoted twice with
+unchanged counts.
+
+Deferred profiles: `kamisato_ayaka` had zero visual candidates; `ash_ketchum`
+mixed multiple seasons and outfits; `uzumaki_naruto` had zero candidates;
+`ellen_joe` mixed maid and school designs with hair/variant conflicts;
+`shibuya_rin` had five partial traits; exact `jeanne_d&#039;arc_alter_(fate)` had
+zero local observations; and `serval_(kemono_friends)` had no structured visual
+traits. Exact identifiers were added to the exclusion ledger. Costumes, seasons,
+variants, props and other contextual designs remain separate or excluded.
+
+The source and derived SQLite databases passed integrity checks. Active feature
+duplicates and published features without evidence returned zero rows. Context
+and search indexes were rebuilt serially after all promotions; the full
+`unittest` suite passed with 58 tests, and real MCP probes confirmed all three
+published profiles while deferred profiles remained unpublished.
+
+## Thirty-fifth general popularity batch (expanded to ten)
+
+The queue remained at ten characters after the expanded batch passed all review
+and verification gates:
+
+| Rank | Character | Danbooru | Gelbooru | e621 | Total |
+|---:|---|---:|---:|---:|---:|
+| 1 | `paimon_(genshin_impact)` | 6,000 | 7,495 | 0 | 13,495 |
+| 2 | `shigure_kai_ni_(kancolle)` | 8,204 | 5,270 | 0 | 13,474 |
+| 3 | `nagato_yuki` | 3,528 | 9,916 | 0 | 13,444 |
+| 4 | `ryuujou_(kancolle)` | 5,543 | 7,897 | 0 | 13,440 |
+| 5 | `march_7th_(honkai:_star_rail)` | 5,036 | 8,388 | 0 | 13,424 |
+| 6 | `mirko` | 4,484 | 8,933 | 0 | 13,417 |
+| 7 | `haruno_sakura` | 2,317 | 11,045 | 0 | 13,362 |
+| 8 | `anya_(spy_x_family)` | 4,525 | 8,796 | 0 | 13,321 |
+| 9 | `takamachi_nanoha` | 3,899 | 9,358 | 0 | 13,257 |
+| 10 | `kafka_(honkai:_star_rail)` | 5,801 | 7,442 | 0 | 13,243 |
+
+Candidate generation produced **146 observations** and **58 visual candidates**.
+Published profiles: `paimon_(genshin_impact)` with 10 features and
+`ryuujou_(kancolle)` with 10: **20 new features**, zero conflicts, and 4 source
+records. Each seed was promoted twice with unchanged counts.
+
+Deferred profiles: `shigure_kai_ni_(kancolle)` had only remodel traits;
+`nagato_yuki` had zero candidates; `march_7th_(honkai:_star_rail)` had
+conflicting eye colors and partial evidence; `mirko` had insufficient base
+outfit evidence; `haruno_sakura` had zero candidates; `anya_(spy_x_family)` had
+partial/meme candidates; `takamachi_nanoha` was tied to a magical state; and
+`kafka_(honkai:_star_rail)` had conflicting eye candidates. Exact identifiers
+were added to the exclusion ledger. Remodellings, costumes, states, memes and
+other contextual variants remain separate or excluded.
+
+The source and derived SQLite databases passed integrity checks. Active feature
+duplicates and published features without evidence returned zero rows. Context
+and search indexes were rebuilt serially after all promotions; the full
+`unittest` suite passed with 58 tests, and real MCP probes confirmed both
+published profiles while deferred profiles remained unpublished.
+
+## Thirty-sixth general popularity batch (expanded to ten)
+
+The queue remained at ten characters after the expanded batch passed all review
+and verification gates:
+
+| Rank | Character | Danbooru | Gelbooru | e621 | Total |
+|---:|---|---:|---:|---:|---:|
+| 1 | `amatsukaze_(kancolle)` | 6,105 | 7,129 | 0 | 13,234 |
+| 2 | `minamoto_no_raikou_(fate)` | 5,011 | 8,209 | 0 | 13,220 |
+| 3 | `tomoe_mami_(magical_girl)` | 4,813 | 8,385 | 0 | 13,198 |
+| 4 | `rice_shower_(umamusume)` | 5,277 | 7,917 | 0 | 13,194 |
+| 5 | `plana_(blue_archive)` | 5,263 | 7,869 | 0 | 13,132 |
+| 6 | `peach_(mario)` | 0 | 13,071 | 0 | 13,071 |
+| 7 | `kitagawa_marin` | 4,296 | 8,744 | 0 | 13,040 |
+| 8 | `son_goku` | 3,585 | 9,428 | 0 | 13,013 |
+| 9 | `arona_(blue_archive)` | 5,331 | 7,639 | 0 | 12,970 |
+| 10 | `kyubey` | 4,664 | 8,287 | 0 | 12,951 |
+
+Candidate generation produced **209 observations** and **77 visual candidates**.
+Published profiles: `minamoto_no_raikou_(fate)` with 9 features,
+`rice_shower_(umamusume)` with 9, and `plana_(blue_archive)` with 9: **27 new
+features**, zero conflicts, and 6 source records. Each seed was promoted twice
+with unchanged counts.
+
+Deferred profiles: `amatsukaze_(kancolle)` had conflicting grey/white hair;
+`tomoe_mami_(magical_girl)` had only state identity; `peach_(mario)` had zero
+local observations; `kitagawa_marin` mixed extensive cosplay and outfits;
+`son_goku` had only one accessory candidate; `arona_(blue_archive)` had partial
+traits with possible design overlap; and `kyubey` had only an eye candidate.
+Exact identifiers were added to the exclusion ledger. Remodels, costumes,
+magical states, cosplay, props and other contextual variants remain separate or
+excluded.
+
+The source and derived SQLite databases passed integrity checks. Active feature
+duplicates and published features without evidence returned zero rows. Context
+and search indexes were rebuilt serially after all promotions; the full
+`unittest` suite passed with 58 tests, and real MCP probes confirmed all three
+published profiles while deferred profiles remained unpublished.
+
+## Thirty-seventh general popularity batch (expanded to ten)
+
+The queue remained at ten characters after the expanded batch passed all review
+and verification gates:
+
+| Rank | Character | Danbooru | Gelbooru | e621 | Total |
+|---:|---|---:|---:|---:|---:|
+| 1 | `daiwa_scarlet_(umamusume)` | 5,333 | 7,615 | 0 | 12,948 |
+| 2 | `minami_kotori` | 4,102 | 8,752 | 0 | 12,854 |
+| 3 | `miki_sayaka_(magical_girl)` | 4,755 | 8,053 | 0 | 12,808 |
+| 4 | `suletta_mercury` | 5,242 | 7,503 | 0 | 12,745 |
+| 5 | `klee_(genshin_impact)` | 5,434 | 7,305 | 0 | 12,739 |
+| 6 | `murakumo_(kancolle)` | 5,849 | 6,890 | 0 | 12,739 |
+| 7 | `noa_(blue_archive)` | 4,902 | 7,773 | 0 | 12,675 |
+| 8 | `yamato_(kancolle)` | 5,612 | 7,026 | 0 | 12,638 |
+| 9 | `himekaidou_hatate` | 5,214 | 7,422 | 0 | 12,636 |
+| 10 | `serena_(pokemon)` | 3,861 | 8,771 | 0 | 12,632 |
+
+Candidate generation produced **179 observations** and **72 visual candidates**.
+Published profiles: `miki_sayaka_(magical_girl)` with 6 features,
+`murakumo_(kancolle)` with 10, and `serena_(pokemon)` with 10: **26 new
+features**, zero conflicts, and 5 source records. Each seed was promoted twice
+with unchanged counts.
+
+Deferred profiles: `daiwa_scarlet_(umamusume)` had only a uniform candidate;
+`minami_kotori` had four partial traits; `suletta_mercury` had zero candidates;
+`klee_(genshin_impact)` had conflicting eye colors; `noa_(blue_archive)` had
+five partial traits; `yamato_(kancolle)` had four partial traits;
+`himekaidou_hatate` had conflicting eyes and variant clothing. Exact identifiers
+were added to the exclusion ledger. Remodels, costumes, magical states,
+cosplay, props and other contextual variants remain separate or excluded.
+
+The source and derived SQLite databases passed integrity checks. Active feature
+duplicates and published features without evidence returned zero rows. Context
+and search indexes were rebuilt serially after all promotions; the full
+`unittest` suite passed with 58 tests, and real MCP probes confirmed all three
+published profiles while deferred profiles remained unpublished.
+
+## Thirty-eighth general popularity batch (expanded to ten)
+
+The queue remained at ten characters after the expanded batch passed all review
+and verification gates:
+
+| Rank | Character | Danbooru | Gelbooru | e621 | Total |
+|---:|---|---:|---:|---:|---:|
+| 1 | `gloria_(pokemon)` | 4,594 | 7,974 | 0 | 12,568 |
+| 2 | `aru_(blue_archive)` | 5,389 | 7,137 | 0 | 12,526 |
+| 3 | `eula_(genshin_impact)` | 5,515 | 7,011 | 0 | 12,526 |
+| 4 | `tsukino_usagi` | 3,950 | 8,543 | 0 | 12,493 |
+| 5 | `infection_monitor_(arknights)` | 0 | 12,467 | 0 | 12,467 |
+| 6 | `tartaglia_(genshin_impact)` | 4,379 | 8,066 | 0 | 12,445 |
+| 7 | `gold_ship_(umamusume)` | 4,554 | 7,842 | 0 | 12,396 |
+| 8 | `trainer_(umamusume)` | 6,584 | 5,799 | 0 | 12,383 |
+| 9 | `asuna_(bunny)_(blue_archive)` | 5,513 | 6,772 | 0 | 12,285 |
+| 10 | `power_(chainsaw_man)` | 4,611 | 7,673 | 0 | 12,284 |
+
+Candidate generation produced **134 observations** and **58 visual candidates**.
+Published profiles: `gloria_(pokemon)` with 13 features,
+`eula_(genshin_impact)` with 4, `power_(chainsaw_man)` with 13, and
+`asuna_(bunny)_(blue_archive)` with 6: **36 new features**, zero conflicts,
+and 8 source records. Each seed was promoted twice with unchanged counts.
+The Asuna profile is explicitly scoped to the registered official bunny
+costume variant and was not merged with base Asuna.
+
+Deferred profiles: `aru_(blue_archive)` had only a contextual uniform;
+`tsukino_usagi` had insufficient structured appearance evidence;
+`infection_monitor_(arknights)` is a device/metadata entity, not a character;
+`tartaglia_(genshin_impact)` had zero candidates; `gold_ship_(umamusume)` had
+only a uniform candidate; and `trainer_(umamusume)` is a generic player/avatar
+entity. Exact identifiers were added to the exclusion ledger. Collaborations,
+transformations, costumes outside the explicit Asuna variant, props and other
+contextual variants remain separate or excluded.
+
+The source and derived SQLite databases passed integrity checks. Active feature
+duplicates and published features without evidence returned zero rows. Context
+and search indexes were rebuilt serially after all promotions; the full
+`unittest` suite passed with 58 tests, and real MCP probes confirmed all four
+published profiles while deferred profiles remained unpublished.
+
+## Thirty-ninth general popularity batch (expanded to ten)
+
+The queue remained at ten characters after the expanded batch passed all review
+and verification gates:
+
+| Rank | Character | Danbooru | Gelbooru | e621 | Total |
+|---:|---|---:|---:|---:|---:|
+| 1 | `ijichi_nijika` | 5,164 | 7,115 | 0 | 12,279 |
+| 2 | `hex_maniac_(pokemon)` | 2,941 | 9,323 | 0 | 12,264 |
+| 3 | `hanako_(blue_archive)` | 5,295 | 6,960 | 0 | 12,255 |
+| 4 | `tainaka_ritsu` | 4,286 | 7,941 | 0 | 12,227 |
+| 5 | `mario` | 3,228 | 8,978 | 0 | 12,206 |
+| 6 | `denji_(chainsaw_man)` | 4,000 | 8,203 | 0 | 12,203 |
+| 7 | `shenhe_(genshin_impact)` | 5,473 | 6,694 | 0 | 12,167 |
+| 8 | `oshino_shinobu` | 4,338 | 7,814 | 0 | 12,152 |
+| 9 | `darjeeling_(girls_und_panzer)` | 5,269 | 6,847 | 0 | 12,116 |
+| 10 | `ibaraki_kasen` | 5,177 | 6,865 | 0 | 12,042 |
+
+Candidate generation produced **253 observations** and **82 visual candidates**.
+Published profiles: `hex_maniac_(pokemon)` with 5 features,
+`hanako_(blue_archive)` with 10, `tainaka_ritsu` with 6, and `mario` with 8:
+**29 new features**, zero conflicts, and 4 source records. Each seed was
+promoted twice with unchanged counts.
+
+Deferred profiles: `ijichi_nijika` had conflicting eye colors and mixed
+uniform/performance attire; `denji_(chainsaw_man)` had zero candidates and
+mixed human/devil forms; `shenhe_(genshin_impact)` had zero candidates;
+`oshino_shinobu` had only partial evidence; `darjeeling_(girls_und_panzer)`
+had zero candidates; and `ibaraki_kasen` had conflicting eye colors and partial
+evidence. Exact identifiers were added to the exclusion ledger. Variants,
+forms, performance attire, props and other contextual designs remain separate
+or excluded.
+
+The source and derived SQLite databases passed integrity checks. Active feature
+duplicates and published features without evidence returned zero rows. Context
+and search indexes were rebuilt serially after all promotions; the full
+`unittest` suite passed with 58 tests, and real MCP probes confirmed all four
+published profiles while deferred profiles remained unpublished.
+
+## Fortieth general popularity batch (expanded to ten)
+
+The queue remained at ten characters after the expanded batch passed all review
+and verification gates:
+
+| Rank | Character | Danbooru | Gelbooru | e621 | Total |
+|---:|---|---:|---:|---:|---:|
+| 1 | `skadi_(arknights)` | 5,517 | 6,510 | 0 | 12,027 |
+| 2 | `jalter` | 0 | 12,024 | 0 | 12,024 |
+| 3 | `asuna_(sao)` | 4,356 | 7,638 | 0 | 11,994 |
+| 4 | `kiana_kaslana` | 4,843 | 7,060 | 0 | 11,903 |
+| 5 | `mordred_(fate)` | 5,486 | 6,341 | 0 | 11,827 |
+| 6 | `hata_no_kokoro` | 5,082 | 6,741 | 0 | 11,823 |
+| 7 | `seia_(blue_archive)` | 3,656 | 8,167 | 0 | 11,823 |
+| 8 | `houshou_(kancolle)` | 5,020 | 6,745 | 0 | 11,765 |
+| 9 | `bb_(fate)` | 5,109 | 6,643 | 0 | 11,752 |
+| 10 | `reze_(chainsaw_man)` | 2,289 | 9,451 | 0 | 11,740 |
+
+Candidate generation produced **403 observations** and **151 visual candidates**.
+Published profiles: `seia_(blue_archive)` with 15 features,
+`houshou_(kancolle)` with 6, `bb_(fate)` with 3, and `hata_no_kokoro` with
+13: **37 new features**, zero conflicts, and 6 source records. Each seed was
+promoted twice with unchanged counts.
+
+Deferred profiles: `skadi_(arknights)` had zero candidates; `jalter` had
+inconsistent/misclassified local wiki evidence; `asuna_(sao)` had zero
+candidates; `kiana_kaslana` mixed multiple battlesuits; `mordred_(fate)` was a
+catchall variant tag; and `reze_(chainsaw_man)` had zero candidates. Exact
+identifiers were added to the exclusion ledger. Variants, battlesuits, forms
+and unresolved identities remain separate or excluded.
+
+The source and derived SQLite databases passed integrity checks. Active feature
+duplicates and published features without evidence returned zero rows. Context
+and search indexes were rebuilt serially after all promotions; the full
+`unittest` suite passed with 58 tests, and real MCP probes confirmed all four
+published profiles while deferred profiles remained unpublished.
+
+## Forty-first general popularity batch (expanded to ten)
+
+The queue remained at ten characters after the expanded batch passed all review
+and verification gates:
+
+| Rank | Character | Danbooru | Gelbooru | e621 | Total |
+|---:|---|---:|---:|---:|---:|
+| 1 | `tamamo_(fate)` | 11,726 | 0 | 0 | 11,726 |
+| 2 | `saotome_ranma` | 565 | 11,154 | 0 | 11,719 |
+| 3 | `byleth_(female)_(fire_emblem)` | 4,907 | 6,795 | 0 | 11,702 |
+| 4 | `kaito_(vocaloid)` | 3,004 | 8,691 | 0 | 11,695 |
+| 5 | `clownpiece` | 5,329 | 6,341 | 0 | 11,670 |
+| 6 | `oyama_mahiro` | 5,166 | 6,481 | 0 | 11,647 |
+| 7 | `ninomae_ina&#039;nis` | 0 | 11,636 | 0 | 11,636 |
+| 8 | `tatsumaki` | 3,272 | 8,363 | 0 | 11,635 |
+| 9 | `ako_(blue_archive)` | 5,030 | 6,599 | 0 | 11,629 |
+| 10 | `morichika_rinnosuke` | 5,674 | 5,912 | 0 | 11,586 |
+
+Candidate generation produced **199 observations** and **72 visual candidates**.
+Published profiles: `byleth_(female)_(fire_emblem)` with 6 features,
+`kaito_(vocaloid)` with 5, `clownpiece` with 12, `tatsumaki` with 7, and
+`ako_(blue_archive)` with 22: **52 new features**, zero conflicts, and 9 source
+records. Each seed was promoted twice with unchanged counts.
+
+Deferred profiles: `tamamo_(fate)` was a catchall for Tamamo and variants;
+`saotome_ranma` mixed masculine and feminine forms; `oyama_mahiro` had zero
+visual candidates; `ninomae_ina&#039;nis` had metadata without structured visual
+observations; and `morichika_rinnosuke` had zero visual candidates. Exact
+identifiers were added to the exclusion ledger. Variants, forms, alternate
+outfits and unresolved metadata remain separate or excluded.
+
+The source and derived SQLite databases passed integrity checks. Active feature
+duplicates and published features without evidence returned zero rows. Context
+and search indexes were rebuilt serially after all promotions; the full
+`unittest` suite passed with 58 tests, and real MCP probes confirmed all five
+published profiles while deferred profiles remained unpublished.
+
+## Forty-second general popularity batch (expanded to ten)
+
+The queue remained at ten characters after the expanded batch passed all review
+and verification gates:
+
+| Rank | Character | Danbooru | Gelbooru | e621 | Total |
+|---:|---|---:|---:|---:|---:|
+| 1 | `nishizumi_maho` | 4,800 | 6,769 | 0 | 11,569 |
+| 2 | `kaku_seiga` | 4,634 | 6,911 | 0 | 11,545 |
+| 3 | `momoi_(blue_archive)` | 4,779 | 6,740 | 0 | 11,519 |
+| 4 | `izumi_konata` | 3,368 | 8,144 | 0 | 11,512 |
+| 5 | `toramaru_shou` | 4,357 | 7,139 | 0 | 11,496 |
+| 6 | `hoshii_miki` | 4,324 | 7,077 | 0 | 11,401 |
+| 7 | `yukikaze_(kancolle)` | 4,694 | 6,643 | 0 | 11,337 |
+| 8 | `mejiro_mcqueen_(umamusume)` | 4,778 | 6,543 | 0 | 11,321 |
+| 9 | `togawa_sakiko` | 2,020 | 9,297 | 0 | 11,317 |
+| 10 | `acheron_(honkai:_star_rail)` | 5,032 | 6,274 | 0 | 11,306 |
+
+Candidate generation produced **170 observations** and **78 visual candidates**.
+Published profiles: `kaku_seiga` with 15 features, `izumi_konata` with 6,
+`toramaru_shou` with 14, `yukikaze_(kancolle)` with 6,
+`mejiro_mcqueen_(umamusume)` with 3, and `acheron_(honkai:_star_rail)` with
+16: **60 new features**, zero conflicts, and 8 source records. Each seed was
+promoted twice with unchanged counts. Acheron's filesystem seed uses the safe
+filename `acheron_(honkai_star_rail).json`; the canonical tag remains unchanged
+inside the seed.
+
+Deferred profiles: `nishizumi_maho` had zero visual candidates;
+`momoi_(blue_archive)` had only variant references and no structured base
+evidence; `hoshii_miki` had zero visual candidates; and `togawa_sakiko` mixed
+school uniforms and other outfits. Exact identifiers were added to the
+exclusion ledger. Variants, forms, seasonal outfits and unresolved contexts
+remain separate or excluded.
+
+The source and derived SQLite databases passed integrity checks. Active feature
+duplicates and published features without evidence returned zero rows. Context
+and search indexes were rebuilt serially after all promotions; the full
+`unittest` suite passed with 58 tests, and real MCP probes confirmed all six
+published profiles while deferred profiles remained unpublished.
+
+## Forty-third general popularity batch (expanded to ten)
+
+The queue remained at ten characters after the expanded batch passed all review
+and verification gates:
+
+| Rank | Character | Danbooru | Gelbooru | e621 | Total |
+|---:|---|---:|---:|---:|---:|
+| 1 | `iono_(pokemon)` | 4,076 | 7,213 | 0 | 11,289 |
+| 2 | `miorine_rembran` | 4,633 | 6,638 | 0 | 11,271 |
+| 3 | `saber_alter` | 3,935 | 7,332 | 0 | 11,267 |
+| 4 | `eevee` | 2,849 | 8,383 | 0 | 11,232 |
+| 5 | `taihou_(azur_lane)` | 4,491 | 6,736 | 0 | 11,227 |
+| 6 | `ushio_(kancolle)` | 4,722 | 6,498 | 0 | 11,220 |
+| 7 | `sparkle_(honkai:_star_rail)` | 4,146 | 7,048 | 0 | 11,194 |
+| 8 | `yuudachi_kai_ni_(kancolle)` | 7,178 | 4,016 | 0 | 11,194 |
+| 9 | `lappland_(arknights)` | 4,802 | 6,387 | 0 | 11,189 |
+| 10 | `oma_kokichi` | 2,248 | 8,931 | 0 | 11,179 |
+
+Candidate generation produced **214 observations** and **66 visual candidates**.
+Published profiles: `taihou_(azur_lane)` with 10 features,
+`ushio_(kancolle)` with 6, `sparkle_(honkai:_star_rail)` with 13, and
+`oma_kokichi` with 5: **34 new features**, zero conflicts, and 8 source
+records. Each seed was promoted twice with unchanged counts.
+
+Deferred profiles: `iono_(pokemon)` had zero visual candidates;
+`miorine_rembran` had zero observations and candidates; `saber_alter` mixed
+armor, dress and variant designs; `eevee` is a generic species/entity rather
+than a character profile; `yuudachi_kai_ni_(kancolle)` was a remodel variant
+without structured observations; and `lappland_(arknights)` had zero visual
+candidates. Exact identifiers were added to the exclusion ledger. Variants,
+forms, remodels and unresolved entities remain separate or excluded.
+
+The source and derived SQLite databases passed integrity checks. Active feature
+duplicates and published features without evidence returned zero rows. Context
+and search indexes were rebuilt serially after all promotions; the full
+`unittest` suite passed with 58 tests, and real MCP probes confirmed all four
+published profiles while deferred profiles remained unpublished.
+
+## Forty-fourth general popularity batch (expanded to ten)
+
+The queue remained at ten characters after the expanded batch passed all review
+and verification gates:
+
+| Rank | Character | Danbooru | Gelbooru | e621 | Total |
+|---:|---|---:|---:|---:|---:|
+| 1 | `kasodani_kyouko` | 5,025 | 6,152 | 0 | 11,177 |
+| 2 | `jeanne_d'arc_alter_(fate)` | 11,159 | 0 | 0 | 11,159 |
+| 3 | `hiiragi_kagami` | 3,491 | 7,632 | 0 | 11,123 |
+| 4 | `nagae_iku` | 4,185 | 6,916 | 0 | 11,101 |
+| 5 | `matou_sakura` | 3,989 | 7,091 | 0 | 11,080 |
+| 6 | `ikari_shinji` | 2,711 | 8,323 | 0 | 11,034 |
+| 7 | `inoue_takina` | 4,723 | 6,296 | 0 | 11,019 |
+| 8 | `murasa_minamitsu` | 3,981 | 7,036 | 0 | 11,017 |
+| 9 | `yoko_littner` | 3,420 | 7,517 | 0 | 10,937 |
+| 10 | `asashio_(kancolle)` | 4,889 | 6,022 | 0 | 10,911 |
+
+Candidate generation produced **125 observations** and **46 visual candidates**.
+Published profiles: `hiiragi_kagami` with 5 features, `matou_sakura` with 4,
+`inoue_takina` with 10, and `asashio_(kancolle)` with 7: **26 new features**,
+zero conflicts, and 8 source records. Each seed was promoted twice with
+unchanged counts.
+
+Deferred profiles: `kasodani_kyouko` had zero visual candidates;
+`jeanne_d'arc_alter_(fate)` had zero candidates and requires additional
+identity/evidence review; `nagae_iku` had zero candidates; `ikari_shinji` had
+only a meme candidate; `murasa_minamitsu` had zero candidates; and
+`yoko_littner` had insufficient structured evidence. Exact identifiers were
+added to the exclusion ledger. Variants, forms, memes and unresolved
+appearance evidence remain separate or excluded.
+
+The source and derived SQLite databases passed integrity checks. Active feature
+duplicates and published features without evidence returned zero rows. Context
+and search indexes were rebuilt serially after all promotions; the full
+`unittest` suite passed with 58 tests, and real MCP probes confirmed all four
+published profiles while deferred profiles remained unpublished.
