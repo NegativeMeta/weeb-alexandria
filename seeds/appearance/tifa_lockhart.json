@@ -1,1 +1,102 @@
-{"character_tag":"tifa_lockhart","sources":[{"id":"danbooru:wiki:tifa_lockhart","source_site":"danbooru","source_kind":"wiki","source_key":"tifa_lockhart","source_url":"https://danbooru.donmai.us/wiki_pages/tifa_lockhart.json","source_tier":1,"title":"Tifa Lockhart","excerpt":"Long black hair, red or brown eyes, cropped white tank top, black skirt with suspenders and fingerless gloves.","captured_at":"2026-08-28"},{"id":"gelbooru:wiki:tifa_lockhart","source_site":"gelbooru","source_kind":"wiki","source_key":"tifa_lockhart","source_url":"https://gelbooru.com/index.php?page=wiki&s=view&id=tifa_lockhart","source_tier":1,"title":"Tifa Lockhart","excerpt":"Dark-haired woman wearing a white top and a black miniskirt with suspenders.","captured_at":"2026-08-28"}],"profiles":[{"appearance_key":"tifa_lockhart::default","variant_tag":"tifa_lockhart","display_name":"Base appearance","appearance_kind":"default","is_default":true,"status":"published","confidence":"high","provenance":"danbooru_gelbooru_wiki_reviewed","notes":"Classic base outfit; Remake and Advent Children variants excluded.","features":[{"facet":"hair","canonical_tag":"long_hair","value":"Long hair","source_refs":["danbooru:wiki:tifa_lockhart"]},{"facet":"hair","canonical_tag":"black_hair","value":"Black hair","source_refs":["danbooru:wiki:tifa_lockhart","gelbooru:wiki:tifa_lockhart"]},{"facet":"eyes","canonical_tag":"red_eyes","value":"Red or brown eyes","source_refs":["danbooru:wiki:tifa_lockhart"]},{"facet":"clothing","canonical_tag":"white_tank_top","value":"White tank top","source_refs":["danbooru:wiki:tifa_lockhart","gelbooru:wiki:tifa_lockhart"]},{"facet":"lower_body","canonical_tag":"black_skirt","value":"Black skirt","source_refs":["danbooru:wiki:tifa_lockhart","gelbooru:wiki:tifa_lockhart"]},{"facet":"clothing","canonical_tag":"suspenders","value":"Suspenders","source_refs":["danbooru:wiki:tifa_lockhart","gelbooru:wiki:tifa_lockhart"]},{"facet":"gloves","canonical_tag":"fingerless_gloves","value":"Fingerless gloves","source_refs":["danbooru:wiki:tifa_lockhart"]}]}]}
+{
+  "character_tag": "tifa_lockhart",
+  "sources": [
+    {
+      "id": "danbooru:wiki:tifa_lockhart",
+      "source_site": "danbooru",
+      "source_kind": "wiki",
+      "source_key": "tifa_lockhart",
+      "source_url": "https://danbooru.donmai.us/wiki_pages/tifa_lockhart.json",
+      "source_tier": 1,
+      "title": "Tifa Lockhart",
+      "excerpt": "Long black hair, red or brown eyes, cropped white tank top, black skirt with suspenders and fingerless gloves.",
+      "captured_at": "2026-08-28"
+    },
+    {
+      "id": "gelbooru:wiki:tifa_lockhart",
+      "source_site": "gelbooru",
+      "source_kind": "wiki",
+      "source_key": "tifa_lockhart",
+      "source_url": "https://gelbooru.com/index.php?page=wiki&s=view&id=tifa_lockhart",
+      "source_tier": 1,
+      "title": "Tifa Lockhart",
+      "excerpt": "Dark-haired woman wearing a white top and a black miniskirt with suspenders.",
+      "captured_at": "2026-08-28"
+    }
+  ],
+  "profiles": [
+    {
+      "appearance_key": "tifa_lockhart::default",
+      "variant_tag": "tifa_lockhart",
+      "display_name": "Base appearance",
+      "appearance_kind": "default",
+      "is_default": true,
+      "status": "published",
+      "confidence": "high",
+      "provenance": "danbooru_gelbooru_wiki_reviewed",
+      "notes": "Classic base outfit; Remake and Advent Children variants excluded.",
+      "features": [
+        {
+          "facet": "hair",
+          "canonical_tag": "long_hair",
+          "value": "Long hair",
+          "source_refs": [
+            "danbooru:wiki:tifa_lockhart"
+          ]
+        },
+        {
+          "facet": "hair",
+          "canonical_tag": "black_hair",
+          "value": "Black hair",
+          "source_refs": [
+            "danbooru:wiki:tifa_lockhart",
+            "gelbooru:wiki:tifa_lockhart"
+          ]
+        },
+        {
+          "facet": "eyes",
+          "canonical_tag": "red_eyes",
+          "value": "Red or brown eyes",
+          "source_refs": [
+            "danbooru:wiki:tifa_lockhart"
+          ]
+        },
+        {
+          "facet": "upper_body",
+          "canonical_tag": "white_tank_top",
+          "value": "White tank top",
+          "source_refs": [
+            "danbooru:wiki:tifa_lockhart",
+            "gelbooru:wiki:tifa_lockhart"
+          ]
+        },
+        {
+          "facet": "lower_body",
+          "canonical_tag": "black_skirt",
+          "value": "Black skirt",
+          "source_refs": [
+            "danbooru:wiki:tifa_lockhart",
+            "gelbooru:wiki:tifa_lockhart"
+          ]
+        },
+        {
+          "facet": "accessories",
+          "canonical_tag": "suspenders",
+          "value": "Suspenders",
+          "source_refs": [
+            "danbooru:wiki:tifa_lockhart",
+            "gelbooru:wiki:tifa_lockhart"
+          ]
+        },
+        {
+          "facet": "gloves",
+          "canonical_tag": "fingerless_gloves",
+          "value": "Fingerless gloves",
+          "source_refs": [
+            "danbooru:wiki:tifa_lockhart"
+          ]
+        }
+      ]
+    }
+  ]
+}

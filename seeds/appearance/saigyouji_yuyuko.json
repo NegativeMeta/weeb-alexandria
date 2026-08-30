@@ -1,1 +1,67 @@
-{"character_tag":"saigyouji_yuyuko","sources":[{"id":"danbooru:wiki:saigyouji_yuyuko","source_site":"danbooru","source_kind":"wiki","source_key":"saigyouji_yuyuko","source_url":"https://danbooru.donmai.us/wiki_pages/saigyouji_yuyuko.json","source_tier":1,"title":"Saigyouji Yuyuko","excerpt":"Ghost princess of Hakugyokurou; the wiki distinguishes her ghost appearance from her living form.","captured_at":"2026-08-28"},{"id":"gelbooru:wiki:saigyouji_yuyuko","source_site":"gelbooru","source_kind":"wiki","source_key":"saigyouji_yuyuko","source_url":"https://gelbooru.com/index.php?page=wiki&s=view&id=saigyouji_yuyuko","source_tier":1,"title":"Saigyouji Yuyuko","excerpt":"Touhou ghost princess commonly depicted with mob cap and triangular headpiece.","captured_at":"2026-08-28"}],"profiles":[{"appearance_key":"saigyouji_yuyuko::default","variant_tag":"saigyouji_yuyuko","display_name":"Base ghost appearance","appearance_kind":"default","is_default":true,"status":"published","confidence":"medium","provenance":"danbooru_gelbooru_wiki_reviewed","notes":"Ghost base only; living form and fan-design headwear variants remain separate.","features":[{"facet":"identity","canonical_tag":"ghost","value":"Ghost","source_refs":["danbooru:wiki:saigyouji_yuyuko","gelbooru:wiki:saigyouji_yuyuko"]},{"facet":"headwear","canonical_tag":"mob_cap","value":"Mob cap is a common depiction","source_refs":["gelbooru:wiki:saigyouji_yuyuko"]},{"facet":"headwear","canonical_tag":"triangular_headpiece","value":"Triangular headpiece is a common depiction","source_refs":["gelbooru:wiki:saigyouji_yuyuko"]}]}]}
+{
+  "character_tag": "saigyouji_yuyuko",
+  "sources": [
+    {
+      "id": "danbooru:wiki:saigyouji_yuyuko",
+      "source_site": "danbooru",
+      "source_kind": "wiki",
+      "source_key": "saigyouji_yuyuko",
+      "source_url": "https://danbooru.donmai.us/wiki_pages/saigyouji_yuyuko.json",
+      "source_tier": 1,
+      "title": "Saigyouji Yuyuko",
+      "excerpt": "Ghost princess of Hakugyokurou; the wiki distinguishes her ghost appearance from her living form.",
+      "captured_at": "2026-08-28"
+    },
+    {
+      "id": "gelbooru:wiki:saigyouji_yuyuko",
+      "source_site": "gelbooru",
+      "source_kind": "wiki",
+      "source_key": "saigyouji_yuyuko",
+      "source_url": "https://gelbooru.com/index.php?page=wiki&s=view&id=saigyouji_yuyuko",
+      "source_tier": 1,
+      "title": "Saigyouji Yuyuko",
+      "excerpt": "Touhou ghost princess commonly depicted with mob cap and triangular headpiece.",
+      "captured_at": "2026-08-28"
+    }
+  ],
+  "profiles": [
+    {
+      "appearance_key": "saigyouji_yuyuko::default",
+      "variant_tag": "saigyouji_yuyuko",
+      "display_name": "Base ghost appearance",
+      "appearance_kind": "default",
+      "is_default": true,
+      "status": "published",
+      "confidence": "medium",
+      "provenance": "danbooru_gelbooru_wiki_reviewed",
+      "notes": "Ghost base only; living form and fan-design headwear variants remain separate.",
+      "features": [
+        {
+          "facet": "context",
+          "canonical_tag": "ghost",
+          "value": "Ghost",
+          "source_refs": [
+            "danbooru:wiki:saigyouji_yuyuko",
+            "gelbooru:wiki:saigyouji_yuyuko"
+          ]
+        },
+        {
+          "facet": "headwear",
+          "canonical_tag": "mob_cap",
+          "value": "Mob cap is a common depiction",
+          "source_refs": [
+            "gelbooru:wiki:saigyouji_yuyuko"
+          ]
+        },
+        {
+          "facet": "headwear",
+          "canonical_tag": "triangular_headpiece",
+          "value": "Triangular headpiece is a common depiction",
+          "source_refs": [
+            "gelbooru:wiki:saigyouji_yuyuko"
+          ]
+        }
+      ]
+    }
+  ]
+}

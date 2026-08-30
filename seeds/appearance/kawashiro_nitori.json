@@ -1,1 +1,115 @@
-{"character_tag":"kawashiro_nitori","sources":[{"id":"danbooru:wiki:kawashiro_nitori","source_site":"danbooru","source_kind":"wiki","source_key":"kawashiro_nitori","source_url":"https://danbooru.donmai.us/wiki_pages/kawashiro_nitori.json","source_tier":1,"title":"Kawashiro Nitori","excerpt":"Short blue hair in two side-up sections with hair bobbles, blue eyes and green newsboy cap; collared blue shirt, matching skirt and blue boots.","captured_at":"2026-08-28"},{"id":"gelbooru:wiki:kawashiro_nitori","source_site":"gelbooru","source_kind":"wiki","source_key":"kawashiro_nitori","source_url":"https://gelbooru.com/index.php?page=wiki&s=view&id=kawashiro_nitori","source_tier":1,"title":"Kawashiro Nitori","excerpt":"Commonly depicted with two side-up hairstyle; ordinary twintails are a fan variation.","captured_at":"2026-08-28"}],"profiles":[{"appearance_key":"kawashiro_nitori::default","variant_tag":"kawashiro_nitori","display_name":"Base appearance","appearance_kind":"default","is_default":true,"status":"published","confidence":"high","provenance":"danbooru_gelbooru_wiki_reviewed","notes":"Base design; cucumber props, bottles and ordinary-twintail fan variation excluded.","features":[{"facet":"hair","canonical_tag":"short_hair","value":"Short hair","source_refs":["danbooru:wiki:kawashiro_nitori"]},{"facet":"hair","canonical_tag":"blue_hair","value":"Blue hair","source_refs":["danbooru:wiki:kawashiro_nitori"]},{"facet":"hair_style","canonical_tag":"two_side_up","value":"Two side-up sections","source_refs":["danbooru:wiki:kawashiro_nitori","gelbooru:wiki:kawashiro_nitori"]},{"facet":"hair_accessory","canonical_tag":"hair_bobbles","value":"Hair bobbles","source_refs":["danbooru:wiki:kawashiro_nitori"]},{"facet":"eyes","canonical_tag":"blue_eyes","value":"Blue eyes","source_refs":["danbooru:wiki:kawashiro_nitori"]},{"facet":"headwear","canonical_tag":"green_hat","value":"Green newsboy cap","source_refs":["danbooru:wiki:kawashiro_nitori"]},{"facet":"clothing","canonical_tag":"blue_shirt","value":"Blue collared shirt","source_refs":["danbooru:wiki:kawashiro_nitori"]},{"facet":"lower_body","canonical_tag":"blue_skirt","value":"Matching blue skirt","source_refs":["danbooru:wiki:kawashiro_nitori"]},{"facet":"footwear","canonical_tag":"blue_boots","value":"Blue boots","source_refs":["danbooru:wiki:kawashiro_nitori"]}]}]}
+{
+  "character_tag": "kawashiro_nitori",
+  "sources": [
+    {
+      "id": "danbooru:wiki:kawashiro_nitori",
+      "source_site": "danbooru",
+      "source_kind": "wiki",
+      "source_key": "kawashiro_nitori",
+      "source_url": "https://danbooru.donmai.us/wiki_pages/kawashiro_nitori.json",
+      "source_tier": 1,
+      "title": "Kawashiro Nitori",
+      "excerpt": "Short blue hair in two side-up sections with hair bobbles, blue eyes and green newsboy cap; collared blue shirt, matching skirt and blue boots.",
+      "captured_at": "2026-08-28"
+    },
+    {
+      "id": "gelbooru:wiki:kawashiro_nitori",
+      "source_site": "gelbooru",
+      "source_kind": "wiki",
+      "source_key": "kawashiro_nitori",
+      "source_url": "https://gelbooru.com/index.php?page=wiki&s=view&id=kawashiro_nitori",
+      "source_tier": 1,
+      "title": "Kawashiro Nitori",
+      "excerpt": "Commonly depicted with two side-up hairstyle; ordinary twintails are a fan variation.",
+      "captured_at": "2026-08-28"
+    }
+  ],
+  "profiles": [
+    {
+      "appearance_key": "kawashiro_nitori::default",
+      "variant_tag": "kawashiro_nitori",
+      "display_name": "Base appearance",
+      "appearance_kind": "default",
+      "is_default": true,
+      "status": "published",
+      "confidence": "high",
+      "provenance": "danbooru_gelbooru_wiki_reviewed",
+      "notes": "Base design; cucumber props, bottles and ordinary-twintail fan variation excluded.",
+      "features": [
+        {
+          "facet": "hair",
+          "canonical_tag": "short_hair",
+          "value": "Short hair",
+          "source_refs": [
+            "danbooru:wiki:kawashiro_nitori"
+          ]
+        },
+        {
+          "facet": "hair",
+          "canonical_tag": "blue_hair",
+          "value": "Blue hair",
+          "source_refs": [
+            "danbooru:wiki:kawashiro_nitori"
+          ]
+        },
+        {
+          "facet": "hair",
+          "canonical_tag": "two_side_up",
+          "value": "Two side-up sections",
+          "source_refs": [
+            "danbooru:wiki:kawashiro_nitori",
+            "gelbooru:wiki:kawashiro_nitori"
+          ]
+        },
+        {
+          "facet": "hair_accessory",
+          "canonical_tag": "hair_bobbles",
+          "value": "Hair bobbles",
+          "source_refs": [
+            "danbooru:wiki:kawashiro_nitori"
+          ]
+        },
+        {
+          "facet": "eyes",
+          "canonical_tag": "blue_eyes",
+          "value": "Blue eyes",
+          "source_refs": [
+            "danbooru:wiki:kawashiro_nitori"
+          ]
+        },
+        {
+          "facet": "headwear",
+          "canonical_tag": "green_hat",
+          "value": "Green newsboy cap",
+          "source_refs": [
+            "danbooru:wiki:kawashiro_nitori"
+          ]
+        },
+        {
+          "facet": "upper_body",
+          "canonical_tag": "blue_shirt",
+          "value": "Blue collared shirt",
+          "source_refs": [
+            "danbooru:wiki:kawashiro_nitori"
+          ]
+        },
+        {
+          "facet": "lower_body",
+          "canonical_tag": "blue_skirt",
+          "value": "Matching blue skirt",
+          "source_refs": [
+            "danbooru:wiki:kawashiro_nitori"
+          ]
+        },
+        {
+          "facet": "footwear",
+          "canonical_tag": "blue_boots",
+          "value": "Blue boots",
+          "source_refs": [
+            "danbooru:wiki:kawashiro_nitori"
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,1 +1,77 @@
-{"character_tag":"yae_miko","sources":[{"id":"danbooru:wiki:yae_miko","source_site":"danbooru","source_kind":"wiki","source_key":"yae_miko","source_url":"https://danbooru.donmai.us/wiki_pages/yae_miko.json","source_tier":1,"title":"Yae Miko","excerpt":"Yae Miko wears a nontraditional miko garment: sleeveless white shirt with detached sleeves and red skirt; source explicitly says it is not a kimono.","captured_at":"2026-08-28"},{"id":"gelbooru:wiki:yae_miko","source_site":"gelbooru","source_kind":"wiki","source_key":"yae_miko","source_url":"https://gelbooru.com/index.php?page=wiki&s=view&id=yae_miko","source_tier":1,"title":"Yae Miko","excerpt":"Yae Miko has fox-like ears and golden head accessory; her uniquely styled nontraditional miko outfit has sleeveless white shirt, detached sleeves and red skirt, not a kimono.","captured_at":"2026-08-28"}],"profiles":[{"appearance_key":"yae_miko::default","variant_tag":"yae_miko","display_name":"Default appearance","appearance_kind":"default","is_default":true,"status":"published","confidence":"high","provenance":"danbooru_gelbooru_wiki_reviewed","notes":"Default shrine maiden design; anniversary, pop-up and other alternate outfits excluded. Kimono tag explicitly excluded by source guidance.","features":[{"facet":"anatomy","canonical_tag":"fox_ears","value":"Fox-like ears","source_refs":["gelbooru:wiki:yae_miko"]},{"facet":"upper_body","canonical_tag":"sleeveless_shirt","value":"Sleeveless white shirt","source_refs":["danbooru:wiki:yae_miko","gelbooru:wiki:yae_miko"]},{"facet":"sleeves","canonical_tag":"detached_sleeves","value":"Detached sleeves","source_refs":["danbooru:wiki:yae_miko","gelbooru:wiki:yae_miko"]},{"facet":"lower_body","canonical_tag":"red_skirt","value":"Red skirt","source_refs":["danbooru:wiki:yae_miko","gelbooru:wiki:yae_miko"]}]}]}
+{
+  "character_tag": "yae_miko",
+  "sources": [
+    {
+      "id": "danbooru:wiki:yae_miko",
+      "source_site": "danbooru",
+      "source_kind": "wiki",
+      "source_key": "yae_miko",
+      "source_url": "https://danbooru.donmai.us/wiki_pages/yae_miko.json",
+      "source_tier": 1,
+      "title": "Yae Miko",
+      "excerpt": "Yae Miko wears a nontraditional miko garment: sleeveless white shirt with detached sleeves and red skirt; source explicitly says it is not a kimono.",
+      "captured_at": "2026-08-28"
+    },
+    {
+      "id": "gelbooru:wiki:yae_miko",
+      "source_site": "gelbooru",
+      "source_kind": "wiki",
+      "source_key": "yae_miko",
+      "source_url": "https://gelbooru.com/index.php?page=wiki&s=view&id=yae_miko",
+      "source_tier": 1,
+      "title": "Yae Miko",
+      "excerpt": "Yae Miko has fox-like ears and golden head accessory; her uniquely styled nontraditional miko outfit has sleeveless white shirt, detached sleeves and red skirt, not a kimono.",
+      "captured_at": "2026-08-28"
+    }
+  ],
+  "profiles": [
+    {
+      "appearance_key": "yae_miko::default",
+      "variant_tag": "yae_miko",
+      "display_name": "Default appearance",
+      "appearance_kind": "default",
+      "is_default": true,
+      "status": "published",
+      "confidence": "high",
+      "provenance": "danbooru_gelbooru_wiki_reviewed",
+      "notes": "Default shrine maiden design; anniversary, pop-up and other alternate outfits excluded. Kimono tag explicitly excluded by source guidance.",
+      "features": [
+        {
+          "facet": "body",
+          "canonical_tag": "fox_ears",
+          "value": "Fox-like ears",
+          "source_refs": [
+            "gelbooru:wiki:yae_miko"
+          ]
+        },
+        {
+          "facet": "upper_body",
+          "canonical_tag": "sleeveless_shirt",
+          "value": "Sleeveless white shirt",
+          "source_refs": [
+            "danbooru:wiki:yae_miko",
+            "gelbooru:wiki:yae_miko"
+          ]
+        },
+        {
+          "facet": "sleeves",
+          "canonical_tag": "detached_sleeves",
+          "value": "Detached sleeves",
+          "source_refs": [
+            "danbooru:wiki:yae_miko",
+            "gelbooru:wiki:yae_miko"
+          ]
+        },
+        {
+          "facet": "lower_body",
+          "canonical_tag": "red_skirt",
+          "value": "Red skirt",
+          "source_refs": [
+            "danbooru:wiki:yae_miko",
+            "gelbooru:wiki:yae_miko"
+          ]
+        }
+      ]
+    }
+  ]
+}

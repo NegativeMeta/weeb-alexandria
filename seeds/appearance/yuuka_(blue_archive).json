@@ -1,1 +1,114 @@
-{"character_tag":"yuuka_(blue_archive)","sources":[{"id":"danbooru:wiki:yuuka_(blue_archive)","source_site":"danbooru","source_kind":"wiki","source_key":"yuuka_(blue_archive)","source_url":"https://danbooru.donmai.us/wiki_pages/yuuka_(blue_archive).json","source_tier":1,"title":"Yuuka","excerpt":"Long dark blue or purple hair in two side-up sections with triangular ornament and blue eyes with red pupils; black skirt suit, white jacket, black half gloves and ankle boots.","captured_at":"2026-08-28"},{"id":"gelbooru:wiki:yuuka_(blue_archive)","source_site":"gelbooru","source_kind":"wiki","source_key":"yuuka_(blue_archive)","source_url":"https://gelbooru.com/index.php?page=wiki&s=view&id=yuuka_(blue_archive)","source_tier":1,"title":"Yuuka","excerpt":"Blue Archive treasurer; default and sportswear skins are separately tagged.","captured_at":"2026-08-28"}],"profiles":[{"appearance_key":"yuuka_(blue_archive)::default","variant_tag":"yuuka_(blue_archive)","display_name":"Default appearance","appearance_kind":"default","is_default":true,"status":"published","confidence":"high","provenance":"danbooru_gelbooru_wiki_reviewed","notes":"Default skirt-suit design; Track, pajamas and other alternate costumes excluded.","features":[{"facet":"hair","canonical_tag":"long_hair","value":"Long hair","source_refs":["danbooru:wiki:yuuka_(blue_archive)"]},{"facet":"hair","canonical_tag":"blue_hair","value":"Dark blue or purple hair","source_refs":["danbooru:wiki:yuuka_(blue_archive)"]},{"facet":"hair_style","canonical_tag":"two_side_up","value":"Two side-up sections","source_refs":["danbooru:wiki:yuuka_(blue_archive)"]},{"facet":"eyes","canonical_tag":"blue_eyes","value":"Blue eyes with red pupils","source_refs":["danbooru:wiki:yuuka_(blue_archive)"]},{"facet":"hair_accessory","canonical_tag":"triangle_hair_ornament","value":"Triangular hair ornament","source_refs":["danbooru:wiki:yuuka_(blue_archive)"]},{"facet":"clothing","canonical_tag":"skirt_suit","value":"Black skirt suit","source_refs":["danbooru:wiki:yuuka_(blue_archive)"]},{"facet":"jacket","canonical_tag":"white_jacket","value":"White jacket","source_refs":["danbooru:wiki:yuuka_(blue_archive)"]},{"facet":"gloves","canonical_tag":"half_gloves","value":"Black half gloves","source_refs":["danbooru:wiki:yuuka_(blue_archive)"]},{"facet":"footwear","canonical_tag":"ankle_boots","value":"Black ankle boots","source_refs":["danbooru:wiki:yuuka_(blue_archive)"]}]}]}
+{
+  "character_tag": "yuuka_(blue_archive)",
+  "sources": [
+    {
+      "id": "danbooru:wiki:yuuka_(blue_archive)",
+      "source_site": "danbooru",
+      "source_kind": "wiki",
+      "source_key": "yuuka_(blue_archive)",
+      "source_url": "https://danbooru.donmai.us/wiki_pages/yuuka_(blue_archive).json",
+      "source_tier": 1,
+      "title": "Yuuka",
+      "excerpt": "Long dark blue or purple hair in two side-up sections with triangular ornament and blue eyes with red pupils; black skirt suit, white jacket, black half gloves and ankle boots.",
+      "captured_at": "2026-08-28"
+    },
+    {
+      "id": "gelbooru:wiki:yuuka_(blue_archive)",
+      "source_site": "gelbooru",
+      "source_kind": "wiki",
+      "source_key": "yuuka_(blue_archive)",
+      "source_url": "https://gelbooru.com/index.php?page=wiki&s=view&id=yuuka_(blue_archive)",
+      "source_tier": 1,
+      "title": "Yuuka",
+      "excerpt": "Blue Archive treasurer; default and sportswear skins are separately tagged.",
+      "captured_at": "2026-08-28"
+    }
+  ],
+  "profiles": [
+    {
+      "appearance_key": "yuuka_(blue_archive)::default",
+      "variant_tag": "yuuka_(blue_archive)",
+      "display_name": "Default appearance",
+      "appearance_kind": "default",
+      "is_default": true,
+      "status": "published",
+      "confidence": "high",
+      "provenance": "danbooru_gelbooru_wiki_reviewed",
+      "notes": "Default skirt-suit design; Track, pajamas and other alternate costumes excluded.",
+      "features": [
+        {
+          "facet": "hair",
+          "canonical_tag": "long_hair",
+          "value": "Long hair",
+          "source_refs": [
+            "danbooru:wiki:yuuka_(blue_archive)"
+          ]
+        },
+        {
+          "facet": "hair",
+          "canonical_tag": "blue_hair",
+          "value": "Dark blue or purple hair",
+          "source_refs": [
+            "danbooru:wiki:yuuka_(blue_archive)"
+          ]
+        },
+        {
+          "facet": "hair",
+          "canonical_tag": "two_side_up",
+          "value": "Two side-up sections",
+          "source_refs": [
+            "danbooru:wiki:yuuka_(blue_archive)"
+          ]
+        },
+        {
+          "facet": "eyes",
+          "canonical_tag": "blue_eyes",
+          "value": "Blue eyes with red pupils",
+          "source_refs": [
+            "danbooru:wiki:yuuka_(blue_archive)"
+          ]
+        },
+        {
+          "facet": "hair_accessory",
+          "canonical_tag": "triangle_hair_ornament",
+          "value": "Triangular hair ornament",
+          "source_refs": [
+            "danbooru:wiki:yuuka_(blue_archive)"
+          ]
+        },
+        {
+          "facet": "lower_body",
+          "canonical_tag": "skirt_suit",
+          "value": "Black skirt suit",
+          "source_refs": [
+            "danbooru:wiki:yuuka_(blue_archive)"
+          ]
+        },
+        {
+          "facet": "jacket",
+          "canonical_tag": "white_jacket",
+          "value": "White jacket",
+          "source_refs": [
+            "danbooru:wiki:yuuka_(blue_archive)"
+          ]
+        },
+        {
+          "facet": "gloves",
+          "canonical_tag": "half_gloves",
+          "value": "Black half gloves",
+          "source_refs": [
+            "danbooru:wiki:yuuka_(blue_archive)"
+          ]
+        },
+        {
+          "facet": "footwear",
+          "canonical_tag": "ankle_boots",
+          "value": "Black ankle boots",
+          "source_refs": [
+            "danbooru:wiki:yuuka_(blue_archive)"
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,1 +1,133 @@
-{"character_tag":"kochiya_sanae","sources":[{"id":"danbooru:wiki:kochiya_sanae","source_site":"danbooru","source_kind":"wiki","source_key":"kochiya_sanae","source_url":"https://danbooru.donmai.us/wiki_pages/kochiya_sanae.json","source_tier":1,"title":"Kochiya Sanae","excerpt":"Long green hair with a single sidelock; green or blue eyes; snake and frog hair ornaments; sleeveless white collared shirt, detached wide white sleeves, long frilled blue skirt, white socks and brown shoes.","captured_at":"2026-08-28"},{"id":"gelbooru:wiki:kochiya_sanae","source_site":"gelbooru","source_kind":"wiki","source_key":"kochiya_sanae","source_url":"https://gelbooru.com/index.php?page=wiki&s=view&id=kochiya_sanae","source_tier":1,"title":"Kochiya Sanae","excerpt":"Touhou shrine maiden with long light green hair, snake-shaped hair accessory, frog hair clip, blue and white outfit, and gohei.","captured_at":"2026-08-28"}],"profiles":[{"appearance_key":"kochiya_sanae::default","variant_tag":"kochiya_sanae","display_name":"Base appearance","appearance_kind":"default","is_default":true,"status":"published","confidence":"high","provenance":"danbooru_gelbooru_wiki_reviewed","notes":"Base shrine-maiden appearance; school uniform and later-game variations remain separate.","features":[{"facet":"hair","canonical_tag":"long_hair","value":"Long hair","source_refs":["danbooru:wiki:kochiya_sanae"]},{"facet":"hair","canonical_tag":"green_hair","value":"Green hair","source_refs":["danbooru:wiki:kochiya_sanae","gelbooru:wiki:kochiya_sanae"]},{"facet":"eyes","canonical_tag":"green_eyes","value":"Green eyes are documented as an appearance alternative","source_refs":["danbooru:wiki:kochiya_sanae"]},{"facet":"eyes","canonical_tag":"blue_eyes","value":"Blue eyes are documented as an appearance alternative","source_refs":["danbooru:wiki:kochiya_sanae"]},{"facet":"hair_accessory","canonical_tag":"single_sidelock","value":"Single sidelock","source_refs":["danbooru:wiki:kochiya_sanae"]},{"facet":"hair_accessory","canonical_tag":"snake_hair_ornament","value":"Snake hair ornament","source_refs":["danbooru:wiki:kochiya_sanae","gelbooru:wiki:kochiya_sanae"]},{"facet":"hair_accessory","canonical_tag":"frog_hair_ornament","value":"Frog hair ornament","source_refs":["danbooru:wiki:kochiya_sanae","gelbooru:wiki:kochiya_sanae"]},{"facet":"clothing","canonical_tag":"nontraditional_miko","value":"Nontraditional miko outfit","source_refs":["danbooru:wiki:kochiya_sanae"]},{"facet":"clothing","canonical_tag":"white_shirt","value":"Sleeveless white collared shirt","source_refs":["danbooru:wiki:kochiya_sanae"]},{"facet":"clothing","canonical_tag":"detached_sleeves","value":"Detached wide white sleeves","source_refs":["danbooru:wiki:kochiya_sanae"]},{"facet":"clothing","canonical_tag":"blue_skirt","value":"Long frilled blue skirt","source_refs":["danbooru:wiki:kochiya_sanae"]}]}]}
+{
+  "character_tag": "kochiya_sanae",
+  "sources": [
+    {
+      "id": "danbooru:wiki:kochiya_sanae",
+      "source_site": "danbooru",
+      "source_kind": "wiki",
+      "source_key": "kochiya_sanae",
+      "source_url": "https://danbooru.donmai.us/wiki_pages/kochiya_sanae.json",
+      "source_tier": 1,
+      "title": "Kochiya Sanae",
+      "excerpt": "Long green hair with a single sidelock; green or blue eyes; snake and frog hair ornaments; sleeveless white collared shirt, detached wide white sleeves, long frilled blue skirt, white socks and brown shoes.",
+      "captured_at": "2026-08-28"
+    },
+    {
+      "id": "gelbooru:wiki:kochiya_sanae",
+      "source_site": "gelbooru",
+      "source_kind": "wiki",
+      "source_key": "kochiya_sanae",
+      "source_url": "https://gelbooru.com/index.php?page=wiki&s=view&id=kochiya_sanae",
+      "source_tier": 1,
+      "title": "Kochiya Sanae",
+      "excerpt": "Touhou shrine maiden with long light green hair, snake-shaped hair accessory, frog hair clip, blue and white outfit, and gohei.",
+      "captured_at": "2026-08-28"
+    }
+  ],
+  "profiles": [
+    {
+      "appearance_key": "kochiya_sanae::default",
+      "variant_tag": "kochiya_sanae",
+      "display_name": "Base appearance",
+      "appearance_kind": "default",
+      "is_default": true,
+      "status": "published",
+      "confidence": "high",
+      "provenance": "danbooru_gelbooru_wiki_reviewed",
+      "notes": "Base shrine-maiden appearance; school uniform and later-game variations remain separate.",
+      "features": [
+        {
+          "facet": "hair",
+          "canonical_tag": "long_hair",
+          "value": "Long hair",
+          "source_refs": [
+            "danbooru:wiki:kochiya_sanae"
+          ]
+        },
+        {
+          "facet": "hair",
+          "canonical_tag": "green_hair",
+          "value": "Green hair",
+          "source_refs": [
+            "danbooru:wiki:kochiya_sanae",
+            "gelbooru:wiki:kochiya_sanae"
+          ]
+        },
+        {
+          "facet": "eyes",
+          "canonical_tag": "green_eyes",
+          "value": "Green eyes are documented as an appearance alternative",
+          "source_refs": [
+            "danbooru:wiki:kochiya_sanae"
+          ]
+        },
+        {
+          "facet": "eyes",
+          "canonical_tag": "blue_eyes",
+          "value": "Blue eyes are documented as an appearance alternative",
+          "source_refs": [
+            "danbooru:wiki:kochiya_sanae"
+          ]
+        },
+        {
+          "facet": "hair_accessory",
+          "canonical_tag": "single_sidelock",
+          "value": "Single sidelock",
+          "source_refs": [
+            "danbooru:wiki:kochiya_sanae"
+          ]
+        },
+        {
+          "facet": "hair_accessory",
+          "canonical_tag": "snake_hair_ornament",
+          "value": "Snake hair ornament",
+          "source_refs": [
+            "danbooru:wiki:kochiya_sanae",
+            "gelbooru:wiki:kochiya_sanae"
+          ]
+        },
+        {
+          "facet": "hair_accessory",
+          "canonical_tag": "frog_hair_ornament",
+          "value": "Frog hair ornament",
+          "source_refs": [
+            "danbooru:wiki:kochiya_sanae",
+            "gelbooru:wiki:kochiya_sanae"
+          ]
+        },
+        {
+          "facet": "context",
+          "canonical_tag": "nontraditional_miko",
+          "value": "Nontraditional miko outfit",
+          "source_refs": [
+            "danbooru:wiki:kochiya_sanae"
+          ]
+        },
+        {
+          "facet": "upper_body",
+          "canonical_tag": "white_shirt",
+          "value": "Sleeveless white collared shirt",
+          "source_refs": [
+            "danbooru:wiki:kochiya_sanae"
+          ]
+        },
+        {
+          "facet": "sleeves",
+          "canonical_tag": "detached_sleeves",
+          "value": "Detached wide white sleeves",
+          "source_refs": [
+            "danbooru:wiki:kochiya_sanae"
+          ]
+        },
+        {
+          "facet": "lower_body",
+          "canonical_tag": "blue_skirt",
+          "value": "Long frilled blue skirt",
+          "source_refs": [
+            "danbooru:wiki:kochiya_sanae"
+          ]
+        }
+      ]
+    }
+  ]
+}

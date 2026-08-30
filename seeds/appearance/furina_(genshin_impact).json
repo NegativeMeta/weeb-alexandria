@@ -1,1 +1,113 @@
-{"character_tag":"furina_(genshin_impact)","sources":[{"id":"danbooru:wiki:furina_(genshin_impact)","source_site":"danbooru","source_kind":"wiki","source_key":"furina_(genshin_impact)","source_url":"https://danbooru.donmai.us/wiki_pages/furina_(genshin_impact).json","source_tier":1,"title":"Furina","excerpt":"Furina has white and blue hair worn in a long ponytail, large ahoge and heterochromatic blue eyes with mismatched drop-shaped pupils; blue ouji-fashion outfit and top hat.","captured_at":"2026-08-28"},{"id":"gelbooru:wiki:furina_(genshin_impact)","source_site":"gelbooru","source_kind":"wiki","source_key":"furina_(genshin_impact)","source_url":"https://gelbooru.com/index.php?page=wiki&s=view&id=furina_(genshin_impact)","source_tier":1,"title":"Furina","excerpt":"Furina's common design has long white and blue ponytail hair with ahoge, heterochromatic blue eyes, blue ouji fashion outfit and top hat.","captured_at":"2026-08-28"}],"profiles":[{"appearance_key":"furina_(genshin_impact)::default","variant_tag":"furina_(genshin_impact)","display_name":"Default appearance","appearance_kind":"default","is_default":true,"status":"published","confidence":"high","provenance":"danbooru_gelbooru_wiki_reviewed","notes":"Default Pneuma/Ousia base design; short-hair, old-design and alternate-costume variants excluded.","features":[{"facet":"hair","canonical_tag":"long_hair","value":"Long hair","source_refs":["danbooru:wiki:furina_(genshin_impact)","gelbooru:wiki:furina_(genshin_impact)"]},{"facet":"hair","canonical_tag":"white_hair","value":"White hair","source_refs":["danbooru:wiki:furina_(genshin_impact)","gelbooru:wiki:furina_(genshin_impact)"]},{"facet":"hair","canonical_tag":"blue_hair","value":"Blue hair","source_refs":["danbooru:wiki:furina_(genshin_impact)","gelbooru:wiki:furina_(genshin_impact)"]},{"facet":"hair_style","canonical_tag":"ponytail","value":"Ponytail","source_refs":["danbooru:wiki:furina_(genshin_impact)","gelbooru:wiki:furina_(genshin_impact)"]},{"facet":"hair_accessory","canonical_tag":"ahoge","value":"Large ahoge","source_refs":["danbooru:wiki:furina_(genshin_impact)"]},{"facet":"eyes","canonical_tag":"heterochromia","value":"Heterochromatic blue eyes","source_refs":["danbooru:wiki:furina_(genshin_impact)","gelbooru:wiki:furina_(genshin_impact)"]},{"facet":"headwear","canonical_tag":"top_hat","value":"Top hat","source_refs":["danbooru:wiki:furina_(genshin_impact)","gelbooru:wiki:furina_(genshin_impact)"]},{"facet":"clothing","canonical_tag":"ouji_fashion","value":"Blue ouji-fashion outfit","source_refs":["danbooru:wiki:furina_(genshin_impact)","gelbooru:wiki:furina_(genshin_impact)"]}]}]}
+{
+  "character_tag": "furina_(genshin_impact)",
+  "sources": [
+    {
+      "id": "danbooru:wiki:furina_(genshin_impact)",
+      "source_site": "danbooru",
+      "source_kind": "wiki",
+      "source_key": "furina_(genshin_impact)",
+      "source_url": "https://danbooru.donmai.us/wiki_pages/furina_(genshin_impact).json",
+      "source_tier": 1,
+      "title": "Furina",
+      "excerpt": "Furina has white and blue hair worn in a long ponytail, large ahoge and heterochromatic blue eyes with mismatched drop-shaped pupils; blue ouji-fashion outfit and top hat.",
+      "captured_at": "2026-08-28"
+    },
+    {
+      "id": "gelbooru:wiki:furina_(genshin_impact)",
+      "source_site": "gelbooru",
+      "source_kind": "wiki",
+      "source_key": "furina_(genshin_impact)",
+      "source_url": "https://gelbooru.com/index.php?page=wiki&s=view&id=furina_(genshin_impact)",
+      "source_tier": 1,
+      "title": "Furina",
+      "excerpt": "Furina's common design has long white and blue ponytail hair with ahoge, heterochromatic blue eyes, blue ouji fashion outfit and top hat.",
+      "captured_at": "2026-08-28"
+    }
+  ],
+  "profiles": [
+    {
+      "appearance_key": "furina_(genshin_impact)::default",
+      "variant_tag": "furina_(genshin_impact)",
+      "display_name": "Default appearance",
+      "appearance_kind": "default",
+      "is_default": true,
+      "status": "published",
+      "confidence": "high",
+      "provenance": "danbooru_gelbooru_wiki_reviewed",
+      "notes": "Default Pneuma/Ousia base design; short-hair, old-design and alternate-costume variants excluded.",
+      "features": [
+        {
+          "facet": "hair",
+          "canonical_tag": "long_hair",
+          "value": "Long hair",
+          "source_refs": [
+            "danbooru:wiki:furina_(genshin_impact)",
+            "gelbooru:wiki:furina_(genshin_impact)"
+          ]
+        },
+        {
+          "facet": "hair",
+          "canonical_tag": "white_hair",
+          "value": "White hair",
+          "source_refs": [
+            "danbooru:wiki:furina_(genshin_impact)",
+            "gelbooru:wiki:furina_(genshin_impact)"
+          ]
+        },
+        {
+          "facet": "hair",
+          "canonical_tag": "blue_hair",
+          "value": "Blue hair",
+          "source_refs": [
+            "danbooru:wiki:furina_(genshin_impact)",
+            "gelbooru:wiki:furina_(genshin_impact)"
+          ]
+        },
+        {
+          "facet": "hair",
+          "canonical_tag": "ponytail",
+          "value": "Ponytail",
+          "source_refs": [
+            "danbooru:wiki:furina_(genshin_impact)",
+            "gelbooru:wiki:furina_(genshin_impact)"
+          ]
+        },
+        {
+          "facet": "hair_accessory",
+          "canonical_tag": "ahoge",
+          "value": "Large ahoge",
+          "source_refs": [
+            "danbooru:wiki:furina_(genshin_impact)"
+          ]
+        },
+        {
+          "facet": "eyes",
+          "canonical_tag": "heterochromia",
+          "value": "Heterochromatic blue eyes",
+          "source_refs": [
+            "danbooru:wiki:furina_(genshin_impact)",
+            "gelbooru:wiki:furina_(genshin_impact)"
+          ]
+        },
+        {
+          "facet": "headwear",
+          "canonical_tag": "top_hat",
+          "value": "Top hat",
+          "source_refs": [
+            "danbooru:wiki:furina_(genshin_impact)",
+            "gelbooru:wiki:furina_(genshin_impact)"
+          ]
+        },
+        {
+          "facet": "context",
+          "canonical_tag": "ouji_fashion",
+          "value": "Blue ouji-fashion outfit",
+          "source_refs": [
+            "danbooru:wiki:furina_(genshin_impact)",
+            "gelbooru:wiki:furina_(genshin_impact)"
+          ]
+        }
+      ]
+    }
+  ]
+}

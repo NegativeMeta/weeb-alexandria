@@ -1,1 +1,130 @@
-{"character_tag":"firefly_(honkai:_star_rail)","sources":[{"id":"danbooru:wiki:firefly_(honkai:_star_rail)","source_site":"danbooru","source_kind":"wiki","source_key":"firefly_(honkai:_star_rail)","source_url":"https://danbooru.donmai.us/wiki_pages/firefly_(honkai:_star_rail).json","source_tier":1,"title":"Firefly","excerpt":"Firefly has long grey hair with light blue gradient ends, two-tone blue-purple eyes, black hairband and default white/green dress with orange neckerchief, black thighhighs, ankle boots and one left bridal gauntlet.","captured_at":"2026-08-28"},{"id":"gelbooru:wiki:firefly_(honkai:_star_rail)","source_site":"gelbooru","source_kind":"wiki","source_key":"firefly_(honkai:_star_rail)","source_url":"https://gelbooru.com/index.php?page=wiki&s=view&id=firefly_(honkai:_star_rail)","source_tier":1,"title":"Firefly","excerpt":"Default outfit has long grey hair with green gradient, two-tone blue-purple eyes, white shirt/dress, green inner dress, orange neckerchief, black hairband, black thighhighs and black ankle boots.","captured_at":"2026-08-28"}],"profiles":[{"appearance_key":"firefly_(honkai:_star_rail)::default","variant_tag":"firefly_(honkai:_star_rail)","display_name":"Default appearance","appearance_kind":"default","is_default":true,"status":"published","confidence":"high","provenance":"danbooru_gelbooru_wiki_reviewed","notes":"Default civilian appearance; Sam/armor form and Spring Missive or other costumes excluded.","features":[{"facet":"hair","canonical_tag":"long_hair","value":"Long hair","source_refs":["danbooru:wiki:firefly_(honkai:_star_rail)","gelbooru:wiki:firefly_(honkai:_star_rail)"]},{"facet":"hair","canonical_tag":"grey_hair","value":"Grey hair","source_refs":["danbooru:wiki:firefly_(honkai:_star_rail)","gelbooru:wiki:firefly_(honkai:_star_rail)"]},{"facet":"hair","canonical_tag":"gradient_hair","value":"Light blue to green gradient at the ends","source_refs":["danbooru:wiki:firefly_(honkai:_star_rail)","gelbooru:wiki:firefly_(honkai:_star_rail)"]},{"facet":"eyes","canonical_tag":"two_tone_eyes","value":"Two-tone blue-purple eyes","source_refs":["danbooru:wiki:firefly_(honkai:_star_rail)","gelbooru:wiki:firefly_(honkai:_star_rail)"]},{"facet":"hair_accessory","canonical_tag":"black_hairband","value":"Black hairband","source_refs":["danbooru:wiki:firefly_(honkai:_star_rail)"]},{"facet":"clothing","canonical_tag":"white_dress","value":"White dress/shirt layer","source_refs":["danbooru:wiki:firefly_(honkai:_star_rail)","gelbooru:wiki:firefly_(honkai:_star_rail)"]},{"facet":"clothing","canonical_tag":"green_dress","value":"Green inner dress","source_refs":["danbooru:wiki:firefly_(honkai:_star_rail)","gelbooru:wiki:firefly_(honkai:_star_rail)"]},{"facet":"neckwear","canonical_tag":"orange_neckerchief","value":"Orange neckerchief","source_refs":["danbooru:wiki:firefly_(honkai:_star_rail)"]},{"facet":"legwear","canonical_tag":"black_thighhighs","value":"Black thighhighs","source_refs":["danbooru:wiki:firefly_(honkai:_star_rail)","gelbooru:wiki:firefly_(honkai:_star_rail)"]},{"facet":"footwear","canonical_tag":"ankle_boots","value":"Black ankle boots","source_refs":["danbooru:wiki:firefly_(honkai:_star_rail)","gelbooru:wiki:firefly_(honkai:_star_rail)"]}]}]}
+{
+  "character_tag": "firefly_(honkai:_star_rail)",
+  "sources": [
+    {
+      "id": "danbooru:wiki:firefly_(honkai:_star_rail)",
+      "source_site": "danbooru",
+      "source_kind": "wiki",
+      "source_key": "firefly_(honkai:_star_rail)",
+      "source_url": "https://danbooru.donmai.us/wiki_pages/firefly_(honkai:_star_rail).json",
+      "source_tier": 1,
+      "title": "Firefly",
+      "excerpt": "Firefly has long grey hair with light blue gradient ends, two-tone blue-purple eyes, black hairband and default white/green dress with orange neckerchief, black thighhighs, ankle boots and one left bridal gauntlet.",
+      "captured_at": "2026-08-28"
+    },
+    {
+      "id": "gelbooru:wiki:firefly_(honkai:_star_rail)",
+      "source_site": "gelbooru",
+      "source_kind": "wiki",
+      "source_key": "firefly_(honkai:_star_rail)",
+      "source_url": "https://gelbooru.com/index.php?page=wiki&s=view&id=firefly_(honkai:_star_rail)",
+      "source_tier": 1,
+      "title": "Firefly",
+      "excerpt": "Default outfit has long grey hair with green gradient, two-tone blue-purple eyes, white shirt/dress, green inner dress, orange neckerchief, black hairband, black thighhighs and black ankle boots.",
+      "captured_at": "2026-08-28"
+    }
+  ],
+  "profiles": [
+    {
+      "appearance_key": "firefly_(honkai:_star_rail)::default",
+      "variant_tag": "firefly_(honkai:_star_rail)",
+      "display_name": "Default appearance",
+      "appearance_kind": "default",
+      "is_default": true,
+      "status": "published",
+      "confidence": "high",
+      "provenance": "danbooru_gelbooru_wiki_reviewed",
+      "notes": "Default civilian appearance; Sam/armor form and Spring Missive or other costumes excluded.",
+      "features": [
+        {
+          "facet": "hair",
+          "canonical_tag": "long_hair",
+          "value": "Long hair",
+          "source_refs": [
+            "danbooru:wiki:firefly_(honkai:_star_rail)",
+            "gelbooru:wiki:firefly_(honkai:_star_rail)"
+          ]
+        },
+        {
+          "facet": "hair",
+          "canonical_tag": "grey_hair",
+          "value": "Grey hair",
+          "source_refs": [
+            "danbooru:wiki:firefly_(honkai:_star_rail)",
+            "gelbooru:wiki:firefly_(honkai:_star_rail)"
+          ]
+        },
+        {
+          "facet": "hair",
+          "canonical_tag": "gradient_hair",
+          "value": "Light blue to green gradient at the ends",
+          "source_refs": [
+            "danbooru:wiki:firefly_(honkai:_star_rail)",
+            "gelbooru:wiki:firefly_(honkai:_star_rail)"
+          ]
+        },
+        {
+          "facet": "eyes",
+          "canonical_tag": "two_tone_eyes",
+          "value": "Two-tone blue-purple eyes",
+          "source_refs": [
+            "danbooru:wiki:firefly_(honkai:_star_rail)",
+            "gelbooru:wiki:firefly_(honkai:_star_rail)"
+          ]
+        },
+        {
+          "facet": "hair_accessory",
+          "canonical_tag": "black_hairband",
+          "value": "Black hairband",
+          "source_refs": [
+            "danbooru:wiki:firefly_(honkai:_star_rail)"
+          ]
+        },
+        {
+          "facet": "dress",
+          "canonical_tag": "white_dress",
+          "value": "White dress/shirt layer",
+          "source_refs": [
+            "danbooru:wiki:firefly_(honkai:_star_rail)",
+            "gelbooru:wiki:firefly_(honkai:_star_rail)"
+          ]
+        },
+        {
+          "facet": "dress",
+          "canonical_tag": "green_dress",
+          "value": "Green inner dress",
+          "source_refs": [
+            "danbooru:wiki:firefly_(honkai:_star_rail)",
+            "gelbooru:wiki:firefly_(honkai:_star_rail)"
+          ]
+        },
+        {
+          "facet": "neck",
+          "canonical_tag": "orange_neckerchief",
+          "value": "Orange neckerchief",
+          "source_refs": [
+            "danbooru:wiki:firefly_(honkai:_star_rail)"
+          ]
+        },
+        {
+          "facet": "legwear",
+          "canonical_tag": "black_thighhighs",
+          "value": "Black thighhighs",
+          "source_refs": [
+            "danbooru:wiki:firefly_(honkai:_star_rail)",
+            "gelbooru:wiki:firefly_(honkai:_star_rail)"
+          ]
+        },
+        {
+          "facet": "footwear",
+          "canonical_tag": "ankle_boots",
+          "value": "Black ankle boots",
+          "source_refs": [
+            "danbooru:wiki:firefly_(honkai:_star_rail)",
+            "gelbooru:wiki:firefly_(honkai:_star_rail)"
+          ]
+        }
+      ]
+    }
+  ]
+}

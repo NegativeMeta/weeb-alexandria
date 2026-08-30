@@ -1,1 +1,109 @@
-{"character_tag":"yakumo_yukari","sources":[{"id":"danbooru:wiki:yakumo_yukari","source_site":"danbooru","source_kind":"wiki","source_key":"yakumo_yukari","source_url":"https://danbooru.donmai.us/wiki_pages/yakumo_yukari.json","source_tier":1,"title":"Yakumo Yukari","excerpt":"Long blonde hair with multiple red bows and yellow or purple eyes; white mob cap with red ribbon; white or purple dress, white gloves; often carries a pink parasol or folding fan.","captured_at":"2026-08-28"},{"id":"gelbooru:wiki:yakumo_yukari","source_site":"gelbooru","source_kind":"wiki","source_key":"yakumo_yukari","source_url":"https://gelbooru.com/index.php?page=wiki&s=view&id=yakumo_yukari","source_tier":1,"title":"Yakumo Yukari","excerpt":"Blonde Touhou youkai of boundaries who wears a purple dress and mob cap and is often seen with an umbrella.","captured_at":"2026-08-28"}],"profiles":[{"appearance_key":"yakumo_yukari::default","variant_tag":"yakumo_yukari","display_name":"Base appearance","appearance_kind":"default","is_default":true,"status":"published","confidence":"high","provenance":"danbooru_gelbooru_wiki_reviewed","notes":"Base appearance; young Yukari and props remain separate variants/entities.","features":[{"facet":"hair","canonical_tag":"long_hair","value":"Long hair","source_refs":["danbooru:wiki:yakumo_yukari"]},{"facet":"hair","canonical_tag":"blonde_hair","value":"Blonde hair","source_refs":["danbooru:wiki:yakumo_yukari","gelbooru:wiki:yakumo_yukari"]},{"facet":"eyes","canonical_tag":"yellow_eyes","value":"Yellow eyes are documented as an appearance alternative","source_refs":["danbooru:wiki:yakumo_yukari"]},{"facet":"eyes","canonical_tag":"purple_eyes","value":"Purple eyes are documented as an appearance alternative","source_refs":["danbooru:wiki:yakumo_yukari"]},{"facet":"hair_accessory","canonical_tag":"red_bow","value":"Multiple red bows","source_refs":["danbooru:wiki:yakumo_yukari"]},{"facet":"headwear","canonical_tag":"mob_cap","value":"White mob cap","source_refs":["danbooru:wiki:yakumo_yukari","gelbooru:wiki:yakumo_yukari"]},{"facet":"clothing","canonical_tag":"purple_dress","value":"Purple dress is a documented base-outfit alternative","source_refs":["danbooru:wiki:yakumo_yukari","gelbooru:wiki:yakumo_yukari"]},{"facet":"clothing","canonical_tag":"white_dress","value":"White frilled dress is a documented base-outfit alternative","source_refs":["danbooru:wiki:yakumo_yukari"]}]}]}
+{
+  "character_tag": "yakumo_yukari",
+  "sources": [
+    {
+      "id": "danbooru:wiki:yakumo_yukari",
+      "source_site": "danbooru",
+      "source_kind": "wiki",
+      "source_key": "yakumo_yukari",
+      "source_url": "https://danbooru.donmai.us/wiki_pages/yakumo_yukari.json",
+      "source_tier": 1,
+      "title": "Yakumo Yukari",
+      "excerpt": "Long blonde hair with multiple red bows and yellow or purple eyes; white mob cap with red ribbon; white or purple dress, white gloves; often carries a pink parasol or folding fan.",
+      "captured_at": "2026-08-28"
+    },
+    {
+      "id": "gelbooru:wiki:yakumo_yukari",
+      "source_site": "gelbooru",
+      "source_kind": "wiki",
+      "source_key": "yakumo_yukari",
+      "source_url": "https://gelbooru.com/index.php?page=wiki&s=view&id=yakumo_yukari",
+      "source_tier": 1,
+      "title": "Yakumo Yukari",
+      "excerpt": "Blonde Touhou youkai of boundaries who wears a purple dress and mob cap and is often seen with an umbrella.",
+      "captured_at": "2026-08-28"
+    }
+  ],
+  "profiles": [
+    {
+      "appearance_key": "yakumo_yukari::default",
+      "variant_tag": "yakumo_yukari",
+      "display_name": "Base appearance",
+      "appearance_kind": "default",
+      "is_default": true,
+      "status": "published",
+      "confidence": "high",
+      "provenance": "danbooru_gelbooru_wiki_reviewed",
+      "notes": "Base appearance; young Yukari and props remain separate variants/entities.",
+      "features": [
+        {
+          "facet": "hair",
+          "canonical_tag": "long_hair",
+          "value": "Long hair",
+          "source_refs": [
+            "danbooru:wiki:yakumo_yukari"
+          ]
+        },
+        {
+          "facet": "hair",
+          "canonical_tag": "blonde_hair",
+          "value": "Blonde hair",
+          "source_refs": [
+            "danbooru:wiki:yakumo_yukari",
+            "gelbooru:wiki:yakumo_yukari"
+          ]
+        },
+        {
+          "facet": "eyes",
+          "canonical_tag": "yellow_eyes",
+          "value": "Yellow eyes are documented as an appearance alternative",
+          "source_refs": [
+            "danbooru:wiki:yakumo_yukari"
+          ]
+        },
+        {
+          "facet": "eyes",
+          "canonical_tag": "purple_eyes",
+          "value": "Purple eyes are documented as an appearance alternative",
+          "source_refs": [
+            "danbooru:wiki:yakumo_yukari"
+          ]
+        },
+        {
+          "facet": "hair_accessory",
+          "canonical_tag": "red_bow",
+          "value": "Multiple red bows",
+          "source_refs": [
+            "danbooru:wiki:yakumo_yukari"
+          ]
+        },
+        {
+          "facet": "headwear",
+          "canonical_tag": "mob_cap",
+          "value": "White mob cap",
+          "source_refs": [
+            "danbooru:wiki:yakumo_yukari",
+            "gelbooru:wiki:yakumo_yukari"
+          ]
+        },
+        {
+          "facet": "dress",
+          "canonical_tag": "purple_dress",
+          "value": "Purple dress is a documented base-outfit alternative",
+          "source_refs": [
+            "danbooru:wiki:yakumo_yukari",
+            "gelbooru:wiki:yakumo_yukari"
+          ]
+        },
+        {
+          "facet": "dress",
+          "canonical_tag": "white_dress",
+          "value": "White frilled dress is a documented base-outfit alternative",
+          "source_refs": [
+            "danbooru:wiki:yakumo_yukari"
+          ]
+        }
+      ]
+    }
+  ]
+}

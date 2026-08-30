@@ -1,1 +1,92 @@
-{"character_tag":"suzumiya_haruhi","sources":[{"id":"danbooru:wiki:suzumiya_haruhi","source_site":"danbooru","source_kind":"wiki","source_key":"suzumiya_haruhi","source_url":"https://danbooru.donmai.us/wiki_pages/suzumiya_haruhi.json","source_tier":1,"title":"Suzumiya Haruhi","excerpt":"Haruhi has brown eyes, medium-length brown bob-cut hair with an orange hairband; her common outfit is a blue serafuku with red ribbon and black knee-high socks.","captured_at":"2026-08-28"},{"id":"gelbooru:wiki:suzumiya_haruhi","source_site":"gelbooru","source_kind":"wiki","source_key":"suzumiya_haruhi","source_url":"https://gelbooru.com/index.php?page=wiki&s=view&id=suzumiya_haruhi","source_tier":1,"title":"Suzumiya Haruhi","excerpt":"Main school uniform design with brown hair, orange hairband, red ribbon and black socks.","captured_at":"2026-08-28"}],"profiles":[{"appearance_key":"suzumiya_haruhi::default","variant_tag":"suzumiya_haruhi","display_name":"School uniform appearance","appearance_kind":"default","is_default":true,"status":"published","confidence":"high","provenance":"danbooru_gelbooru_wiki_reviewed","notes":"Common school-uniform design; casual, concert and alternate outfits excluded.","features":[{"facet":"eyes","canonical_tag":"brown_eyes","value":"Brown eyes","source_refs":["danbooru:wiki:suzumiya_haruhi"]},{"facet":"hair","canonical_tag":"medium_hair","value":"Medium-length brown bob-cut hair","source_refs":["danbooru:wiki:suzumiya_haruhi","gelbooru:wiki:suzumiya_haruhi"]},{"facet":"hair_accessory","canonical_tag":"orange_hairband","value":"Orange hairband","source_refs":["danbooru:wiki:suzumiya_haruhi","gelbooru:wiki:suzumiya_haruhi"]},{"facet":"clothing","canonical_tag":"kouyouen_academy_school_uniform","value":"Kouyouen Academy school uniform","source_refs":["danbooru:wiki:suzumiya_haruhi"]},{"facet":"neckwear","canonical_tag":"red_ribbon","value":"Red ribbon","source_refs":["danbooru:wiki:suzumiya_haruhi"]},{"facet":"legwear","canonical_tag":"black_socks","value":"Black knee-high socks","source_refs":["danbooru:wiki:suzumiya_haruhi"]}]}]}
+{
+  "character_tag": "suzumiya_haruhi",
+  "sources": [
+    {
+      "id": "danbooru:wiki:suzumiya_haruhi",
+      "source_site": "danbooru",
+      "source_kind": "wiki",
+      "source_key": "suzumiya_haruhi",
+      "source_url": "https://danbooru.donmai.us/wiki_pages/suzumiya_haruhi.json",
+      "source_tier": 1,
+      "title": "Suzumiya Haruhi",
+      "excerpt": "Haruhi has brown eyes, medium-length brown bob-cut hair with an orange hairband; her common outfit is a blue serafuku with red ribbon and black knee-high socks.",
+      "captured_at": "2026-08-28"
+    },
+    {
+      "id": "gelbooru:wiki:suzumiya_haruhi",
+      "source_site": "gelbooru",
+      "source_kind": "wiki",
+      "source_key": "suzumiya_haruhi",
+      "source_url": "https://gelbooru.com/index.php?page=wiki&s=view&id=suzumiya_haruhi",
+      "source_tier": 1,
+      "title": "Suzumiya Haruhi",
+      "excerpt": "Main school uniform design with brown hair, orange hairband, red ribbon and black socks.",
+      "captured_at": "2026-08-28"
+    }
+  ],
+  "profiles": [
+    {
+      "appearance_key": "suzumiya_haruhi::default",
+      "variant_tag": "suzumiya_haruhi",
+      "display_name": "School uniform appearance",
+      "appearance_kind": "default",
+      "is_default": true,
+      "status": "published",
+      "confidence": "high",
+      "provenance": "danbooru_gelbooru_wiki_reviewed",
+      "notes": "Common school-uniform design; casual, concert and alternate outfits excluded.",
+      "features": [
+        {
+          "facet": "eyes",
+          "canonical_tag": "brown_eyes",
+          "value": "Brown eyes",
+          "source_refs": [
+            "danbooru:wiki:suzumiya_haruhi"
+          ]
+        },
+        {
+          "facet": "hair",
+          "canonical_tag": "medium_hair",
+          "value": "Medium-length brown bob-cut hair",
+          "source_refs": [
+            "danbooru:wiki:suzumiya_haruhi",
+            "gelbooru:wiki:suzumiya_haruhi"
+          ]
+        },
+        {
+          "facet": "hair_accessory",
+          "canonical_tag": "orange_hairband",
+          "value": "Orange hairband",
+          "source_refs": [
+            "danbooru:wiki:suzumiya_haruhi",
+            "gelbooru:wiki:suzumiya_haruhi"
+          ]
+        },
+        {
+          "facet": "dress",
+          "canonical_tag": "kouyouen_academy_school_uniform",
+          "value": "Kouyouen Academy school uniform",
+          "source_refs": [
+            "danbooru:wiki:suzumiya_haruhi"
+          ]
+        },
+        {
+          "facet": "neck",
+          "canonical_tag": "red_ribbon",
+          "value": "Red ribbon",
+          "source_refs": [
+            "danbooru:wiki:suzumiya_haruhi"
+          ]
+        },
+        {
+          "facet": "legwear",
+          "canonical_tag": "black_socks",
+          "value": "Black knee-high socks",
+          "source_refs": [
+            "danbooru:wiki:suzumiya_haruhi"
+          ]
+        }
+      ]
+    }
+  ]
+}

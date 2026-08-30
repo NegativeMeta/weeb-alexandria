@@ -1,1 +1,178 @@
-{"character_tag":"kazama_iroha","sources":[{"id":"danbooru:wiki:kazama_iroha","source_site":"danbooru","source_kind":"wiki","source_key":"kazama_iroha","source_url":"https://danbooru.donmai.us/wiki_pages/kazama_iroha.json","source_tier":1,"title":"Kazama Iroha","excerpt":"Iroha is a samurai with medium or long blonde hair, blue eyes, and small breasts; her default hair is a ponytail with multicolored bow, ahoge, double-parted bangs, and black hairband.","captured_at":"2026-08-28"},{"id":"gelbooru:wiki:kazama_iroha","source_site":"gelbooru","source_kind":"wiki","source_key":"kazama_iroha","source_url":"https://gelbooru.com/index.php?page=wiki&s=view&id=kazama_iroha","source_tier":1,"title":"Kazama Iroha","excerpt":"A samurai from holoX with medium or long blonde hair, blue eyes, small breasts, ponytail, multicolored bow, ahoge, and double-parted bangs.","captured_at":"2026-08-28"}],"profiles":[{"appearance_key":"kazama_iroha::default","variant_tag":"kazama_iroha","display_name":"Base appearance","appearance_kind":"default","is_default":true,"status":"published","confidence":"high","provenance":"danbooru_gelbooru_wiki_reviewed","notes":"Base identity only; Pokobee, weapons, and named costumes remain separate.","conflicts":[{"conflict_key":"base_hair_length","facet":"hair","alternatives":["medium_hair","long_hair"],"status":"open","reason":"Both sources describe medium or long hair.","source_refs":["danbooru:wiki:kazama_iroha","gelbooru:wiki:kazama_iroha"]},{"conflict_key":"base_bust_size","facet":"body","alternatives":["small_breasts","medium_breasts"],"status":"open","reason":"Sources describe small breasts while noting frequent fanart exaggeration to medium.","source_refs":["danbooru:wiki:kazama_iroha","gelbooru:wiki:kazama_iroha"]}],"features":[{"facet":"occupation","value":"Samurai","canonical_tag":"samurai","source_refs":["danbooru:wiki:kazama_iroha","gelbooru:wiki:kazama_iroha"]},{"facet":"hair","value":"Blonde hair","canonical_tag":"blonde_hair","source_refs":["danbooru:wiki:kazama_iroha","gelbooru:wiki:kazama_iroha"]},{"facet":"eyes","value":"Blue eyes","canonical_tag":"blue_eyes","source_refs":["danbooru:wiki:kazama_iroha","gelbooru:wiki:kazama_iroha"]},{"facet":"hair","value":"Medium hair","canonical_tag":"medium_hair","role":"alternative","source_refs":["danbooru:wiki:kazama_iroha","gelbooru:wiki:kazama_iroha"]},{"facet":"hair","value":"Long hair","canonical_tag":"long_hair","role":"alternative","source_refs":["danbooru:wiki:kazama_iroha","gelbooru:wiki:kazama_iroha"]},{"facet":"body","value":"Small breasts","canonical_tag":"small_breasts","source_refs":["danbooru:wiki:kazama_iroha","gelbooru:wiki:kazama_iroha"]},{"facet":"body","value":"Medium breasts in exaggerated fanart","canonical_tag":"medium_breasts","role":"alternative","source_refs":["danbooru:wiki:kazama_iroha"]},{"facet":"hair_accessory","value":"Ponytail","canonical_tag":"ponytail","source_refs":["danbooru:wiki:kazama_iroha","gelbooru:wiki:kazama_iroha"]},{"facet":"hair_accessory","value":"Multicolored hair bow","canonical_tag":"multicolored_bow","source_refs":["danbooru:wiki:kazama_iroha"]},{"facet":"hair_accessory","value":"Ahoge","canonical_tag":"ahoge","source_refs":["danbooru:wiki:kazama_iroha"]},{"facet":"hair_accessory","value":"Double-parted bangs","canonical_tag":"double-parted_bangs","source_refs":["danbooru:wiki:kazama_iroha"]},{"facet":"accessories","value":"Black hairband","canonical_tag":"black_hairband","source_refs":["danbooru:wiki:kazama_iroha"]}]}]}
+{
+  "character_tag": "kazama_iroha",
+  "sources": [
+    {
+      "id": "danbooru:wiki:kazama_iroha",
+      "source_site": "danbooru",
+      "source_kind": "wiki",
+      "source_key": "kazama_iroha",
+      "source_url": "https://danbooru.donmai.us/wiki_pages/kazama_iroha.json",
+      "source_tier": 1,
+      "title": "Kazama Iroha",
+      "excerpt": "Iroha is a samurai with medium or long blonde hair, blue eyes, and small breasts; her default hair is a ponytail with multicolored bow, ahoge, double-parted bangs, and black hairband.",
+      "captured_at": "2026-08-28"
+    },
+    {
+      "id": "gelbooru:wiki:kazama_iroha",
+      "source_site": "gelbooru",
+      "source_kind": "wiki",
+      "source_key": "kazama_iroha",
+      "source_url": "https://gelbooru.com/index.php?page=wiki&s=view&id=kazama_iroha",
+      "source_tier": 1,
+      "title": "Kazama Iroha",
+      "excerpt": "A samurai from holoX with medium or long blonde hair, blue eyes, small breasts, ponytail, multicolored bow, ahoge, and double-parted bangs.",
+      "captured_at": "2026-08-28"
+    }
+  ],
+  "profiles": [
+    {
+      "appearance_key": "kazama_iroha::default",
+      "variant_tag": "kazama_iroha",
+      "display_name": "Base appearance",
+      "appearance_kind": "default",
+      "is_default": true,
+      "status": "published",
+      "confidence": "high",
+      "provenance": "danbooru_gelbooru_wiki_reviewed",
+      "notes": "Base identity only; Pokobee, weapons, and named costumes remain separate.",
+      "conflicts": [
+        {
+          "conflict_key": "base_hair_length",
+          "facet": "hair",
+          "alternatives": [
+            "medium_hair",
+            "long_hair"
+          ],
+          "status": "open",
+          "reason": "Both sources describe medium or long hair.",
+          "source_refs": [
+            "danbooru:wiki:kazama_iroha",
+            "gelbooru:wiki:kazama_iroha"
+          ]
+        },
+        {
+          "conflict_key": "base_bust_size",
+          "facet": "body",
+          "alternatives": [
+            "small_breasts",
+            "medium_breasts"
+          ],
+          "status": "open",
+          "reason": "Sources describe small breasts while noting frequent fanart exaggeration to medium.",
+          "source_refs": [
+            "danbooru:wiki:kazama_iroha",
+            "gelbooru:wiki:kazama_iroha"
+          ]
+        }
+      ],
+      "features": [
+        {
+          "facet": "context",
+          "value": "Samurai",
+          "canonical_tag": "samurai",
+          "source_refs": [
+            "danbooru:wiki:kazama_iroha",
+            "gelbooru:wiki:kazama_iroha"
+          ]
+        },
+        {
+          "facet": "hair",
+          "value": "Blonde hair",
+          "canonical_tag": "blonde_hair",
+          "source_refs": [
+            "danbooru:wiki:kazama_iroha",
+            "gelbooru:wiki:kazama_iroha"
+          ]
+        },
+        {
+          "facet": "eyes",
+          "value": "Blue eyes",
+          "canonical_tag": "blue_eyes",
+          "source_refs": [
+            "danbooru:wiki:kazama_iroha",
+            "gelbooru:wiki:kazama_iroha"
+          ]
+        },
+        {
+          "facet": "hair",
+          "value": "Medium hair",
+          "canonical_tag": "medium_hair",
+          "role": "alternative",
+          "source_refs": [
+            "danbooru:wiki:kazama_iroha",
+            "gelbooru:wiki:kazama_iroha"
+          ]
+        },
+        {
+          "facet": "hair",
+          "value": "Long hair",
+          "canonical_tag": "long_hair",
+          "role": "alternative",
+          "source_refs": [
+            "danbooru:wiki:kazama_iroha",
+            "gelbooru:wiki:kazama_iroha"
+          ]
+        },
+        {
+          "facet": "body",
+          "value": "Small breasts",
+          "canonical_tag": "small_breasts",
+          "source_refs": [
+            "danbooru:wiki:kazama_iroha",
+            "gelbooru:wiki:kazama_iroha"
+          ]
+        },
+        {
+          "facet": "body",
+          "value": "Medium breasts in exaggerated fanart",
+          "canonical_tag": "medium_breasts",
+          "role": "alternative",
+          "source_refs": [
+            "danbooru:wiki:kazama_iroha"
+          ]
+        },
+        {
+          "facet": "hair_accessory",
+          "value": "Ponytail",
+          "canonical_tag": "ponytail",
+          "source_refs": [
+            "danbooru:wiki:kazama_iroha",
+            "gelbooru:wiki:kazama_iroha"
+          ]
+        },
+        {
+          "facet": "hair_accessory",
+          "value": "Multicolored hair bow",
+          "canonical_tag": "multicolored_bow",
+          "source_refs": [
+            "danbooru:wiki:kazama_iroha"
+          ]
+        },
+        {
+          "facet": "hair_accessory",
+          "value": "Ahoge",
+          "canonical_tag": "ahoge",
+          "source_refs": [
+            "danbooru:wiki:kazama_iroha"
+          ]
+        },
+        {
+          "facet": "hair_accessory",
+          "value": "Double-parted bangs",
+          "canonical_tag": "double-parted_bangs",
+          "source_refs": [
+            "danbooru:wiki:kazama_iroha"
+          ]
+        },
+        {
+          "facet": "accessories",
+          "value": "Black hairband",
+          "canonical_tag": "black_hairband",
+          "source_refs": [
+            "danbooru:wiki:kazama_iroha"
+          ]
+        }
+      ]
+    }
+  ]
+}

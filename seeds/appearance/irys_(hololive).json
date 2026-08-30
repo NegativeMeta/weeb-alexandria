@@ -1,1 +1,126 @@
-{"character_tag":"irys_(hololive)","sources":[{"id":"danbooru:wiki:irys_(hololive)","source_site":"danbooru","source_kind":"wiki","source_key":"irys_(hololive)","source_url":"https://danbooru.donmai.us/wiki_pages/irys_(hololive).json","source_tier":1,"title":"IRyS (Hololive)","excerpt":"IRyS is a Nephilim with very long dark pink or red hair, purple gradient and red streaks, star halos, pink and blue heterochromic eyes with star-shaped pupils, black horns, pointy ears, and differently-colored crystal wings.","captured_at":"2026-08-28"},{"id":"gelbooru:wiki:irys_(hololive)","source_site":"gelbooru","source_kind":"wiki","source_key":"irys_(hololive)","source_url":"https://gelbooru.com/index.php?page=wiki&s=view&id=irys_(hololive)","source_tier":1,"title":"IRyS (Hololive)","excerpt":"IRyS is a half-demon, half-angel Nephilim with one red and one blue eye, long red hair, horns, and a black-and-white outfit with magenta accessories.","captured_at":"2026-08-28"}],"profiles":[{"appearance_key":"irys_(hololive)::default","variant_tag":"irys_(hololive)","display_name":"Current base appearance","appearance_kind":"default","is_default":true,"status":"published","confidence":"high","provenance":"danbooru_gelbooru_wiki_reviewed","notes":"Current base appearance only, corresponding to IRyS 2.0; IRyS 1.0, named costumes, Bloom, Gloom, Smol IRyS, and fanbase entities remain separate.","features":[{"facet":"species","value":"Nephilim","canonical_tag":"nephilim","source_refs":["danbooru:wiki:irys_(hololive)","gelbooru:wiki:irys_(hololive)"]},{"facet":"hair","value":"Very long dark pink or red hair","canonical_tag":"red_hair","source_refs":["danbooru:wiki:irys_(hololive)","gelbooru:wiki:irys_(hololive)"]},{"facet":"hair","value":"Purple gradient","canonical_tag":"gradient_hair","source_refs":["danbooru:wiki:irys_(hololive)"]},{"facet":"hair","value":"Red streaks","canonical_tag":"red_streaks","source_refs":["danbooru:wiki:irys_(hololive)"]},{"facet":"eyes","value":"Heterochromic pink and blue eyes","canonical_tag":"heterochromia","source_refs":["danbooru:wiki:irys_(hololive)","gelbooru:wiki:irys_(hololive)"]},{"facet":"eyes","value":"Star-shaped pupils","canonical_tag":"star-shaped_pupils","source_refs":["danbooru:wiki:irys_(hololive)"]},{"facet":"halo","value":"Pair of star halos","canonical_tag":"double_halo","source_refs":["danbooru:wiki:irys_(hololive)"]},{"facet":"horns","value":"Black horns","canonical_tag":"black_horns","source_refs":["danbooru:wiki:irys_(hololive)","gelbooru:wiki:irys_(hololive)"]},{"facet":"ears","value":"Pointy ears","canonical_tag":"pointy_ears","source_refs":["danbooru:wiki:irys_(hololive)"]},{"facet":"wings","value":"Differently-colored crystal wings","canonical_tag":"crystal_wings","source_refs":["danbooru:wiki:irys_(hololive)"]}]}]}
+{
+  "character_tag": "irys_(hololive)",
+  "sources": [
+    {
+      "id": "danbooru:wiki:irys_(hololive)",
+      "source_site": "danbooru",
+      "source_kind": "wiki",
+      "source_key": "irys_(hololive)",
+      "source_url": "https://danbooru.donmai.us/wiki_pages/irys_(hololive).json",
+      "source_tier": 1,
+      "title": "IRyS (Hololive)",
+      "excerpt": "IRyS is a Nephilim with very long dark pink or red hair, purple gradient and red streaks, star halos, pink and blue heterochromic eyes with star-shaped pupils, black horns, pointy ears, and differently-colored crystal wings.",
+      "captured_at": "2026-08-28"
+    },
+    {
+      "id": "gelbooru:wiki:irys_(hololive)",
+      "source_site": "gelbooru",
+      "source_kind": "wiki",
+      "source_key": "irys_(hololive)",
+      "source_url": "https://gelbooru.com/index.php?page=wiki&s=view&id=irys_(hololive)",
+      "source_tier": 1,
+      "title": "IRyS (Hololive)",
+      "excerpt": "IRyS is a half-demon, half-angel Nephilim with one red and one blue eye, long red hair, horns, and a black-and-white outfit with magenta accessories.",
+      "captured_at": "2026-08-28"
+    }
+  ],
+  "profiles": [
+    {
+      "appearance_key": "irys_(hololive)::default",
+      "variant_tag": "irys_(hololive)",
+      "display_name": "Current base appearance",
+      "appearance_kind": "default",
+      "is_default": true,
+      "status": "published",
+      "confidence": "high",
+      "provenance": "danbooru_gelbooru_wiki_reviewed",
+      "notes": "Current base appearance only, corresponding to IRyS 2.0; IRyS 1.0, named costumes, Bloom, Gloom, Smol IRyS, and fanbase entities remain separate.",
+      "features": [
+        {
+          "facet": "species",
+          "value": "Nephilim",
+          "canonical_tag": "nephilim",
+          "source_refs": [
+            "danbooru:wiki:irys_(hololive)",
+            "gelbooru:wiki:irys_(hololive)"
+          ]
+        },
+        {
+          "facet": "hair",
+          "value": "Very long dark pink or red hair",
+          "canonical_tag": "red_hair",
+          "source_refs": [
+            "danbooru:wiki:irys_(hololive)",
+            "gelbooru:wiki:irys_(hololive)"
+          ]
+        },
+        {
+          "facet": "hair",
+          "value": "Purple gradient",
+          "canonical_tag": "gradient_hair",
+          "source_refs": [
+            "danbooru:wiki:irys_(hololive)"
+          ]
+        },
+        {
+          "facet": "hair",
+          "value": "Red streaks",
+          "canonical_tag": "red_streaks",
+          "source_refs": [
+            "danbooru:wiki:irys_(hololive)"
+          ]
+        },
+        {
+          "facet": "eyes",
+          "value": "Heterochromic pink and blue eyes",
+          "canonical_tag": "heterochromia",
+          "source_refs": [
+            "danbooru:wiki:irys_(hololive)",
+            "gelbooru:wiki:irys_(hololive)"
+          ]
+        },
+        {
+          "facet": "eyes",
+          "value": "Star-shaped pupils",
+          "canonical_tag": "star-shaped_pupils",
+          "source_refs": [
+            "danbooru:wiki:irys_(hololive)"
+          ]
+        },
+        {
+          "facet": "headwear",
+          "value": "Pair of star halos",
+          "canonical_tag": "double_halo",
+          "source_refs": [
+            "danbooru:wiki:irys_(hololive)"
+          ]
+        },
+        {
+          "facet": "horns",
+          "value": "Black horns",
+          "canonical_tag": "black_horns",
+          "source_refs": [
+            "danbooru:wiki:irys_(hololive)",
+            "gelbooru:wiki:irys_(hololive)"
+          ]
+        },
+        {
+          "facet": "ears",
+          "value": "Pointy ears",
+          "canonical_tag": "pointy_ears",
+          "source_refs": [
+            "danbooru:wiki:irys_(hololive)"
+          ]
+        },
+        {
+          "facet": "wings",
+          "value": "Differently-colored crystal wings",
+          "canonical_tag": "crystal_wings",
+          "source_refs": [
+            "danbooru:wiki:irys_(hololive)"
+          ]
+        }
+      ]
+    }
+  ]
+}

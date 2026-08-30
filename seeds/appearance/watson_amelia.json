@@ -1,1 +1,116 @@
-{"character_tag":"watson_amelia","sources":[{"id":"danbooru:wiki:watson_amelia","source_site":"danbooru","source_kind":"wiki","source_key":"watson_amelia","source_url":"https://danbooru.donmai.us/wiki_pages/watson_amelia.json","source_tier":1,"title":"Watson Amelia","excerpt":"Amelia has medium blonde hair and blue eyes; her default hairstyle is a bob cut with a monocle hair ornament. Her general activities ended in 2024, but she remains a Cover affiliate.","captured_at":"2026-08-28"},{"id":"gelbooru:wiki:watson_amelia","source_site":"gelbooru","source_kind":"wiki","source_key":"watson_amelia","source_url":"https://gelbooru.com/index.php?page=wiki&s=view&id=watson_amelia","source_tier":1,"title":"Watson Amelia","excerpt":"A blonde and blue-eyed detective wearing a brown hat and coat with a white shirt and skirt.","captured_at":"2026-08-28"}],"profiles":[{"appearance_key":"watson_amelia::default","variant_tag":"watson_amelia","display_name":"Base appearance","appearance_kind":"default","is_default":true,"status":"published","confidence":"high","provenance":"danbooru_gelbooru_wiki_reviewed","notes":"Base identity of Hololive English affiliate. Bubba, Wellington, and named costumes remain separate.","features":[{"facet":"occupation","value":"Detective","canonical_tag":"detective","source_refs":["danbooru:wiki:watson_amelia"]},{"facet":"hair","value":"Medium hair","canonical_tag":"medium_hair","source_refs":["danbooru:wiki:watson_amelia"]},{"facet":"hair","value":"Blonde hair","canonical_tag":"blonde_hair","source_refs":["danbooru:wiki:watson_amelia","gelbooru:wiki:watson_amelia"]},{"facet":"eyes","value":"Blue eyes","canonical_tag":"blue_eyes","source_refs":["danbooru:wiki:watson_amelia","gelbooru:wiki:watson_amelia"]},{"facet":"hair_accessory","value":"Bob cut","canonical_tag":"bob_cut","source_refs":["danbooru:wiki:watson_amelia"]},{"facet":"hair_accessory","value":"Monocle hair ornament","canonical_tag":"monocle","source_refs":["danbooru:wiki:watson_amelia"]},{"facet":"headwear","value":"Brown hat","canonical_tag":"brown_hat","source_refs":["gelbooru:wiki:watson_amelia"]},{"facet":"jacket","value":"Brown coat","canonical_tag":"brown_coat","source_refs":["gelbooru:wiki:watson_amelia"]},{"facet":"body","value":"Large breasts","canonical_tag":"large_breasts","source_refs":["danbooru:wiki:watson_amelia"]}]}]}
+{
+  "character_tag": "watson_amelia",
+  "sources": [
+    {
+      "id": "danbooru:wiki:watson_amelia",
+      "source_site": "danbooru",
+      "source_kind": "wiki",
+      "source_key": "watson_amelia",
+      "source_url": "https://danbooru.donmai.us/wiki_pages/watson_amelia.json",
+      "source_tier": 1,
+      "title": "Watson Amelia",
+      "excerpt": "Amelia has medium blonde hair and blue eyes; her default hairstyle is a bob cut with a monocle hair ornament. Her general activities ended in 2024, but she remains a Cover affiliate.",
+      "captured_at": "2026-08-28"
+    },
+    {
+      "id": "gelbooru:wiki:watson_amelia",
+      "source_site": "gelbooru",
+      "source_kind": "wiki",
+      "source_key": "watson_amelia",
+      "source_url": "https://gelbooru.com/index.php?page=wiki&s=view&id=watson_amelia",
+      "source_tier": 1,
+      "title": "Watson Amelia",
+      "excerpt": "A blonde and blue-eyed detective wearing a brown hat and coat with a white shirt and skirt.",
+      "captured_at": "2026-08-28"
+    }
+  ],
+  "profiles": [
+    {
+      "appearance_key": "watson_amelia::default",
+      "variant_tag": "watson_amelia",
+      "display_name": "Base appearance",
+      "appearance_kind": "default",
+      "is_default": true,
+      "status": "published",
+      "confidence": "high",
+      "provenance": "danbooru_gelbooru_wiki_reviewed",
+      "notes": "Base identity of Hololive English affiliate. Bubba, Wellington, and named costumes remain separate.",
+      "features": [
+        {
+          "facet": "context",
+          "value": "Detective",
+          "canonical_tag": "detective",
+          "source_refs": [
+            "danbooru:wiki:watson_amelia"
+          ]
+        },
+        {
+          "facet": "hair",
+          "value": "Medium hair",
+          "canonical_tag": "medium_hair",
+          "source_refs": [
+            "danbooru:wiki:watson_amelia"
+          ]
+        },
+        {
+          "facet": "hair",
+          "value": "Blonde hair",
+          "canonical_tag": "blonde_hair",
+          "source_refs": [
+            "danbooru:wiki:watson_amelia",
+            "gelbooru:wiki:watson_amelia"
+          ]
+        },
+        {
+          "facet": "eyes",
+          "value": "Blue eyes",
+          "canonical_tag": "blue_eyes",
+          "source_refs": [
+            "danbooru:wiki:watson_amelia",
+            "gelbooru:wiki:watson_amelia"
+          ]
+        },
+        {
+          "facet": "hair_accessory",
+          "value": "Bob cut",
+          "canonical_tag": "bob_cut",
+          "source_refs": [
+            "danbooru:wiki:watson_amelia"
+          ]
+        },
+        {
+          "facet": "hair_accessory",
+          "value": "Monocle hair ornament",
+          "canonical_tag": "monocle",
+          "source_refs": [
+            "danbooru:wiki:watson_amelia"
+          ]
+        },
+        {
+          "facet": "headwear",
+          "value": "Brown hat",
+          "canonical_tag": "brown_hat",
+          "source_refs": [
+            "gelbooru:wiki:watson_amelia"
+          ]
+        },
+        {
+          "facet": "jacket",
+          "value": "Brown coat",
+          "canonical_tag": "brown_coat",
+          "source_refs": [
+            "gelbooru:wiki:watson_amelia"
+          ]
+        },
+        {
+          "facet": "body",
+          "value": "Large breasts",
+          "canonical_tag": "large_breasts",
+          "source_refs": [
+            "danbooru:wiki:watson_amelia"
+          ]
+        }
+      ]
+    }
+  ]
+}

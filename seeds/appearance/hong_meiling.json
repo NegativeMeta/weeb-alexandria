@@ -1,1 +1,110 @@
-{"character_tag":"hong_meiling","sources":[{"id":"danbooru:wiki:hong_meiling","source_site":"danbooru","source_kind":"wiki","source_key":"hong_meiling","source_url":"https://danbooru.donmai.us/wiki_pages/hong_meiling.json","source_tier":1,"title":"Hong Meiling","excerpt":"Touhou gatekeeper with blue or aqua eyes, long red hair with braids; wears a green beret with star ornament, Chinese dress, skirt and black shoes.","captured_at":"2026-08-28"},{"id":"gelbooru:wiki:hong_meiling","source_site":"gelbooru","source_kind":"wiki","source_key":"hong_meiling","source_url":"https://gelbooru.com/index.php?page=wiki&s=view&id=hong_meiling","source_tier":1,"title":"Hong Meiling","excerpt":"Humanoid youkai gatekeeper with blue or aqua eyes, long red hair, braids, green beret and Chinese dress.","captured_at":"2026-08-28"}],"profiles":[{"appearance_key":"hong_meiling::default","variant_tag":"hong_meiling","display_name":"Base appearance","appearance_kind":"default","is_default":true,"status":"published","confidence":"high","provenance":"danbooru_gelbooru_wiki_reviewed","notes":"Human base appearance; dragon and panda variants, weapons and props excluded.","features":[{"facet":"hair","canonical_tag":"long_hair","value":"Long hair","source_refs":["danbooru:wiki:hong_meiling"]},{"facet":"hair","canonical_tag":"red_hair","value":"Red hair","source_refs":["danbooru:wiki:hong_meiling","gelbooru:wiki:hong_meiling"]},{"facet":"hair_accessory","canonical_tag":"twin_braids","value":"Braids","source_refs":["gelbooru:wiki:hong_meiling"]},{"facet":"eyes","canonical_tag":"blue_eyes","value":"Blue or aqua eyes","source_refs":["danbooru:wiki:hong_meiling","gelbooru:wiki:hong_meiling"]},{"facet":"headwear","canonical_tag":"green_hat","value":"Green beret","source_refs":["danbooru:wiki:hong_meiling","gelbooru:wiki:hong_meiling"]},{"facet":"headwear","canonical_tag":"star_hat_ornament","value":"Star ornament on hat","source_refs":["danbooru:wiki:hong_meiling"]},{"facet":"clothing","canonical_tag":"china_dress","value":"Chinese dress","source_refs":["danbooru:wiki:hong_meiling","gelbooru:wiki:hong_meiling"]},{"facet":"footwear","canonical_tag":"black_shoes","value":"Black shoes","source_refs":["danbooru:wiki:hong_meiling"]}]}]}
+{
+  "character_tag": "hong_meiling",
+  "sources": [
+    {
+      "id": "danbooru:wiki:hong_meiling",
+      "source_site": "danbooru",
+      "source_kind": "wiki",
+      "source_key": "hong_meiling",
+      "source_url": "https://danbooru.donmai.us/wiki_pages/hong_meiling.json",
+      "source_tier": 1,
+      "title": "Hong Meiling",
+      "excerpt": "Touhou gatekeeper with blue or aqua eyes, long red hair with braids; wears a green beret with star ornament, Chinese dress, skirt and black shoes.",
+      "captured_at": "2026-08-28"
+    },
+    {
+      "id": "gelbooru:wiki:hong_meiling",
+      "source_site": "gelbooru",
+      "source_kind": "wiki",
+      "source_key": "hong_meiling",
+      "source_url": "https://gelbooru.com/index.php?page=wiki&s=view&id=hong_meiling",
+      "source_tier": 1,
+      "title": "Hong Meiling",
+      "excerpt": "Humanoid youkai gatekeeper with blue or aqua eyes, long red hair, braids, green beret and Chinese dress.",
+      "captured_at": "2026-08-28"
+    }
+  ],
+  "profiles": [
+    {
+      "appearance_key": "hong_meiling::default",
+      "variant_tag": "hong_meiling",
+      "display_name": "Base appearance",
+      "appearance_kind": "default",
+      "is_default": true,
+      "status": "published",
+      "confidence": "high",
+      "provenance": "danbooru_gelbooru_wiki_reviewed",
+      "notes": "Human base appearance; dragon and panda variants, weapons and props excluded.",
+      "features": [
+        {
+          "facet": "hair",
+          "canonical_tag": "long_hair",
+          "value": "Long hair",
+          "source_refs": [
+            "danbooru:wiki:hong_meiling"
+          ]
+        },
+        {
+          "facet": "hair",
+          "canonical_tag": "red_hair",
+          "value": "Red hair",
+          "source_refs": [
+            "danbooru:wiki:hong_meiling",
+            "gelbooru:wiki:hong_meiling"
+          ]
+        },
+        {
+          "facet": "hair_accessory",
+          "canonical_tag": "twin_braids",
+          "value": "Braids",
+          "source_refs": [
+            "gelbooru:wiki:hong_meiling"
+          ]
+        },
+        {
+          "facet": "eyes",
+          "canonical_tag": "blue_eyes",
+          "value": "Blue or aqua eyes",
+          "source_refs": [
+            "danbooru:wiki:hong_meiling",
+            "gelbooru:wiki:hong_meiling"
+          ]
+        },
+        {
+          "facet": "headwear",
+          "canonical_tag": "green_hat",
+          "value": "Green beret",
+          "source_refs": [
+            "danbooru:wiki:hong_meiling",
+            "gelbooru:wiki:hong_meiling"
+          ]
+        },
+        {
+          "facet": "headwear",
+          "canonical_tag": "star_hat_ornament",
+          "value": "Star ornament on hat",
+          "source_refs": [
+            "danbooru:wiki:hong_meiling"
+          ]
+        },
+        {
+          "facet": "dress",
+          "canonical_tag": "china_dress",
+          "value": "Chinese dress",
+          "source_refs": [
+            "danbooru:wiki:hong_meiling",
+            "gelbooru:wiki:hong_meiling"
+          ]
+        },
+        {
+          "facet": "footwear",
+          "canonical_tag": "black_shoes",
+          "value": "Black shoes",
+          "source_refs": [
+            "danbooru:wiki:hong_meiling"
+          ]
+        }
+      ]
+    }
+  ]
+}

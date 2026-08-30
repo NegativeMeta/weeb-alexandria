@@ -1,1 +1,82 @@
-{"character_tag":"kazami_yuuka","sources":[{"id":"danbooru:wiki:kazami_yuuka","source_site":"danbooru","source_kind":"wiki","source_key":"kazami_yuuka","source_url":"https://danbooru.donmai.us/wiki_pages/kazami_yuuka.json","source_tier":1,"title":"Kazami Yuuka","excerpt":"Windows-era Yuuka is commonly depicted with green hair, red eyes, long sleeves, collared white shirt and red skirt; PC-98 appearance is separately tagged.","captured_at":"2026-08-28"},{"id":"gelbooru:wiki:kazami_yuuka","source_site":"gelbooru","source_kind":"wiki","source_key":"kazami_yuuka","source_url":"https://gelbooru.com/index.php?page=wiki&s=view&id=kazami_yuuka","source_tier":1,"title":"Kazami Yuuka","excerpt":"Modern Touhou Yuuka design is distinct from the PC-98 generation and is associated with flowers.","captured_at":"2026-08-28"}],"profiles":[{"appearance_key":"kazami_yuuka::default","variant_tag":"kazami_yuuka","display_name":"Windows-era base appearance","appearance_kind":"default","is_default":true,"status":"published","confidence":"medium","provenance":"danbooru_gelbooru_wiki_reviewed","notes":"Windows-era base only; PC-98, Seihou and flower-field variants excluded.","features":[{"facet":"hair","canonical_tag":"green_hair","value":"Green hair in Windows-era depictions","source_refs":["danbooru:wiki:kazami_yuuka"]},{"facet":"eyes","canonical_tag":"red_eyes","value":"Red eyes in common modern depictions","source_refs":["danbooru:wiki:kazami_yuuka"]},{"facet":"clothing","canonical_tag":"white_shirt","value":"White collared shirt","source_refs":["danbooru:wiki:kazami_yuuka"]},{"facet":"sleeves","canonical_tag":"long_sleeves","value":"Long sleeves","source_refs":["danbooru:wiki:kazami_yuuka"]},{"facet":"lower_body","canonical_tag":"red_skirt","value":"Red skirt","source_refs":["danbooru:wiki:kazami_yuuka"]}]}]}
+{
+  "character_tag": "kazami_yuuka",
+  "sources": [
+    {
+      "id": "danbooru:wiki:kazami_yuuka",
+      "source_site": "danbooru",
+      "source_kind": "wiki",
+      "source_key": "kazami_yuuka",
+      "source_url": "https://danbooru.donmai.us/wiki_pages/kazami_yuuka.json",
+      "source_tier": 1,
+      "title": "Kazami Yuuka",
+      "excerpt": "Windows-era Yuuka is commonly depicted with green hair, red eyes, long sleeves, collared white shirt and red skirt; PC-98 appearance is separately tagged.",
+      "captured_at": "2026-08-28"
+    },
+    {
+      "id": "gelbooru:wiki:kazami_yuuka",
+      "source_site": "gelbooru",
+      "source_kind": "wiki",
+      "source_key": "kazami_yuuka",
+      "source_url": "https://gelbooru.com/index.php?page=wiki&s=view&id=kazami_yuuka",
+      "source_tier": 1,
+      "title": "Kazami Yuuka",
+      "excerpt": "Modern Touhou Yuuka design is distinct from the PC-98 generation and is associated with flowers.",
+      "captured_at": "2026-08-28"
+    }
+  ],
+  "profiles": [
+    {
+      "appearance_key": "kazami_yuuka::default",
+      "variant_tag": "kazami_yuuka",
+      "display_name": "Windows-era base appearance",
+      "appearance_kind": "default",
+      "is_default": true,
+      "status": "published",
+      "confidence": "medium",
+      "provenance": "danbooru_gelbooru_wiki_reviewed",
+      "notes": "Windows-era base only; PC-98, Seihou and flower-field variants excluded.",
+      "features": [
+        {
+          "facet": "hair",
+          "canonical_tag": "green_hair",
+          "value": "Green hair in Windows-era depictions",
+          "source_refs": [
+            "danbooru:wiki:kazami_yuuka"
+          ]
+        },
+        {
+          "facet": "eyes",
+          "canonical_tag": "red_eyes",
+          "value": "Red eyes in common modern depictions",
+          "source_refs": [
+            "danbooru:wiki:kazami_yuuka"
+          ]
+        },
+        {
+          "facet": "upper_body",
+          "canonical_tag": "white_shirt",
+          "value": "White collared shirt",
+          "source_refs": [
+            "danbooru:wiki:kazami_yuuka"
+          ]
+        },
+        {
+          "facet": "sleeves",
+          "canonical_tag": "long_sleeves",
+          "value": "Long sleeves",
+          "source_refs": [
+            "danbooru:wiki:kazami_yuuka"
+          ]
+        },
+        {
+          "facet": "lower_body",
+          "canonical_tag": "red_skirt",
+          "value": "Red skirt",
+          "source_refs": [
+            "danbooru:wiki:kazami_yuuka"
+          ]
+        }
+      ]
+    }
+  ]
+}

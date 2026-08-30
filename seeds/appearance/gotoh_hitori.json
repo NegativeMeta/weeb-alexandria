@@ -1,1 +1,101 @@
-{"character_tag":"gotoh_hitori","sources":[{"id":"danbooru:wiki:gotoh_hitori","source_site":"danbooru","source_kind":"wiki","source_key":"gotoh_hitori","source_url":"https://danbooru.donmai.us/wiki_pages/gotoh_hitori.json","source_tier":1,"title":"Gotoh Hitori","excerpt":"Long pink hair with one side up, blue eyes, cube hair ornament, pink track jacket, grey pleated skirt, black socks and brown loafers.","captured_at":"2026-08-28"},{"id":"gelbooru:wiki:gotoh_hitori","source_site":"gelbooru","source_kind":"wiki","source_key":"gotoh_hitori","source_url":"https://gelbooru.com/index.php?page=wiki&s=view&id=gotoh_hitori","source_tier":1,"title":"Gotoh Hitori","excerpt":"Bocchi the Rock character with long pink hair, one side up and blue eyes.","captured_at":"2026-08-28"}],"profiles":[{"appearance_key":"gotoh_hitori::default","variant_tag":"gotoh_hitori","display_name":"Base appearance","appearance_kind":"default","is_default":true,"status":"published","confidence":"high","provenance":"danbooru_gelbooru_wiki_reviewed","notes":"Common casual design; band performance and alternate outfits excluded.","features":[{"facet":"hair","canonical_tag":"long_hair","value":"Long hair","source_refs":["danbooru:wiki:gotoh_hitori"]},{"facet":"hair","canonical_tag":"pink_hair","value":"Pink hair","source_refs":["danbooru:wiki:gotoh_hitori","gelbooru:wiki:gotoh_hitori"]},{"facet":"hair_style","canonical_tag":"one_side_up","value":"One side up","source_refs":["danbooru:wiki:gotoh_hitori","gelbooru:wiki:gotoh_hitori"]},{"facet":"eyes","canonical_tag":"blue_eyes","value":"Blue eyes","source_refs":["danbooru:wiki:gotoh_hitori","gelbooru:wiki:gotoh_hitori"]},{"facet":"hair_accessory","canonical_tag":"cube_hair_ornament","value":"Cube hair ornament","source_refs":["danbooru:wiki:gotoh_hitori"]},{"facet":"jacket","canonical_tag":"pink_jacket","value":"Pink track jacket","source_refs":["danbooru:wiki:gotoh_hitori"]},{"facet":"lower_body","canonical_tag":"grey_skirt","value":"Grey pleated skirt","source_refs":["danbooru:wiki:gotoh_hitori"]}]}]}
+{
+  "character_tag": "gotoh_hitori",
+  "sources": [
+    {
+      "id": "danbooru:wiki:gotoh_hitori",
+      "source_site": "danbooru",
+      "source_kind": "wiki",
+      "source_key": "gotoh_hitori",
+      "source_url": "https://danbooru.donmai.us/wiki_pages/gotoh_hitori.json",
+      "source_tier": 1,
+      "title": "Gotoh Hitori",
+      "excerpt": "Long pink hair with one side up, blue eyes, cube hair ornament, pink track jacket, grey pleated skirt, black socks and brown loafers.",
+      "captured_at": "2026-08-28"
+    },
+    {
+      "id": "gelbooru:wiki:gotoh_hitori",
+      "source_site": "gelbooru",
+      "source_kind": "wiki",
+      "source_key": "gotoh_hitori",
+      "source_url": "https://gelbooru.com/index.php?page=wiki&s=view&id=gotoh_hitori",
+      "source_tier": 1,
+      "title": "Gotoh Hitori",
+      "excerpt": "Bocchi the Rock character with long pink hair, one side up and blue eyes.",
+      "captured_at": "2026-08-28"
+    }
+  ],
+  "profiles": [
+    {
+      "appearance_key": "gotoh_hitori::default",
+      "variant_tag": "gotoh_hitori",
+      "display_name": "Base appearance",
+      "appearance_kind": "default",
+      "is_default": true,
+      "status": "published",
+      "confidence": "high",
+      "provenance": "danbooru_gelbooru_wiki_reviewed",
+      "notes": "Common casual design; band performance and alternate outfits excluded.",
+      "features": [
+        {
+          "facet": "hair",
+          "canonical_tag": "long_hair",
+          "value": "Long hair",
+          "source_refs": [
+            "danbooru:wiki:gotoh_hitori"
+          ]
+        },
+        {
+          "facet": "hair",
+          "canonical_tag": "pink_hair",
+          "value": "Pink hair",
+          "source_refs": [
+            "danbooru:wiki:gotoh_hitori",
+            "gelbooru:wiki:gotoh_hitori"
+          ]
+        },
+        {
+          "facet": "hair",
+          "canonical_tag": "one_side_up",
+          "value": "One side up",
+          "source_refs": [
+            "danbooru:wiki:gotoh_hitori",
+            "gelbooru:wiki:gotoh_hitori"
+          ]
+        },
+        {
+          "facet": "eyes",
+          "canonical_tag": "blue_eyes",
+          "value": "Blue eyes",
+          "source_refs": [
+            "danbooru:wiki:gotoh_hitori",
+            "gelbooru:wiki:gotoh_hitori"
+          ]
+        },
+        {
+          "facet": "hair_accessory",
+          "canonical_tag": "cube_hair_ornament",
+          "value": "Cube hair ornament",
+          "source_refs": [
+            "danbooru:wiki:gotoh_hitori"
+          ]
+        },
+        {
+          "facet": "jacket",
+          "canonical_tag": "pink_jacket",
+          "value": "Pink track jacket",
+          "source_refs": [
+            "danbooru:wiki:gotoh_hitori"
+          ]
+        },
+        {
+          "facet": "lower_body",
+          "canonical_tag": "grey_skirt",
+          "value": "Grey pleated skirt",
+          "source_refs": [
+            "danbooru:wiki:gotoh_hitori"
+          ]
+        }
+      ]
+    }
+  ]
+}

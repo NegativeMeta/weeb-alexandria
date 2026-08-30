@@ -1,1 +1,119 @@
-{"character_tag":"hoshino_(blue_archive)","sources":[{"id":"danbooru:wiki:hoshino_(blue_archive)","source_site":"danbooru","source_kind":"wiki","source_key":"hoshino_(blue_archive)","source_url":"https://danbooru.donmai.us/wiki_pages/hoshino_(blue_archive).json","source_tier":1,"title":"Takanashi Hoshino","excerpt":"Default design has very long pink hair with huge ahoge and hair flaps, heterochromatic blue left/yellow right eyes, black plaid skirt, white collared shirt with chest harness and blue necktie.","captured_at":"2026-08-28"},{"id":"gelbooru:wiki:hoshino_(blue_archive)","source_site":"gelbooru","source_kind":"wiki","source_key":"hoshino_(blue_archive)","source_url":"https://gelbooru.com/index.php?page=wiki&s=view&id=hoshino_(blue_archive)","source_tier":1,"title":"Takanashi Hoshino","excerpt":"Default and swimsuit designs are separately tagged; default has very long pink hair, heterochromia, black plaid skirt, white collared shirt, chest harness and blue necktie.","captured_at":"2026-08-28"}],"profiles":[{"appearance_key":"hoshino_(blue_archive)::default","variant_tag":"hoshino_(blue_archive)","display_name":"Default appearance","appearance_kind":"default","is_default":true,"status":"published","confidence":"high","provenance":"danbooru_gelbooru_wiki_reviewed","notes":"Default Abydos design; swimsuit and Combat Mode variants excluded.","features":[{"facet":"hair","canonical_tag":"very_long_hair","value":"Very long hair","source_refs":["danbooru:wiki:hoshino_(blue_archive)","gelbooru:wiki:hoshino_(blue_archive)"]},{"facet":"hair","canonical_tag":"pink_hair","value":"Pink hair","source_refs":["danbooru:wiki:hoshino_(blue_archive)","gelbooru:wiki:hoshino_(blue_archive)"]},{"facet":"hair_accessory","canonical_tag":"huge_ahoge","value":"Huge ahoge","source_refs":["danbooru:wiki:hoshino_(blue_archive)"]},{"facet":"hair_accessory","canonical_tag":"hair_flaps","value":"Hair flaps","source_refs":["danbooru:wiki:hoshino_(blue_archive)"]},{"facet":"eyes","canonical_tag":"heterochromia","value":"Heterochromatic blue and yellow eyes","source_refs":["danbooru:wiki:hoshino_(blue_archive)","gelbooru:wiki:hoshino_(blue_archive)"]},{"facet":"clothing","canonical_tag":"plaid_skirt","value":"Black plaid skirt","source_refs":["danbooru:wiki:hoshino_(blue_archive)","gelbooru:wiki:hoshino_(blue_archive)"]},{"facet":"upper_body","canonical_tag":"collared_shirt","value":"White collared shirt","source_refs":["danbooru:wiki:hoshino_(blue_archive)"]},{"facet":"upper_body","canonical_tag":"chest_harness","value":"Chest harness","source_refs":["danbooru:wiki:hoshino_(blue_archive)"]},{"facet":"neckwear","canonical_tag":"blue_necktie","value":"Blue necktie","source_refs":["danbooru:wiki:hoshino_(blue_archive)","gelbooru:wiki:hoshino_(blue_archive)"]}]}]}
+{
+  "character_tag": "hoshino_(blue_archive)",
+  "sources": [
+    {
+      "id": "danbooru:wiki:hoshino_(blue_archive)",
+      "source_site": "danbooru",
+      "source_kind": "wiki",
+      "source_key": "hoshino_(blue_archive)",
+      "source_url": "https://danbooru.donmai.us/wiki_pages/hoshino_(blue_archive).json",
+      "source_tier": 1,
+      "title": "Takanashi Hoshino",
+      "excerpt": "Default design has very long pink hair with huge ahoge and hair flaps, heterochromatic blue left/yellow right eyes, black plaid skirt, white collared shirt with chest harness and blue necktie.",
+      "captured_at": "2026-08-28"
+    },
+    {
+      "id": "gelbooru:wiki:hoshino_(blue_archive)",
+      "source_site": "gelbooru",
+      "source_kind": "wiki",
+      "source_key": "hoshino_(blue_archive)",
+      "source_url": "https://gelbooru.com/index.php?page=wiki&s=view&id=hoshino_(blue_archive)",
+      "source_tier": 1,
+      "title": "Takanashi Hoshino",
+      "excerpt": "Default and swimsuit designs are separately tagged; default has very long pink hair, heterochromia, black plaid skirt, white collared shirt, chest harness and blue necktie.",
+      "captured_at": "2026-08-28"
+    }
+  ],
+  "profiles": [
+    {
+      "appearance_key": "hoshino_(blue_archive)::default",
+      "variant_tag": "hoshino_(blue_archive)",
+      "display_name": "Default appearance",
+      "appearance_kind": "default",
+      "is_default": true,
+      "status": "published",
+      "confidence": "high",
+      "provenance": "danbooru_gelbooru_wiki_reviewed",
+      "notes": "Default Abydos design; swimsuit and Combat Mode variants excluded.",
+      "features": [
+        {
+          "facet": "hair",
+          "canonical_tag": "very_long_hair",
+          "value": "Very long hair",
+          "source_refs": [
+            "danbooru:wiki:hoshino_(blue_archive)",
+            "gelbooru:wiki:hoshino_(blue_archive)"
+          ]
+        },
+        {
+          "facet": "hair",
+          "canonical_tag": "pink_hair",
+          "value": "Pink hair",
+          "source_refs": [
+            "danbooru:wiki:hoshino_(blue_archive)",
+            "gelbooru:wiki:hoshino_(blue_archive)"
+          ]
+        },
+        {
+          "facet": "hair_accessory",
+          "canonical_tag": "huge_ahoge",
+          "value": "Huge ahoge",
+          "source_refs": [
+            "danbooru:wiki:hoshino_(blue_archive)"
+          ]
+        },
+        {
+          "facet": "hair_accessory",
+          "canonical_tag": "hair_flaps",
+          "value": "Hair flaps",
+          "source_refs": [
+            "danbooru:wiki:hoshino_(blue_archive)"
+          ]
+        },
+        {
+          "facet": "eyes",
+          "canonical_tag": "heterochromia",
+          "value": "Heterochromatic blue and yellow eyes",
+          "source_refs": [
+            "danbooru:wiki:hoshino_(blue_archive)",
+            "gelbooru:wiki:hoshino_(blue_archive)"
+          ]
+        },
+        {
+          "facet": "lower_body",
+          "canonical_tag": "plaid_skirt",
+          "value": "Black plaid skirt",
+          "source_refs": [
+            "danbooru:wiki:hoshino_(blue_archive)",
+            "gelbooru:wiki:hoshino_(blue_archive)"
+          ]
+        },
+        {
+          "facet": "upper_body",
+          "canonical_tag": "collared_shirt",
+          "value": "White collared shirt",
+          "source_refs": [
+            "danbooru:wiki:hoshino_(blue_archive)"
+          ]
+        },
+        {
+          "facet": "upper_body",
+          "canonical_tag": "chest_harness",
+          "value": "Chest harness",
+          "source_refs": [
+            "danbooru:wiki:hoshino_(blue_archive)"
+          ]
+        },
+        {
+          "facet": "neck",
+          "canonical_tag": "blue_necktie",
+          "value": "Blue necktie",
+          "source_refs": [
+            "danbooru:wiki:hoshino_(blue_archive)",
+            "gelbooru:wiki:hoshino_(blue_archive)"
+          ]
+        }
+      ]
+    }
+  ]
+}

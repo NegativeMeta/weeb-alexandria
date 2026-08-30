@@ -1,64 +1,420 @@
 {
   "character_tag": "kirisame_marisa",
   "sources": [
-    {"id":"danbooru:wiki:kirisame_marisa","source_site":"danbooru","source_kind":"wiki","source_key":"kirisame_marisa","source_url":"https://danbooru.donmai.us/wiki_pages/kirisame_marisa.json","source_tier":1,"title":"Kirisame Marisa","excerpt":"Marisa has long blonde hair with a single side braid tied with a hair bow. Her outfit is usually a black frilled witch hat, black vest over a white turtleneck shirt with puffy short sleeves, black frilled skirt, white apron, white socks, and either black Mary Janes or brown boots.","captured_at":"2026-08-28"},
-    {"id":"gelbooru:wiki:kirisame_marisa","source_site":"gelbooru","source_kind":"wiki","source_key":"kirisame_marisa","source_url":"https://gelbooru.com/index.php?page=wiki&s=view&id=kirisame_marisa","source_tier":1,"title":"Kirisame Marisa","excerpt":"The Windows design is blonde hair, black witch hat and dress with a white apron-like cloth.","captured_at":"2026-08-28"},
-    {"id":"danbooru:wiki:kirisame_marisa_(pc_98)","source_site":"danbooru","source_kind":"wiki","source_key":"kirisame_marisa_(pc_98)","source_url":"https://danbooru.donmai.us/wiki_pages/kirisame_marisa_(pc_98).json","source_tier":1,"title":"Kirisame Marisa (PC-98)","excerpt":"In Story of Eastern Wonderland, Marisa has short red hair, red eyes, and a purple outfit and hat. In later PC-98 games, her eyes are yellow and her hair is long and blonde, while she continues to wear purple.","captured_at":"2026-08-28"},
-    {"id":"gelbooru:wiki:kirisame_marisa_(pc_98)","source_site":"gelbooru","source_kind":"wiki","source_key":"kirisame_marisa_(pc_98)","source_url":"https://gelbooru.com/index.php?page=wiki&s=view&id=kirisame_marisa_(pc_98)","source_tier":1,"title":"Kirisame Marisa (PC-98)","excerpt":"The second game shows short red hair and red eyes; following PC-98 games show yellow eyes and long blonde hair with purple clothing.","captured_at":"2026-08-28"},
-    {"id":"danbooru:wiki:kirisame_marisa_(seihou)","source_site":"danbooru","source_kind":"wiki","source_key":"kirisame_marisa_(seihou)","source_url":"https://danbooru.donmai.us/wiki_pages/kirisame_marisa_(seihou).json","source_tier":1,"title":"Kirisame Marisa (Seihou)","excerpt":"The Seihou appearance has a black dress, black shawl, white bow on the back, and white angel wings instead of a broom.","captured_at":"2026-08-28"},
-    {"id":"gelbooru:wiki:kirisame_marisa_(seihou)","source_site":"gelbooru","source_kind":"wiki","source_key":"kirisame_marisa_(seihou)","source_url":"https://gelbooru.com/index.php?page=wiki&s=view&id=kirisame_marisa_(seihou)","source_tier":1,"title":"Kirisame Marisa (Seihou)","excerpt":"Seihou Marisa wears a black dress and shawl, a white bow, and white angel wings instead of a broom.","captured_at":"2026-08-28"}
+    {
+      "id": "danbooru:wiki:kirisame_marisa",
+      "source_site": "danbooru",
+      "source_kind": "wiki",
+      "source_key": "kirisame_marisa",
+      "source_url": "https://danbooru.donmai.us/wiki_pages/kirisame_marisa.json",
+      "source_tier": 1,
+      "title": "Kirisame Marisa",
+      "excerpt": "Marisa has long blonde hair with a single side braid tied with a hair bow. Her outfit is usually a black frilled witch hat, black vest over a white turtleneck shirt with puffy short sleeves, black frilled skirt, white apron, white socks, and either black Mary Janes or brown boots.",
+      "captured_at": "2026-08-28"
+    },
+    {
+      "id": "gelbooru:wiki:kirisame_marisa",
+      "source_site": "gelbooru",
+      "source_kind": "wiki",
+      "source_key": "kirisame_marisa",
+      "source_url": "https://gelbooru.com/index.php?page=wiki&s=view&id=kirisame_marisa",
+      "source_tier": 1,
+      "title": "Kirisame Marisa",
+      "excerpt": "The Windows design is blonde hair, black witch hat and dress with a white apron-like cloth.",
+      "captured_at": "2026-08-28"
+    },
+    {
+      "id": "danbooru:wiki:kirisame_marisa_(pc_98)",
+      "source_site": "danbooru",
+      "source_kind": "wiki",
+      "source_key": "kirisame_marisa_(pc_98)",
+      "source_url": "https://danbooru.donmai.us/wiki_pages/kirisame_marisa_(pc_98).json",
+      "source_tier": 1,
+      "title": "Kirisame Marisa (PC-98)",
+      "excerpt": "In Story of Eastern Wonderland, Marisa has short red hair, red eyes, and a purple outfit and hat. In later PC-98 games, her eyes are yellow and her hair is long and blonde, while she continues to wear purple.",
+      "captured_at": "2026-08-28"
+    },
+    {
+      "id": "gelbooru:wiki:kirisame_marisa_(pc_98)",
+      "source_site": "gelbooru",
+      "source_kind": "wiki",
+      "source_key": "kirisame_marisa_(pc_98)",
+      "source_url": "https://gelbooru.com/index.php?page=wiki&s=view&id=kirisame_marisa_(pc_98)",
+      "source_tier": 1,
+      "title": "Kirisame Marisa (PC-98)",
+      "excerpt": "The second game shows short red hair and red eyes; following PC-98 games show yellow eyes and long blonde hair with purple clothing.",
+      "captured_at": "2026-08-28"
+    },
+    {
+      "id": "danbooru:wiki:kirisame_marisa_(seihou)",
+      "source_site": "danbooru",
+      "source_kind": "wiki",
+      "source_key": "kirisame_marisa_(seihou)",
+      "source_url": "https://danbooru.donmai.us/wiki_pages/kirisame_marisa_(seihou).json",
+      "source_tier": 1,
+      "title": "Kirisame Marisa (Seihou)",
+      "excerpt": "The Seihou appearance has a black dress, black shawl, white bow on the back, and white angel wings instead of a broom.",
+      "captured_at": "2026-08-28"
+    },
+    {
+      "id": "gelbooru:wiki:kirisame_marisa_(seihou)",
+      "source_site": "gelbooru",
+      "source_kind": "wiki",
+      "source_key": "kirisame_marisa_(seihou)",
+      "source_url": "https://gelbooru.com/index.php?page=wiki&s=view&id=kirisame_marisa_(seihou)",
+      "source_tier": 1,
+      "title": "Kirisame Marisa (Seihou)",
+      "excerpt": "Seihou Marisa wears a black dress and shawl, a white bow, and white angel wings instead of a broom.",
+      "captured_at": "2026-08-28"
+    }
   ],
   "profiles": [
     {
-      "appearance_key":"kirisame_marisa::default","variant_tag":"kirisame_marisa","display_name":"Windows-era base appearance","appearance_kind":"default","is_default":true,"status":"published","replace_features":true,"confidence":"high","provenance":"danbooru_gelbooru_wiki_reviewed","notes":"Stable Windows-era design. PC-98 and Seihou are isolated variants; props such as broom and mini-hakkero are not included as permanent body/outfit features.",
-      "features":[
-        {"facet":"hair","value":"Blonde hair","canonical_tag":"blonde_hair","source_refs":["danbooru:wiki:kirisame_marisa","gelbooru:wiki:kirisame_marisa"]},
-        {"facet":"hair","value":"Long hair","canonical_tag":"long_hair","source_refs":["danbooru:wiki:kirisame_marisa"]},
-        {"facet":"hair_accessory","value":"Single braid","canonical_tag":"single_braid","source_refs":["danbooru:wiki:kirisame_marisa"]},
-        {"facet":"hair_accessory","value":"Side braid","canonical_tag":"side_braid","source_refs":["danbooru:wiki:kirisame_marisa"]},
-        {"facet":"hair_accessory","value":"Hair bow","canonical_tag":"hair_bow","source_refs":["danbooru:wiki:kirisame_marisa"]},
-        {"facet":"headwear","value":"Black witch hat","canonical_tag":"black_hat","source_refs":["danbooru:wiki:kirisame_marisa","gelbooru:wiki:kirisame_marisa"]},
-        {"facet":"headwear","value":"Witch hat","canonical_tag":"witch_hat","source_refs":["danbooru:wiki:kirisame_marisa"]},
-        {"facet":"headwear","value":"Frilled hat","canonical_tag":"frilled_hat","source_refs":["danbooru:wiki:kirisame_marisa"]},
-        {"facet":"jacket","value":"Black vest","canonical_tag":"black_vest","source_refs":["danbooru:wiki:kirisame_marisa"]},
-        {"facet":"upper_body","value":"White turtleneck shirt","canonical_tag":"turtleneck_shirt","source_refs":["danbooru:wiki:kirisame_marisa"]},
-        {"facet":"upper_body","value":"White shirt","canonical_tag":"white_shirt","source_refs":["danbooru:wiki:kirisame_marisa"]},
-        {"facet":"sleeves","value":"Puffy short sleeves","canonical_tag":"puffy_short_sleeves","source_refs":["danbooru:wiki:kirisame_marisa"]},
-        {"facet":"lower_body","value":"Black skirt","canonical_tag":"black_skirt","source_refs":["danbooru:wiki:kirisame_marisa"]},
-        {"facet":"lower_body","value":"Frilled skirt","canonical_tag":"frilled_skirt","source_refs":["danbooru:wiki:kirisame_marisa"]},
-        {"facet":"lower_body","value":"Matching skirt set","canonical_tag":"skirt_set","source_refs":["danbooru:wiki:kirisame_marisa"]},
-        {"facet":"accessories","value":"White frilled apron","canonical_tag":"white_apron","source_refs":["danbooru:wiki:kirisame_marisa"]},
-        {"facet":"accessories","value":"Frilled apron","canonical_tag":"frilled_apron","source_refs":["danbooru:wiki:kirisame_marisa"]},
-        {"facet":"accessories","value":"Waist apron","canonical_tag":"waist_apron","source_refs":["danbooru:wiki:kirisame_marisa"]},
-        {"facet":"accessories","value":"Buttons","canonical_tag":"buttons","source_refs":["danbooru:wiki:kirisame_marisa"]},
-        {"facet":"legwear","value":"White socks","canonical_tag":"white_socks","source_refs":["danbooru:wiki:kirisame_marisa"]},
-        {"facet":"footwear","value":"Black Mary Janes","canonical_tag":"mary_janes","source_refs":["danbooru:wiki:kirisame_marisa"]},
-        {"facet":"footwear","value":"Brown boots","canonical_tag":"brown_boots","source_refs":["danbooru:wiki:kirisame_marisa"]}
+      "appearance_key": "kirisame_marisa::default",
+      "variant_tag": "kirisame_marisa",
+      "display_name": "Windows-era base appearance",
+      "appearance_kind": "default",
+      "is_default": true,
+      "status": "published",
+      "replace_features": true,
+      "confidence": "high",
+      "provenance": "danbooru_gelbooru_wiki_reviewed",
+      "notes": "Stable Windows-era design. PC-98 and Seihou are isolated variants; props such as broom and mini-hakkero are not included as permanent body/outfit features.",
+      "features": [
+        {
+          "facet": "hair",
+          "value": "Blonde hair",
+          "canonical_tag": "blonde_hair",
+          "source_refs": [
+            "danbooru:wiki:kirisame_marisa",
+            "gelbooru:wiki:kirisame_marisa"
+          ]
+        },
+        {
+          "facet": "hair",
+          "value": "Long hair",
+          "canonical_tag": "long_hair",
+          "source_refs": [
+            "danbooru:wiki:kirisame_marisa"
+          ]
+        },
+        {
+          "facet": "hair_accessory",
+          "value": "Single braid",
+          "canonical_tag": "single_braid",
+          "source_refs": [
+            "danbooru:wiki:kirisame_marisa"
+          ]
+        },
+        {
+          "facet": "hair_accessory",
+          "value": "Side braid",
+          "canonical_tag": "side_braid",
+          "source_refs": [
+            "danbooru:wiki:kirisame_marisa"
+          ]
+        },
+        {
+          "facet": "hair_accessory",
+          "value": "Hair bow",
+          "canonical_tag": "hair_bow",
+          "source_refs": [
+            "danbooru:wiki:kirisame_marisa"
+          ]
+        },
+        {
+          "facet": "headwear",
+          "value": "Black witch hat",
+          "canonical_tag": "black_hat",
+          "source_refs": [
+            "danbooru:wiki:kirisame_marisa",
+            "gelbooru:wiki:kirisame_marisa"
+          ]
+        },
+        {
+          "facet": "headwear",
+          "value": "Witch hat",
+          "canonical_tag": "witch_hat",
+          "source_refs": [
+            "danbooru:wiki:kirisame_marisa"
+          ]
+        },
+        {
+          "facet": "headwear",
+          "value": "Frilled hat",
+          "canonical_tag": "frilled_hat",
+          "source_refs": [
+            "danbooru:wiki:kirisame_marisa"
+          ]
+        },
+        {
+          "facet": "jacket",
+          "value": "Black vest",
+          "canonical_tag": "black_vest",
+          "source_refs": [
+            "danbooru:wiki:kirisame_marisa"
+          ]
+        },
+        {
+          "facet": "upper_body",
+          "value": "White turtleneck shirt",
+          "canonical_tag": "turtleneck_shirt",
+          "source_refs": [
+            "danbooru:wiki:kirisame_marisa"
+          ]
+        },
+        {
+          "facet": "upper_body",
+          "value": "White shirt",
+          "canonical_tag": "white_shirt",
+          "source_refs": [
+            "danbooru:wiki:kirisame_marisa"
+          ]
+        },
+        {
+          "facet": "sleeves",
+          "value": "Puffy short sleeves",
+          "canonical_tag": "puffy_short_sleeves",
+          "source_refs": [
+            "danbooru:wiki:kirisame_marisa"
+          ]
+        },
+        {
+          "facet": "lower_body",
+          "value": "Black skirt",
+          "canonical_tag": "black_skirt",
+          "source_refs": [
+            "danbooru:wiki:kirisame_marisa"
+          ]
+        },
+        {
+          "facet": "lower_body",
+          "value": "Frilled skirt",
+          "canonical_tag": "frilled_skirt",
+          "source_refs": [
+            "danbooru:wiki:kirisame_marisa"
+          ]
+        },
+        {
+          "facet": "lower_body",
+          "value": "Matching skirt set",
+          "canonical_tag": "skirt_set",
+          "source_refs": [
+            "danbooru:wiki:kirisame_marisa"
+          ]
+        },
+        {
+          "facet": "accessories",
+          "value": "White frilled apron",
+          "canonical_tag": "white_apron",
+          "source_refs": [
+            "danbooru:wiki:kirisame_marisa"
+          ]
+        },
+        {
+          "facet": "accessories",
+          "value": "Frilled apron",
+          "canonical_tag": "frilled_apron",
+          "source_refs": [
+            "danbooru:wiki:kirisame_marisa"
+          ]
+        },
+        {
+          "facet": "accessories",
+          "value": "Waist apron",
+          "canonical_tag": "waist_apron",
+          "source_refs": [
+            "danbooru:wiki:kirisame_marisa"
+          ]
+        },
+        {
+          "facet": "accessories",
+          "value": "Buttons",
+          "canonical_tag": "buttons",
+          "source_refs": [
+            "danbooru:wiki:kirisame_marisa"
+          ]
+        },
+        {
+          "facet": "legwear",
+          "value": "White socks",
+          "canonical_tag": "white_socks",
+          "source_refs": [
+            "danbooru:wiki:kirisame_marisa"
+          ]
+        },
+        {
+          "facet": "footwear",
+          "value": "Black Mary Janes",
+          "canonical_tag": "mary_janes",
+          "source_refs": [
+            "danbooru:wiki:kirisame_marisa"
+          ]
+        },
+        {
+          "facet": "footwear",
+          "value": "Brown boots",
+          "canonical_tag": "brown_boots",
+          "source_refs": [
+            "danbooru:wiki:kirisame_marisa"
+          ]
+        }
       ]
     },
     {
-      "appearance_key":"kirisame_marisa::kirisame_marisa_(pc_98)","variant_tag":"kirisame_marisa_(pc_98)","display_name":"PC-98 / Classic Marisa","appearance_kind":"variant","is_default":false,"status":"published","replace_features":true,"confidence":"high","provenance":"danbooru_gelbooru_wiki_reviewed","notes":"PC-98 is a contextual appearance variant. The source explicitly describes two historical designs, retained as open conflicts.",
-      "conflicts":[
-        {"conflict_key":"pc98_hair_and_eyes","facet":"hair","alternatives":["short_hair+red_hair+red_eyes","long_hair+blonde_hair+yellow_eyes"],"status":"open","reason":"The source distinguishes Story of Eastern Wonderland from the later PC-98 games.","source_refs":["danbooru:wiki:kirisame_marisa_(pc_98)","gelbooru:wiki:kirisame_marisa_(pc_98)"]}
+      "appearance_key": "kirisame_marisa::kirisame_marisa_(pc_98)",
+      "variant_tag": "kirisame_marisa_(pc_98)",
+      "display_name": "PC-98 / Classic Marisa",
+      "appearance_kind": "variant",
+      "is_default": false,
+      "status": "published",
+      "replace_features": true,
+      "confidence": "high",
+      "provenance": "danbooru_gelbooru_wiki_reviewed",
+      "notes": "PC-98 is a contextual appearance variant. The source explicitly describes two historical designs, retained as open conflicts.",
+      "conflicts": [
+        {
+          "conflict_key": "pc98_hair_and_eyes",
+          "facet": "hair",
+          "alternatives": [
+            "short_hair+red_hair+red_eyes",
+            "long_hair+blonde_hair+yellow_eyes"
+          ],
+          "status": "open",
+          "reason": "The source distinguishes Story of Eastern Wonderland from the later PC-98 games.",
+          "source_refs": [
+            "danbooru:wiki:kirisame_marisa_(pc_98)",
+            "gelbooru:wiki:kirisame_marisa_(pc_98)"
+          ]
+        }
       ],
-      "features":[
-        {"facet":"hair","value":"Short hair (Story of Eastern Wonderland design)","canonical_tag":"short_hair","source_refs":["danbooru:wiki:kirisame_marisa_(pc_98)"]},
-        {"facet":"hair","value":"Red hair (early PC-98 design)","canonical_tag":"red_hair","source_refs":["danbooru:wiki:kirisame_marisa_(pc_98)","gelbooru:wiki:kirisame_marisa_(pc_98)"]},
-        {"facet":"eyes","value":"Red eyes (early PC-98 design)","canonical_tag":"red_eyes","source_refs":["danbooru:wiki:kirisame_marisa_(pc_98)"]},
-        {"facet":"hair","value":"Long hair (later PC-98 design)","canonical_tag":"long_hair","source_refs":["danbooru:wiki:kirisame_marisa_(pc_98)"]},
-        {"facet":"hair","value":"Blonde hair (later PC-98 design)","canonical_tag":"blonde_hair","source_refs":["danbooru:wiki:kirisame_marisa_(pc_98)","gelbooru:wiki:kirisame_marisa_(pc_98)"]},
-        {"facet":"eyes","value":"Yellow eyes (later PC-98 design)","canonical_tag":"yellow_eyes","source_refs":["danbooru:wiki:kirisame_marisa_(pc_98)","gelbooru:wiki:kirisame_marisa_(pc_98)"]},
-        {"facet":"dress","value":"Purple outfit","canonical_tag":"purple_dress","source_refs":["danbooru:wiki:kirisame_marisa_(pc_98)","gelbooru:wiki:kirisame_marisa_(pc_98)"]},
-        {"facet":"headwear","value":"Purple hat","canonical_tag":"purple_hat","source_refs":["danbooru:wiki:kirisame_marisa_(pc_98)"]},
-        {"facet":"hair","value":"Hair over one eye (specific PC-98 depiction)","canonical_tag":"hair_over_one_eye","source_refs":["danbooru:wiki:kirisame_marisa_(pc_98)"]}
+      "features": [
+        {
+          "facet": "hair",
+          "value": "Short hair (Story of Eastern Wonderland design)",
+          "canonical_tag": "short_hair",
+          "source_refs": [
+            "danbooru:wiki:kirisame_marisa_(pc_98)"
+          ]
+        },
+        {
+          "facet": "hair",
+          "value": "Red hair (early PC-98 design)",
+          "canonical_tag": "red_hair",
+          "source_refs": [
+            "danbooru:wiki:kirisame_marisa_(pc_98)",
+            "gelbooru:wiki:kirisame_marisa_(pc_98)"
+          ]
+        },
+        {
+          "facet": "eyes",
+          "value": "Red eyes (early PC-98 design)",
+          "canonical_tag": "red_eyes",
+          "source_refs": [
+            "danbooru:wiki:kirisame_marisa_(pc_98)"
+          ]
+        },
+        {
+          "facet": "hair",
+          "value": "Long hair (later PC-98 design)",
+          "canonical_tag": "long_hair",
+          "source_refs": [
+            "danbooru:wiki:kirisame_marisa_(pc_98)"
+          ]
+        },
+        {
+          "facet": "hair",
+          "value": "Blonde hair (later PC-98 design)",
+          "canonical_tag": "blonde_hair",
+          "source_refs": [
+            "danbooru:wiki:kirisame_marisa_(pc_98)",
+            "gelbooru:wiki:kirisame_marisa_(pc_98)"
+          ]
+        },
+        {
+          "facet": "eyes",
+          "value": "Yellow eyes (later PC-98 design)",
+          "canonical_tag": "yellow_eyes",
+          "source_refs": [
+            "danbooru:wiki:kirisame_marisa_(pc_98)",
+            "gelbooru:wiki:kirisame_marisa_(pc_98)"
+          ]
+        },
+        {
+          "facet": "dress",
+          "value": "Purple outfit",
+          "canonical_tag": "purple_dress",
+          "source_refs": [
+            "danbooru:wiki:kirisame_marisa_(pc_98)",
+            "gelbooru:wiki:kirisame_marisa_(pc_98)"
+          ]
+        },
+        {
+          "facet": "headwear",
+          "value": "Purple hat",
+          "canonical_tag": "purple_hat",
+          "source_refs": [
+            "danbooru:wiki:kirisame_marisa_(pc_98)"
+          ]
+        },
+        {
+          "facet": "hair",
+          "value": "Hair over one eye (specific PC-98 depiction)",
+          "canonical_tag": "hair_over_one_eye",
+          "source_refs": [
+            "danbooru:wiki:kirisame_marisa_(pc_98)"
+          ]
+        }
       ]
     },
     {
-      "appearance_key":"kirisame_marisa::kirisame_marisa_(seihou)","variant_tag":"kirisame_marisa_(seihou)","display_name":"Seihou appearance","appearance_kind":"variant","is_default":false,"status":"published","replace_features":true,"confidence":"high","provenance":"danbooru_gelbooru_wiki_reviewed","notes":"Seihou appearance is isolated from the Windows outfit and replaces the broom motif with angel wings.","features":[
-        {"facet":"dress","value":"Black dress","canonical_tag":"black_dress","source_refs":["danbooru:wiki:kirisame_marisa_(seihou)","gelbooru:wiki:kirisame_marisa_(seihou)"]},
-        {"facet":"jacket","value":"Black shawl","canonical_tag":"shawl","source_refs":["danbooru:wiki:kirisame_marisa_(seihou)","gelbooru:wiki:kirisame_marisa_(seihou)"]},
-        {"facet":"accessories","value":"White bow","canonical_tag":"white_bow","source_refs":["danbooru:wiki:kirisame_marisa_(seihou)","gelbooru:wiki:kirisame_marisa_(seihou)"]},
-        {"facet":"species","value":"White angel wings","canonical_tag":"white_wings","source_refs":["danbooru:wiki:kirisame_marisa_(seihou)","gelbooru:wiki:kirisame_marisa_(seihou)"]}
+      "appearance_key": "kirisame_marisa::kirisame_marisa_(seihou)",
+      "variant_tag": "kirisame_marisa_(seihou)",
+      "display_name": "Seihou appearance",
+      "appearance_kind": "variant",
+      "is_default": false,
+      "status": "published",
+      "replace_features": true,
+      "confidence": "high",
+      "provenance": "danbooru_gelbooru_wiki_reviewed",
+      "notes": "Seihou appearance is isolated from the Windows outfit and replaces the broom motif with angel wings.",
+      "features": [
+        {
+          "facet": "dress",
+          "value": "Black dress",
+          "canonical_tag": "black_dress",
+          "source_refs": [
+            "danbooru:wiki:kirisame_marisa_(seihou)",
+            "gelbooru:wiki:kirisame_marisa_(seihou)"
+          ]
+        },
+        {
+          "facet": "jacket",
+          "value": "Black shawl",
+          "canonical_tag": "shawl",
+          "source_refs": [
+            "danbooru:wiki:kirisame_marisa_(seihou)",
+            "gelbooru:wiki:kirisame_marisa_(seihou)"
+          ]
+        },
+        {
+          "facet": "accessories",
+          "value": "White bow",
+          "canonical_tag": "white_bow",
+          "source_refs": [
+            "danbooru:wiki:kirisame_marisa_(seihou)",
+            "gelbooru:wiki:kirisame_marisa_(seihou)"
+          ]
+        },
+        {
+          "facet": "wings",
+          "value": "White angel wings",
+          "canonical_tag": "white_wings",
+          "source_refs": [
+            "danbooru:wiki:kirisame_marisa_(seihou)",
+            "gelbooru:wiki:kirisame_marisa_(seihou)"
+          ]
+        }
       ]
     }
   ]

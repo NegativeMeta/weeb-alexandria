@@ -1,1 +1,66 @@
-{"character_tag":"hitomi_chris","sources":[{"id":"danbooru:wiki:hitomi_chris","source_site":"danbooru","source_kind":"wiki","source_key":"hitomi_chris","source_url":"https://danbooru.donmai.us/wiki_pages/hitomi_chris.json","source_tier":1,"title":"Hitomi Chris","excerpt":"Former first-generation Hololive member; appearance source identifies brown hair, glasses, and blue-and-white uniform.","captured_at":"2026-08-28"},{"id":"gelbooru:wiki:hitomi_chris","source_site":"gelbooru","source_kind":"wiki","source_key":"hitomi_chris","source_url":"https://gelbooru.com/index.php?page=wiki&s=view&id=hitomi_chris","source_tier":1,"title":"Hitomi Chris","excerpt":"A brown-haired teen girl with glasses and a blue-and-white uniform; former first-generation Hololive member.","captured_at":"2026-08-28"}],"profiles":[{"appearance_key":"hitomi_chris::default","variant_tag":"hitomi_chris","display_name":"Base appearance","appearance_kind":"default","is_default":true,"status":"published","confidence":"medium","provenance":"danbooru_gelbooru_wiki_reviewed","notes":"Historical terminated talent; uniform is retained only as sourced appearance detail, not generalized to other profiles.","features":[{"facet":"hair","value":"Brown hair","canonical_tag":"brown_hair","source_refs":["gelbooru:wiki:hitomi_chris"]},{"facet":"accessories","value":"Glasses","canonical_tag":"glasses","source_refs":["gelbooru:wiki:hitomi_chris"]},{"facet":"clothing","value":"Blue-and-white uniform","canonical_tag":"blue_white_uniform","source_refs":["gelbooru:wiki:hitomi_chris"]}]}]}
+{
+  "character_tag": "hitomi_chris",
+  "sources": [
+    {
+      "id": "danbooru:wiki:hitomi_chris",
+      "source_site": "danbooru",
+      "source_kind": "wiki",
+      "source_key": "hitomi_chris",
+      "source_url": "https://danbooru.donmai.us/wiki_pages/hitomi_chris.json",
+      "source_tier": 1,
+      "title": "Hitomi Chris",
+      "excerpt": "Former first-generation Hololive member; appearance source identifies brown hair, glasses, and blue-and-white uniform.",
+      "captured_at": "2026-08-28"
+    },
+    {
+      "id": "gelbooru:wiki:hitomi_chris",
+      "source_site": "gelbooru",
+      "source_kind": "wiki",
+      "source_key": "hitomi_chris",
+      "source_url": "https://gelbooru.com/index.php?page=wiki&s=view&id=hitomi_chris",
+      "source_tier": 1,
+      "title": "Hitomi Chris",
+      "excerpt": "A brown-haired teen girl with glasses and a blue-and-white uniform; former first-generation Hololive member.",
+      "captured_at": "2026-08-28"
+    }
+  ],
+  "profiles": [
+    {
+      "appearance_key": "hitomi_chris::default",
+      "variant_tag": "hitomi_chris",
+      "display_name": "Base appearance",
+      "appearance_kind": "default",
+      "is_default": true,
+      "status": "published",
+      "confidence": "medium",
+      "provenance": "danbooru_gelbooru_wiki_reviewed",
+      "notes": "Historical terminated talent; uniform is retained only as sourced appearance detail, not generalized to other profiles.",
+      "features": [
+        {
+          "facet": "hair",
+          "value": "Brown hair",
+          "canonical_tag": "brown_hair",
+          "source_refs": [
+            "gelbooru:wiki:hitomi_chris"
+          ]
+        },
+        {
+          "facet": "face",
+          "value": "Glasses",
+          "canonical_tag": "glasses",
+          "source_refs": [
+            "gelbooru:wiki:hitomi_chris"
+          ]
+        },
+        {
+          "facet": "dress",
+          "value": "Blue-and-white uniform",
+          "canonical_tag": "blue_white_uniform",
+          "source_refs": [
+            "gelbooru:wiki:hitomi_chris"
+          ]
+        }
+      ]
+    }
+  ]
+}

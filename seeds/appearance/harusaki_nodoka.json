@@ -1,1 +1,112 @@
-{"character_tag":"harusaki_nodoka","sources":[{"id":"danbooru:wiki:harusaki_nodoka","source_site":"danbooru","source_kind":"wiki","source_key":"harusaki_nodoka","source_url":"https://danbooru.donmai.us/wiki_pages/harusaki_nodoka.json","source_tier":1,"title":"Harusaki Nodoka","excerpt":"Hololive staff member with short brown hair, ahoge, dark pink eyes, mole on neck, white collared shirt, green cardigan, black pencil skirt, pantyhose, high heels, pink lanyard and frog charm.","captured_at":"2026-08-28"},{"id":"gelbooru:wiki:harusaki_nodoka","source_site":"gelbooru","source_kind":"wiki","source_key":"harusaki_nodoka","source_url":"https://gelbooru.com/index.php?page=wiki&s=view&id=harusaki_nodoka","source_tier":1,"title":"Harusaki Nodoka","excerpt":"Hololive staff pseudo-VTuber with short brown hair, ahoge, dark pink eyes, office-lady outfit, pink lanyard, ID card, frog charm, and neck mole.","captured_at":"2026-08-28"}],"profiles":[{"appearance_key":"harusaki_nodoka::default","variant_tag":"harusaki_nodoka","display_name":"Base appearance","appearance_kind":"default","is_default":true,"status":"published","confidence":"high","provenance":"danbooru_gelbooru_wiki_reviewed","notes":"Historical staff/announcer identity; holoAN appearances and holoNatsu Paradise remain separate.","features":[{"facet":"hair","value":"Short brown hair","canonical_tag":"brown_hair","source_refs":["danbooru:wiki:harusaki_nodoka","gelbooru:wiki:harusaki_nodoka"]},{"facet":"hair_accessory","value":"Ahoge","canonical_tag":"ahoge","source_refs":["danbooru:wiki:harusaki_nodoka"]},{"facet":"eyes","value":"Dark pink eyes","canonical_tag":"pink_eyes","source_refs":["danbooru:wiki:harusaki_nodoka","gelbooru:wiki:harusaki_nodoka"]},{"facet":"face","value":"Mole on neck","canonical_tag":"mole_on_neck","source_refs":["danbooru:wiki:harusaki_nodoka","gelbooru:wiki:harusaki_nodoka"]},{"facet":"clothing","value":"Green cardigan","canonical_tag":"green_cardigan","source_refs":["danbooru:wiki:harusaki_nodoka","gelbooru:wiki:harusaki_nodoka"]},{"facet":"clothing","value":"Black pencil skirt","canonical_tag":"pencil_skirt","source_refs":["danbooru:wiki:harusaki_nodoka"]},{"facet":"accessories","value":"Pink lanyard with ID card","canonical_tag":"lanyard","source_refs":["danbooru:wiki:harusaki_nodoka","gelbooru:wiki:harusaki_nodoka"]},{"facet":"accessories","value":"Frog charm","canonical_tag":"frog_charm","source_refs":["danbooru:wiki:harusaki_nodoka","gelbooru:wiki:harusaki_nodoka"]}]}]}
+{
+  "character_tag": "harusaki_nodoka",
+  "sources": [
+    {
+      "id": "danbooru:wiki:harusaki_nodoka",
+      "source_site": "danbooru",
+      "source_kind": "wiki",
+      "source_key": "harusaki_nodoka",
+      "source_url": "https://danbooru.donmai.us/wiki_pages/harusaki_nodoka.json",
+      "source_tier": 1,
+      "title": "Harusaki Nodoka",
+      "excerpt": "Hololive staff member with short brown hair, ahoge, dark pink eyes, mole on neck, white collared shirt, green cardigan, black pencil skirt, pantyhose, high heels, pink lanyard and frog charm.",
+      "captured_at": "2026-08-28"
+    },
+    {
+      "id": "gelbooru:wiki:harusaki_nodoka",
+      "source_site": "gelbooru",
+      "source_kind": "wiki",
+      "source_key": "harusaki_nodoka",
+      "source_url": "https://gelbooru.com/index.php?page=wiki&s=view&id=harusaki_nodoka",
+      "source_tier": 1,
+      "title": "Harusaki Nodoka",
+      "excerpt": "Hololive staff pseudo-VTuber with short brown hair, ahoge, dark pink eyes, office-lady outfit, pink lanyard, ID card, frog charm, and neck mole.",
+      "captured_at": "2026-08-28"
+    }
+  ],
+  "profiles": [
+    {
+      "appearance_key": "harusaki_nodoka::default",
+      "variant_tag": "harusaki_nodoka",
+      "display_name": "Base appearance",
+      "appearance_kind": "default",
+      "is_default": true,
+      "status": "published",
+      "confidence": "high",
+      "provenance": "danbooru_gelbooru_wiki_reviewed",
+      "notes": "Historical staff/announcer identity; holoAN appearances and holoNatsu Paradise remain separate.",
+      "features": [
+        {
+          "facet": "hair",
+          "value": "Short brown hair",
+          "canonical_tag": "brown_hair",
+          "source_refs": [
+            "danbooru:wiki:harusaki_nodoka",
+            "gelbooru:wiki:harusaki_nodoka"
+          ]
+        },
+        {
+          "facet": "hair_accessory",
+          "value": "Ahoge",
+          "canonical_tag": "ahoge",
+          "source_refs": [
+            "danbooru:wiki:harusaki_nodoka"
+          ]
+        },
+        {
+          "facet": "eyes",
+          "value": "Dark pink eyes",
+          "canonical_tag": "pink_eyes",
+          "source_refs": [
+            "danbooru:wiki:harusaki_nodoka",
+            "gelbooru:wiki:harusaki_nodoka"
+          ]
+        },
+        {
+          "facet": "face",
+          "value": "Mole on neck",
+          "canonical_tag": "mole_on_neck",
+          "source_refs": [
+            "danbooru:wiki:harusaki_nodoka",
+            "gelbooru:wiki:harusaki_nodoka"
+          ]
+        },
+        {
+          "facet": "jacket",
+          "value": "Green cardigan",
+          "canonical_tag": "green_cardigan",
+          "source_refs": [
+            "danbooru:wiki:harusaki_nodoka",
+            "gelbooru:wiki:harusaki_nodoka"
+          ]
+        },
+        {
+          "facet": "lower_body",
+          "value": "Black pencil skirt",
+          "canonical_tag": "pencil_skirt",
+          "source_refs": [
+            "danbooru:wiki:harusaki_nodoka"
+          ]
+        },
+        {
+          "facet": "accessories",
+          "value": "Pink lanyard with ID card",
+          "canonical_tag": "lanyard",
+          "source_refs": [
+            "danbooru:wiki:harusaki_nodoka",
+            "gelbooru:wiki:harusaki_nodoka"
+          ]
+        },
+        {
+          "facet": "accessories",
+          "value": "Frog charm",
+          "canonical_tag": "frog_charm",
+          "source_refs": [
+            "danbooru:wiki:harusaki_nodoka",
+            "gelbooru:wiki:harusaki_nodoka"
+          ]
+        }
+      ]
+    }
+  ]
+}

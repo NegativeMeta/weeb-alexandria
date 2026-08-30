@@ -1,1 +1,60 @@
-{"character_tag":"link","sources":[{"id":"danbooru:wiki:link","source_site":"danbooru","source_kind":"wiki","source_key":"link","source_url":"https://danbooru.donmai.us/wiki_pages/link.json","source_tier":1,"title":"Link","excerpt":"The Legend of Zelda protagonist; common pre-Breath of the Wild elements include a green tunic and Phrygian cap.","captured_at":"2026-08-28"},{"id":"e621:wiki:link","source_site":"e621","source_kind":"wiki","source_key":"link","source_url":"https://e621.net/wiki_pages/show_or_new?title=link","source_tier":1,"title":"Link","excerpt":"Main protagonist of The Legend of Zelda, commonly portrayed wearing a green tunic and pointed cap.","captured_at":"2026-08-28"}],"profiles":[{"appearance_key":"link::default","variant_tag":"link","display_name":"Common base appearance","appearance_kind":"default","is_default":true,"status":"published","confidence":"medium","provenance":"danbooru_e621_wiki_reviewed","notes":"Cross-incarnation common elements only; game-specific designs and gender-swapped Linkle remain separate.","features":[{"facet":"clothing","canonical_tag":"green_tunic","value":"Green tunic is a common series appearance element","source_refs":["danbooru:wiki:link","e621:wiki:link"]},{"facet":"headwear","canonical_tag":"phrygian_cap","value":"Pointed Phrygian cap is a common series appearance element","source_refs":["danbooru:wiki:link","e621:wiki:link"]}]}]}
+{
+  "character_tag": "link",
+  "sources": [
+    {
+      "id": "danbooru:wiki:link",
+      "source_site": "danbooru",
+      "source_kind": "wiki",
+      "source_key": "link",
+      "source_url": "https://danbooru.donmai.us/wiki_pages/link.json",
+      "source_tier": 1,
+      "title": "Link",
+      "excerpt": "The Legend of Zelda protagonist; common pre-Breath of the Wild elements include a green tunic and Phrygian cap.",
+      "captured_at": "2026-08-28"
+    },
+    {
+      "id": "e621:wiki:link",
+      "source_site": "e621",
+      "source_kind": "wiki",
+      "source_key": "link",
+      "source_url": "https://e621.net/wiki_pages/show_or_new?title=link",
+      "source_tier": 1,
+      "title": "Link",
+      "excerpt": "Main protagonist of The Legend of Zelda, commonly portrayed wearing a green tunic and pointed cap.",
+      "captured_at": "2026-08-28"
+    }
+  ],
+  "profiles": [
+    {
+      "appearance_key": "link::default",
+      "variant_tag": "link",
+      "display_name": "Common base appearance",
+      "appearance_kind": "default",
+      "is_default": true,
+      "status": "published",
+      "confidence": "medium",
+      "provenance": "danbooru_e621_wiki_reviewed",
+      "notes": "Cross-incarnation common elements only; game-specific designs and gender-swapped Linkle remain separate.",
+      "features": [
+        {
+          "facet": "upper_body",
+          "canonical_tag": "green_tunic",
+          "value": "Green tunic is a common series appearance element",
+          "source_refs": [
+            "danbooru:wiki:link",
+            "e621:wiki:link"
+          ]
+        },
+        {
+          "facet": "headwear",
+          "canonical_tag": "phrygian_cap",
+          "value": "Pointed Phrygian cap is a common series appearance element",
+          "source_refs": [
+            "danbooru:wiki:link",
+            "e621:wiki:link"
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,1 +1,114 @@
-{"character_tag":"hina_(blue_archive)","sources":[{"id":"danbooru:wiki:hina_(blue_archive)","source_site":"danbooru","source_kind":"wiki","source_key":"hina_(blue_archive)","source_url":"https://danbooru.donmai.us/wiki_pages/hina_(blue_archive).json","source_tier":1,"title":"Hina","excerpt":"Very long grey to white hair with parted bangs and ahoge; two pairs of demon horns and wings; black suit uniform, black miniskirt, purple thighhighs and long black boots.","captured_at":"2026-08-28"},{"id":"gelbooru:wiki:hina_(blue_archive)","source_site":"gelbooru","source_kind":"wiki","source_key":"hina_(blue_archive)","source_url":"https://gelbooru.com/index.php?page=wiki&s=view&id=hina_(blue_archive)","source_tier":1,"title":"Hina","excerpt":"Blue Archive Hina default and alternate costumes are separately tagged.","captured_at":"2026-08-28"}],"profiles":[{"appearance_key":"hina_(blue_archive)::default","variant_tag":"hina_(blue_archive)","display_name":"Default appearance","appearance_kind":"default","is_default":true,"status":"published","confidence":"high","provenance":"danbooru_gelbooru_wiki_reviewed","notes":"Default Prefect Team design; swimsuit, dress and pajamas variants excluded.","features":[{"facet":"hair","canonical_tag":"very_long_hair","value":"Very long grey to white hair","source_refs":["danbooru:wiki:hina_(blue_archive)"]},{"facet":"hair_style","canonical_tag":"parted_bangs","value":"Parted bangs","source_refs":["danbooru:wiki:hina_(blue_archive)"]},{"facet":"hair_accessory","canonical_tag":"ahoge","value":"Ahoge","source_refs":["danbooru:wiki:hina_(blue_archive)"]},{"facet":"anatomy","canonical_tag":"demon_horns","value":"Two pairs of demon horns","source_refs":["danbooru:wiki:hina_(blue_archive)"]},{"facet":"anatomy","canonical_tag":"demon_wings","value":"Demon wings","source_refs":["danbooru:wiki:hina_(blue_archive)"]},{"facet":"clothing","canonical_tag":"black_suit","value":"Black suit uniform","source_refs":["danbooru:wiki:hina_(blue_archive)"]},{"facet":"lower_body","canonical_tag":"black_skirt","value":"Black miniskirt","source_refs":["danbooru:wiki:hina_(blue_archive)"]},{"facet":"legwear","canonical_tag":"purple_thighhighs","value":"Dark purple thighhighs","source_refs":["danbooru:wiki:hina_(blue_archive)"]},{"facet":"footwear","canonical_tag":"black_boots","value":"Long black boots","source_refs":["danbooru:wiki:hina_(blue_archive)"]}]}]}
+{
+  "character_tag": "hina_(blue_archive)",
+  "sources": [
+    {
+      "id": "danbooru:wiki:hina_(blue_archive)",
+      "source_site": "danbooru",
+      "source_kind": "wiki",
+      "source_key": "hina_(blue_archive)",
+      "source_url": "https://danbooru.donmai.us/wiki_pages/hina_(blue_archive).json",
+      "source_tier": 1,
+      "title": "Hina",
+      "excerpt": "Very long grey to white hair with parted bangs and ahoge; two pairs of demon horns and wings; black suit uniform, black miniskirt, purple thighhighs and long black boots.",
+      "captured_at": "2026-08-28"
+    },
+    {
+      "id": "gelbooru:wiki:hina_(blue_archive)",
+      "source_site": "gelbooru",
+      "source_kind": "wiki",
+      "source_key": "hina_(blue_archive)",
+      "source_url": "https://gelbooru.com/index.php?page=wiki&s=view&id=hina_(blue_archive)",
+      "source_tier": 1,
+      "title": "Hina",
+      "excerpt": "Blue Archive Hina default and alternate costumes are separately tagged.",
+      "captured_at": "2026-08-28"
+    }
+  ],
+  "profiles": [
+    {
+      "appearance_key": "hina_(blue_archive)::default",
+      "variant_tag": "hina_(blue_archive)",
+      "display_name": "Default appearance",
+      "appearance_kind": "default",
+      "is_default": true,
+      "status": "published",
+      "confidence": "high",
+      "provenance": "danbooru_gelbooru_wiki_reviewed",
+      "notes": "Default Prefect Team design; swimsuit, dress and pajamas variants excluded.",
+      "features": [
+        {
+          "facet": "hair",
+          "canonical_tag": "very_long_hair",
+          "value": "Very long grey to white hair",
+          "source_refs": [
+            "danbooru:wiki:hina_(blue_archive)"
+          ]
+        },
+        {
+          "facet": "hair",
+          "canonical_tag": "parted_bangs",
+          "value": "Parted bangs",
+          "source_refs": [
+            "danbooru:wiki:hina_(blue_archive)"
+          ]
+        },
+        {
+          "facet": "hair_accessory",
+          "canonical_tag": "ahoge",
+          "value": "Ahoge",
+          "source_refs": [
+            "danbooru:wiki:hina_(blue_archive)"
+          ]
+        },
+        {
+          "facet": "body",
+          "canonical_tag": "demon_horns",
+          "value": "Two pairs of demon horns",
+          "source_refs": [
+            "danbooru:wiki:hina_(blue_archive)"
+          ]
+        },
+        {
+          "facet": "wings",
+          "canonical_tag": "demon_wings",
+          "value": "Demon wings",
+          "source_refs": [
+            "danbooru:wiki:hina_(blue_archive)"
+          ]
+        },
+        {
+          "facet": "dress",
+          "canonical_tag": "black_suit",
+          "value": "Black suit uniform",
+          "source_refs": [
+            "danbooru:wiki:hina_(blue_archive)"
+          ]
+        },
+        {
+          "facet": "lower_body",
+          "canonical_tag": "black_skirt",
+          "value": "Black miniskirt",
+          "source_refs": [
+            "danbooru:wiki:hina_(blue_archive)"
+          ]
+        },
+        {
+          "facet": "legwear",
+          "canonical_tag": "purple_thighhighs",
+          "value": "Dark purple thighhighs",
+          "source_refs": [
+            "danbooru:wiki:hina_(blue_archive)"
+          ]
+        },
+        {
+          "facet": "footwear",
+          "canonical_tag": "black_boots",
+          "value": "Long black boots",
+          "source_refs": [
+            "danbooru:wiki:hina_(blue_archive)"
+          ]
+        }
+      ]
+    }
+  ]
+}

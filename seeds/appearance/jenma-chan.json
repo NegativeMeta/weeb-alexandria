@@ -1,1 +1,69 @@
-{"character_tag":"jenma-chan","sources":[{"id":"danbooru:wiki:jenma-chan","source_site":"danbooru","source_kind":"wiki","source_key":"jenma-chan","source_url":"https://danbooru.donmai.us/wiki_pages/jenma-chan.json","source_tier":1,"title":"Jenma-chan","excerpt":"Hololive English staff member and manager with short blonde hair, purple inner hair, and a halo floating over her head.","captured_at":"2026-08-28"},{"id":"gelbooru:wiki:jenma-chan","source_site":"gelbooru","source_kind":"wiki","source_key":"jenma-chan","source_url":"https://gelbooru.com/index.php?page=wiki&s=view&id=jenma-chan","source_tier":1,"title":"Jenma-chan","excerpt":"Hololive English staff member and manager with short blonde hair, purple inner hair, and floating halo.","captured_at":"2026-08-28"}],"profiles":[{"appearance_key":"jenma_chan::default","variant_tag":"jenma_chan","display_name":"Base appearance","appearance_kind":"default","is_default":true,"status":"published","confidence":"high","provenance":"danbooru_gelbooru_wiki_reviewed","notes":"Staff identity represented by a community-origin design; no manager-specific variants inferred.","features":[{"facet":"hair","value":"Short blonde hair","canonical_tag":"blonde_hair","source_refs":["danbooru:wiki:jenma-chan","gelbooru:wiki:jenma-chan"]},{"facet":"hair","value":"Purple inner hair","canonical_tag":"colored_inner_hair","source_refs":["danbooru:wiki:jenma-chan","gelbooru:wiki:jenma-chan"]},{"facet":"halo","value":"Floating halo","canonical_tag":"halo","source_refs":["danbooru:wiki:jenma-chan","gelbooru:wiki:jenma-chan"]}]}]}
+{
+  "character_tag": "jenma-chan",
+  "sources": [
+    {
+      "id": "danbooru:wiki:jenma-chan",
+      "source_site": "danbooru",
+      "source_kind": "wiki",
+      "source_key": "jenma-chan",
+      "source_url": "https://danbooru.donmai.us/wiki_pages/jenma-chan.json",
+      "source_tier": 1,
+      "title": "Jenma-chan",
+      "excerpt": "Hololive English staff member and manager with short blonde hair, purple inner hair, and a halo floating over her head.",
+      "captured_at": "2026-08-28"
+    },
+    {
+      "id": "gelbooru:wiki:jenma-chan",
+      "source_site": "gelbooru",
+      "source_kind": "wiki",
+      "source_key": "jenma-chan",
+      "source_url": "https://gelbooru.com/index.php?page=wiki&s=view&id=jenma-chan",
+      "source_tier": 1,
+      "title": "Jenma-chan",
+      "excerpt": "Hololive English staff member and manager with short blonde hair, purple inner hair, and floating halo.",
+      "captured_at": "2026-08-28"
+    }
+  ],
+  "profiles": [
+    {
+      "appearance_key": "jenma_chan::default",
+      "variant_tag": "jenma_chan",
+      "display_name": "Base appearance",
+      "appearance_kind": "default",
+      "is_default": true,
+      "status": "published",
+      "confidence": "high",
+      "provenance": "danbooru_gelbooru_wiki_reviewed",
+      "notes": "Staff identity represented by a community-origin design; no manager-specific variants inferred.",
+      "features": [
+        {
+          "facet": "hair",
+          "value": "Short blonde hair",
+          "canonical_tag": "blonde_hair",
+          "source_refs": [
+            "danbooru:wiki:jenma-chan",
+            "gelbooru:wiki:jenma-chan"
+          ]
+        },
+        {
+          "facet": "hair",
+          "value": "Purple inner hair",
+          "canonical_tag": "colored_inner_hair",
+          "source_refs": [
+            "danbooru:wiki:jenma-chan",
+            "gelbooru:wiki:jenma-chan"
+          ]
+        },
+        {
+          "facet": "headwear",
+          "value": "Floating halo",
+          "canonical_tag": "halo",
+          "source_refs": [
+            "danbooru:wiki:jenma-chan",
+            "gelbooru:wiki:jenma-chan"
+          ]
+        }
+      ]
+    }
+  ]
+}

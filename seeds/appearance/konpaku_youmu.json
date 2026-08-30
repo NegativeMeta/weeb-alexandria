@@ -1,1 +1,130 @@
-{"character_tag":"konpaku_youmu","sources":[{"id":"danbooru:wiki:konpaku_youmu","source_site":"danbooru","source_kind":"wiki","source_key":"konpaku_youmu","source_url":"https://danbooru.donmai.us/wiki_pages/konpaku_youmu.json","source_tier":1,"title":"Konpaku Youmu","excerpt":"Short grey hair; blue, green, or red eyes; black hairband with black bow; white collared shirt, black bowtie, green vest and frilled green skirt, white socks and black Mary Janes.","captured_at":"2026-08-28"},{"id":"gelbooru:wiki:konpaku_youmu","source_site":"gelbooru","source_kind":"wiki","source_key":"konpaku_youmu","source_url":"https://gelbooru.com/index.php?page=wiki&s=view&id=konpaku_youmu","source_tier":1,"title":"Konpaku Youmu","excerpt":"Touhou character and gardener of Hakugyokurou; her phantom half floats beside her.","captured_at":"2026-08-28"}],"profiles":[{"appearance_key":"konpaku_youmu::default","variant_tag":"konpaku_youmu","display_name":"Base appearance","appearance_kind":"default","is_default":true,"status":"published","confidence":"high","provenance":"danbooru_gelbooru_wiki_reviewed","notes":"Base appearance only; swords and phantom half are separate entities/props.","features":[{"facet":"hair","canonical_tag":"short_hair","value":"Short hair","source_refs":["danbooru:wiki:konpaku_youmu"]},{"facet":"hair","canonical_tag":"grey_hair","value":"Grey hair","source_refs":["danbooru:wiki:konpaku_youmu"]},{"facet":"eyes","canonical_tag":"blue_eyes","value":"Blue eyes are documented as an appearance alternative","source_refs":["danbooru:wiki:konpaku_youmu"]},{"facet":"eyes","canonical_tag":"green_eyes","value":"Green eyes are documented as an appearance alternative","source_refs":["danbooru:wiki:konpaku_youmu"]},{"facet":"eyes","canonical_tag":"red_eyes","value":"Red eyes are documented as an appearance alternative","source_refs":["danbooru:wiki:konpaku_youmu"]},{"facet":"hair_accessory","canonical_tag":"black_hairband","value":"Black hairband","source_refs":["danbooru:wiki:konpaku_youmu"]},{"facet":"accessories","canonical_tag":"black_bow","value":"Black bow","source_refs":["danbooru:wiki:konpaku_youmu"]},{"facet":"clothing","canonical_tag":"white_collared_shirt","value":"White collared shirt","source_refs":["danbooru:wiki:konpaku_youmu"]},{"facet":"clothing","canonical_tag":"green_vest","value":"Green vest","source_refs":["danbooru:wiki:konpaku_youmu"]},{"facet":"clothing","canonical_tag":"green_skirt","value":"Frilled green skirt","source_refs":["danbooru:wiki:konpaku_youmu"]},{"facet":"footwear","canonical_tag":"mary_janes","value":"Black Mary Jane shoes","source_refs":["danbooru:wiki:konpaku_youmu"]}]}]}
+{
+  "character_tag": "konpaku_youmu",
+  "sources": [
+    {
+      "id": "danbooru:wiki:konpaku_youmu",
+      "source_site": "danbooru",
+      "source_kind": "wiki",
+      "source_key": "konpaku_youmu",
+      "source_url": "https://danbooru.donmai.us/wiki_pages/konpaku_youmu.json",
+      "source_tier": 1,
+      "title": "Konpaku Youmu",
+      "excerpt": "Short grey hair; blue, green, or red eyes; black hairband with black bow; white collared shirt, black bowtie, green vest and frilled green skirt, white socks and black Mary Janes.",
+      "captured_at": "2026-08-28"
+    },
+    {
+      "id": "gelbooru:wiki:konpaku_youmu",
+      "source_site": "gelbooru",
+      "source_kind": "wiki",
+      "source_key": "konpaku_youmu",
+      "source_url": "https://gelbooru.com/index.php?page=wiki&s=view&id=konpaku_youmu",
+      "source_tier": 1,
+      "title": "Konpaku Youmu",
+      "excerpt": "Touhou character and gardener of Hakugyokurou; her phantom half floats beside her.",
+      "captured_at": "2026-08-28"
+    }
+  ],
+  "profiles": [
+    {
+      "appearance_key": "konpaku_youmu::default",
+      "variant_tag": "konpaku_youmu",
+      "display_name": "Base appearance",
+      "appearance_kind": "default",
+      "is_default": true,
+      "status": "published",
+      "confidence": "high",
+      "provenance": "danbooru_gelbooru_wiki_reviewed",
+      "notes": "Base appearance only; swords and phantom half are separate entities/props.",
+      "features": [
+        {
+          "facet": "hair",
+          "canonical_tag": "short_hair",
+          "value": "Short hair",
+          "source_refs": [
+            "danbooru:wiki:konpaku_youmu"
+          ]
+        },
+        {
+          "facet": "hair",
+          "canonical_tag": "grey_hair",
+          "value": "Grey hair",
+          "source_refs": [
+            "danbooru:wiki:konpaku_youmu"
+          ]
+        },
+        {
+          "facet": "eyes",
+          "canonical_tag": "blue_eyes",
+          "value": "Blue eyes are documented as an appearance alternative",
+          "source_refs": [
+            "danbooru:wiki:konpaku_youmu"
+          ]
+        },
+        {
+          "facet": "eyes",
+          "canonical_tag": "green_eyes",
+          "value": "Green eyes are documented as an appearance alternative",
+          "source_refs": [
+            "danbooru:wiki:konpaku_youmu"
+          ]
+        },
+        {
+          "facet": "eyes",
+          "canonical_tag": "red_eyes",
+          "value": "Red eyes are documented as an appearance alternative",
+          "source_refs": [
+            "danbooru:wiki:konpaku_youmu"
+          ]
+        },
+        {
+          "facet": "hair_accessory",
+          "canonical_tag": "black_hairband",
+          "value": "Black hairband",
+          "source_refs": [
+            "danbooru:wiki:konpaku_youmu"
+          ]
+        },
+        {
+          "facet": "accessories",
+          "canonical_tag": "black_bow",
+          "value": "Black bow",
+          "source_refs": [
+            "danbooru:wiki:konpaku_youmu"
+          ]
+        },
+        {
+          "facet": "neck",
+          "canonical_tag": "white_collared_shirt",
+          "value": "White collared shirt",
+          "source_refs": [
+            "danbooru:wiki:konpaku_youmu"
+          ]
+        },
+        {
+          "facet": "jacket",
+          "canonical_tag": "green_vest",
+          "value": "Green vest",
+          "source_refs": [
+            "danbooru:wiki:konpaku_youmu"
+          ]
+        },
+        {
+          "facet": "lower_body",
+          "canonical_tag": "green_skirt",
+          "value": "Frilled green skirt",
+          "source_refs": [
+            "danbooru:wiki:konpaku_youmu"
+          ]
+        },
+        {
+          "facet": "footwear",
+          "canonical_tag": "mary_janes",
+          "value": "Black Mary Jane shoes",
+          "source_refs": [
+            "danbooru:wiki:konpaku_youmu"
+          ]
+        }
+      ]
+    }
+  ]
+}

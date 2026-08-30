@@ -1,1 +1,74 @@
-{"character_tag":"nico_robin","sources":[{"id":"danbooru:wiki:nico_robin","source_site":"danbooru","source_kind":"wiki","source_key":"nico_robin","source_url":"https://danbooru.donmai.us/wiki_pages/nico_robin.json","source_tier":1,"title":"Nico Robin","excerpt":"Nico Robin has long black hair with blunt bangs; her base pre-timeskip design uses a black leather dress/jacket hybrid.","captured_at":"2026-08-28"},{"id":"gelbooru:wiki:nico_robin","source_site":"gelbooru","source_kind":"wiki","source_key":"nico_robin","source_url":"https://gelbooru.com/index.php?page=wiki&s=view&id=nico_robin","source_tier":1,"title":"Nico Robin","excerpt":"One Piece archaeologist; pre-timeskip and later outfits are separately represented.","captured_at":"2026-08-28"}],"profiles":[{"appearance_key":"nico_robin::default","variant_tag":"nico_robin","display_name":"Pre-timeskip base appearance","appearance_kind":"default","is_default":true,"status":"published","confidence":"medium","provenance":"danbooru_gelbooru_wiki_reviewed","notes":"Base pre-timeskip design; timeskip, film and alternate outfits excluded.","features":[{"facet":"hair","canonical_tag":"long_hair","value":"Long hair","source_refs":["danbooru:wiki:nico_robin"]},{"facet":"hair","canonical_tag":"black_hair","value":"Black hair","source_refs":["danbooru:wiki:nico_robin"]},{"facet":"hair_style","canonical_tag":"blunt_bangs","value":"Blunt bangs","source_refs":["danbooru:wiki:nico_robin"]},{"facet":"clothing","canonical_tag":"black_dress","value":"Black leather dress/jacket hybrid","source_refs":["danbooru:wiki:nico_robin"]}]}]}
+{
+  "character_tag": "nico_robin",
+  "sources": [
+    {
+      "id": "danbooru:wiki:nico_robin",
+      "source_site": "danbooru",
+      "source_kind": "wiki",
+      "source_key": "nico_robin",
+      "source_url": "https://danbooru.donmai.us/wiki_pages/nico_robin.json",
+      "source_tier": 1,
+      "title": "Nico Robin",
+      "excerpt": "Nico Robin has long black hair with blunt bangs; her base pre-timeskip design uses a black leather dress/jacket hybrid.",
+      "captured_at": "2026-08-28"
+    },
+    {
+      "id": "gelbooru:wiki:nico_robin",
+      "source_site": "gelbooru",
+      "source_kind": "wiki",
+      "source_key": "nico_robin",
+      "source_url": "https://gelbooru.com/index.php?page=wiki&s=view&id=nico_robin",
+      "source_tier": 1,
+      "title": "Nico Robin",
+      "excerpt": "One Piece archaeologist; pre-timeskip and later outfits are separately represented.",
+      "captured_at": "2026-08-28"
+    }
+  ],
+  "profiles": [
+    {
+      "appearance_key": "nico_robin::default",
+      "variant_tag": "nico_robin",
+      "display_name": "Pre-timeskip base appearance",
+      "appearance_kind": "default",
+      "is_default": true,
+      "status": "published",
+      "confidence": "medium",
+      "provenance": "danbooru_gelbooru_wiki_reviewed",
+      "notes": "Base pre-timeskip design; timeskip, film and alternate outfits excluded.",
+      "features": [
+        {
+          "facet": "hair",
+          "canonical_tag": "long_hair",
+          "value": "Long hair",
+          "source_refs": [
+            "danbooru:wiki:nico_robin"
+          ]
+        },
+        {
+          "facet": "hair",
+          "canonical_tag": "black_hair",
+          "value": "Black hair",
+          "source_refs": [
+            "danbooru:wiki:nico_robin"
+          ]
+        },
+        {
+          "facet": "hair",
+          "canonical_tag": "blunt_bangs",
+          "value": "Blunt bangs",
+          "source_refs": [
+            "danbooru:wiki:nico_robin"
+          ]
+        },
+        {
+          "facet": "dress",
+          "canonical_tag": "black_dress",
+          "value": "Black leather dress/jacket hybrid",
+          "source_refs": [
+            "danbooru:wiki:nico_robin"
+          ]
+        }
+      ]
+    }
+  ]
+}

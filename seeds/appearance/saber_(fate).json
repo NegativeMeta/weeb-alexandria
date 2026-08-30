@@ -1,1 +1,96 @@
-{"character_tag":"saber_(fate)","sources":[{"id":"danbooru:wiki:saber_(fate)","source_site":"danbooru","source_kind":"wiki","source_key":"saber_(fate)","source_url":"https://danbooru.donmai.us/wiki_pages/saber_(fate).json","source_tier":1,"title":"Saber","excerpt":"Blonde hair tied in a bun with braid, green eyes and ahoge; commonly wears armored dress or white blouse with blue skirt.","captured_at":"2026-08-28"},{"id":"gelbooru:wiki:saber_(fate)","source_site":"gelbooru","source_kind":"wiki","source_key":"saber_(fate)","source_url":"https://gelbooru.com/index.php?page=wiki&s=view&id=saber_(fate)","source_tier":1,"title":"Saber","excerpt":"Blonde hair in braided bun, green eyes and ahoge; armored dress or white blouse and blue skirt.","captured_at":"2026-08-28"}],"profiles":[{"appearance_key":"saber_(fate)::default","variant_tag":"saber_(fate)","display_name":"Base appearance","appearance_kind":"default","is_default":true,"status":"published","confidence":"high","provenance":"danbooru_gelbooru_wiki_reviewed","notes":"Saber base only; Fate/Zero suit and named costumes excluded.","features":[{"facet":"hair","canonical_tag":"blonde_hair","value":"Blonde hair","source_refs":["danbooru:wiki:saber_(fate)","gelbooru:wiki:saber_(fate)"]},{"facet":"hair_style","canonical_tag":"single_hair_bun","value":"Hair tied in a bun with braid","source_refs":["danbooru:wiki:saber_(fate)","gelbooru:wiki:saber_(fate)"]},{"facet":"eyes","canonical_tag":"green_eyes","value":"Green eyes","source_refs":["danbooru:wiki:saber_(fate)","gelbooru:wiki:saber_(fate)"]},{"facet":"hair_style","canonical_tag":"ahoge","value":"Ahoge","source_refs":["danbooru:wiki:saber_(fate)","gelbooru:wiki:saber_(fate)"]},{"facet":"clothing","canonical_tag":"armored_dress","value":"Armored dress","source_refs":["danbooru:wiki:saber_(fate)","gelbooru:wiki:saber_(fate)"]},{"facet":"clothing","canonical_tag":"blue_skirt","value":"Blue skirt in alternate base presentation","source_refs":["danbooru:wiki:saber_(fate)","gelbooru:wiki:saber_(fate)"]}]}]}
+{
+  "character_tag": "saber_(fate)",
+  "sources": [
+    {
+      "id": "danbooru:wiki:saber_(fate)",
+      "source_site": "danbooru",
+      "source_kind": "wiki",
+      "source_key": "saber_(fate)",
+      "source_url": "https://danbooru.donmai.us/wiki_pages/saber_(fate).json",
+      "source_tier": 1,
+      "title": "Saber",
+      "excerpt": "Blonde hair tied in a bun with braid, green eyes and ahoge; commonly wears armored dress or white blouse with blue skirt.",
+      "captured_at": "2026-08-28"
+    },
+    {
+      "id": "gelbooru:wiki:saber_(fate)",
+      "source_site": "gelbooru",
+      "source_kind": "wiki",
+      "source_key": "saber_(fate)",
+      "source_url": "https://gelbooru.com/index.php?page=wiki&s=view&id=saber_(fate)",
+      "source_tier": 1,
+      "title": "Saber",
+      "excerpt": "Blonde hair in braided bun, green eyes and ahoge; armored dress or white blouse and blue skirt.",
+      "captured_at": "2026-08-28"
+    }
+  ],
+  "profiles": [
+    {
+      "appearance_key": "saber_(fate)::default",
+      "variant_tag": "saber_(fate)",
+      "display_name": "Base appearance",
+      "appearance_kind": "default",
+      "is_default": true,
+      "status": "published",
+      "confidence": "high",
+      "provenance": "danbooru_gelbooru_wiki_reviewed",
+      "notes": "Saber base only; Fate/Zero suit and named costumes excluded.",
+      "features": [
+        {
+          "facet": "hair",
+          "canonical_tag": "blonde_hair",
+          "value": "Blonde hair",
+          "source_refs": [
+            "danbooru:wiki:saber_(fate)",
+            "gelbooru:wiki:saber_(fate)"
+          ]
+        },
+        {
+          "facet": "hair",
+          "canonical_tag": "single_hair_bun",
+          "value": "Hair tied in a bun with braid",
+          "source_refs": [
+            "danbooru:wiki:saber_(fate)",
+            "gelbooru:wiki:saber_(fate)"
+          ]
+        },
+        {
+          "facet": "eyes",
+          "canonical_tag": "green_eyes",
+          "value": "Green eyes",
+          "source_refs": [
+            "danbooru:wiki:saber_(fate)",
+            "gelbooru:wiki:saber_(fate)"
+          ]
+        },
+        {
+          "facet": "hair",
+          "canonical_tag": "ahoge",
+          "value": "Ahoge",
+          "source_refs": [
+            "danbooru:wiki:saber_(fate)",
+            "gelbooru:wiki:saber_(fate)"
+          ]
+        },
+        {
+          "facet": "dress",
+          "canonical_tag": "armored_dress",
+          "value": "Armored dress",
+          "source_refs": [
+            "danbooru:wiki:saber_(fate)",
+            "gelbooru:wiki:saber_(fate)"
+          ]
+        },
+        {
+          "facet": "lower_body",
+          "canonical_tag": "blue_skirt",
+          "value": "Blue skirt in alternate base presentation",
+          "source_refs": [
+            "danbooru:wiki:saber_(fate)",
+            "gelbooru:wiki:saber_(fate)"
+          ]
+        }
+      ]
+    }
+  ]
+}

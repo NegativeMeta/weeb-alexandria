@@ -1,1 +1,106 @@
-{"character_tag":"moriya_suwako","sources":[{"id":"danbooru:wiki:moriya_suwako","source_site":"danbooru","source_kind":"wiki","source_key":"moriya_suwako","source_url":"https://danbooru.donmai.us/wiki_pages/moriya_suwako.json","source_tier":1,"title":"Moriya Suwako","excerpt":"Medium blonde hair with two red ribbons and yellow eyes; brown hat, white turtleneck shirt, purple vest and matching skirt, white socks and brown loafers.","captured_at":"2026-08-28"},{"id":"gelbooru:wiki:moriya_suwako","source_site":"gelbooru","source_kind":"wiki","source_key":"moriya_suwako","source_url":"https://gelbooru.com/index.php?page=wiki&s=view&id=moriya_suwako","source_tier":1,"title":"Moriya Suwako","excerpt":"Mountain goddess who takes the form of a frog; hat with leering eyes is a recurring depiction.","captured_at":"2026-08-28"}],"profiles":[{"appearance_key":"moriya_suwako::default","variant_tag":"moriya_suwako","display_name":"Base appearance","appearance_kind":"default","is_default":true,"status":"published","confidence":"high","provenance":"danbooru_gelbooru_wiki_reviewed","notes":"Base appearance; frog motifs and fan-art hat exaggerations excluded unless explicitly visual.","features":[{"facet":"hair","canonical_tag":"medium_hair","value":"Medium-length hair","source_refs":["danbooru:wiki:moriya_suwako"]},{"facet":"hair","canonical_tag":"blonde_hair","value":"Blonde hair","source_refs":["danbooru:wiki:moriya_suwako"]},{"facet":"hair_accessory","canonical_tag":"red_ribbon","value":"Two red hair ribbons","source_refs":["danbooru:wiki:moriya_suwako"]},{"facet":"eyes","canonical_tag":"yellow_eyes","value":"Yellow eyes","source_refs":["danbooru:wiki:moriya_suwako"]},{"facet":"headwear","canonical_tag":"brown_hat","value":"Brown hat","source_refs":["danbooru:wiki:moriya_suwako"]},{"facet":"clothing","canonical_tag":"purple_vest","value":"Purple vest","source_refs":["danbooru:wiki:moriya_suwako"]},{"facet":"lower_body","canonical_tag":"purple_skirt","value":"Matching purple skirt","source_refs":["danbooru:wiki:moriya_suwako"]},{"facet":"legwear","canonical_tag":"white_socks","value":"White socks","source_refs":["danbooru:wiki:moriya_suwako"]}]}]}
+{
+  "character_tag": "moriya_suwako",
+  "sources": [
+    {
+      "id": "danbooru:wiki:moriya_suwako",
+      "source_site": "danbooru",
+      "source_kind": "wiki",
+      "source_key": "moriya_suwako",
+      "source_url": "https://danbooru.donmai.us/wiki_pages/moriya_suwako.json",
+      "source_tier": 1,
+      "title": "Moriya Suwako",
+      "excerpt": "Medium blonde hair with two red ribbons and yellow eyes; brown hat, white turtleneck shirt, purple vest and matching skirt, white socks and brown loafers.",
+      "captured_at": "2026-08-28"
+    },
+    {
+      "id": "gelbooru:wiki:moriya_suwako",
+      "source_site": "gelbooru",
+      "source_kind": "wiki",
+      "source_key": "moriya_suwako",
+      "source_url": "https://gelbooru.com/index.php?page=wiki&s=view&id=moriya_suwako",
+      "source_tier": 1,
+      "title": "Moriya Suwako",
+      "excerpt": "Mountain goddess who takes the form of a frog; hat with leering eyes is a recurring depiction.",
+      "captured_at": "2026-08-28"
+    }
+  ],
+  "profiles": [
+    {
+      "appearance_key": "moriya_suwako::default",
+      "variant_tag": "moriya_suwako",
+      "display_name": "Base appearance",
+      "appearance_kind": "default",
+      "is_default": true,
+      "status": "published",
+      "confidence": "high",
+      "provenance": "danbooru_gelbooru_wiki_reviewed",
+      "notes": "Base appearance; frog motifs and fan-art hat exaggerations excluded unless explicitly visual.",
+      "features": [
+        {
+          "facet": "hair",
+          "canonical_tag": "medium_hair",
+          "value": "Medium-length hair",
+          "source_refs": [
+            "danbooru:wiki:moriya_suwako"
+          ]
+        },
+        {
+          "facet": "hair",
+          "canonical_tag": "blonde_hair",
+          "value": "Blonde hair",
+          "source_refs": [
+            "danbooru:wiki:moriya_suwako"
+          ]
+        },
+        {
+          "facet": "hair_accessory",
+          "canonical_tag": "red_ribbon",
+          "value": "Two red hair ribbons",
+          "source_refs": [
+            "danbooru:wiki:moriya_suwako"
+          ]
+        },
+        {
+          "facet": "eyes",
+          "canonical_tag": "yellow_eyes",
+          "value": "Yellow eyes",
+          "source_refs": [
+            "danbooru:wiki:moriya_suwako"
+          ]
+        },
+        {
+          "facet": "headwear",
+          "canonical_tag": "brown_hat",
+          "value": "Brown hat",
+          "source_refs": [
+            "danbooru:wiki:moriya_suwako"
+          ]
+        },
+        {
+          "facet": "jacket",
+          "canonical_tag": "purple_vest",
+          "value": "Purple vest",
+          "source_refs": [
+            "danbooru:wiki:moriya_suwako"
+          ]
+        },
+        {
+          "facet": "lower_body",
+          "canonical_tag": "purple_skirt",
+          "value": "Matching purple skirt",
+          "source_refs": [
+            "danbooru:wiki:moriya_suwako"
+          ]
+        },
+        {
+          "facet": "legwear",
+          "canonical_tag": "white_socks",
+          "value": "White socks",
+          "source_refs": [
+            "danbooru:wiki:moriya_suwako"
+          ]
+        }
+      ]
+    }
+  ]
+}

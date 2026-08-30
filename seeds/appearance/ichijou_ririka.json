@@ -1,1 +1,109 @@
-{"character_tag":"ichijou_ririka","sources":[{"id":"danbooru:wiki:ichijou_ririka","source_site":"danbooru","source_kind":"wiki","source_key":"ichijou_ririka","source_url":"https://danbooru.donmai.us/wiki_pages/ichijou_ririka.json","source_tier":1,"title":"Ichijou Ririka","excerpt":"Ririka has long gradient orange hair with pink inner hair, swept bangs, ahoge, orange eyes, hairclips, earrings, and sunglasses worn on her head.","captured_at":"2026-08-28"},{"id":"gelbooru:wiki:ichijou_ririka","source_site":"gelbooru","source_kind":"wiki","source_key":"ichijou_ririka","source_url":"https://gelbooru.com/index.php?page=wiki&s=view&id=ichijou_ririka","source_tier":1,"title":"Ichijou Ririka","excerpt":"A ReGLOSS member with long orange hair, pink inner hair, and orange eyes.","captured_at":"2026-08-28"}],"profiles":[{"appearance_key":"ichijou_ririka::default","variant_tag":"ichijou_ririka","display_name":"Base appearance","appearance_kind":"default","is_default":true,"status":"published","confidence":"high","provenance":"danbooru_gelbooru_wiki_reviewed","notes":"Base identity only; Uni, ReGLOSS uniform, and named costumes remain separate.","features":[{"facet":"hair","value":"Long gradient orange hair","canonical_tag":"orange_hair","source_refs":["danbooru:wiki:ichijou_ririka","gelbooru:wiki:ichijou_ririka"]},{"facet":"hair","value":"Pink inner hair","canonical_tag":"colored_inner_hair","source_refs":["danbooru:wiki:ichijou_ririka","gelbooru:wiki:ichijou_ririka"]},{"facet":"hair_accessory","value":"Swept bangs","canonical_tag":"swept_bangs","source_refs":["danbooru:wiki:ichijou_ririka"]},{"facet":"hair_accessory","value":"Ahoge","canonical_tag":"ahoge","source_refs":["danbooru:wiki:ichijou_ririka"]},{"facet":"eyes","value":"Orange eyes","canonical_tag":"orange_eyes","source_refs":["danbooru:wiki:ichijou_ririka","gelbooru:wiki:ichijou_ririka"]},{"facet":"accessories","value":"Hairclips","canonical_tag":"hairclip","source_refs":["danbooru:wiki:ichijou_ririka"]},{"facet":"accessories","value":"Earrings","canonical_tag":"earrings","source_refs":["danbooru:wiki:ichijou_ririka"]},{"facet":"accessories","value":"Sunglasses on head","canonical_tag":"sunglasses","source_refs":["danbooru:wiki:ichijou_ririka"]}]}]}
+{
+  "character_tag": "ichijou_ririka",
+  "sources": [
+    {
+      "id": "danbooru:wiki:ichijou_ririka",
+      "source_site": "danbooru",
+      "source_kind": "wiki",
+      "source_key": "ichijou_ririka",
+      "source_url": "https://danbooru.donmai.us/wiki_pages/ichijou_ririka.json",
+      "source_tier": 1,
+      "title": "Ichijou Ririka",
+      "excerpt": "Ririka has long gradient orange hair with pink inner hair, swept bangs, ahoge, orange eyes, hairclips, earrings, and sunglasses worn on her head.",
+      "captured_at": "2026-08-28"
+    },
+    {
+      "id": "gelbooru:wiki:ichijou_ririka",
+      "source_site": "gelbooru",
+      "source_kind": "wiki",
+      "source_key": "ichijou_ririka",
+      "source_url": "https://gelbooru.com/index.php?page=wiki&s=view&id=ichijou_ririka",
+      "source_tier": 1,
+      "title": "Ichijou Ririka",
+      "excerpt": "A ReGLOSS member with long orange hair, pink inner hair, and orange eyes.",
+      "captured_at": "2026-08-28"
+    }
+  ],
+  "profiles": [
+    {
+      "appearance_key": "ichijou_ririka::default",
+      "variant_tag": "ichijou_ririka",
+      "display_name": "Base appearance",
+      "appearance_kind": "default",
+      "is_default": true,
+      "status": "published",
+      "confidence": "high",
+      "provenance": "danbooru_gelbooru_wiki_reviewed",
+      "notes": "Base identity only; Uni, ReGLOSS uniform, and named costumes remain separate.",
+      "features": [
+        {
+          "facet": "hair",
+          "value": "Long gradient orange hair",
+          "canonical_tag": "orange_hair",
+          "source_refs": [
+            "danbooru:wiki:ichijou_ririka",
+            "gelbooru:wiki:ichijou_ririka"
+          ]
+        },
+        {
+          "facet": "hair",
+          "value": "Pink inner hair",
+          "canonical_tag": "colored_inner_hair",
+          "source_refs": [
+            "danbooru:wiki:ichijou_ririka",
+            "gelbooru:wiki:ichijou_ririka"
+          ]
+        },
+        {
+          "facet": "hair_accessory",
+          "value": "Swept bangs",
+          "canonical_tag": "swept_bangs",
+          "source_refs": [
+            "danbooru:wiki:ichijou_ririka"
+          ]
+        },
+        {
+          "facet": "hair_accessory",
+          "value": "Ahoge",
+          "canonical_tag": "ahoge",
+          "source_refs": [
+            "danbooru:wiki:ichijou_ririka"
+          ]
+        },
+        {
+          "facet": "eyes",
+          "value": "Orange eyes",
+          "canonical_tag": "orange_eyes",
+          "source_refs": [
+            "danbooru:wiki:ichijou_ririka",
+            "gelbooru:wiki:ichijou_ririka"
+          ]
+        },
+        {
+          "facet": "accessories",
+          "value": "Hairclips",
+          "canonical_tag": "hairclip",
+          "source_refs": [
+            "danbooru:wiki:ichijou_ririka"
+          ]
+        },
+        {
+          "facet": "jewelry",
+          "value": "Earrings",
+          "canonical_tag": "earrings",
+          "source_refs": [
+            "danbooru:wiki:ichijou_ririka"
+          ]
+        },
+        {
+          "facet": "accessories",
+          "value": "Sunglasses on head",
+          "canonical_tag": "sunglasses",
+          "source_refs": [
+            "danbooru:wiki:ichijou_ririka"
+          ]
+        }
+      ]
+    }
+  ]
+}
