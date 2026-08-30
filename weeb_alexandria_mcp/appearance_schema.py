@@ -250,6 +250,17 @@ def normalize_tag(value: str) -> str:
     return "_".join((value or "").strip().lower().replace("-", "_").split())
 
 
+_CANONICAL_APPEARANCE_TAG_ALIASES = {
+    "hair_clip": "hairclip",
+}
+
+
+def normalize_appearance_tag(value: str) -> str:
+    """Normalize an appearance tag and resolve approved canonical aliases."""
+    normalized = normalize_tag(value)
+    return _CANONICAL_APPEARANCE_TAG_ALIASES.get(normalized, normalized)
+
+
 def humanize_tag(tag: str) -> str:
     """Produce a readable label while retaining the canonical tag elsewhere."""
     return re.sub(r"\s+", " ", normalize_tag(tag).replace("_", " ")).strip()
@@ -261,7 +272,7 @@ def infer_facet(tag: str, category: Optional[str] = None) -> str:
     An empty string means that the candidate needs review. The classifier is
     deliberately deterministic and does not use an LLM or a fuzzy guess.
     """
-    normalized = normalize_tag(tag)
+    normalized = normalize_appearance_tag(tag)
     category_key = (category or "").strip().lower()
     if not normalized or category_key in {"meta", "artist", "copyright", "character", "alias"}:
         return ""
@@ -296,7 +307,7 @@ def infer_facet(tag: str, category: Optional[str] = None) -> str:
 def canonical_facet(facet: str, tag: str) -> str:
     """Choose a controlled facet while preserving ambiguous assignments."""
     normalized_facet = normalize_tag(facet)
-    normalized_tag = normalize_tag(tag)
+    normalized_tag = normalize_appearance_tag(tag)
     explicit = _EXPLICIT_FACETS.get(normalized_tag)
     if explicit:
         return explicit
@@ -419,7 +430,7 @@ def upsert_appearance_feature_catalog(
     confidence: str = "medium",
 ) -> int:
     """Return the stable global catalog row for one canonical appearance tag."""
-    canonical_tag = normalize_tag(canonical_tag)
+    canonical_tag = normalize_appearance_tag(canonical_tag)
     facet = normalize_tag(facet) or "unclassified"
     if not canonical_tag:
         raise ValueError("appearance catalog entries require a canonical tag")

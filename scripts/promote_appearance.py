@@ -22,6 +22,7 @@ from weeb_alexandria_mcp.appearance_schema import (  # noqa: E402
     appearance_kind_for_variant,
     ensure_appearance_schema,
     humanize_tag,
+    normalize_appearance_tag,
     normalize_tag,
     upsert_appearance_facet_catalog,
     upsert_appearance_feature_catalog,
@@ -116,7 +117,7 @@ def validate_seed_profiles(character_tag: str, profiles: list[Any]) -> None:
         for feature in features:
             if not isinstance(feature, dict):
                 raise ValueError(f"feature must be an object for {profile_key}")
-            canonical_tag = normalize_tag(str(feature.get("canonical_tag", "")))
+            canonical_tag = normalize_appearance_tag(str(feature.get("canonical_tag", "")))
             facet = normalize_tag(str(feature.get("facet", "")))
             if not canonical_tag or not facet:
                 raise ValueError(
@@ -307,7 +308,7 @@ def promote(db: Path, seed_path: Path) -> dict[str, int]:
             for feature in features:
                 if not isinstance(feature, dict):
                     raise ValueError(f"feature must be an object for {profile_key}")
-                canonical_tag = normalize_tag(str(feature.get("canonical_tag", "")))
+                canonical_tag = normalize_appearance_tag(str(feature.get("canonical_tag", "")))
                 facet = normalize_tag(str(feature.get("facet", "")))
                 source_refs = feature.get("source_refs", [])
                 if not canonical_tag or not facet:

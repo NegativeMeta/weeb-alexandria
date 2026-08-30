@@ -18,6 +18,7 @@ sys.path.insert(0, str(ROOT))
 
 from weeb_alexandria_mcp.appearance_schema import (  # noqa: E402
     ensure_appearance_schema,
+    normalize_appearance_tag,
     sync_appearance_facet_catalog,
     sync_appearance_feature_catalog,
 )
@@ -26,12 +27,66 @@ from scripts.migrate_appearance_profiles import _deduplicate_existing_features  
 DEFAULT_DB = ROOT / "tag_library.db"
 
 
+def _merge_feature_sources(con: sqlite3.Connection, keeper_id: int, duplicate_id: int) -> None:
+    con.execute(
+        """INSERT OR IGNORE INTO character_appearance_feature_sources(
+               feature_id, source_id, polarity, observed_tag, support_count,
+               sample_size, evidence_text, confidence
+           ) SELECT ?, source_id, polarity, observed_tag, support_count,
+                    sample_size, evidence_text, confidence
+           FROM character_appearance_feature_sources
+           WHERE feature_id=?""",
+        (keeper_id, duplicate_id),
+    )
+    con.execute(
+        "DELETE FROM character_appearance_feature_sources WHERE feature_id=?",
+        (duplicate_id,),
+    )
+    con.execute(
+        "DELETE FROM character_appearance_features WHERE feature_id=?",
+        (duplicate_id,),
+    )
+
+
+def _normalize_canonical_aliases(con: sqlite3.Connection) -> tuple[int, int]:
+    rows = con.execute(
+        """SELECT feature_id, appearance_key, canonical_tag
+           FROM character_appearance_features
+           WHERE status <> 'retired'
+           ORDER BY feature_id"""
+    ).fetchall()
+    changed = 0
+    merged = 0
+    for row in rows:
+        target_tag = normalize_appearance_tag(row["canonical_tag"])
+        if target_tag == row["canonical_tag"]:
+            continue
+        existing = con.execute(
+            """SELECT feature_id FROM character_appearance_features
+               WHERE appearance_key=? AND canonical_tag=? AND feature_id<>?
+               ORDER BY feature_id LIMIT 1""",
+            (row["appearance_key"], target_tag, row["feature_id"]),
+        ).fetchone()
+        if existing is None:
+            con.execute(
+                "UPDATE character_appearance_features SET canonical_tag=? WHERE feature_id=?",
+                (target_tag, row["feature_id"]),
+            )
+            changed += 1
+        else:
+            _merge_feature_sources(con, int(existing[0]), int(row["feature_id"]))
+            changed += 1
+            merged += 1
+    return changed, merged
+
+
 def normalize(db: Path) -> dict[str, int]:
     con = sqlite3.connect(db)
     con.row_factory = sqlite3.Row
     try:
         ensure_appearance_schema(con)
         con.execute("BEGIN")
+        canonical_tag_changes, merged_aliases = _normalize_canonical_aliases(con)
         deduplicated = _deduplicate_existing_features(con)
         sync_appearance_facet_catalog(con)
         catalog_features = sync_appearance_feature_catalog(con)
@@ -72,7 +127,7 @@ def normalize(db: Path) -> dict[str, int]:
         normalized_at = con.execute(
             "SELECT value FROM appearance_schema_metadata WHERE key='normalized_at'"
         ).fetchone()
-        if deduplicated or normalized_at is None:
+        if canonical_tag_changes or deduplicated or normalized_at is None:
             con.execute(
                 """INSERT INTO appearance_schema_metadata(key, value) VALUES (?, ?)
                    ON CONFLICT(key) DO UPDATE SET value=excluded.value""",
@@ -86,6 +141,8 @@ def normalize(db: Path) -> dict[str, int]:
         con.commit()
         return {
             "deduplicated_features": deduplicated,
+            "canonical_tag_changes": canonical_tag_changes,
+            "merged_aliases": merged_aliases,
             "catalog_features": catalog_features,
             "active_features": active_features,
             "active_catalog": active_catalog,

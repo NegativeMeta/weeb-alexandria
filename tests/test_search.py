@@ -989,6 +989,67 @@ class SearchRegressionTests(unittest.TestCase):
         self.assertEqual(evidence_count, 2)
         self.assertEqual(catalog_count, 1)
 
+    def test_appearance_normalizer_resolves_hair_clip_alias_idempotently(self):
+        from scripts.normalize_appearance_features import normalize
+        from weeb_alexandria_mcp.owned_schema import SCHEMA_SQL, ensure_owned_schema
+
+        with tempfile.TemporaryDirectory() as tmp:
+            path = Path(tmp) / "alias.sqlite"
+            con = sqlite3.connect(path)
+            con.executescript(SCHEMA_SQL)
+            ensure_owned_schema(con)
+            con.execute(
+                """INSERT INTO character_appearance_sources(
+                    source_site, source_kind, source_key, source_tier
+                ) VALUES ('test', 'wiki', 'hair-clip', 1)"""
+            )
+            source_id = con.execute(
+                "SELECT source_id FROM character_appearance_sources"
+            ).fetchone()[0]
+            con.execute(
+                """INSERT INTO character_appearance_features(
+                    appearance_key, facet, value, canonical_tag,
+                    status, confidence
+                ) VALUES ('fixture::default', 'hair_accessory', 'Hair clip',
+                          'hair_clip', 'published', 'high')"""
+            )
+            feature_id = con.execute(
+                "SELECT feature_id FROM character_appearance_features"
+            ).fetchone()[0]
+            con.execute(
+                """INSERT INTO character_appearance_feature_sources(
+                    feature_id, source_id, observed_tag, evidence_text
+                ) VALUES (?, ?, 'hair_clip', 'Exact fixture evidence')""",
+                (feature_id, source_id),
+            )
+            con.commit()
+            con.close()
+
+            first = normalize(path)
+            second = normalize(path)
+            con = sqlite3.connect(path)
+            row = con.execute(
+                """SELECT canonical_tag, facet, catalog_id FROM character_appearance_features"""
+            ).fetchone()
+            evidence = con.execute(
+                """SELECT observed_tag, evidence_text
+                   FROM character_appearance_feature_sources"""
+            ).fetchone()
+            catalog_tags = con.execute(
+                "SELECT canonical_tag FROM appearance_feature_catalog ORDER BY canonical_tag"
+            ).fetchall()
+            con.close()
+
+        self.assertEqual(first["canonical_tag_changes"], 1)
+        self.assertEqual(first["merged_aliases"], 0)
+        self.assertEqual(second["canonical_tag_changes"], 0)
+        self.assertEqual(second["merged_aliases"], 0)
+        self.assertEqual(row[0], "hairclip")
+        self.assertEqual(row[1], "hair_accessory")
+        self.assertIsNotNone(row[2])
+        self.assertEqual(evidence, ("hair_clip", "Exact fixture evidence"))
+        self.assertEqual(catalog_tags, [("hairclip",)])
+
     def test_appearance_candidate_builder_separates_sources_and_excludes_metadata(self):
         import json
         from scripts.build_appearance_candidates import build

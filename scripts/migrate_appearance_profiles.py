@@ -16,6 +16,7 @@ from weeb_alexandria_mcp.appearance_schema import (  # noqa: E402
     ensure_appearance_schema,
     infer_facet,
     humanize_tag,
+    normalize_appearance_tag,
     normalize_tag,
     sync_appearance_facet_catalog,
     sync_appearance_feature_catalog,
@@ -140,7 +141,7 @@ def source_id_for(con: sqlite3.Connection, character_tag: str,
 def upsert_feature(con: sqlite3.Connection, appearance_key_value: str,
                    facet: str, tag: str, value: str,
                    confidence: str = "high") -> int:
-    canonical_tag = normalize_tag(tag)
+    canonical_tag = normalize_appearance_tag(tag)
     if not canonical_tag:
         raise ValueError("appearance feature cannot have an empty tag")
     feature_facet = canonical_facet(facet, canonical_tag)
