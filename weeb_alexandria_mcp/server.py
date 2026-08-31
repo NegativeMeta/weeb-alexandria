@@ -277,6 +277,61 @@ def _copyright_tokens(con: sqlite3.Connection) -> set[str]:
             )
     return _COPYRIGHT_TOKENS
 
+
+def _appearance_characters(con: sqlite3.Connection, query: str) -> list[dict]:
+    """Return modern appearance-only characters for a name query."""
+    normalized = _normalize_tag(query)
+    if not normalized:
+        return []
+    profiles = con.execute(
+        """SELECT character_tag, display_name, appearance_key, is_default
+           FROM character_appearance_profiles
+           WHERE status IN ('reviewed', 'published')
+           ORDER BY character_tag, is_default DESC, variant_tag"""
+    ).fetchall()
+    selected: dict[str, sqlite3.Row] = {}
+    for profile in profiles:
+        character = profile["character_tag"]
+        display_normalized = _normalize_tag(profile["display_name"])
+        if normalized not in character and normalized not in display_normalized:
+            continue
+        current = selected.get(character)
+        if current is None or profile["is_default"] > current["is_default"]:
+            selected[character] = profile
+
+    out = []
+    for character, profile in selected.items():
+        count = con.execute(
+            "SELECT COALESCE(MAX(post_count), 0) FROM tags WHERE name=?",
+            (character,),
+        ).fetchone()[0]
+        traits = [dict(row) for row in con.execute(
+            """SELECT f.facet, f.value, f.canonical_tag AS evidence_tag,
+                      f.canonical_tag AS trait_slug, f.confidence
+               FROM character_appearance_features f
+               WHERE f.appearance_key=? AND f.status IN ('reviewed', 'published')
+               ORDER BY f.facet, f.display_order, f.canonical_tag""",
+            (profile["appearance_key"],),
+        ).fetchall()]
+        for trait in traits:
+            trait["label"] = trait["value"]
+            trait["provenance"] = "appearance_profile"
+        out.append({
+            "character": character,
+            "name": profile["display_name"],
+            "copyright": None,
+            "copyright_name": None,
+            "trigger": "",
+            "count": count,
+            "url": "",
+            "profile_provenance": "appearance_profile",
+            "profile_confidence": "high",
+            "slug": character,
+            "tags": [],
+            "traits": traits,
+        })
+    return out
+
 def _local_characters(con: sqlite3.Connection, query: str = "",
                       copyright: Optional[str] = None,
                       hair_color: Optional[str] = None,
@@ -1125,6 +1180,16 @@ def search_characters(q: str = "", copyright: Optional[str] = None,
     try:
         all_rows = _local_characters(con, q, copyright, hair_color, hair_length,
                                      eye_color, gender, sort, 100)
+        if q and not any(row["slug"] == _normalize_tag(q) for row in all_rows):
+            existing = {row["slug"] for row in all_rows}
+            all_rows.extend(
+                row for row in _appearance_characters(con, q)
+                if row["slug"] not in existing
+            )
+            if sort == "name":
+                all_rows.sort(key=lambda row: row["name"].lower())
+            elif sort != "random":
+                all_rows.sort(key=lambda row: (-row["count"], row["name"].lower()))
         page = max(1, int(page))
         page_size = 72
         start = (page - 1) * page_size

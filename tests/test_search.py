@@ -98,6 +98,17 @@ class SearchRegressionTests(unittest.TestCase):
         self.assertEqual(result["total"], 4)
         self.assertIn("frieren", {item["slug"] for item in result["results"]})
 
+    def test_search_characters_finds_appearance_only_character_by_tag(self):
+        result = search_characters(q="inugami_korone")
+        self.assertIn("inugami_korone", {item["slug"] for item in result["results"]})
+        korone = next(item for item in result["results"] if item["slug"] == "inugami_korone")
+        self.assertEqual(korone["profile_provenance"], "appearance_profile")
+        self.assertTrue(korone["traits"])
+
+    def test_search_characters_finds_appearance_only_character_by_display_name(self):
+        result = search_characters(q="Inugami Korone")
+        self.assertIn("inugami_korone", {item["slug"] for item in result["results"]})
+
     def test_search_knowledge_exposes_owned_entities_namespace(self):
         result = search_knowledge("hatsune miku", category="character", limit=5)
         self.assertIn("entities", result)
