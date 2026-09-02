@@ -1,0 +1,141 @@
+{
+  "character_tag": "red_(pokemon)",
+  "sources": [
+    {
+      "id": "danbooru:wiki:red_(pokemon)",
+      "source_site": "danbooru",
+      "source_kind": "wiki",
+      "source_key": "red_(pokemon)",
+      "source_url": "https://danbooru.donmai.us/wiki_pages/red_(pokemon).json",
+      "source_tier": 1,
+      "title": "red_(pokemon)",
+      "excerpt": "In his Pokemon FireRed and LeafGreen outfit, he has [[brown eyes]] and [[short hair]] [[spiked hair]] [[brown hair]]. He wears a red [[baseball cap]], a t-shirt under a [[red jacket]] [[sleeveless jacket]], black wristbands, [[baggy pants]] [[blue pants]], and shoes.",
+      "captured_at": "2026-09-02"
+    },
+    {
+      "id": "gelbooru:wiki:red_(pokemon)",
+      "source_site": "gelbooru",
+      "source_kind": "wiki",
+      "source_key": "red_(pokemon)",
+      "source_url": "https://gelbooru.com/index.php?page=wiki&s=view&id=red_(pokemon)",
+      "source_tier": 1,
+      "title": "red_(pokemon)",
+      "excerpt": "In his Pokemon FireRed and LeafGreen outfit, he has [[brown eyes]] and [[short hair]] [[spiked hair]] [[brown hair]]. He wears a red [[baseball cap]], a t-shirt under a [[red jacket]] [[sleeveless jacket]], black wristbands, [[baggy pants]] [[blue pants]], and shoes.",
+      "captured_at": "2026-09-02"
+    }
+  ],
+  "profiles": [
+    {
+      "appearance_key": "red_(pokemon)::default",
+      "variant_tag": "red_(pokemon)",
+      "display_name": "FireRed/LeafGreen appearance",
+      "appearance_kind": "default",
+      "is_default": true,
+      "status": "published",
+      "confidence": "high",
+      "provenance": "danbooru_gelbooru_wiki_reviewed",
+      "notes": "FireRed/LeafGreen design only; other game depictions, player-choice metadata, bag, and items excluded.",
+      "features": [
+        {
+          "facet": "eyes",
+          "canonical_tag": "brown_eyes",
+          "value": "Brown eyes",
+          "source_refs": [
+            "danbooru:wiki:red_(pokemon)",
+            "gelbooru:wiki:red_(pokemon)"
+          ]
+        },
+        {
+          "facet": "hair",
+          "canonical_tag": "short_hair",
+          "value": "Short hair",
+          "source_refs": [
+            "danbooru:wiki:red_(pokemon)",
+            "gelbooru:wiki:red_(pokemon)"
+          ]
+        },
+        {
+          "facet": "hair",
+          "canonical_tag": "spiked_hair",
+          "value": "Spiked hair",
+          "source_refs": [
+            "danbooru:wiki:red_(pokemon)",
+            "gelbooru:wiki:red_(pokemon)"
+          ]
+        },
+        {
+          "facet": "hair",
+          "canonical_tag": "brown_hair",
+          "value": "Brown hair",
+          "source_refs": [
+            "danbooru:wiki:red_(pokemon)",
+            "gelbooru:wiki:red_(pokemon)"
+          ]
+        },
+        {
+          "facet": "headwear",
+          "canonical_tag": "baseball_cap",
+          "value": "Baseball cap",
+          "source_refs": [
+            "danbooru:wiki:red_(pokemon)",
+            "gelbooru:wiki:red_(pokemon)"
+          ]
+        },
+        {
+          "facet": "jacket",
+          "canonical_tag": "red_jacket",
+          "value": "Red jacket",
+          "source_refs": [
+            "danbooru:wiki:red_(pokemon)",
+            "gelbooru:wiki:red_(pokemon)"
+          ]
+        },
+        {
+          "facet": "jacket",
+          "canonical_tag": "sleeveless_jacket",
+          "value": "Sleeveless jacket",
+          "source_refs": [
+            "danbooru:wiki:red_(pokemon)",
+            "gelbooru:wiki:red_(pokemon)"
+          ]
+        },
+        {
+          "facet": "lower_body",
+          "canonical_tag": "baggy_pants",
+          "value": "Baggy pants",
+          "source_refs": [
+            "danbooru:wiki:red_(pokemon)",
+            "gelbooru:wiki:red_(pokemon)"
+          ]
+        },
+        {
+          "facet": "lower_body",
+          "canonical_tag": "blue_pants",
+          "value": "Blue pants",
+          "source_refs": [
+            "danbooru:wiki:red_(pokemon)",
+            "gelbooru:wiki:red_(pokemon)"
+          ]
+        },
+        {
+          "facet": "footwear",
+          "canonical_tag": "shoes",
+          "value": "Shoes",
+          "source_refs": [
+            "danbooru:wiki:red_(pokemon)",
+            "gelbooru:wiki:red_(pokemon)"
+          ]
+        },
+        {
+          "facet": "accessories",
+          "canonical_tag": "wristband",
+          "value": "Wristbands",
+          "source_refs": [
+            "danbooru:wiki:red_(pokemon)",
+            "gelbooru:wiki:red_(pokemon)"
+          ]
+        }
+      ]
+    }
+  ]
+}

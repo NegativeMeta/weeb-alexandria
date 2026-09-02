@@ -1,0 +1,123 @@
+{
+  "character_tag": "iowa_(kancolle)",
+  "sources": [
+    {
+      "id": "danbooru:wiki:iowa_(kancolle)",
+      "source_site": "danbooru",
+      "source_kind": "wiki",
+      "source_key": "iowa_(kancolle)",
+      "source_url": "https://danbooru.donmai.us/wiki_pages/iowa_(kancolle).json",
+      "source_tier": 1,
+      "title": "iowa_(kancolle)",
+      "excerpt": "She has [[long blonde hair]] and grayish blue eyes. She wears a corseted bra with an American flag print attached to [[thighhighs]], [[black fingerless gloves]], long white sleeves, and a [[miniskirt]].",
+      "captured_at": "2026-09-02"
+    },
+    {
+      "id": "gelbooru:wiki:iowa_(kancolle)",
+      "source_site": "gelbooru",
+      "source_kind": "wiki",
+      "source_key": "iowa_(kancolle)",
+      "source_url": "https://gelbooru.com/index.php?page=wiki&s=view&id=iowa_(kancolle)",
+      "source_tier": 1,
+      "title": "iowa_(kancolle)",
+      "excerpt": "She has [[long blonde hair]] and grayish blue eyes. She wears a corseted bra with an American flag print attached to [[thighhighs]], [[black fingerless gloves]], long white sleeves, and a [[miniskirt]].",
+      "captured_at": "2026-09-02"
+    }
+  ],
+  "profiles": [
+    {
+      "appearance_key": "iowa_(kancolle)::default",
+      "variant_tag": "iowa_(kancolle)",
+      "display_name": "Base appearance",
+      "appearance_kind": "default",
+      "is_default": true,
+      "status": "published",
+      "confidence": "high",
+      "provenance": "danbooru_gelbooru_wiki_reviewed",
+      "notes": "Base design; rigging, weapons, and historical metadata excluded.",
+      "features": [
+        {
+          "facet": "hair",
+          "canonical_tag": "long_hair",
+          "value": "Long hair",
+          "source_refs": [
+            "danbooru:wiki:iowa_(kancolle)",
+            "gelbooru:wiki:iowa_(kancolle)"
+          ]
+        },
+        {
+          "facet": "hair",
+          "canonical_tag": "blonde_hair",
+          "value": "Blonde hair",
+          "source_refs": [
+            "danbooru:wiki:iowa_(kancolle)",
+            "gelbooru:wiki:iowa_(kancolle)"
+          ]
+        },
+        {
+          "facet": "eyes",
+          "canonical_tag": "blue_eyes",
+          "value": "Grayish blue eyes",
+          "source_refs": [
+            "danbooru:wiki:iowa_(kancolle)",
+            "gelbooru:wiki:iowa_(kancolle)"
+          ]
+        },
+        {
+          "facet": "upper_body",
+          "canonical_tag": "corset",
+          "value": "Corseted top",
+          "source_refs": [
+            "danbooru:wiki:iowa_(kancolle)",
+            "gelbooru:wiki:iowa_(kancolle)"
+          ]
+        },
+        {
+          "facet": "legwear",
+          "canonical_tag": "thighhighs",
+          "value": "Thigh-highs",
+          "source_refs": [
+            "danbooru:wiki:iowa_(kancolle)",
+            "gelbooru:wiki:iowa_(kancolle)"
+          ]
+        },
+        {
+          "facet": "accessories",
+          "canonical_tag": "american_flag_print",
+          "value": "American flag print",
+          "source_refs": [
+            "danbooru:wiki:iowa_(kancolle)",
+            "gelbooru:wiki:iowa_(kancolle)"
+          ]
+        },
+        {
+          "facet": "gloves",
+          "canonical_tag": "fingerless_gloves",
+          "value": "Fingerless gloves",
+          "source_refs": [
+            "danbooru:wiki:iowa_(kancolle)",
+            "gelbooru:wiki:iowa_(kancolle)"
+          ]
+        },
+        {
+          "facet": "sleeves",
+          "canonical_tag": "long_sleeves",
+          "value": "Long white sleeves",
+          "source_refs": [
+            "danbooru:wiki:iowa_(kancolle)",
+            "gelbooru:wiki:iowa_(kancolle)"
+          ]
+        },
+        {
+          "facet": "lower_body",
+          "canonical_tag": "miniskirt",
+          "value": "Miniskirt",
+          "source_refs": [
+            "danbooru:wiki:iowa_(kancolle)",
+            "gelbooru:wiki:iowa_(kancolle)"
+          ]
+        }
+      ]
+    }
+  ]
+}

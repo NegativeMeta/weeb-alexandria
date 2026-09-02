@@ -2481,3 +2481,30 @@ ledger and were not published.
 
 The final validation passed with **65 tests**, `PRAGMA integrity_check = ok`,
 serial search/context index rebuilds, and `git diff --check`.
+
+## General appearance batch 33 (expanded to ten)
+
+The next ten characters were selected by the reproducible independent ranking
+(Danbooru + Gelbooru + e621; `combined` excluded):
+
+| Rank | Character | Danbooru | Gelbooru | e621 | Total | Result |
+|---:|---|---:|---:|---:|---:|---|
+| 1 | `silence_suzuka_(umamusume)` | 3,876 | 5,224 | 0 | 9,100 | Deferred; hair-color alternative and outfit-specific sources |
+| 2 | `tachibana_arisu` | 3,604 | 5,492 | 0 | 9,096 | Deferred; no structured visual description |
+| 3 | `iowa_(kancolle)` | 4,150 | 4,933 | 0 | 9,083 | Published; 9 features |
+| 4 | `hecatia_lapislazuli` | 4,062 | 4,983 | 0 | 9,045 | Deferred; intentional color changes by ornament/form |
+| 5 | `prinz_eugen_(azur_lane)` | 4,036 | 4,958 | 0 | 8,994 | Deferred; conflicting hair-color alternatives |
+| 6 | `jane_doe_(zenless_zone_zero)` | 3,405 | 5,584 | 0 | 8,989 | Deferred; insufficient visual description |
+| 7 | `red_(pokemon)` | 2,526 | 6,452 | 0 | 8,978 | Published; 11 features for FireRed/LeafGreen |
+| 8 | `raiden_mei` | 3,679 | 5,288 | 0 | 8,967 | Deferred; multiple playable forms |
+| 9 | `akiyama_yukari` | 3,782 | 5,165 | 0 | 8,947 | Deferred; insufficient structured visual evidence |
+| 10 | `uchiha_sasuke` | 1,463 | 7,447 | 0 | 8,910 | Deferred; insufficient structured visual evidence |
+
+Candidate generation produced **284 observations** and **116 pending visual
+candidates**. Two profiles were promoted with **20 features**, **40 evidence
+links**, and **0 conflicts**. Every promotion was repeated successfully with
+unchanged counts. The eight deferred names were added to the explicit exclusion
+ledger and were not published.
+
+The final validation passed with **65 tests**, `PRAGMA integrity_check = ok`,
+serial search/context index rebuilds, and `git diff --check`.
