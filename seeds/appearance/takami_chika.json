@@ -1,0 +1,105 @@
+{
+  "character_tag": "takami_chika",
+  "sources": [
+    {
+      "id": "danbooru:wiki:takami_chika",
+      "source_site": "danbooru",
+      "source_kind": "wiki",
+      "source_key": "takami_chika",
+      "source_url": "https://danbooru.donmai.us/wiki_pages/takami_chika.json",
+      "source_tier": 1,
+      "title": "takami_chika",
+      "excerpt": "She has [[short hair]], [[orange hair]] with a [[side braid]] tied with a [[yellow ribbon]] on the left side, a [[clover hair ornament]] on the right, an [[ahoge]] on top, and [[red eyes]].",
+      "captured_at": "2026-09-02"
+    },
+    {
+      "id": "gelbooru:wiki:takami_chika",
+      "source_site": "gelbooru",
+      "source_kind": "wiki",
+      "source_key": "takami_chika",
+      "source_url": "https://gelbooru.com/index.php?page=wiki&s=view&id=takami_chika",
+      "source_tier": 1,
+      "title": "takami_chika",
+      "excerpt": "She has [[short hair]], [[orange hair]] with a [[side braid]] tied with a [[yellow ribbon]] on the left side, a [[clover hair ornament]] on the right, an [[ahoge]] on top, and [[red eyes]].",
+      "captured_at": "2026-09-02"
+    }
+  ],
+  "profiles": [
+    {
+      "appearance_key": "takami_chika::default",
+      "variant_tag": "takami_chika",
+      "display_name": "Base appearance",
+      "appearance_kind": "default",
+      "is_default": true,
+      "status": "published",
+      "confidence": "high",
+      "provenance": "danbooru_gelbooru_wiki_reviewed",
+      "notes": "Base appearance; idol costumes, animal companions, and alternate depictions excluded.",
+      "features": [
+        {
+          "facet": "hair",
+          "canonical_tag": "short_hair",
+          "value": "Short hair",
+          "source_refs": [
+            "danbooru:wiki:takami_chika",
+            "gelbooru:wiki:takami_chika"
+          ]
+        },
+        {
+          "facet": "hair",
+          "canonical_tag": "orange_hair",
+          "value": "Orange hair",
+          "source_refs": [
+            "danbooru:wiki:takami_chika",
+            "gelbooru:wiki:takami_chika"
+          ]
+        },
+        {
+          "facet": "hair_accessory",
+          "canonical_tag": "side_braid",
+          "value": "Side braid",
+          "source_refs": [
+            "danbooru:wiki:takami_chika",
+            "gelbooru:wiki:takami_chika"
+          ]
+        },
+        {
+          "facet": "hair_accessory",
+          "canonical_tag": "yellow_ribbon",
+          "value": "Yellow ribbon",
+          "source_refs": [
+            "danbooru:wiki:takami_chika",
+            "gelbooru:wiki:takami_chika"
+          ]
+        },
+        {
+          "facet": "hair_accessory",
+          "canonical_tag": "clover_hair_ornament",
+          "value": "Clover hair ornament",
+          "source_refs": [
+            "danbooru:wiki:takami_chika",
+            "gelbooru:wiki:takami_chika"
+          ]
+        },
+        {
+          "facet": "hair_accessory",
+          "canonical_tag": "ahoge",
+          "value": "Ahoge",
+          "source_refs": [
+            "danbooru:wiki:takami_chika",
+            "gelbooru:wiki:takami_chika"
+          ]
+        },
+        {
+          "facet": "eyes",
+          "canonical_tag": "red_eyes",
+          "value": "Red eyes",
+          "source_refs": [
+            "danbooru:wiki:takami_chika",
+            "gelbooru:wiki:takami_chika"
+          ]
+        }
+      ]
+    }
+  ]
+}

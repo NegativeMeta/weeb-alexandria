@@ -1,0 +1,96 @@
+{
+  "character_tag": "atago_(azur_lane)",
+  "sources": [
+    {
+      "id": "danbooru:wiki:atago_(azur_lane)",
+      "source_site": "danbooru",
+      "source_kind": "wiki",
+      "source_key": "atago_(azur_lane)",
+      "source_url": "https://danbooru.donmai.us/wiki_pages/atago_(azur_lane).json",
+      "source_tier": 1,
+      "title": "atago_(azur_lane)",
+      "excerpt": "She has [[long hair]], [[black hair]] with a pair of standing [[dog ears]] on top of her head. She wears a white [[military uniform]] with a [[miniskirt]] and black [[thighhighs]].",
+      "captured_at": "2026-09-02"
+    },
+    {
+      "id": "gelbooru:wiki:atago_(azur_lane)",
+      "source_site": "gelbooru",
+      "source_kind": "wiki",
+      "source_key": "atago_(azur_lane)",
+      "source_url": "https://gelbooru.com/index.php?page=wiki&s=view&id=atago_(azur_lane)",
+      "source_tier": 1,
+      "title": "atago_(azur_lane)",
+      "excerpt": "She has [[long hair]], [[black hair]] with a pair of standing [[dog ears]] on top of her head. She wears a white [[military uniform]] with a [[miniskirt]] and black [[thighhighs]].",
+      "captured_at": "2026-09-02"
+    }
+  ],
+  "profiles": [
+    {
+      "appearance_key": "atago_(azur_lane)::default",
+      "variant_tag": "atago_(azur_lane)",
+      "display_name": "Default outfit",
+      "appearance_kind": "default",
+      "is_default": true,
+      "status": "published",
+      "confidence": "high",
+      "provenance": "danbooru_gelbooru_wiki_reviewed",
+      "notes": "Default outfit; alternate skins, rigging, and body-description metadata excluded.",
+      "features": [
+        {
+          "facet": "hair",
+          "canonical_tag": "long_hair",
+          "value": "Long hair",
+          "source_refs": [
+            "danbooru:wiki:atago_(azur_lane)",
+            "gelbooru:wiki:atago_(azur_lane)"
+          ]
+        },
+        {
+          "facet": "hair",
+          "canonical_tag": "black_hair",
+          "value": "Black hair",
+          "source_refs": [
+            "danbooru:wiki:atago_(azur_lane)",
+            "gelbooru:wiki:atago_(azur_lane)"
+          ]
+        },
+        {
+          "facet": "ears",
+          "canonical_tag": "dog_ears",
+          "value": "Dog ears",
+          "source_refs": [
+            "danbooru:wiki:atago_(azur_lane)",
+            "gelbooru:wiki:atago_(azur_lane)"
+          ]
+        },
+        {
+          "facet": "dress",
+          "canonical_tag": "military_uniform",
+          "value": "Military uniform",
+          "source_refs": [
+            "danbooru:wiki:atago_(azur_lane)",
+            "gelbooru:wiki:atago_(azur_lane)"
+          ]
+        },
+        {
+          "facet": "lower_body",
+          "canonical_tag": "miniskirt",
+          "value": "Miniskirt",
+          "source_refs": [
+            "danbooru:wiki:atago_(azur_lane)",
+            "gelbooru:wiki:atago_(azur_lane)"
+          ]
+        },
+        {
+          "facet": "legwear",
+          "canonical_tag": "black_thighhighs",
+          "value": "Black thigh-highs",
+          "source_refs": [
+            "danbooru:wiki:atago_(azur_lane)",
+            "gelbooru:wiki:atago_(azur_lane)"
+          ]
+        }
+      ]
+    }
+  ]
+}

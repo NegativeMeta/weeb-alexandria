@@ -1,0 +1,105 @@
+{
+  "character_tag": "bulma",
+  "sources": [
+    {
+      "id": "danbooru:wiki:bulma",
+      "source_site": "danbooru",
+      "source_kind": "wiki",
+      "source_key": "bulma",
+      "source_url": "https://danbooru.donmai.us/wiki_pages/bulma.json",
+      "source_tier": 1,
+      "title": "bulma",
+      "excerpt": "Her first appearance has her hair in a [[braided ponytail]], a [[red bow]] [[hair bow]], a [[pink dress]], [[purple socks]], and [[blue shoes]] [[sneakers]].",
+      "captured_at": "2026-09-02"
+    },
+    {
+      "id": "gelbooru:wiki:bulma",
+      "source_site": "gelbooru",
+      "source_kind": "wiki",
+      "source_key": "bulma",
+      "source_url": "https://gelbooru.com/index.php?page=wiki&s=view&id=bulma",
+      "source_tier": 1,
+      "title": "bulma",
+      "excerpt": "Her first appearance has her hair in a [[braided ponytail]], a [[red bow]] [[hair bow]], a [[pink dress]], [[purple socks]], and [[blue shoes]] [[sneakers]].",
+      "captured_at": "2026-09-02"
+    }
+  ],
+  "profiles": [
+    {
+      "appearance_key": "bulma::default",
+      "variant_tag": "bulma",
+      "display_name": "First-appearance design",
+      "appearance_kind": "default",
+      "is_default": true,
+      "status": "published",
+      "confidence": "high",
+      "provenance": "danbooru_gelbooru_wiki_reviewed",
+      "notes": "First appearance only; later outfits and official hairstyle changes excluded.",
+      "features": [
+        {
+          "facet": "hair_accessory",
+          "canonical_tag": "braided_ponytail",
+          "value": "Braided ponytail",
+          "source_refs": [
+            "danbooru:wiki:bulma",
+            "gelbooru:wiki:bulma"
+          ]
+        },
+        {
+          "facet": "hair_accessory",
+          "canonical_tag": "hair_bow",
+          "value": "Hair bow",
+          "source_refs": [
+            "danbooru:wiki:bulma",
+            "gelbooru:wiki:bulma"
+          ]
+        },
+        {
+          "facet": "accessories",
+          "canonical_tag": "red_bow",
+          "value": "Red bow",
+          "source_refs": [
+            "danbooru:wiki:bulma",
+            "gelbooru:wiki:bulma"
+          ]
+        },
+        {
+          "facet": "dress",
+          "canonical_tag": "pink_dress",
+          "value": "Pink dress",
+          "source_refs": [
+            "danbooru:wiki:bulma",
+            "gelbooru:wiki:bulma"
+          ]
+        },
+        {
+          "facet": "legwear",
+          "canonical_tag": "purple_socks",
+          "value": "Purple socks",
+          "source_refs": [
+            "danbooru:wiki:bulma",
+            "gelbooru:wiki:bulma"
+          ]
+        },
+        {
+          "facet": "footwear",
+          "canonical_tag": "blue_shoes",
+          "value": "Blue shoes",
+          "source_refs": [
+            "danbooru:wiki:bulma",
+            "gelbooru:wiki:bulma"
+          ]
+        },
+        {
+          "facet": "footwear",
+          "canonical_tag": "sneakers",
+          "value": "Sneakers",
+          "source_refs": [
+            "danbooru:wiki:bulma",
+            "gelbooru:wiki:bulma"
+          ]
+        }
+      ]
+    }
+  ]
+}

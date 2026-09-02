@@ -1,0 +1,177 @@
+{
+  "character_tag": "emilia_(re:zero)",
+  "sources": [
+    {
+      "id": "danbooru:wiki:emilia_(re:zero)",
+      "source_site": "danbooru",
+      "source_kind": "wiki",
+      "source_key": "emilia_(re:zero)",
+      "source_url": "https://danbooru.donmai.us/wiki_pages/emilia_(re:zero).json",
+      "source_tier": 1,
+      "title": "emilia_(re:zero)",
+      "excerpt": "She has [[long hair]] [[grey hair]] low-tied with a [[crown braid]] and [[blunt bangs]], decorated with a [[hair flower]], an [[x hair ornament]] and a [[purple ribbon]], with [[pointy ears]] and [[purple eyes]]. She wears a [[short dress]] [[white dress]] with a detached collar, [[detached sleeves]], a [[pleated skirt]] [[miniskirt]] under the dress and [[white boots]].",
+      "captured_at": "2026-09-02"
+    },
+    {
+      "id": "gelbooru:wiki:emilia_(re:zero)",
+      "source_site": "gelbooru",
+      "source_kind": "wiki",
+      "source_key": "emilia_(re:zero)",
+      "source_url": "https://gelbooru.com/index.php?page=wiki&s=view&id=emilia_(re:zero)",
+      "source_tier": 1,
+      "title": "emilia_(re:zero)",
+      "excerpt": "She has [[long hair]] [[grey hair]] low-tied with a [[crown braid]] and [[blunt bangs]], decorated with a [[hair flower]], an [[x hair ornament]] and a [[purple ribbon]], with [[pointy ears]] and [[purple eyes]]. She wears a [[short dress]] [[white dress]] with a detached collar, [[detached sleeves]], a [[pleated skirt]] [[miniskirt]] under the dress and [[white boots]].",
+      "captured_at": "2026-09-02"
+    }
+  ],
+  "profiles": [
+    {
+      "appearance_key": "emilia_(re:zero)::default",
+      "variant_tag": "emilia_(re:zero)",
+      "display_name": "Base appearance",
+      "appearance_kind": "default",
+      "is_default": true,
+      "status": "published",
+      "confidence": "high",
+      "provenance": "danbooru_gelbooru_wiki_reviewed",
+      "notes": "Base design; alternate outfits, pupils/color alternatives, and story metadata excluded.",
+      "features": [
+        {
+          "facet": "hair",
+          "canonical_tag": "long_hair",
+          "value": "Long hair",
+          "source_refs": [
+            "danbooru:wiki:emilia_(re:zero)",
+            "gelbooru:wiki:emilia_(re:zero)"
+          ]
+        },
+        {
+          "facet": "hair",
+          "canonical_tag": "grey_hair",
+          "value": "Grey hair",
+          "source_refs": [
+            "danbooru:wiki:emilia_(re:zero)",
+            "gelbooru:wiki:emilia_(re:zero)"
+          ]
+        },
+        {
+          "facet": "hair_accessory",
+          "canonical_tag": "crown_braid",
+          "value": "Crown braid",
+          "source_refs": [
+            "danbooru:wiki:emilia_(re:zero)",
+            "gelbooru:wiki:emilia_(re:zero)"
+          ]
+        },
+        {
+          "facet": "hair_accessory",
+          "canonical_tag": "blunt_bangs",
+          "value": "Blunt bangs",
+          "source_refs": [
+            "danbooru:wiki:emilia_(re:zero)",
+            "gelbooru:wiki:emilia_(re:zero)"
+          ]
+        },
+        {
+          "facet": "hair_accessory",
+          "canonical_tag": "hair_flower",
+          "value": "Hair flower",
+          "source_refs": [
+            "danbooru:wiki:emilia_(re:zero)",
+            "gelbooru:wiki:emilia_(re:zero)"
+          ]
+        },
+        {
+          "facet": "hair_accessory",
+          "canonical_tag": "x_hair_ornament",
+          "value": "X hair ornament",
+          "source_refs": [
+            "danbooru:wiki:emilia_(re:zero)",
+            "gelbooru:wiki:emilia_(re:zero)"
+          ]
+        },
+        {
+          "facet": "hair_accessory",
+          "canonical_tag": "purple_ribbon",
+          "value": "Purple ribbon",
+          "source_refs": [
+            "danbooru:wiki:emilia_(re:zero)",
+            "gelbooru:wiki:emilia_(re:zero)"
+          ]
+        },
+        {
+          "facet": "ears",
+          "canonical_tag": "pointy_ears",
+          "value": "Pointy ears",
+          "source_refs": [
+            "danbooru:wiki:emilia_(re:zero)",
+            "gelbooru:wiki:emilia_(re:zero)"
+          ]
+        },
+        {
+          "facet": "eyes",
+          "canonical_tag": "purple_eyes",
+          "value": "Purple eyes",
+          "source_refs": [
+            "danbooru:wiki:emilia_(re:zero)",
+            "gelbooru:wiki:emilia_(re:zero)"
+          ]
+        },
+        {
+          "facet": "dress",
+          "canonical_tag": "short_dress",
+          "value": "Short dress",
+          "source_refs": [
+            "danbooru:wiki:emilia_(re:zero)",
+            "gelbooru:wiki:emilia_(re:zero)"
+          ]
+        },
+        {
+          "facet": "dress",
+          "canonical_tag": "white_dress",
+          "value": "White dress",
+          "source_refs": [
+            "danbooru:wiki:emilia_(re:zero)",
+            "gelbooru:wiki:emilia_(re:zero)"
+          ]
+        },
+        {
+          "facet": "sleeves",
+          "canonical_tag": "detached_sleeves",
+          "value": "Detached sleeves",
+          "source_refs": [
+            "danbooru:wiki:emilia_(re:zero)",
+            "gelbooru:wiki:emilia_(re:zero)"
+          ]
+        },
+        {
+          "facet": "lower_body",
+          "canonical_tag": "pleated_skirt",
+          "value": "Pleated skirt",
+          "source_refs": [
+            "danbooru:wiki:emilia_(re:zero)",
+            "gelbooru:wiki:emilia_(re:zero)"
+          ]
+        },
+        {
+          "facet": "lower_body",
+          "canonical_tag": "miniskirt",
+          "value": "Miniskirt",
+          "source_refs": [
+            "danbooru:wiki:emilia_(re:zero)",
+            "gelbooru:wiki:emilia_(re:zero)"
+          ]
+        },
+        {
+          "facet": "footwear",
+          "canonical_tag": "white_boots",
+          "value": "White boots",
+          "source_refs": [
+            "danbooru:wiki:emilia_(re:zero)",
+            "gelbooru:wiki:emilia_(re:zero)"
+          ]
+        }
+      ]
+    }
+  ]
+}

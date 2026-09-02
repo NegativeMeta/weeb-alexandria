@@ -2454,3 +2454,30 @@ ledger and were not published.
 
 The final validation passed with **65 tests**, `PRAGMA integrity_check = ok`,
 serial search/context index rebuilds, and `git diff --check`.
+
+## General appearance batch 32 (expanded to ten)
+
+The next ten characters were selected by the reproducible independent ranking
+(Danbooru + Gelbooru + e621; `combined` excluded):
+
+| Rank | Character | Danbooru | Gelbooru | e621 | Total | Result |
+|---:|---|---:|---:|---:|---:|---|
+| 1 | `saihara_shuichi` | 1,906 | 7,348 | 0 | 9,254 | Published; 4 features |
+| 2 | `atago_(azur_lane)` | 4,142 | 5,090 | 0 | 9,232 | Published; 6 features |
+| 3 | `emilia_(re:zero)` | 3,363 | 5,828 | 0 | 9,191 | Published; 15 features |
+| 4 | `sanji_(one_piece)` | 1,714 | 7,467 | 0 | 9,181 | Deferred; insufficient structured visual evidence |
+| 5 | `ro-500_(kancolle)` | 4,160 | 5,015 | 0 | 9,175 | Deferred; multiple forms/outfits |
+| 6 | `cu_chulainn_(fate)` | 2,654 | 6,516 | 0 | 9,170 | Deferred; aggregate tag for multiple versions |
+| 7 | `bulma` | 1,562 | 7,599 | 0 | 9,161 | Published; 7 features for first appearance |
+| 8 | `arlecchino_(genshin_impact)` | 3,891 | 5,257 | 0 | 9,148 | Deferred; insufficient structured visual description |
+| 9 | `ahri_(league_of_legends)` | 3,502 | 5,640 | 0 | 9,142 | Deferred; many skins and no base description |
+| 10 | `takami_chika` | 2,339 | 6,784 | 0 | 9,123 | Published; 7 features |
+
+Candidate generation produced **108 observations** and **48 pending visual
+candidates**. Five profiles were promoted with **39 features**, **78 evidence
+links**, and **0 conflicts**. Every promotion was repeated successfully with
+unchanged counts. The five deferred names were added to the explicit exclusion
+ledger and were not published.
+
+The final validation passed with **65 tests**, `PRAGMA integrity_check = ok`,
+serial search/context index rebuilds, and `git diff --check`.
