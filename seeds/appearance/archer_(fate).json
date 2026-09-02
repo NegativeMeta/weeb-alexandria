@@ -1,0 +1,78 @@
+{
+  "character_tag": "archer_(fate)",
+  "sources": [
+    {
+      "id": "danbooru:wiki:archer_(fate)",
+      "source_site": "danbooru",
+      "source_kind": "wiki",
+      "source_key": "archer_(fate)",
+      "source_url": "https://danbooru.donmai.us/wiki_pages/archer_(fate).json",
+      "source_tier": 1,
+      "title": "archer_(fate)",
+      "excerpt": "A dark-skinned male with [[white hair]] and [[grey eyes]], wearing black and red [[armor]].",
+      "captured_at": "2026-09-02"
+    },
+    {
+      "id": "gelbooru:wiki:archer_(fate)",
+      "source_site": "gelbooru",
+      "source_kind": "wiki",
+      "source_key": "archer_(fate)",
+      "source_url": "https://gelbooru.com/index.php?page=wiki&s=view&id=archer_(fate)",
+      "source_tier": 1,
+      "title": "archer_(fate)",
+      "excerpt": "A dark-skinned male with [[white hair]] and [[grey eyes]], wearing black and red [[armor]].",
+      "captured_at": "2026-09-02"
+    }
+  ],
+  "profiles": [
+    {
+      "appearance_key": "archer_(fate)::default",
+      "variant_tag": "archer_(fate)",
+      "display_name": "Default Archer appearance",
+      "appearance_kind": "default",
+      "is_default": true,
+      "status": "published",
+      "confidence": "high",
+      "provenance": "danbooru_gelbooru_wiki_reviewed",
+      "notes": "Default Fate/stay night design; weapons, ascensions, and alternate depictions excluded.",
+      "features": [
+        {
+          "facet": "skin",
+          "canonical_tag": "dark_skin",
+          "value": "Dark skin",
+          "source_refs": [
+            "danbooru:wiki:archer_(fate)",
+            "gelbooru:wiki:archer_(fate)"
+          ]
+        },
+        {
+          "facet": "hair",
+          "canonical_tag": "white_hair",
+          "value": "White hair",
+          "source_refs": [
+            "danbooru:wiki:archer_(fate)",
+            "gelbooru:wiki:archer_(fate)"
+          ]
+        },
+        {
+          "facet": "eyes",
+          "canonical_tag": "grey_eyes",
+          "value": "Grey eyes",
+          "source_refs": [
+            "danbooru:wiki:archer_(fate)",
+            "gelbooru:wiki:archer_(fate)"
+          ]
+        },
+        {
+          "facet": "dress",
+          "canonical_tag": "armor",
+          "value": "Armor",
+          "source_refs": [
+            "danbooru:wiki:archer_(fate)",
+            "gelbooru:wiki:archer_(fate)"
+          ]
+        }
+      ]
+    }
+  ]
+}

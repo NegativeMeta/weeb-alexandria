@@ -2400,3 +2400,30 @@ ledger and were not published.
 
 The final validation passed with **65 tests**, `PRAGMA integrity_check = ok`,
 serial search/context index rebuilds, and `git diff --check`.
+
+## General appearance batch 30 (expanded to ten)
+
+The next ten characters were selected by the reproducible independent ranking
+(Danbooru + Gelbooru + e621; `combined` excluded):
+
+| Rank | Character | Danbooru | Gelbooru | e621 | Total | Result |
+|---:|---|---:|---:|---:|---:|---|
+| 1 | `mordred_(fate/apocrypha)` | 4,383 | 5,336 | 0 | 9,719 | Deferred; insufficient visual description |
+| 2 | `naruto_uzumaki` | 0 | 9,711 | 0 | 9,711 | Deferred; insufficient structured evidence |
+| 3 | `amami_haruka` | 3,160 | 6,384 | 0 | 9,544 | Deferred; no structured base description |
+| 4 | `inoue_orihime` | 1,565 | 7,971 | 0 | 9,536 | Deferred; conflicting hair and multiple outfits |
+| 5 | `archer_(fate)` | 3,046 | 6,487 | 0 | 9,533 | Published; 4 features |
+| 6 | `selene_(pokemon)` | 3,643 | 5,883 | 0 | 9,526 | Deferred; selectable protagonist |
+| 7 | `tsunade_(naruto)` | 1,057 | 8,460 | 0 | 9,517 | Deferred; no structured visual description |
+| 8 | `morgan_le_fay_(fate)` | 3,705 | 5,770 | 0 | 9,475 | Deferred; variant/insufficient base set |
+| 9 | `soga_no_tojiko` | 3,868 | 5,598 | 0 | 9,466 | Published; 8 features |
+| 10 | `princess_daisy` | 1,771 | 7,687 | 0 | 9,458 | Published; 13 features |
+
+Candidate generation produced **323 observations** and **119 pending visual
+candidates**. Three profiles were promoted with **25 features**, **50 evidence
+links**, and **0 conflicts**. Every promotion was repeated successfully with
+unchanged counts. The seven deferred names were added to the explicit exclusion
+ledger and were not published.
+
+The final validation passed with **65 tests**, `PRAGMA integrity_check = ok`,
+serial search/context index rebuilds, and `git diff --check`.

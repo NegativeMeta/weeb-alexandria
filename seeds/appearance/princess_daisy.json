@@ -1,0 +1,159 @@
+{
+  "character_tag": "princess_daisy",
+  "sources": [
+    {
+      "id": "danbooru:wiki:princess_daisy",
+      "source_site": "danbooru",
+      "source_kind": "wiki",
+      "source_key": "princess_daisy",
+      "source_url": "https://danbooru.donmai.us/wiki_pages/princess_daisy.json",
+      "source_tier": 1,
+      "title": "princess_daisy",
+      "excerpt": "She has [[medium hair]] [[flipped hair]] [[brown hair]] with [[parted bangs]] and [[blue eyes]]. For her default costume, she wears a gold crown, [[flower earrings]], a [[collared dress]] [[puffy short sleeves]] orange trim [[frilled dress]] [[yellow dress]] [[gown]] and [[orange footwear]] [[high heels]].",
+      "captured_at": "2026-09-02"
+    },
+    {
+      "id": "gelbooru:wiki:princess_daisy",
+      "source_site": "gelbooru",
+      "source_kind": "wiki",
+      "source_key": "princess_daisy",
+      "source_url": "https://gelbooru.com/index.php?page=wiki&s=view&id=princess_daisy",
+      "source_tier": 1,
+      "title": "princess_daisy",
+      "excerpt": "She has [[medium hair]] [[flipped hair]] [[brown hair]] with [[parted bangs]] and [[blue eyes]]. For her default costume, she wears a gold crown, [[flower earrings]], a [[collared dress]] [[puffy short sleeves]] orange trim [[frilled dress]] [[yellow dress]] [[gown]] and [[orange footwear]] [[high heels]].",
+      "captured_at": "2026-09-02"
+    }
+  ],
+  "profiles": [
+    {
+      "appearance_key": "princess_daisy::default",
+      "variant_tag": "princess_daisy",
+      "display_name": "Default costume",
+      "appearance_kind": "default",
+      "is_default": true,
+      "status": "published",
+      "confidence": "high",
+      "provenance": "danbooru_gelbooru_wiki_reviewed",
+      "notes": "Default costume only; transformations, sports outfits, and alternate costumes excluded.",
+      "features": [
+        {
+          "facet": "hair",
+          "canonical_tag": "medium_hair",
+          "value": "Medium hair",
+          "source_refs": [
+            "danbooru:wiki:princess_daisy",
+            "gelbooru:wiki:princess_daisy"
+          ]
+        },
+        {
+          "facet": "hair",
+          "canonical_tag": "flipped_hair",
+          "value": "Flipped hair",
+          "source_refs": [
+            "danbooru:wiki:princess_daisy",
+            "gelbooru:wiki:princess_daisy"
+          ]
+        },
+        {
+          "facet": "hair",
+          "canonical_tag": "brown_hair",
+          "value": "Brown hair",
+          "source_refs": [
+            "danbooru:wiki:princess_daisy",
+            "gelbooru:wiki:princess_daisy"
+          ]
+        },
+        {
+          "facet": "hair_accessory",
+          "canonical_tag": "parted_bangs",
+          "value": "Parted bangs",
+          "source_refs": [
+            "danbooru:wiki:princess_daisy",
+            "gelbooru:wiki:princess_daisy"
+          ]
+        },
+        {
+          "facet": "eyes",
+          "canonical_tag": "blue_eyes",
+          "value": "Blue eyes",
+          "source_refs": [
+            "danbooru:wiki:princess_daisy",
+            "gelbooru:wiki:princess_daisy"
+          ]
+        },
+        {
+          "facet": "jewelry",
+          "canonical_tag": "flower_earrings",
+          "value": "Flower earrings",
+          "source_refs": [
+            "danbooru:wiki:princess_daisy",
+            "gelbooru:wiki:princess_daisy"
+          ]
+        },
+        {
+          "facet": "dress",
+          "canonical_tag": "collared_dress",
+          "value": "Collared dress",
+          "source_refs": [
+            "danbooru:wiki:princess_daisy",
+            "gelbooru:wiki:princess_daisy"
+          ]
+        },
+        {
+          "facet": "sleeves",
+          "canonical_tag": "puffy_short_sleeves",
+          "value": "Puffy short sleeves",
+          "source_refs": [
+            "danbooru:wiki:princess_daisy",
+            "gelbooru:wiki:princess_daisy"
+          ]
+        },
+        {
+          "facet": "dress",
+          "canonical_tag": "frilled_dress",
+          "value": "Frilled dress",
+          "source_refs": [
+            "danbooru:wiki:princess_daisy",
+            "gelbooru:wiki:princess_daisy"
+          ]
+        },
+        {
+          "facet": "dress",
+          "canonical_tag": "yellow_dress",
+          "value": "Yellow dress",
+          "source_refs": [
+            "danbooru:wiki:princess_daisy",
+            "gelbooru:wiki:princess_daisy"
+          ]
+        },
+        {
+          "facet": "dress",
+          "canonical_tag": "gown",
+          "value": "Gown",
+          "source_refs": [
+            "danbooru:wiki:princess_daisy",
+            "gelbooru:wiki:princess_daisy"
+          ]
+        },
+        {
+          "facet": "footwear",
+          "canonical_tag": "orange_footwear",
+          "value": "Orange footwear",
+          "source_refs": [
+            "danbooru:wiki:princess_daisy",
+            "gelbooru:wiki:princess_daisy"
+          ]
+        },
+        {
+          "facet": "footwear",
+          "canonical_tag": "high_heels",
+          "value": "High heels",
+          "source_refs": [
+            "danbooru:wiki:princess_daisy",
+            "gelbooru:wiki:princess_daisy"
+          ]
+        }
+      ]
+    }
+  ]
+}
