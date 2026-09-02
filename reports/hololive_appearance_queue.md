@@ -2320,3 +2320,29 @@ ledger and were not published.
 
 The final validation passed with **65 tests**, `PRAGMA integrity_check = ok`,
 serial search/context index rebuilds, and `git diff --check`.
+
+## General appearance batch 27 (expanded to ten)
+
+The next ten characters were selected by the reproducible independent ranking
+(Danbooru + Gelbooru + e621; `combined` excluded):
+
+| Rank | Character | Danbooru | Gelbooru | e621 | Total | Result |
+|---:|---|---:|---:|---:|---:|---|
+| 1 | `shijou_takane` | 3,930 | 6,138 | 0 | 10,068 | Deferred; incomplete visual evidence |
+| 2 | `sonic_the_hedgehog` | 2,512 | 7,552 | 0 | 10,064 | Deferred; multiple forms/outfits |
+| 3 | `mutsuki_(blue_archive)` | 4,207 | 5,854 | 0 | 10,061 | Deferred; no structured visual description |
+| 4 | `senketsu` | 3,753 | 6,286 | 0 | 10,039 | Deferred; sentient outfit/object |
+| 5 | `tokai_teio_(umamusume)` | 4,417 | 5,610 | 0 | 10,027 | Deferred; outfit-specific/insufficient base evidence |
+| 6 | `sakura_kyoko_(magical_girl)` | 3,809 | 6,209 | 0 | 10,018 | Deferred; transformation/form scope |
+| 7 | `nero_claudius_(fate/extra)` | 4,218 | 5,783 | 0 | 10,001 | Deferred; variant of covered Nero identity |
+| 8 | `kisaragi_chihaya` | 3,336 | 6,660 | 0 | 9,996 | Deferred; no structured visual description |
+| 9 | `kijin_seija` | 4,405 | 5,559 | 0 | 9,964 | Deferred; conflicting hair/horn alternatives |
+| 10 | `toga_himiko` | 2,760 | 7,180 | 0 | 9,940 | Published; 18 features |
+
+Candidate generation produced **296 observations** and **93 pending visual
+candidates**. One profile was promoted with **18 features**, **36 evidence
+links**, and **0 conflicts**. The other nine names were added to the explicit
+exclusion ledger and were not published.
+
+The final validation passed with **65 tests**, `PRAGMA integrity_check = ok`,
+serial search/context index rebuilds, and `git diff --check`.

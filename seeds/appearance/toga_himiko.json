@@ -1,0 +1,204 @@
+{
+  "character_tag": "toga_himiko",
+  "sources": [
+    {
+      "id": "danbooru:wiki:toga_himiko",
+      "source_site": "danbooru",
+      "source_kind": "wiki",
+      "source_key": "toga_himiko",
+      "source_url": "https://danbooru.donmai.us/wiki_pages/toga_himiko.json",
+      "source_tier": 1,
+      "title": "toga_himiko",
+      "excerpt": "She has [[blonde hair]] that she wears done up in a [[messy hair]] double bun along with [[blunt bangs]] and [[sidelocks]], [[yellow eyes]] that are often narrowed or with sanpaku and slit pupils, made up with black eyeliner or with [[bags under eyes]]. She frequently blushes and smiles baring her teeth that feature prominent [[fangs]]. She typically wears a [[serafuku]] with a [[blue sailor collar]] and [[red neckerchief]] with a [[yellow cardigan]] [[cardigan]] sweater over it, and a [[blue skirt]] [[pleated skirt]]. She also wears [[black socks]] [[knee-highs]] and [[brown footwear]] [[loafers]].",
+      "captured_at": "2026-09-02"
+    },
+    {
+      "id": "gelbooru:wiki:toga_himiko",
+      "source_site": "gelbooru",
+      "source_kind": "wiki",
+      "source_key": "toga_himiko",
+      "source_url": "https://gelbooru.com/index.php?page=wiki&s=view&id=toga_himiko",
+      "source_tier": 1,
+      "title": "toga_himiko",
+      "excerpt": "She has [[blonde hair]] that she wears done up in a [[messy hair]] double bun along with [[blunt bangs]] and [[sidelocks]], [[yellow eyes]] that are often narrowed or with sanpaku and slit pupils, made up with black eyeliner or with [[bags under eyes]]. She frequently blushes and smiles baring her teeth that feature prominent [[fangs]]. She typically wears a [[serafuku]] with a [[blue sailor collar]] and [[red neckerchief]] with a [[yellow cardigan]] [[cardigan]] sweater over it, and a [[blue skirt]] [[pleated skirt]]. She also wears [[black socks]] [[knee-highs]] and [[brown footwear]] [[loafers]].",
+      "captured_at": "2026-09-02"
+    }
+  ],
+  "profiles": [
+    {
+      "appearance_key": "toga_himiko::default",
+      "variant_tag": "toga_himiko",
+      "display_name": "Base school-uniform appearance",
+      "appearance_kind": "default",
+      "is_default": true,
+      "status": "published",
+      "confidence": "high",
+      "provenance": "danbooru_gelbooru_wiki_reviewed",
+      "notes": "Base appearance and typical school uniform; combat gear, weapons, expressions, and alternate outfits excluded.",
+      "features": [
+        {
+          "facet": "hair",
+          "canonical_tag": "blonde_hair",
+          "value": "Blonde hair",
+          "source_refs": [
+            "danbooru:wiki:toga_himiko",
+            "gelbooru:wiki:toga_himiko"
+          ]
+        },
+        {
+          "facet": "hair",
+          "canonical_tag": "messy_hair",
+          "value": "Messy hair",
+          "source_refs": [
+            "danbooru:wiki:toga_himiko",
+            "gelbooru:wiki:toga_himiko"
+          ]
+        },
+        {
+          "facet": "hair_accessory",
+          "canonical_tag": "blunt_bangs",
+          "value": "Blunt bangs",
+          "source_refs": [
+            "danbooru:wiki:toga_himiko",
+            "gelbooru:wiki:toga_himiko"
+          ]
+        },
+        {
+          "facet": "hair_accessory",
+          "canonical_tag": "sidelocks",
+          "value": "Sidelocks",
+          "source_refs": [
+            "danbooru:wiki:toga_himiko",
+            "gelbooru:wiki:toga_himiko"
+          ]
+        },
+        {
+          "facet": "eyes",
+          "canonical_tag": "yellow_eyes",
+          "value": "Yellow eyes",
+          "source_refs": [
+            "danbooru:wiki:toga_himiko",
+            "gelbooru:wiki:toga_himiko"
+          ]
+        },
+        {
+          "facet": "face",
+          "canonical_tag": "bags_under_eyes",
+          "value": "Bags under the eyes",
+          "source_refs": [
+            "danbooru:wiki:toga_himiko",
+            "gelbooru:wiki:toga_himiko"
+          ]
+        },
+        {
+          "facet": "face",
+          "canonical_tag": "fangs",
+          "value": "Prominent fangs",
+          "source_refs": [
+            "danbooru:wiki:toga_himiko",
+            "gelbooru:wiki:toga_himiko"
+          ]
+        },
+        {
+          "facet": "dress",
+          "canonical_tag": "serafuku",
+          "value": "Sailor uniform",
+          "source_refs": [
+            "danbooru:wiki:toga_himiko",
+            "gelbooru:wiki:toga_himiko"
+          ]
+        },
+        {
+          "facet": "neck",
+          "canonical_tag": "blue_sailor_collar",
+          "value": "Blue sailor collar",
+          "source_refs": [
+            "danbooru:wiki:toga_himiko",
+            "gelbooru:wiki:toga_himiko"
+          ]
+        },
+        {
+          "facet": "neck",
+          "canonical_tag": "red_neckerchief",
+          "value": "Red neckerchief",
+          "source_refs": [
+            "danbooru:wiki:toga_himiko",
+            "gelbooru:wiki:toga_himiko"
+          ]
+        },
+        {
+          "facet": "jacket",
+          "canonical_tag": "yellow_cardigan",
+          "value": "Yellow cardigan",
+          "source_refs": [
+            "danbooru:wiki:toga_himiko",
+            "gelbooru:wiki:toga_himiko"
+          ]
+        },
+        {
+          "facet": "jacket",
+          "canonical_tag": "cardigan",
+          "value": "Cardigan",
+          "source_refs": [
+            "danbooru:wiki:toga_himiko",
+            "gelbooru:wiki:toga_himiko"
+          ]
+        },
+        {
+          "facet": "lower_body",
+          "canonical_tag": "blue_skirt",
+          "value": "Blue skirt",
+          "source_refs": [
+            "danbooru:wiki:toga_himiko",
+            "gelbooru:wiki:toga_himiko"
+          ]
+        },
+        {
+          "facet": "lower_body",
+          "canonical_tag": "pleated_skirt",
+          "value": "Pleated skirt",
+          "source_refs": [
+            "danbooru:wiki:toga_himiko",
+            "gelbooru:wiki:toga_himiko"
+          ]
+        },
+        {
+          "facet": "legwear",
+          "canonical_tag": "black_socks",
+          "value": "Black socks",
+          "source_refs": [
+            "danbooru:wiki:toga_himiko",
+            "gelbooru:wiki:toga_himiko"
+          ]
+        },
+        {
+          "facet": "legwear",
+          "canonical_tag": "kneehighs",
+          "value": "Knee-high socks",
+          "source_refs": [
+            "danbooru:wiki:toga_himiko",
+            "gelbooru:wiki:toga_himiko"
+          ]
+        },
+        {
+          "facet": "footwear",
+          "canonical_tag": "brown_footwear",
+          "value": "Brown footwear",
+          "source_refs": [
+            "danbooru:wiki:toga_himiko",
+            "gelbooru:wiki:toga_himiko"
+          ]
+        },
+        {
+          "facet": "footwear",
+          "canonical_tag": "loafers",
+          "value": "Loafers",
+          "source_refs": [
+            "danbooru:wiki:toga_himiko",
+            "gelbooru:wiki:toga_himiko"
+          ]
+        }
+      ]
+    }
+  ]
+}
