@@ -2535,3 +2535,30 @@ ledger and were not published.
 
 The final validation passed with **65 tests**, `PRAGMA integrity_check = ok`,
 serial search/context index rebuilds, and `git diff --check`.
+
+## General appearance batch 35 (expanded to ten)
+
+The next ten characters were selected by the reproducible independent ranking
+(Danbooru + Gelbooru + e621; `combined` excluded):
+
+| Rank | Character | Danbooru | Gelbooru | e621 | Total | Result |
+|---:|---|---:|---:|---:|---:|---|
+| 1 | `minase_iori` | 3,260 | 5,502 | 0 | 8,762 | Deferred; no structured base appearance |
+| 2 | `adachi_rei` | 2,019 | 6,728 | 0 | 8,747 | Published; 15 features |
+| 3 | `bowsette` | 3,279 | 5,457 | 0 | 8,736 | Deferred; fan transformation with incompatible variants |
+| 4 | `sagisawa_fumika` | 4,028 | 4,703 | 0 | 8,731 | Deferred; no structured visual description |
+| 5 | `medusa_(rider)_(fate)` | 3,148 | 5,579 | 0 | 8,727 | Deferred; combat and civilian designs differ |
+| 6 | `aki_shizuha` | 3,586 | 5,129 | 0 | 8,715 | Deferred; insufficient visual description |
+| 7 | `fu_hua` | 3,912 | 4,801 | 0 | 8,713 | Deferred; many forms and outfits |
+| 8 | `exusiai_(arknights)` | 3,477 | 5,227 | 0 | 8,704 | Deferred; insufficient visual description |
+| 9 | `shimamura_uzuki` | 3,661 | 5,041 | 0 | 8,702 | Deferred; no structured visual candidates |
+| 10 | `amamiya_ren` | 2,999 | 5,648 | 0 | 8,647 | Deferred; selectable/player character identity |
+
+Candidate generation produced **208 observations** and **71 pending visual
+candidates**. One profile was promoted with **15 features**, **30 evidence
+links**, and **0 conflicts**. Every promotion was repeated successfully with
+unchanged counts. The nine deferred names were added to the explicit exclusion
+ledger and were not published.
+
+The final validation passed with **65 tests**, `PRAGMA integrity_check = ok`,
+serial search/context index rebuilds, and `git diff --check`.

@@ -99,6 +99,9 @@ EXCLUDED = {
     "prinz_eugen_(azur_lane)", "jane_doe_(zenless_zone_zero)", "raiden_mei",
     "akiyama_yukari", "uchiha_sasuke",
     "reisalin_stout", "letty_whiterock", "kanna_kamui",
+    "minase_iori", "bowsette", "sagisawa_fumika", "medusa_(rider)_(fate)",
+    "aki_shizuha", "fu_hua", "exusiai_(arknights)", "shimamura_uzuki",
+    "amamiya_ren",
 }
 
 def rank(db: Path, limit: int) -> list[dict[str, int | str]]:

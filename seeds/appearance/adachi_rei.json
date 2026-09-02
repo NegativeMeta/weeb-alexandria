@@ -1,0 +1,177 @@
+{
+  "character_tag": "adachi_rei",
+  "sources": [
+    {
+      "id": "danbooru:wiki:adachi_rei",
+      "source_site": "danbooru",
+      "source_kind": "wiki",
+      "source_key": "adachi_rei",
+      "source_url": "https://danbooru.donmai.us/wiki_pages/adachi_rei.json",
+      "source_tier": 1,
+      "title": "adachi_rei",
+      "excerpt": "Adachi Rei has [[orange hair]], [[orange eyes]], and [[medium hair]] done into a one side up style tied with a [[hair ribbon]]. She also wears a small [[hairclip]]. She wears an [[open jacket]] [[white jacket]] with a black turtleneck underneath and [[white gloves]]. She also wears a [[plaid skirt]] [[grey skirt]] with an orange [[belt]]. Beneath that, Rei wears black leggings and [[sneakers]].",
+      "captured_at": "2026-09-02"
+    },
+    {
+      "id": "gelbooru:wiki:adachi_rei",
+      "source_site": "gelbooru",
+      "source_kind": "wiki",
+      "source_key": "adachi_rei",
+      "source_url": "https://gelbooru.com/index.php?page=wiki&s=view&id=adachi_rei",
+      "source_tier": 1,
+      "title": "adachi_rei",
+      "excerpt": "Adachi Rei has [[orange hair]], [[orange eyes]], and [[medium hair]] done into a one side up style tied with a [[hair ribbon]]. She also wears a small [[hairclip]]. She wears an [[open jacket]] [[white jacket]] with a black turtleneck underneath and [[white gloves]]. She also wears a [[plaid skirt]] [[grey skirt]] with an orange [[belt]]. Beneath that, Rei wears black leggings and [[sneakers]].",
+      "captured_at": "2026-09-02"
+    }
+  ],
+  "profiles": [
+    {
+      "appearance_key": "adachi_rei::default",
+      "variant_tag": "adachi_rei",
+      "display_name": "Base appearance",
+      "appearance_kind": "default",
+      "is_default": true,
+      "status": "published",
+      "confidence": "high",
+      "provenance": "danbooru_gelbooru_wiki_reviewed",
+      "notes": "Base design; headset, sound-wave decoration, and lower-body shorts alternative excluded from the canonical profile.",
+      "features": [
+        {
+          "facet": "hair",
+          "canonical_tag": "orange_hair",
+          "value": "Orange hair",
+          "source_refs": [
+            "danbooru:wiki:adachi_rei",
+            "gelbooru:wiki:adachi_rei"
+          ]
+        },
+        {
+          "facet": "eyes",
+          "canonical_tag": "orange_eyes",
+          "value": "Orange eyes",
+          "source_refs": [
+            "danbooru:wiki:adachi_rei",
+            "gelbooru:wiki:adachi_rei"
+          ]
+        },
+        {
+          "facet": "hair",
+          "canonical_tag": "medium_hair",
+          "value": "Medium hair",
+          "source_refs": [
+            "danbooru:wiki:adachi_rei",
+            "gelbooru:wiki:adachi_rei"
+          ]
+        },
+        {
+          "facet": "hair_accessory",
+          "canonical_tag": "one_side_up",
+          "value": "One-side-up hairstyle",
+          "source_refs": [
+            "danbooru:wiki:adachi_rei",
+            "gelbooru:wiki:adachi_rei"
+          ]
+        },
+        {
+          "facet": "hair_accessory",
+          "canonical_tag": "hair_ribbon",
+          "value": "Hair ribbon",
+          "source_refs": [
+            "danbooru:wiki:adachi_rei",
+            "gelbooru:wiki:adachi_rei"
+          ]
+        },
+        {
+          "facet": "hair_accessory",
+          "canonical_tag": "hairclip",
+          "value": "Hair clip",
+          "source_refs": [
+            "danbooru:wiki:adachi_rei",
+            "gelbooru:wiki:adachi_rei"
+          ]
+        },
+        {
+          "facet": "jacket",
+          "canonical_tag": "open_jacket",
+          "value": "Open jacket",
+          "source_refs": [
+            "danbooru:wiki:adachi_rei",
+            "gelbooru:wiki:adachi_rei"
+          ]
+        },
+        {
+          "facet": "jacket",
+          "canonical_tag": "white_jacket",
+          "value": "White jacket",
+          "source_refs": [
+            "danbooru:wiki:adachi_rei",
+            "gelbooru:wiki:adachi_rei"
+          ]
+        },
+        {
+          "facet": "upper_body",
+          "canonical_tag": "turtleneck",
+          "value": "Black turtleneck",
+          "source_refs": [
+            "danbooru:wiki:adachi_rei",
+            "gelbooru:wiki:adachi_rei"
+          ]
+        },
+        {
+          "facet": "gloves",
+          "canonical_tag": "white_gloves",
+          "value": "White gloves",
+          "source_refs": [
+            "danbooru:wiki:adachi_rei",
+            "gelbooru:wiki:adachi_rei"
+          ]
+        },
+        {
+          "facet": "lower_body",
+          "canonical_tag": "plaid_skirt",
+          "value": "Plaid skirt",
+          "source_refs": [
+            "danbooru:wiki:adachi_rei",
+            "gelbooru:wiki:adachi_rei"
+          ]
+        },
+        {
+          "facet": "lower_body",
+          "canonical_tag": "grey_skirt",
+          "value": "Grey skirt",
+          "source_refs": [
+            "danbooru:wiki:adachi_rei",
+            "gelbooru:wiki:adachi_rei"
+          ]
+        },
+        {
+          "facet": "accessories",
+          "canonical_tag": "orange_belt",
+          "value": "Orange belt",
+          "source_refs": [
+            "danbooru:wiki:adachi_rei",
+            "gelbooru:wiki:adachi_rei"
+          ]
+        },
+        {
+          "facet": "legwear",
+          "canonical_tag": "leggings",
+          "value": "Black leggings",
+          "source_refs": [
+            "danbooru:wiki:adachi_rei",
+            "gelbooru:wiki:adachi_rei"
+          ]
+        },
+        {
+          "facet": "footwear",
+          "canonical_tag": "sneakers",
+          "value": "Sneakers",
+          "source_refs": [
+            "danbooru:wiki:adachi_rei",
+            "gelbooru:wiki:adachi_rei"
+          ]
+        }
+      ]
+    }
+  ]
+}
