@@ -71,7 +71,12 @@ EXCLUDED = {
     "togawa_sakiko", "iono_(pokemon)", "miorine_rembran", "saber_alter",
     "eevee", "yuudachi_kai_ni_(kancolle)", "lappland_(arknights)",
     "kasodani_kyouko", "jeanne_d'arc_alter_(fate)", "nagae_iku",
+    "suzuran_(arknights)", "android_18", "baobhan_sith_(fate)",
+    "lucina_(fire_emblem)", "bocchi_(bocchi_the_rock!)",
+    "rensouhou-chan", "toki_(bunny)_(blue_archive)",
+    "roronoa_zoro", "anchovy_(girls_und_panzer)", "hoshimi_miyabi", "c.c.",
     "ikari_shinji", "murasa_minamitsu", "yoko_littner",
+    "okita_souji_(koha-ace)", "miyako_yoshika",
 }
 
 def rank(db: Path, limit: int) -> list[dict[str, int | str]]:

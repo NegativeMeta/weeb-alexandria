@@ -1419,3 +1419,833 @@ duplicates and published features without evidence returned zero rows. Context
 and search indexes were rebuilt serially after all promotions; the full
 `unittest` suite passed with 58 tests, and real MCP probes confirmed all four
 published profiles while deferred profiles remained unpublished.
+
+## Forty-fifth general popularity batch (expanded to ten)
+
+The queue remained at ten characters after reconciling the live canonical
+projection, MCP visibility, and the explicit exclusion ledger. The next ten
+eligible characters were ranked by independent Danbooru + Gelbooru + e621
+post counts; `combined` was excluded:
+
+| Rank | Character | Danbooru | Gelbooru | e621 | Total |
+|---:|---|---:|---:|---:|---:|
+| 1 | `suzuran_(arknights)` | 4,446 | 6,453 | 0 | 10,899 |
+| 2 | `junko_(touhou)` | 4,849 | 6,044 | 0 | 10,893 |
+| 3 | `hasumi_(blue_archive)` | 3,923 | 6,959 | 0 | 10,882 |
+| 4 | `android_18` | 2,002 | 8,877 | 0 | 10,879 |
+| 5 | `tsushima_yoshiko` | 3,347 | 7,522 | 0 | 10,869 |
+| 6 | `emiya_shirou` | 3,813 | 7,051 | 0 | 10,864 |
+| 7 | `baobhan_sith_(fate)` | 4,366 | 6,439 | 0 | 10,805 |
+| 8 | `chihaya_anon` | 2,281 | 8,522 | 0 | 10,803 |
+| 9 | `lucina_(fire_emblem)` | 3,647 | 7,075 | 0 | 10,722 |
+| 10 | `bocchi_(bocchi_the_rock!)` | 0 | 10,691 | 0 | 10,691 |
+
+Candidate generation produced **118 observations** and **40 visual
+candidates**:
+
+| Character | Observations | Variants observed | Candidates | Decision |
+|---|---:|---:|---:|---|
+| `suzuran_(arknights)` | 10 | 1 | 0 | Deferred: wiki evidence is identity/context and skins only; no structured visual candidates. |
+| `junko_(touhou)` | 12 | 2 | 6 | Published base profile with 9 features; hair-color alternatives and energy-tail effect retained. |
+| `hasumi_(blue_archive)` | 29 | 1 | 16 | Published base profile with 18 features from explicit default-design evidence. |
+| `android_18` | 0 | 0 | 0 | Deferred: local sources contain identity and appearance-post listings but no structured visual evidence. |
+| `tsushima_yoshiko` | 13 | 5 | 3 | Published base profile with 6 features; eye-color source conflict retained. |
+| `emiya_shirou` | 37 | 8 | 8 | Published base profile with 6 features; yellow/amber eye-color conflict and clothing alternatives retained. |
+| `baobhan_sith_(fate)` | 2 | 1 | 0 | Deferred: base wiki lists named ascensions/costumes but no feature-level base evidence. |
+| `chihaya_anon` | 15 | 1 | 7 | Published base profile with 5 features; blue/grey eye-color conflict and optional glasses retained. |
+| `lucina_(fire_emblem)` | 0 | 0 | 0 | Deferred: local sources contain identity and outfit listings but no structured visual candidates. |
+| `bocchi_(bocchi_the_rock!)` | 0 | 0 | 0 | Deferred: local Gelbooru entry is descriptive but has no structured visual evidence. |
+
+Five profiles were published with **44 new features**, **44 evidence links**,
+**9 source records**, and **4 open conflicts**. Four source-reviewed features
+were added beyond the statistical candidate rows where the full wiki sentence
+provided explicit evidence (including Hasumi's halo/garter straps and Junko's
+scoped clothing/effect details). Work/copyright tags and named outfits were
+not promoted; the `mygo!!!!!_(bang_dream!)` work tag was rejected as a false
+hair-accessory candidate. Junko's fox tails were classified as `effects`, not
+anatomical `tail` features.
+
+The five deferred identifiers were added to the ranker's exclusion ledger and
+the next reproducible queue now begins with `kosaka_honoka`,
+`prinz_eugen_(kancolle)`, and `roronoa_zoro`. The source and all three derived
+SQLite databases passed integrity checks; active duplicates, missing facet
+links, active `unclassified` rows, and published features without evidence
+returned zero rows. All derived fingerprints match the final source SHA-256
+`5bd7c6e4d881b87f1c27f68b4b10909169bce0081f1a3889257e9af0bcd6bfe8`.
+
+Each seed was promoted twice with unchanged counts. The full `unittest` suite
+passed with **63 tests**, and real MCP stdio probes exposed all five published
+profiles with `facet_metadata` and evidence while returning `found=false` for
+all five deferred profiles.
+
+## Forty-sixth general popularity batch (expanded to ten)
+
+The queue was reconciled against the canonical database, MCP projection, and
+exclusion ledger. `rensouhou-chan` was excluded as a familiar-like turret
+sidekick rather than an independent character. `toki_(bunny)_(blue_archive)`
+was excluded as an official variant of the already published base profile
+`toki_(blue_archive)`. After those corrections, the selected ten were:
+
+| Rank | Character | Danbooru | Gelbooru | e621 | Total |
+|---:|---|---:|---:|---:|---:|
+| 1 | `kosaka_honoka` | 3,475 | 7,211 | 0 | 10,686 |
+| 2 | `prinz_eugen_(kancolle)` | 4,867 | 5,797 | 0 | 10,664 |
+| 3 | `roronoa_zoro` | 2,246 | 8,397 | 0 | 10,643 |
+| 4 | `anchovy_(girls_und_panzer)` | 4,546 | 6,074 | 0 | 10,620 |
+| 5 | `higuchi_madoka` | 4,680 | 5,899 | 0 | 10,579 |
+| 6 | `kiryuuin_satsuki` | 3,450 | 7,112 | 0 | 10,562 |
+| 7 | `hoshimi_miyabi` | 4,024 | 6,532 | 0 | 10,556 |
+| 8 | `c.c.` | 3,918 | 6,622 | 0 | 10,540 |
+| 9 | `stocking_(psg)` | 3,251 | 7,278 | 0 | 10,529 |
+| 10 | `shoukaku_(kancolle)` | 4,404 | 6,085 | 0 | 10,489 |
+
+Candidate generation produced **206 observations** and **82 visual
+candidates**:
+
+| Character | Observations | Variants observed | Candidates | Decision |
+|---|---:|---:|---:|---|
+| `kosaka_honoka` | 11 | 3 | 3 | Published base profile with 3 features; voice-actor metadata rejected. |
+| `prinz_eugen_(kancolle)` | 35 | 2 | 12 | Published base profile with 10 features; remodel/camouflage and white-skirt changes excluded. |
+| `roronoa_zoro` | 3 | 1 | 1 | Deferred: the only candidate was `straw_hat_pirates`, a group/context tag rather than appearance evidence. |
+| `anchovy_(girls_und_panzer)` | 0 | 0 | 0 | Deferred: local sources establish identity and role but yield no structured visual candidates. |
+| `higuchi_madoka` | 30 | 1 | 12 | Published base profile with 12 features from the explicit school-design description. |
+| `kiryuuin_satsuki` | 19 | 2 | 8 | Published base profile with 9 features; Junketsu's active revealing state and weapon excluded. |
+| `hoshimi_miyabi` | 10 | 2 | 3 | Deferred: all candidates belong to the named `dignified_blossom` variant, not the default base card. |
+| `c.c.` | 4 | 2 | 0 | Deferred: the local wiki supplies only an appearance-post link, without feature-level text. |
+| `stocking_(psg)` | 56 | 2 | 31 | Published regular base profile with 10 features; outer hair colors retained as one formal open conflict. Angel/police variants excluded. |
+| `shoukaku_(kancolle)` | 38 | 1 | 12 | Published default base profile with 10 features; rigging, props, Kai Ni and named modes excluded. |
+
+Six profiles were published with **54 new features**, **96 evidence links**,
+**11 source records**, and **1 open conflict**. Features were limited to
+explicitly sourced visual facts; voice actors, group tags, weapon/rigging
+metadata, character roles, and named variants were not promoted. Stocking's
+regular profile retains black/purple/blue outer-hair alternatives from the
+source instead of silently selecting one color.
+
+The four deferred identifiers were added to the ranker's exclusion ledger. The
+next reproducible queue now begins with `yamada_ryo`,
+`okita_souji_(koha-ace)`, and `miyako_yoshika`. The source and all three derived
+SQLite databases passed integrity checks; active duplicates, missing facet
+links, active `unclassified` rows, and published features without evidence
+returned zero rows. All derived fingerprints match the final source SHA-256
+`fb252b7f00a5c5f512d3e80b0a258031988f4a805efe4ac3a8833af9d1d58bea`.
+
+Each seed was promoted twice with unchanged counts. The full `unittest` suite
+passed with **63 tests**, and real MCP stdio probes exposed all six published
+profiles with `facet_metadata` and evidence while returning `found=false` for
+all four deferred profiles.
+
+## Kaela Kovalskia current-default attire follow-up
+
+The canonical profile already contained `kaela_kovalskia::default` with eight
+appearance features, but no clothing features. Local Danbooru and Gelbooru wiki
+records identify `kaela_kovalskia_(4th_costume)` as Kaela's **current default**
+since the March 2025 redebut, replacing the retired original default costume.
+The reviewed variant was published separately as
+`kaela_kovalskia::kaela_kovalskia_(4th_costume)` so the historical base profile
+and named costume scope remain distinct.
+
+The new variant contains **13 features** backed by **25 evidence links** and
+**2 site-specific wiki sources**: long/black coat, black scarf, red cropped
+ribbed sweater, single red glove, black short shorts, red O-ring thigh strap,
+and black boots. Both source excerpts were checked as literal substrings of
+the captured local wiki bodies. The seed was promoted twice with unchanged
+counts. The final source and derived-index fingerprint is
+`6ee581f0a1a7d64bd8a3f21d742a2ed57ed7c2e393c88fb75518f2778e02c88b`; SQLite
+integrity, duplicate/evidence/facet checks, MCP projection, and all **63 tests**
+passed.
+
+## Hololive official-outfit pass 01
+
+A first outfit-focused pass selected five already published Hololive base
+profiles: `gawr_gura`, `houshou_marine`, `usada_pekora`, `shirakami_fubuki`,
+and `watson_amelia`. Candidate generation produced **1,646 observations** and
+**648 candidates**. Review used the local Danbooru and Gelbooru wiki records for
+each named `1st_costume`; shared uniforms, cosplay, lore/species tags, props,
+and non-clothing metadata were excluded.
+
+| Idol | Variant | Decision | Features | Evidence links |
+|---|---|---|---:|---:|
+| Gawr Gura | `gawr_gura_(1st_costume)` | Published | 6 | 12 |
+| Houshou Marine | `houshou_marine_(1st_costume)` | Published | 20 | 40 |
+| Usada Pekora | `usada_pekora_(1st_costume)` | Published | 12 | 24 |
+| Shirakami Fubuki | `shirakami_fubuki_(1st_costume)` | Published | 9 | 18 |
+| Watson Amelia | `watson_amelia_(1st_costume)` | Published | 14 | 28 |
+
+The five seeds contain **61 clothing/accessory features**, **122 evidence
+links**, and **10 site-specific wiki sources**. Every seed passed batch-wide
+JSON, profile-scope, controlled-facet, duplicate-key, source-reference, and
+literal-excerpt validation. Each was promoted twice with unchanged counts.
+The MCP exposes all five variants with evidence. After the final schema
+synchronization, all derived indexes were rebuilt serially against source
+SHA-256 `17025294304f024f3843ce297aeaa0a867b4b4b11663a21a79ea4e8cad22ac63`;
+SQLite integrity, fingerprints, active-duplicate/evidence/facet checks, and
+all **63 tests** passed.
+
+## Hololive official-outfit pass 02
+
+The second outfit-focused pass selected five new official costume pages after
+reconciling the 12 already published variants. Candidate generation produced
+**1,247 observations** and **513 candidates**. The complete local Danbooru and
+Gelbooru bodies were reviewed; shared uniforms, cosplay, lore/species tags,
+roles, props, and metadata were excluded.
+
+| Idol | Variant | Decision | Features | Evidence links |
+|---|---|---|---:|---:|
+| Houshou Marine | `houshou_marine_(8th_costume)` | Published | 7 | 14 |
+| AZKi | `azki_(hololive)_(4th_costume)` | Published | 13 | 26 |
+| Minato Aqua | `minato_aqua_(1st_costume)` | Published | 15 | 30 |
+| Sakura Miko | `sakura_miko_(1st_costume)` | Published | 14 | 28 |
+| A-chan | `a-chan_(1st_costume)_(hololive)` | Deferred | 5 | 0 |
+
+Four variants were published with **49 features**, **98 evidence links**, and
+**8 site-specific wiki sources**. A-chan was deliberately deferred: the local
+canonical base is `a_chan_(hololive)`, while the source table exposes the
+historical `a-chan_(hololive)` spelling; publishing it without an explicit
+alias mapping would create a duplicate identity. The seed remains pending for
+a future alias-resolution change.
+
+The four published variants were promoted twice with unchanged counts and
+were exposed by real MCP probes with evidence. After schema synchronization,
+all derived indexes were rebuilt serially against source SHA-256
+`35f60009cf72e1f242c6ccb7b13d63873a39b7c7c0af781964a27e9f5359bb3d`. SQLite
+integrity, matching fingerprints, active-duplicate/evidence/facet checks, and
+all **63 tests** passed.
+
+## Hololive official-outfit pass 03
+
+The third outfit-focused pass selected five additional official default-costume
+pages after reconciling the published variants. Candidate generation produced
+**1,464 observations** and **644 candidates**. Local Danbooru/Gelbooru wiki
+bodies were reviewed; weapons, lore, optional props, and non-clothing metadata
+were excluded.
+
+| Idol | Variant | Decision | Features | Evidence links |
+|---|---|---|---:|---:|
+| Ninomae Ina'nis | `ninomae_ina'nis_(1st_costume)` | Published | 10 | 10 |
+| Nanashi Mumei | `nanashi_mumei_(1st_costume)` | Published | 14 | 28 |
+| Sakamata Chloe | `sakamata_chloe_(1st_costume)` | Published | 14 | 28 |
+| Ouro Kronii | `ouro_kronii_(1st_costume)` | Published | 13 | 26 |
+| Mori Calliope | `mori_calliope_(1st_costume)` | Published | 10 | 20 |
+
+All five seeds passed JSON, scope, controlled-facet, duplicate-key,
+source-reference, and literal-excerpt validation. The five variants were
+promoted twice with unchanged counts and were exposed by real MCP probes with
+evidence. After the final MCP schema synchronization, all derived indexes were
+rebuilt serially against source SHA-256
+`6511a7b4bab6377213f7f686997acc0f353f26bbde8ccbf3c7a43378b1818170`.
+SQLite integrity, matching fingerprints, active duplicate/evidence/facet
+checks, and all **63 tests** passed. The local total is now **290 published
+profiles** and **2,590 published features**.
+
+## Hololive official-outfit pass 04
+
+The fourth outfit-focused pass reconciled the current published projection and
+selected the next five eligible official default-costume pages. Candidate
+generation produced **2,082 observations** and **895 candidates**. Local
+Danbooru/Gelbooru wiki bodies were reviewed independently; optional weapons,
+fanart alternatives, lore, and non-clothing metadata were excluded.
+
+| Idol | Variant | Decision | Features | Evidence links |
+|---|---|---|---:|---:|
+| Nekomata Okayu | `nekomata_okayu_(1st_costume)` | Published | 10 | 20 |
+| Hoshimachi Suisei | `hoshimachi_suisei_(1st_costume)` | Published | 12 | 24 |
+| La+ Darknesss | `la+_darknesss_(1st_costume)` | Published | 9 | 18 |
+| Takanashi Kiara | `takanashi_kiara_(1st_costume)` | Published | 11 | 22 |
+| Shishiro Botan | `shishiro_botan_(1st_costume)` | Published | 9 | 18 |
+
+All five seeds passed JSON, profile-scope, controlled-facet, duplicate-key,
+source-reference, and site-specific literal-excerpt validation. The five
+variants were promoted twice with unchanged counts and exposed through real
+MCP probes with their published features. After the final MCP schema
+synchronization, all derived indexes were rebuilt serially against source
+SHA-256 `8b6441c70d50f81753544fc51682f1c2905e83bae4b5292ee1cc27c55ba199a0`.
+SQLite integrity, matching fingerprints, active duplicate/evidence/facet
+checks, and all **65 tests** passed. The local total is now **295 published
+profiles** and **2,641 published features**.
+
+## Hololive official-outfit pass 05
+
+After reconciling pass 04, the next five eligible official first-costume pages
+were selected: Shiori Novella, Mococo Abyssgard, Fuwawa Abyssgard, Kiryu Coco,
+and Uruha Rushia. Candidate generation produced **904 observations** and
+**372 candidates**. Danbooru and Gelbooru wiki bodies were reviewed
+independently. Props, weapons, lore, hairstyle-only metadata, and optional or
+contextual items were excluded from the published feature cards.
+
+| Idol | Variant | Decision | Features | Evidence links |
+|---|---|---|---:|---:|
+| Shiori Novella | `shiori_novella_(1st_costume)` | Published | 12 | 24 |
+| Mococo Abyssgard | `mococo_abyssgard_(1st_costume)` | Published | 10 | 20 |
+| Fuwawa Abyssgard | `fuwawa_abyssgard_(1st_costume)` | Published | 10 | 20 |
+| Kiryu Coco | `kiryu_coco_(1st_costume)` | Published | 6 | 12 |
+| Uruha Rushia | `uruha_rushia_(1st_costume)` | Published | 11 | 22 |
+
+All five seeds passed JSON, profile-scope, controlled-facet, duplicate-key,
+source-reference, resolvable-tag, and site-specific literal-excerpt
+validation. The five variants were promoted twice with unchanged counts and
+exposed through real MCP probes with status `published`. After the final MCP
+schema synchronization, derived indexes were rebuilt serially against source
+SHA-256 `ceb1b05100a54faa041f53d272406e5ffc4a79e759a32df705b825a79c229e63`.
+SQLite integrity, matching fingerprints, active duplicate/evidence/facet
+checks, and all **65 tests** passed. The local total is now **300 published
+profiles** and **2,690 published features**.
+
+## Hololive official-outfit pass 06
+
+After reconciling pass 05, the next five eligible official first-costume pages
+were selected: Nerissa Ravencroft, Hakui Koyori, Murasaki Shion, Tokoyami Towa,
+and Hakos Baelz. Candidate generation produced **1,807 observations** and
+**761 candidates**. Danbooru and Gelbooru wiki bodies were reviewed
+independently. Props, weapons, lore, companion entities, hairstyle-only data,
+and ambiguous alternative interpretations were excluded.
+
+| Idol | Variant | Decision | Features | Evidence links |
+|---|---|---|---:|---:|
+| Nerissa Ravencroft | `nerissa_ravencroft_(1st_costume)` | Published | 12 | 24 |
+| Hakui Koyori | `hakui_koyori_(1st_costume)` | Published | 11 | 22 |
+| Murasaki Shion | `murasaki_shion_(1st_costume)` | Published | 10 | 20 |
+| Tokoyami Towa | `tokoyami_towa_(1st_costume)` | Published | 9 | 18 |
+| Hakos Baelz | `hakos_baelz_(1st_costume)` | Published | 10 | 20 |
+
+All five seeds passed JSON, profile-scope, controlled-facet, duplicate-key,
+source-reference, resolvable-tag, and site-specific literal-excerpt
+validation. The five variants were promoted twice with unchanged counts and
+exposed through real MCP probes with status `published`. After the final MCP
+schema synchronization, derived indexes were rebuilt serially against source
+SHA-256 `7b4dd2fa9a3342b82a2e2d80df9c87edf846e762b709857906acd5e8489083dc`.
+SQLite integrity, matching fingerprints, active duplicate/evidence/facet
+checks, and all **65 tests** passed. The local total is now **305 published
+profiles** and **2,742 published features**.
+
+## Hololive official-outfit pass 07
+
+After reconciling pass 06, the next five eligible official first-costume pages
+were selected: Nakiri Ayame, Yukihana Lamy, Ookami Mio, Kazama Iroha, and
+Shirogane Noel. Candidate generation produced **1,800 observations** and
+**727 candidates**. Danbooru and Gelbooru wiki bodies were reviewed
+independently. Weapons, masks, props, lore, hairstyles, and non-resolvable
+footwear details were excluded from the published feature cards.
+
+| Idol | Variant | Decision | Features | Evidence links |
+|---|---|---|---:|---:|
+| Nakiri Ayame | `nakiri_ayame_(1st_costume)` | Published | 7 | 14 |
+| Yukihana Lamy | `yukihana_lamy_(1st_costume)` | Published | 9 | 18 |
+| Ookami Mio | `ookami_mio_(1st_costume)` | Published | 9 | 18 |
+| Kazama Iroha | `kazama_iroha_(1st_costume)` | Published | 8 | 16 |
+| Shirogane Noel | `shirogane_noel_(1st_costume)` | Published | 9 | 18 |
+
+All five seeds passed JSON, profile-scope, controlled-facet, duplicate-key,
+source-reference, resolvable-tag, and site-specific literal-excerpt
+validation. The five variants were promoted twice with unchanged counts and
+exposed through real MCP probes with status `published`. After the final MCP
+schema synchronization, derived indexes were rebuilt serially against source
+SHA-256 `c6baaf0de238904e016453ff46c594312e2ac4aaf44f94c6a2cdc575f8c43aaa`.
+SQLite integrity, matching fingerprints, active duplicate/evidence/facet
+checks, and all **65 tests** passed. The local total is now **310 published
+profiles** and **2,784 published features**.
+
+## Hololive official-outfit pass 08
+
+After reconciling pass 07, the next five eligible official costume pages with
+published base profiles and local Danbooru/Gelbooru wiki records were selected.
+Candidate generation was run with the exact five character-scoped variant
+identifiers and produced **206 observations** and **85 candidates**:
+
+| Idol | Variant | Observations | Candidates | Decision | Features | Evidence links |
+|---|---|---:|---:|---|---:|---:|
+| Houshou Marine | `houshou_marine_(summer)` | 53 | 22 | Published | 20 | 37 |
+| Sakura Miko | `sakura_miko_(casual)` | 64 | 23 | Published | 21 | 41 |
+| Gawr Gura | `gawr_gura_(casual)` | 30 | 13 | Published | 12 | 24 |
+| Hoshimachi Suisei | `hoshimachi_suisei_(casual)` | 59 | 27 | Published | 24 | 47 |
+| Minato Aqua | `minato_aqua_(5th_costume)` | 0 | 0 | Deferred: Gelbooru has only a prose swimsuit note and Danbooru has no local wiki body; no feature-level evidence. | 0 | 0 |
+
+The four published variants contain **77 features**, **149 evidence links**, and
+**8 site-specific wiki sources**. Features were limited to resolvable controlled
+visual facets from literal Danbooru/Gelbooru wiki links; shared uniforms,
+cosplay, props, lore, metadata, and unsupported optional/contextual details were
+excluded. All four seeds passed batch-wide JSON, profile-scope, controlled-facet,
+duplicate-key, source-reference, resolvable-tag, and site-specific literal-
+excerpt validation before promotion. A logical backup was created at
+`backups/tag_library_before_hololive_outfit_pass_08.sqlite` before promotion.
+Each published seed was promoted twice with unchanged counts.
+
+The final source SHA-256 is
+`2bb3790bbb7f33ac838a0383066648295c7fa4228ba044ae46cb5fb9bfd97c8c` and the
+source size is **868,425,728 bytes**. The source, context, search, and batch
+candidate SQLite databases passed `PRAGMA integrity_check = ok`; their recorded
+source fingerprints match this final source hash and size. Active duplicate
+assignments, published features without evidence, missing facet links, and
+active `unclassified` rows all returned zero rows. The derived context and
+search indexes and `hololive_outfit_candidates_08.sqlite` were rebuilt
+serially after the final canonical write.
+
+Real MCP stdio probes returned `found=true` with published status for the four
+published variants and `found=false` for deferred `minato_aqua_(5th_costume)`.
+The full `unittest` suite passed with **65 tests**. `git diff --check` also
+passed; no commit or push was performed.
+
+## Hololive official-outfit pass 09
+
+After reconciling the live canonical projection and the completed pass 08, the
+next five eligible official first-costume pages with published bases and local
+Danbooru/Gelbooru wiki bodies were processed: Aki Rosenthal, Anya Melfissa,
+Ayunda Risu, Kobo Kanaeru, and Vestia Zeta. Candidate generation produced
+**1,262 observations** and **500 candidates**.
+
+| Idol | Variant | Decision | Features | Evidence links |
+|---|---|---|---:|---:|
+| Aki Rosenthal | `aki_rosenthal_(1st_costume)` | Published | 11 | 22 |
+| Anya Melfissa | `anya_melfissa_(1st_costume)` | Published | 11 | 22 |
+| Ayunda Risu | `ayunda_risu_(1st_costume)` | Published | 14 | 28 |
+| Kobo Kanaeru | `kobo_kanaeru_(1st_costume)` | Published | 17 | 34 |
+| Vestia Zeta | `vestia_zeta_(1st_costume)` | Published | 12 | 24 |
+
+All five seeds passed batch-wide JSON, profile/variant-scope, controlled-facet,
+duplicate-key, resolvable-tag, source-reference, and independent literal-excerpt
+validation against each complete site-specific wiki body. Props, weapons, lore,
+shared uniforms, cosplay, and non-outfit metadata were excluded. The five
+promotions were each repeated once with unchanged counts. Real MCP stdio probes
+returned `found=true` and published status for all five exact variants.
+
+The five profiles contain **65 features**, **130 evidence links**, and **10
+site-specific wiki sources**. The final source and all three derived index
+fingerprints match SHA-256
+`9cc51b5ca98b7bf101b8d60c8f9358425fd5889ca127f487a16ab4a29afe4146` and source
+size **868,466,688 bytes**. Candidate index metrics are 1,262 observations and
+500 candidates. Canonical, context, search, and candidate SQLite databases all
+returned `PRAGMA integrity_check = ok`; active duplicate assignments, missing
+evidence, missing facet links, and active `unclassified` rows returned zero
+rows. The logical backup is
+`backups/tag_library_before_hololive_outfit_pass_09.sqlite`. The full
+`unittest` suite passed with **65 tests**, and `git diff --check` passed.
+No commit or push was performed.
+
+## Hololive official-outfit pass 10
+
+After reconciling pass 09 against the canonical appearance tables and the
+working seed directory, the next five unpublished official first-costume
+variants with published base profiles and complete local Danbooru/Gelbooru wiki
+records were selected: Ceres Fauna, Amane Kanata, Takane Lui, Oozora Subaru,
+and Koseki Bijou. Candidate generation used the exact character-scoped variant
+identifiers and produced **196 observations** and **89 pending visual
+candidates**.
+
+| Idol | Variant | Observations | Candidates | Decision | Features | Evidence links |
+|---|---|---:|---:|---|---:|---:|
+| Ceres Fauna | `ceres_fauna_(1st_costume)` | 44 | 18 | Published | 17 | 34 |
+| Amane Kanata | `amane_kanata_(1st_costume)` | 39 | 18 | Published | 18 | 36 |
+| Takane Lui | `takane_lui_(1st_costume)` | 48 | 16 | Published | 14 | 28 |
+| Oozora Subaru | `oozora_subaru_(1st_costume)` | 23 | 19 | Published | 18 | 36 |
+| Koseki Bijou | `koseki_bijou_(1st_costume)` | 42 | 18 | Published | 15 | 30 |
+
+All five seeds passed batch-wide JSON, canonical registration, profile/variant
+scope, controlled-facet, duplicate-key, source-reference, and literal-excerpt
+validation. The complete site-specific wiki bodies were inspected before seed
+authoring; excerpts were independently verified as literal substrings of the
+Danbooru and Gelbooru records. Optional costume updates, props, weapons,
+manager context, fanart alternatives, and non-outfit metadata were excluded.
+The logical backup was created at
+`backups/tag_library_before_hololive_outfit_pass_10.sqlite` before promotion.
+
+The five seeds were promoted and then promoted a second time with unchanged
+counts. The canonical projection now contains **5 published profiles, 82
+published features, and 164 evidence links** for this pass. Active duplicate
+assignments, published/reviewed features without evidence, missing facet links,
+and active `unclassified` rows all returned zero rows. The canonical source
+passed `PRAGMA integrity_check = ok`; its final SHA-256 is
+`328e05228acaf7aaf79ddb63c605cb46cecf8dd1972d43d4efb96c83abdf793d` and its
+size is **868,540,416 bytes**. The batch candidate, search, and context index
+metadata match that hash and size, and all three derived databases passed
+`PRAGMA integrity_check = ok`.
+
+The full `.venv/Scripts/python.exe -m unittest discover -s tests -q` suite passed
+with **65 tests**. A real MCP stdio probe against a fresh logical copy of the
+final canonical database returned `found=true`, `published`, and evidence for
+all five exact variants (Ceres 6 exposed runtime features, Kanata 7, Lui 9,
+Subaru 7, and Bijou 7). A direct probe against the live canonical path was
+blocked by an unrelated persistent MCP process holding a SQLite write lock;
+no canonical data was lost or weakened, and the canonical SQL projection was
+verified directly. No commit or push was performed.
+
+## Hololive official-outfit pass 11
+
+After reconciling pass 10 against the live canonical projection, seeds, and
+MCP, the next five unpublished official first-costume variants with published
+base profiles and independent Danbooru/Gelbooru wiki bodies were selected:
+Airani Iofifteen, Cecilia Immergreen, Elizabeth Rose Bloodflame, Ichijou
+Ririka, and Juufuutei Raden. Candidate generation used the exact
+character-scoped variant identifiers and produced **153 observations** and
+**76 pending visual candidates**:
+
+|| Idol | Variant | Observations | Candidates | Decision | Features | Evidence links |
+|---|---|---:|---:|---|---:|---:|
+| Airani Iofifteen | `airani_iofifteen_(1st_costume)` | 29 | 10 | Published | 6 | 12 |
+| Cecilia Immergreen | `cecilia_immergreen_(1st_costume)` | 40 | 21 | Published | 8 | 12 |
+| Elizabeth Rose Bloodflame | `elizabeth_rose_bloodflame_(1st_costume)` | 20 | 10 | Published | 8 | 14 |
+| Ichijou Ririka | `ichijou_ririka_(1st_costume)` | 31 | 21 | Published | 8 | 12 |
+| Juufuutei Raden | `juufuutei_raden_(1st_costume)` | 33 | 14 | Published | 7 | 14 |
+
+All five seeds passed batch-wide JSON, canonical registration, profile/variant
+scope, controlled-facet, duplicate-key, source-reference, and independent
+literal-excerpt validation against the complete site-specific Danbooru and
+Gelbooru bodies. The only failed validation was a Gelbooru Cecilia excerpt
+using the local tag's underscored spelling; it was corrected to the captured
+literal `short shorts` wording before any promotion. Optional props/weapons,
+ReGLOSS/shared uniforms, costumes, and non-outfit metadata were excluded.
+A logical backup was created before promotion at
+`backups/tag_library_before_hololive_outfit_pass_11.sqlite`.
+
+The five seeds were promoted and each was promoted a second time with
+unchanged idempotent counts. The pass added **37 published features** and
+**64 evidence links** from **10 site-specific wiki sources**. The canonical
+projection now contains **329 published profiles**, **3,045 published
+features**, and **4,780 evidence links**. Active duplicate assignments,
+published features without evidence, missing facet links, and active
+`unclassified` rows all returned zero rows.
+
+The final canonical source SHA-256 is
+`10b17c52e42e2b7a62f1fdb9ba99b94b29796ccf2e5dbbf2011b1e32203f40ad` with size
+**868,564,992 bytes**. The candidate, search, and context indexes were rebuilt
+serially after the final MCP schema bootstrap; their recorded fingerprints
+match this source hash and size. The canonical source and all three derived
+SQLite databases returned `PRAGMA integrity_check = ok`.
+
+A real MCP stdio probe returned `found=true`, status `published`, and evidence
+for all five exact variants (Airani 6, Cecilia 8, Elizabeth 8, Ririka 8, and
+Raden 7 exposed runtime features). The full
+`.venv/Scripts/python.exe -m unittest discover -s tests -q` suite passed with
+**65 tests**. No commit, push, or Hugging Face publication was performed.
+
+## Hololive official-outfit pass 12
+
+After reconciling pass 11 against the live canonical projection, exact published
+appearance keys, the seed directory, and a real MCP stdio probe, the next five
+new official first-costume variants with published base profiles and independent
+Danbooru/Gelbooru wiki records were selected: Kureiji Ollie, Moona Hoshinova,
+Pavolia Reine, Tokino Sora, and Natsuiro Matsuri. No concurrent worker process
+was active at the start of the tick. The logical backup was created before any
+canonical promotion at
+`backups/tag_library_before_hololive_outfit_pass_12.sqlite`.
+
+The exact character-scoped candidate build produced **186 observations** and
+**75 pending visual candidates**:
+
+| Idol | Variant | Observations | Candidates | Decision | Features | Evidence links |
+|---|---|---:|---:|---|---:|---:|
+| Kureiji Ollie | `kureiji_ollie_(1st_costume)` | 33 | 12 | Published | 8 | 8 |
+| Moona Hoshinova | `moona_hoshinova_(1st_costume)` | 40 | 20 | Published | 9 | 9 |
+| Pavolia Reine | `pavolia_reine_(1st_costume)` | 19 | 7 | Published | 5 | 5 |
+| Tokino Sora | `tokino_sora_(1st_costume)` | 62 | 23 | Published | 7 | 7 |
+| Natsuiro Matsuri | `natsuiro_matsuri_(1st_costume)` | 32 | 13 | Published | 6 | 6 |
+
+All five seeds passed batch-wide JSON, canonical registration, profile/variant
+scope, controlled-facet, duplicate-key, source-reference, and literal-excerpt
+validation before promotion. The complete site-specific wiki bodies were
+captured independently; each published feature links to the exact Danbooru
+excerpt, while the corresponding Gelbooru body is retained as an independent
+source record. Shared agency uniforms, props, weapons, lore, and non-outfit
+metadata were excluded. The five seeds were promoted twice with unchanged
+idempotent counts.
+
+The pass added **35 published features**, **35 evidence links**, and **10
+site-specific wiki source records**. The canonical projection now contains
+**334 published profiles**, **3,080 published features**, **4,815 evidence
+links**, and **65 published variants**. Active duplicate assignments, published
+features without evidence, cross-character scope violations, and active
+`unclassified` rows all returned zero rows.
+
+The final canonical source SHA-256 is
+`ca8969cfc156cee7419ccbf69bb5d88f75c6f69e66b5d4783a1e6a3369eeb36c` with source
+size **868,622,336 bytes**. The candidate, search, and context indexes were
+rebuilt serially after the final schema bootstrap; all three recorded this
+fingerprint and size, and all four SQLite databases returned
+`PRAGMA integrity_check = ok`.
+
+A real MCP stdio probe returned `found=true`, status `published`, and evidence
+for all five exact variants (Kureiji 4 exposed runtime features, Moona 7,
+Pavolia 3, Tokino 7, and Natsuiro 5). The required
+`.venv/Scripts/python.exe -m unittest discover -s tests -q` suite passed with
+**65 tests**. No commit, push, or Hugging Face publication was performed.
+
+## Hololive official-outfit pass 13
+
+The next five unpublished official first-costume variants were reconciled
+against the canonical database, exact appearance keys, seed directory, and a
+fresh MCP stdio projection: Akai Haato, Gigi Murin, Himemori Luna, Omaru Polka,
+and Shiranui Flare. No concurrent worker process was active. A logical backup
+was created before promotion at
+`backups/tag_library_before_hololive_outfit_pass_13.sqlite`.
+
+The exact character-scoped candidate build produced **210 observations** and
+**96 pending visual candidates**:
+
+|| Idol | Variant | Observations | Candidates | Decision | Features | Evidence links |
+|---|---|---:|---:|---|---:|---:|
+| Akai Haato | `akai_haato_(1st_costume)` | 26 | 12 | Published | 9 | 18 |
+| Gigi Murin | `gigi_murin_(1st_costume)` | 30 | 17 | Published | 8 | 16 |
+| Himemori Luna | `himemori_luna_(1st_costume)` | 49 | 21 | Published | 13 | 26 |
+| Omaru Polka | `omaru_polka_(1st_costume)` | 61 | 28 | Published | 13 | 26 |
+| Shiranui Flare | `shiranui_flare_(1st_costume)` | 44 | 18 | Published | 11 | 22 |
+
+All five seeds passed batch-wide JSON, canonical registration, profile/variant
+scope, controlled-facet, unique-feature, source-reference, and literal-excerpt
+validation. Complete Danbooru and Gelbooru wiki bodies were independently
+retained as the two source records per variant; every published feature links
+to both site-specific records. Shared uniforms, cosplay, lore, props, weapons,
+hairstyle-only metadata, and unsupported alternatives were excluded. The
+logical backup was created before any canonical promotion.
+
+The five seeds were promoted and each was promoted a second time with unchanged
+idempotent counts. The pass added **54 published features**, **108 evidence
+links**, and **10 site-specific wiki source records**. The canonical projection
+now contains **339 published profiles**, **3,134 published features**, and
+**4,923 evidence links**. Active duplicate assignments, published features
+without evidence, missing facet links, and active `unclassified` rows all
+returned zero rows.
+
+The final canonical source SHA-256 is
+`4bd9366bfce7b2a66223d8d60d75ce398d5b31b0a56c73d58e1e67b5c2f8097a` with source
+size **868,810,752 bytes**. Search, context, and exact batch candidate indexes
+were rebuilt serially after the final MCP schema bootstrap; all three recorded
+this fingerprint and size. The canonical source and all four SQLite databases
+returned `PRAGMA integrity_check = ok`.
+
+A real MCP stdio probe returned `found=true`, status `published`, and evidence
+for all five exact variants (Akai 9, Gigi 8, Luna 13, Polka 13, and Flare 11
+runtime features; two sources and feature-level evidence per profile). The
+full `.venv/Scripts/python.exe -m unittest discover -s tests -q` suite passed
+with **65 tests**. No commit, push, or Hugging Face publication was performed.
+
+## Hololive official-outfit pass 14
+
+The queue was reconciled against the live canonical projection, exact published
+appearance keys, working seeds, and a real MCP stdio probe. The next five
+unpublished official first-costume variants with published base profiles and
+complete local Danbooru/Gelbooru wiki records were selected: Tsunomaki Watame,
+Raora Panthera, Yuzuki Choco, Tsukumo Sana, and Otonose Kanade. No concurrent
+worker process was active. A logical SQLite backup was created before promotion
+at `backups/tag_library_before_hololive_outfit_pass_14.sqlite`.
+
+The exact character-scoped candidate build produced **169 observations** and
+**74 pending visual candidates**:
+
+| Idol | Variant | Observations | Candidates | Decision | Features | Evidence links |
+|---|---|---:|---:|---|---:|---:|
+| Tsunomaki Watame | `tsunomaki_watame_(1st_costume)` | 32 | 15 | Published | 15 | 30 |
+| Raora Panthera | `raora_panthera_(1st_costume)` | 32 | 17 | Published | 12 | 24 |
+| Yuzuki Choco | `yuzuki_choco_(1st_costume)` | 31 | 14 | Published | 16 | 32 |
+| Tsukumo Sana | `tsukumo_sana_(1st_costume)` | 44 | 14 | Published | 19 | 38 |
+| Otonose Kanade | `otonose_kanade_(1st_costume)` | 30 | 14 | Published | 16 | 32 |
+
+All five seeds passed batch-wide JSON, canonical registration, profile/variant
+scope, controlled-facet, unique-feature, source-reference, and independent
+literal-excerpt validation against the complete site-specific wiki bodies.
+Every feature links to both the Danbooru and Gelbooru source records. Props,
+weapons, lore, hairstyle-only observations, and unsupported alternatives were
+excluded. Raora's Danbooru/Gelbooru jacket-color disagreement was retained as
+one formal open conflict rather than silently selecting a color.
+
+The five seeds were promoted and each was promoted a second time with unchanged
+idempotent counts. The pass added **78 published features**, **156 evidence
+links**, **10 site-specific wiki sources**, and **1 open conflict**. The canonical
+projection now contains **344 published profiles**, **3,212 published features**,
+**5,079 evidence links**, and **70 published variants**. Active duplicate
+assignments, published features without evidence, missing facet links, and
+active `unclassified` rows all returned zero rows.
+
+The final canonical source SHA-256 is
+`aaa03dd1aacdc3b226f9287163bc7bf3df8e11c41943b68ae14db23bc49f7fd2` with source
+size **868,937,728 bytes**. The exact batch candidate, search, and context
+indexes were rebuilt serially after the final MCP schema bootstrap; all three
+recorded this fingerprint and size. The canonical source and all four SQLite
+databases returned `PRAGMA integrity_check = ok`.
+
+A real MCP stdio probe returned `found=true`, status `published`, and evidence
+for all five exact variants (Watame 15, Raora 12, Choco 16, Sana 19, and Kanade
+16 exposed runtime features). The full
+`.venv/Scripts/python.exe -m unittest discover -s tests -q` suite passed with
+**65 tests**, and `git diff --check` passed. No commit, push, or Hugging Face
+publication was performed.
+
+## Hololive official-outfit pass 15
+
+The queue was reconciled against the canonical database, exact published
+appearance keys, working seed directory, and a fresh MCP stdio projection. No
+concurrent worker process was active. The next five unpublished official
+first-costume variants with published base profiles and independent
+Danbooru/Gelbooru wiki records were selected by independent post volume:
+Momosuzu Nene (1,026: Danbooru 680, Gelbooru 346), Hiodoshi Ao (810: 355,
+455), Todoroki Hajime (789: 326, 463), Kaela Kovalskia (432: 287, 145), and
+Mizumiya Su (281: 0, 281). `combined` rows were excluded from ranking. Kaela's
+record is explicitly historical/original default because her 4th costume is the
+current default. A logical SQLite backup was created before promotion at
+`backups/tag_library_before_hololive_outfit_pass_15.sqlite`.
+
+The exact character-scoped candidate build produced **207 observations** and
+**88 pending visual candidates**:
+
+| Idol | Variant | Observations | Candidates | Decision | Features | Evidence links |
+|---|---|---:|---:|---|---:|---:|
+| Momosuzu Nene | `momosuzu_nene_(1st_costume)` | 76 | 29 | Published | 9 | 18 |
+| Hiodoshi Ao | `hiodoshi_ao_(1st_costume)` | 31 | 14 | Published | 5 | 10 |
+| Todoroki Hajime | `todoroki_hajime_(1st_costume)` | 16 | 7 | Published | 6 | 12 |
+| Kaela Kovalskia | `kaela_kovalskia_(1st_costume)` | 51 | 23 | Published | 19 | 38 |
+| Mizumiya Su | `mizumiya_su_(1st_costume)` | 33 | 15 | Published | 12 | 24 |
+
+All five seeds passed batch-wide JSON, canonical registration, profile/variant
+scope, controlled-facet, unique-feature, source-reference, and independent
+literal-excerpt validation against the complete site-specific wiki bodies.
+Every feature links to both Danbooru and Gelbooru source records. The
+ReGLOSS unit costume in Ao's source was excluded from her first-costume
+profile; props, talismans, weapons/tools, lore, hairstyle-only observations,
+and unsupported alternatives were excluded. No conflicts were required.
+
+The five seeds were promoted and each was promoted a second time with
+unchanged idempotent counts. The pass added **51 published features**, **102
+evidence links**, and **10 site-specific wiki source records**. The canonical
+projection now contains **349 published profiles**, **3,263 published
+features**, **5,181 evidence links**, and **75 published variants**. Active
+duplicate assignments, published features without evidence, missing facet
+links, and active `unclassified` rows all returned zero rows.
+
+The final canonical source SHA-256 is
+`e4677c280586b58ae031cdec5bcb402409b8e2ac4bee81f1b491dbbc136f66fc` with source
+size **869,085,184 bytes**. The exact batch candidate, search, and context
+indexes were rebuilt serially after the final MCP schema bootstrap; candidate
+and context metadata match this fingerprint and size, and all four SQLite
+databases returned `PRAGMA integrity_check = ok`.
+
+A real MCP stdio probe returned `found=true`, status `published`, and evidence
+for all five exact variants (Momosuzu 6, Ao 5, Hajime 6, Kaela 9, and Su 7
+exposed runtime features). The required
+`.venv/Scripts/python.exe -m unittest discover -s tests -q` suite passed with
+**65 tests**. No commit, push, or Hugging Face publication was performed.
+
+## Hololive official-outfit pass 16
+
+The queue was reconciled against the live canonical projection, exact published
+appearance keys, and working seeds; the resulting profiles were then verified
+through a fresh MCP stdio projection. The next five unpublished official
+first-costume variants with published base profiles and independent
+Danbooru/Gelbooru wiki bodies were selected: Harusaki Nodoka, Isaki Riona,
+Kikirara Vivi, Koganei Niko, and Rindo Chihaya. No concurrent worker
+process was active. A logical SQLite backup was created before promotion at
+`backups/tag_library_before_hololive_outfit_pass_16.sqlite`.
+
+The exact character-scoped candidate build produced **165 observations** and
+**65 pending visual candidates**:
+
+| Idol | Variant | Observations | Candidates | Decision | Features | Evidence links |
+|---|---|---:|---:|---|---:|---:|
+| Harusaki Nodoka | `harusaki_nodoka_(1st_costume)` | 32 | 10 | Published | 10 | 20 |
+| Isaki Riona | `isaki_riona_(1st_costume)` | 30 | 11 | Published | 10 | 20 |
+| Kikirara Vivi | `kikirara_vivi_(1st_costume)` | 25 | 10 | Published | 10 | 20 |
+| Koganei Niko | `koganei_niko_(1st_costume)` | 38 | 14 | Published | 14 | 28 |
+| Rindo Chihaya | `rindo_chihaya_(1st_costume)` | 40 | 20 | Published | 18 | 36 |
+
+All five seeds passed batch-wide JSON, canonical registration, profile/variant
+scope, controlled-facet, unique-feature, source-reference, and independent
+literal-excerpt validation against the complete site-specific wiki bodies.
+Every feature links to both the Danbooru and Gelbooru source records. Roles,
+props, lore, metadata, and unsupported alternatives were excluded; Rindo's
+steering-wheel accessory was not promoted as a separate prop feature.
+The logical backup was created before any canonical promotion.
+
+The five seeds were promoted and each was promoted a second time with unchanged
+idempotent counts. The pass added **62 published features**, **124 evidence
+links**, and **10 site-specific wiki source records**. The canonical projection
+now contains **354 published profiles**, **3,325 published features**,
+**5,305 evidence links**, and **85 published variants**. Active duplicate
+assignments, published features without evidence, missing facet links, and
+active `unclassified` rows all returned zero rows.
+
+The final canonical source SHA-256 is
+`e9e5c08028e87956d8a5f904b98d7ba5559c214a8d7292fffe958492298a0cea` with source
+size **869,126,144 bytes**. The exact batch candidate, search, and context
+indexes were rebuilt serially after the final MCP schema bootstrap; all three
+recorded this fingerprint and size, and all four SQLite databases returned
+`PRAGMA integrity_check = ok`.
+
+A real MCP stdio probe returned `found=true`, status `published`, and evidence
+for all five exact variants (Nodoka 10, Riona 10, Vivi 10, Niko 14, and Chihaya
+18 exposed runtime features). The required
+`.venv/Scripts/python.exe -m unittest discover -s tests -q` suite passed with
+**65 tests**. `git diff --check` passed. No commit, push, or Hugging Face
+publication was performed.
+
+## Hololive official-outfit pass 17
+
+The queue was reconciled against the live canonical database, exact published
+appearance keys, working seeds, and a real MCP stdio projection. No concurrent
+worker process was active. One unpublished official first-costume variant with
+a published base profile and complete independent Danbooru/Gelbooru wiki
+records remained: Yozora Mel. Its independent post-volume ranking was Danbooru
+122 and Gelbooru 144, total 266 (`combined` excluded). A logical SQLite backup
+was created before promotion at
+`backups/tag_library_before_hololive_outfit_pass_17.sqlite`.
+
+The exact character-scoped candidate build produced **50 observations** and
+**17 pending visual candidates**:
+
+| Idol | Variant | Observations | Candidates | Decision | Features | Evidence links |
+|---|---|---:|---:|---|---:|---:|
+| Yozora Mel | `yozora_mel_(1st_costume)` | 50 | 17 | Published | 17 | 34 |
+
+The seed passed JSON, canonical registration, profile/variant scope,
+controlled-facet, unique-feature, source-reference, and independent literal-
+excerpt validation against both complete site-specific wiki bodies. The source
+records differ where the sites differ; unsupported metadata and non-visual
+context were excluded. The seed was promoted and promoted a second time with
+unchanged idempotent counts: 1 profile, 17 features, 34 attempted evidence
+links, 2 sources, and 0 conflicts.
+
+The canonical projection now contains **355 published profiles**, **3,342
+published features**, **5,327 evidence links**, **692 source records**, and
+**86 published variants**. Active duplicate assignments, published features
+without evidence, missing facet links, and active `unclassified` rows all
+returned zero rows.
+
+The final canonical source SHA-256 is
+`43c4e2228b2640a5703a418575404f29d3412c569a2ebaf8d8cdb9cefb352eea` with source
+size **869,130,240 bytes**. The exact batch candidate, search, and context
+indexes were rebuilt serially after the final MCP bootstrap; their metadata
+matches this fingerprint and size. The canonical source and all four SQLite
+databases returned `PRAGMA integrity_check = ok`.
+
+A real MCP stdio probe returned `found=true`, status `published`, and 17 exposed
+runtime features for the exact `yozora_mel_(1st_costume)` variant; the
+three-way probe also returned Yozora Mel through `search_characters` and its
+canonical tag through `search_knowledge`. The required
+`.venv/Scripts/python.exe -m unittest discover -s tests -q` suite passed with
+**65 tests**. `git diff --check` passed. No commit, push, or Hugging Face
+publication was performed.
+
+The local queue is exhausted for unpublished official first-costume variants
+with published bases and complete independent Danbooru/Gelbooru wiki records;
+no candidates were invented.
+
+## General appearance batch 23
+
+The next five characters were selected by the reproducible independent ranking
+(Danbooru + Gelbooru + e621; `combined` excluded):
+
+| Rank | Character | Danbooru | Gelbooru | e621 | Total | Result |
+|---:|---|---:|---:|---:|---:|---|
+| 1 | `yamada_ryo` | 4,436 | 6,051 | 0 | 10,487 | Published; 15 features |
+| 2 | `okita_souji_(koha-ace)` | 4,446 | 6,025 | 0 | 10,471 | Deferred; no structured visual candidates |
+| 3 | `miyako_yoshika` | 4,124 | 6,294 | 0 | 10,418 | Deferred; source documents inconsistent hair/eye colors |
+| 4 | `gilgamesh_(fate)` | 3,005 | 7,406 | 0 | 10,411 | Published; 4 features |
+| 5 | `akebono_(kancolle)` | 4,596 | 5,812 | 0 | 10,408 | Published; 12 features |
+
+Candidate generation produced **108 observations** and **47 pending visual
+candidates**. Three profiles were promoted with **31 features**, **62 evidence
+links**, and **0 conflicts**. Each promotion was repeated successfully with
+unchanged counts, confirming idempotence. Okita and Miyako were added to the
+explicit exclusion ledger and were not published.
+
+The context index was rebuilt serially after promotion. The rebuild exposed a
+work-tokenization defect for underscore-separated titles; `build_context_index.py`
+was corrected to index both canonical and space-separated work terms. The full
+suite passed with **65 tests**, `git diff --check` passed, and the canonical
+SQLite integrity check remained `ok`.

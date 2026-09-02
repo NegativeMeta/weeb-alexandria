@@ -110,7 +110,7 @@ def build(source: Path, output: Path) -> tuple[int, int]:
             "SELECT name, aliases FROM tags WHERE category_name='copyright'"
         ):
             work = (row["name"] or "").lower()
-            work_terms = terms(work) | terms(row["aliases"] or "")
+            work_terms = terms(work) | terms(work.replace("_", " ")) | terms(row["aliases"] or "")
             if not work_terms:
                 continue
             works.setdefault(work, set()).update(work_terms)
