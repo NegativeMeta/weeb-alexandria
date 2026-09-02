@@ -2271,3 +2271,25 @@ and were not published.
 
 The final validation passed with **65 tests**, `PRAGMA integrity_check = ok`,
 serial search/context index rebuilds, and `git diff --check`.
+
+## General appearance batch 25
+
+The next five characters were selected by the reproducible independent ranking
+(Danbooru + Gelbooru + e621; `combined` excluded):
+
+| Rank | Character | Danbooru | Gelbooru | e621 | Total | Result |
+|---:|---|---:|---:|---:|---:|---|
+| 1 | `kurodani_yamame` | 4,067 | 6,256 | 0 | 10,323 | Published; 6 features |
+| 2 | `kanna_(blue_archive)` | 4,368 | 5,954 | 0 | 10,322 | Published; 11 features |
+| 3 | `ranma-chan` | 2,129 | 8,144 | 0 | 10,273 | Deferred; transformation/genderswap form |
+| 4 | `itsumi_erika` | 4,446 | 5,775 | 0 | 10,221 | Deferred; no structured visual candidates |
+| 5 | `sakurauchi_riko` | 3,117 | 7,100 | 0 | 10,217 | Published; 4 features |
+
+Candidate generation produced **59 observations** and **35 pending visual
+candidates**. Three profiles were promoted with **21 features**, **27 evidence
+links**, and **0 conflicts**. Every promotion was repeated successfully with
+unchanged counts. Ranma-chan and Itsumi Erika were added to the explicit
+exclusion ledger and were not published.
+
+The final validation passed with **65 tests**, `PRAGMA integrity_check = ok`,
+serial search/context index rebuilds, and `git diff --check`.

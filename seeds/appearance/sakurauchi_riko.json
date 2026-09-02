@@ -1,0 +1,76 @@
+{
+  "character_tag": "sakurauchi_riko",
+  "sources": [
+    {
+      "id": "danbooru:wiki:sakurauchi_riko",
+      "source_site": "danbooru",
+      "source_kind": "wiki",
+      "source_key": "sakurauchi_riko",
+      "source_url": "https://danbooru.donmai.us/wiki_pages/sakurauchi_riko.json",
+      "source_tier": 1,
+      "title": "sakurauchi_riko",
+      "excerpt": "She has [[yellow eyes]] and [[long hair]], [[red hair]], styled as a half updo with two [[hairclips]].",
+      "captured_at": "2026-09-02"
+    },
+    {
+      "id": "gelbooru:wiki:sakurauchi_riko",
+      "source_site": "gelbooru",
+      "source_kind": "wiki",
+      "source_key": "sakurauchi_riko",
+      "source_url": "https://gelbooru.com/index.php?page=wiki&s=view&id=sakurauchi_riko",
+      "source_tier": 1,
+      "title": "sakurauchi_riko",
+      "excerpt": "She has [[yellow eyes]] and [[long hair]], [[red hair]], styled as a half updo with two [[hairclips]].",
+      "captured_at": "2026-09-02"
+    }
+  ],
+  "profiles": [
+    {
+      "appearance_key": "sakurauchi_riko::default",
+      "variant_tag": "sakurauchi_riko",
+      "display_name": "Base appearance",
+      "appearance_kind": "default",
+      "is_default": true,
+      "status": "published",
+      "confidence": "high",
+      "provenance": "danbooru_gelbooru_wiki_reviewed",
+      "notes": "Stable base appearance; outfit-specific and personality/context tags excluded.",
+      "features": [
+        {
+          "facet": "hair",
+          "canonical_tag": "long_hair",
+          "value": "Long hair",
+          "source_refs": [
+            "danbooru:wiki:sakurauchi_riko",
+            "gelbooru:wiki:sakurauchi_riko"
+          ]
+        },
+        {
+          "facet": "hair",
+          "canonical_tag": "red_hair",
+          "value": "Red hair",
+          "source_refs": [
+            "danbooru:wiki:sakurauchi_riko",
+            "gelbooru:wiki:sakurauchi_riko"
+          ]
+        },
+        {
+          "facet": "eyes",
+          "canonical_tag": "yellow_eyes",
+          "value": "Yellow eyes",
+          "source_refs": [
+            "danbooru:wiki:sakurauchi_riko"
+          ]
+        },
+        {
+          "facet": "hair_accessory",
+          "canonical_tag": "hairclip",
+          "value": "Hair clips",
+          "source_refs": [
+            "danbooru:wiki:sakurauchi_riko"
+          ]
+        }
+      ]
+    }
+  ]
+}
