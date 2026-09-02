@@ -1,0 +1,69 @@
+{
+  "character_tag": "d.va_(overwatch)",
+  "sources": [
+    {
+      "id": "danbooru:wiki:d.va_(overwatch)",
+      "source_site": "danbooru",
+      "source_kind": "wiki",
+      "source_key": "d.va_(overwatch)",
+      "source_url": "https://danbooru.donmai.us/wiki_pages/d.va_(overwatch).json",
+      "source_tier": 1,
+      "title": "d.va_(overwatch)",
+      "excerpt": "D.Va's standard outfit is a primarily-blue mecha pilot suit with a bunny insignia on the chest and sponsor logos on the right thigh; pink, whisker markings facial marks; and a pair of headphones. She has long hair brown hair with swept bangs.",
+      "captured_at": "2026-09-02"
+    },
+    {
+      "id": "gelbooru:wiki:d.va_(overwatch)",
+      "source_site": "gelbooru",
+      "source_kind": "wiki",
+      "source_key": "d.va_(overwatch)",
+      "source_url": "https://gelbooru.com/index.php?page=wiki&s=view&id=d.va_(overwatch)",
+      "source_tier": 1,
+      "title": "d.va_(overwatch)",
+      "excerpt": "D.Va's standard outfit is a primarily-blue mecha pilot suit with a bunny insignia on the chest and sponsor logos on the right thigh; pink, whisker markings facial marks; and a pair of headphones. She has long hair brown hair with swept bangs.",
+      "captured_at": "2026-09-02"
+    }
+  ],
+  "profiles": [
+    {
+      "appearance_key": "d.va_(overwatch)::default",
+      "variant_tag": "d.va_(overwatch)",
+      "display_name": "Standard pilot appearance",
+      "appearance_kind": "default",
+      "is_default": true,
+      "status": "published",
+      "confidence": "high",
+      "provenance": "danbooru_gelbooru_wiki_reviewed",
+      "notes": "Standard D.Va design; alternate skins, mecha, role, and biography excluded.",
+      "features": [
+        {
+          "facet": "hair",
+          "canonical_tag": "long_hair",
+          "value": "Long hair",
+          "source_refs": [
+            "danbooru:wiki:d.va_(overwatch)",
+            "gelbooru:wiki:d.va_(overwatch)"
+          ]
+        },
+        {
+          "facet": "hair",
+          "canonical_tag": "brown_hair",
+          "value": "Brown hair",
+          "source_refs": [
+            "danbooru:wiki:d.va_(overwatch)",
+            "gelbooru:wiki:d.va_(overwatch)"
+          ]
+        },
+        {
+          "facet": "hair_accessory",
+          "canonical_tag": "swept_bangs",
+          "value": "Swept bangs",
+          "source_refs": [
+            "danbooru:wiki:d.va_(overwatch)",
+            "gelbooru:wiki:d.va_(overwatch)"
+          ]
+        }
+      ]
+    }
+  ]
+}

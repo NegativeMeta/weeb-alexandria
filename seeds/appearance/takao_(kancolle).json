@@ -1,0 +1,114 @@
+{
+  "character_tag": "takao_(kancolle)",
+  "sources": [
+    {
+      "id": "danbooru:wiki:takao_(kancolle)",
+      "source_site": "danbooru",
+      "source_kind": "wiki",
+      "source_key": "takao_(kancolle)",
+      "source_url": "https://danbooru.donmai.us/wiki_pages/takao_(kancolle).json",
+      "source_tier": 1,
+      "title": "takao_(kancolle)",
+      "excerpt": "In Kantai Collection, Takao (cruiser) has [[short hair]] [[black hair]], [[red eyes]], and large breasts. She wears a [[blue beret]], [[blue military uniform]], [[miniskirt]], [[black gloves]] and [[black thighhighs]] with garter straps.",
+      "captured_at": "2026-09-02"
+    },
+    {
+      "id": "gelbooru:wiki:takao_(kancolle)",
+      "source_site": "gelbooru",
+      "source_kind": "wiki",
+      "source_key": "takao_(kancolle)",
+      "source_url": "https://gelbooru.com/index.php?page=wiki&s=view&id=takao_(kancolle)",
+      "source_tier": 1,
+      "title": "takao_(kancolle)",
+      "excerpt": "In Kantai Collection, Takao (cruiser) has [[short hair]] [[black hair]], [[red eyes]], and large breasts. She wears a [[blue beret]], [[blue military uniform]], [[miniskirt]], [[black gloves]] and [[black thighhighs]] with garter straps.",
+      "captured_at": "2026-09-02"
+    }
+  ],
+  "profiles": [
+    {
+      "appearance_key": "takao_(kancolle)::default",
+      "variant_tag": "takao_(kancolle)",
+      "display_name": "Default heavy-cruiser appearance",
+      "appearance_kind": "default",
+      "is_default": true,
+      "status": "published",
+      "confidence": "high",
+      "provenance": "danbooru_gelbooru_wiki_reviewed",
+      "notes": "Default character design; historical biography and weapon/context tags excluded.",
+      "features": [
+        {
+          "facet": "hair",
+          "canonical_tag": "short_hair",
+          "value": "Short hair",
+          "source_refs": [
+            "danbooru:wiki:takao_(kancolle)",
+            "gelbooru:wiki:takao_(kancolle)"
+          ]
+        },
+        {
+          "facet": "hair",
+          "canonical_tag": "black_hair",
+          "value": "Black hair",
+          "source_refs": [
+            "danbooru:wiki:takao_(kancolle)",
+            "gelbooru:wiki:takao_(kancolle)"
+          ]
+        },
+        {
+          "facet": "eyes",
+          "canonical_tag": "red_eyes",
+          "value": "Red eyes",
+          "source_refs": [
+            "danbooru:wiki:takao_(kancolle)",
+            "gelbooru:wiki:takao_(kancolle)"
+          ]
+        },
+        {
+          "facet": "headwear",
+          "canonical_tag": "beret",
+          "value": "Blue beret",
+          "source_refs": [
+            "danbooru:wiki:takao_(kancolle)",
+            "gelbooru:wiki:takao_(kancolle)"
+          ]
+        },
+        {
+          "facet": "dress",
+          "canonical_tag": "military_uniform",
+          "value": "Blue military uniform",
+          "source_refs": [
+            "danbooru:wiki:takao_(kancolle)",
+            "gelbooru:wiki:takao_(kancolle)"
+          ]
+        },
+        {
+          "facet": "lower_body",
+          "canonical_tag": "miniskirt",
+          "value": "Miniskirt",
+          "source_refs": [
+            "danbooru:wiki:takao_(kancolle)",
+            "gelbooru:wiki:takao_(kancolle)"
+          ]
+        },
+        {
+          "facet": "gloves",
+          "canonical_tag": "black_gloves",
+          "value": "Black gloves",
+          "source_refs": [
+            "danbooru:wiki:takao_(kancolle)",
+            "gelbooru:wiki:takao_(kancolle)"
+          ]
+        },
+        {
+          "facet": "legwear",
+          "canonical_tag": "black_thighhighs",
+          "value": "Black thigh-highs",
+          "source_refs": [
+            "danbooru:wiki:takao_(kancolle)",
+            "gelbooru:wiki:takao_(kancolle)"
+          ]
+        }
+      ]
+    }
+  ]
+}

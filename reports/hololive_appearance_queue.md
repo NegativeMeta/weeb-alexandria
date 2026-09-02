@@ -2293,3 +2293,30 @@ exclusion ledger and were not published.
 
 The final validation passed with **65 tests**, `PRAGMA integrity_check = ok`,
 serial search/context index rebuilds, and `git diff --check`.
+
+## General appearance batch 26 (expanded to ten)
+
+The next ten characters were selected by the reproducible independent ranking
+(Danbooru + Gelbooru + e621; `combined` excluded):
+
+| Rank | Character | Danbooru | Gelbooru | e621 | Total | Result |
+|---:|---|---:|---:|---:|---:|---|
+| 1 | `aki_minoriko` | 4,164 | 6,027 | 0 | 10,191 | Deferred; insufficient visual detail |
+| 2 | `yumemi_riamu` | 4,614 | 5,573 | 0 | 10,187 | Deferred; no visual description |
+| 3 | `saori_(blue_archive)` | 4,262 | 5,921 | 0 | 10,183 | Deferred; no structured visual candidates |
+| 4 | `d.va_(overwatch)` | 4,376 | 5,801 | 0 | 10,177 | Published; 3 features |
+| 5 | `hoshizora_rin` | 3,039 | 7,111 | 0 | 10,150 | Published; 2 features |
+| 6 | `rosalina` | 2,500 | 7,643 | 0 | 10,143 | Deferred; multiple forms/outfits |
+| 7 | `northern_ocean_princess` | 3,855 | 6,255 | 0 | 10,110 | Deferred; insufficient structured candidates |
+| 8 | `ooyodo_(kancolle)` | 4,504 | 5,606 | 0 | 10,110 | Published; 12 features |
+| 9 | `dark_magician_girl` | 2,874 | 7,217 | 0 | 10,091 | Deferred; no structured visual candidates |
+| 10 | `takao_(kancolle)` | 4,339 | 5,735 | 0 | 10,074 | Published; 8 features |
+
+Candidate generation produced **298 observations** and **98 pending visual
+candidates**. Four profiles were promoted with **25 features**, **50 evidence
+links**, and **0 conflicts**. Every promotion was repeated successfully with
+unchanged counts. The six deferred names were added to the explicit exclusion
+ledger and were not published.
+
+The final validation passed with **65 tests**, `PRAGMA integrity_check = ok`,
+serial search/context index rebuilds, and `git diff --check`.
