@@ -1,0 +1,114 @@
+{
+  "character_tag": "kitakami_(kancolle)",
+  "sources": [
+    {
+      "id": "danbooru:wiki:kitakami_(kancolle)",
+      "source_site": "danbooru",
+      "source_kind": "wiki",
+      "source_key": "kitakami_(kancolle)",
+      "source_url": "https://danbooru.donmai.us/wiki_pages/kitakami_(kancolle).json",
+      "source_tier": 1,
+      "title": "kitakami_(kancolle)",
+      "excerpt": "In her base form she wears a light green [[serafuku]] top with a dark green skirt. She has [[long hair]] [[black hair]] with the back in a [[braid]], [[blunt bangs]], and hime-cut-like [[sidelocks]].",
+      "captured_at": "2026-09-02"
+    },
+    {
+      "id": "gelbooru:wiki:kitakami_(kancolle)",
+      "source_site": "gelbooru",
+      "source_kind": "wiki",
+      "source_key": "kitakami_(kancolle)",
+      "source_url": "https://gelbooru.com/index.php?page=wiki&s=view&id=kitakami_(kancolle)",
+      "source_tier": 1,
+      "title": "kitakami_(kancolle)",
+      "excerpt": "In her base form she wears a light green [[serafuku]] top with a dark green skirt. She has [[long hair]] [[black hair]] with the back in a [[braid]], [[blunt bangs]], and hime-cut-like [[sidelocks]].",
+      "captured_at": "2026-09-02"
+    }
+  ],
+  "profiles": [
+    {
+      "appearance_key": "kitakami_(kancolle)::default",
+      "variant_tag": "kitakami_(kancolle)",
+      "display_name": "Base form",
+      "appearance_kind": "default",
+      "is_default": true,
+      "status": "published",
+      "confidence": "high",
+      "provenance": "danbooru_gelbooru_wiki_reviewed",
+      "notes": "Base form only; Kai/Kai Ni uniforms, rigging, and weapons excluded.",
+      "features": [
+        {
+          "facet": "dress",
+          "canonical_tag": "serafuku",
+          "value": "Sailor uniform",
+          "source_refs": [
+            "danbooru:wiki:kitakami_(kancolle)",
+            "gelbooru:wiki:kitakami_(kancolle)"
+          ]
+        },
+        {
+          "facet": "upper_body",
+          "canonical_tag": "green_shirt",
+          "value": "Light green top",
+          "source_refs": [
+            "danbooru:wiki:kitakami_(kancolle)",
+            "gelbooru:wiki:kitakami_(kancolle)"
+          ]
+        },
+        {
+          "facet": "lower_body",
+          "canonical_tag": "green_skirt",
+          "value": "Dark green skirt",
+          "source_refs": [
+            "danbooru:wiki:kitakami_(kancolle)",
+            "gelbooru:wiki:kitakami_(kancolle)"
+          ]
+        },
+        {
+          "facet": "hair",
+          "canonical_tag": "long_hair",
+          "value": "Long hair",
+          "source_refs": [
+            "danbooru:wiki:kitakami_(kancolle)",
+            "gelbooru:wiki:kitakami_(kancolle)"
+          ]
+        },
+        {
+          "facet": "hair",
+          "canonical_tag": "black_hair",
+          "value": "Black hair",
+          "source_refs": [
+            "danbooru:wiki:kitakami_(kancolle)",
+            "gelbooru:wiki:kitakami_(kancolle)"
+          ]
+        },
+        {
+          "facet": "hair_accessory",
+          "canonical_tag": "braid",
+          "value": "Back braid",
+          "source_refs": [
+            "danbooru:wiki:kitakami_(kancolle)",
+            "gelbooru:wiki:kitakami_(kancolle)"
+          ]
+        },
+        {
+          "facet": "hair_accessory",
+          "canonical_tag": "blunt_bangs",
+          "value": "Blunt bangs",
+          "source_refs": [
+            "danbooru:wiki:kitakami_(kancolle)",
+            "gelbooru:wiki:kitakami_(kancolle)"
+          ]
+        },
+        {
+          "facet": "hair_accessory",
+          "canonical_tag": "sidelocks",
+          "value": "Sidelocks",
+          "source_refs": [
+            "danbooru:wiki:kitakami_(kancolle)",
+            "gelbooru:wiki:kitakami_(kancolle)"
+          ]
+        }
+      ]
+    }
+  ]
+}

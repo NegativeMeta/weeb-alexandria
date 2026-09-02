@@ -1,0 +1,159 @@
+{
+  "character_tag": "sendai_(kancolle)",
+  "sources": [
+    {
+      "id": "danbooru:wiki:sendai_(kancolle)",
+      "source_site": "danbooru",
+      "source_kind": "wiki",
+      "source_key": "sendai_(kancolle)",
+      "source_url": "https://danbooru.donmai.us/wiki_pages/sendai_(kancolle).json",
+      "source_tier": 1,
+      "title": "sendai_(kancolle)",
+      "excerpt": "She has [[medium hair]] [[brown hair]] done two side up, and [[brown eyes]]. Her default outfit is an orange shirt with white [[sailor collar]], black neckerchief, black gloves, [[elbow gloves]], [[black skirt]] [[pleated skirt]], [[black socks]], and black footwear.",
+      "captured_at": "2026-09-02"
+    },
+    {
+      "id": "gelbooru:wiki:sendai_(kancolle)",
+      "source_site": "gelbooru",
+      "source_kind": "wiki",
+      "source_key": "sendai_(kancolle)",
+      "source_url": "https://gelbooru.com/index.php?page=wiki&s=view&id=sendai_(kancolle)",
+      "source_tier": 1,
+      "title": "sendai_(kancolle)",
+      "excerpt": "She has [[medium hair]] [[brown hair]] done two side up, and [[brown eyes]]. Her default outfit is an orange shirt with white [[sailor collar]], black neckerchief, black gloves, [[elbow gloves]], [[black skirt]] [[pleated skirt]], [[black socks]], and black footwear.",
+      "captured_at": "2026-09-02"
+    }
+  ],
+  "profiles": [
+    {
+      "appearance_key": "sendai_(kancolle)::default",
+      "variant_tag": "sendai_(kancolle)",
+      "display_name": "Default class uniform",
+      "appearance_kind": "default",
+      "is_default": true,
+      "status": "published",
+      "confidence": "high",
+      "provenance": "danbooru_gelbooru_wiki_reviewed",
+      "notes": "Default uniform; remodel, rigging, and weapons excluded.",
+      "features": [
+        {
+          "facet": "hair",
+          "canonical_tag": "medium_hair",
+          "value": "Medium hair",
+          "source_refs": [
+            "danbooru:wiki:sendai_(kancolle)",
+            "gelbooru:wiki:sendai_(kancolle)"
+          ]
+        },
+        {
+          "facet": "hair",
+          "canonical_tag": "brown_hair",
+          "value": "Brown hair",
+          "source_refs": [
+            "danbooru:wiki:sendai_(kancolle)",
+            "gelbooru:wiki:sendai_(kancolle)"
+          ]
+        },
+        {
+          "facet": "hair_accessory",
+          "canonical_tag": "two_side_up",
+          "value": "Two-side-up hairstyle",
+          "source_refs": [
+            "danbooru:wiki:sendai_(kancolle)",
+            "gelbooru:wiki:sendai_(kancolle)"
+          ]
+        },
+        {
+          "facet": "eyes",
+          "canonical_tag": "brown_eyes",
+          "value": "Brown eyes",
+          "source_refs": [
+            "danbooru:wiki:sendai_(kancolle)",
+            "gelbooru:wiki:sendai_(kancolle)"
+          ]
+        },
+        {
+          "facet": "upper_body",
+          "canonical_tag": "orange_shirt",
+          "value": "Orange shirt",
+          "source_refs": [
+            "danbooru:wiki:sendai_(kancolle)",
+            "gelbooru:wiki:sendai_(kancolle)"
+          ]
+        },
+        {
+          "facet": "neck",
+          "canonical_tag": "sailor_collar",
+          "value": "Sailor collar",
+          "source_refs": [
+            "danbooru:wiki:sendai_(kancolle)",
+            "gelbooru:wiki:sendai_(kancolle)"
+          ]
+        },
+        {
+          "facet": "accessories",
+          "canonical_tag": "black_neckerchief",
+          "value": "Black neckerchief",
+          "source_refs": [
+            "danbooru:wiki:sendai_(kancolle)",
+            "gelbooru:wiki:sendai_(kancolle)"
+          ]
+        },
+        {
+          "facet": "gloves",
+          "canonical_tag": "black_gloves",
+          "value": "Black gloves",
+          "source_refs": [
+            "danbooru:wiki:sendai_(kancolle)",
+            "gelbooru:wiki:sendai_(kancolle)"
+          ]
+        },
+        {
+          "facet": "gloves",
+          "canonical_tag": "elbow_gloves",
+          "value": "Elbow gloves",
+          "source_refs": [
+            "danbooru:wiki:sendai_(kancolle)",
+            "gelbooru:wiki:sendai_(kancolle)"
+          ]
+        },
+        {
+          "facet": "lower_body",
+          "canonical_tag": "black_skirt",
+          "value": "Black skirt",
+          "source_refs": [
+            "danbooru:wiki:sendai_(kancolle)",
+            "gelbooru:wiki:sendai_(kancolle)"
+          ]
+        },
+        {
+          "facet": "lower_body",
+          "canonical_tag": "pleated_skirt",
+          "value": "Pleated skirt",
+          "source_refs": [
+            "danbooru:wiki:sendai_(kancolle)",
+            "gelbooru:wiki:sendai_(kancolle)"
+          ]
+        },
+        {
+          "facet": "legwear",
+          "canonical_tag": "black_socks",
+          "value": "Black socks",
+          "source_refs": [
+            "danbooru:wiki:sendai_(kancolle)",
+            "gelbooru:wiki:sendai_(kancolle)"
+          ]
+        },
+        {
+          "facet": "footwear",
+          "canonical_tag": "black_footwear",
+          "value": "Black footwear",
+          "source_refs": [
+            "danbooru:wiki:sendai_(kancolle)",
+            "gelbooru:wiki:sendai_(kancolle)"
+          ]
+        }
+      ]
+    }
+  ]
+}

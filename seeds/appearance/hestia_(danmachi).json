@@ -1,0 +1,105 @@
+{
+  "character_tag": "hestia_(danmachi)",
+  "sources": [
+    {
+      "id": "danbooru:wiki:hestia_(danmachi)",
+      "source_site": "danbooru",
+      "source_kind": "wiki",
+      "source_key": "hestia_(danmachi)",
+      "source_url": "https://danbooru.donmai.us/wiki_pages/hestia_(danmachi).json",
+      "source_tier": 1,
+      "title": "hestia_(danmachi)",
+      "excerpt": "Hestia has [[blue eyes]] and [[long hair]] [[black hair]] going down to her hips tied in [[twintails]] with white ribbons. Her casual attire consists of a short [[white dress]] with a cleavage cutout combined with a [[blue ribbon]]. She also wears [[white gloves]].",
+      "captured_at": "2026-09-02"
+    },
+    {
+      "id": "gelbooru:wiki:hestia_(danmachi)",
+      "source_site": "gelbooru",
+      "source_kind": "wiki",
+      "source_key": "hestia_(danmachi)",
+      "source_url": "https://gelbooru.com/index.php?page=wiki&s=view&id=hestia_(danmachi)",
+      "source_tier": 1,
+      "title": "hestia_(danmachi)",
+      "excerpt": "Hestia has [[blue eyes]] and [[long hair]] [[black hair]] going down to her hips tied in [[twintails]] with white ribbons. Her casual attire consists of a short [[white dress]] with a cleavage cutout combined with a [[blue ribbon]]. She also wears [[white gloves]].",
+      "captured_at": "2026-09-02"
+    }
+  ],
+  "profiles": [
+    {
+      "appearance_key": "hestia_(danmachi)::default",
+      "variant_tag": "hestia_(danmachi)",
+      "display_name": "Base casual appearance",
+      "appearance_kind": "default",
+      "is_default": true,
+      "status": "published",
+      "confidence": "high",
+      "provenance": "danbooru_gelbooru_wiki_reviewed",
+      "notes": "Base casual attire; ribbon styling and body-description metadata kept only when visual.",
+      "features": [
+        {
+          "facet": "eyes",
+          "canonical_tag": "blue_eyes",
+          "value": "Blue eyes",
+          "source_refs": [
+            "danbooru:wiki:hestia_(danmachi)",
+            "gelbooru:wiki:hestia_(danmachi)"
+          ]
+        },
+        {
+          "facet": "hair",
+          "canonical_tag": "long_hair",
+          "value": "Long hair",
+          "source_refs": [
+            "danbooru:wiki:hestia_(danmachi)",
+            "gelbooru:wiki:hestia_(danmachi)"
+          ]
+        },
+        {
+          "facet": "hair",
+          "canonical_tag": "black_hair",
+          "value": "Black hair",
+          "source_refs": [
+            "danbooru:wiki:hestia_(danmachi)",
+            "gelbooru:wiki:hestia_(danmachi)"
+          ]
+        },
+        {
+          "facet": "hair_accessory",
+          "canonical_tag": "twintails",
+          "value": "Twintails",
+          "source_refs": [
+            "danbooru:wiki:hestia_(danmachi)",
+            "gelbooru:wiki:hestia_(danmachi)"
+          ]
+        },
+        {
+          "facet": "dress",
+          "canonical_tag": "white_dress",
+          "value": "White dress",
+          "source_refs": [
+            "danbooru:wiki:hestia_(danmachi)",
+            "gelbooru:wiki:hestia_(danmachi)"
+          ]
+        },
+        {
+          "facet": "accessories",
+          "canonical_tag": "blue_ribbon",
+          "value": "Blue ribbon",
+          "source_refs": [
+            "danbooru:wiki:hestia_(danmachi)",
+            "gelbooru:wiki:hestia_(danmachi)"
+          ]
+        },
+        {
+          "facet": "gloves",
+          "canonical_tag": "white_gloves",
+          "value": "White gloves",
+          "source_refs": [
+            "danbooru:wiki:hestia_(danmachi)",
+            "gelbooru:wiki:hestia_(danmachi)"
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,159 @@
+{
+  "character_tag": "karyl_(princess_connect!)",
+  "sources": [
+    {
+      "id": "danbooru:wiki:karyl_(princess_connect!)",
+      "source_site": "danbooru",
+      "source_kind": "wiki",
+      "source_key": "karyl_(princess_connect!)",
+      "source_url": "https://danbooru.donmai.us/wiki_pages/karyl_(princess_connect!).json",
+      "source_tier": 1,
+      "title": "karyl_(princess_connect!)",
+      "excerpt": "She is a [[cat girl]] with [[green eyes]] and [[very long hair]] [[black hair]] stylized in [[low twintails]] with [[hair between eyes]], and a white [[hair streak]]. She wears a multicolored [[dress]] with [[sleeveless dress]], [[detached sleeves]], [[wide sleeves]], blue sleeves, and [[frilled sleeves]], plus [[black thighhighs]].",
+      "captured_at": "2026-09-02"
+    },
+    {
+      "id": "gelbooru:wiki:karyl_(princess_connect!)",
+      "source_site": "gelbooru",
+      "source_kind": "wiki",
+      "source_key": "karyl_(princess_connect!)",
+      "source_url": "https://gelbooru.com/index.php?page=wiki&s=view&id=karyl_(princess_connect!)",
+      "source_tier": 1,
+      "title": "karyl_(princess_connect!)",
+      "excerpt": "She is a [[cat girl]] with [[green eyes]] and [[very long hair]] [[black hair]] stylized in [[low twintails]] with [[hair between eyes]], and a white [[hair streak]]. She wears a multicolored [[dress]] with [[sleeveless dress]], [[detached sleeves]], [[wide sleeves]], blue sleeves, and [[frilled sleeves]], plus [[black thighhighs]].",
+      "captured_at": "2026-09-02"
+    }
+  ],
+  "profiles": [
+    {
+      "appearance_key": "karyl_(princess_connect!)::default",
+      "variant_tag": "karyl_(princess_connect!)",
+      "display_name": "Default appearance",
+      "appearance_kind": "default",
+      "is_default": true,
+      "status": "published",
+      "confidence": "high",
+      "provenance": "danbooru_gelbooru_wiki_reviewed",
+      "notes": "Default outfit; summer, alternate game appearances, and props excluded.",
+      "features": [
+        {
+          "facet": "species",
+          "canonical_tag": "cat_girl",
+          "value": "Cat girl",
+          "source_refs": [
+            "danbooru:wiki:karyl_(princess_connect!)",
+            "gelbooru:wiki:karyl_(princess_connect!)"
+          ]
+        },
+        {
+          "facet": "eyes",
+          "canonical_tag": "green_eyes",
+          "value": "Green eyes",
+          "source_refs": [
+            "danbooru:wiki:karyl_(princess_connect!)",
+            "gelbooru:wiki:karyl_(princess_connect!)"
+          ]
+        },
+        {
+          "facet": "hair",
+          "canonical_tag": "very_long_hair",
+          "value": "Very long hair",
+          "source_refs": [
+            "danbooru:wiki:karyl_(princess_connect!)",
+            "gelbooru:wiki:karyl_(princess_connect!)"
+          ]
+        },
+        {
+          "facet": "hair",
+          "canonical_tag": "black_hair",
+          "value": "Black hair",
+          "source_refs": [
+            "danbooru:wiki:karyl_(princess_connect!)",
+            "gelbooru:wiki:karyl_(princess_connect!)"
+          ]
+        },
+        {
+          "facet": "hair_accessory",
+          "canonical_tag": "low_twintails",
+          "value": "Low twintails",
+          "source_refs": [
+            "danbooru:wiki:karyl_(princess_connect!)",
+            "gelbooru:wiki:karyl_(princess_connect!)"
+          ]
+        },
+        {
+          "facet": "hair",
+          "canonical_tag": "hair_between_eyes",
+          "value": "Hair between eyes",
+          "source_refs": [
+            "danbooru:wiki:karyl_(princess_connect!)",
+            "gelbooru:wiki:karyl_(princess_connect!)"
+          ]
+        },
+        {
+          "facet": "hair",
+          "canonical_tag": "hair_streak",
+          "value": "White hair streak",
+          "source_refs": [
+            "danbooru:wiki:karyl_(princess_connect!)",
+            "gelbooru:wiki:karyl_(princess_connect!)"
+          ]
+        },
+        {
+          "facet": "dress",
+          "canonical_tag": "multicolored_dress",
+          "value": "Multicolored dress",
+          "source_refs": [
+            "danbooru:wiki:karyl_(princess_connect!)",
+            "gelbooru:wiki:karyl_(princess_connect!)"
+          ]
+        },
+        {
+          "facet": "dress",
+          "canonical_tag": "sleeveless_dress",
+          "value": "Sleeveless dress",
+          "source_refs": [
+            "danbooru:wiki:karyl_(princess_connect!)",
+            "gelbooru:wiki:karyl_(princess_connect!)"
+          ]
+        },
+        {
+          "facet": "sleeves",
+          "canonical_tag": "detached_sleeves",
+          "value": "Detached sleeves",
+          "source_refs": [
+            "danbooru:wiki:karyl_(princess_connect!)",
+            "gelbooru:wiki:karyl_(princess_connect!)"
+          ]
+        },
+        {
+          "facet": "sleeves",
+          "canonical_tag": "wide_sleeves",
+          "value": "Wide sleeves",
+          "source_refs": [
+            "danbooru:wiki:karyl_(princess_connect!)",
+            "gelbooru:wiki:karyl_(princess_connect!)"
+          ]
+        },
+        {
+          "facet": "sleeves",
+          "canonical_tag": "frilled_sleeves",
+          "value": "Frilled sleeves",
+          "source_refs": [
+            "danbooru:wiki:karyl_(princess_connect!)",
+            "gelbooru:wiki:karyl_(princess_connect!)"
+          ]
+        },
+        {
+          "facet": "legwear",
+          "canonical_tag": "black_thighhighs",
+          "value": "Black thigh-highs",
+          "source_refs": [
+            "danbooru:wiki:karyl_(princess_connect!)",
+            "gelbooru:wiki:karyl_(princess_connect!)"
+          ]
+        }
+      ]
+    }
+  ]
+}

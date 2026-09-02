@@ -1,0 +1,87 @@
+{
+  "character_tag": "zero_two_(darling_in_the_franxx)",
+  "sources": [
+    {
+      "id": "danbooru:wiki:zero_two_(darling_in_the_franxx)",
+      "source_site": "danbooru",
+      "source_kind": "wiki",
+      "source_key": "zero_two_(darling_in_the_franxx)",
+      "source_url": "https://danbooru.donmai.us/wiki_pages/zero_two_(darling_in_the_franxx).json",
+      "source_tier": 1,
+      "title": "zero_two_(darling_in_the_franxx)",
+      "excerpt": "She has [[pink hair]], [[green eyes]], and [[small horns]] [[red horns]]. She usually wears a [[white hairband]].",
+      "captured_at": "2026-09-02"
+    },
+    {
+      "id": "gelbooru:wiki:zero_two_(darling_in_the_franxx)",
+      "source_site": "gelbooru",
+      "source_kind": "wiki",
+      "source_key": "zero_two_(darling_in_the_franxx)",
+      "source_url": "https://gelbooru.com/index.php?page=wiki&s=view&id=zero_two_(darling_in_the_franxx)",
+      "source_tier": 1,
+      "title": "zero_two_(darling_in_the_franxx)",
+      "excerpt": "She has [[pink hair]], [[green eyes]], and [[small horns]] [[red horns]]. She usually wears a [[white hairband]].",
+      "captured_at": "2026-09-02"
+    }
+  ],
+  "profiles": [
+    {
+      "appearance_key": "zero_two_(darling_in_the_franxx)::default",
+      "variant_tag": "zero_two_(darling_in_the_franxx)",
+      "display_name": "Adult base appearance",
+      "appearance_kind": "default",
+      "is_default": true,
+      "status": "published",
+      "confidence": "high",
+      "provenance": "danbooru_gelbooru_wiki_reviewed",
+      "notes": "Adult base form; aged-down form, robe, and metadata excluded.",
+      "features": [
+        {
+          "facet": "hair",
+          "canonical_tag": "pink_hair",
+          "value": "Pink hair",
+          "source_refs": [
+            "danbooru:wiki:zero_two_(darling_in_the_franxx)",
+            "gelbooru:wiki:zero_two_(darling_in_the_franxx)"
+          ]
+        },
+        {
+          "facet": "eyes",
+          "canonical_tag": "green_eyes",
+          "value": "Green eyes",
+          "source_refs": [
+            "danbooru:wiki:zero_two_(darling_in_the_franxx)",
+            "gelbooru:wiki:zero_two_(darling_in_the_franxx)"
+          ]
+        },
+        {
+          "facet": "horns",
+          "canonical_tag": "small_horns",
+          "value": "Small horns",
+          "source_refs": [
+            "danbooru:wiki:zero_two_(darling_in_the_franxx)",
+            "gelbooru:wiki:zero_two_(darling_in_the_franxx)"
+          ]
+        },
+        {
+          "facet": "horns",
+          "canonical_tag": "red_horns",
+          "value": "Red horns",
+          "source_refs": [
+            "danbooru:wiki:zero_two_(darling_in_the_franxx)",
+            "gelbooru:wiki:zero_two_(darling_in_the_franxx)"
+          ]
+        },
+        {
+          "facet": "hair_accessory",
+          "canonical_tag": "white_hairband",
+          "value": "White hairband",
+          "source_refs": [
+            "danbooru:wiki:zero_two_(darling_in_the_franxx)",
+            "gelbooru:wiki:zero_two_(darling_in_the_franxx)"
+          ]
+        }
+      ]
+    }
+  ]
+}

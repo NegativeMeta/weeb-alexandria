@@ -2508,3 +2508,30 @@ ledger and were not published.
 
 The final validation passed with **65 tests**, `PRAGMA integrity_check = ok`,
 serial search/context index rebuilds, and `git diff --check`.
+
+## General appearance batch 34 (expanded to ten)
+
+The next ten characters were selected by the reproducible independent ranking
+(Danbooru + Gelbooru + e621; `combined` excluded):
+
+| Rank | Character | Danbooru | Gelbooru | e621 | Total | Result |
+|---:|---|---:|---:|---:|---:|---|
+| 1 | `kitakami_(kancolle)` | 3,774 | 5,124 | 0 | 8,898 | Published; 8 features for base form |
+| 2 | `reisalin_stout` | 3,479 | 5,408 | 0 | 8,887 | Deferred; insufficient structured base description |
+| 3 | `neru_(blue_archive)` | 3,533 | 5,352 | 0 | 8,885 | Published; 9 features |
+| 4 | `sendai_(kancolle)` | 3,884 | 4,944 | 0 | 8,828 | Published; 13 features |
+| 5 | `hestia_(danmachi)` | 3,661 | 5,142 | 0 | 8,803 | Published; 7 features |
+| 6 | `sukuna_shinmyoumaru` | 4,025 | 4,768 | 0 | 8,793 | Published; 8 features |
+| 7 | `karyl_(princess_connect!)` | 3,999 | 4,789 | 0 | 8,788 | Published; 13 features |
+| 8 | `zero_two_(darling_in_the_franxx)` | 2,856 | 5,932 | 0 | 8,788 | Published; 5 features for adult base form |
+| 9 | `letty_whiterock` | 3,330 | 5,452 | 0 | 8,782 | Deferred; insufficient structured visual description |
+| 10 | `kanna_kamui` | 2,568 | 6,203 | 0 | 8,771 | Deferred; hair-color alternative and dragon form |
+
+Candidate generation produced **228 observations** and **77 pending visual
+candidates**. Seven profiles were promoted with **63 features**, **126 evidence
+links**, and **0 conflicts**. Every promotion was repeated successfully with
+unchanged counts. The three deferred names were added to the explicit exclusion
+ledger and were not published.
+
+The final validation passed with **65 tests**, `PRAGMA integrity_check = ok`,
+serial search/context index rebuilds, and `git diff --check`.
