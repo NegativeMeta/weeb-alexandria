@@ -2249,3 +2249,25 @@ work-tokenization defect for underscore-separated titles; `build_context_index.p
 was corrected to index both canonical and space-separated work terms. The full
 suite passed with **65 tests**, `git diff --check` passed, and the canonical
 SQLite integrity check remained `ok`.
+
+## General appearance batch 24
+
+The next five characters were selected by the reproducible independent ranking
+(Danbooru + Gelbooru + e621; `combined` excluded):
+
+| Rank | Character | Danbooru | Gelbooru | e621 | Total | Result |
+|---:|---|---:|---:|---:|---:|---|
+| 1 | `bakugou_katsuki` | 1,929 | 8,461 | 0 | 10,390 | Published; 4 features |
+| 2 | `xiao_(genshin_impact)` | 4,492 | 5,877 | 0 | 10,369 | Deferred; no structured visual candidates |
+| 3 | `caelus_(honkai:_star_rail)` | 3,756 | 6,612 | 0 | 10,368 | Deferred; selectable protagonist/avatar |
+| 4 | `bremerton_(azur_lane)` | 4,504 | 5,857 | 0 | 10,361 | Published; 16 features |
+| 5 | `kotobuki_tsumugi` | 3,742 | 6,604 | 0 | 10,346 | Published; 6 features |
+
+Candidate generation produced **90 observations** and **39 pending visual
+candidates**. Three profiles were promoted with **26 features**, **45 evidence
+links**, and **0 conflicts**. Every promotion was repeated successfully with
+unchanged counts. Xiao and Caelus were added to the explicit exclusion ledger
+and were not published.
+
+The final validation passed with **65 tests**, `PRAGMA integrity_check = ok`,
+serial search/context index rebuilds, and `git diff --check`.

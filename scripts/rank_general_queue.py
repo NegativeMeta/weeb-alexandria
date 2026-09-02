@@ -77,6 +77,7 @@ EXCLUDED = {
     "roronoa_zoro", "anchovy_(girls_und_panzer)", "hoshimi_miyabi", "c.c.",
     "ikari_shinji", "murasa_minamitsu", "yoko_littner",
     "okita_souji_(koha-ace)", "miyako_yoshika",
+    "xiao_(genshin_impact)", "caelus_(honkai:_star_rail)",
 }
 
 def rank(db: Path, limit: int) -> list[dict[str, int | str]]:

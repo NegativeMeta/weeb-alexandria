@@ -1,0 +1,90 @@
+{
+  "character_tag": "kotobuki_tsumugi",
+  "sources": [
+    {
+      "id": "danbooru:wiki:kotobuki_tsumugi",
+      "source_site": "danbooru",
+      "source_kind": "wiki",
+      "source_key": "kotobuki_tsumugi",
+      "source_url": "https://danbooru.donmai.us/wiki_pages/kotobuki_tsumugi.json",
+      "source_tier": 1,
+      "title": "kotobuki_tsumugi",
+      "excerpt": "She has [[blue eyes]] and [[long hair]] [[blonde hair]] with [[bangs]], [[hair between eyes]], and [[sidelocks]]. Usually depicted wearing the [[Sakuragaoka High School Uniform]].",
+      "captured_at": "2026-09-02"
+    },
+    {
+      "id": "gelbooru:wiki:kotobuki_tsumugi",
+      "source_site": "gelbooru",
+      "source_kind": "wiki",
+      "source_key": "kotobuki_tsumugi",
+      "source_url": "https://gelbooru.com/index.php?page=wiki&s=view&id=kotobuki_tsumugi",
+      "source_tier": 1,
+      "title": "kotobuki_tsumugi",
+      "excerpt": "She has [[blue eyes]] and [[long hair]] [[blonde hair]] with [[bangs]], [[hair between eyes]], and [[sidelocks]]. Usually depicted wearing the [[Sakuragaoka High School Uniform]].",
+      "captured_at": "2026-09-02"
+    }
+  ],
+  "profiles": [
+    {
+      "appearance_key": "kotobuki_tsumugi::default",
+      "variant_tag": "kotobuki_tsumugi",
+      "display_name": "School-uniform appearance",
+      "appearance_kind": "default",
+      "is_default": true,
+      "status": "published",
+      "confidence": "high",
+      "provenance": "danbooru_gelbooru_wiki_reviewed",
+      "notes": "Base appearance and commonly depicted school uniform; instrument, personality, and biography excluded.",
+      "features": [
+        {
+          "facet": "eyes",
+          "canonical_tag": "blue_eyes",
+          "value": "Blue eyes",
+          "source_refs": [
+            "danbooru:wiki:kotobuki_tsumugi"
+          ]
+        },
+        {
+          "facet": "hair",
+          "canonical_tag": "long_hair",
+          "value": "Long hair",
+          "source_refs": [
+            "danbooru:wiki:kotobuki_tsumugi"
+          ]
+        },
+        {
+          "facet": "hair",
+          "canonical_tag": "blonde_hair",
+          "value": "Blonde hair",
+          "source_refs": [
+            "danbooru:wiki:kotobuki_tsumugi"
+          ]
+        },
+        {
+          "facet": "hair",
+          "canonical_tag": "hair_between_eyes",
+          "value": "Hair between the eyes",
+          "source_refs": [
+            "danbooru:wiki:kotobuki_tsumugi"
+          ]
+        },
+        {
+          "facet": "hair_accessory",
+          "canonical_tag": "sidelocks",
+          "value": "Sidelocks",
+          "source_refs": [
+            "danbooru:wiki:kotobuki_tsumugi"
+          ]
+        },
+        {
+          "facet": "dress",
+          "canonical_tag": "sakuragaoka_high_school_uniform",
+          "value": "Sakuragaoka High School uniform",
+          "source_refs": [
+            "danbooru:wiki:kotobuki_tsumugi"
+          ]
+        }
+      ]
+    }
+  ]
+}
