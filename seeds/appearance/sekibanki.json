@@ -1,0 +1,132 @@
+{
+  "character_tag": "sekibanki",
+  "sources": [
+    {
+      "id": "danbooru:wiki:sekibanki",
+      "source_site": "danbooru",
+      "source_kind": "wiki",
+      "source_key": "sekibanki",
+      "source_url": "https://danbooru.donmai.us/wiki_pages/sekibanki.json",
+      "source_tier": 1,
+      "title": "sekibanki",
+      "excerpt": "She has [[red eyes]] and [[short hair]], [[red hair]], and usually wears a [[black shirt]] with [[long sleeves]], a red cloak that may [[covered mouth]], a [[blue bow]] as a [[hair bow]], and a [[red skirt]] [[miniskirt]].",
+      "captured_at": "2026-09-02"
+    },
+    {
+      "id": "gelbooru:wiki:sekibanki",
+      "source_site": "gelbooru",
+      "source_kind": "wiki",
+      "source_key": "sekibanki",
+      "source_url": "https://gelbooru.com/index.php?page=wiki&s=view&id=sekibanki",
+      "source_tier": 1,
+      "title": "sekibanki",
+      "excerpt": "She has [[red eyes]] and [[short hair]], [[red hair]], and usually wears a [[black shirt]] with [[long sleeves]], a red cloak that may [[covered mouth]], a [[blue bow]] as a [[hair bow]], and a [[red skirt]] [[miniskirt]].",
+      "captured_at": "2026-09-02"
+    }
+  ],
+  "profiles": [
+    {
+      "appearance_key": "sekibanki::default",
+      "variant_tag": "sekibanki",
+      "display_name": "Base appearance",
+      "appearance_kind": "default",
+      "is_default": true,
+      "status": "published",
+      "confidence": "high",
+      "provenance": "danbooru_gelbooru_wiki_reviewed",
+      "notes": "Base design; headless gag, poses, and alternate media costumes excluded.",
+      "features": [
+        {
+          "facet": "eyes",
+          "canonical_tag": "red_eyes",
+          "value": "Red eyes",
+          "source_refs": [
+            "danbooru:wiki:sekibanki",
+            "gelbooru:wiki:sekibanki"
+          ]
+        },
+        {
+          "facet": "hair",
+          "canonical_tag": "short_hair",
+          "value": "Short hair",
+          "source_refs": [
+            "danbooru:wiki:sekibanki",
+            "gelbooru:wiki:sekibanki"
+          ]
+        },
+        {
+          "facet": "hair",
+          "canonical_tag": "red_hair",
+          "value": "Red hair",
+          "source_refs": [
+            "danbooru:wiki:sekibanki",
+            "gelbooru:wiki:sekibanki"
+          ]
+        },
+        {
+          "facet": "upper_body",
+          "canonical_tag": "black_shirt",
+          "value": "Black shirt",
+          "source_refs": [
+            "danbooru:wiki:sekibanki",
+            "gelbooru:wiki:sekibanki"
+          ]
+        },
+        {
+          "facet": "sleeves",
+          "canonical_tag": "long_sleeves",
+          "value": "Long sleeves",
+          "source_refs": [
+            "danbooru:wiki:sekibanki",
+            "gelbooru:wiki:sekibanki"
+          ]
+        },
+        {
+          "facet": "face",
+          "canonical_tag": "covered_mouth",
+          "value": "Covered mouth",
+          "source_refs": [
+            "danbooru:wiki:sekibanki",
+            "gelbooru:wiki:sekibanki"
+          ]
+        },
+        {
+          "facet": "accessories",
+          "canonical_tag": "blue_bow",
+          "value": "Blue bow",
+          "source_refs": [
+            "danbooru:wiki:sekibanki",
+            "gelbooru:wiki:sekibanki"
+          ]
+        },
+        {
+          "facet": "hair_accessory",
+          "canonical_tag": "hair_bow",
+          "value": "Hair bow",
+          "source_refs": [
+            "danbooru:wiki:sekibanki",
+            "gelbooru:wiki:sekibanki"
+          ]
+        },
+        {
+          "facet": "lower_body",
+          "canonical_tag": "red_skirt",
+          "value": "Red skirt",
+          "source_refs": [
+            "danbooru:wiki:sekibanki",
+            "gelbooru:wiki:sekibanki"
+          ]
+        },
+        {
+          "facet": "lower_body",
+          "canonical_tag": "miniskirt",
+          "value": "Miniskirt",
+          "source_refs": [
+            "danbooru:wiki:sekibanki",
+            "gelbooru:wiki:sekibanki"
+          ]
+        }
+      ]
+    }
+  ]
+}

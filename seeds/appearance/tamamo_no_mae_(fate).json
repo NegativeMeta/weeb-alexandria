@@ -1,0 +1,96 @@
+{
+  "character_tag": "tamamo_no_mae_(fate)",
+  "sources": [
+    {
+      "id": "danbooru:wiki:tamamo_no_mae_(fate)",
+      "source_site": "danbooru",
+      "source_kind": "wiki",
+      "source_key": "tamamo_no_mae_(fate)",
+      "source_url": "https://danbooru.donmai.us/wiki_pages/tamamo_no_mae_(fate).json",
+      "source_tier": 1,
+      "title": "tamamo_no_mae_(fate)",
+      "excerpt": "She's a magical [[fox girl]] who has [[pink hair]], [[yellow eyes]], is dressed in stylized traditional blue [[japanese clothes]], and often has [[split ponytail]] hairstyle with [[blue bow]].",
+      "captured_at": "2026-09-02"
+    },
+    {
+      "id": "gelbooru:wiki:tamamo_no_mae_(fate)",
+      "source_site": "gelbooru",
+      "source_kind": "wiki",
+      "source_key": "tamamo_no_mae_(fate)",
+      "source_url": "https://gelbooru.com/index.php?page=wiki&s=view&id=tamamo_no_mae_(fate)",
+      "source_tier": 1,
+      "title": "tamamo_no_mae_(fate)",
+      "excerpt": "She's a magical [[fox girl]] who has [[pink hair]], [[yellow eyes]], is dressed in stylized traditional blue [[japanese clothes]], and often has [[split ponytail]] hairstyle with [[blue bow]].",
+      "captured_at": "2026-09-02"
+    }
+  ],
+  "profiles": [
+    {
+      "appearance_key": "tamamo_no_mae_(fate)::default",
+      "variant_tag": "tamamo_no_mae_(fate)",
+      "display_name": "Base Caster appearance",
+      "appearance_kind": "default",
+      "is_default": true,
+      "status": "published",
+      "confidence": "high",
+      "provenance": "danbooru_gelbooru_wiki_reviewed",
+      "notes": "Base Caster design; ascensions, costumes, mirror weapon, and other Tamamo variants excluded.",
+      "features": [
+        {
+          "facet": "species",
+          "canonical_tag": "fox_girl",
+          "value": "Fox girl",
+          "source_refs": [
+            "danbooru:wiki:tamamo_no_mae_(fate)",
+            "gelbooru:wiki:tamamo_no_mae_(fate)"
+          ]
+        },
+        {
+          "facet": "hair",
+          "canonical_tag": "pink_hair",
+          "value": "Pink hair",
+          "source_refs": [
+            "danbooru:wiki:tamamo_no_mae_(fate)",
+            "gelbooru:wiki:tamamo_no_mae_(fate)"
+          ]
+        },
+        {
+          "facet": "eyes",
+          "canonical_tag": "yellow_eyes",
+          "value": "Yellow eyes",
+          "source_refs": [
+            "danbooru:wiki:tamamo_no_mae_(fate)",
+            "gelbooru:wiki:tamamo_no_mae_(fate)"
+          ]
+        },
+        {
+          "facet": "dress",
+          "canonical_tag": "japanese_clothes",
+          "value": "Japanese clothes",
+          "source_refs": [
+            "danbooru:wiki:tamamo_no_mae_(fate)",
+            "gelbooru:wiki:tamamo_no_mae_(fate)"
+          ]
+        },
+        {
+          "facet": "hair_accessory",
+          "canonical_tag": "split_ponytail",
+          "value": "Split ponytail",
+          "source_refs": [
+            "danbooru:wiki:tamamo_no_mae_(fate)",
+            "gelbooru:wiki:tamamo_no_mae_(fate)"
+          ]
+        },
+        {
+          "facet": "accessories",
+          "canonical_tag": "blue_bow",
+          "value": "Blue bow",
+          "source_refs": [
+            "danbooru:wiki:tamamo_no_mae_(fate)",
+            "gelbooru:wiki:tamamo_no_mae_(fate)"
+          ]
+        }
+      ]
+    }
+  ]
+}

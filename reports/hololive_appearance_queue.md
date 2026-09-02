@@ -2373,3 +2373,30 @@ ledger and were not published.
 
 The final validation passed with **65 tests**, `PRAGMA integrity_check = ok`,
 serial search/context index rebuilds, and `git diff --check`.
+
+## General appearance batch 29 (expanded to ten)
+
+The next ten characters were selected by the reproducible independent ranking
+(Danbooru + Gelbooru + e621; `combined` excluded):
+
+| Rank | Character | Danbooru | Gelbooru | e621 | Total | Result |
+|---:|---|---:|---:|---:|---:|---|
+| 1 | `sekibanki` | 4,331 | 5,450 | 0 | 9,781 | Published; 10 features |
+| 2 | `mutsu_(kancolle)` | 4,214 | 5,547 | 0 | 9,761 | Published; 12 features |
+| 3 | `tamamo_no_mae_(fate)` | 0 | 9,740 | 0 | 9,740 | Published; 6 features |
+| 4 | `mordred_(fate/apocrypha)` | 4,383 | 5,336 | 0 | 9,719 | Deferred; insufficient visual description |
+| 5 | `naruto_uzumaki` | 0 | 9,711 | 0 | 9,711 | Deferred; insufficient structured evidence |
+| 6 | `rover_(wuthering_waves)` | 2,125 | 7,566 | 0 | 9,691 | Deferred; selectable protagonist with gendered forms |
+| 7 | `takarada_rikka` | 3,665 | 6,018 | 0 | 9,683 | Deferred; no independent structured candidate set |
+| 8 | `kaban_(kemono_friends)` | 4,188 | 5,476 | 0 | 9,664 | Published; 11 features |
+| 9 | `sailor_moon` | 2,840 | 6,820 | 0 | 9,660 | Deferred; multiple transformation forms |
+| 10 | `ishtar_(fate)` | 4,001 | 5,607 | 0 | 9,608 | Deferred; ascensions and variants, no base set |
+
+Candidate generation produced **116 observations** and **42 pending visual
+candidates**. Four profiles were promoted with **39 features**, **78 evidence
+links**, and **0 conflicts**. Every promotion was repeated successfully with
+unchanged counts. The six deferred names were added to the explicit exclusion
+ledger and were not published.
+
+The final validation passed with **65 tests**, `PRAGMA integrity_check = ok`,
+serial search/context index rebuilds, and `git diff --check`.

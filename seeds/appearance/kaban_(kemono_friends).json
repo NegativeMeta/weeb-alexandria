@@ -1,0 +1,141 @@
+{
+  "character_tag": "kaban_(kemono_friends)",
+  "sources": [
+    {
+      "id": "danbooru:wiki:kaban_(kemono_friends)",
+      "source_site": "danbooru",
+      "source_kind": "wiki",
+      "source_key": "kaban_(kemono_friends)",
+      "source_url": "https://danbooru.donmai.us/wiki_pages/kaban_(kemono_friends).json",
+      "source_tier": 1,
+      "title": "kaban_(kemono_friends)",
+      "excerpt": "She wears a tattered [[pith helmet]] with a [[hat feather]] in it over her [[short hair]] [[black hair]] [[wavy hair]] that comes down [[hair between eyes]] [[black eyes]]. Her clothing includes a [[red shirt]], [[shorts]], [[black pantyhose]] and [[black gloves]].",
+      "captured_at": "2026-09-02"
+    },
+    {
+      "id": "gelbooru:wiki:kaban_(kemono_friends)",
+      "source_site": "gelbooru",
+      "source_kind": "wiki",
+      "source_key": "kaban_(kemono_friends)",
+      "source_url": "https://gelbooru.com/index.php?page=wiki&s=view&id=kaban_(kemono_friends)",
+      "source_tier": 1,
+      "title": "kaban_(kemono_friends)",
+      "excerpt": "She wears a tattered [[pith helmet]] with a [[hat feather]] in it over her [[short hair]] [[black hair]] [[wavy hair]] that comes down [[hair between eyes]] [[black eyes]]. Her clothing includes a [[red shirt]], [[shorts]], [[black pantyhose]] and [[black gloves]].",
+      "captured_at": "2026-09-02"
+    }
+  ],
+  "profiles": [
+    {
+      "appearance_key": "kaban_(kemono_friends)::default",
+      "variant_tag": "kaban_(kemono_friends)",
+      "display_name": "Base anime appearance",
+      "appearance_kind": "default",
+      "is_default": true,
+      "status": "published",
+      "confidence": "high",
+      "provenance": "danbooru_gelbooru_wiki_reviewed",
+      "notes": "Base first-anime appearance; backpack, props, and spoiler metadata excluded.",
+      "features": [
+        {
+          "facet": "headwear",
+          "canonical_tag": "pith_helmet",
+          "value": "Pith helmet",
+          "source_refs": [
+            "danbooru:wiki:kaban_(kemono_friends)",
+            "gelbooru:wiki:kaban_(kemono_friends)"
+          ]
+        },
+        {
+          "facet": "headwear",
+          "canonical_tag": "hat_feather",
+          "value": "Hat feather",
+          "source_refs": [
+            "danbooru:wiki:kaban_(kemono_friends)",
+            "gelbooru:wiki:kaban_(kemono_friends)"
+          ]
+        },
+        {
+          "facet": "hair",
+          "canonical_tag": "short_hair",
+          "value": "Short hair",
+          "source_refs": [
+            "danbooru:wiki:kaban_(kemono_friends)",
+            "gelbooru:wiki:kaban_(kemono_friends)"
+          ]
+        },
+        {
+          "facet": "hair",
+          "canonical_tag": "black_hair",
+          "value": "Black hair",
+          "source_refs": [
+            "danbooru:wiki:kaban_(kemono_friends)",
+            "gelbooru:wiki:kaban_(kemono_friends)"
+          ]
+        },
+        {
+          "facet": "hair",
+          "canonical_tag": "wavy_hair",
+          "value": "Wavy hair",
+          "source_refs": [
+            "danbooru:wiki:kaban_(kemono_friends)",
+            "gelbooru:wiki:kaban_(kemono_friends)"
+          ]
+        },
+        {
+          "facet": "hair",
+          "canonical_tag": "hair",
+          "value": "Hair between the eyes",
+          "source_refs": [
+            "danbooru:wiki:kaban_(kemono_friends)",
+            "gelbooru:wiki:kaban_(kemono_friends)"
+          ]
+        },
+        {
+          "facet": "eyes",
+          "canonical_tag": "black_eyes",
+          "value": "Black eyes",
+          "source_refs": [
+            "danbooru:wiki:kaban_(kemono_friends)",
+            "gelbooru:wiki:kaban_(kemono_friends)"
+          ]
+        },
+        {
+          "facet": "upper_body",
+          "canonical_tag": "red_shirt",
+          "value": "Red shirt",
+          "source_refs": [
+            "danbooru:wiki:kaban_(kemono_friends)",
+            "gelbooru:wiki:kaban_(kemono_friends)"
+          ]
+        },
+        {
+          "facet": "lower_body",
+          "canonical_tag": "shorts",
+          "value": "Shorts",
+          "source_refs": [
+            "danbooru:wiki:kaban_(kemono_friends)",
+            "gelbooru:wiki:kaban_(kemono_friends)"
+          ]
+        },
+        {
+          "facet": "legwear",
+          "canonical_tag": "black_pantyhose",
+          "value": "Black pantyhose",
+          "source_refs": [
+            "danbooru:wiki:kaban_(kemono_friends)",
+            "gelbooru:wiki:kaban_(kemono_friends)"
+          ]
+        },
+        {
+          "facet": "gloves",
+          "canonical_tag": "black_gloves",
+          "value": "Black gloves",
+          "source_refs": [
+            "danbooru:wiki:kaban_(kemono_friends)",
+            "gelbooru:wiki:kaban_(kemono_friends)"
+          ]
+        }
+      ]
+    }
+  ]
+}
