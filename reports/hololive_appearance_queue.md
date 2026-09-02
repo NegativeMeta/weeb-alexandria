@@ -2346,3 +2346,30 @@ exclusion ledger and were not published.
 
 The final validation passed with **65 tests**, `PRAGMA integrity_check = ok`,
 serial search/context index rebuilds, and `git diff --check`.
+
+## General appearance batch 28 (expanded to ten)
+
+The next ten characters were selected by the reproducible independent ranking
+(Danbooru + Gelbooru + e621; `combined` excluded):
+
+| Rank | Character | Danbooru | Gelbooru | e621 | Total | Result |
+|---:|---|---:|---:|---:|---:|---|
+| 1 | `shirasaka_koume` | 4,274 | 5,641 | 0 | 9,915 | Deferred; no structured visual description |
+| 2 | `medusa_(fate)` | 4,246 | 5,648 | 0 | 9,894 | Deferred; aggregate tag for multiple versions |
+| 3 | `edelgard_von_hresvelg` | 3,682 | 6,203 | 0 | 9,885 | Deferred; conflicting forms/appearance alternatives |
+| 4 | `miyamoto_musashi_(fate)` | 4,097 | 5,749 | 0 | 9,846 | Published; 9 features |
+| 5 | `belle_(zenless_zone_zero)` | 2,734 | 7,092 | 0 | 9,826 | Deferred; selectable protagonist/avatar |
+| 6 | `chloe_von_einzbern` | 3,465 | 6,360 | 0 | 9,825 | Deferred; insufficient structured visual evidence |
+| 7 | `uraraka_ochaco` | 0 | 9,820 | 0 | 9,820 | Published; 7 features |
+| 8 | `marcille_donato` | 4,246 | 5,556 | 0 | 9,802 | Published; 6 features |
+| 9 | `ereshkigal_(fate)` | 4,455 | 5,343 | 0 | 9,798 | Deferred; multiple ascensions/variants |
+| 10 | `midori_(blue_archive)` | 4,098 | 5,697 | 0 | 9,795 | Deferred; no structured visual candidates |
+
+Candidate generation produced **159 observations** and **38 pending visual
+candidates**. Three profiles were promoted with **22 features**, **44 evidence
+links**, and **0 conflicts**. Every promotion was repeated successfully with
+unchanged counts. The seven deferred names were added to the explicit exclusion
+ledger and were not published.
+
+The final validation passed with **65 tests**, `PRAGMA integrity_check = ok`,
+serial search/context index rebuilds, and `git diff --check`.

@@ -1,0 +1,105 @@
+{
+  "character_tag": "uraraka_ochaco",
+  "sources": [
+    {
+      "id": "danbooru:wiki:uraraka_ochaco",
+      "source_site": "danbooru",
+      "source_kind": "wiki",
+      "source_key": "uraraka_ochaco",
+      "source_url": "https://danbooru.donmai.us/wiki_pages/uraraka_ochaco.json",
+      "source_tier": 1,
+      "title": "uraraka_ochaco",
+      "excerpt": "She is a positive, upbeat girl with [[brown eyes]] and [[medium hair]] [[brown hair]] with [[sidelocks]]. Her hero costume is a [[bodysuit]] with bulky [[high heel boots]] and a [[helmet]].",
+      "captured_at": "2026-09-02"
+    },
+    {
+      "id": "gelbooru:wiki:uraraka_ochaco",
+      "source_site": "gelbooru",
+      "source_kind": "wiki",
+      "source_key": "uraraka_ochaco",
+      "source_url": "https://gelbooru.com/index.php?page=wiki&s=view&id=uraraka_ochaco",
+      "source_tier": 1,
+      "title": "uraraka_ochaco",
+      "excerpt": "She is a positive, upbeat girl with [[brown eyes]] and [[medium hair]] [[brown hair]] with [[sidelocks]]. Her hero costume is a [[bodysuit]] with bulky [[high heel boots]] and a [[helmet]].",
+      "captured_at": "2026-09-02"
+    }
+  ],
+  "profiles": [
+    {
+      "appearance_key": "uraraka_ochaco::default",
+      "variant_tag": "uraraka_ochaco",
+      "display_name": "Hero-costume appearance",
+      "appearance_kind": "default",
+      "is_default": true,
+      "status": "published",
+      "confidence": "high",
+      "provenance": "danbooru_gelbooru_wiki_reviewed",
+      "notes": "Default hero costume; quirks, expression tags, weapons, and alternate outfits excluded.",
+      "features": [
+        {
+          "facet": "eyes",
+          "canonical_tag": "brown_eyes",
+          "value": "Brown eyes",
+          "source_refs": [
+            "danbooru:wiki:uraraka_ochaco",
+            "gelbooru:wiki:uraraka_ochaco"
+          ]
+        },
+        {
+          "facet": "hair",
+          "canonical_tag": "medium_hair",
+          "value": "Medium hair",
+          "source_refs": [
+            "danbooru:wiki:uraraka_ochaco",
+            "gelbooru:wiki:uraraka_ochaco"
+          ]
+        },
+        {
+          "facet": "hair",
+          "canonical_tag": "brown_hair",
+          "value": "Brown hair",
+          "source_refs": [
+            "danbooru:wiki:uraraka_ochaco",
+            "gelbooru:wiki:uraraka_ochaco"
+          ]
+        },
+        {
+          "facet": "hair_accessory",
+          "canonical_tag": "sidelocks",
+          "value": "Sidelocks",
+          "source_refs": [
+            "danbooru:wiki:uraraka_ochaco",
+            "gelbooru:wiki:uraraka_ochaco"
+          ]
+        },
+        {
+          "facet": "dress",
+          "canonical_tag": "bodysuit",
+          "value": "Hero bodysuit",
+          "source_refs": [
+            "danbooru:wiki:uraraka_ochaco",
+            "gelbooru:wiki:uraraka_ochaco"
+          ]
+        },
+        {
+          "facet": "headwear",
+          "canonical_tag": "helmet",
+          "value": "Helmet",
+          "source_refs": [
+            "danbooru:wiki:uraraka_ochaco",
+            "gelbooru:wiki:uraraka_ochaco"
+          ]
+        },
+        {
+          "facet": "footwear",
+          "canonical_tag": "high_heel_boots",
+          "value": "High-heel boots",
+          "source_refs": [
+            "danbooru:wiki:uraraka_ochaco",
+            "gelbooru:wiki:uraraka_ochaco"
+          ]
+        }
+      ]
+    }
+  ]
+}

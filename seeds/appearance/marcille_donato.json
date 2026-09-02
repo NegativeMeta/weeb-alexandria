@@ -1,0 +1,96 @@
+{
+  "character_tag": "marcille_donato",
+  "sources": [
+    {
+      "id": "danbooru:wiki:marcille_donato",
+      "source_site": "danbooru",
+      "source_kind": "wiki",
+      "source_key": "marcille_donato",
+      "source_url": "https://danbooru.donmai.us/wiki_pages/marcille_donato.json",
+      "source_tier": 1,
+      "title": "marcille_donato",
+      "excerpt": "She has [[long hair]] [[blonde hair]] and [[green eyes]], and wears a [[blue robe]] with matching blue [[hood]] [[hooded capelet]] [[blue capelet]].",
+      "captured_at": "2026-09-02"
+    },
+    {
+      "id": "gelbooru:wiki:marcille_donato",
+      "source_site": "gelbooru",
+      "source_kind": "wiki",
+      "source_key": "marcille_donato",
+      "source_url": "https://gelbooru.com/index.php?page=wiki&s=view&id=marcille_donato",
+      "source_tier": 1,
+      "title": "marcille_donato",
+      "excerpt": "She has [[long hair]] [[blonde hair]] and [[green eyes]], and wears a [[blue robe]] with matching blue [[hood]] [[hooded capelet]] [[blue capelet]].",
+      "captured_at": "2026-09-02"
+    }
+  ],
+  "profiles": [
+    {
+      "appearance_key": "marcille_donato::default",
+      "variant_tag": "marcille_donato",
+      "display_name": "Base adventurer appearance",
+      "appearance_kind": "default",
+      "is_default": true,
+      "status": "published",
+      "confidence": "high",
+      "provenance": "danbooru_gelbooru_wiki_reviewed",
+      "notes": "Base design; alternate forms, crossovers, props, and memes excluded.",
+      "features": [
+        {
+          "facet": "hair",
+          "canonical_tag": "long_hair",
+          "value": "Long hair",
+          "source_refs": [
+            "danbooru:wiki:marcille_donato",
+            "gelbooru:wiki:marcille_donato"
+          ]
+        },
+        {
+          "facet": "hair",
+          "canonical_tag": "blonde_hair",
+          "value": "Blonde hair",
+          "source_refs": [
+            "danbooru:wiki:marcille_donato",
+            "gelbooru:wiki:marcille_donato"
+          ]
+        },
+        {
+          "facet": "eyes",
+          "canonical_tag": "green_eyes",
+          "value": "Green eyes",
+          "source_refs": [
+            "danbooru:wiki:marcille_donato",
+            "gelbooru:wiki:marcille_donato"
+          ]
+        },
+        {
+          "facet": "dress",
+          "canonical_tag": "blue_robe",
+          "value": "Blue robe",
+          "source_refs": [
+            "danbooru:wiki:marcille_donato",
+            "gelbooru:wiki:marcille_donato"
+          ]
+        },
+        {
+          "facet": "headwear",
+          "canonical_tag": "hooded_capelet",
+          "value": "Hooded capelet",
+          "source_refs": [
+            "danbooru:wiki:marcille_donato",
+            "gelbooru:wiki:marcille_donato"
+          ]
+        },
+        {
+          "facet": "headwear",
+          "canonical_tag": "blue_capelet",
+          "value": "Blue capelet",
+          "source_refs": [
+            "danbooru:wiki:marcille_donato",
+            "gelbooru:wiki:marcille_donato"
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,123 @@
+{
+  "character_tag": "miyamoto_musashi_(fate)",
+  "sources": [
+    {
+      "id": "danbooru:wiki:miyamoto_musashi_(fate)",
+      "source_site": "danbooru",
+      "source_kind": "wiki",
+      "source_key": "miyamoto_musashi_(fate)",
+      "source_url": "https://danbooru.donmai.us/wiki_pages/miyamoto_musashi_(fate).json",
+      "source_tier": 1,
+      "title": "miyamoto_musashi_(fate)",
+      "excerpt": "She has [[pink hair]] in a [[ponytail]] held by a fan-like [[hair ornament]], [[blue eyes]], and large breasts. Initially wears a [[blue kimono]] [[sleeveless kimono]] with an obi, [[black detached sleeves]], [[black thighhighs]], and [[sandals]].",
+      "captured_at": "2026-09-02"
+    },
+    {
+      "id": "gelbooru:wiki:miyamoto_musashi_(fate)",
+      "source_site": "gelbooru",
+      "source_kind": "wiki",
+      "source_key": "miyamoto_musashi_(fate)",
+      "source_url": "https://gelbooru.com/index.php?page=wiki&s=view&id=miyamoto_musashi_(fate)",
+      "source_tier": 1,
+      "title": "miyamoto_musashi_(fate)",
+      "excerpt": "She has [[pink hair]] in a [[ponytail]] held by a fan-like [[hair ornament]], [[blue eyes]], and large breasts. Initially wears a [[blue kimono]] [[sleeveless kimono]] with an obi, [[black detached sleeves]], [[black thighhighs]], and [[sandals]].",
+      "captured_at": "2026-09-02"
+    }
+  ],
+  "profiles": [
+    {
+      "appearance_key": "miyamoto_musashi_(fate)::default",
+      "variant_tag": "miyamoto_musashi_(fate)",
+      "display_name": "First-ascension appearance",
+      "appearance_kind": "default",
+      "is_default": true,
+      "status": "published",
+      "confidence": "high",
+      "provenance": "danbooru_gelbooru_wiki_reviewed",
+      "notes": "Initial design; later ascensions, swimsuit, and other costumes excluded.",
+      "features": [
+        {
+          "facet": "hair",
+          "canonical_tag": "pink_hair",
+          "value": "Pink hair",
+          "source_refs": [
+            "danbooru:wiki:miyamoto_musashi_(fate)",
+            "gelbooru:wiki:miyamoto_musashi_(fate)"
+          ]
+        },
+        {
+          "facet": "hair_accessory",
+          "canonical_tag": "ponytail",
+          "value": "Ponytail",
+          "source_refs": [
+            "danbooru:wiki:miyamoto_musashi_(fate)",
+            "gelbooru:wiki:miyamoto_musashi_(fate)"
+          ]
+        },
+        {
+          "facet": "hair_accessory",
+          "canonical_tag": "hair_ornament",
+          "value": "Fan-like hair ornament",
+          "source_refs": [
+            "danbooru:wiki:miyamoto_musashi_(fate)",
+            "gelbooru:wiki:miyamoto_musashi_(fate)"
+          ]
+        },
+        {
+          "facet": "eyes",
+          "canonical_tag": "blue_eyes",
+          "value": "Blue eyes",
+          "source_refs": [
+            "danbooru:wiki:miyamoto_musashi_(fate)",
+            "gelbooru:wiki:miyamoto_musashi_(fate)"
+          ]
+        },
+        {
+          "facet": "dress",
+          "canonical_tag": "blue_kimono",
+          "value": "Blue kimono",
+          "source_refs": [
+            "danbooru:wiki:miyamoto_musashi_(fate)",
+            "gelbooru:wiki:miyamoto_musashi_(fate)"
+          ]
+        },
+        {
+          "facet": "dress",
+          "canonical_tag": "sleeveless_kimono",
+          "value": "Sleeveless kimono",
+          "source_refs": [
+            "danbooru:wiki:miyamoto_musashi_(fate)",
+            "gelbooru:wiki:miyamoto_musashi_(fate)"
+          ]
+        },
+        {
+          "facet": "sleeves",
+          "canonical_tag": "detached_sleeves",
+          "value": "Detached sleeves",
+          "source_refs": [
+            "danbooru:wiki:miyamoto_musashi_(fate)",
+            "gelbooru:wiki:miyamoto_musashi_(fate)"
+          ]
+        },
+        {
+          "facet": "legwear",
+          "canonical_tag": "black_thighhighs",
+          "value": "Black thigh-highs",
+          "source_refs": [
+            "danbooru:wiki:miyamoto_musashi_(fate)",
+            "gelbooru:wiki:miyamoto_musashi_(fate)"
+          ]
+        },
+        {
+          "facet": "footwear",
+          "canonical_tag": "sandals",
+          "value": "Sandals",
+          "source_refs": [
+            "danbooru:wiki:miyamoto_musashi_(fate)",
+            "gelbooru:wiki:miyamoto_musashi_(fate)"
+          ]
+        }
+      ]
+    }
+  ]
+}

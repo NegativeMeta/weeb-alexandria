@@ -84,6 +84,9 @@ EXCLUDED = {
     "shijou_takane", "sonic_the_hedgehog", "mutsuki_(blue_archive)",
     "senketsu", "tokai_teio_(umamusume)", "sakura_kyoko_(magical_girl)",
     "nero_claudius_(fate/extra)", "kisaragi_chihaya", "kijin_seija",
+    "shirasaka_koume", "medusa_(fate)", "edelgard_von_hresvelg",
+    "belle_(zenless_zone_zero)", "chloe_von_einzbern", "ereshkigal_(fate)",
+    "midori_(blue_archive)",
 }
 
 def rank(db: Path, limit: int) -> list[dict[str, int | str]]:
