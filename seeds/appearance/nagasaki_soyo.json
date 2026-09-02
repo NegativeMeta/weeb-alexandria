@@ -1,0 +1,96 @@
+{
+  "character_tag": "nagasaki_soyo",
+  "sources": [
+    {
+      "id": "danbooru:wiki:nagasaki_soyo",
+      "source_site": "danbooru",
+      "source_kind": "wiki",
+      "source_key": "nagasaki_soyo",
+      "source_url": "https://danbooru.donmai.us/wiki_pages/nagasaki_soyo.json",
+      "source_tier": 1,
+      "title": "nagasaki_soyo",
+      "excerpt": "She has [[blue eyes]] and [[long hair]] [[brown hair]] with middle parted bangs and [[long sidelocks]].",
+      "captured_at": "2026-09-02"
+    },
+    {
+      "id": "gelbooru:wiki:nagasaki_soyo",
+      "source_site": "gelbooru",
+      "source_kind": "wiki",
+      "source_key": "nagasaki_soyo",
+      "source_url": "https://gelbooru.com/index.php?page=wiki&s=view&id=nagasaki_soyo",
+      "source_tier": 1,
+      "title": "nagasaki_soyo",
+      "excerpt": "She has [[blue eyes]] and [[long hair]] [[brown hair]] with middle parted bangs and [[long sidelocks]].",
+      "captured_at": "2026-09-02"
+    }
+  ],
+  "profiles": [
+    {
+      "appearance_key": "nagasaki_soyo::default",
+      "variant_tag": "nagasaki_soyo",
+      "display_name": "Tsukinomori school-uniform appearance",
+      "appearance_kind": "default",
+      "is_default": true,
+      "status": "published",
+      "confidence": "high",
+      "provenance": "danbooru_gelbooru_wiki_reviewed",
+      "notes": "School-uniform design; live and casual costumes excluded.",
+      "features": [
+        {
+          "facet": "eyes",
+          "canonical_tag": "blue_eyes",
+          "value": "Blue eyes",
+          "source_refs": [
+            "danbooru:wiki:nagasaki_soyo",
+            "gelbooru:wiki:nagasaki_soyo"
+          ]
+        },
+        {
+          "facet": "hair",
+          "canonical_tag": "long_hair",
+          "value": "Long hair",
+          "source_refs": [
+            "danbooru:wiki:nagasaki_soyo",
+            "gelbooru:wiki:nagasaki_soyo"
+          ]
+        },
+        {
+          "facet": "hair",
+          "canonical_tag": "brown_hair",
+          "value": "Brown hair",
+          "source_refs": [
+            "danbooru:wiki:nagasaki_soyo",
+            "gelbooru:wiki:nagasaki_soyo"
+          ]
+        },
+        {
+          "facet": "hair_accessory",
+          "canonical_tag": "parted_bangs",
+          "value": "Parted bangs",
+          "source_refs": [
+            "danbooru:wiki:nagasaki_soyo",
+            "gelbooru:wiki:nagasaki_soyo"
+          ]
+        },
+        {
+          "facet": "hair_accessory",
+          "canonical_tag": "long_sidelocks",
+          "value": "Long sidelocks",
+          "source_refs": [
+            "danbooru:wiki:nagasaki_soyo",
+            "gelbooru:wiki:nagasaki_soyo"
+          ]
+        },
+        {
+          "facet": "dress",
+          "canonical_tag": "tsukinomori_school_uniform",
+          "value": "Tsukinomori school uniform",
+          "source_refs": [
+            "danbooru:wiki:nagasaki_soyo",
+            "gelbooru:wiki:nagasaki_soyo"
+          ]
+        }
+      ]
+    }
+  ]
+}

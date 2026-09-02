@@ -1,0 +1,105 @@
+{
+  "character_tag": "formidable_(azur_lane)",
+  "sources": [
+    {
+      "id": "danbooru:wiki:formidable_(azur_lane)",
+      "source_site": "danbooru",
+      "source_kind": "wiki",
+      "source_key": "formidable_(azur_lane)",
+      "source_url": "https://danbooru.donmai.us/wiki_pages/formidable_(azur_lane).json",
+      "source_tier": 1,
+      "title": "formidable_(azur_lane)",
+      "excerpt": "Her default outfit consists of a two-tone [[dress]] with white [[frilled dress]] in a gothic-lolita style, two-tone [[ribbon]], and white [[pantyhose]]. She has [[very long hair]] [[grey hair]] in [[twintails]].",
+      "captured_at": "2026-09-02"
+    },
+    {
+      "id": "gelbooru:wiki:formidable_(azur_lane)",
+      "source_site": "gelbooru",
+      "source_kind": "wiki",
+      "source_key": "formidable_(azur_lane)",
+      "source_url": "https://gelbooru.com/index.php?page=wiki&s=view&id=formidable_(azur_lane)",
+      "source_tier": 1,
+      "title": "formidable_(azur_lane)",
+      "excerpt": "Her default outfit consists of a two-tone [[dress]] with white [[frilled dress]] in a gothic-lolita style, two-tone [[ribbon]], and white [[pantyhose]]. She has [[very long hair]] [[grey hair]] in [[twintails]].",
+      "captured_at": "2026-09-02"
+    }
+  ],
+  "profiles": [
+    {
+      "appearance_key": "formidable_(azur_lane)::default",
+      "variant_tag": "formidable_(azur_lane)",
+      "display_name": "Default outfit",
+      "appearance_kind": "default",
+      "is_default": true,
+      "status": "published",
+      "confidence": "high",
+      "provenance": "danbooru_gelbooru_wiki_reviewed",
+      "notes": "Default outfit; alternate costumes and body-description metadata excluded.",
+      "features": [
+        {
+          "facet": "dress",
+          "canonical_tag": "dress",
+          "value": "Two-tone dress",
+          "source_refs": [
+            "danbooru:wiki:formidable_(azur_lane)",
+            "gelbooru:wiki:formidable_(azur_lane)"
+          ]
+        },
+        {
+          "facet": "dress",
+          "canonical_tag": "frilled_dress",
+          "value": "Frilled dress",
+          "source_refs": [
+            "danbooru:wiki:formidable_(azur_lane)",
+            "gelbooru:wiki:formidable_(azur_lane)"
+          ]
+        },
+        {
+          "facet": "hair",
+          "canonical_tag": "grey_hair",
+          "value": "Grey hair",
+          "source_refs": [
+            "danbooru:wiki:formidable_(azur_lane)",
+            "gelbooru:wiki:formidable_(azur_lane)"
+          ]
+        },
+        {
+          "facet": "hair",
+          "canonical_tag": "very_long_hair",
+          "value": "Very long hair",
+          "source_refs": [
+            "danbooru:wiki:formidable_(azur_lane)",
+            "gelbooru:wiki:formidable_(azur_lane)"
+          ]
+        },
+        {
+          "facet": "hair_accessory",
+          "canonical_tag": "ribbon",
+          "value": "Ribbon",
+          "source_refs": [
+            "danbooru:wiki:formidable_(azur_lane)",
+            "gelbooru:wiki:formidable_(azur_lane)"
+          ]
+        },
+        {
+          "facet": "legwear",
+          "canonical_tag": "pantyhose",
+          "value": "Pantyhose",
+          "source_refs": [
+            "danbooru:wiki:formidable_(azur_lane)",
+            "gelbooru:wiki:formidable_(azur_lane)"
+          ]
+        },
+        {
+          "facet": "hair_accessory",
+          "canonical_tag": "twintails",
+          "value": "Twintails",
+          "source_refs": [
+            "danbooru:wiki:formidable_(azur_lane)",
+            "gelbooru:wiki:formidable_(azur_lane)"
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,96 @@
+{
+  "character_tag": "miyu_(blue_archive)",
+  "sources": [
+    {
+      "id": "danbooru:wiki:miyu_(blue_archive)",
+      "source_site": "danbooru",
+      "source_kind": "wiki",
+      "source_key": "miyu_(blue_archive)",
+      "source_url": "https://danbooru.donmai.us/wiki_pages/miyu_(blue_archive).json",
+      "source_tier": 1,
+      "title": "miyu_(blue_archive)",
+      "excerpt": "She has [[red eyes]] and [[long hair]] [[black hair]] in a [[hime cut]]. In her default outfit she wears a blue [[serafuku]] with [[white pantyhose]].",
+      "captured_at": "2026-09-02"
+    },
+    {
+      "id": "gelbooru:wiki:miyu_(blue_archive)",
+      "source_site": "gelbooru",
+      "source_kind": "wiki",
+      "source_key": "miyu_(blue_archive)",
+      "source_url": "https://gelbooru.com/index.php?page=wiki&s=view&id=miyu_(blue_archive)",
+      "source_tier": 1,
+      "title": "miyu_(blue_archive)",
+      "excerpt": "She has [[red eyes]] and [[long hair]] [[black hair]] in a [[hime cut]]. In her default outfit she wears a blue [[serafuku]] with [[white pantyhose]].",
+      "captured_at": "2026-09-02"
+    }
+  ],
+  "profiles": [
+    {
+      "appearance_key": "miyu_(blue_archive)::default",
+      "variant_tag": "miyu_(blue_archive)",
+      "display_name": "Default outfit",
+      "appearance_kind": "default",
+      "is_default": true,
+      "status": "published",
+      "confidence": "high",
+      "provenance": "danbooru_gelbooru_wiki_reviewed",
+      "notes": "Default outfit; weapon, jokes, and alternate outfits excluded.",
+      "features": [
+        {
+          "facet": "eyes",
+          "canonical_tag": "red_eyes",
+          "value": "Red eyes",
+          "source_refs": [
+            "danbooru:wiki:miyu_(blue_archive)",
+            "gelbooru:wiki:miyu_(blue_archive)"
+          ]
+        },
+        {
+          "facet": "hair",
+          "canonical_tag": "long_hair",
+          "value": "Long hair",
+          "source_refs": [
+            "danbooru:wiki:miyu_(blue_archive)",
+            "gelbooru:wiki:miyu_(blue_archive)"
+          ]
+        },
+        {
+          "facet": "hair",
+          "canonical_tag": "black_hair",
+          "value": "Black hair",
+          "source_refs": [
+            "danbooru:wiki:miyu_(blue_archive)",
+            "gelbooru:wiki:miyu_(blue_archive)"
+          ]
+        },
+        {
+          "facet": "hair",
+          "canonical_tag": "hime_cut",
+          "value": "Hime cut",
+          "source_refs": [
+            "danbooru:wiki:miyu_(blue_archive)",
+            "gelbooru:wiki:miyu_(blue_archive)"
+          ]
+        },
+        {
+          "facet": "dress",
+          "canonical_tag": "serafuku",
+          "value": "Sailor uniform",
+          "source_refs": [
+            "danbooru:wiki:miyu_(blue_archive)",
+            "gelbooru:wiki:miyu_(blue_archive)"
+          ]
+        },
+        {
+          "facet": "legwear",
+          "canonical_tag": "white_pantyhose",
+          "value": "White pantyhose",
+          "source_refs": [
+            "danbooru:wiki:miyu_(blue_archive)",
+            "gelbooru:wiki:miyu_(blue_archive)"
+          ]
+        }
+      ]
+    }
+  ]
+}

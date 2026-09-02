@@ -2427,3 +2427,30 @@ ledger and were not published.
 
 The final validation passed with **65 tests**, `PRAGMA integrity_check = ok`,
 serial search/context index rebuilds, and `git diff --check`.
+
+## General appearance batch 31 (expanded to ten)
+
+The next ten characters were selected by the reproducible independent ranking
+(Danbooru + Gelbooru + e621; `combined` excluded):
+
+| Rank | Character | Danbooru | Gelbooru | e621 | Total | Result |
+|---:|---|---:|---:|---:|---:|---|
+| 1 | `han_juri` | 2,695 | 6,728 | 0 | 9,423 | Deferred; many incompatible outfits/forms |
+| 2 | `musashi_(kancolle)` | 4,248 | 5,166 | 0 | 9,414 | Deferred; conflicting hair/eye alternatives |
+| 3 | `miyu_(blue_archive)` | 4,179 | 5,175 | 0 | 9,354 | Published; 6 features |
+| 4 | `kikuchi_makoto` | 3,440 | 5,902 | 0 | 9,342 | Deferred; no structured visual description |
+| 5 | `nagasaki_soyo` | 2,014 | 7,317 | 0 | 9,331 | Published; 6 features |
+| 6 | `bismarck_(kancolle)` | 4,219 | 5,108 | 0 | 9,327 | Published; 7 features |
+| 7 | `formidable_(azur_lane)` | 4,200 | 5,121 | 0 | 9,321 | Published; 7 features |
+| 8 | `uraraka_ochako` | 0 | 9,307 | 0 | 9,307 | Deferred; alias/identity already covered as Ochaco |
+| 9 | `iseri_nina` | 2,881 | 6,419 | 0 | 9,300 | Deferred; conflicting hair-color alternatives |
+| 10 | `meltryllis_(fate)` | 4,231 | 5,067 | 0 | 9,298 | Published; 8 features |
+
+Candidate generation produced **547 observations** and **283 pending visual
+candidates**. Five profiles were promoted with **34 features**, **68 evidence
+links**, and **0 conflicts**. Every promotion was repeated successfully with
+unchanged counts. The five deferred names were added to the explicit exclusion
+ledger and were not published.
+
+The final validation passed with **65 tests**, `PRAGMA integrity_check = ok`,
+serial search/context index rebuilds, and `git diff --check`.

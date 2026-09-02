@@ -91,6 +91,8 @@ EXCLUDED = {
     "mordred_(fate/apocrypha)", "naruto_uzumaki", "amami_haruka",
     "inoue_orihime", "selene_(pokemon)", "tsunade_(naruto)",
     "morgan_le_fay_(fate)",
+    "han_juri", "musashi_(kancolle)", "kikuchi_makoto",
+    "uraraka_ochako", "iseri_nina",
 }
 
 def rank(db: Path, limit: int) -> list[dict[str, int | str]]:
