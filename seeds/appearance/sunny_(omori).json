@@ -1,0 +1,127 @@
+{
+  "character_tag": "sunny_(omori)",
+  "sources": [
+    {
+      "id": "danbooru:wiki:sunny_(omori)",
+      "source_site": "danbooru",
+      "source_kind": "wiki",
+      "source_key": "sunny_(omori)",
+      "source_url": "https://danbooru.donmai.us/wiki_pages/sunny_(omori).json",
+      "source_tier": 1,
+      "title": "sunny_(omori)",
+      "excerpt": "He has [[very short_hair|very short]] [[black hair]] with [[antenna hair]], [[double-parted bangs]] and [[empty eyes|empty]] [[black eyes]] with [[no pupils]]. He wears a [[white_shirt|white]] [[collared shirt]] under a [[black  sweater vest]], [[brown shorts]] [[white socks|white]] [[kneehighs]] or [[ankle socks]], and [[black shoes|black]] [[loafers]].",
+      "captured_at": "2026-09-02"
+    }
+  ],
+  "profiles": [
+    {
+      "appearance_key": "sunny_(omori)::default",
+      "variant_tag": "sunny_(omori)",
+      "display_name": "FARAWAY appearance",
+      "appearance_kind": "default",
+      "is_default": true,
+      "status": "published",
+      "confidence": "high",
+      "provenance": "danbooru_wiki_reviewed",
+      "notes": "FARAWAY version; HEADSPACE/OMORI and alternate costumes excluded.",
+      "features": [
+        {
+          "facet": "hair",
+          "canonical_tag": "very_short_hair",
+          "value": "Very short hair",
+          "source_refs": [
+            "danbooru:wiki:sunny_(omori)"
+          ]
+        },
+        {
+          "facet": "hair",
+          "canonical_tag": "black_hair",
+          "value": "Black hair",
+          "source_refs": [
+            "danbooru:wiki:sunny_(omori)"
+          ]
+        },
+        {
+          "facet": "hair",
+          "canonical_tag": "antenna_hair",
+          "value": "Antenna hair",
+          "source_refs": [
+            "danbooru:wiki:sunny_(omori)"
+          ]
+        },
+        {
+          "facet": "eyes",
+          "canonical_tag": "empty_eyes",
+          "value": "Empty eyes",
+          "source_refs": [
+            "danbooru:wiki:sunny_(omori)"
+          ]
+        },
+        {
+          "facet": "eyes",
+          "canonical_tag": "black_eyes",
+          "value": "Black eyes",
+          "source_refs": [
+            "danbooru:wiki:sunny_(omori)"
+          ]
+        },
+        {
+          "facet": "upper_body",
+          "canonical_tag": "white_shirt",
+          "value": "White shirt",
+          "source_refs": [
+            "danbooru:wiki:sunny_(omori)"
+          ]
+        },
+        {
+          "facet": "upper_body",
+          "canonical_tag": "collared_shirt",
+          "value": "Collared shirt",
+          "source_refs": [
+            "danbooru:wiki:sunny_(omori)"
+          ]
+        },
+        {
+          "facet": "lower_body",
+          "canonical_tag": "brown_shorts",
+          "value": "Brown shorts",
+          "source_refs": [
+            "danbooru:wiki:sunny_(omori)"
+          ]
+        },
+        {
+          "facet": "legwear",
+          "canonical_tag": "white_socks",
+          "value": "White socks",
+          "source_refs": [
+            "danbooru:wiki:sunny_(omori)"
+          ]
+        },
+        {
+          "facet": "legwear",
+          "canonical_tag": "ankle_socks",
+          "value": "Ankle socks",
+          "source_refs": [
+            "danbooru:wiki:sunny_(omori)"
+          ]
+        },
+        {
+          "facet": "legwear",
+          "canonical_tag": "kneehighs",
+          "value": "Knee-highs",
+          "source_refs": [
+            "danbooru:wiki:sunny_(omori)"
+          ]
+        },
+        {
+          "facet": "footwear",
+          "canonical_tag": "black_shoes",
+          "value": "Black shoes",
+          "source_refs": [
+            "danbooru:wiki:sunny_(omori)"
+          ]
+        }
+      ]
+    }
+  ]
+}

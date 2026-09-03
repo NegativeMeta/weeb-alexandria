@@ -107,6 +107,9 @@ EXCLUDED = {
     "basil_(omori)", "kumoi_ichirin", "kieran_(pokemon)", "takagaki_kaede",
     "belfast_(azur_lane)", "koizumi_hanayo", "wise_(zenless_zone_zero)",
     "nessa_(pokemon)", "satono_diamond_(umamusume)", "octoling_player_character",
+    "djeeta_(granblue_fantasy)", "mikasa_ackerman", "bronya_zaychik",
+    "joseph_joestar", "ruby_rose", "jeanne_d'arc_alter_(avenger)_(fate)",
+    "nozomi_(blue_archive)",
 }
 
 def rank(db: Path, limit: int) -> list[dict[str, int | str]]:

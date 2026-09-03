@@ -2644,3 +2644,28 @@ review context and was not promoted in this batch.
 
 The corrected next queue begins with `djeeta_(granblue_fantasy)` after the
 ledger update.
+
+## General appearance batch 39 (expanded to ten)
+
+The selected queue was ranked reproducibly from independent Danbooru, Gelbooru,
+and e621 counts (`combined` excluded):
+
+| Rank | Character | Danbooru | Gelbooru | e621 | Total | Result |
+|---:|---|---:|---:|---:|---:|---|
+| 1 | `djeeta_(granblue_fantasy)` | 3,867 | 4,402 | 0 | 8,269 | Deferred; only 4 observations |
+| 2 | `nakano_miku` | 3,382 | 4,881 | 0 | 8,263 | Published; 13 features |
+| 3 | `mikasa_ackerman` | 2,307 | 5,947 | 0 | 8,254 | Deferred; only 2 observations |
+| 4 | `bronya_zaychik` | 3,507 | 4,704 | 0 | 8,211 | Deferred; multiple encarnations and outfits |
+| 5 | `samidare_(kancolle)` | 3,429 | 4,772 | 0 | 8,201 | Published; 9 features for base form |
+| 6 | `joseph_joestar` | 688 | 7,508 | 0 | 8,196 | Deferred; only crossdressing candidate |
+| 7 | `ruby_rose` | 2,747 | 5,435 | 0 | 8,182 | Deferred; conflicting hair and outfit descriptions |
+| 8 | `sunny_(omori)` | 1,080 | 7,102 | 0 | 8,182 | Published; 12 features for FARAWAY appearance |
+| 9 | `jeanne_d'arc_alter_(avenger)_(fate)` | 8,181 | 0 | 0 | 8,181 | Deferred; no builder observations |
+| 10 | `nozomi_(blue_archive)` | 2,368 | 5,783 | 0 | 8,151 | Deferred; only 2 partial candidates |
+
+Candidate generation produced **311 observations** and **115 pending candidates**.
+Three profiles were promoted with **34 features**, **34 evidence links**, and
+**0 conflicts**. Every promotion was repeated successfully with unchanged
+counts. Seven names were deferred and added to the explicit exclusion ledger.
+
+The corrected next queue begins with `sangonomiya_kokomi` after the ledger update.
