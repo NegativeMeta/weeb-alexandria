@@ -2695,3 +2695,28 @@ counts. Seven names were deferred and added to the explicit exclusion ledger.
 
 The corrected next queue begins with `female_byleth_(fire_emblem)` after the
 ledger update.
+
+## General appearance batch 41 (expanded to ten)
+
+The selected queue was ranked reproducibly from independent Danbooru, Gelbooru,
+and e621 counts (`combined` excluded):
+
+| Rank | Character | Danbooru | Gelbooru | e621 | Total | Result |
+|---:|---|---:|---:|---:|---:|---|
+| 1 | `female_byleth_(fire_emblem)` | 0 | 8,013 | 0 | 8,013 | Deferred; selectable/player avatar |
+| 2 | `shiranui_(kancolle)` | 3,254 | 4,748 | 0 | 8,002 | Published; 16 features for base form |
+| 3 | `yagami_hikari` | 558 | 7,411 | 0 | 7,969 | Deferred; no visual candidates |
+| 4 | `souryuu_(kancolle)` | 3,315 | 4,645 | 0 | 7,960 | Published; 14 features for base form |
+| 5 | `hikari_(blue_archive)` | 2,407 | 5,549 | 0 | 7,956 | Deferred; partial candidates |
+| 6 | `super_sonico` | 2,558 | 5,389 | 0 | 7,947 | Published; 8 features for usual base outfit |
+| 7 | `kokkoro_(princess_connect!)` | 3,428 | 4,491 | 0 | 7,919 | Published; 11 features for default appearance |
+| 8 | `skyla_(pokemon)` | 1,892 | 6,024 | 0 | 7,916 | Published; 14 features for Black and White appearance |
+| 9 | `shiina_taki` | 1,561 | 6,349 | 0 | 7,910 | Deferred; multiple school uniforms and live outfits |
+| 10 | `jougasaki_mika` | 3,569 | 4,329 | 0 | 7,898 | Deferred; only one non-visual candidate |
+
+Candidate generation produced **227 observations** and **96 pending candidates**.
+Five profiles were promoted with **63 features**, **63 evidence links**, and
+**0 conflicts**. Every promotion was repeated successfully with unchanged
+counts. Five names were deferred and added to the explicit exclusion ledger.
+
+The corrected next queue begins with `kuroki_tomoko` after the ledger update.

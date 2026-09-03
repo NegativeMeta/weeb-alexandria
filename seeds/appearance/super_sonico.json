@@ -1,0 +1,95 @@
+{
+  "character_tag": "super_sonico",
+  "sources": [
+    {
+      "id": "danbooru:wiki:super_sonico",
+      "source_site": "danbooru",
+      "source_kind": "wiki",
+      "source_key": "super_sonico",
+      "source_url": "https://danbooru.donmai.us/wiki_pages/super_sonico.json",
+      "source_tier": 1,
+      "title": "super_sonico",
+      "excerpt": "Sonico is rather shy and clumsy, but nevertheless kind, bubbly, energetic and positive no matter what. Her usual (and most known) outfit consist of a [[casual]] [[blouse]] with a cat printed on it, as well as a [[blue hoodie|blue]] [[hoodie]], and a [[fur-trimmed skirt|fur-trimmed]] [[miniskirt]]. She is never seen without her trademark [[headphones]]. While her physical features depend on the artist, she is consistently depicted with large, [[tareme]] [[red eyes]], light [[pink hair]] and very [[large breasts]].",
+      "captured_at": "2026-09-02"
+    }
+  ],
+  "profiles": [
+    {
+      "appearance_key": "super_sonico::default",
+      "variant_tag": "super_sonico",
+      "display_name": "Usual base outfit",
+      "appearance_kind": "default",
+      "is_default": true,
+      "status": "published",
+      "confidence": "high",
+      "provenance": "danbooru_wiki_reviewed",
+      "notes": "Usual base outfit; VTuber redesign, named costumes, and props excluded.",
+      "features": [
+        {
+          "facet": "eyes",
+          "canonical_tag": "red_eyes",
+          "value": "Red eyes",
+          "source_refs": [
+            "danbooru:wiki:super_sonico"
+          ]
+        },
+        {
+          "facet": "hair",
+          "canonical_tag": "pink_hair",
+          "value": "Pink hair",
+          "source_refs": [
+            "danbooru:wiki:super_sonico"
+          ]
+        },
+        {
+          "facet": "upper_body",
+          "canonical_tag": "blouse",
+          "value": "Blouse",
+          "source_refs": [
+            "danbooru:wiki:super_sonico"
+          ]
+        },
+        {
+          "facet": "lower_body",
+          "canonical_tag": "miniskirt",
+          "value": "Miniskirt",
+          "source_refs": [
+            "danbooru:wiki:super_sonico"
+          ]
+        },
+        {
+          "facet": "lower_body",
+          "canonical_tag": "pleated_skirt",
+          "value": "Pleated skirt",
+          "source_refs": [
+            "danbooru:wiki:super_sonico"
+          ]
+        },
+        {
+          "facet": "legwear",
+          "canonical_tag": "black_thighhighs",
+          "value": "Black thigh-highs",
+          "source_refs": [
+            "danbooru:wiki:super_sonico"
+          ]
+        },
+        {
+          "facet": "footwear",
+          "canonical_tag": "black_footwear",
+          "value": "Black footwear",
+          "source_refs": [
+            "danbooru:wiki:super_sonico"
+          ]
+        },
+        {
+          "facet": "footwear",
+          "canonical_tag": "high_heel_boots",
+          "value": "High-heel boots",
+          "source_refs": [
+            "danbooru:wiki:super_sonico"
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,143 @@
+{
+  "character_tag": "souryuu_(kancolle)",
+  "sources": [
+    {
+      "id": "danbooru:wiki:souryuu_(kancolle)",
+      "source_site": "danbooru",
+      "source_kind": "wiki",
+      "source_key": "souryuu_(kancolle)",
+      "source_url": "https://danbooru.donmai.us/wiki_pages/souryuu_(kancolle).json",
+      "source_tier": 1,
+      "title": "souryuu_(kancolle)",
+      "excerpt": "She has [[short hair|short]] dark [[blue hair]] tied into [[twintails]], [[blue eyes]], and [[large breasts]]. Her default outfit, fitting of her name (\"[[Seiryuu|Azure Dragon]]\"), consists of a [[green kimono]] top with [[wide sleeves]], dark [[blue skirt|blue]] [[pleated skirt]], dragon horn-themed [[hairclip]]s for her twintails, flight deck apron, [[white socks]], [[rudder footwear|rudder]] [[sandals]], and [[yugake]].",
+      "captured_at": "2026-09-02"
+    }
+  ],
+  "profiles": [
+    {
+      "appearance_key": "souryuu_(kancolle)::default",
+      "variant_tag": "souryuu_(kancolle)",
+      "display_name": "Base form",
+      "appearance_kind": "default",
+      "is_default": true,
+      "status": "published",
+      "confidence": "high",
+      "provenance": "danbooru_wiki_reviewed",
+      "notes": "Base form only; Kai Ni, seasonal outfits, rigging, and weapons excluded.",
+      "features": [
+        {
+          "facet": "hair",
+          "canonical_tag": "blue_hair",
+          "value": "Blue hair",
+          "source_refs": [
+            "danbooru:wiki:souryuu_(kancolle)"
+          ]
+        },
+        {
+          "facet": "hair",
+          "canonical_tag": "short_hair",
+          "value": "Short hair",
+          "source_refs": [
+            "danbooru:wiki:souryuu_(kancolle)"
+          ]
+        },
+        {
+          "facet": "hair_accessory",
+          "canonical_tag": "twintails",
+          "value": "Twintails",
+          "source_refs": [
+            "danbooru:wiki:souryuu_(kancolle)"
+          ]
+        },
+        {
+          "facet": "hair_accessory",
+          "canonical_tag": "hair_ribbon",
+          "value": "Hair ribbon",
+          "source_refs": [
+            "danbooru:wiki:souryuu_(kancolle)"
+          ]
+        },
+        {
+          "facet": "hair_accessory",
+          "canonical_tag": "hairclip",
+          "value": "Hair clip",
+          "source_refs": [
+            "danbooru:wiki:souryuu_(kancolle)"
+          ]
+        },
+        {
+          "facet": "eyes",
+          "canonical_tag": "blue_eyes",
+          "value": "Blue eyes",
+          "source_refs": [
+            "danbooru:wiki:souryuu_(kancolle)"
+          ]
+        },
+        {
+          "facet": "dress",
+          "canonical_tag": "green_kimono",
+          "value": "Green kimono",
+          "source_refs": [
+            "danbooru:wiki:souryuu_(kancolle)"
+          ]
+        },
+        {
+          "facet": "dress",
+          "canonical_tag": "kimono",
+          "value": "Kimono",
+          "source_refs": [
+            "danbooru:wiki:souryuu_(kancolle)"
+          ]
+        },
+        {
+          "facet": "sleeves",
+          "canonical_tag": "wide_sleeves",
+          "value": "Wide sleeves",
+          "source_refs": [
+            "danbooru:wiki:souryuu_(kancolle)"
+          ]
+        },
+        {
+          "facet": "lower_body",
+          "canonical_tag": "blue_skirt",
+          "value": "Blue skirt",
+          "source_refs": [
+            "danbooru:wiki:souryuu_(kancolle)"
+          ]
+        },
+        {
+          "facet": "lower_body",
+          "canonical_tag": "pleated_skirt",
+          "value": "Pleated skirt",
+          "source_refs": [
+            "danbooru:wiki:souryuu_(kancolle)"
+          ]
+        },
+        {
+          "facet": "legwear",
+          "canonical_tag": "white_socks",
+          "value": "White socks",
+          "source_refs": [
+            "danbooru:wiki:souryuu_(kancolle)"
+          ]
+        },
+        {
+          "facet": "footwear",
+          "canonical_tag": "sandals",
+          "value": "Sandals",
+          "source_refs": [
+            "danbooru:wiki:souryuu_(kancolle)"
+          ]
+        },
+        {
+          "facet": "footwear",
+          "canonical_tag": "rudder_footwear",
+          "value": "Rudder footwear",
+          "source_refs": [
+            "danbooru:wiki:souryuu_(kancolle)"
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,143 @@
+{
+  "character_tag": "skyla_(pokemon)",
+  "sources": [
+    {
+      "id": "danbooru:wiki:skyla_(pokemon)",
+      "source_site": "danbooru",
+      "source_kind": "wiki",
+      "source_key": "skyla_(pokemon)",
+      "source_url": "https://danbooru.donmai.us/wiki_pages/skyla_(pokemon).json",
+      "source_tier": 1,
+      "title": "skyla_(pokemon)",
+      "excerpt": "She has [[blue eyes]], and [[red hair]] with [[short hair with long locks|long]] [[sidelocks|locks]] and tied [[one side up]] with an [[hair ornament|ornament]].",
+      "captured_at": "2026-09-02"
+    }
+  ],
+  "profiles": [
+    {
+      "appearance_key": "skyla_(pokemon)::default",
+      "variant_tag": "skyla_(pokemon)",
+      "display_name": "Black and White appearance",
+      "appearance_kind": "default",
+      "is_default": true,
+      "status": "published",
+      "confidence": "high",
+      "provenance": "danbooru_wiki_reviewed",
+      "notes": "Black and White default appearance; Masters EX and other variants excluded.",
+      "features": [
+        {
+          "facet": "eyes",
+          "canonical_tag": "blue_eyes",
+          "value": "Blue eyes",
+          "source_refs": [
+            "danbooru:wiki:skyla_(pokemon)"
+          ]
+        },
+        {
+          "facet": "hair",
+          "canonical_tag": "red_hair",
+          "value": "Red hair",
+          "source_refs": [
+            "danbooru:wiki:skyla_(pokemon)"
+          ]
+        },
+        {
+          "facet": "hair_accessory",
+          "canonical_tag": "short_hair_with_long_locks",
+          "value": "Short hair with long locks",
+          "source_refs": [
+            "danbooru:wiki:skyla_(pokemon)"
+          ]
+        },
+        {
+          "facet": "hair_accessory",
+          "canonical_tag": "sidelocks",
+          "value": "Sidelocks",
+          "source_refs": [
+            "danbooru:wiki:skyla_(pokemon)"
+          ]
+        },
+        {
+          "facet": "hair_accessory",
+          "canonical_tag": "hair_ornament",
+          "value": "Hair ornament",
+          "source_refs": [
+            "danbooru:wiki:skyla_(pokemon)"
+          ]
+        },
+        {
+          "facet": "jacket",
+          "canonical_tag": "blue_jacket",
+          "value": "Blue jacket",
+          "source_refs": [
+            "danbooru:wiki:skyla_(pokemon)"
+          ]
+        },
+        {
+          "facet": "jacket",
+          "canonical_tag": "cropped_jacket",
+          "value": "Cropped jacket",
+          "source_refs": [
+            "danbooru:wiki:skyla_(pokemon)"
+          ]
+        },
+        {
+          "facet": "upper_body",
+          "canonical_tag": "crop_top",
+          "value": "Crop top",
+          "source_refs": [
+            "danbooru:wiki:skyla_(pokemon)"
+          ]
+        },
+        {
+          "facet": "lower_body",
+          "canonical_tag": "blue_shorts",
+          "value": "Blue shorts",
+          "source_refs": [
+            "danbooru:wiki:skyla_(pokemon)"
+          ]
+        },
+        {
+          "facet": "lower_body",
+          "canonical_tag": "short_shorts",
+          "value": "Short shorts",
+          "source_refs": [
+            "danbooru:wiki:skyla_(pokemon)"
+          ]
+        },
+        {
+          "facet": "accessories",
+          "canonical_tag": "suspenders",
+          "value": "Suspenders",
+          "source_refs": [
+            "danbooru:wiki:skyla_(pokemon)"
+          ]
+        },
+        {
+          "facet": "gloves",
+          "canonical_tag": "blue_gloves",
+          "value": "Blue gloves",
+          "source_refs": [
+            "danbooru:wiki:skyla_(pokemon)"
+          ]
+        },
+        {
+          "facet": "footwear",
+          "canonical_tag": "blue_boots",
+          "value": "Blue boots",
+          "source_refs": [
+            "danbooru:wiki:skyla_(pokemon)"
+          ]
+        },
+        {
+          "facet": "footwear",
+          "canonical_tag": "boots",
+          "value": "Boots",
+          "source_refs": [
+            "danbooru:wiki:skyla_(pokemon)"
+          ]
+        }
+      ]
+    }
+  ]
+}
