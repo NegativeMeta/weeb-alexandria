@@ -1,0 +1,150 @@
+{
+  "character_tag": "silver_wolf_(honkai:_star_rail)",
+  "sources": [
+    {
+      "id": "danbooru:wiki:silver_wolf_(honkai:_star_rail)",
+      "source_site": "danbooru",
+      "source_kind": "wiki",
+      "source_key": "silver_wolf_(honkai:_star_rail)",
+      "source_url": "https://danbooru.donmai.us/wiki_pages/silver_wolf_(honkai:_star_rail).json",
+      "source_tier": 1,
+      "title": "silver_wolf_(honkai:_star_rail)",
+      "excerpt": "She has [[long hair|long]] [[grey hair]] with a [[blue hair|blue]] [[gradient]] and tied into a [[drill hair|drill]] [[ponytail]], [[grey eyes]], and [[small breasts]]. Her default outfit consists of a [[black jacket|black]] [[cropped jacket]], white [[crop top]], black [[sports bra]], [[black shorts|black]] [[short shorts]], differently-colored [[thigh strap]]s, [[goggles]] [[eyewear on head|on her head]], [[fishnet socks]], and [[black boots]].",
+      "captured_at": "2026-09-02"
+    },
+    {
+      "id": "gelbooru:wiki:silver_wolf_(honkai:_star_rail)",
+      "source_site": "gelbooru",
+      "source_kind": "wiki",
+      "source_key": "silver_wolf_(honkai:_star_rail)",
+      "source_url": "https://gelbooru.com/index.php?page=wiki&s=view&id=silver_wolf_(honkai:_star_rail)",
+      "source_tier": 1,
+      "title": "silver_wolf_(honkai:_star_rail)",
+      "excerpt": "She is portrayed with [[long hair|long]] [[grey hair]] with a [[blue hair|blue]] [[gradient]] and tied into a [[drill hair|drill]] [[ponytail]], [[grey eyes]], and [[small breasts]]. Her default outfit consists of a [[black jacket|black]] [[cropped jacket]], white [[crop top]], black [[sports bra]], [[black shorts|black]] [[short shorts]], differently-colored [[thigh strap]]s, [[goggles]] [[eyewear on head|on her head]], [[fishnet socks]], and [[black footwear|black]] [[boots]].",
+      "captured_at": "2026-09-02"
+    }
+  ],
+  "profiles": [
+    {
+      "appearance_key": "silver_wolf_(honkai:_star_rail)::default",
+      "variant_tag": "silver_wolf_(honkai:_star_rail)",
+      "display_name": "Default outfit",
+      "appearance_kind": "default",
+      "is_default": true,
+      "status": "published",
+      "confidence": "high",
+      "provenance": "danbooru_gelbooru_wiki_reviewed",
+      "notes": "Default outfit only; alternate costumes excluded.",
+      "features": [
+        {
+          "facet": "hair",
+          "canonical_tag": "long_hair",
+          "value": "Long hair",
+          "source_refs": [
+            "danbooru:wiki:silver_wolf_(honkai:_star_rail)",
+            "gelbooru:wiki:silver_wolf_(honkai:_star_rail)"
+          ]
+        },
+        {
+          "facet": "hair",
+          "canonical_tag": "grey_hair",
+          "value": "Grey hair",
+          "source_refs": [
+            "danbooru:wiki:silver_wolf_(honkai:_star_rail)",
+            "gelbooru:wiki:silver_wolf_(honkai:_star_rail)"
+          ]
+        },
+        {
+          "facet": "hair",
+          "canonical_tag": "drill_hair",
+          "value": "Drill hair",
+          "source_refs": [
+            "danbooru:wiki:silver_wolf_(honkai:_star_rail)",
+            "gelbooru:wiki:silver_wolf_(honkai:_star_rail)"
+          ]
+        },
+        {
+          "facet": "hair_accessory",
+          "canonical_tag": "ponytail",
+          "value": "Ponytail",
+          "source_refs": [
+            "danbooru:wiki:silver_wolf_(honkai:_star_rail)",
+            "gelbooru:wiki:silver_wolf_(honkai:_star_rail)"
+          ]
+        },
+        {
+          "facet": "eyes",
+          "canonical_tag": "grey_eyes",
+          "value": "Grey eyes",
+          "source_refs": [
+            "danbooru:wiki:silver_wolf_(honkai:_star_rail)",
+            "gelbooru:wiki:silver_wolf_(honkai:_star_rail)"
+          ]
+        },
+        {
+          "facet": "jacket",
+          "canonical_tag": "black_jacket",
+          "value": "Black jacket",
+          "source_refs": [
+            "danbooru:wiki:silver_wolf_(honkai:_star_rail)",
+            "gelbooru:wiki:silver_wolf_(honkai:_star_rail)"
+          ]
+        },
+        {
+          "facet": "jacket",
+          "canonical_tag": "cropped_jacket",
+          "value": "Cropped jacket",
+          "source_refs": [
+            "danbooru:wiki:silver_wolf_(honkai:_star_rail)",
+            "gelbooru:wiki:silver_wolf_(honkai:_star_rail)"
+          ]
+        },
+        {
+          "facet": "upper_body",
+          "canonical_tag": "crop_top",
+          "value": "Crop top",
+          "source_refs": [
+            "danbooru:wiki:silver_wolf_(honkai:_star_rail)",
+            "gelbooru:wiki:silver_wolf_(honkai:_star_rail)"
+          ]
+        },
+        {
+          "facet": "lower_body",
+          "canonical_tag": "black_shorts",
+          "value": "Black shorts",
+          "source_refs": [
+            "danbooru:wiki:silver_wolf_(honkai:_star_rail)",
+            "gelbooru:wiki:silver_wolf_(honkai:_star_rail)"
+          ]
+        },
+        {
+          "facet": "lower_body",
+          "canonical_tag": "short_shorts",
+          "value": "Short shorts",
+          "source_refs": [
+            "danbooru:wiki:silver_wolf_(honkai:_star_rail)",
+            "gelbooru:wiki:silver_wolf_(honkai:_star_rail)"
+          ]
+        },
+        {
+          "facet": "legwear",
+          "canonical_tag": "fishnet_socks",
+          "value": "Fishnet socks",
+          "source_refs": [
+            "danbooru:wiki:silver_wolf_(honkai:_star_rail)",
+            "gelbooru:wiki:silver_wolf_(honkai:_star_rail)"
+          ]
+        },
+        {
+          "facet": "footwear",
+          "canonical_tag": "black_boots",
+          "value": "Black boots",
+          "source_refs": [
+            "danbooru:wiki:silver_wolf_(honkai:_star_rail)",
+            "gelbooru:wiki:silver_wolf_(honkai:_star_rail)"
+          ]
+        }
+      ]
+    }
+  ]
+}

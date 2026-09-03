@@ -1,0 +1,132 @@
+{
+  "character_tag": "komaeda_nagito",
+  "sources": [
+    {
+      "id": "danbooru:wiki:komaeda_nagito",
+      "source_site": "danbooru",
+      "source_kind": "wiki",
+      "source_key": "komaeda_nagito",
+      "source_url": "https://danbooru.donmai.us/wiki_pages/komaeda_nagito.json",
+      "source_tier": 1,
+      "title": "komaeda_nagito",
+      "excerpt": "A character from [[Danganronpa 2: Goodbye Despair]], titled the Ultimate Lucky Student (超高校級の「幸運」). He typically wears a [[white shirt|white]] [[print shirt]] with a [[green jacket| green]] [[hooded jacket]] which is usually [[open jacket|open]]. He has [[white hair|white]] to [[grey hair]] that is [[messy hair|messy]] most of the time. On his [[black pants|pants]] he has a [[chain]] with a [[skull ornament]].",
+      "captured_at": "2026-09-02"
+    },
+    {
+      "id": "gelbooru:wiki:komaeda_nagito",
+      "source_site": "gelbooru",
+      "source_kind": "wiki",
+      "source_key": "komaeda_nagito",
+      "source_url": "https://gelbooru.com/index.php?page=wiki&s=view&id=komaeda_nagito",
+      "source_tier": 1,
+      "title": "komaeda_nagito",
+      "excerpt": "A character from [[Danganronpa 2: Goodbye Despair]], titled the Ultimate Lucky Student (超高校級の「幸運」). He typically wears a [[white shirt|white]] [[print shirt]] with a [[green jacket| green]] [[hooded jacket]] which is usually [[open jacket|open]]. He has [[white hair|white]] to [[grey hair]] that is [[messy hair|messy]] most of the time. On his [[black pants|pants]] he has a [[chain]] with a [[skull ornament]].",
+      "captured_at": "2026-09-02"
+    }
+  ],
+  "profiles": [
+    {
+      "appearance_key": "komaeda_nagito::default",
+      "variant_tag": "komaeda_nagito",
+      "display_name": "Default appearance",
+      "appearance_kind": "default",
+      "is_default": true,
+      "status": "published",
+      "confidence": "high",
+      "provenance": "danbooru_gelbooru_wiki_reviewed",
+      "notes": "Default Danganronpa 2 outfit; later appearances excluded.",
+      "features": [
+        {
+          "facet": "upper_body",
+          "canonical_tag": "white_shirt",
+          "value": "White shirt",
+          "source_refs": [
+            "danbooru:wiki:komaeda_nagito",
+            "gelbooru:wiki:komaeda_nagito"
+          ]
+        },
+        {
+          "facet": "upper_body",
+          "canonical_tag": "print_shirt",
+          "value": "Print shirt",
+          "source_refs": [
+            "danbooru:wiki:komaeda_nagito",
+            "gelbooru:wiki:komaeda_nagito"
+          ]
+        },
+        {
+          "facet": "jacket",
+          "canonical_tag": "green_jacket",
+          "value": "Green jacket",
+          "source_refs": [
+            "danbooru:wiki:komaeda_nagito",
+            "gelbooru:wiki:komaeda_nagito"
+          ]
+        },
+        {
+          "facet": "jacket",
+          "canonical_tag": "hooded_jacket",
+          "value": "Hooded jacket",
+          "source_refs": [
+            "danbooru:wiki:komaeda_nagito",
+            "gelbooru:wiki:komaeda_nagito"
+          ]
+        },
+        {
+          "facet": "jacket",
+          "canonical_tag": "open_jacket",
+          "value": "Open jacket",
+          "source_refs": [
+            "danbooru:wiki:komaeda_nagito",
+            "gelbooru:wiki:komaeda_nagito"
+          ]
+        },
+        {
+          "facet": "hair",
+          "canonical_tag": "white_hair",
+          "value": "White hair",
+          "source_refs": [
+            "danbooru:wiki:komaeda_nagito",
+            "gelbooru:wiki:komaeda_nagito"
+          ]
+        },
+        {
+          "facet": "hair",
+          "canonical_tag": "grey_hair",
+          "value": "Grey hair",
+          "source_refs": [
+            "danbooru:wiki:komaeda_nagito",
+            "gelbooru:wiki:komaeda_nagito"
+          ]
+        },
+        {
+          "facet": "hair",
+          "canonical_tag": "messy_hair",
+          "value": "Messy hair",
+          "source_refs": [
+            "danbooru:wiki:komaeda_nagito",
+            "gelbooru:wiki:komaeda_nagito"
+          ]
+        },
+        {
+          "facet": "lower_body",
+          "canonical_tag": "black_pants",
+          "value": "Black pants",
+          "source_refs": [
+            "danbooru:wiki:komaeda_nagito",
+            "gelbooru:wiki:komaeda_nagito"
+          ]
+        },
+        {
+          "facet": "accessories",
+          "canonical_tag": "skull_ornament",
+          "value": "Skull ornament",
+          "source_refs": [
+            "danbooru:wiki:komaeda_nagito",
+            "gelbooru:wiki:komaeda_nagito"
+          ]
+        }
+      ]
+    }
+  ]
+}

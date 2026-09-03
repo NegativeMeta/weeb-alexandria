@@ -1,0 +1,150 @@
+{
+  "character_tag": "kasumi_(kancolle)",
+  "sources": [
+    {
+      "id": "danbooru:wiki:kasumi_(kancolle)",
+      "source_site": "danbooru",
+      "source_kind": "wiki",
+      "source_key": "kasumi_(kancolle)",
+      "source_url": "https://danbooru.donmai.us/wiki_pages/kasumi_(kancolle).json",
+      "source_tier": 1,
+      "title": "kasumi_(kancolle)",
+      "excerpt": "She has [[long_hair|long]] [[grey hair]] with a [[side ponytail]], [[yellow_eyes|yellowish]]-[[brown eyes]]. Her default outfit is the Konishi-design [i]Asashio[/i]-class uniform: a [[short_sleeves|short-sleeved]] [[white shirt]], a [[grey skirt]] with [[suspenders]], [[black socks|black]] [[kneehighs]], and grey-red [[rudder footwear]].",
+      "captured_at": "2026-09-02"
+    },
+    {
+      "id": "gelbooru:wiki:kasumi_(kancolle)",
+      "source_site": "gelbooru",
+      "source_kind": "wiki",
+      "source_key": "kasumi_(kancolle)",
+      "source_url": "https://gelbooru.com/index.php?page=wiki&s=view&id=kasumi_(kancolle)",
+      "source_tier": 1,
+      "title": "kasumi_(kancolle)",
+      "excerpt": "She has [[long_hair|long]] [[grey hair]] with a [[side ponytail]], [[yellow_eyes|yellowish]]-[[brown eyes]]. She wears a [[short_sleeves|short-sleeved]] [[white shirt]], black [[arm warmers]], a [[grey skirt|grey]] with [[suspender skirt|suspender]] [[miniskirt]] and [[black_socks|black]] [[kneehighs]]. She carries a twin-gun turret, a quad torpedo launcher and a [[randoseru]]-shaped structure.",
+      "captured_at": "2026-09-02"
+    }
+  ],
+  "profiles": [
+    {
+      "appearance_key": "kasumi_(kancolle)::default",
+      "variant_tag": "kasumi_(kancolle)",
+      "display_name": "Base form",
+      "appearance_kind": "default",
+      "is_default": true,
+      "status": "published",
+      "confidence": "high",
+      "provenance": "danbooru_gelbooru_wiki_reviewed",
+      "notes": "Base form only; Kai/Kai Ni, rigging, weapons, and skins excluded.",
+      "features": [
+        {
+          "facet": "hair",
+          "canonical_tag": "long_hair",
+          "value": "Long hair",
+          "source_refs": [
+            "danbooru:wiki:kasumi_(kancolle)",
+            "gelbooru:wiki:kasumi_(kancolle)"
+          ]
+        },
+        {
+          "facet": "hair",
+          "canonical_tag": "grey_hair",
+          "value": "Grey hair",
+          "source_refs": [
+            "danbooru:wiki:kasumi_(kancolle)",
+            "gelbooru:wiki:kasumi_(kancolle)"
+          ]
+        },
+        {
+          "facet": "hair_accessory",
+          "canonical_tag": "side_ponytail",
+          "value": "Side ponytail",
+          "source_refs": [
+            "danbooru:wiki:kasumi_(kancolle)",
+            "gelbooru:wiki:kasumi_(kancolle)"
+          ]
+        },
+        {
+          "facet": "eyes",
+          "canonical_tag": "yellow_eyes",
+          "value": "Yellow eyes",
+          "source_refs": [
+            "danbooru:wiki:kasumi_(kancolle)",
+            "gelbooru:wiki:kasumi_(kancolle)"
+          ]
+        },
+        {
+          "facet": "eyes",
+          "canonical_tag": "brown_eyes",
+          "value": "Brown eyes",
+          "source_refs": [
+            "danbooru:wiki:kasumi_(kancolle)",
+            "gelbooru:wiki:kasumi_(kancolle)"
+          ]
+        },
+        {
+          "facet": "sleeves",
+          "canonical_tag": "short_sleeves",
+          "value": "Short sleeves",
+          "source_refs": [
+            "danbooru:wiki:kasumi_(kancolle)",
+            "gelbooru:wiki:kasumi_(kancolle)"
+          ]
+        },
+        {
+          "facet": "upper_body",
+          "canonical_tag": "white_shirt",
+          "value": "White shirt",
+          "source_refs": [
+            "danbooru:wiki:kasumi_(kancolle)",
+            "gelbooru:wiki:kasumi_(kancolle)"
+          ]
+        },
+        {
+          "facet": "lower_body",
+          "canonical_tag": "grey_skirt",
+          "value": "Grey skirt",
+          "source_refs": [
+            "danbooru:wiki:kasumi_(kancolle)",
+            "gelbooru:wiki:kasumi_(kancolle)"
+          ]
+        },
+        {
+          "facet": "accessories",
+          "canonical_tag": "suspenders",
+          "value": "Suspenders",
+          "source_refs": [
+            "danbooru:wiki:kasumi_(kancolle)",
+            "gelbooru:wiki:kasumi_(kancolle)"
+          ]
+        },
+        {
+          "facet": "legwear",
+          "canonical_tag": "black_socks",
+          "value": "Black socks",
+          "source_refs": [
+            "danbooru:wiki:kasumi_(kancolle)",
+            "gelbooru:wiki:kasumi_(kancolle)"
+          ]
+        },
+        {
+          "facet": "legwear",
+          "canonical_tag": "kneehighs",
+          "value": "Knee-highs",
+          "source_refs": [
+            "danbooru:wiki:kasumi_(kancolle)",
+            "gelbooru:wiki:kasumi_(kancolle)"
+          ]
+        },
+        {
+          "facet": "footwear",
+          "canonical_tag": "rudder_footwear",
+          "value": "Rudder footwear",
+          "source_refs": [
+            "danbooru:wiki:kasumi_(kancolle)",
+            "gelbooru:wiki:kasumi_(kancolle)"
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -2562,3 +2562,31 @@ ledger and were not published.
 
 The final validation passed with **65 tests**, `PRAGMA integrity_check = ok`,
 serial search/context index rebuilds, and `git diff --check`.
+
+## General appearance batch 36 (expanded to ten)
+
+The selected queue was ranked reproducibly from independent Danbooru, Gelbooru,
+and e621 counts (`combined` excluded):
+
+| Rank | Character | Danbooru | Gelbooru | e621 | Total | Result |
+|---:|---|---:|---:|---:|---:|---|
+| 1 | `meiko_(vocaloid)` | 3,127 | 5,502 | 0 | 8,629 | Published; 7 features |
+| 2 | `silver_wolf_(honkai:_star_rail)` | 3,309 | 5,301 | 0 | 8,610 | Published; 12 features |
+| 3 | `jeanne_d&#039;arc_(ruler)_(fate)` | 0 | 8,607 | 0 | 8,607 | Deferred; zero builder observations |
+| 4 | `kasumi_(kancolle)` | 3,884 | 4,696 | 0 | 8,580 | Published; 12 features for base form |
+| 5 | `shihouin_yoruichi` | 1,648 | 6,924 | 0 | 8,572 | Published; 8 features for human form |
+| 6 | `komaeda_nagito` | 1,504 | 7,055 | 0 | 8,559 | Published; 10 features |
+| 7 | `ui_(blue_archive)` | 3,611 | 4,940 | 0 | 8,551 | Published; 7 features for default uniform |
+| 8 | `surtr_(arknights)` | 3,503 | 5,045 | 0 | 8,548 | Deferred; only 2 observations |
+| 9 | `nakano_nino` | 3,608 | 4,938 | 0 | 8,546 | Published; 14 features for long-hair appearance |
+| 10 | `kawaragi_momoka` | 2,588 | 5,954 | 0 | 8,542 | Published; 10 features for base appearance |
+
+Candidate generation produced **226 observations** and **106 pending
+candidates**. Eight profiles were promoted with **80 features**, **160 evidence
+links**, and **0 conflicts**. Each promotion was repeated successfully with
+unchanged counts. `jeanne_d&#039;arc_(ruler)_(fate)` and `surtr_(arknights)` were
+differed under the evidence gate. Previously deferred names in the ranking were
+kept in the existing exclusion ledger without duplicate entries.
+
+The final reranked queue begins with `phainon_(honkai:_star_rail)` and was
+computed after the ledger update.

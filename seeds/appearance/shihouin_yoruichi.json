@@ -1,0 +1,114 @@
+{
+  "character_tag": "shihouin_yoruichi",
+  "sources": [
+    {
+      "id": "danbooru:wiki:shihouin_yoruichi",
+      "source_site": "danbooru",
+      "source_kind": "wiki",
+      "source_key": "shihouin_yoruichi",
+      "source_url": "https://danbooru.donmai.us/wiki_pages/shihouin_yoruichi.json",
+      "source_tier": 1,
+      "title": "shihouin_yoruichi",
+      "excerpt": "She has [[dark-skinned_female|dark skin]], [[long_hair|long]] [[purple hair]] tied in a [[ponytail]], [[yellow eyes]] and [[large breasts]]. Often drawn in her combat outfit whch consists of a [[black leotard]], [[black_gloves|black]] [[elbow gloves]], [[black thighhighs]] and a [[scarf]].",
+      "captured_at": "2026-09-02"
+    },
+    {
+      "id": "gelbooru:wiki:shihouin_yoruichi",
+      "source_site": "gelbooru",
+      "source_kind": "wiki",
+      "source_key": "shihouin_yoruichi",
+      "source_url": "https://gelbooru.com/index.php?page=wiki&s=view&id=shihouin_yoruichi",
+      "source_tier": 1,
+      "title": "shihouin_yoruichi",
+      "excerpt": "A dark-skinned purple-haired busty shinigami. She was initially introduced as a talking black cat, assumed by characters who don't know her and perhaps the audience to be male, but she later revealed her true form to Ichigo during the Soul Society arc. Since then, she has mostly remained in her true form. She is a skilled fighter, notable for her extreme speed, even compared to other characters in the series. She was the princess of the Shihouin noble clan and a member of Soul Society but has long since abandoned the role. She mostly hangs around Urahara Kisuke in Karakura Town and assists him and the heroes when necessary. She is quite an exhibitionist, and enjoys teasing the chaste Ichigo and acted as his mentor during the Soul Society arc. She has a friendly and laid-back personality. Notably, when she was a princess, she told her bodyguard Soi_Fon to address her informally. She is voiced by Yukino_Satsuki and Saito_Shiro (cat form)",
+      "captured_at": "2026-09-02"
+    }
+  ],
+  "profiles": [
+    {
+      "appearance_key": "shihouin_yoruichi::default",
+      "variant_tag": "shihouin_yoruichi",
+      "display_name": "Human base appearance",
+      "appearance_kind": "default",
+      "is_default": true,
+      "status": "published",
+      "confidence": "high",
+      "provenance": "danbooru_gelbooru_wiki_reviewed",
+      "notes": "Human form; black-cat form and named skins excluded.",
+      "features": [
+        {
+          "facet": "hair",
+          "canonical_tag": "long_hair",
+          "value": "Long hair",
+          "source_refs": [
+            "danbooru:wiki:shihouin_yoruichi",
+            "gelbooru:wiki:shihouin_yoruichi"
+          ]
+        },
+        {
+          "facet": "hair",
+          "canonical_tag": "purple_hair",
+          "value": "Purple hair",
+          "source_refs": [
+            "danbooru:wiki:shihouin_yoruichi",
+            "gelbooru:wiki:shihouin_yoruichi"
+          ]
+        },
+        {
+          "facet": "hair_accessory",
+          "canonical_tag": "ponytail",
+          "value": "Ponytail",
+          "source_refs": [
+            "danbooru:wiki:shihouin_yoruichi",
+            "gelbooru:wiki:shihouin_yoruichi"
+          ]
+        },
+        {
+          "facet": "eyes",
+          "canonical_tag": "yellow_eyes",
+          "value": "Yellow eyes",
+          "source_refs": [
+            "danbooru:wiki:shihouin_yoruichi",
+            "gelbooru:wiki:shihouin_yoruichi"
+          ]
+        },
+        {
+          "facet": "gloves",
+          "canonical_tag": "black_gloves",
+          "value": "Black gloves",
+          "source_refs": [
+            "danbooru:wiki:shihouin_yoruichi",
+            "gelbooru:wiki:shihouin_yoruichi"
+          ]
+        },
+        {
+          "facet": "gloves",
+          "canonical_tag": "elbow_gloves",
+          "value": "Elbow gloves",
+          "source_refs": [
+            "danbooru:wiki:shihouin_yoruichi",
+            "gelbooru:wiki:shihouin_yoruichi"
+          ]
+        },
+        {
+          "facet": "legwear",
+          "canonical_tag": "black_thighhighs",
+          "value": "Black thigh-highs",
+          "source_refs": [
+            "danbooru:wiki:shihouin_yoruichi",
+            "gelbooru:wiki:shihouin_yoruichi"
+          ]
+        },
+        {
+          "facet": "neck",
+          "canonical_tag": "scarf",
+          "value": "Scarf",
+          "source_refs": [
+            "danbooru:wiki:shihouin_yoruichi",
+            "gelbooru:wiki:shihouin_yoruichi"
+          ]
+        }
+      ]
+    }
+  ]
+}

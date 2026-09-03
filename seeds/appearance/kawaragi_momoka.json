@@ -1,0 +1,132 @@
+{
+  "character_tag": "kawaragi_momoka",
+  "sources": [
+    {
+      "id": "danbooru:wiki:kawaragi_momoka",
+      "source_site": "danbooru",
+      "source_kind": "wiki",
+      "source_key": "kawaragi_momoka",
+      "source_url": "https://danbooru.donmai.us/wiki_pages/kawaragi_momoka.json",
+      "source_tier": 1,
+      "title": "kawaragi_momoka",
+      "excerpt": "She has [[grey eyes]] and [[long hair|long]] [[grey hair]] with differently colored [[roots (hair)|]]. She typically wears a [[black choker]], a [[black sweater|black]] [[ribbed sweater|ribbed]] [[v-neck]] [[sweater]] with a [[white shirt|white]] [[torn shirt|torn]] [[undershirt]], [[denim shorts|denim]] [[short shorts]] with [[black leggings|black]] [[leggings under shorts|underneath]], and a pair of [[black boots|black]] [[lace-up boots]].",
+      "captured_at": "2026-09-02"
+    },
+    {
+      "id": "gelbooru:wiki:kawaragi_momoka",
+      "source_site": "gelbooru",
+      "source_kind": "wiki",
+      "source_key": "kawaragi_momoka",
+      "source_url": "https://gelbooru.com/index.php?page=wiki&s=view&id=kawaragi_momoka",
+      "source_tier": 1,
+      "title": "kawaragi_momoka",
+      "excerpt": "She has [[grey eyes]] and [[long hair|long]] [[grey hair]] with differently colored [[roots (hair)|]].",
+      "captured_at": "2026-09-02"
+    }
+  ],
+  "profiles": [
+    {
+      "appearance_key": "kawaragi_momoka::default",
+      "variant_tag": "kawaragi_momoka",
+      "display_name": "Base Girls Band Cry appearance",
+      "appearance_kind": "default",
+      "is_default": true,
+      "status": "published",
+      "confidence": "high",
+      "provenance": "danbooru_gelbooru_wiki_reviewed",
+      "notes": "Normal Girls Band Cry appearance; RPG wolf-ear/tail variant excluded.",
+      "features": [
+        {
+          "facet": "eyes",
+          "canonical_tag": "grey_eyes",
+          "value": "Grey eyes",
+          "source_refs": [
+            "danbooru:wiki:kawaragi_momoka",
+            "gelbooru:wiki:kawaragi_momoka"
+          ]
+        },
+        {
+          "facet": "hair",
+          "canonical_tag": "long_hair",
+          "value": "Long hair",
+          "source_refs": [
+            "danbooru:wiki:kawaragi_momoka",
+            "gelbooru:wiki:kawaragi_momoka"
+          ]
+        },
+        {
+          "facet": "hair",
+          "canonical_tag": "grey_hair",
+          "value": "Grey hair",
+          "source_refs": [
+            "danbooru:wiki:kawaragi_momoka",
+            "gelbooru:wiki:kawaragi_momoka"
+          ]
+        },
+        {
+          "facet": "neck",
+          "canonical_tag": "black_choker",
+          "value": "Black choker",
+          "source_refs": [
+            "danbooru:wiki:kawaragi_momoka",
+            "gelbooru:wiki:kawaragi_momoka"
+          ]
+        },
+        {
+          "facet": "upper_body",
+          "canonical_tag": "black_sweater",
+          "value": "Black sweater",
+          "source_refs": [
+            "danbooru:wiki:kawaragi_momoka",
+            "gelbooru:wiki:kawaragi_momoka"
+          ]
+        },
+        {
+          "facet": "upper_body",
+          "canonical_tag": "white_shirt",
+          "value": "White shirt",
+          "source_refs": [
+            "danbooru:wiki:kawaragi_momoka",
+            "gelbooru:wiki:kawaragi_momoka"
+          ]
+        },
+        {
+          "facet": "lower_body",
+          "canonical_tag": "denim_shorts",
+          "value": "Denim shorts",
+          "source_refs": [
+            "danbooru:wiki:kawaragi_momoka",
+            "gelbooru:wiki:kawaragi_momoka"
+          ]
+        },
+        {
+          "facet": "lower_body",
+          "canonical_tag": "short_shorts",
+          "value": "Short shorts",
+          "source_refs": [
+            "danbooru:wiki:kawaragi_momoka",
+            "gelbooru:wiki:kawaragi_momoka"
+          ]
+        },
+        {
+          "facet": "lower_body",
+          "canonical_tag": "leggings_under_shorts",
+          "value": "Leggings under shorts",
+          "source_refs": [
+            "danbooru:wiki:kawaragi_momoka",
+            "gelbooru:wiki:kawaragi_momoka"
+          ]
+        },
+        {
+          "facet": "footwear",
+          "canonical_tag": "black_boots",
+          "value": "Black boots",
+          "source_refs": [
+            "danbooru:wiki:kawaragi_momoka",
+            "gelbooru:wiki:kawaragi_momoka"
+          ]
+        }
+      ]
+    }
+  ]
+}
