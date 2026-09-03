@@ -2590,3 +2590,29 @@ kept in the existing exclusion ledger without duplicate entries.
 
 The final reranked queue begins with `phainon_(honkai:_star_rail)` and was
 computed after the ledger update.
+
+## General appearance batch 37 (expanded to ten)
+
+The selected queue was ranked reproducibly from independent Danbooru, Gelbooru,
+and e621 counts (`combined` excluded):
+
+| Rank | Character | Danbooru | Gelbooru | e621 | Total | Result |
+|---:|---|---:|---:|---:|---:|---|
+| 1 | `phainon_(honkai:_star_rail)` | 0 | 8,515 | 0 | 8,515 | Published; 16 features for default outfit |
+| 2 | `artoria_pendragon_(lancer)_(fate)` | 2,914 | 5,585 | 0 | 8,499 | Deferred; Fate variant with multiple ascensions |
+| 3 | `bridget_(guilty_gear)` | 3,100 | 5,382 | 0 | 8,482 | Deferred; XX and Strive designs/identity context differ |
+| 4 | `basil_(omori)` | 1,156 | 7,314 | 0 | 8,470 | Deferred; FARAWAY and HEADSPACE forms differ |
+| 5 | `kumoi_ichirin` | 3,228 | 5,232 | 0 | 8,460 | Deferred; only 10 observations and partial traits |
+| 6 | `lana_(pokemon)` | 2,466 | 5,989 | 0 | 8,455 | Published; 11 features for Sun and Moon appearance |
+| 7 | `takagaki_kaede` | 3,764 | 4,672 | 0 | 8,436 | Deferred; no structured base appearance |
+| 8 | `callie_(splatoon)` | 2,871 | 5,554 | 0 | 8,425 | Published; 4 features for default costume |
+| 9 | `kieran_(pokemon)` | 2,245 | 6,169 | 0 | 8,414 | Deferred; only school-uniform candidate |
+| 10 | `gumi` | 2,399 | 6,001 | 0 | 8,400 | Published; 5 features for VOCALOID2 base outfit |
+
+Candidate generation produced **263 observations** and **99 pending candidates**.
+Four profiles were promoted with **36 features**, **36 evidence links**, and
+**0 conflicts**. Each promotion was repeated successfully with unchanged
+counts. The six deferred names were added to the explicit exclusion ledger.
+
+The corrected next queue was rerun after the ledger update and begins with
+`gakupo_(vocaloid)`; no push or external publication was performed.

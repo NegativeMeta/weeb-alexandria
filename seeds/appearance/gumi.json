@@ -1,0 +1,71 @@
+{
+  "character_tag": "gumi",
+  "sources": [
+    {
+      "id": "danbooru:wiki:gumi",
+      "source_site": "danbooru",
+      "source_kind": "wiki",
+      "source_key": "gumi",
+      "source_url": "https://danbooru.donmai.us/wiki_pages/gumi.json",
+      "source_tier": 1,
+      "title": "gumi",
+      "excerpt": "Licensed as Megpoid (メグッポイド), she is voiced by seiyuu [[Nakajima Megumi]]. Her appearances were initially illustrated by [[Yuuki Masami]], and later by [[nou (nounknown)]]. She wears a two piece outfit consisting of a [[crop top]] and [[frilled skirt]]. Her accessories are white [[wrist cuffs]], [[choker]], and [[boots]]. Around her leg is a red [[frilled thigh strap]], and she wears a gray [[headset]] that has red [[goggles]] attached.",
+      "captured_at": "2026-09-02"
+    }
+  ],
+  "profiles": [
+    {
+      "appearance_key": "gumi::default",
+      "variant_tag": "gumi",
+      "display_name": "VOCALOID2 base outfit",
+      "appearance_kind": "default",
+      "is_default": true,
+      "status": "published",
+      "confidence": "high",
+      "provenance": "danbooru_wiki_reviewed",
+      "notes": "VOCALOID2 base outfit only; later voicebank/version costumes excluded.",
+      "features": [
+        {
+          "facet": "upper_body",
+          "canonical_tag": "crop_top",
+          "value": "Crop top",
+          "source_refs": [
+            "danbooru:wiki:gumi"
+          ]
+        },
+        {
+          "facet": "lower_body",
+          "canonical_tag": "frilled_skirt",
+          "value": "Frilled skirt",
+          "source_refs": [
+            "danbooru:wiki:gumi"
+          ]
+        },
+        {
+          "facet": "neck",
+          "canonical_tag": "choker",
+          "value": "Choker",
+          "source_refs": [
+            "danbooru:wiki:gumi"
+          ]
+        },
+        {
+          "facet": "footwear",
+          "canonical_tag": "boots",
+          "value": "Boots",
+          "source_refs": [
+            "danbooru:wiki:gumi"
+          ]
+        },
+        {
+          "facet": "accessories",
+          "canonical_tag": "belt",
+          "value": "Belt",
+          "source_refs": [
+            "danbooru:wiki:gumi"
+          ]
+        }
+      ]
+    }
+  ]
+}

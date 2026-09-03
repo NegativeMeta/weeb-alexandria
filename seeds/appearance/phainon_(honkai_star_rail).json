@@ -1,0 +1,159 @@
+{
+  "character_tag": "phainon_(honkai:_star_rail)",
+  "sources": [
+    {
+      "id": "danbooru:wiki:phainon_(honkai:_star_rail)",
+      "source_site": "danbooru",
+      "source_kind": "wiki",
+      "source_key": "phainon_(honkai:_star_rail)",
+      "source_url": "https://danbooru.donmai.us/wiki_pages/phainon_(honkai:_star_rail).json",
+      "source_tier": 1,
+      "title": "phainon_(honkai:_star_rail)",
+      "excerpt": "He has [[short hair|short]] [[white hair]] with [[antenna hair|two ahoge]], [[blue eyes]], and a [[sun tattoo]] on the left side of his [[neck tattoo|neck]]. His outfit consists of a [[long sleeves|long-sleeved]] [[white coat]] worn over a [[black shirt|black]] undershirt, a [[single glove|single]] [[fingerless gloves|fingerless]] [[black gloves|black glove]] on his left hand, [[black choker]], [[blue cape]], [[black pants]], [[tassel]]s on blue straps, and [[knee boots|knee-length]] [[black boots]].",
+      "captured_at": "2026-09-02"
+    }
+  ],
+  "profiles": [
+    {
+      "appearance_key": "phainon_(honkai:_star_rail)::default",
+      "variant_tag": "phainon_(honkai:_star_rail)",
+      "display_name": "Default outfit",
+      "appearance_kind": "default",
+      "is_default": true,
+      "status": "published",
+      "confidence": "high",
+      "provenance": "danbooru_wiki_reviewed",
+      "notes": "Default outfit only; alternate forms, costumes, and school uniform excluded.",
+      "features": [
+        {
+          "facet": "dress",
+          "canonical_tag": "chrysos_heirs_school_uniform",
+          "value": "Chrysos Heirs school uniform",
+          "source_refs": [
+            "danbooru:wiki:phainon_(honkai:_star_rail)"
+          ]
+        },
+        {
+          "facet": "eyes",
+          "canonical_tag": "blue_eyes",
+          "value": "Blue eyes",
+          "source_refs": [
+            "danbooru:wiki:phainon_(honkai:_star_rail)"
+          ]
+        },
+        {
+          "facet": "footwear",
+          "canonical_tag": "black_boots",
+          "value": "Black boots",
+          "source_refs": [
+            "danbooru:wiki:phainon_(honkai:_star_rail)"
+          ]
+        },
+        {
+          "facet": "footwear",
+          "canonical_tag": "knee_boots",
+          "value": "Knee boots",
+          "source_refs": [
+            "danbooru:wiki:phainon_(honkai:_star_rail)"
+          ]
+        },
+        {
+          "facet": "gloves",
+          "canonical_tag": "black_gloves",
+          "value": "Black gloves",
+          "source_refs": [
+            "danbooru:wiki:phainon_(honkai:_star_rail)"
+          ]
+        },
+        {
+          "facet": "gloves",
+          "canonical_tag": "fingerless_gloves",
+          "value": "Fingerless gloves",
+          "source_refs": [
+            "danbooru:wiki:phainon_(honkai:_star_rail)"
+          ]
+        },
+        {
+          "facet": "gloves",
+          "canonical_tag": "single_glove",
+          "value": "Single glove",
+          "source_refs": [
+            "danbooru:wiki:phainon_(honkai:_star_rail)"
+          ]
+        },
+        {
+          "facet": "hair",
+          "canonical_tag": "antenna_hair",
+          "value": "Antenna hair",
+          "source_refs": [
+            "danbooru:wiki:phainon_(honkai:_star_rail)"
+          ]
+        },
+        {
+          "facet": "hair",
+          "canonical_tag": "short_hair",
+          "value": "Short hair",
+          "source_refs": [
+            "danbooru:wiki:phainon_(honkai:_star_rail)"
+          ]
+        },
+        {
+          "facet": "hair",
+          "canonical_tag": "white_hair",
+          "value": "White hair",
+          "source_refs": [
+            "danbooru:wiki:phainon_(honkai:_star_rail)"
+          ]
+        },
+        {
+          "facet": "headwear",
+          "canonical_tag": "blue_cape",
+          "value": "Blue cape",
+          "source_refs": [
+            "danbooru:wiki:phainon_(honkai:_star_rail)"
+          ]
+        },
+        {
+          "facet": "jacket",
+          "canonical_tag": "white_coat",
+          "value": "White coat",
+          "source_refs": [
+            "danbooru:wiki:phainon_(honkai:_star_rail)"
+          ]
+        },
+        {
+          "facet": "lower_body",
+          "canonical_tag": "black_pants",
+          "value": "Black pants",
+          "source_refs": [
+            "danbooru:wiki:phainon_(honkai:_star_rail)"
+          ]
+        },
+        {
+          "facet": "neck",
+          "canonical_tag": "black_choker",
+          "value": "Black choker",
+          "source_refs": [
+            "danbooru:wiki:phainon_(honkai:_star_rail)"
+          ]
+        },
+        {
+          "facet": "sleeves",
+          "canonical_tag": "long_sleeves",
+          "value": "Long sleeves",
+          "source_refs": [
+            "danbooru:wiki:phainon_(honkai:_star_rail)"
+          ]
+        },
+        {
+          "facet": "upper_body",
+          "canonical_tag": "black_shirt",
+          "value": "Black shirt",
+          "source_refs": [
+            "danbooru:wiki:phainon_(honkai:_star_rail)"
+          ]
+        }
+      ]
+    }
+  ]
+}
