@@ -2616,3 +2616,31 @@ counts. The six deferred names were added to the explicit exclusion ledger.
 
 The corrected next queue was rerun after the ledger update and begins with
 `gakupo_(vocaloid)`; no push or external publication was performed.
+
+## General appearance batch 38 (expanded to ten)
+
+The selected queue was ranked reproducibly from independent Danbooru, Gelbooru,
+and e621 counts (`combined` excluded):
+
+| Rank | Character | Danbooru | Gelbooru | e621 | Total | Result |
+|---:|---|---:|---:|---:|---:|---|
+| 1 | `belfast_(azur_lane)` | 3,601 | 4,786 | 0 | 8,387 | Deferred; only sparse hair/eye/choker candidates |
+| 2 | `koizumi_hanayo` | 2,679 | 5,705 | 0 | 8,384 | Deferred; partial visual candidates |
+| 3 | `arcueid_brunestud` | 2,603 | 5,765 | 0 | 8,368 | Published; 8 features for original appearance |
+| 4 | `boa_hancock` | 1,126 | 7,240 | 0 | 8,366 | Published; 11 features |
+| 5 | `wise_(zenless_zone_zero)` | 2,360 | 6,005 | 0 | 8,365 | Deferred; selectable/player avatar |
+| 6 | `nessa_(pokemon)` | 2,971 | 5,382 | 0 | 8,353 | Deferred; not selected after conservative variant review |
+| 7 | `satono_diamond_(umamusume)` | 3,550 | 4,790 | 0 | 8,340 | Deferred; only uniform candidate and many outfits |
+| 8 | `shinosawa_hiro` | 2,516 | 5,813 | 0 | 8,329 | Published; 13 features for typical appearance |
+| 9 | `octoling_player_character` | 2,981 | 5,343 | 0 | 8,324 | Deferred; selectable/player avatar |
+| 10 | `ishmael_(project_moon)` | 2,871 | 5,431 | 0 | 8,302 | Published; 15 features for base identity |
+
+Candidate generation produced **209 observations** and **81 pending candidates**.
+Four profiles were promoted with **47 features**, **47 evidence links**, and
+**0 conflicts**. Every promotion was repeated successfully with unchanged
+counts. Six names were deferred; their exact identifiers were added to the
+exclusion ledger. `nessa_(pokemon)` was already covered by the previous batch's
+review context and was not promoted in this batch.
+
+The corrected next queue begins with `djeeta_(granblue_fantasy)` after the
+ledger update.

@@ -1,0 +1,135 @@
+{
+  "character_tag": "shinosawa_hiro",
+  "sources": [
+    {
+      "id": "danbooru:wiki:shinosawa_hiro",
+      "source_site": "danbooru",
+      "source_kind": "wiki",
+      "source_key": "shinosawa_hiro",
+      "source_url": "https://danbooru.donmai.us/wiki_pages/shinosawa_hiro.json",
+      "source_tier": 1,
+      "title": "shinosawa_hiro",
+      "excerpt": "She has [[orange eyes]] and [[colored eyelashes]], her [[long hair]] is often [[gradient hair|gradient]] and [[flipped hair|flipped]], with a primary color of [[blonde hair|blonde]] transitioning into [[grey hair|dark grey]] at the ends. She also wears long [[parallel hairclips]].",
+      "captured_at": "2026-09-02"
+    }
+  ],
+  "profiles": [
+    {
+      "appearance_key": "shinosawa_hiro::default",
+      "variant_tag": "shinosawa_hiro",
+      "display_name": "Typical base appearance",
+      "appearance_kind": "default",
+      "is_default": true,
+      "status": "published",
+      "confidence": "high",
+      "provenance": "danbooru_wiki_reviewed",
+      "notes": "Typical appearance; named idol outfits excluded.",
+      "features": [
+        {
+          "facet": "eyes",
+          "canonical_tag": "orange_eyes",
+          "value": "Orange eyes",
+          "source_refs": [
+            "danbooru:wiki:shinosawa_hiro"
+          ]
+        },
+        {
+          "facet": "hair",
+          "canonical_tag": "long_hair",
+          "value": "Long hair",
+          "source_refs": [
+            "danbooru:wiki:shinosawa_hiro"
+          ]
+        },
+        {
+          "facet": "hair",
+          "canonical_tag": "gradient_hair",
+          "value": "Gradient hair",
+          "source_refs": [
+            "danbooru:wiki:shinosawa_hiro"
+          ]
+        },
+        {
+          "facet": "hair",
+          "canonical_tag": "flipped_hair",
+          "value": "Flipped hair",
+          "source_refs": [
+            "danbooru:wiki:shinosawa_hiro"
+          ]
+        },
+        {
+          "facet": "hair",
+          "canonical_tag": "blonde_hair",
+          "value": "Blonde hair",
+          "source_refs": [
+            "danbooru:wiki:shinosawa_hiro"
+          ]
+        },
+        {
+          "facet": "hair",
+          "canonical_tag": "grey_hair",
+          "value": "Grey hair",
+          "source_refs": [
+            "danbooru:wiki:shinosawa_hiro"
+          ]
+        },
+        {
+          "facet": "hair_accessory",
+          "canonical_tag": "hairclip",
+          "value": "Hair clip",
+          "source_refs": [
+            "danbooru:wiki:shinosawa_hiro"
+          ]
+        },
+        {
+          "facet": "jacket",
+          "canonical_tag": "open_coat",
+          "value": "Open coat",
+          "source_refs": [
+            "danbooru:wiki:shinosawa_hiro"
+          ]
+        },
+        {
+          "facet": "jacket",
+          "canonical_tag": "white_coat",
+          "value": "White coat",
+          "source_refs": [
+            "danbooru:wiki:shinosawa_hiro"
+          ]
+        },
+        {
+          "facet": "lower_body",
+          "canonical_tag": "blue_shorts",
+          "value": "Blue shorts",
+          "source_refs": [
+            "danbooru:wiki:shinosawa_hiro"
+          ]
+        },
+        {
+          "facet": "lower_body",
+          "canonical_tag": "short_shorts",
+          "value": "Short shorts",
+          "source_refs": [
+            "danbooru:wiki:shinosawa_hiro"
+          ]
+        },
+        {
+          "facet": "lower_body",
+          "canonical_tag": "denim_shorts",
+          "value": "Denim shorts",
+          "source_refs": [
+            "danbooru:wiki:shinosawa_hiro"
+          ]
+        },
+        {
+          "facet": "accessories",
+          "canonical_tag": "rope_belt",
+          "value": "Rope belt",
+          "source_refs": [
+            "danbooru:wiki:shinosawa_hiro"
+          ]
+        }
+      ]
+    }
+  ]
+}
