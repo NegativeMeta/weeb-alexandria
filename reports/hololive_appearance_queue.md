@@ -2669,3 +2669,29 @@ Three profiles were promoted with **34 features**, **34 evidence links**, and
 counts. Seven names were deferred and added to the explicit exclusion ledger.
 
 The corrected next queue begins with `sangonomiya_kokomi` after the ledger update.
+
+## General appearance batch 40 (expanded to ten)
+
+The selected queue was ranked reproducibly from independent Danbooru, Gelbooru,
+and e621 counts (`combined` excluded):
+
+| Rank | Character | Danbooru | Gelbooru | e621 | Total | Result |
+|---:|---|---:|---:|---:|---:|---|
+| 1 | `sangonomiya_kokomi` | 3,769 | 4,382 | 0 | 8,151 | Deferred; no visual candidates |
+| 2 | `sirius_(azur_lane)` | 3,654 | 4,493 | 0 | 8,147 | Deferred; only three partial candidates |
+| 3 | `ganaha_hibiki` | 3,135 | 4,993 | 0 | 8,128 | Deferred; one observation |
+| 4 | `boo_tao_(genshin_impact)` | 5,100 | 2,983 | 0 | 8,083 | Deferred; two observations |
+| 5 | `tatsuta_(kancolle)` | 3,351 | 4,727 | 0 | 8,078 | Published; 7 features for base form |
+| 6 | `jeanne_d&#039;arc_(fate/apocrypha)` | 0 | 8,077 | 0 | 8,077 | Deferred; no builder observations |
+| 7 | `nakoruru` | 465 | 7,572 | 0 | 8,037 | Deferred; no structured appearance candidates |
+| 8 | `futatsuiwa_mamizou` | 3,472 | 4,558 | 0 | 8,030 | Published; 12 features for tanuki base appearance |
+| 9 | `don_quixote_(project_moon)` | 2,589 | 5,436 | 0 | 8,025 | Published; 11 features for base identity |
+| 10 | `nonomi_(blue_archive)` | 3,397 | 4,618 | 0 | 8,015 | Deferred; partial candidates only |
+
+Candidate generation produced **107 observations** and **34 pending candidates**.
+Three profiles were promoted with **30 features**, **30 evidence links**, and
+**0 conflicts**. Every promotion was repeated successfully with unchanged
+counts. Seven names were deferred and added to the explicit exclusion ledger.
+
+The corrected next queue begins with `female_byleth_(fire_emblem)` after the
+ledger update.
