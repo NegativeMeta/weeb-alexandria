@@ -258,7 +258,8 @@ def upsert_conflicts(con: sqlite3.Connection, profile_key: str,
 def promote(db: Path, seed_path: Path) -> dict[str, int]:
     data = read_seed(seed_path)
     character_tag = normalize_tag(str(data["character_tag"]))
-    con = sqlite3.connect(db)
+    con = sqlite3.connect(db, timeout=120)
+    con.execute("PRAGMA busy_timeout=120000")
     con.row_factory = sqlite3.Row
     try:
         ensure_owned_schema(con)

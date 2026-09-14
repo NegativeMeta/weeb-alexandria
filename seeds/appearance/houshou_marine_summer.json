@@ -1,0 +1,219 @@
+{
+  "character_tag": "houshou_marine",
+  "sources": [
+    {
+      "id": "danbooru:wiki:houshou_marine_(summer)",
+      "source_site": "danbooru",
+      "source_kind": "wiki",
+      "source_key": "houshou_marine_(summer)",
+      "source_url": "https://danbooru.donmai.us/wiki_pages/houshou_marine_(summer).json",
+      "source_tier": 1,
+      "title": "houshou marine (summer)",
+      "excerpt": "The 4th [[official alternate costume|costume]] of [[hololive]]'s [[Houshou Marine]]. \r\n\r\nIt consists of a [[red bikini|red]] [[string bikini]] [[halterneck]] [[bikini under clothes|worn under]] a [[black jacket|black]], [[partially unzipped]] [[hooded jacket]] [[white shorts|white]] [[short shorts|short]] [[dolphin shorts]], an [[o-ring thigh strap]], an [[ankle strap]] [[gladiator sandals]], a [[black hat|black]] [[baseball cap]] and [[heart-shaped eyewear|heart-shaped]] [[sunglasses]]. A week after her third outfit debut, Marine revealed a variant with unzipped jacket, a [[wet]] [[see-through shirt|see-through]] [[cropped shirt|cropped]] [[white shirt|white]] [[t-shirt]]. This was actually a compromise to comply with YouTube's guidelines.\r\n\r\nShe has 3 different [[official alternate hairstyle|official hairstyles]] in this costume:\r\n\r\n* [[Very long hair]] tied in a [[high ponytail]]\r\n* Very long hair tied in [[twintails]] held with [[black ribbon|black]] [[hair ribbon]]s\r\n* Very long [[straight hair]] with [[sidelocks]]\r\n\r\nh4. Appearance\r\n\r\n* !asset #24717613: Profile\r\n* !post #4671230: Reference sheet (1)\r\n* !post #4671232: Reference sheet (2)",
+      "captured_at": "2026-08-31"
+    },
+    {
+      "id": "gelbooru:wiki:houshou_marine_(summer)",
+      "source_site": "gelbooru",
+      "source_kind": "wiki",
+      "source_key": "houshou_marine_(summer)",
+      "source_url": "https://gelbooru.com/index.php?page=wiki&s=view&id=houshou_marine_(summer)",
+      "source_tier": 1,
+      "title": "houshou marine (summer)",
+      "excerpt": "The 4th [[official alternate costume|costume]] of [[hololive]]'s [[Houshou Marine]]. \r\n\r\nIt consists of a [[red bikini|red]] [[string bikini]] [[halterneck]] [[bikini under clothes|worn under]] a [[black jacket|black]], [[partially unzipped]] [[hooded jacket]] [[white shorts|white]] [[short shorts|short]]  [[dolphin shorts]], an [[o-ring thigh strap]], an [[ankle strap]] [[gladiator sandals]], a [[black headwear|black]] [[baseball cap]] and [[heart-shaped eyewear|heart-shaped]] [[sunglasses]]. A week after her third outfit debut, Marine revealed a variant with unzipped jacket, a [[wet]] [[see-through shirt|see-through]] [[cropped shirt|cropped]] [[white shirt|white]] [[t-shirt]]. This was actually a compromise to comply with Youtube's guidelines.\r\n\r\nHer [[official alternate hairstyle|hairstyle]] with this outfit is either her usual [[twintails]], [[straight hair]] with [[sidelocks]] or [[very long hair]] in a [[high ponytail]]. \r\n\r\nh4. Appearance\r\n\r\n* !post #4671232: Reference sheet",
+      "captured_at": "2026-08-31"
+    }
+  ],
+  "profiles": [
+    {
+      "appearance_key": "houshou_marine::houshou_marine_(summer)",
+      "variant_tag": "houshou_marine_(summer)",
+      "display_name": "houshou marine (summer)",
+      "appearance_kind": "costume",
+      "is_default": false,
+      "status": "published",
+      "confidence": "high",
+      "provenance": "danbooru_gelbooru_wiki_reviewed",
+      "notes": "Official named costume; shared uniforms, props, lore, cosplay, and optional contextual items excluded.",
+      "features": [
+        {
+          "facet": "headwear",
+          "canonical_tag": "baseball_cap",
+          "value": "Baseball cap",
+          "source_refs": [
+            "danbooru:wiki:houshou_marine_(summer)",
+            "gelbooru:wiki:houshou_marine_(summer)"
+          ]
+        },
+        {
+          "facet": "upper_body",
+          "canonical_tag": "bikini_under_clothes",
+          "value": "Bikini under clothes",
+          "source_refs": [
+            "danbooru:wiki:houshou_marine_(summer)",
+            "gelbooru:wiki:houshou_marine_(summer)"
+          ]
+        },
+        {
+          "facet": "headwear",
+          "canonical_tag": "black_hat",
+          "value": "Black hat",
+          "source_refs": [
+            "danbooru:wiki:houshou_marine_(summer)"
+          ]
+        },
+        {
+          "facet": "jacket",
+          "canonical_tag": "black_jacket",
+          "value": "Black jacket",
+          "source_refs": [
+            "danbooru:wiki:houshou_marine_(summer)",
+            "gelbooru:wiki:houshou_marine_(summer)"
+          ]
+        },
+        {
+          "facet": "hair_accessory",
+          "canonical_tag": "black_ribbon",
+          "value": "Black ribbon",
+          "source_refs": [
+            "danbooru:wiki:houshou_marine_(summer)"
+          ]
+        },
+        {
+          "facet": "upper_body",
+          "canonical_tag": "cropped_shirt",
+          "value": "Cropped shirt",
+          "source_refs": [
+            "danbooru:wiki:houshou_marine_(summer)",
+            "gelbooru:wiki:houshou_marine_(summer)"
+          ]
+        },
+        {
+          "facet": "lower_body",
+          "canonical_tag": "dolphin_shorts",
+          "value": "Dolphin shorts",
+          "source_refs": [
+            "danbooru:wiki:houshou_marine_(summer)",
+            "gelbooru:wiki:houshou_marine_(summer)"
+          ]
+        },
+        {
+          "facet": "footwear",
+          "canonical_tag": "gladiator_sandals",
+          "value": "Gladiator sandals",
+          "source_refs": [
+            "danbooru:wiki:houshou_marine_(summer)",
+            "gelbooru:wiki:houshou_marine_(summer)"
+          ]
+        },
+        {
+          "facet": "hair_accessory",
+          "canonical_tag": "hair_ribbon",
+          "value": "Hair ribbon",
+          "source_refs": [
+            "danbooru:wiki:houshou_marine_(summer)"
+          ]
+        },
+        {
+          "facet": "hair_accessory",
+          "canonical_tag": "high_ponytail",
+          "value": "High ponytail",
+          "source_refs": [
+            "danbooru:wiki:houshou_marine_(summer)",
+            "gelbooru:wiki:houshou_marine_(summer)"
+          ]
+        },
+        {
+          "facet": "jacket",
+          "canonical_tag": "hooded_jacket",
+          "value": "Hooded jacket",
+          "source_refs": [
+            "danbooru:wiki:houshou_marine_(summer)",
+            "gelbooru:wiki:houshou_marine_(summer)"
+          ]
+        },
+        {
+          "facet": "upper_body",
+          "canonical_tag": "red_bikini",
+          "value": "Red bikini",
+          "source_refs": [
+            "danbooru:wiki:houshou_marine_(summer)",
+            "gelbooru:wiki:houshou_marine_(summer)"
+          ]
+        },
+        {
+          "facet": "lower_body",
+          "canonical_tag": "short_shorts",
+          "value": "Short shorts",
+          "source_refs": [
+            "danbooru:wiki:houshou_marine_(summer)",
+            "gelbooru:wiki:houshou_marine_(summer)"
+          ]
+        },
+        {
+          "facet": "hair_accessory",
+          "canonical_tag": "sidelocks",
+          "value": "Sidelocks",
+          "source_refs": [
+            "danbooru:wiki:houshou_marine_(summer)",
+            "gelbooru:wiki:houshou_marine_(summer)"
+          ]
+        },
+        {
+          "facet": "hair",
+          "canonical_tag": "straight_hair",
+          "value": "Straight hair",
+          "source_refs": [
+            "danbooru:wiki:houshou_marine_(summer)",
+            "gelbooru:wiki:houshou_marine_(summer)"
+          ]
+        },
+        {
+          "facet": "upper_body",
+          "canonical_tag": "string_bikini",
+          "value": "String bikini",
+          "source_refs": [
+            "danbooru:wiki:houshou_marine_(summer)",
+            "gelbooru:wiki:houshou_marine_(summer)"
+          ]
+        },
+        {
+          "facet": "hair_accessory",
+          "canonical_tag": "twintails",
+          "value": "Twintails",
+          "source_refs": [
+            "danbooru:wiki:houshou_marine_(summer)",
+            "gelbooru:wiki:houshou_marine_(summer)"
+          ]
+        },
+        {
+          "facet": "hair",
+          "canonical_tag": "very_long_hair",
+          "value": "Very long hair",
+          "source_refs": [
+            "danbooru:wiki:houshou_marine_(summer)",
+            "gelbooru:wiki:houshou_marine_(summer)"
+          ]
+        },
+        {
+          "facet": "upper_body",
+          "canonical_tag": "white_shirt",
+          "value": "White shirt",
+          "source_refs": [
+            "danbooru:wiki:houshou_marine_(summer)",
+            "gelbooru:wiki:houshou_marine_(summer)"
+          ]
+        },
+        {
+          "facet": "lower_body",
+          "canonical_tag": "white_shorts",
+          "value": "White shorts",
+          "source_refs": [
+            "danbooru:wiki:houshou_marine_(summer)",
+            "gelbooru:wiki:houshou_marine_(summer)"
+          ]
+        }
+      ]
+    }
+  ]
+}

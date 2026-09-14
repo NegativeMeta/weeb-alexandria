@@ -1,0 +1,195 @@
+{
+  "character_tag": "ceres_fauna",
+  "sources": [
+    {
+      "id": "danbooru:wiki:ceres_fauna_(1st_costume)",
+      "source_site": "danbooru",
+      "source_kind": "wiki",
+      "source_key": "ceres_fauna_(1st_costume)",
+      "source_url": "https://danbooru.donmai.us/wiki_pages/ceres_fauna_(1st_costume).json",
+      "source_tier": 1,
+      "title": "Ceres Fauna (1st costume)",
+      "excerpt": "The default costume of [[hololive English|hololive EN]]'s [[Ceres Fauna]].\r\n\r\nShe wears a [[layered dress]] consisting of a [[short dress|short]] [[blue dress|dark blue]] [[strapless dress|strapless]] [[backless dress|backless]] inner layer with a [[frilled skirt|frilled]] [[skirt under dress|skirt underneath]], and a [[white dress|white]] and [[pink dress|pink]] [[two-sided dress]] outer layer with an opening that goes [[framed breasts|around]] and [[underbust|under]] the chest area, [[long sleeves|long]] [[wide sleeves]] with [[shoulder cutout]]s a  [[detached collar]] with a [[blue bowtie]], and a [[high-low skirt]]. She also wears a [[blue bridal gauntlets|blue]] [[single bridal gauntlet]], a [[single thighhigh|single]] [[stirrup legwear|stirrup]] [[white thighhighs|white thighhigh]] on her left leg and an [[anklet]] on her right leg.\r\n\r\nOn March 2023, she got an update for this outfit that allows her to replace the outer dress with a [[high-waist skirt]].\r\n\r\nh4. Appearance\r\n\r\n* !asset #25594704: Profile\r\n* !post #4725523: Reference sheet",
+      "captured_at": "2026-08-31"
+    },
+    {
+      "id": "gelbooru:wiki:ceres_fauna_(1st_costume)",
+      "source_site": "gelbooru",
+      "source_kind": "wiki",
+      "source_key": "ceres_fauna_(1st_costume)",
+      "source_url": "https://gelbooru.com/index.php?page=wiki&s=view&id=ceres_fauna_(1st_costume)",
+      "source_tier": 1,
+      "title": "Ceres Fauna (1st costume)",
+      "excerpt": "The default costume of [[hololive English]]'s [[Ceres Fauna]].\r\n\r\nShe wears a [[layered dress]] consisting of a [[short dress|short]] [[blue dress|dark blue]] [[strapless dress|strapless]] [[backless dress|backless]] inner layer with a [[frilled skirt|frilled]] [[skirt under dress|skirt underneath]], and a [[white dress|white]] and [[pink dress|pink]] [[two-sided dress]] outer layer with an opening that goes [[framed breasts|around]] and [[underbust|under]] the chest area, [[long sleeves|long]] [[wide sleeves]] with [[shoulder cutout]]s a  [[detached collar]] with a [[blue bowtie]], and a [[high-low skirt]]. She also wears a [[blue gloves|blue]] [[single bridal gauntlet]], a [[single thighhigh|single]] [[stirrup legwear|stirrup]] [[white thighhighs|white thighhigh]] on her left leg and an [[anklet]] on her right leg.\r\n\r\nOn March 2023, she got an update for this outfit that allows her to replace the outer dress with a [[high-waist skirt]].\r\n\r\nh4. Appearance\r\n\r\n* !post #4725523: Reference sheet\r\n* !post #4723678: Live2D",
+      "captured_at": "2026-08-31"
+    }
+  ],
+  "profiles": [
+    {
+      "appearance_key": "ceres_fauna::ceres_fauna_(1st_costume)",
+      "variant_tag": "ceres_fauna_(1st_costume)",
+      "display_name": "Ceres Fauna 1st costume",
+      "appearance_kind": "costume",
+      "is_default": false,
+      "status": "published",
+      "confidence": "high",
+      "provenance": "danbooru_gelbooru_wiki_reviewed",
+      "notes": "Official first costume; optional props, weapons, lore, and non-outfit metadata excluded.",
+      "features": [
+        {
+          "facet": "dress",
+          "canonical_tag": "backless_dress",
+          "value": "backless dress",
+          "source_refs": [
+            "danbooru:wiki:ceres_fauna_(1st_costume)",
+            "gelbooru:wiki:ceres_fauna_(1st_costume)"
+          ]
+        },
+        {
+          "facet": "dress",
+          "canonical_tag": "blue_dress",
+          "value": "blue dress",
+          "source_refs": [
+            "danbooru:wiki:ceres_fauna_(1st_costume)",
+            "gelbooru:wiki:ceres_fauna_(1st_costume)"
+          ]
+        },
+        {
+          "facet": "dress",
+          "canonical_tag": "layered_dress",
+          "value": "layered dress",
+          "source_refs": [
+            "danbooru:wiki:ceres_fauna_(1st_costume)",
+            "gelbooru:wiki:ceres_fauna_(1st_costume)"
+          ]
+        },
+        {
+          "facet": "dress",
+          "canonical_tag": "pink_dress",
+          "value": "pink dress",
+          "source_refs": [
+            "danbooru:wiki:ceres_fauna_(1st_costume)",
+            "gelbooru:wiki:ceres_fauna_(1st_costume)"
+          ]
+        },
+        {
+          "facet": "dress",
+          "canonical_tag": "short_dress",
+          "value": "short dress",
+          "source_refs": [
+            "danbooru:wiki:ceres_fauna_(1st_costume)",
+            "gelbooru:wiki:ceres_fauna_(1st_costume)"
+          ]
+        },
+        {
+          "facet": "dress",
+          "canonical_tag": "skirt_under_dress",
+          "value": "skirt under dress",
+          "source_refs": [
+            "danbooru:wiki:ceres_fauna_(1st_costume)",
+            "gelbooru:wiki:ceres_fauna_(1st_costume)"
+          ]
+        },
+        {
+          "facet": "dress",
+          "canonical_tag": "strapless_dress",
+          "value": "strapless dress",
+          "source_refs": [
+            "danbooru:wiki:ceres_fauna_(1st_costume)",
+            "gelbooru:wiki:ceres_fauna_(1st_costume)"
+          ]
+        },
+        {
+          "facet": "dress",
+          "canonical_tag": "white_dress",
+          "value": "white dress",
+          "source_refs": [
+            "danbooru:wiki:ceres_fauna_(1st_costume)",
+            "gelbooru:wiki:ceres_fauna_(1st_costume)"
+          ]
+        },
+        {
+          "facet": "gloves",
+          "canonical_tag": "blue_gloves",
+          "value": "blue gloves",
+          "source_refs": [
+            "danbooru:wiki:ceres_fauna_(1st_costume)",
+            "gelbooru:wiki:ceres_fauna_(1st_costume)"
+          ]
+        },
+        {
+          "facet": "legwear",
+          "canonical_tag": "single_thighhigh",
+          "value": "single thighhigh",
+          "source_refs": [
+            "danbooru:wiki:ceres_fauna_(1st_costume)",
+            "gelbooru:wiki:ceres_fauna_(1st_costume)"
+          ]
+        },
+        {
+          "facet": "legwear",
+          "canonical_tag": "stirrup_legwear",
+          "value": "stirrup legwear",
+          "source_refs": [
+            "danbooru:wiki:ceres_fauna_(1st_costume)",
+            "gelbooru:wiki:ceres_fauna_(1st_costume)"
+          ]
+        },
+        {
+          "facet": "legwear",
+          "canonical_tag": "white_thighhighs",
+          "value": "white thighhighs",
+          "source_refs": [
+            "danbooru:wiki:ceres_fauna_(1st_costume)",
+            "gelbooru:wiki:ceres_fauna_(1st_costume)"
+          ]
+        },
+        {
+          "facet": "lower_body",
+          "canonical_tag": "frilled_skirt",
+          "value": "frilled skirt",
+          "source_refs": [
+            "danbooru:wiki:ceres_fauna_(1st_costume)",
+            "gelbooru:wiki:ceres_fauna_(1st_costume)"
+          ]
+        },
+        {
+          "facet": "neck",
+          "canonical_tag": "blue_bowtie",
+          "value": "blue bowtie",
+          "source_refs": [
+            "danbooru:wiki:ceres_fauna_(1st_costume)",
+            "gelbooru:wiki:ceres_fauna_(1st_costume)"
+          ]
+        },
+        {
+          "facet": "neck",
+          "canonical_tag": "detached_collar",
+          "value": "detached collar",
+          "source_refs": [
+            "danbooru:wiki:ceres_fauna_(1st_costume)",
+            "gelbooru:wiki:ceres_fauna_(1st_costume)"
+          ]
+        },
+        {
+          "facet": "sleeves",
+          "canonical_tag": "long_sleeves",
+          "value": "long sleeves",
+          "source_refs": [
+            "danbooru:wiki:ceres_fauna_(1st_costume)",
+            "gelbooru:wiki:ceres_fauna_(1st_costume)"
+          ]
+        },
+        {
+          "facet": "sleeves",
+          "canonical_tag": "wide_sleeves",
+          "value": "wide sleeves",
+          "source_refs": [
+            "danbooru:wiki:ceres_fauna_(1st_costume)",
+            "gelbooru:wiki:ceres_fauna_(1st_costume)"
+          ]
+        }
+      ]
+    }
+  ]
+}

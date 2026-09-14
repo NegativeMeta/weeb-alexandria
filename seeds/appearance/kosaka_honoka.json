@@ -1,0 +1,14 @@
+{
+  "character_tag": "kosaka_honoka",
+  "sources": [
+    {"id":"danbooru:wiki:kosaka_honoka","source_site":"danbooru","source_kind":"wiki","source_key":"kosaka_honoka","source_url":"https://danbooru.donmai.us/wiki_pages/kosaka_honoka.json","source_tier":1,"title":"Kosaka Honoka","excerpt":"She wears her [[orange hair]] in a [[one side up]] and has [[blue eyes]].","captured_at":"2026-08-31"},
+    {"id":"gelbooru:wiki:kosaka_honoka","source_site":"gelbooru","source_kind":"wiki","source_key":"kosaka_honoka","source_url":"https://gelbooru.com/index.php?page=wiki&s=view&id=kosaka_honoka","source_tier":1,"title":"Kosaka Honoka","excerpt":"She wears her [[orange hair]] in a [[one side up]] and has [[blue eyes]].","captured_at":"2026-08-31"}
+  ],
+  "profiles": [
+    {"appearance_key":"kosaka_honoka::default","variant_tag":"kosaka_honoka","display_name":"Default Kosaka Honoka appearance","appearance_kind":"default","is_default":true,"status":"published","confidence":"high","provenance":"danbooru_gelbooru_wiki_reviewed","notes":"Base appearance only; idol costumes and named outfits excluded.","features":[
+      {"facet":"hair","canonical_tag":"orange_hair","value":"Orange hair","source_refs":["danbooru:wiki:kosaka_honoka","gelbooru:wiki:kosaka_honoka"]},
+      {"facet":"hair_accessory","canonical_tag":"one_side_up","value":"One-side-up hair on the left","source_refs":["danbooru:wiki:kosaka_honoka","gelbooru:wiki:kosaka_honoka"]},
+      {"facet":"eyes","canonical_tag":"blue_eyes","value":"Blue eyes","source_refs":["danbooru:wiki:kosaka_honoka","gelbooru:wiki:kosaka_honoka"]}
+    ]}
+  ]
+}

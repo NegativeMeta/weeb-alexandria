@@ -1,0 +1,54 @@
+{
+  "character_tag": "junko_(touhou)",
+  "sources": [
+    {
+      "id": "danbooru:wiki:junko_(touhou)",
+      "source_site": "danbooru",
+      "source_kind": "wiki",
+      "source_key": "junko_(touhou)",
+      "source_url": "https://danbooru.donmai.us/wiki_pages/junko_(touhou).json",
+      "source_tier": 1,
+      "title": "Junko",
+      "excerpt": "She has [[long hair|long]] [[blonde hair|blonde]] or [[orange hair]] and [[red eyes]]. She wears a [[dalachi (headdress)|]] with a [[crescent]] moon on it and [[Chinese clothes]] with a [[red tabard]]. Behind her are [[multiple tails|multiple]] [[fox tail|fox tails]] made out of energy.",
+      "captured_at": "2026-08-30"
+    },
+    {
+      "id": "gelbooru:wiki:junko_(touhou)",
+      "source_site": "gelbooru",
+      "source_kind": "wiki",
+      "source_key": "junko_(touhou)",
+      "source_url": "https://gelbooru.com/index.php?page=wiki&s=view&id=junko_(touhou)",
+      "source_tier": 1,
+      "title": "Junko",
+      "excerpt": "She has long_hair blonde_hair or orange_hair , and red_eyes . She wears a phoenix crown with a crescent moon on it and Chinese_clothes with a red tabard . Behind her are multiple_tails fox_tail s made out of energy.",
+      "captured_at": "2026-08-30"
+    }
+  ],
+  "profiles": [
+    {
+      "appearance_key": "junko_(touhou)::default",
+      "variant_tag": "junko_(touhou)",
+      "display_name": "Default Junko appearance",
+      "appearance_kind": "default",
+      "is_default": true,
+      "status": "published",
+      "confidence": "high",
+      "provenance": "danbooru_gelbooru_wiki_reviewed",
+      "notes": "Base Touhou design only; LostWord and fox-themed variant observations remain separate. Energy tails are classified as effects, not anatomical tails.",
+      "features": [
+        {"facet":"hair","canonical_tag":"long_hair","value":"Long hair","source_refs":["danbooru:wiki:junko_(touhou)"],"evidence":{"text":"[[long hair|long]]","observed_tag":"long_hair"}},
+        {"facet":"hair","canonical_tag":"blonde_hair","value":"Blonde hair","role":"alternative","source_refs":["danbooru:wiki:junko_(touhou)"],"evidence":{"text":"[[blonde hair|blonde]]","observed_tag":"blonde_hair"}},
+        {"facet":"hair","canonical_tag":"orange_hair","value":"Orange hair","role":"alternative","source_refs":["danbooru:wiki:junko_(touhou)"],"evidence":{"text":"[[orange hair]]","observed_tag":"orange_hair"}},
+        {"facet":"eyes","canonical_tag":"red_eyes","value":"Red eyes","source_refs":["danbooru:wiki:junko_(touhou)"],"evidence":{"text":"[[red eyes]]","observed_tag":"red_eyes"}},
+        {"facet":"headwear","canonical_tag":"dalachi_(headdress)","value":"Dalachi headdress","source_refs":["danbooru:wiki:junko_(touhou)"],"evidence":{"text":"[[dalachi (headdress)|]]","observed_tag":"dalachi_(headdress)"}},
+        {"facet":"headwear","canonical_tag":"crescent","value":"Crescent moon ornament","source_refs":["danbooru:wiki:junko_(touhou)"],"evidence":{"text":"with a [[crescent]] moon on it","observed_tag":"crescent"}},
+        {"facet":"dress","canonical_tag":"chinese_clothes","value":"Chinese clothes","source_refs":["danbooru:wiki:junko_(touhou)"],"evidence":{"text":"[[Chinese clothes]]","observed_tag":"chinese_clothes"}},
+        {"facet":"upper_body","canonical_tag":"red_tabard","value":"Red tabard","source_refs":["danbooru:wiki:junko_(touhou)"],"evidence":{"text":"[[red tabard]]","observed_tag":"red_tabard"}},
+        {"facet":"effects","canonical_tag":"fox_tail","value":"Energy fox tails behind her","source_refs":["danbooru:wiki:junko_(touhou)"],"evidence":{"text":"Behind her are [[multiple tails|multiple]] [[fox tail|fox tails]] made out of energy","observed_tag":"fox_tail"}}
+      ],
+      "conflicts": [
+        {"conflict_key":"hair_color","facet":"hair","alternatives":["blonde_hair","orange_hair"],"status":"open","reason":"Both sources describe blonde or orange hair.","source_refs":["danbooru:wiki:junko_(touhou)","gelbooru:wiki:junko_(touhou)"],"resolution_note":"Keep both source-documented color alternatives."}
+      ]
+    }
+  ]
+}

@@ -2720,3 +2720,82 @@ Five profiles were promoted with **63 features**, **63 evidence links**, and
 counts. Five names were deferred and added to the explicit exclusion ledger.
 
 The corrected next queue begins with `kuroki_tomoko` after the ledger update.
+
+## General appearance batch 42 (reconciled close)
+
+The general queue was ranked from the independent Danbooru, Gelbooru, and e621
+post counts (`combined` excluded). The original ten-position selection and its
+per-site counts were preserved:
+
+| Rank | Character | Danbooru | Gelbooru | e621 | Total | Result |
+|---:|---|---:|---:|---:|---:|---|
+| 1 | `kuroki_tomoko` | 3,007 | 4,879 | 0 | 7,886 | Deferred; no accepted seed in this batch |
+| 2 | `miyako_(blue_archive)` | 3,364 | 4,521 | 0 | 7,885 | Deferred; no accepted seed in this batch |
+| 3 | `kishin_sagume` | 3,327 | 4,548 | 0 | 7,875 | Published; 5 final features (3 unsupported legacy assignments retired) |
+| 4 | `ruler_(fate/apocrypha)` | 0 | 7,863 | 0 | 7,863 | Deferred; no accepted seed in this batch |
+| 5 | `w_(arknights)` | 3,388 | 4,460 | 0 | 7,848 | Deferred; final projection had 0 candidates |
+| 6 | `hifumi_(blue_archive)` | 3,378 | 4,460 | 0 | 7,838 | Published; 10 features |
+| 7 | `bea_(pokemon)` | 2,886 | 4,943 | 0 | 7,829 | Published; 15 features |
+| 8 | `robin_(honkai:_star_rail)` | 3,428 | 4,381 | 0 | 7,809 | Published; 15 final features (2 unsupported legacy assignments retired) |
+| 9 | `fischl_(genshin_impact)` | 3,542 | 4,266 | 0 | 7,808 | Published; 21 features |
+| 10 | `ultimate_madoka` | 3,230 | 4,556 | 0 | 7,786 | Published; 27 final features (2 unsupported legacy assignments retired) |
+
+The final candidate projection was rebuilt after the last canonical write and
+matched the final database fingerprint: **277 observations** and **149
+candidates**. Per-character counts were: Kuroki 4/1, Miyako 13/7, Kishin
+11/8, Ruler 1/1, W 4/0, Hifumi 28/20, Bea 31/25, Robin 26/21, Fischl 41/33,
+and Ultimate Madoka 37/33 (observations/candidates). The four deferred names
+remain in the ranker's explicit exclusion ledger; the next live queue begins
+with `lily_white`.
+
+The six accepted seeds passed the strict batch validator against that final
+projection: **93 accepted features, 0 `CANDIDATE_FAIL`, 0 `EXCERPT_FAIL`**.
+Promotion was repeated for all six seeds; both passes returned zero conflicts
+and unchanged profile/feature/evidence/source counts:
+
+| Character | Final features | Active evidence links | Sources |
+|---|---:|---:|---:|
+| `bea_(pokemon)` | 15 | 30 | 2 |
+| `fischl_(genshin_impact)` | 21 | 42 | 2 |
+| `hifumi_(blue_archive)` | 10 | 20 | 2 |
+| `kishin_sagume` | 5 | 10 | 2 |
+| `robin_(honkai_fullwidth_colon_star_rail)` | 15 | 30 | 2 |
+| `ultimate_madoka` | 27 | 54 | 2 |
+| **Total** | **93** | **186** | **12** |
+
+The seven unsupported assignments were retired rather than deleted:
+`short_hair`, `white_jacket`, `cut_in_pleats`, `purple_pumps`,
+`purple_high_heels`, `pink_gems`, and `layered_frills`. Their 14 evidence links
+remain auditable. The canonical evidence table contains 6,772 links: 6,746
+belong to published features and 26 belong to retired features (12 historical
+retired links plus these 14); unjoined links: 0. All 12 batch source records
+have non-empty hashes and their excerpts are literal substrings of the
+site-specific captured wiki bodies.
+
+Final canonical verification passed: `PRAGMA integrity_check=ok`,
+`foreign_key_check=0`, active duplicate assignments=0, published feature
+evidence gaps=0, missing facet links=0, and active unclassified features=0.
+The final canonical projection is 437 published profiles, 4,170 published
+features, and 19 retired feature rows. The search index contains 1,513,349
+rows. The context index contains 3,461,336 context rows and 766,021 work
+relations; its rebuild attempted 3,462,709 inserts before deduplication, and
+its physical counts match metadata.
+
+The real MCP stdio probe exposed all six tools and returned `found=true`,
+`status=published`, and the exact canonical `appearance_key` for all six
+accepted characters. The runtime bootstrap left the canonical DB hash
+unchanged. The full regression suite passed: **65 tests, 65 OK**. The global
+seed checker still reports 18 inherited errors in six unrelated historical
+seeds; they are outside this batch's accepted-seed gate and were not modified
+as part of this close.
+
+batch_close=complete
+canonical_db_size=869687296
+canonical_db_sha256=77f5cea53e5ecaa5901feccd4394060849904f3ca28f22dfb01ec6182571872f
+canonical_published_profiles=437
+canonical_published_features=4170
+canonical_all_evidence_links=6772
+canonical_published_evidence_links=6746
+canonical_retired_evidence_links=26
+canonical_unjoined_evidence_links=0
+last_promoted_seed=kishin_sagume.json

@@ -7,11 +7,11 @@ import math
 import os
 import re
 import sqlite3
+from pathlib import Path
 from typing import Any, Optional
 
 from mcp.server.fastmcp import FastMCP
 from weeb_alexandria_mcp.appearance_runtime import get_appearance_payload
-from weeb_alexandria_mcp.owned_schema import ensure_owned_schema
 
 ROOT = os.path.dirname(os.path.abspath(__file__))
 TAGLIB_DB = os.path.abspath(os.environ.get(
@@ -33,7 +33,6 @@ _WORK_NAME_HINTS = {
     "oshi_no_ko": {"hoshino_ai"},
 }
 _COPYRIGHT_TOKENS: Optional[set[str]] = None
-_OWNED_SCHEMA_READY = False
 _SourceCacheKey = tuple[str, tuple[tuple[int, int], ...]]
 _SOURCE_HASH_CACHE: Optional[tuple[_SourceCacheKey, str]] = None
 _SOURCE_TAG_COUNT_CACHE: Optional[tuple[_SourceCacheKey, int]] = None
@@ -50,12 +49,12 @@ def _normalize_tag(value: str) -> str:
 
 
 def _db() -> sqlite3.Connection:
-    global _OWNED_SCHEMA_READY
-    con = sqlite3.connect(TAGLIB_DB)
+    """Open the provisioned canonical database without implicit writes."""
+    db_path = Path(TAGLIB_DB).resolve()
+    uri = f"file:{db_path.as_posix()}?mode=ro"
+    con = sqlite3.connect(uri, uri=True, timeout=15)
+    con.execute("PRAGMA busy_timeout=15000")
     con.row_factory = sqlite3.Row
-    if not _OWNED_SCHEMA_READY:
-        ensure_owned_schema(con)
-        _OWNED_SCHEMA_READY = True
     return con
 
 
@@ -1593,8 +1592,8 @@ def get_sources_status() -> dict:
 
     con = _db()
     try:
-        # ensure_owned_schema() may modify a newly opened database; capture the
-        # signature after that initialization before storing the cache entry.
+        # The runtime connection is read-only; cache the signature that was
+        # observed for this source snapshot.
         signature = _source_cache_key()
         counts = {}
         for table in ("tags", "wiki", "tag_aliases", "tag_implications",

@@ -1,0 +1,202 @@
+{
+  "character_tag": "shirogane_noel",
+  "sources": [
+    {
+      "id": "danbooru:wiki:shirogane_noel_(casual)",
+      "source_site": "danbooru",
+      "source_kind": "wiki",
+      "source_key": "shirogane_noel_(casual)",
+      "source_url": "https://danbooru.donmai.us/wiki_pages/shirogane_noel_(casual).json",
+      "source_tier": 1,
+      "title": "shirogane_noel_(casual)",
+      "excerpt": "The 3rd [[official alternate costume|costume]] of [[hololive]]'s [[Shirogane Noel]].\r\n\r\nHer casual attire consists of a [[white sweater|white]], [[ribbed sweater|ribbed]] [[off-shoulder sweater]] worn over a [[black tank top]], a [[black choker]] with a [[snowflake pendant|snowflake]] [[pendant]], a [[plaid skirt|plaid]], [[brown skirt|brown]] [[high-waist skirt|high-waist]] [[miniskirt]], [[black socks]] and [[brown shoes]].\r\n\r\nIn June 1st 2021, she received a variation of her casual attire as a joke for the \"World Milk Day\":[https://en.wikipedia.org/wiki/World_Milk_Day], which adds a cow [[cow ears|ears]], [[cow horns|horns]] and a [[cow tail|tail]], a [[collared shirt]] with a [[cow print]] and a [[neck bell|neck]] [[cowbell]]. This peculiar attire is a result of Noel embracing all the \"cow jokes\" resulting from her large breasts.\r\n\r\nShe has 2 different [[official alternate hairstyle|official hairstyles]] in this costume one for the regular version and one for the World Milk Day variation:\r\n* [[medium hair|Medium-length]] [[parted hair|Parted]] [[half updo]] with a small [[half up braid]]s held with a [[blue ribbon|blue]] [[hair ribbon]]s and [[wispy bangs|choppy]] [[blunt bangs|blunt]] [[fanged bangs]]\r\n* Medium-length hair done in a [[single braid|single]] [[side braid]] held with a [[blue bow|blue]] [[hair bow]]\r\n\r\nh4. Appearance\r\n\r\n* !asset #15445361: Profile\r\n* !post #4174179: Reference sheet\r\n* !post #5444183: World Milk Day variant",
+      "captured_at": "2026-08-31"
+    },
+    {
+      "id": "gelbooru:wiki:shirogane_noel_(casual)",
+      "source_site": "gelbooru",
+      "source_kind": "wiki",
+      "source_key": "shirogane_noel_(casual)",
+      "source_url": "https://gelbooru.com/index.php?page=wiki&s=view&id=shirogane_noel_(casual)",
+      "source_tier": 1,
+      "title": "shirogane_noel_(casual)",
+      "excerpt": "The 3rd [[official alternate costume|costume]] of [[hololive]]'s [[Shirogane Noel]], as shown in post #4174179.\r\n\r\nHer casual attire consists of a [[white sweater|white]], [[ribbed sweater|ribbed]] [[off-shoulder sweater]] worn over a [[black tank top]], a [[black choker]] with a [[snowflake pendant|snowflake]] [[pendant]], a [[plaid skirt|plaid]], [[brown skirt|brown]] [[high-waist skirt|high-waist]] [[miniskirt]], [[black socks]] and [[brown footwear|brown]] [[shoes]].\r\n\r\nIn June 1st 2021, she received a variation of her casual attire as a joke for the \"World Milk Day\":[https://en.wikipedia.org/wiki/World_Milk_Day], which adds a cow [[cow ears|ears]], [[cow horns|horns]] and a [[cow tail|tail]], a [[collared shirt]] with a [[cow print]] and a [[neck bell|neck]] [[cowbell]]. This peculiar attire is a result of Noel embracing all the \"cow jokes\" resulting from her large breasts.\r\n\r\nHer [[official alternate hairstyle|official hairstyle]] with this attire is a [[parted hair|parted]] [[half updo]] with small [[half up braid]]s held with [[blue ribbon|blue]] [[hair ribbon]]s and [[choppy bangs|choppy]] [[blunt bangs|blunt]] [[fanged bangs]] or a [[single braid|single]] [[side braid]] with the World Milk Day variation.",
+      "captured_at": "2026-08-31"
+    }
+  ],
+  "profiles": [
+    {
+      "appearance_key": "shirogane_noel::shirogane_noel_(casual)",
+      "variant_tag": "shirogane_noel_(casual)",
+      "display_name": "shirogane_noel_(casual)",
+      "appearance_kind": "costume",
+      "is_default": false,
+      "status": "published",
+      "confidence": "high",
+      "provenance": "danbooru_gelbooru_wiki_reviewed",
+      "notes": "Official named costume; optional variants and unsupported contextual details excluded.",
+      "features": [
+        {
+          "facet": "upper_body",
+          "canonical_tag": "white_sweater",
+          "value": "white sweater",
+          "source_refs": [
+            "danbooru:wiki:shirogane_noel_(casual)",
+            "gelbooru:wiki:shirogane_noel_(casual)"
+          ]
+        },
+        {
+          "facet": "upper_body",
+          "canonical_tag": "ribbed_sweater",
+          "value": "ribbed sweater",
+          "source_refs": [
+            "danbooru:wiki:shirogane_noel_(casual)",
+            "gelbooru:wiki:shirogane_noel_(casual)"
+          ]
+        },
+        {
+          "facet": "upper_body",
+          "canonical_tag": "off_shoulder_sweater",
+          "value": "off shoulder sweater",
+          "source_refs": [
+            "danbooru:wiki:shirogane_noel_(casual)",
+            "gelbooru:wiki:shirogane_noel_(casual)"
+          ]
+        },
+        {
+          "facet": "upper_body",
+          "canonical_tag": "black_tank_top",
+          "value": "black tank top",
+          "source_refs": [
+            "danbooru:wiki:shirogane_noel_(casual)",
+            "gelbooru:wiki:shirogane_noel_(casual)"
+          ]
+        },
+        {
+          "facet": "neck",
+          "canonical_tag": "black_choker",
+          "value": "black choker",
+          "source_refs": [
+            "danbooru:wiki:shirogane_noel_(casual)",
+            "gelbooru:wiki:shirogane_noel_(casual)"
+          ]
+        },
+        {
+          "facet": "jewelry",
+          "canonical_tag": "snowflake_pendant",
+          "value": "snowflake pendant",
+          "source_refs": [
+            "danbooru:wiki:shirogane_noel_(casual)",
+            "gelbooru:wiki:shirogane_noel_(casual)"
+          ]
+        },
+        {
+          "facet": "jewelry",
+          "canonical_tag": "pendant",
+          "value": "pendant",
+          "source_refs": [
+            "danbooru:wiki:shirogane_noel_(casual)",
+            "gelbooru:wiki:shirogane_noel_(casual)"
+          ]
+        },
+        {
+          "facet": "lower_body",
+          "canonical_tag": "plaid_skirt",
+          "value": "plaid skirt",
+          "source_refs": [
+            "danbooru:wiki:shirogane_noel_(casual)",
+            "gelbooru:wiki:shirogane_noel_(casual)"
+          ]
+        },
+        {
+          "facet": "lower_body",
+          "canonical_tag": "brown_skirt",
+          "value": "brown skirt",
+          "source_refs": [
+            "danbooru:wiki:shirogane_noel_(casual)",
+            "gelbooru:wiki:shirogane_noel_(casual)"
+          ]
+        },
+        {
+          "facet": "lower_body",
+          "canonical_tag": "high_waist_skirt",
+          "value": "high waist skirt",
+          "source_refs": [
+            "danbooru:wiki:shirogane_noel_(casual)",
+            "gelbooru:wiki:shirogane_noel_(casual)"
+          ]
+        },
+        {
+          "facet": "lower_body",
+          "canonical_tag": "miniskirt",
+          "value": "miniskirt",
+          "source_refs": [
+            "danbooru:wiki:shirogane_noel_(casual)",
+            "gelbooru:wiki:shirogane_noel_(casual)"
+          ]
+        },
+        {
+          "facet": "legwear",
+          "canonical_tag": "black_socks",
+          "value": "black socks",
+          "source_refs": [
+            "danbooru:wiki:shirogane_noel_(casual)",
+            "gelbooru:wiki:shirogane_noel_(casual)"
+          ]
+        },
+        {
+          "facet": "footwear",
+          "canonical_tag": "brown_shoes",
+          "value": "brown shoes",
+          "source_refs": [
+            "danbooru:wiki:shirogane_noel_(casual)"
+          ]
+        },
+        {
+          "facet": "hair",
+          "canonical_tag": "medium_hair",
+          "value": "medium hair",
+          "source_refs": [
+            "danbooru:wiki:shirogane_noel_(casual)"
+          ]
+        },
+        {
+          "facet": "hair_accessory",
+          "canonical_tag": "parted_hair",
+          "value": "parted hair",
+          "source_refs": [
+            "danbooru:wiki:shirogane_noel_(casual)",
+            "gelbooru:wiki:shirogane_noel_(casual)"
+          ]
+        },
+        {
+          "facet": "hair_accessory",
+          "canonical_tag": "hair_ribbon",
+          "value": "hair ribbon",
+          "source_refs": [
+            "danbooru:wiki:shirogane_noel_(casual)",
+            "gelbooru:wiki:shirogane_noel_(casual)"
+          ]
+        },
+        {
+          "facet": "hair_accessory",
+          "canonical_tag": "blunt_bangs",
+          "value": "blunt bangs",
+          "source_refs": [
+            "danbooru:wiki:shirogane_noel_(casual)",
+            "gelbooru:wiki:shirogane_noel_(casual)"
+          ]
+        },
+        {
+          "facet": "hair_accessory",
+          "canonical_tag": "fanged_bangs",
+          "value": "fanged bangs",
+          "source_refs": [
+            "danbooru:wiki:shirogane_noel_(casual)",
+            "gelbooru:wiki:shirogane_noel_(casual)"
+          ]
+        }
+      ]
+    }
+  ]
+}

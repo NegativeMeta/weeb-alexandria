@@ -1,0 +1,50 @@
+{
+  "character_tag": "chihaya_anon",
+  "sources": [
+    {
+      "id": "danbooru:wiki:chihaya_anon",
+      "source_site": "danbooru",
+      "source_kind": "wiki",
+      "source_key": "chihaya_anon",
+      "source_url": "https://danbooru.donmai.us/wiki_pages/chihaya_anon.json",
+      "source_tier": 1,
+      "title": "Chihaya Anon",
+      "excerpt": "She has [[pink hair|pink]] [[long hair]] and [[grey eyes]] and sometimes wears [[black-framed eyewear|black-framed]] [[glasses]].",
+      "captured_at": "2026-08-30"
+    },
+    {
+      "id": "gelbooru:wiki:chihaya_anon",
+      "source_site": "gelbooru",
+      "source_kind": "wiki",
+      "source_key": "chihaya_anon",
+      "source_url": "https://gelbooru.com/index.php?page=wiki&s=view&id=chihaya_anon",
+      "source_tier": 1,
+      "title": "Chihaya Anon",
+      "excerpt": "Anon has [[pink hair|pink]] [[long hair]] and [[blue eyes|blue]] or [[grey eyes]]. Sometimes she wears [[black-framed eyewear|black-framed]] [[glasses]].",
+      "captured_at": "2026-08-30"
+    }
+  ],
+  "profiles": [
+    {
+      "appearance_key": "chihaya_anon::default",
+      "variant_tag": "chihaya_anon",
+      "display_name": "Default Chihaya Anon appearance",
+      "appearance_kind": "default",
+      "is_default": true,
+      "status": "published",
+      "confidence": "high",
+      "provenance": "danbooru_gelbooru_wiki_reviewed",
+      "notes": "Base character traits only; Haneoka uniform, MyGO live costume, casual, Sanrio collaboration, and other named outfits excluded.",
+      "features": [
+        {"facet":"hair","canonical_tag":"pink_hair","value":"Pink hair","source_refs":["danbooru:wiki:chihaya_anon"],"evidence":{"text":"[[pink hair|pink]]","observed_tag":"pink_hair"}},
+        {"facet":"hair","canonical_tag":"long_hair","value":"Long hair","source_refs":["danbooru:wiki:chihaya_anon"],"evidence":{"text":"[[long hair]]","observed_tag":"long_hair"}},
+        {"facet":"eyes","canonical_tag":"grey_eyes","value":"Grey eyes","role":"alternative","source_refs":["danbooru:wiki:chihaya_anon"],"evidence":{"text":"[[grey eyes]]","observed_tag":"grey_eyes"}},
+        {"facet":"eyes","canonical_tag":"blue_eyes","value":"Blue eyes","role":"alternative","source_refs":["gelbooru:wiki:chihaya_anon"],"evidence":{"text":"[[blue eyes|blue]]","observed_tag":"blue_eyes"}},
+        {"facet":"face","canonical_tag":"glasses","value":"Glasses, sometimes worn","role":"optional","source_refs":["danbooru:wiki:chihaya_anon"],"evidence":{"text":"sometimes wears [[black-framed eyewear|black-framed]] [[glasses]]","observed_tag":"glasses"}}
+      ],
+      "conflicts": [
+        {"conflict_key":"eye_color","facet":"eyes","alternatives":["grey_eyes","blue_eyes"],"status":"open","reason":"Danbooru describes grey eyes while Gelbooru describes blue or grey eyes.","source_refs":["danbooru:wiki:chihaya_anon","gelbooru:wiki:chihaya_anon"],"resolution_note":"Keep both documented until a stronger reference resolves the eye color."}
+      ]
+    }
+  ]
+}

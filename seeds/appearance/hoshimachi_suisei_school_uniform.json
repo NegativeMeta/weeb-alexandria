@@ -1,0 +1,150 @@
+{
+  "character_tag": "hoshimachi_suisei",
+  "sources": [
+    {
+      "id": "danbooru:wiki:hoshimachi_suisei_(school_uniform)",
+      "source_site": "danbooru",
+      "source_kind": "wiki",
+      "source_key": "hoshimachi_suisei_(school_uniform)",
+      "source_url": "https://danbooru.donmai.us/wiki_pages/hoshimachi_suisei_(school_uniform).json",
+      "source_tier": 1,
+      "title": "hoshimachi_suisei_(school_uniform)",
+      "excerpt": "The 4th [[official alternate costume|costume]] of [[hololive]]'s [[Hoshimachi Suisei]].\r\n\r\nIt's a [[school uniform]]-themed outift and comes in 2 versions:\r\n* A [[white dress|white]] [[sailor dress]] consisting of a [[grey cardigan|grey]] [[aran sweater|aran cardigan]], a [[blue choker]], a [[white sailor collar]], a [[blue bowtie]] and a [[blue belt]].\r\n* A [[black dress|black]] [[sailor dress]] consisting of a [[white jacket|white]] [[hooded jacket]] with [[cat hood|cat ears]], a [[black choker]], a [[black sailor collar]], a [[yellow bowtie]] and a [[grey belt]].\r\n\r\nIn both versions the shirt has [[frilled sleeves|frilled]] [[puffy short sleeves]], a [[star brooch]] holding the bowtie, the dress is a [[pleated dress|pleated]] [[medium dress|knee-lenght]] [[half-dress]], and both have [[white socks]] and [[black footwear|black]] [[loafers]], she also wears [[pearl earrings]] on both versions.\r\n\r\nHer [[official alternate hairstyle|official hairstyle]] with this outfit is [[long hair]] in a [[half updo]] with a [[single side bun|single]] [[side up bun]].\r\n\r\nh4. Appearance\r\n\r\n* !post #4855094",
+      "captured_at": "2026-08-31"
+    },
+    {
+      "id": "gelbooru:wiki:hoshimachi_suisei_(school_uniform)",
+      "source_site": "gelbooru",
+      "source_kind": "wiki",
+      "source_key": "hoshimachi_suisei_(school_uniform)",
+      "source_url": "https://gelbooru.com/index.php?page=wiki&s=view&id=hoshimachi_suisei_(school_uniform)",
+      "source_tier": 1,
+      "title": "hoshimachi_suisei_(school_uniform)",
+      "excerpt": "The 4th [[official alternate costume|costume]] of [[hololive]]'s [[Hoshimachi Suisei]].\r\n\r\nIt's a [[school uniform]]-themed outift and comes in 2 versions:\r\n* A [[white dress|white]] [[sailor dress]] consisting of a [[grey cardigan|grey]] [[aran sweater|aran cardigan]], a [[blue choker]], a [[white sailor collar]], a [[blue bowtie]] and a [[blue belt]].\r\n* A [[black dress|black]] [[sailor dress]] consisting of a [[white jacket|white]] [[hooded jacket]] with [[cat hood|cat ears]], a [[black choker]], a [[black sailor collar]], a [[yellow bowtie]] and a [[grey belt]].\r\n\r\nIn both versions the shirt has [[frilled sleeves|frilled]] [[puffy short sleeves]], a [[star brooch]] holding the bowtie, the dress is a [[pleated dress|pleated]] [[medium dress|knee-lenght]] [[half-dress]], and both have [[white socks]] and [[black footwear|black]] [[loafers]], she also wears [[pearl earrings]] on both versions.\r\n\r\nHer [[official alternate hairstyle|official hairstyle]] with this outfit is [[long hair]] in a [[half updo]] with a [[single side bun|single]] [[side up bun]].\r\n\r\nh4. Appearance\r\n\r\n* !post #4855094",
+      "captured_at": "2026-08-31"
+    }
+  ],
+  "profiles": [
+    {
+      "appearance_key": "hoshimachi_suisei::hoshimachi_suisei_(school_uniform)",
+      "variant_tag": "hoshimachi_suisei_(school_uniform)",
+      "display_name": "hoshimachi_suisei school_uniform",
+      "appearance_kind": "costume",
+      "is_default": false,
+      "status": "published",
+      "confidence": "high",
+      "provenance": "danbooru_gelbooru_wiki_reviewed",
+      "notes": "Official named costume; alternatives, props, lore, cosplay, shared uniforms, and unsupported optional details excluded.",
+      "features": [
+        {
+          "facet": "dress",
+          "canonical_tag": "sailor_dress",
+          "value": "Sailor dress",
+          "source_refs": [
+            "danbooru:wiki:hoshimachi_suisei_(school_uniform)",
+            "gelbooru:wiki:hoshimachi_suisei_(school_uniform)"
+          ]
+        },
+        {
+          "facet": "dress",
+          "canonical_tag": "school_uniform",
+          "value": "School uniform",
+          "source_refs": [
+            "danbooru:wiki:hoshimachi_suisei_(school_uniform)",
+            "gelbooru:wiki:hoshimachi_suisei_(school_uniform)"
+          ]
+        },
+        {
+          "facet": "sleeves",
+          "canonical_tag": "frilled_sleeves",
+          "value": "Frilled sleeves",
+          "source_refs": [
+            "danbooru:wiki:hoshimachi_suisei_(school_uniform)",
+            "gelbooru:wiki:hoshimachi_suisei_(school_uniform)"
+          ]
+        },
+        {
+          "facet": "sleeves",
+          "canonical_tag": "puffy_short_sleeves",
+          "value": "Puffy short sleeves",
+          "source_refs": [
+            "danbooru:wiki:hoshimachi_suisei_(school_uniform)",
+            "gelbooru:wiki:hoshimachi_suisei_(school_uniform)"
+          ]
+        },
+        {
+          "facet": "jewelry",
+          "canonical_tag": "star_brooch",
+          "value": "Star brooch",
+          "source_refs": [
+            "danbooru:wiki:hoshimachi_suisei_(school_uniform)",
+            "gelbooru:wiki:hoshimachi_suisei_(school_uniform)"
+          ]
+        },
+        {
+          "facet": "dress",
+          "canonical_tag": "pleated_dress",
+          "value": "Pleated dress",
+          "source_refs": [
+            "danbooru:wiki:hoshimachi_suisei_(school_uniform)",
+            "gelbooru:wiki:hoshimachi_suisei_(school_uniform)"
+          ]
+        },
+        {
+          "facet": "dress",
+          "canonical_tag": "medium_dress",
+          "value": "Medium dress",
+          "source_refs": [
+            "danbooru:wiki:hoshimachi_suisei_(school_uniform)",
+            "gelbooru:wiki:hoshimachi_suisei_(school_uniform)"
+          ]
+        },
+        {
+          "facet": "legwear",
+          "canonical_tag": "white_socks",
+          "value": "White socks",
+          "source_refs": [
+            "danbooru:wiki:hoshimachi_suisei_(school_uniform)",
+            "gelbooru:wiki:hoshimachi_suisei_(school_uniform)"
+          ]
+        },
+        {
+          "facet": "footwear",
+          "canonical_tag": "black_footwear",
+          "value": "Black footwear",
+          "source_refs": [
+            "danbooru:wiki:hoshimachi_suisei_(school_uniform)",
+            "gelbooru:wiki:hoshimachi_suisei_(school_uniform)"
+          ]
+        },
+        {
+          "facet": "jewelry",
+          "canonical_tag": "pearl_earrings",
+          "value": "Pearl earrings",
+          "source_refs": [
+            "danbooru:wiki:hoshimachi_suisei_(school_uniform)",
+            "gelbooru:wiki:hoshimachi_suisei_(school_uniform)"
+          ]
+        },
+        {
+          "facet": "hair",
+          "canonical_tag": "long_hair",
+          "value": "Long hair",
+          "source_refs": [
+            "danbooru:wiki:hoshimachi_suisei_(school_uniform)",
+            "gelbooru:wiki:hoshimachi_suisei_(school_uniform)"
+          ]
+        },
+        {
+          "facet": "hair_accessory",
+          "canonical_tag": "official_alternate_hairstyle",
+          "value": "Official alternate hairstyle",
+          "source_refs": [
+            "danbooru:wiki:hoshimachi_suisei_(school_uniform)",
+            "gelbooru:wiki:hoshimachi_suisei_(school_uniform)"
+          ]
+        }
+      ]
+    }
+  ]
+}

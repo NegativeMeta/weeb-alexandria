@@ -1,0 +1,19 @@
+{
+  "character_tag": "kiryuuin_satsuki",
+  "sources": [
+    {"id":"danbooru:wiki:kiryuuin_satsuki","source_site":"danbooru","source_kind":"wiki","source_key":"kiryuuin_satsuki","source_url":"https://danbooru.donmai.us/wiki_pages/kiryuuin_satsuki.json","source_tier":1,"title":"Kiryuuin Satsuki","excerpt":"Satsuki is a tall slim woman. She has [[long_hair|long]] [[black hair]], [[blue eyes]] and [[thick eyebrows]]. She usually wears [[Junketsu]], a [[kamui_(kill_la_kill)|Kamui]] made by the Kiriyūin family. Junketsu's dormant form is that of a white-and-blue [[school uniform]] with [[pleated skirt]]. The design is noticeably more militaristic and regal than normal uniforms, with a [[high collar]], shoulder [[epaulettes]] and gold adornments along the sides. She also wears [[white boots|white]] [[thigh boots]] with [[high heels]].","captured_at":"2026-08-31"}
+  ],
+  "profiles": [
+    {"appearance_key":"kiryuuin_satsuki::default","variant_tag":"kiryuuin_satsuki","display_name":"Default Kiryuuin Satsuki appearance","appearance_kind":"default","is_default":true,"status":"published","confidence":"high","provenance":"danbooru_wiki_reviewed","notes":"Usual Junketsu design only; active revealing state and Bakuzan excluded.","features":[
+      {"facet":"hair","canonical_tag":"long_hair","value":"Long hair","source_refs":["danbooru:wiki:kiryuuin_satsuki"]},
+      {"facet":"hair","canonical_tag":"black_hair","value":"Black hair","source_refs":["danbooru:wiki:kiryuuin_satsuki"]},
+      {"facet":"eyes","canonical_tag":"blue_eyes","value":"Blue eyes","source_refs":["danbooru:wiki:kiryuuin_satsuki"]},
+      {"facet":"face","canonical_tag":"thick_eyebrows","value":"Thick eyebrows","source_refs":["danbooru:wiki:kiryuuin_satsuki"]},
+      {"facet":"dress","canonical_tag":"school_uniform","value":"White-and-blue school uniform","source_refs":["danbooru:wiki:kiryuuin_satsuki"]},
+      {"facet":"lower_body","canonical_tag":"pleated_skirt","value":"Pleated skirt","source_refs":["danbooru:wiki:kiryuuin_satsuki"]},
+      {"facet":"neck","canonical_tag":"high_collar","value":"High collar","source_refs":["danbooru:wiki:kiryuuin_satsuki"]},
+      {"facet":"footwear","canonical_tag":"white_boots","value":"White thigh boots","source_refs":["danbooru:wiki:kiryuuin_satsuki"]},
+      {"facet":"footwear","canonical_tag":"thigh_boots","value":"Thigh boots","source_refs":["danbooru:wiki:kiryuuin_satsuki"]}
+    ]}
+  ]
+}

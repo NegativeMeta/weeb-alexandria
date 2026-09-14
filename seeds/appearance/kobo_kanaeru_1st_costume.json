@@ -1,0 +1,195 @@
+{
+  "character_tag": "kobo_kanaeru",
+  "sources": [
+    {
+      "id": "danbooru:wiki:kobo_kanaeru_(1st_costume)",
+      "source_site": "danbooru",
+      "source_kind": "wiki",
+      "source_key": "kobo_kanaeru_(1st_costume)",
+      "source_url": "https://danbooru.donmai.us/wiki_pages/kobo_kanaeru_(1st_costume).json",
+      "source_tier": 1,
+      "title": "Kobo Kanaeru 1st costume",
+      "excerpt": "She wears a [[see-through jacket]] with half [[see-through sleeves|see-through]] and half [[blue sleeves|blue]] [[puffy long sleeves]] with a [[long sleeves|long sleeved]] [[cropped hoodie|cropped]] [[white hoodie]] and a a [[cropped shirt|cropped]] [[blue shirt]] underneath it,a combination of [[white pants|white]] [[tight pants]] and [[grey shorts|grey]] [[bike shorts]], [[white socks|white]] [[kneehighs]] and [[white shoes|white]] [[sneakers]] with [[colored shoe soles|red soles]].",
+      "captured_at": "2026-08-31"
+    },
+    {
+      "id": "gelbooru:wiki:kobo_kanaeru_(1st_costume)",
+      "source_site": "gelbooru",
+      "source_kind": "wiki",
+      "source_key": "kobo_kanaeru_(1st_costume)",
+      "source_url": "https://gelbooru.com/index.php?page=wiki&s=view&id=kobo_kanaeru_(1st_costume)",
+      "source_tier": 1,
+      "title": "Kobo Kanaeru 1st costume",
+      "excerpt": "She wears a [[see-through jacket]] with half [[see-through sleeves|see-through]] and half [[blue sleeves|blue]] [[puffy long sleeves]] with a [[long sleeves|long sleeved]] [[cropped hoodie|cropped]] [[white hoodie]] and a a [[cropped shirt|cropped]] [[blue shirt]] underneath it,a combination of [[white pants|white]] [[tight pants]] and [[grey shorts|grey]] [[bike shorts]], [[white socks|white]] [[kneehighs]] and [[white footwear|white]] [[sneakers]] with [[colored shoe soles|red soles]].",
+      "captured_at": "2026-08-31"
+    }
+  ],
+  "profiles": [
+    {
+      "appearance_key": "kobo_kanaeru::kobo_kanaeru_(1st_costume)",
+      "variant_tag": "kobo_kanaeru_(1st_costume)",
+      "display_name": "Kobo Kanaeru 1st costume",
+      "appearance_kind": "costume",
+      "is_default": false,
+      "status": "published",
+      "confidence": "high",
+      "provenance": "danbooru_gelbooru_wiki_reviewed",
+      "notes": "Official first costume; props, weapons, lore, shared uniforms, and non-outfit metadata excluded.",
+      "features": [
+        {
+          "facet": "jacket",
+          "canonical_tag": "see-through_jacket",
+          "value": "See-through jacket",
+          "source_refs": [
+            "danbooru:wiki:kobo_kanaeru_(1st_costume)",
+            "gelbooru:wiki:kobo_kanaeru_(1st_costume)"
+          ]
+        },
+        {
+          "facet": "sleeves",
+          "canonical_tag": "see-through_sleeves",
+          "value": "See-through sleeves",
+          "source_refs": [
+            "danbooru:wiki:kobo_kanaeru_(1st_costume)",
+            "gelbooru:wiki:kobo_kanaeru_(1st_costume)"
+          ]
+        },
+        {
+          "facet": "sleeves",
+          "canonical_tag": "blue_sleeves",
+          "value": "Blue puffy sleeves",
+          "source_refs": [
+            "danbooru:wiki:kobo_kanaeru_(1st_costume)",
+            "gelbooru:wiki:kobo_kanaeru_(1st_costume)"
+          ]
+        },
+        {
+          "facet": "sleeves",
+          "canonical_tag": "puffy_long_sleeves",
+          "value": "Puffy long sleeves",
+          "source_refs": [
+            "danbooru:wiki:kobo_kanaeru_(1st_costume)",
+            "gelbooru:wiki:kobo_kanaeru_(1st_costume)"
+          ]
+        },
+        {
+          "facet": "upper_body",
+          "canonical_tag": "cropped_hoodie",
+          "value": "Cropped hoodie",
+          "source_refs": [
+            "danbooru:wiki:kobo_kanaeru_(1st_costume)",
+            "gelbooru:wiki:kobo_kanaeru_(1st_costume)"
+          ]
+        },
+        {
+          "facet": "upper_body",
+          "canonical_tag": "white_hoodie",
+          "value": "White hoodie",
+          "source_refs": [
+            "danbooru:wiki:kobo_kanaeru_(1st_costume)",
+            "gelbooru:wiki:kobo_kanaeru_(1st_costume)"
+          ]
+        },
+        {
+          "facet": "upper_body",
+          "canonical_tag": "cropped_shirt",
+          "value": "Cropped shirt",
+          "source_refs": [
+            "danbooru:wiki:kobo_kanaeru_(1st_costume)",
+            "gelbooru:wiki:kobo_kanaeru_(1st_costume)"
+          ]
+        },
+        {
+          "facet": "upper_body",
+          "canonical_tag": "blue_shirt",
+          "value": "Blue shirt",
+          "source_refs": [
+            "danbooru:wiki:kobo_kanaeru_(1st_costume)",
+            "gelbooru:wiki:kobo_kanaeru_(1st_costume)"
+          ]
+        },
+        {
+          "facet": "lower_body",
+          "canonical_tag": "white_pants",
+          "value": "White tight pants",
+          "source_refs": [
+            "danbooru:wiki:kobo_kanaeru_(1st_costume)",
+            "gelbooru:wiki:kobo_kanaeru_(1st_costume)"
+          ]
+        },
+        {
+          "facet": "lower_body",
+          "canonical_tag": "tight_pants",
+          "value": "Tight pants",
+          "source_refs": [
+            "danbooru:wiki:kobo_kanaeru_(1st_costume)",
+            "gelbooru:wiki:kobo_kanaeru_(1st_costume)"
+          ]
+        },
+        {
+          "facet": "lower_body",
+          "canonical_tag": "grey_shorts",
+          "value": "Grey bike shorts",
+          "source_refs": [
+            "danbooru:wiki:kobo_kanaeru_(1st_costume)",
+            "gelbooru:wiki:kobo_kanaeru_(1st_costume)"
+          ]
+        },
+        {
+          "facet": "lower_body",
+          "canonical_tag": "bike_shorts",
+          "value": "Bike shorts",
+          "source_refs": [
+            "danbooru:wiki:kobo_kanaeru_(1st_costume)",
+            "gelbooru:wiki:kobo_kanaeru_(1st_costume)"
+          ]
+        },
+        {
+          "facet": "legwear",
+          "canonical_tag": "white_socks",
+          "value": "White kneehighs",
+          "source_refs": [
+            "danbooru:wiki:kobo_kanaeru_(1st_costume)",
+            "gelbooru:wiki:kobo_kanaeru_(1st_costume)"
+          ]
+        },
+        {
+          "facet": "legwear",
+          "canonical_tag": "kneehighs",
+          "value": "Kneehighs",
+          "source_refs": [
+            "danbooru:wiki:kobo_kanaeru_(1st_costume)",
+            "gelbooru:wiki:kobo_kanaeru_(1st_costume)"
+          ]
+        },
+        {
+          "facet": "footwear",
+          "canonical_tag": "white_shoes",
+          "value": "White sneakers",
+          "source_refs": [
+            "danbooru:wiki:kobo_kanaeru_(1st_costume)",
+            "gelbooru:wiki:kobo_kanaeru_(1st_costume)"
+          ]
+        },
+        {
+          "facet": "footwear",
+          "canonical_tag": "sneakers",
+          "value": "Sneakers",
+          "source_refs": [
+            "danbooru:wiki:kobo_kanaeru_(1st_costume)",
+            "gelbooru:wiki:kobo_kanaeru_(1st_costume)"
+          ]
+        },
+        {
+          "facet": "footwear",
+          "canonical_tag": "colored_shoe_soles",
+          "value": "Red soles",
+          "source_refs": [
+            "danbooru:wiki:kobo_kanaeru_(1st_costume)",
+            "gelbooru:wiki:kobo_kanaeru_(1st_costume)"
+          ]
+        }
+      ]
+    }
+  ]
+}

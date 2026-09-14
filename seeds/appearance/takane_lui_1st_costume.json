@@ -1,0 +1,168 @@
+{
+  "character_tag": "takane_lui",
+  "sources": [
+    {
+      "id": "danbooru:wiki:takane_lui_(1st_costume)",
+      "source_site": "danbooru",
+      "source_kind": "wiki",
+      "source_key": "takane_lui_(1st_costume)",
+      "source_url": "https://danbooru.donmai.us/wiki_pages/takane_lui_(1st_costume).json",
+      "source_tier": 1,
+      "title": "Takane Lui (1st costume)",
+      "excerpt": "The default costume of [[hololive]]'s [[Takane Lui]].\r\n\r\nIt consists of a [[black choker]], a [[long sleeves|long-sleeved]] [[white shirt|white]] [[dress shirt]] with [[breast zipper]]s, a [[red necktie]] with a [[white ascot]] under it, an [[underbust]] [[chest harness]], [[sleeve garter]]s, [[fingerless gloves|fingerless]] [[black gloves]], [[black shorts|black]] [[high-waist shorts|high-waist]] [[leather shorts]], a [[black pantyhose]], a [[thigh strap]] with a [[whip]] hanging from it on her right leg, and [[black shoes|black]] [[strappy heels]] (although they are sometimes depicted in fanart as [[pumps]] with [[ankle cuffs]]). She also has an optional [[red coat|red]] [[feather-trimmed coat]] which she wears [[coat on shoulders|on her shoulders]] and a [[orange-tinted eyewear|orange-tinted]] [[sunglasses]].\r\n\r\nh4. Appearance\r\n\r\n* !asset #25444908: Profile\r\n* !post #4942499: Reference sheet (with coat)\r\n* !post #4942497: Reference sheet (without coat)\r\n* !post #8203010: Merchandise (with coat)\r\n* !post #8302623: Merchandise (without coat)",
+      "captured_at": "2026-08-31"
+    },
+    {
+      "id": "gelbooru:wiki:takane_lui_(1st_costume)",
+      "source_site": "gelbooru",
+      "source_kind": "wiki",
+      "source_key": "takane_lui_(1st_costume)",
+      "source_url": "https://gelbooru.com/index.php?page=wiki&s=view&id=takane_lui_(1st_costume)",
+      "source_tier": 1,
+      "title": "Takane Lui (1st costume)",
+      "excerpt": "The default costume of [[hololive]]'s [[Takane Lui]].\r\n\r\nIt consists of a [[black choker]], a [[long sleeves|long-sleeved]] [[white shirt|white]] [[dress shirt]] with [[breast zipper]]s, a [[red necktie]] with a [[white ascot]] under it, an [[underbust]] [[chest harness]], [[sleeve garter]]s, [[fingerless gloves|fingerless]] [[black gloves]], [[black shorts|black]] [[high-waist shorts|high-waist]] [[leather shorts]], a [[black pantyhose]], a [[thigh strap]] with a [[whip]] hanging from it on her right leg, and [[black footwear|black]] [[strappy heels]] (although they are sometimes depicted in fanart as [[pumps]] with [[ankle cuffs]]). She also has an optional [[red coat|red]] [[feather-trimmed coat]] which she wears [[coat on shoulders|on her shoulders]] and a [[orange-tinted eyewear|orange-tinted]] [[sunglasses]].\r\n\r\nh4. Appearance\r\n\r\n* !post #4942497: Reference sheet (1)\r\n* !post #4942499: Reference sheet (2)\r\n* !post #4942469: Live2D",
+      "captured_at": "2026-08-31"
+    }
+  ],
+  "profiles": [
+    {
+      "appearance_key": "takane_lui::takane_lui_(1st_costume)",
+      "variant_tag": "takane_lui_(1st_costume)",
+      "display_name": "Takane Lui 1st costume",
+      "appearance_kind": "costume",
+      "is_default": false,
+      "status": "published",
+      "confidence": "high",
+      "provenance": "danbooru_gelbooru_wiki_reviewed",
+      "notes": "Official first costume; optional props, weapons, lore, and non-outfit metadata excluded.",
+      "features": [
+        {
+          "facet": "accessories",
+          "canonical_tag": "breast_zipper",
+          "value": "breast zipper",
+          "source_refs": [
+            "danbooru:wiki:takane_lui_(1st_costume)",
+            "gelbooru:wiki:takane_lui_(1st_costume)"
+          ]
+        },
+        {
+          "facet": "dress",
+          "canonical_tag": "dress_shirt",
+          "value": "dress shirt",
+          "source_refs": [
+            "danbooru:wiki:takane_lui_(1st_costume)",
+            "gelbooru:wiki:takane_lui_(1st_costume)"
+          ]
+        },
+        {
+          "facet": "footwear",
+          "canonical_tag": "black_shoes",
+          "value": "black shoes",
+          "source_refs": [
+            "danbooru:wiki:takane_lui_(1st_costume)",
+            "gelbooru:wiki:takane_lui_(1st_costume)"
+          ]
+        },
+        {
+          "facet": "gloves",
+          "canonical_tag": "black_gloves",
+          "value": "black gloves",
+          "source_refs": [
+            "danbooru:wiki:takane_lui_(1st_costume)",
+            "gelbooru:wiki:takane_lui_(1st_costume)"
+          ]
+        },
+        {
+          "facet": "gloves",
+          "canonical_tag": "fingerless_gloves",
+          "value": "fingerless gloves",
+          "source_refs": [
+            "danbooru:wiki:takane_lui_(1st_costume)",
+            "gelbooru:wiki:takane_lui_(1st_costume)"
+          ]
+        },
+        {
+          "facet": "legwear",
+          "canonical_tag": "black_pantyhose",
+          "value": "black pantyhose",
+          "source_refs": [
+            "danbooru:wiki:takane_lui_(1st_costume)",
+            "gelbooru:wiki:takane_lui_(1st_costume)"
+          ]
+        },
+        {
+          "facet": "lower_body",
+          "canonical_tag": "black_shorts",
+          "value": "black shorts",
+          "source_refs": [
+            "danbooru:wiki:takane_lui_(1st_costume)",
+            "gelbooru:wiki:takane_lui_(1st_costume)"
+          ]
+        },
+        {
+          "facet": "lower_body",
+          "canonical_tag": "high_waist_shorts",
+          "value": "high waist shorts",
+          "source_refs": [
+            "danbooru:wiki:takane_lui_(1st_costume)",
+            "gelbooru:wiki:takane_lui_(1st_costume)"
+          ]
+        },
+        {
+          "facet": "lower_body",
+          "canonical_tag": "leather_shorts",
+          "value": "leather shorts",
+          "source_refs": [
+            "danbooru:wiki:takane_lui_(1st_costume)",
+            "gelbooru:wiki:takane_lui_(1st_costume)"
+          ]
+        },
+        {
+          "facet": "neck",
+          "canonical_tag": "black_choker",
+          "value": "black choker",
+          "source_refs": [
+            "danbooru:wiki:takane_lui_(1st_costume)",
+            "gelbooru:wiki:takane_lui_(1st_costume)"
+          ]
+        },
+        {
+          "facet": "neck",
+          "canonical_tag": "red_necktie",
+          "value": "red necktie",
+          "source_refs": [
+            "danbooru:wiki:takane_lui_(1st_costume)",
+            "gelbooru:wiki:takane_lui_(1st_costume)"
+          ]
+        },
+        {
+          "facet": "sleeves",
+          "canonical_tag": "long_sleeves",
+          "value": "long sleeves",
+          "source_refs": [
+            "danbooru:wiki:takane_lui_(1st_costume)",
+            "gelbooru:wiki:takane_lui_(1st_costume)"
+          ]
+        },
+        {
+          "facet": "sleeves",
+          "canonical_tag": "sleeve_garter",
+          "value": "sleeve garter",
+          "source_refs": [
+            "danbooru:wiki:takane_lui_(1st_costume)",
+            "gelbooru:wiki:takane_lui_(1st_costume)"
+          ]
+        },
+        {
+          "facet": "upper_body",
+          "canonical_tag": "white_shirt",
+          "value": "white shirt",
+          "source_refs": [
+            "danbooru:wiki:takane_lui_(1st_costume)",
+            "gelbooru:wiki:takane_lui_(1st_costume)"
+          ]
+        }
+      ]
+    }
+  ]
+}

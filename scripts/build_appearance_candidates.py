@@ -113,21 +113,45 @@ def wiki_observations(con: sqlite3.Connection, character_tag: str,
            ORDER BY site, title""",
         (character_tag, escape_like(character_tag) + r"\_(%"),
     ).fetchall()
+    has_catalog = con.execute(
+        """SELECT 1 FROM sqlite_master
+           WHERE type='table' AND name='appearance_feature_catalog'"""
+    ).fetchone()
+    catalog_tags = {
+        normalize_tag(row[0]) for row in con.execute(
+            "SELECT canonical_tag FROM appearance_feature_catalog "
+            "WHERE status='active'"
+        )
+    } if has_catalog else set()
     result: list[dict[str, Any]] = []
     for site, title, body in rows:
         variant_tag = normalize_tag(title)
-        raw_tags = [canonical_link_tag(match) for match in WIKI_LINK_RE.findall(body or "")]
+        body_text = body or ""
+        linked_tags = {
+            canonical_link_tag(match) for match in WIKI_LINK_RE.findall(body_text)
+        }
+        body_tags = {
+            tag for tag in catalog_tags
+            if re.search(
+                rf"(?<![\\w]){re.escape(tag)}(?![\\w])",
+                body_text.lower(),
+            )
+        }
+        raw_tags = sorted(linked_tags | body_tags)
         categories = read_tag_categories(con, site, raw_tags)
-        for tag in sorted(set(raw_tags)):
+        for tag in raw_tags:
             if not tag or tag in {character_tag, variant_tag}:
                 continue
             category = categories.get(tag, "")
             if category in {"meta", "artist", "copyright", "character", "alias"}:
                 continue
-            if tag not in categories:
-                # A link without a local tag row is not a canonical tag in the
-                # active snapshot, so leave it for a future source import.
+            if tag not in categories and tag not in catalog_tags:
+                # A link without a local tag row is usable only when the
+                # canonical appearance catalog already owns the tag. This
+                # avoids dropping known features while keeping unknown links
+                # out of the candidate projection.
                 continue
+            observation = "linked" if tag in linked_tags else "named"
             result.append({
                 "character_tag": character_tag,
                 "variant_tag": variant_tag,
@@ -141,7 +165,7 @@ def wiki_observations(con: sqlite3.Connection, character_tag: str,
                 "facet_guess": infer_facet(tag, category),
                 "support_count": 1,
                 "sample_size": 1,
-                "evidence_text": f"Linked from {site} wiki {title}.",
+                "evidence_text": f"{observation.capitalize()} in {site} wiki {title}.",
                 "captured_at": captured_at,
             })
     return result

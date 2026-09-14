@@ -1,0 +1,141 @@
+{
+  "character_tag": "anya_melfissa",
+  "sources": [
+    {
+      "id": "danbooru:wiki:anya_melfissa_(1st_costume)",
+      "source_site": "danbooru",
+      "source_kind": "wiki",
+      "source_key": "anya_melfissa_(1st_costume)",
+      "source_url": "https://danbooru.donmai.us/wiki_pages/anya_melfissa_(1st_costume).json",
+      "source_tier": 1,
+      "title": "Anya Melfissa 1st costume",
+      "excerpt": "It consists of a [[short dress|short]] [[black dress|black]] [[sleeveless dress|sleeveless]] [[frilled dress]] with [[center frills]] and [[long sleeves|long]] [[black sleeves|black]] [[detached sleeves]] a [[black ribbon|black]] [[thigh ribbon]] forming a [[thigh strap]] and a [[single ankle cuff]]. She is [[barefoot]] in this costume.",
+      "captured_at": "2026-08-31"
+    },
+    {
+      "id": "gelbooru:wiki:anya_melfissa_(1st_costume)",
+      "source_site": "gelbooru",
+      "source_kind": "wiki",
+      "source_key": "anya_melfissa_(1st_costume)",
+      "source_url": "https://gelbooru.com/index.php?page=wiki&s=view&id=anya_melfissa_(1st_costume)",
+      "source_tier": 1,
+      "title": "Anya Melfissa 1st costume",
+      "excerpt": "It consists of a [[short dress|short]] [[black dress|black]] [[sleeveless dress|sleeveless]] [[frilled dress]] with [[center frills]] and [[long sleeves|long]] [[black sleeves|black]] [[detached sleeves]] a [[black ribbon|black]] [[thigh ribbon]] forming a [[thigh strap]] and a [[single ankle cuff]]. She is [[barefoot]] in this costume.",
+      "captured_at": "2026-08-31"
+    }
+  ],
+  "profiles": [
+    {
+      "appearance_key": "anya_melfissa::anya_melfissa_(1st_costume)",
+      "variant_tag": "anya_melfissa_(1st_costume)",
+      "display_name": "Anya Melfissa 1st costume",
+      "appearance_kind": "costume",
+      "is_default": false,
+      "status": "published",
+      "confidence": "high",
+      "provenance": "danbooru_gelbooru_wiki_reviewed",
+      "notes": "Official first costume; props, weapons, lore, shared uniforms, and non-outfit metadata excluded.",
+      "features": [
+        {
+          "facet": "dress",
+          "canonical_tag": "black_dress",
+          "value": "Black dress",
+          "source_refs": [
+            "danbooru:wiki:anya_melfissa_(1st_costume)",
+            "gelbooru:wiki:anya_melfissa_(1st_costume)"
+          ]
+        },
+        {
+          "facet": "dress",
+          "canonical_tag": "short_dress",
+          "value": "Short dress",
+          "source_refs": [
+            "danbooru:wiki:anya_melfissa_(1st_costume)",
+            "gelbooru:wiki:anya_melfissa_(1st_costume)"
+          ]
+        },
+        {
+          "facet": "dress",
+          "canonical_tag": "sleeveless_dress",
+          "value": "Sleeveless dress",
+          "source_refs": [
+            "danbooru:wiki:anya_melfissa_(1st_costume)",
+            "gelbooru:wiki:anya_melfissa_(1st_costume)"
+          ]
+        },
+        {
+          "facet": "dress",
+          "canonical_tag": "frilled_dress",
+          "value": "Frilled dress",
+          "source_refs": [
+            "danbooru:wiki:anya_melfissa_(1st_costume)",
+            "gelbooru:wiki:anya_melfissa_(1st_costume)"
+          ]
+        },
+        {
+          "facet": "sleeves",
+          "canonical_tag": "black_sleeves",
+          "value": "Black detached sleeves",
+          "source_refs": [
+            "danbooru:wiki:anya_melfissa_(1st_costume)",
+            "gelbooru:wiki:anya_melfissa_(1st_costume)"
+          ]
+        },
+        {
+          "facet": "sleeves",
+          "canonical_tag": "detached_sleeves",
+          "value": "Detached sleeves",
+          "source_refs": [
+            "danbooru:wiki:anya_melfissa_(1st_costume)",
+            "gelbooru:wiki:anya_melfissa_(1st_costume)"
+          ]
+        },
+        {
+          "facet": "sleeves",
+          "canonical_tag": "long_sleeves",
+          "value": "Long sleeves",
+          "source_refs": [
+            "danbooru:wiki:anya_melfissa_(1st_costume)",
+            "gelbooru:wiki:anya_melfissa_(1st_costume)"
+          ]
+        },
+        {
+          "facet": "hair_accessory",
+          "canonical_tag": "thigh_ribbon",
+          "value": "Black thigh ribbon",
+          "source_refs": [
+            "danbooru:wiki:anya_melfissa_(1st_costume)",
+            "gelbooru:wiki:anya_melfissa_(1st_costume)"
+          ]
+        },
+        {
+          "facet": "accessories",
+          "canonical_tag": "thigh_strap",
+          "value": "Thigh strap",
+          "source_refs": [
+            "danbooru:wiki:anya_melfissa_(1st_costume)",
+            "gelbooru:wiki:anya_melfissa_(1st_costume)"
+          ]
+        },
+        {
+          "facet": "accessories",
+          "canonical_tag": "single_ankle_cuff",
+          "value": "Single ankle cuff",
+          "source_refs": [
+            "danbooru:wiki:anya_melfissa_(1st_costume)",
+            "gelbooru:wiki:anya_melfissa_(1st_costume)"
+          ]
+        },
+        {
+          "facet": "footwear",
+          "canonical_tag": "barefoot",
+          "value": "Barefoot",
+          "source_refs": [
+            "danbooru:wiki:anya_melfissa_(1st_costume)",
+            "gelbooru:wiki:anya_melfissa_(1st_costume)"
+          ]
+        }
+      ]
+    }
+  ]
+}

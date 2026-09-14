@@ -1,0 +1,184 @@
+{
+  "character_tag": "takanashi_kiara",
+  "sources": [
+    {
+      "id": "danbooru:wiki:takanashi_kiara_(casual)",
+      "source_site": "danbooru",
+      "source_kind": "wiki",
+      "source_key": "takanashi_kiara_(casual)",
+      "source_url": "https://danbooru.donmai.us/wiki_pages/takanashi_kiara_(casual).json",
+      "source_tier": 1,
+      "title": "takanashi_kiara_(casual)",
+      "excerpt": "The 2nd [[official alternate costume|costume]] of [[hololive English|hololive EN]]'s [[Takanashi Kiara]].\r\n\r\nIt consists of a [[straw hat|straw]] [[sun hat]], an [[aqua choker|aqua]] [[pendant choker]], a [[cropped shirt|cropped]] [[white shirt|white]] [[short sleeves|short-sleeved]] [[see-through shirt|see-through]] [[blouse]] with an [[aqua bikini|aqua]] [[bikini top only|bikini top]] [[bikini under clothes|underneath]] [[blue shorts]] and [[white sandals|white]] [[gladiator sandals]]. She also has optional [[cat ears]] and [[cat tail|tail]].\r\n\r\nOn March 2024, Kiara received a \"[[Frogiwawa]] [[hood]]\" accessory update for this costume. However, the way the hood perfectly covered her [[bikini]] makes it appeared as if she's [[topless female|topless]].\r\n\r\nFor her [[official alternate hairstyle|official hairstyle]] in this costume, she has her [[medium hair|medium-length hair]] tied into [[low twintails|low]] [[low twin braids|twin braids]] with [[swept bangs]] and [[hair flaps]], decorated with a [[white hairband]].\r\n\r\nh4. Appearance\r\n\r\n* !asset #19720649: Profile",
+      "captured_at": "2026-08-31"
+    },
+    {
+      "id": "gelbooru:wiki:takanashi_kiara_(casual)",
+      "source_site": "gelbooru",
+      "source_kind": "wiki",
+      "source_key": "takanashi_kiara_(casual)",
+      "source_url": "https://gelbooru.com/index.php?page=wiki&s=view&id=takanashi_kiara_(casual)",
+      "source_tier": 1,
+      "title": "takanashi_kiara_(casual)",
+      "excerpt": "The second [[official alternate costume|costume]] of [[hololive English]]'s [[Takanashi Kiara]], as seen in post #4503562.\r\n\r\nIt consists of a [[straw hat|straw]] [[sun hat]], an [[aqua choker|aqua]] [[pendant choker]], a [[white shirt|white]] [[short sleeves|short-sleeved]] [[see-through shirt|see-through]] [[blouse]] with an [[aqua bikini|aqua]] [[bikini top only|bikini top]] [[bikini under clothes|underneath]] [[blue shorts]] and [[white footwear|white]] [[gladiator sandals]]. She also has optional [[cat ears]] and [[cat tail|tail]].\r\n\r\nOn March 2024, Kiara received a \"[[Frogiwawa]] [[hood]]\" accessory update for this costume. However, the way the hood perfectly covered her [[bikini]] makes it appeared as if she's [[topless]].\r\n\r\nHer [[official alternate hairstyle|official hairstyle]] with this attire is [[low twintails|low]] [[low twin braids|twin braids]] with [[swept bangs]] and [[hair flaps]], decorated with a [[white hairband]].",
+      "captured_at": "2026-08-31"
+    }
+  ],
+  "profiles": [
+    {
+      "appearance_key": "takanashi_kiara::takanashi_kiara_(casual)",
+      "variant_tag": "takanashi_kiara_(casual)",
+      "display_name": "takanashi_kiara_(casual)",
+      "appearance_kind": "costume",
+      "is_default": false,
+      "status": "published",
+      "confidence": "high",
+      "provenance": "danbooru_gelbooru_wiki_reviewed",
+      "notes": "Official named costume; optional variants and unsupported contextual details excluded.",
+      "features": [
+        {
+          "facet": "headwear",
+          "canonical_tag": "sun_hat",
+          "value": "sun hat",
+          "source_refs": [
+            "danbooru:wiki:takanashi_kiara_(casual)",
+            "gelbooru:wiki:takanashi_kiara_(casual)"
+          ]
+        },
+        {
+          "facet": "neck",
+          "canonical_tag": "pendant_choker",
+          "value": "pendant choker",
+          "source_refs": [
+            "danbooru:wiki:takanashi_kiara_(casual)",
+            "gelbooru:wiki:takanashi_kiara_(casual)"
+          ]
+        },
+        {
+          "facet": "upper_body",
+          "canonical_tag": "cropped_shirt",
+          "value": "cropped shirt",
+          "source_refs": [
+            "danbooru:wiki:takanashi_kiara_(casual)"
+          ]
+        },
+        {
+          "facet": "upper_body",
+          "canonical_tag": "white_shirt",
+          "value": "white shirt",
+          "source_refs": [
+            "danbooru:wiki:takanashi_kiara_(casual)",
+            "gelbooru:wiki:takanashi_kiara_(casual)"
+          ]
+        },
+        {
+          "facet": "upper_body",
+          "canonical_tag": "see_through_shirt",
+          "value": "see through shirt",
+          "source_refs": [
+            "danbooru:wiki:takanashi_kiara_(casual)",
+            "gelbooru:wiki:takanashi_kiara_(casual)"
+          ]
+        },
+        {
+          "facet": "upper_body",
+          "canonical_tag": "blouse",
+          "value": "blouse",
+          "source_refs": [
+            "danbooru:wiki:takanashi_kiara_(casual)",
+            "gelbooru:wiki:takanashi_kiara_(casual)"
+          ]
+        },
+        {
+          "facet": "upper_body",
+          "canonical_tag": "bikini_top_only",
+          "value": "bikini top only",
+          "source_refs": [
+            "danbooru:wiki:takanashi_kiara_(casual)",
+            "gelbooru:wiki:takanashi_kiara_(casual)"
+          ]
+        },
+        {
+          "facet": "upper_body",
+          "canonical_tag": "bikini_under_clothes",
+          "value": "bikini under clothes",
+          "source_refs": [
+            "danbooru:wiki:takanashi_kiara_(casual)",
+            "gelbooru:wiki:takanashi_kiara_(casual)"
+          ]
+        },
+        {
+          "facet": "sleeves",
+          "canonical_tag": "short_sleeves",
+          "value": "short sleeves",
+          "source_refs": [
+            "danbooru:wiki:takanashi_kiara_(casual)",
+            "gelbooru:wiki:takanashi_kiara_(casual)"
+          ]
+        },
+        {
+          "facet": "lower_body",
+          "canonical_tag": "blue_shorts",
+          "value": "blue shorts",
+          "source_refs": [
+            "danbooru:wiki:takanashi_kiara_(casual)",
+            "gelbooru:wiki:takanashi_kiara_(casual)"
+          ]
+        },
+        {
+          "facet": "footwear",
+          "canonical_tag": "gladiator_sandals",
+          "value": "gladiator sandals",
+          "source_refs": [
+            "danbooru:wiki:takanashi_kiara_(casual)",
+            "gelbooru:wiki:takanashi_kiara_(casual)"
+          ]
+        },
+        {
+          "facet": "hair",
+          "canonical_tag": "medium_hair",
+          "value": "medium hair",
+          "source_refs": [
+            "danbooru:wiki:takanashi_kiara_(casual)"
+          ]
+        },
+        {
+          "facet": "hair_accessory",
+          "canonical_tag": "low_twin_braids",
+          "value": "low twin braids",
+          "source_refs": [
+            "danbooru:wiki:takanashi_kiara_(casual)",
+            "gelbooru:wiki:takanashi_kiara_(casual)"
+          ]
+        },
+        {
+          "facet": "hair_accessory",
+          "canonical_tag": "swept_bangs",
+          "value": "swept bangs",
+          "source_refs": [
+            "danbooru:wiki:takanashi_kiara_(casual)",
+            "gelbooru:wiki:takanashi_kiara_(casual)"
+          ]
+        },
+        {
+          "facet": "hair_accessory",
+          "canonical_tag": "hair_flaps",
+          "value": "hair flaps",
+          "source_refs": [
+            "danbooru:wiki:takanashi_kiara_(casual)",
+            "gelbooru:wiki:takanashi_kiara_(casual)"
+          ]
+        },
+        {
+          "facet": "hair_accessory",
+          "canonical_tag": "white_hairband",
+          "value": "white hairband",
+          "source_refs": [
+            "danbooru:wiki:takanashi_kiara_(casual)",
+            "gelbooru:wiki:takanashi_kiara_(casual)"
+          ]
+        }
+      ]
+    }
+  ]
+}

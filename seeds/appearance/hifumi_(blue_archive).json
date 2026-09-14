@@ -1,0 +1,134 @@
+{
+  "character_tag": "hifumi_(blue_archive)",
+  "sources": [
+    {
+      "id": "danbooru:wiki:hifumi_(blue_archive)",
+      "source_site": "danbooru",
+      "source_kind": "wiki",
+      "source_key": "hifumi_(blue_archive)",
+      "source_url": "https://danbooru.donmai.us/wiki_pages/hifumi_(blue_archive).json",
+      "source_tier": 1,
+      "title": "hifumi_(blue_archive)",
+      "excerpt": "long hair|long]] [[blonde hair]] with [[low twintails]]. Hifumi has a bright [[yellow eyes]] and an average figure. Hifumi wears a standard [[white cardigan]] with [[blue sailor collar]] and [[yellow bowtie]], along",
+      "captured_at": "2026-09-13",
+      "source_sha256": "563e250767eddea9b62bfaef923dac90fb506cdba59d35aedb3aefebc9abddd5"
+    },
+    {
+      "id": "gelbooru:wiki:hifumi_(blue_archive)",
+      "source_site": "gelbooru",
+      "source_kind": "wiki",
+      "source_key": "hifumi_(blue_archive)",
+      "source_url": "https://gelbooru.com/index.php?page=wiki&s=view&id=hifumi_(blue_archive)",
+      "source_tier": 1,
+      "title": "hifumi_(blue_archive)",
+      "excerpt": "A character from [[Blue Archive]]. Member of the [[Make-Up Work Club (blue archive)|]]. \r\n\r\nHer full name is Ajitani Hifumi.\r\n\r\nUsually seen with [[Peroro_(blue_archive)|]]-themed merchandise like her [[white",
+      "captured_at": "2026-09-13",
+      "source_sha256": "bf192bb81a66e75c4deddeb721028127c084bd852f80ef94e7863347ec7e536f"
+    }
+  ],
+  "profiles": [
+    {
+      "appearance_key": "hifumi_(blue_archive)::default",
+      "variant_tag": "hifumi_(blue_archive)",
+      "display_name": "Hifumi default appearance",
+      "appearance_kind": "default",
+      "is_default": true,
+      "status": "published",
+      "confidence": "high",
+      "provenance": "danbooru_gelbooru_wiki_reviewed",
+      "notes": "Blue Archive Make-Up Work Club member Ajitani Hifumi default appearance.",
+      "features": [
+        {
+          "facet": "hair",
+          "canonical_tag": "long_hair",
+          "value": "Long hair",
+          "source_refs": [
+            "danbooru:wiki:hifumi_(blue_archive)",
+            "gelbooru:wiki:hifumi_(blue_archive)"
+          ]
+        },
+        {
+          "facet": "hair",
+          "canonical_tag": "blonde_hair",
+          "value": "Blonde hair",
+          "source_refs": [
+            "danbooru:wiki:hifumi_(blue_archive)",
+            "gelbooru:wiki:hifumi_(blue_archive)"
+          ]
+        },
+        {
+          "facet": "hair_accessory",
+          "canonical_tag": "low_twintails",
+          "value": "Low twintails",
+          "source_refs": [
+            "danbooru:wiki:hifumi_(blue_archive)",
+            "gelbooru:wiki:hifumi_(blue_archive)"
+          ]
+        },
+        {
+          "facet": "eyes",
+          "canonical_tag": "yellow_eyes",
+          "value": "Yellow eyes",
+          "source_refs": [
+            "danbooru:wiki:hifumi_(blue_archive)",
+            "gelbooru:wiki:hifumi_(blue_archive)"
+          ]
+        },
+        {
+          "facet": "upper_body",
+          "canonical_tag": "white_cardigan",
+          "value": "White cardigan",
+          "source_refs": [
+            "danbooru:wiki:hifumi_(blue_archive)",
+            "gelbooru:wiki:hifumi_(blue_archive)"
+          ]
+        },
+        {
+          "facet": "neck",
+          "canonical_tag": "blue_sailor_collar",
+          "value": "Blue sailor collar",
+          "source_refs": [
+            "danbooru:wiki:hifumi_(blue_archive)",
+            "gelbooru:wiki:hifumi_(blue_archive)"
+          ]
+        },
+        {
+          "facet": "neck",
+          "canonical_tag": "yellow_bowtie",
+          "value": "Yellow bowtie",
+          "source_refs": [
+            "danbooru:wiki:hifumi_(blue_archive)",
+            "gelbooru:wiki:hifumi_(blue_archive)"
+          ]
+        },
+        {
+          "facet": "lower_body",
+          "canonical_tag": "blue_skirt",
+          "value": "Blue skirt",
+          "source_refs": [
+            "danbooru:wiki:hifumi_(blue_archive)",
+            "gelbooru:wiki:hifumi_(blue_archive)"
+          ]
+        },
+        {
+          "facet": "legwear",
+          "canonical_tag": "black_pantyhose",
+          "value": "Black pantyhose",
+          "source_refs": [
+            "danbooru:wiki:hifumi_(blue_archive)",
+            "gelbooru:wiki:hifumi_(blue_archive)"
+          ]
+        },
+        {
+          "facet": "footwear",
+          "canonical_tag": "white_shoes",
+          "value": "White shoes",
+          "source_refs": [
+            "danbooru:wiki:hifumi_(blue_archive)",
+            "gelbooru:wiki:hifumi_(blue_archive)"
+          ]
+        }
+      ]
+    }
+  ]
+}

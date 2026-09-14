@@ -1,0 +1,105 @@
+{
+  "character_tag": "ookami_mio",
+  "sources": [
+    {
+      "id": "danbooru:wiki:ookami_mio_(casual)",
+      "source_site": "danbooru",
+      "source_kind": "wiki",
+      "source_key": "ookami_mio_(casual)",
+      "source_url": "https://danbooru.donmai.us/wiki_pages/ookami_mio_(casual).json",
+      "source_tier": 1,
+      "title": "ookami_mio_(casual)",
+      "excerpt": "The 3rd [[official alternate costume|costume]] of [[hololive]]'s [[Ookami Mio]], in chronological order, as seen in post #3724399 and post #3724400. It comes in 2 versions, one with a hoodie and another with a white shirt.\r\n\r\nThe former consists of a [[two-tone hoodie|two-tone]] [[black hoodie|black]] and [[white hoodie]] with a [[paw print pattern]] and [[sleeves past wrists|sleeves past her wrists]], a [[black choker]], [[black shorts|black]] [[ short shorts]] a [[black pantyhose]] and [[white footwear|white]] [[sneakers]].\r\n\r\nThe latter, meanwhile, replaces the hoodie with a [[long sleeves|long-sleeved]] [[white shirt|white]] [[asymmetrical clothes|asymmetrical]] [[asymmetrical shirt|shirt]] with a [[shoulder cutout]] and the pantyhose with black [[socks]].\r\n\r\nOriginally, she used her regular hairstyle with this outfit, but she later got the same [[wavy hair|wavy]] [[low twintails]] from her 5th outfit as an option.",
+      "captured_at": "2026-08-31"
+    },
+    {
+      "id": "gelbooru:wiki:ookami_mio_(casual)",
+      "source_site": "gelbooru",
+      "source_kind": "wiki",
+      "source_key": "ookami_mio_(casual)",
+      "source_url": "https://gelbooru.com/index.php?page=wiki&s=view&id=ookami_mio_(casual)",
+      "source_tier": 1,
+      "title": "ookami_mio_(casual)",
+      "excerpt": "The 3rd [[official alternate costume|costume]] of [[hololive]]'s [[Ookami Mio]], in chronological order, as seen in post #3724399 and post #3724400. It comes in 2 versions, one with a hoodie and another with a white shirt.\r\n\r\nThe former consists of a [[two-tone hoodie|two-tone]] [[black hoodie|black]] and [[white hoodie]] with a [[paw print pattern]] and [[sleeves past wrists|sleeves past her wrists]], a [[black choker]], [[black shorts|black]] [[ short shorts]] a [[black pantyhose]] and [[white footwear|white]] [[sneakers]].\r\n\r\nThe latter, meanwhile, replaces the hoodie with a [[long sleeves|long-sleeved]] [[white shirt|white]] [[asymmetrical clothes|asymmetrical]] [[asymmetrical shirt|shirt]] with a [[shoulder cutout]] and the pantyhose with black [[socks]].\r\n\r\nOriginally, she used her regular hairstyle with this outfit, but she later got the same [[wavy hair|wavy]] [[low twintails]] from her 5th outfit as an option.",
+      "captured_at": "2026-08-31"
+    }
+  ],
+  "profiles": [
+    {
+      "appearance_key": "ookami_mio::ookami_mio_(casual)",
+      "variant_tag": "ookami_mio_(casual)",
+      "display_name": "ookami_mio casual",
+      "appearance_kind": "costume",
+      "is_default": false,
+      "status": "published",
+      "confidence": "high",
+      "provenance": "danbooru_gelbooru_wiki_reviewed",
+      "notes": "Official named costume; alternatives, props, lore, cosplay, shared uniforms, and unsupported optional details excluded.",
+      "features": [
+        {
+          "facet": "accessories",
+          "canonical_tag": "paw_print_pattern",
+          "value": "Paw print pattern",
+          "source_refs": [
+            "danbooru:wiki:ookami_mio_(casual)",
+            "gelbooru:wiki:ookami_mio_(casual)"
+          ]
+        },
+        {
+          "facet": "neck",
+          "canonical_tag": "black_choker",
+          "value": "Black choker",
+          "source_refs": [
+            "danbooru:wiki:ookami_mio_(casual)",
+            "gelbooru:wiki:ookami_mio_(casual)"
+          ]
+        },
+        {
+          "facet": "lower_body",
+          "canonical_tag": "black_shorts",
+          "value": "Black shorts",
+          "source_refs": [
+            "danbooru:wiki:ookami_mio_(casual)",
+            "gelbooru:wiki:ookami_mio_(casual)"
+          ]
+        },
+        {
+          "facet": "sleeves",
+          "canonical_tag": "long_sleeves",
+          "value": "Long sleeves",
+          "source_refs": [
+            "danbooru:wiki:ookami_mio_(casual)",
+            "gelbooru:wiki:ookami_mio_(casual)"
+          ]
+        },
+        {
+          "facet": "footwear",
+          "canonical_tag": "white_footwear",
+          "value": "White footwear",
+          "source_refs": [
+            "danbooru:wiki:ookami_mio_(casual)",
+            "gelbooru:wiki:ookami_mio_(casual)"
+          ]
+        },
+        {
+          "facet": "footwear",
+          "canonical_tag": "sneakers",
+          "value": "Sneakers",
+          "source_refs": [
+            "danbooru:wiki:ookami_mio_(casual)",
+            "gelbooru:wiki:ookami_mio_(casual)"
+          ]
+        },
+        {
+          "facet": "legwear",
+          "canonical_tag": "socks",
+          "value": "Socks",
+          "source_refs": [
+            "danbooru:wiki:ookami_mio_(casual)",
+            "gelbooru:wiki:ookami_mio_(casual)"
+          ]
+        }
+      ]
+    }
+  ]
+}

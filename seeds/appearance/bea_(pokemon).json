@@ -1,0 +1,179 @@
+{
+  "character_tag": "bea_(pokemon)",
+  "sources": [
+    {
+      "id": "danbooru:wiki:bea_(pokemon)",
+      "source_site": "danbooru",
+      "source_kind": "wiki",
+      "source_key": "bea_(pokemon)",
+      "source_url": "https://danbooru.donmai.us/wiki_pages/bea_(pokemon).json",
+      "source_tier": 1,
+      "title": "bea_(pokemon)",
+      "excerpt": "hort hair|short]] [[grey hair]] with [[hair between eyes|long bangs]]. She wears a [[black hairband|black]] [[bow hairband]], a [[black unitard]] [[bodysuit under clothes|under]] a [[collared shirt|collared]] [[short",
+      "captured_at": "2026-09-13",
+      "source_sha256": "bedc7d2d5e2cc1c1fbc204c7657d62bc502934a701e1bbed7ca01ea42eb55209"
+    },
+    {
+      "id": "gelbooru:wiki:bea_(pokemon)",
+      "source_site": "gelbooru",
+      "source_kind": "wiki",
+      "source_key": "bea_(pokemon)",
+      "source_url": "https://gelbooru.com/index.php?page=wiki&s=view&id=bea_(pokemon)",
+      "source_tier": 1,
+      "title": "bea_(pokemon)",
+      "excerpt": "hort hair|short]] [[grey hair]] with [[hair between eyes|long bangs]]. She wears a [[black hairband|black]] [[bow hairband|hairband]], a [[black bodysuit|bodysuit]] [[bodysuit under clothes|under]] a [[collared",
+      "captured_at": "2026-09-13",
+      "source_sha256": "1524a3fb3173aa82e31483e4ac06627201d8b0b22fdba5bba62a4a3b3ed0f49d"
+    }
+  ],
+  "profiles": [
+    {
+      "appearance_key": "bea_(pokemon)::default",
+      "variant_tag": "bea_(pokemon)",
+      "display_name": "Bea default appearance",
+      "appearance_kind": "default",
+      "is_default": true,
+      "status": "published",
+      "confidence": "high",
+      "provenance": "danbooru_gelbooru_wiki_reviewed",
+      "notes": "Pokémon Sword Gym Leader Bea (Saitou) default appearance. Counterpart is Allister in Shield.",
+      "features": [
+        {
+          "facet": "eyes",
+          "canonical_tag": "grey_eyes",
+          "value": "Grey eyes",
+          "source_refs": [
+            "danbooru:wiki:bea_(pokemon)",
+            "gelbooru:wiki:bea_(pokemon)"
+          ]
+        },
+        {
+          "facet": "hair",
+          "canonical_tag": "grey_hair",
+          "value": "Grey hair",
+          "source_refs": [
+            "danbooru:wiki:bea_(pokemon)",
+            "gelbooru:wiki:bea_(pokemon)"
+          ]
+        },
+        {
+          "facet": "hair",
+          "canonical_tag": "short_hair",
+          "value": "Short hair",
+          "source_refs": [
+            "danbooru:wiki:bea_(pokemon)",
+            "gelbooru:wiki:bea_(pokemon)"
+          ]
+        },
+        {
+          "facet": "hair",
+          "canonical_tag": "hair_between_eyes",
+          "value": "Hair between eyes",
+          "source_refs": [
+            "danbooru:wiki:bea_(pokemon)",
+            "gelbooru:wiki:bea_(pokemon)"
+          ]
+        },
+        {
+          "facet": "hair_accessory",
+          "canonical_tag": "bow_hairband",
+          "value": "Bow hairband",
+          "source_refs": [
+            "danbooru:wiki:bea_(pokemon)",
+            "gelbooru:wiki:bea_(pokemon)"
+          ]
+        },
+        {
+          "facet": "hair_accessory",
+          "canonical_tag": "black_hairband",
+          "value": "Black hairband",
+          "source_refs": [
+            "danbooru:wiki:bea_(pokemon)",
+            "gelbooru:wiki:bea_(pokemon)"
+          ]
+        },
+        {
+          "facet": "dress",
+          "canonical_tag": "black_bodysuit",
+          "value": "Black bodysuit",
+          "source_refs": [
+            "danbooru:wiki:bea_(pokemon)",
+            "gelbooru:wiki:bea_(pokemon)"
+          ]
+        },
+        {
+          "facet": "dress",
+          "canonical_tag": "bodysuit_under_clothes",
+          "value": "Bodysuit under clothes",
+          "source_refs": [
+            "danbooru:wiki:bea_(pokemon)",
+            "gelbooru:wiki:bea_(pokemon)"
+          ]
+        },
+        {
+          "facet": "upper_body",
+          "canonical_tag": "collared_shirt",
+          "value": "Collared shirt",
+          "source_refs": [
+            "danbooru:wiki:bea_(pokemon)",
+            "gelbooru:wiki:bea_(pokemon)"
+          ]
+        },
+        {
+          "facet": "sleeves",
+          "canonical_tag": "short_sleeves",
+          "value": "Short sleeves",
+          "source_refs": [
+            "danbooru:wiki:bea_(pokemon)",
+            "gelbooru:wiki:bea_(pokemon)"
+          ]
+        },
+        {
+          "facet": "upper_body",
+          "canonical_tag": "print_shirt",
+          "value": "Print shirt",
+          "source_refs": [
+            "danbooru:wiki:bea_(pokemon)",
+            "gelbooru:wiki:bea_(pokemon)"
+          ]
+        },
+        {
+          "facet": "lower_body",
+          "canonical_tag": "side_slit_shorts",
+          "value": "Side slit shorts",
+          "source_refs": [
+            "danbooru:wiki:bea_(pokemon)",
+            "gelbooru:wiki:bea_(pokemon)"
+          ]
+        },
+        {
+          "facet": "lower_body",
+          "canonical_tag": "print_shorts",
+          "value": "Print shorts",
+          "source_refs": [
+            "danbooru:wiki:bea_(pokemon)",
+            "gelbooru:wiki:bea_(pokemon)"
+          ]
+        },
+        {
+          "facet": "gloves",
+          "canonical_tag": "single_glove",
+          "value": "Single glove",
+          "source_refs": [
+            "danbooru:wiki:bea_(pokemon)",
+            "gelbooru:wiki:bea_(pokemon)"
+          ]
+        },
+        {
+          "facet": "gloves",
+          "canonical_tag": "partially_fingerless_gloves",
+          "value": "Partially fingerless gloves",
+          "source_refs": [
+            "danbooru:wiki:bea_(pokemon)",
+            "gelbooru:wiki:bea_(pokemon)"
+          ]
+        }
+      ]
+    }
+  ]
+}

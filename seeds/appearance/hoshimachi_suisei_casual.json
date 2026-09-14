@@ -1,0 +1,257 @@
+{
+  "character_tag": "hoshimachi_suisei",
+  "sources": [
+    {
+      "id": "danbooru:wiki:hoshimachi_suisei_(casual)",
+      "source_site": "danbooru",
+      "source_kind": "wiki",
+      "source_key": "hoshimachi_suisei_(casual)",
+      "source_url": "https://danbooru.donmai.us/wiki_pages/hoshimachi_suisei_(casual).json",
+      "source_tier": 1,
+      "title": "hoshimachi suisei (casual)",
+      "excerpt": "The 3rd [[official alternate costume|costume]] of [[hololive]]'s [[Hoshimachi Suisei]], debuted on 2020-11-12.\r\n\r\nIt consists of a [[black hat|black]] [[quilted headwear|quilted]] [[beret]], a [[short dress|short]] [[collared dress|collared]] [[black dress]] (sometimes depicted as a [[skirt set]]) with [[short sleeves|short]] [[lace sleeves]], a pair of [[bow earrings]], a [[black choker|black]] [[lace choker]], a [[neck ribbon]], a [[blue jacket|dark blue]] [[long sleeves|long-sleeved]] [[two-sided jacket|two-sided]] [[quilted jacket]], a [[black belt]] with her name on it, an [[orange pantyhose]] with an [[o-ring thigh strap]] attached to a [[single garter strap]], and a pair of [[black boots|black]] [[high heel boots|high-heel]] [[lace-up boots]].\r\n\r\nHer [[official alternate hairstyle|official hairstyle]] with this attire is [[long hair]] [[colored inner hair]] with [[swept bangs]] and a [[one side up]] with a [[green ribbon|green]] [[hair ribbon]].\r\n\r\nh4. Appearance\r\n\r\n* !post #6271385: Profile\r\n* !post #5797750: Merchandise",
+      "captured_at": "2026-08-31"
+    },
+    {
+      "id": "gelbooru:wiki:hoshimachi_suisei_(casual)",
+      "source_site": "gelbooru",
+      "source_kind": "wiki",
+      "source_key": "hoshimachi_suisei_(casual)",
+      "source_url": "https://gelbooru.com/index.php?page=wiki&s=view&id=hoshimachi_suisei_(casual)",
+      "source_tier": 1,
+      "title": "hoshimachi suisei (casual)",
+      "excerpt": "The 3rd [[official alternate costume|costume]] of [[Hololive]]'s [[Hoshimachi Suisei]], as seen in post #5797750, debuted on 2020-11-12.\r\n\r\nIt consists of a [[black hat|black]] [[quilted headwear|quilted]] [[beret]], a [[short dress|short]] [[collared dress|collared]] [[black dress]] (sometimes depicted as a [[skirt set]]) with [[short sleeves|short]] [[lace]] [[lace sleeves|sleeves]], a pair of [[bow earrings]], a [[black choker|black]] [[lace choker]], a [[neck ribbon]], a [[blue jacket|dark blue]] [[long sleeves|long-sleeved]] [[two-sided jacket|two-sided]] [[quilted jacket]], a [[black belt]] with her name on it, an [[orange pantyhose]] with an [[o-ring thigh strap]] attached to a [[single garter strap]], and a pair of [[black footwear|black]] [[high heel boots|high-heel]] [[lace-up boots]].\r\n\r\nHer [[official alternate hairstyle|official hairstyle]] with this attire is [[long hair]] [[colored inner hair]] with [[swept bangs]] and a [[one side up]] with a [[green ribbon|green]] [[hair ribbon]].",
+      "captured_at": "2026-08-31"
+    }
+  ],
+  "profiles": [
+    {
+      "appearance_key": "hoshimachi_suisei::hoshimachi_suisei_(casual)",
+      "variant_tag": "hoshimachi_suisei_(casual)",
+      "display_name": "hoshimachi suisei (casual)",
+      "appearance_kind": "costume",
+      "is_default": false,
+      "status": "published",
+      "confidence": "high",
+      "provenance": "danbooru_gelbooru_wiki_reviewed",
+      "notes": "Official named costume; shared uniforms, props, lore, cosplay, and optional contextual items excluded.",
+      "features": [
+        {
+          "facet": "headwear",
+          "canonical_tag": "beret",
+          "value": "Beret",
+          "source_refs": [
+            "danbooru:wiki:hoshimachi_suisei_(casual)",
+            "gelbooru:wiki:hoshimachi_suisei_(casual)"
+          ]
+        },
+        {
+          "facet": "accessories",
+          "canonical_tag": "black_belt",
+          "value": "Black belt",
+          "source_refs": [
+            "danbooru:wiki:hoshimachi_suisei_(casual)",
+            "gelbooru:wiki:hoshimachi_suisei_(casual)"
+          ]
+        },
+        {
+          "facet": "footwear",
+          "canonical_tag": "black_boots",
+          "value": "Black boots",
+          "source_refs": [
+            "danbooru:wiki:hoshimachi_suisei_(casual)"
+          ]
+        },
+        {
+          "facet": "neck",
+          "canonical_tag": "black_choker",
+          "value": "Black choker",
+          "source_refs": [
+            "danbooru:wiki:hoshimachi_suisei_(casual)",
+            "gelbooru:wiki:hoshimachi_suisei_(casual)"
+          ]
+        },
+        {
+          "facet": "dress",
+          "canonical_tag": "black_dress",
+          "value": "Black dress",
+          "source_refs": [
+            "danbooru:wiki:hoshimachi_suisei_(casual)",
+            "gelbooru:wiki:hoshimachi_suisei_(casual)"
+          ]
+        },
+        {
+          "facet": "headwear",
+          "canonical_tag": "black_hat",
+          "value": "Black hat",
+          "source_refs": [
+            "danbooru:wiki:hoshimachi_suisei_(casual)",
+            "gelbooru:wiki:hoshimachi_suisei_(casual)"
+          ]
+        },
+        {
+          "facet": "jacket",
+          "canonical_tag": "blue_jacket",
+          "value": "Blue jacket",
+          "source_refs": [
+            "danbooru:wiki:hoshimachi_suisei_(casual)",
+            "gelbooru:wiki:hoshimachi_suisei_(casual)"
+          ]
+        },
+        {
+          "facet": "jewelry",
+          "canonical_tag": "bow_earrings",
+          "value": "Bow earrings",
+          "source_refs": [
+            "danbooru:wiki:hoshimachi_suisei_(casual)",
+            "gelbooru:wiki:hoshimachi_suisei_(casual)"
+          ]
+        },
+        {
+          "facet": "neck",
+          "canonical_tag": "collared_dress",
+          "value": "Collared dress",
+          "source_refs": [
+            "danbooru:wiki:hoshimachi_suisei_(casual)",
+            "gelbooru:wiki:hoshimachi_suisei_(casual)"
+          ]
+        },
+        {
+          "facet": "hair",
+          "canonical_tag": "colored_inner_hair",
+          "value": "Colored inner hair",
+          "source_refs": [
+            "danbooru:wiki:hoshimachi_suisei_(casual)",
+            "gelbooru:wiki:hoshimachi_suisei_(casual)"
+          ]
+        },
+        {
+          "facet": "hair_accessory",
+          "canonical_tag": "green_ribbon",
+          "value": "Green ribbon",
+          "source_refs": [
+            "danbooru:wiki:hoshimachi_suisei_(casual)",
+            "gelbooru:wiki:hoshimachi_suisei_(casual)"
+          ]
+        },
+        {
+          "facet": "hair_accessory",
+          "canonical_tag": "hair_ribbon",
+          "value": "Hair ribbon",
+          "source_refs": [
+            "danbooru:wiki:hoshimachi_suisei_(casual)",
+            "gelbooru:wiki:hoshimachi_suisei_(casual)"
+          ]
+        },
+        {
+          "facet": "footwear",
+          "canonical_tag": "high_heel_boots",
+          "value": "High heel boots",
+          "source_refs": [
+            "danbooru:wiki:hoshimachi_suisei_(casual)",
+            "gelbooru:wiki:hoshimachi_suisei_(casual)"
+          ]
+        },
+        {
+          "facet": "neck",
+          "canonical_tag": "lace_choker",
+          "value": "Lace choker",
+          "source_refs": [
+            "danbooru:wiki:hoshimachi_suisei_(casual)",
+            "gelbooru:wiki:hoshimachi_suisei_(casual)"
+          ]
+        },
+        {
+          "facet": "sleeves",
+          "canonical_tag": "lace_sleeves",
+          "value": "Lace sleeves",
+          "source_refs": [
+            "danbooru:wiki:hoshimachi_suisei_(casual)",
+            "gelbooru:wiki:hoshimachi_suisei_(casual)"
+          ]
+        },
+        {
+          "facet": "hair",
+          "canonical_tag": "long_hair",
+          "value": "Long hair",
+          "source_refs": [
+            "danbooru:wiki:hoshimachi_suisei_(casual)",
+            "gelbooru:wiki:hoshimachi_suisei_(casual)"
+          ]
+        },
+        {
+          "facet": "sleeves",
+          "canonical_tag": "long_sleeves",
+          "value": "Long sleeves",
+          "source_refs": [
+            "danbooru:wiki:hoshimachi_suisei_(casual)",
+            "gelbooru:wiki:hoshimachi_suisei_(casual)"
+          ]
+        },
+        {
+          "facet": "hair_accessory",
+          "canonical_tag": "neck_ribbon",
+          "value": "Neck ribbon",
+          "source_refs": [
+            "danbooru:wiki:hoshimachi_suisei_(casual)",
+            "gelbooru:wiki:hoshimachi_suisei_(casual)"
+          ]
+        },
+        {
+          "facet": "legwear",
+          "canonical_tag": "orange_pantyhose",
+          "value": "Orange pantyhose",
+          "source_refs": [
+            "danbooru:wiki:hoshimachi_suisei_(casual)",
+            "gelbooru:wiki:hoshimachi_suisei_(casual)"
+          ]
+        },
+        {
+          "facet": "jacket",
+          "canonical_tag": "quilted_jacket",
+          "value": "Quilted jacket",
+          "source_refs": [
+            "danbooru:wiki:hoshimachi_suisei_(casual)",
+            "gelbooru:wiki:hoshimachi_suisei_(casual)"
+          ]
+        },
+        {
+          "facet": "dress",
+          "canonical_tag": "short_dress",
+          "value": "Short dress",
+          "source_refs": [
+            "danbooru:wiki:hoshimachi_suisei_(casual)",
+            "gelbooru:wiki:hoshimachi_suisei_(casual)"
+          ]
+        },
+        {
+          "facet": "sleeves",
+          "canonical_tag": "short_sleeves",
+          "value": "Short sleeves",
+          "source_refs": [
+            "danbooru:wiki:hoshimachi_suisei_(casual)",
+            "gelbooru:wiki:hoshimachi_suisei_(casual)"
+          ]
+        },
+        {
+          "facet": "lower_body",
+          "canonical_tag": "skirt_set",
+          "value": "Skirt set",
+          "source_refs": [
+            "danbooru:wiki:hoshimachi_suisei_(casual)",
+            "gelbooru:wiki:hoshimachi_suisei_(casual)"
+          ]
+        },
+        {
+          "facet": "hair_accessory",
+          "canonical_tag": "swept_bangs",
+          "value": "Swept bangs",
+          "source_refs": [
+            "danbooru:wiki:hoshimachi_suisei_(casual)",
+            "gelbooru:wiki:hoshimachi_suisei_(casual)"
+          ]
+        }
+      ]
+    }
+  ]
+}

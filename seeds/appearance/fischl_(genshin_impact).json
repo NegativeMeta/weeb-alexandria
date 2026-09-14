@@ -1,0 +1,233 @@
+{
+  "character_tag": "fischl_(genshin_impact)",
+  "sources": [
+    {
+      "id": "danbooru:wiki:fischl_(genshin_impact)",
+      "source_site": "danbooru",
+      "source_kind": "wiki",
+      "source_key": "fischl_(genshin_impact)",
+      "source_url": "https://danbooru.donmai.us/wiki_pages/fischl_(genshin_impact).json",
+      "source_tier": 1,
+      "title": "fischl_(genshin_impact)",
+      "excerpt": "[[Genshin Impact]] character.\r\n\r\nA mysterious girl who calls herself \"Prinzessin der Verurteilung\" and travels with a night [[crow]] named [[Oz (genshin impact)|]].\r\nCurrently serves as an investigator in the",
+      "captured_at": "2026-09-13",
+      "source_sha256": "e02b78cea35841677f8485f744e6c67c643389448dac631c3bdbb88cc64c4d67"
+    },
+    {
+      "id": "gelbooru:wiki:fischl_(genshin_impact)",
+      "source_site": "gelbooru",
+      "source_kind": "wiki",
+      "source_key": "fischl_(genshin_impact)",
+      "source_url": "https://gelbooru.com/index.php?page=wiki&s=view&id=fischl_(genshin_impact)",
+      "source_tier": 1,
+      "title": "fischl_(genshin_impact)",
+      "excerpt": "onde_hair , long_hair , two_side_up , asymmetrical_bangs . Brown_legwear , single_thighhigh , garter_straps , single_garter_strap , black_leotard , dress , detached_sleeves , tailcoat , fishnet_bodystocking .",
+      "captured_at": "2026-09-13",
+      "source_sha256": "b7c5387b1a107731cae709d74066e4589af18f83ff14d4f25e7abbbbe914290e"
+    }
+  ],
+  "profiles": [
+    {
+      "appearance_key": "fischl_(genshin_impact)::default",
+      "variant_tag": "fischl_(genshin_impact)",
+      "display_name": "Fischl default appearance",
+      "appearance_kind": "default",
+      "is_default": true,
+      "status": "published",
+      "confidence": "high",
+      "provenance": "danbooru_gelbooru_wiki_reviewed",
+      "notes": "Genshin Impact Prinzessin der Verurteilung default appearance.",
+      "features": [
+        {
+          "facet": "hair",
+          "canonical_tag": "blonde_hair",
+          "value": "Blonde hair",
+          "source_refs": [
+            "danbooru:wiki:fischl_(genshin_impact)",
+            "gelbooru:wiki:fischl_(genshin_impact)"
+          ]
+        },
+        {
+          "facet": "hair",
+          "canonical_tag": "long_hair",
+          "value": "Long hair",
+          "source_refs": [
+            "danbooru:wiki:fischl_(genshin_impact)",
+            "gelbooru:wiki:fischl_(genshin_impact)"
+          ]
+        },
+        {
+          "facet": "hair_accessory",
+          "canonical_tag": "two_side_up",
+          "value": "Two side up",
+          "source_refs": [
+            "danbooru:wiki:fischl_(genshin_impact)",
+            "gelbooru:wiki:fischl_(genshin_impact)"
+          ]
+        },
+        {
+          "facet": "hair_accessory",
+          "canonical_tag": "asymmetrical_bangs",
+          "value": "Asymmetrical bangs",
+          "source_refs": [
+            "danbooru:wiki:fischl_(genshin_impact)",
+            "gelbooru:wiki:fischl_(genshin_impact)"
+          ]
+        },
+        {
+          "facet": "hair_accessory",
+          "canonical_tag": "black_ribbon",
+          "value": "Black ribbon",
+          "source_refs": [
+            "danbooru:wiki:fischl_(genshin_impact)",
+            "gelbooru:wiki:fischl_(genshin_impact)"
+          ]
+        },
+        {
+          "facet": "hair_accessory",
+          "canonical_tag": "hair_ribbon",
+          "value": "Hair ribbon",
+          "source_refs": [
+            "danbooru:wiki:fischl_(genshin_impact)",
+            "gelbooru:wiki:fischl_(genshin_impact)"
+          ]
+        },
+        {
+          "facet": "hair_accessory",
+          "canonical_tag": "purple_ribbon",
+          "value": "Purple ribbon",
+          "source_refs": [
+            "danbooru:wiki:fischl_(genshin_impact)",
+            "gelbooru:wiki:fischl_(genshin_impact)"
+          ]
+        },
+        {
+          "facet": "eyes",
+          "canonical_tag": "green_eyes",
+          "value": "Green eyes",
+          "source_refs": [
+            "danbooru:wiki:fischl_(genshin_impact)",
+            "gelbooru:wiki:fischl_(genshin_impact)"
+          ]
+        },
+        {
+          "facet": "body",
+          "canonical_tag": "small_breasts",
+          "value": "Small breasts",
+          "source_refs": [
+            "danbooru:wiki:fischl_(genshin_impact)",
+            "gelbooru:wiki:fischl_(genshin_impact)"
+          ]
+        },
+        {
+          "facet": "body",
+          "canonical_tag": "petite",
+          "value": "Petite build",
+          "source_refs": [
+            "danbooru:wiki:fischl_(genshin_impact)",
+            "gelbooru:wiki:fischl_(genshin_impact)"
+          ]
+        },
+        {
+          "facet": "jacket",
+          "canonical_tag": "tailcoat",
+          "value": "Tailcoat",
+          "source_refs": [
+            "danbooru:wiki:fischl_(genshin_impact)",
+            "gelbooru:wiki:fischl_(genshin_impact)"
+          ]
+        },
+        {
+          "facet": "sleeves",
+          "canonical_tag": "detached_sleeves",
+          "value": "Detached sleeves",
+          "source_refs": [
+            "danbooru:wiki:fischl_(genshin_impact)",
+            "gelbooru:wiki:fischl_(genshin_impact)"
+          ]
+        },
+        {
+          "facet": "sleeves",
+          "canonical_tag": "single_sleeve",
+          "value": "Single sleeve",
+          "source_refs": [
+            "danbooru:wiki:fischl_(genshin_impact)",
+            "gelbooru:wiki:fischl_(genshin_impact)"
+          ]
+        },
+        {
+          "facet": "neck",
+          "canonical_tag": "collar",
+          "value": "Collar",
+          "source_refs": [
+            "danbooru:wiki:fischl_(genshin_impact)",
+            "gelbooru:wiki:fischl_(genshin_impact)"
+          ]
+        },
+        {
+          "facet": "neck",
+          "canonical_tag": "neck_ribbon",
+          "value": "Neck ribbon",
+          "source_refs": [
+            "danbooru:wiki:fischl_(genshin_impact)",
+            "gelbooru:wiki:fischl_(genshin_impact)"
+          ]
+        },
+        {
+          "facet": "legwear",
+          "canonical_tag": "single_thighhigh",
+          "value": "Single thighhigh",
+          "source_refs": [
+            "danbooru:wiki:fischl_(genshin_impact)",
+            "gelbooru:wiki:fischl_(genshin_impact)"
+          ]
+        },
+        {
+          "facet": "legwear",
+          "canonical_tag": "garter_straps",
+          "value": "Garter straps",
+          "source_refs": [
+            "danbooru:wiki:fischl_(genshin_impact)",
+            "gelbooru:wiki:fischl_(genshin_impact)"
+          ]
+        },
+        {
+          "facet": "dress",
+          "canonical_tag": "black_leotard",
+          "value": "Black leotard",
+          "source_refs": [
+            "danbooru:wiki:fischl_(genshin_impact)",
+            "gelbooru:wiki:fischl_(genshin_impact)"
+          ]
+        },
+        {
+          "facet": "gloves",
+          "canonical_tag": "gloves",
+          "value": "Gloves",
+          "source_refs": [
+            "danbooru:wiki:fischl_(genshin_impact)",
+            "gelbooru:wiki:fischl_(genshin_impact)"
+          ]
+        },
+        {
+          "facet": "gloves",
+          "canonical_tag": "bridal_gauntlets",
+          "value": "Bridal gauntlets",
+          "source_refs": [
+            "danbooru:wiki:fischl_(genshin_impact)",
+            "gelbooru:wiki:fischl_(genshin_impact)"
+          ]
+        },
+        {
+          "facet": "dress",
+          "canonical_tag": "fishnet_bodystocking",
+          "value": "Fishnet bodystocking",
+          "source_refs": [
+            "danbooru:wiki:fischl_(genshin_impact)",
+            "gelbooru:wiki:fischl_(genshin_impact)"
+          ]
+        }
+      ]
+    }
+  ]
+}

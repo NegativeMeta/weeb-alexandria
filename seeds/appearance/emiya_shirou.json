@@ -1,0 +1,51 @@
+{
+  "character_tag": "emiya_shirou",
+  "sources": [
+    {
+      "id": "danbooru:wiki:emiya_shirou",
+      "source_site": "danbooru",
+      "source_kind": "wiki",
+      "source_key": "emiya_shirou",
+      "source_url": "https://danbooru.donmai.us/wiki_pages/emiya_shirou.json",
+      "source_tier": 1,
+      "title": "Emiya Shirou",
+      "excerpt": "A teenager with short unkempt [[orange hair]] and [[yellow eyes]]. Usually wears a [[school uniform]], or alternatively, a [[white shirt]] with long blue [[raglan sleeves]].",
+      "captured_at": "2026-08-30"
+    },
+    {
+      "id": "gelbooru:wiki:emiya_shirou",
+      "source_site": "gelbooru",
+      "source_kind": "wiki",
+      "source_key": "emiya_shirou",
+      "source_url": "https://gelbooru.com/index.php?page=wiki&s=view&id=emiya_shirou",
+      "source_tier": 1,
+      "title": "Emiya Shirou",
+      "excerpt": "Emiya Shirou (衛宮 士郎) is the protagonist of Fate/stay_night . A male teenager with short unkempt orange hair and amber eyes. Usually wears a school uniform, or alternatively, a white shirt with long blue raglan_sleeves .",
+      "captured_at": "2026-08-30"
+    }
+  ],
+  "profiles": [
+    {
+      "appearance_key": "emiya_shirou::default",
+      "variant_tag": "emiya_shirou",
+      "display_name": "Default Emiya Shirou appearance",
+      "appearance_kind": "default",
+      "is_default": true,
+      "status": "published",
+      "confidence": "high",
+      "provenance": "danbooru_gelbooru_wiki_reviewed",
+      "notes": "Base Fate/stay night design only; Prisma Illya, Archer, Muramasa, and other alternate versions excluded.",
+      "features": [
+        {"facet":"hair","canonical_tag":"orange_hair","value":"Orange hair","source_refs":["danbooru:wiki:emiya_shirou"],"evidence":{"text":"short unkempt [[orange hair]]","observed_tag":"orange_hair"}},
+        {"facet":"eyes","canonical_tag":"yellow_eyes","value":"Yellow eyes","role":"alternative","source_refs":["danbooru:wiki:emiya_shirou"],"evidence":{"text":"[[yellow eyes]]","observed_tag":"yellow_eyes"}},
+        {"facet":"eyes","canonical_tag":"amber_eyes","value":"Amber eyes","role":"alternative","source_refs":["gelbooru:wiki:emiya_shirou"],"evidence":{"text":"amber eyes","observed_tag":"amber_eyes"}},
+        {"facet":"dress","canonical_tag":"school_uniform","value":"School uniform","role":"alternative","source_refs":["danbooru:wiki:emiya_shirou"],"evidence":{"text":"Usually wears a [[school uniform]]","observed_tag":"school_uniform"}},
+        {"facet":"upper_body","canonical_tag":"white_shirt","value":"White shirt","role":"alternative","source_refs":["danbooru:wiki:emiya_shirou"],"evidence":{"text":"a [[white shirt]]","observed_tag":"white_shirt"}},
+        {"facet":"sleeves","canonical_tag":"raglan_sleeves","value":"Long blue raglan sleeves","role":"alternative","source_refs":["danbooru:wiki:emiya_shirou"],"evidence":{"text":"long blue [[raglan sleeves]]","observed_tag":"raglan_sleeves"}}
+      ],
+      "conflicts": [
+        {"conflict_key":"eye_color","facet":"eyes","alternatives":["yellow_eyes","amber_eyes"],"status":"open","reason":"Danbooru describes yellow eyes while Gelbooru describes amber eyes.","source_refs":["danbooru:wiki:emiya_shirou","gelbooru:wiki:emiya_shirou"],"resolution_note":"Resolve only with a stronger character reference or official design source."}
+      ]
+    }
+  ]
+}

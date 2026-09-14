@@ -1,0 +1,230 @@
+{
+  "character_tag": "sakura_miko",
+  "sources": [
+    {
+      "id": "danbooru:wiki:sakura_miko_(casual)",
+      "source_site": "danbooru",
+      "source_kind": "wiki",
+      "source_key": "sakura_miko_(casual)",
+      "source_url": "https://danbooru.donmai.us/wiki_pages/sakura_miko_(casual).json",
+      "source_tier": 1,
+      "title": "sakura miko (casual)",
+      "excerpt": "The 2nd [[official alternate costume|costume]] of [[hololive]]'s [[Sakura Miko]], released in March 2021.\r\n\r\nHer casual attire consists of a [[black hat|black]] [[cat hat|cat]] [[beret]], a beige/[[yellow cardigan|light yellow cardigan]], an optional [[red scarf]], a [[collared shirt|collared]] [[long sleeves|long-sleeved]] [[white shirt]] with [[frilled sleeves]] and [[shoulder cutout]]s, a small [[red bowtie]] with a cat-shaped [[neck bell|neck]] [[jingle bell]], an [[underbust]] [[bodice]] with a [[red sash]], [[plaid skirt|plaid]] [[red skirt|red]] [[pleated skirt]] [[miniskirt]], [[black thighhighs]] held up with [[garter straps]] and [[black shoes|black]] [[loafers]]. She has [[red-framed eyewear|red-framed]] [[under-rim eyewear|bottom-rim glasses]] as an optional accesory.\r\n\r\nFor her [[official alternate hairstyle|official hairstyle]] with this costume, she has her [[long hair]] tied into [[low twintails]] with an [[ahoge]] and [[double-parted bangs]] decorated with a cherry blossom-shaped [[hairclip]] and small bows with [[cat hair ornament|cat ornaments]] on her twintails.\r\n\r\nh4. Appearance\r\n\r\n* !asset #25351536: Proifle\r\n* !post #4398758: Reference sheet\r\n* !post #6271386: Merchandise",
+      "captured_at": "2026-08-31"
+    },
+    {
+      "id": "gelbooru:wiki:sakura_miko_(casual)",
+      "source_site": "gelbooru",
+      "source_kind": "wiki",
+      "source_key": "sakura_miko_(casual)",
+      "source_url": "https://gelbooru.com/index.php?page=wiki&s=view&id=sakura_miko_(casual)",
+      "source_tier": 1,
+      "title": "sakura miko (casual)",
+      "excerpt": "The third [[official alternate costume|costume]] of [[hololive]]'s [[Sakura Miko]], as seen in post #4398758 and released in March 2021.\r\n\r\nHer casual attire consists of a [[black hat|black]] [[cat hat|cat]] [[beret]], a beige/[[yellow cardigan|light yellow cardigan]], an optional [[red scarf]], a [[collared shirt|collared]] [[long sleeves|long-sleeved]] [[white shirt]] with [[frilled sleeves]] and [[shoulder cutout]]s, a small [[red bowtie]] with a cat-shaped [[neck bell|neck]] [[jingle bell]], an [[underbust]] [[bodice]] with a [[red sash]], [[plaid skirt|plaid]] [[red skirt|red]] [[pleated skirt]] [[miniskirt]], [[black thighhighs]] held up with [[garter straps]] and [[black footwear|black]] [[loafers]]. She has [[red-framed eyewear|red-framed]] [[under-rim eyewear|bottom-rim glasses]] as an optional accesory.\r\n\r\nHer [[official alternate hairstyle|official hairstyle]] with this attire is [[long hair]] tied into [[low twintails]] with an [[ahoge]] and [[double-parted bangs]] decorated with a cherry blossom-shaped [[hairclip]] and small bows with [[cat hair ornament|cat ornaments]] on her twintails.",
+      "captured_at": "2026-08-31"
+    }
+  ],
+  "profiles": [
+    {
+      "appearance_key": "sakura_miko::sakura_miko_(casual)",
+      "variant_tag": "sakura_miko_(casual)",
+      "display_name": "sakura miko (casual)",
+      "appearance_kind": "costume",
+      "is_default": false,
+      "status": "published",
+      "confidence": "high",
+      "provenance": "danbooru_gelbooru_wiki_reviewed",
+      "notes": "Official named costume; shared uniforms, props, lore, cosplay, and optional contextual items excluded.",
+      "features": [
+        {
+          "facet": "hair_accessory",
+          "canonical_tag": "ahoge",
+          "value": "Ahoge",
+          "source_refs": [
+            "danbooru:wiki:sakura_miko_(casual)",
+            "gelbooru:wiki:sakura_miko_(casual)"
+          ]
+        },
+        {
+          "facet": "headwear",
+          "canonical_tag": "beret",
+          "value": "Beret",
+          "source_refs": [
+            "danbooru:wiki:sakura_miko_(casual)",
+            "gelbooru:wiki:sakura_miko_(casual)"
+          ]
+        },
+        {
+          "facet": "headwear",
+          "canonical_tag": "black_hat",
+          "value": "Black hat",
+          "source_refs": [
+            "danbooru:wiki:sakura_miko_(casual)",
+            "gelbooru:wiki:sakura_miko_(casual)"
+          ]
+        },
+        {
+          "facet": "footwear",
+          "canonical_tag": "black_shoes",
+          "value": "Black shoes",
+          "source_refs": [
+            "danbooru:wiki:sakura_miko_(casual)"
+          ]
+        },
+        {
+          "facet": "legwear",
+          "canonical_tag": "black_thighhighs",
+          "value": "Black thighhighs",
+          "source_refs": [
+            "danbooru:wiki:sakura_miko_(casual)",
+            "gelbooru:wiki:sakura_miko_(casual)"
+          ]
+        },
+        {
+          "facet": "hair_accessory",
+          "canonical_tag": "cat_hair_ornament",
+          "value": "Cat hair ornament",
+          "source_refs": [
+            "danbooru:wiki:sakura_miko_(casual)",
+            "gelbooru:wiki:sakura_miko_(casual)"
+          ]
+        },
+        {
+          "facet": "headwear",
+          "canonical_tag": "cat_hat",
+          "value": "Cat hat",
+          "source_refs": [
+            "danbooru:wiki:sakura_miko_(casual)",
+            "gelbooru:wiki:sakura_miko_(casual)"
+          ]
+        },
+        {
+          "facet": "upper_body",
+          "canonical_tag": "collared_shirt",
+          "value": "Collared shirt",
+          "source_refs": [
+            "danbooru:wiki:sakura_miko_(casual)",
+            "gelbooru:wiki:sakura_miko_(casual)"
+          ]
+        },
+        {
+          "facet": "sleeves",
+          "canonical_tag": "frilled_sleeves",
+          "value": "Frilled sleeves",
+          "source_refs": [
+            "danbooru:wiki:sakura_miko_(casual)",
+            "gelbooru:wiki:sakura_miko_(casual)"
+          ]
+        },
+        {
+          "facet": "hair_accessory",
+          "canonical_tag": "hairclip",
+          "value": "Hairclip",
+          "source_refs": [
+            "danbooru:wiki:sakura_miko_(casual)",
+            "gelbooru:wiki:sakura_miko_(casual)"
+          ]
+        },
+        {
+          "facet": "hair",
+          "canonical_tag": "long_hair",
+          "value": "Long hair",
+          "source_refs": [
+            "danbooru:wiki:sakura_miko_(casual)",
+            "gelbooru:wiki:sakura_miko_(casual)"
+          ]
+        },
+        {
+          "facet": "sleeves",
+          "canonical_tag": "long_sleeves",
+          "value": "Long sleeves",
+          "source_refs": [
+            "danbooru:wiki:sakura_miko_(casual)",
+            "gelbooru:wiki:sakura_miko_(casual)"
+          ]
+        },
+        {
+          "facet": "hair_accessory",
+          "canonical_tag": "low_twintails",
+          "value": "Low twintails",
+          "source_refs": [
+            "danbooru:wiki:sakura_miko_(casual)",
+            "gelbooru:wiki:sakura_miko_(casual)"
+          ]
+        },
+        {
+          "facet": "lower_body",
+          "canonical_tag": "miniskirt",
+          "value": "Miniskirt",
+          "source_refs": [
+            "danbooru:wiki:sakura_miko_(casual)",
+            "gelbooru:wiki:sakura_miko_(casual)"
+          ]
+        },
+        {
+          "facet": "lower_body",
+          "canonical_tag": "plaid_skirt",
+          "value": "Plaid skirt",
+          "source_refs": [
+            "danbooru:wiki:sakura_miko_(casual)",
+            "gelbooru:wiki:sakura_miko_(casual)"
+          ]
+        },
+        {
+          "facet": "lower_body",
+          "canonical_tag": "pleated_skirt",
+          "value": "Pleated skirt",
+          "source_refs": [
+            "danbooru:wiki:sakura_miko_(casual)",
+            "gelbooru:wiki:sakura_miko_(casual)"
+          ]
+        },
+        {
+          "facet": "neck",
+          "canonical_tag": "red_bowtie",
+          "value": "Red bowtie",
+          "source_refs": [
+            "danbooru:wiki:sakura_miko_(casual)",
+            "gelbooru:wiki:sakura_miko_(casual)"
+          ]
+        },
+        {
+          "facet": "neck",
+          "canonical_tag": "red_scarf",
+          "value": "Red scarf",
+          "source_refs": [
+            "danbooru:wiki:sakura_miko_(casual)",
+            "gelbooru:wiki:sakura_miko_(casual)"
+          ]
+        },
+        {
+          "facet": "lower_body",
+          "canonical_tag": "red_skirt",
+          "value": "Red skirt",
+          "source_refs": [
+            "danbooru:wiki:sakura_miko_(casual)",
+            "gelbooru:wiki:sakura_miko_(casual)"
+          ]
+        },
+        {
+          "facet": "upper_body",
+          "canonical_tag": "white_shirt",
+          "value": "White shirt",
+          "source_refs": [
+            "danbooru:wiki:sakura_miko_(casual)",
+            "gelbooru:wiki:sakura_miko_(casual)"
+          ]
+        },
+        {
+          "facet": "jacket",
+          "canonical_tag": "yellow_cardigan",
+          "value": "Yellow cardigan",
+          "source_refs": [
+            "danbooru:wiki:sakura_miko_(casual)",
+            "gelbooru:wiki:sakura_miko_(casual)"
+          ]
+        }
+      ]
+    }
+  ]
+}

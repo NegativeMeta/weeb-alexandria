@@ -1,0 +1,204 @@
+{
+  "character_tag": "oozora_subaru",
+  "sources": [
+    {
+      "id": "danbooru:wiki:oozora_subaru_(1st_costume)",
+      "source_site": "danbooru",
+      "source_kind": "wiki",
+      "source_key": "oozora_subaru_(1st_costume)",
+      "source_url": "https://danbooru.donmai.us/wiki_pages/oozora_subaru_(1st_costume).json",
+      "source_tier": 1,
+      "title": "Oozora Subaru (1st costume)",
+      "excerpt": "The default costume of [[hololive]]'s [[Oozora Subaru]].\r\n\r\nIt consists of an [[oversized shirt|oversized]] [[loose shirt|loose]], [[short sleeves|short-sleeved]] [[two-tone shirt|two-tone]] [[white shirt|white]] and [[yellow shirt|yellow]] [[vertical-striped shirt|vertical-striped]] [[t-shirt]] with the hemline [[long shirt|reaching her hips]] and [[tied shirt|tied]] on the side, a [[two-tone headwear|two-tone]] ([[white hat|white]] and [[red hat|red]]) [[baseball cap]], which she usually wears [[backwards hat|backwards]], [[white shorts]], a [[wristband|wrist]] [[sweatband]], [[white shorts]], [[mismatched legwear|mismatched]] [[red thighhighs|red]] and [[white thighhighs]] and [[white shoes|white]] [[sneakers]]. Being a sports club manager she also carries a [[whistle around neck|whistle]] and a [[stopwatch around neck|stopwatch on her neck]] a [[megaphone]] and a small yellow [[towel]].\r\n\r\nh4. Appearance\r\n\r\n* !post #7804987: Profile\r\n* !post #3443258: Reference sheet",
+      "captured_at": "2026-08-31"
+    },
+    {
+      "id": "gelbooru:wiki:oozora_subaru_(1st_costume)",
+      "source_site": "gelbooru",
+      "source_kind": "wiki",
+      "source_key": "oozora_subaru_(1st_costume)",
+      "source_url": "https://gelbooru.com/index.php?page=wiki&s=view&id=oozora_subaru_(1st_costume)",
+      "source_tier": 1,
+      "title": "Oozora Subaru (1st costume)",
+      "excerpt": "The default costume of hololive 's Oozora Subaru , as shown in post #3443258. Tags: * oversized shirt ** loose shirt short sleeves two-tone shirt white shirt yellow shirt vertical-striped shirt t-shirt tied shirt two-tone headwear white headwear red headwear baseball cap backwards hat white shorts wristband sweatband white shorts mismatched legwear red thighhighs white thighhighs white footwear sneakers whistle stopwatch megaphone yellow towel Based on danbooru.donmai.us/wiki_pages/oozora_subaru_ (1st_costume)?z=1 .",
+      "captured_at": "2026-08-31"
+    }
+  ],
+  "profiles": [
+    {
+      "appearance_key": "oozora_subaru::oozora_subaru_(1st_costume)",
+      "variant_tag": "oozora_subaru_(1st_costume)",
+      "display_name": "Oozora Subaru 1st costume",
+      "appearance_kind": "costume",
+      "is_default": false,
+      "status": "published",
+      "confidence": "high",
+      "provenance": "danbooru_gelbooru_wiki_reviewed",
+      "notes": "Official first costume; optional props, weapons, lore, and non-outfit metadata excluded.",
+      "features": [
+        {
+          "facet": "footwear",
+          "canonical_tag": "sneakers",
+          "value": "sneakers",
+          "source_refs": [
+            "danbooru:wiki:oozora_subaru_(1st_costume)",
+            "gelbooru:wiki:oozora_subaru_(1st_costume)"
+          ]
+        },
+        {
+          "facet": "footwear",
+          "canonical_tag": "white_shoes",
+          "value": "white shoes",
+          "source_refs": [
+            "danbooru:wiki:oozora_subaru_(1st_costume)",
+            "gelbooru:wiki:oozora_subaru_(1st_costume)"
+          ]
+        },
+        {
+          "facet": "gloves",
+          "canonical_tag": "wristband",
+          "value": "wristband",
+          "source_refs": [
+            "danbooru:wiki:oozora_subaru_(1st_costume)",
+            "gelbooru:wiki:oozora_subaru_(1st_costume)"
+          ]
+        },
+        {
+          "facet": "headwear",
+          "canonical_tag": "backwards_hat",
+          "value": "backwards hat",
+          "source_refs": [
+            "danbooru:wiki:oozora_subaru_(1st_costume)",
+            "gelbooru:wiki:oozora_subaru_(1st_costume)"
+          ]
+        },
+        {
+          "facet": "headwear",
+          "canonical_tag": "baseball_cap",
+          "value": "baseball cap",
+          "source_refs": [
+            "danbooru:wiki:oozora_subaru_(1st_costume)",
+            "gelbooru:wiki:oozora_subaru_(1st_costume)"
+          ]
+        },
+        {
+          "facet": "headwear",
+          "canonical_tag": "red_hat",
+          "value": "red hat",
+          "source_refs": [
+            "danbooru:wiki:oozora_subaru_(1st_costume)",
+            "gelbooru:wiki:oozora_subaru_(1st_costume)"
+          ]
+        },
+        {
+          "facet": "headwear",
+          "canonical_tag": "white_hat",
+          "value": "white hat",
+          "source_refs": [
+            "danbooru:wiki:oozora_subaru_(1st_costume)",
+            "gelbooru:wiki:oozora_subaru_(1st_costume)"
+          ]
+        },
+        {
+          "facet": "legwear",
+          "canonical_tag": "mismatched_legwear",
+          "value": "mismatched legwear",
+          "source_refs": [
+            "danbooru:wiki:oozora_subaru_(1st_costume)",
+            "gelbooru:wiki:oozora_subaru_(1st_costume)"
+          ]
+        },
+        {
+          "facet": "legwear",
+          "canonical_tag": "red_thighhighs",
+          "value": "red thighhighs",
+          "source_refs": [
+            "danbooru:wiki:oozora_subaru_(1st_costume)",
+            "gelbooru:wiki:oozora_subaru_(1st_costume)"
+          ]
+        },
+        {
+          "facet": "legwear",
+          "canonical_tag": "white_thighhighs",
+          "value": "white thighhighs",
+          "source_refs": [
+            "danbooru:wiki:oozora_subaru_(1st_costume)",
+            "gelbooru:wiki:oozora_subaru_(1st_costume)"
+          ]
+        },
+        {
+          "facet": "lower_body",
+          "canonical_tag": "white_shorts",
+          "value": "white shorts",
+          "source_refs": [
+            "danbooru:wiki:oozora_subaru_(1st_costume)",
+            "gelbooru:wiki:oozora_subaru_(1st_costume)"
+          ]
+        },
+        {
+          "facet": "sleeves",
+          "canonical_tag": "short_sleeves",
+          "value": "short sleeves",
+          "source_refs": [
+            "danbooru:wiki:oozora_subaru_(1st_costume)",
+            "gelbooru:wiki:oozora_subaru_(1st_costume)"
+          ]
+        },
+        {
+          "facet": "upper_body",
+          "canonical_tag": "long_shirt",
+          "value": "long shirt",
+          "source_refs": [
+            "danbooru:wiki:oozora_subaru_(1st_costume)",
+            "gelbooru:wiki:oozora_subaru_(1st_costume)"
+          ]
+        },
+        {
+          "facet": "upper_body",
+          "canonical_tag": "loose_shirt",
+          "value": "loose shirt",
+          "source_refs": [
+            "danbooru:wiki:oozora_subaru_(1st_costume)",
+            "gelbooru:wiki:oozora_subaru_(1st_costume)"
+          ]
+        },
+        {
+          "facet": "upper_body",
+          "canonical_tag": "oversized_shirt",
+          "value": "oversized shirt",
+          "source_refs": [
+            "danbooru:wiki:oozora_subaru_(1st_costume)",
+            "gelbooru:wiki:oozora_subaru_(1st_costume)"
+          ]
+        },
+        {
+          "facet": "upper_body",
+          "canonical_tag": "tied_shirt",
+          "value": "tied shirt",
+          "source_refs": [
+            "danbooru:wiki:oozora_subaru_(1st_costume)",
+            "gelbooru:wiki:oozora_subaru_(1st_costume)"
+          ]
+        },
+        {
+          "facet": "upper_body",
+          "canonical_tag": "white_shirt",
+          "value": "white shirt",
+          "source_refs": [
+            "danbooru:wiki:oozora_subaru_(1st_costume)",
+            "gelbooru:wiki:oozora_subaru_(1st_costume)"
+          ]
+        },
+        {
+          "facet": "upper_body",
+          "canonical_tag": "yellow_shirt",
+          "value": "yellow shirt",
+          "source_refs": [
+            "danbooru:wiki:oozora_subaru_(1st_costume)",
+            "gelbooru:wiki:oozora_subaru_(1st_costume)"
+          ]
+        }
+      ]
+    }
+  ]
+}

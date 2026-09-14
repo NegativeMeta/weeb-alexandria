@@ -1,0 +1,177 @@
+{
+  "character_tag": "koseki_bijou",
+  "sources": [
+    {
+      "id": "danbooru:wiki:koseki_bijou_(1st_costume)",
+      "source_site": "danbooru",
+      "source_kind": "wiki",
+      "source_key": "koseki_bijou_(1st_costume)",
+      "source_url": "https://danbooru.donmai.us/wiki_pages/koseki_bijou_(1st_costume).json",
+      "source_tier": 1,
+      "title": "Koseki Bijou (1st costume)",
+      "excerpt": "The default costume of [[hololive english|hololive EN]]'s [[Koseki Bijou]]. \r\n\r\nHer default costume consists of a floating gemstone [[circlet]]/[[headpiece]], a [[detached collar]] a [[medium dress|knee-length]] [[white dress|white]] [[strapless dress|strapless]] [[pleated dress]] an [[underbust]] [[black corset]] with an attached [[waist cape]] with [[coattails]], a [[white skirt|white]] [[overskirt]], a [[white sleeves|white]] [[single detached sleeve]] on one arm and an [[arm garter]] with an [[armlet]] on the other. As mentioned above, her feet are encased in [[purple gem]], giving the impression of [[purple boots|purple]] [[ankle boots]].\r\n\r\nFor her default hairstyle, she has [[very long hair|very long]] [[grey hair]] with [[pink hair|pink]] [[colored inner hair]] with [[hair flaps]].\r\n\r\nh4. Appearance\r\n\r\n* !post #6528021: Profile\r\n* !post #6540704: Reference sheet",
+      "captured_at": "2026-08-31"
+    },
+    {
+      "id": "gelbooru:wiki:koseki_bijou_(1st_costume)",
+      "source_site": "gelbooru",
+      "source_kind": "wiki",
+      "source_key": "koseki_bijou_(1st_costume)",
+      "source_url": "https://gelbooru.com/index.php?page=wiki&s=view&id=koseki_bijou_(1st_costume)",
+      "source_tier": 1,
+      "title": "Koseki Bijou (1st costume)",
+      "excerpt": "The default costume of [[hololive English]]'s [[Koseki Bijou]]. \r\n\r\nHer default costume consists of a floating gemstone [[circlet]]/[[headpiece]], a [[detached collar]] a [[medium dress|knee-length]] [[white dress|white]] [[strapless dress|strapless]] [[pleated dress]] an [[underbust]] [[black corset]] with an attached [[waist cape]] with [[coattails]] a [[white skirt|white]] [[overskirt]], a [[white sleeves|white]] [[single detached sleeve]] on one arm and an [[arm garter]] with an [[armlet]] on the other. As mentioned above, her feet are encased in [[purple gemstone]], giving the impression of [[purple footwear|purple]] [[ankle boots]].\r\n\r\nh4. Appearance\r\n\r\n* !post #6528021: Profile\r\n* !post #6540704: Reference sheet",
+      "captured_at": "2026-08-31"
+    }
+  ],
+  "profiles": [
+    {
+      "appearance_key": "koseki_bijou::koseki_bijou_(1st_costume)",
+      "variant_tag": "koseki_bijou_(1st_costume)",
+      "display_name": "Koseki Bijou 1st costume",
+      "appearance_kind": "costume",
+      "is_default": false,
+      "status": "published",
+      "confidence": "high",
+      "provenance": "danbooru_gelbooru_wiki_reviewed",
+      "notes": "Official first costume; optional props, weapons, lore, and non-outfit metadata excluded.",
+      "features": [
+        {
+          "facet": "dress",
+          "canonical_tag": "medium_dress",
+          "value": "medium dress",
+          "source_refs": [
+            "danbooru:wiki:koseki_bijou_(1st_costume)",
+            "gelbooru:wiki:koseki_bijou_(1st_costume)"
+          ]
+        },
+        {
+          "facet": "dress",
+          "canonical_tag": "pleated_dress",
+          "value": "pleated dress",
+          "source_refs": [
+            "danbooru:wiki:koseki_bijou_(1st_costume)",
+            "gelbooru:wiki:koseki_bijou_(1st_costume)"
+          ]
+        },
+        {
+          "facet": "dress",
+          "canonical_tag": "strapless_dress",
+          "value": "strapless dress",
+          "source_refs": [
+            "danbooru:wiki:koseki_bijou_(1st_costume)",
+            "gelbooru:wiki:koseki_bijou_(1st_costume)"
+          ]
+        },
+        {
+          "facet": "dress",
+          "canonical_tag": "white_dress",
+          "value": "white dress",
+          "source_refs": [
+            "danbooru:wiki:koseki_bijou_(1st_costume)",
+            "gelbooru:wiki:koseki_bijou_(1st_costume)"
+          ]
+        },
+        {
+          "facet": "footwear",
+          "canonical_tag": "ankle_boots",
+          "value": "ankle boots",
+          "source_refs": [
+            "danbooru:wiki:koseki_bijou_(1st_costume)",
+            "gelbooru:wiki:koseki_bijou_(1st_costume)"
+          ]
+        },
+        {
+          "facet": "footwear",
+          "canonical_tag": "purple_boots",
+          "value": "purple boots",
+          "source_refs": [
+            "danbooru:wiki:koseki_bijou_(1st_costume)",
+            "gelbooru:wiki:koseki_bijou_(1st_costume)"
+          ]
+        },
+        {
+          "facet": "headwear",
+          "canonical_tag": "circlet",
+          "value": "circlet",
+          "source_refs": [
+            "danbooru:wiki:koseki_bijou_(1st_costume)",
+            "gelbooru:wiki:koseki_bijou_(1st_costume)"
+          ]
+        },
+        {
+          "facet": "headwear",
+          "canonical_tag": "headpiece",
+          "value": "headpiece",
+          "source_refs": [
+            "danbooru:wiki:koseki_bijou_(1st_costume)",
+            "gelbooru:wiki:koseki_bijou_(1st_costume)"
+          ]
+        },
+        {
+          "facet": "headwear",
+          "canonical_tag": "waist_cape",
+          "value": "waist cape",
+          "source_refs": [
+            "danbooru:wiki:koseki_bijou_(1st_costume)",
+            "gelbooru:wiki:koseki_bijou_(1st_costume)"
+          ]
+        },
+        {
+          "facet": "jacket",
+          "canonical_tag": "coattails",
+          "value": "coattails",
+          "source_refs": [
+            "danbooru:wiki:koseki_bijou_(1st_costume)",
+            "gelbooru:wiki:koseki_bijou_(1st_costume)"
+          ]
+        },
+        {
+          "facet": "lower_body",
+          "canonical_tag": "overskirt",
+          "value": "overskirt",
+          "source_refs": [
+            "danbooru:wiki:koseki_bijou_(1st_costume)",
+            "gelbooru:wiki:koseki_bijou_(1st_costume)"
+          ]
+        },
+        {
+          "facet": "lower_body",
+          "canonical_tag": "white_skirt",
+          "value": "white skirt",
+          "source_refs": [
+            "danbooru:wiki:koseki_bijou_(1st_costume)",
+            "gelbooru:wiki:koseki_bijou_(1st_costume)"
+          ]
+        },
+        {
+          "facet": "neck",
+          "canonical_tag": "detached_collar",
+          "value": "detached collar",
+          "source_refs": [
+            "danbooru:wiki:koseki_bijou_(1st_costume)",
+            "gelbooru:wiki:koseki_bijou_(1st_costume)"
+          ]
+        },
+        {
+          "facet": "sleeves",
+          "canonical_tag": "single_detached_sleeve",
+          "value": "single detached sleeve",
+          "source_refs": [
+            "danbooru:wiki:koseki_bijou_(1st_costume)",
+            "gelbooru:wiki:koseki_bijou_(1st_costume)"
+          ]
+        },
+        {
+          "facet": "sleeves",
+          "canonical_tag": "white_sleeves",
+          "value": "white sleeves",
+          "source_refs": [
+            "danbooru:wiki:koseki_bijou_(1st_costume)",
+            "gelbooru:wiki:koseki_bijou_(1st_costume)"
+          ]
+        }
+      ]
+    }
+  ]
+}

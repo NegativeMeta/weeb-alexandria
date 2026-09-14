@@ -1,0 +1,51 @@
+{
+  "character_tag": "tsushima_yoshiko",
+  "sources": [
+    {
+      "id": "danbooru:wiki:tsushima_yoshiko",
+      "source_site": "danbooru",
+      "source_kind": "wiki",
+      "source_key": "tsushima_yoshiko",
+      "source_url": "https://danbooru.donmai.us/wiki_pages/tsushima_yoshiko.json",
+      "source_tier": 1,
+      "title": "Tsushima Yoshiko",
+      "excerpt": "She has [[red eyes]] and [[long hair|long]], [[blue hair]] and a [[single side bun]] on the right side of her head.",
+      "captured_at": "2026-08-30"
+    },
+    {
+      "id": "gelbooru:wiki:tsushima_yoshiko",
+      "source_site": "gelbooru",
+      "source_kind": "wiki",
+      "source_key": "tsushima_yoshiko",
+      "source_url": "https://gelbooru.com/index.php?page=wiki&s=view&id=tsushima_yoshiko",
+      "source_tier": 1,
+      "title": "Tsushima Yoshiko",
+      "excerpt": "One of the main characters of love_live!_sunshine!! and member of Aqours. She has long, blue_hair which she always wears with a hair_bun . She usually has either pink_eyes or purple_eyes .",
+      "captured_at": "2026-08-30"
+    }
+  ],
+  "profiles": [
+    {
+      "appearance_key": "tsushima_yoshiko::default",
+      "variant_tag": "tsushima_yoshiko",
+      "display_name": "Default Tsushima Yoshiko appearance",
+      "appearance_kind": "default",
+      "is_default": true,
+      "status": "published",
+      "confidence": "high",
+      "provenance": "danbooru_gelbooru_wiki_reviewed",
+      "notes": "Base Love Live! Sunshine!! identity only; Yohane fantasy spin-off costumes and named outfits excluded.",
+      "features": [
+        {"facet":"hair","canonical_tag":"long_hair","value":"Long hair","source_refs":["danbooru:wiki:tsushima_yoshiko"],"evidence":{"text":"[[long hair|long]]","observed_tag":"long_hair"}},
+        {"facet":"hair","canonical_tag":"blue_hair","value":"Blue hair","source_refs":["danbooru:wiki:tsushima_yoshiko"],"evidence":{"text":"[[blue hair]]","observed_tag":"blue_hair"}},
+        {"facet":"hair_accessory","canonical_tag":"single_side_bun","value":"Single side bun","source_refs":["danbooru:wiki:tsushima_yoshiko"],"evidence":{"text":"a [[single side bun]] on the right side of her head","observed_tag":"single_side_bun"}},
+        {"facet":"eyes","canonical_tag":"red_eyes","value":"Red eyes","role":"alternative","source_refs":["danbooru:wiki:tsushima_yoshiko"],"evidence":{"text":"She has [[red eyes]]","observed_tag":"red_eyes"}},
+        {"facet":"eyes","canonical_tag":"pink_eyes","value":"Pink eyes","role":"alternative","source_refs":["gelbooru:wiki:tsushima_yoshiko"],"evidence":{"text":"either pink_eyes","observed_tag":"pink_eyes"}},
+        {"facet":"eyes","canonical_tag":"purple_eyes","value":"Purple eyes","role":"alternative","source_refs":["gelbooru:wiki:tsushima_yoshiko"],"evidence":{"text":"or purple_eyes","observed_tag":"purple_eyes"}}
+      ],
+      "conflicts": [
+        {"conflict_key":"eye_color","facet":"eyes","alternatives":["red_eyes","pink_eyes","purple_eyes"],"status":"open","reason":"Danbooru describes red eyes while Gelbooru describes pink or purple eyes.","source_refs":["danbooru:wiki:tsushima_yoshiko","gelbooru:wiki:tsushima_yoshiko"],"resolution_note":"Resolve only with a stronger character reference or official design source."}
+      ]
+    }
+  ]
+}
