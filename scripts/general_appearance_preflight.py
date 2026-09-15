@@ -22,6 +22,20 @@ REPORT = ROOT / "reports" / "hololive_appearance_queue.md"
 RANKER = ROOT / "scripts" / "rank_general_queue.py"
 SEARCH_INDEX = ROOT / "data" / "tag_search.sqlite"
 CONTEXT_INDEX = ROOT / "data" / "character_context.sqlite"
+STATE_PATH = ROOT / "data" / "general_appearance_worker_state.json"
+
+
+def load_worker_state() -> dict[str, object] | None:
+    """Read the durable worker lease without importing the write controller."""
+    if not STATE_PATH.exists():
+        return None
+    try:
+        value = json.loads(STATE_PATH.read_text(encoding="utf-8"))
+    except Exception as exc:
+        raise RuntimeError(f"worker state is not valid JSON: {STATE_PATH}: {exc}") from exc
+    if not isinstance(value, dict) or not value.get("run_id") or not value.get("phase"):
+        raise RuntimeError(f"worker state is malformed: {STATE_PATH}")
+    return value
 
 
 def connect_read_only(path: Path) -> sqlite3.Connection:
@@ -254,9 +268,12 @@ def main() -> int:
         seed_artifacts,
     ))
     queue = next_queue()
+    worker = load_worker_state()
+    worker_blocked = worker is not None and str(worker.get("phase")) != "closed"
+    ready = ready and not worker_blocked
 
     print("scope=general_appearance")
-    print(f"state={'READY' if ready else ('CLOSE_REQUIRED' if close_required else 'BLOCKED')}")
+    print(f"state={'READY' if ready else ('CLOSE_REQUIRED' if close_required and not worker_blocked else 'BLOCKED')}")
     print(f"wake_agent={int(ready)}")
     print(f"close_required={int(close_required)}")
     print(f"published_profiles={published_profiles}")
@@ -282,6 +299,8 @@ def main() -> int:
     print(f"report_synchronized={int(report_synchronized)}")
     print(f"report_mismatches={json.dumps(report_mismatches, ensure_ascii=False)}")
     print(f"latest_report_heading={latest_heading}")
+    print(f"worker_state={('none' if worker is None else str(worker.get('phase')))}")
+    print(f"worker_run_id={('none' if worker is None else str(worker.get('run_id')))}")
     print(f"next_queue={json.dumps(queue, ensure_ascii=False, separators=(',', ':'))}")
     print("integrity=not_run_worker_authoritative")
     print(json.dumps({"wakeAgent": ready}, separators=(",", ":")))

@@ -255,6 +255,163 @@ def upsert_conflicts(con: sqlite3.Connection, profile_key: str,
     return count
 
 
+def _promote_loaded(
+    con: sqlite3.Connection,
+    data: dict[str, Any],
+    seed_path: Path,
+) -> dict[str, int]:
+    """Apply one already-validated seed inside the caller's transaction."""
+    character_tag = normalize_tag(str(data["character_tag"]))
+    sources: dict[str, int] = {}
+    for source in data["sources"]:
+        if not isinstance(source, dict):
+            raise ValueError("each source must be a JSON object")
+        ref = source_ref(source)
+        if not ref or ref in sources:
+            raise ValueError(f"source ids must be unique and non-empty: {ref!r}")
+        sources[ref] = upsert_source(con, source)
+
+    profile_count = 0
+    feature_count = 0
+    link_count = 0
+    conflict_count = 0
+    for profile in data["profiles"]:
+        if not isinstance(profile, dict):
+            raise ValueError("each profile must be a JSON object")
+        profile_key = upsert_profile(con, character_tag, profile)
+        profile_count += 1
+        features = profile.get("features", [])
+        if not isinstance(features, list):
+            raise ValueError(f"features must be a list for {profile_key}")
+        if profile.get("replace_features", False):
+            seed_tags = {
+                normalize_tag(str(feature.get("canonical_tag", "")))
+                for feature in features
+                if isinstance(feature, dict)
+            }
+            if not seed_tags:
+                raise ValueError(
+                    f"replace_features requires at least one feature for {profile_key}"
+                )
+            placeholders = ",".join("?" for _ in seed_tags)
+            con.execute(
+                f"""UPDATE character_appearance_features
+                    SET status='retired'
+                    WHERE appearance_key=?
+                      AND status<>'retired'
+                      AND canonical_tag NOT IN ({placeholders})""",
+                [profile_key, *sorted(seed_tags)],
+            )
+        for feature in features:
+            if not isinstance(feature, dict):
+                raise ValueError(f"feature must be an object for {profile_key}")
+            canonical_tag = normalize_appearance_tag(str(feature.get("canonical_tag", "")))
+            facet = normalize_tag(str(feature.get("facet", "")))
+            source_refs = feature.get("source_refs", [])
+            if not canonical_tag or not facet:
+                raise ValueError(f"feature requires facet and canonical_tag for {profile_key}")
+            if facet not in DEFAULT_FACETS:
+                raise ValueError(f"unknown appearance facet for {profile_key}/{canonical_tag}: {facet}")
+            if not isinstance(source_refs, list) or not source_refs:
+                raise ValueError(f"published feature has no evidence: {profile_key}/{canonical_tag}")
+            missing = sorted(set(str(ref) for ref in source_refs) - sources.keys())
+            if missing:
+                raise ValueError(f"unknown source refs for {profile_key}/{canonical_tag}: {missing}")
+            facet_id = upsert_appearance_facet_catalog(con, facet)
+            catalog_id = upsert_appearance_feature_catalog(
+                con,
+                canonical_tag,
+                facet,
+                str(feature.get("value") or humanize_tag(canonical_tag)),
+                "promoted_appearance_seed",
+                str(feature.get("confidence", "high")),
+            )
+            con.execute(
+                """INSERT INTO character_appearance_features(
+                    catalog_id, facet_id, appearance_key, facet, value, canonical_tag,
+                    role, status, confidence, display_order
+                ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                ON CONFLICT(appearance_key, facet, canonical_tag) DO UPDATE SET
+                    catalog_id=excluded.catalog_id,
+                    facet_id=excluded.facet_id,
+                    value=excluded.value,
+                    role=excluded.role,
+                    status=excluded.status,
+                    confidence=excluded.confidence,
+                    display_order=excluded.display_order""",
+                (
+                    catalog_id,
+                    facet_id,
+                    profile_key,
+                    facet,
+                    str(feature.get("value") or humanize_tag(canonical_tag)),
+                    canonical_tag,
+                    str(feature.get("role", "present")),
+                    str(feature.get("status", "published")),
+                    str(feature.get("confidence", "high")),
+                    int(feature.get("display_order", 0)),
+                ),
+            )
+            feature_row = con.execute(
+                """SELECT feature_id FROM character_appearance_features
+                   WHERE appearance_key=? AND facet=? AND canonical_tag=?""",
+                (profile_key, facet, canonical_tag),
+            ).fetchone()
+            if feature_row is None:
+                raise RuntimeError(f"could not retrieve feature {profile_key}/{canonical_tag}")
+            feature_id = int(feature_row[0])
+            feature_count += 1
+            evidence = feature.get("evidence", {})
+            if not isinstance(evidence, dict):
+                evidence = {}
+            for ref in source_refs:
+                con.execute(
+                    """INSERT INTO character_appearance_feature_sources(
+                        feature_id, source_id, polarity, observed_tag,
+                        support_count, sample_size, evidence_text, confidence
+                    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+                    ON CONFLICT(feature_id, source_id) DO UPDATE SET
+                        polarity=excluded.polarity,
+                        observed_tag=excluded.observed_tag,
+                        support_count=excluded.support_count,
+                        sample_size=excluded.sample_size,
+                        evidence_text=excluded.evidence_text,
+                        confidence=excluded.confidence""",
+                    (
+                        feature_id,
+                        sources[str(ref)],
+                        str(evidence.get("polarity", "supports")),
+                        normalize_tag(str(evidence.get("observed_tag", canonical_tag))),
+                        evidence.get("support_count"),
+                        evidence.get("sample_size"),
+                        str(evidence.get("text", "Reviewed from the cited source.")),
+                        str(evidence.get("confidence", feature.get("confidence", "high"))),
+                    ),
+                )
+                link_count += 1
+        conflict_count += upsert_conflicts(
+            con, profile_key, profile.get("conflicts", []), sources
+        )
+    return {
+        "profiles": profile_count,
+        "features": feature_count,
+        "evidence_links": link_count,
+        "sources": len(sources),
+        "conflicts": conflict_count,
+    }
+
+
+def _set_promotion_metadata(con: sqlite3.Connection, seed_path: Path) -> None:
+    con.execute(
+        "INSERT OR REPLACE INTO appearance_schema_metadata(key, value) VALUES (?, ?)",
+        ("last_promoted_seed", str(seed_path.resolve())),
+    )
+    con.execute(
+        "INSERT OR REPLACE INTO appearance_schema_metadata(key, value) VALUES (?, ?)",
+        ("last_promoted_at", datetime.now(timezone.utc).isoformat()),
+    )
+
+
 def promote(db: Path, seed_path: Path) -> dict[str, int]:
     data = read_seed(seed_path)
     character_tag = normalize_tag(str(data["character_tag"]))
@@ -266,152 +423,46 @@ def promote(db: Path, seed_path: Path) -> dict[str, int]:
         validate_registered_character(con, character_tag, str(data["character_tag"]))
         validate_seed_profiles(character_tag, data["profiles"])
         con.execute("BEGIN")
-        sources: dict[str, int] = {}
-        for source in data["sources"]:
-            if not isinstance(source, dict):
-                raise ValueError("each source must be a JSON object")
-            ref = source_ref(source)
-            if not ref or ref in sources:
-                raise ValueError(f"source ids must be unique and non-empty: {ref!r}")
-            sources[ref] = upsert_source(con, source)
-
-        profile_count = 0
-        feature_count = 0
-        link_count = 0
-        conflict_count = 0
-        for profile in data["profiles"]:
-            if not isinstance(profile, dict):
-                raise ValueError("each profile must be a JSON object")
-            profile_key = upsert_profile(con, character_tag, profile)
-            profile_count += 1
-            features = profile.get("features", [])
-            if not isinstance(features, list):
-                raise ValueError(f"features must be a list for {profile_key}")
-            if profile.get("replace_features", False):
-                seed_tags = {
-                    normalize_tag(str(feature.get("canonical_tag", "")))
-                    for feature in features
-                    if isinstance(feature, dict)
-                }
-                if not seed_tags:
-                    raise ValueError(
-                        f"replace_features requires at least one feature for {profile_key}"
-                    )
-                placeholders = ",".join("?" for _ in seed_tags)
-                con.execute(
-                    f"""UPDATE character_appearance_features
-                        SET status='retired'
-                        WHERE appearance_key=?
-                          AND status<>'retired'
-                          AND canonical_tag NOT IN ({placeholders})""",
-                    [profile_key, *sorted(seed_tags)],
-                )
-            for feature in features:
-                if not isinstance(feature, dict):
-                    raise ValueError(f"feature must be an object for {profile_key}")
-                canonical_tag = normalize_appearance_tag(str(feature.get("canonical_tag", "")))
-                facet = normalize_tag(str(feature.get("facet", "")))
-                source_refs = feature.get("source_refs", [])
-                if not canonical_tag or not facet:
-                    raise ValueError(f"feature requires facet and canonical_tag for {profile_key}")
-                if facet not in DEFAULT_FACETS:
-                    raise ValueError(f"unknown appearance facet for {profile_key}/{canonical_tag}: {facet}")
-                if not isinstance(source_refs, list) or not source_refs:
-                    raise ValueError(f"published feature has no evidence: {profile_key}/{canonical_tag}")
-                missing = sorted(set(str(ref) for ref in source_refs) - sources.keys())
-                if missing:
-                    raise ValueError(f"unknown source refs for {profile_key}/{canonical_tag}: {missing}")
-                facet_id = upsert_appearance_facet_catalog(con, facet)
-                catalog_id = upsert_appearance_feature_catalog(
-                    con,
-                    canonical_tag,
-                    facet,
-                    str(feature.get("value") or humanize_tag(canonical_tag)),
-                    "promoted_appearance_seed",
-                    str(feature.get("confidence", "high")),
-                )
-                con.execute(
-                    """INSERT INTO character_appearance_features(
-                        catalog_id, facet_id, appearance_key, facet, value, canonical_tag,
-                        role, status, confidence, display_order
-                    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-                    ON CONFLICT(appearance_key, facet, canonical_tag) DO UPDATE SET
-                        catalog_id=excluded.catalog_id,
-                        facet_id=excluded.facet_id,
-                        value=excluded.value,
-                        role=excluded.role,
-                        status=excluded.status,
-                        confidence=excluded.confidence,
-                        display_order=excluded.display_order""",
-                    (
-                        catalog_id,
-                        facet_id,
-                        profile_key,
-                        facet,
-                        str(feature.get("value") or humanize_tag(canonical_tag)),
-                        canonical_tag,
-                        str(feature.get("role", "present")),
-                        str(feature.get("status", "published")),
-                        str(feature.get("confidence", "high")),
-                        int(feature.get("display_order", 0)),
-                    ),
-                )
-                feature_row = con.execute(
-                    """SELECT feature_id FROM character_appearance_features
-                       WHERE appearance_key=? AND facet=? AND canonical_tag=?""",
-                    (profile_key, facet, canonical_tag),
-                ).fetchone()
-                if feature_row is None:
-                    raise RuntimeError(f"could not retrieve feature {profile_key}/{canonical_tag}")
-                feature_id = int(feature_row[0])
-                feature_count += 1
-                for ref in source_refs:
-                    evidence = feature.get("evidence", {})
-                    if not isinstance(evidence, dict):
-                        evidence = {}
-                    con.execute(
-                        """INSERT INTO character_appearance_feature_sources(
-                            feature_id, source_id, polarity, observed_tag,
-                            support_count, sample_size, evidence_text, confidence
-                        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?)
-                        ON CONFLICT(feature_id, source_id) DO UPDATE SET
-                            polarity=excluded.polarity,
-                            observed_tag=excluded.observed_tag,
-                            support_count=excluded.support_count,
-                            sample_size=excluded.sample_size,
-                            evidence_text=excluded.evidence_text,
-                            confidence=excluded.confidence""",
-                        (
-                            feature_id,
-                            sources[str(ref)],
-                            str(evidence.get("polarity", "supports")),
-                            normalize_tag(str(evidence.get("observed_tag", canonical_tag))),
-                            evidence.get("support_count"),
-                            evidence.get("sample_size"),
-                            str(evidence.get("text", "Reviewed from the cited source.")),
-                            str(evidence.get("confidence", feature.get("confidence", "high"))),
-                        ),
-                    )
-                    link_count += 1
-            conflict_count += upsert_conflicts(
-                con, profile_key, profile.get("conflicts", []), sources
-            )
-        con.execute(
-            "INSERT OR REPLACE INTO appearance_schema_metadata(key, value) VALUES (?, ?)",
-            ("last_promoted_seed", str(seed_path.resolve())),
-        )
-        con.execute(
-            "INSERT OR REPLACE INTO appearance_schema_metadata(key, value) VALUES (?, ?)",
-            ("last_promoted_at", datetime.now(timezone.utc).isoformat()),
-        )
+        result = _promote_loaded(con, data, seed_path)
+        _set_promotion_metadata(con, seed_path)
         con.commit()
-        return {
-            "profiles": profile_count,
-            "features": feature_count,
-            "evidence_links": link_count,
-            "sources": len(sources),
-            "conflicts": conflict_count,
-        }
+        return result
+    except Exception:
+        con.rollback()
+        raise
+    finally:
+        con.close()
+
+
+def promote_batch(db: Path, seed_paths: list[Path]) -> dict[str, Any]:
+    """Validate and promote every seed in one canonical transaction."""
+    if not seed_paths:
+        raise ValueError("promote_batch requires at least one seed")
+    paths = [Path(path) for path in seed_paths]
+    if len({path.resolve() for path in paths}) != len(paths):
+        raise ValueError("promote_batch seed paths must be unique")
+    loaded = [(path, read_seed(path)) for path in paths]
+    con = sqlite3.connect(db, timeout=120)
+    con.execute("PRAGMA busy_timeout=120000")
+    con.row_factory = sqlite3.Row
+    try:
+        ensure_owned_schema(con)
+        for path, data in loaded:
+            character_tag = normalize_tag(str(data["character_tag"]))
+            validate_registered_character(con, character_tag, str(data["character_tag"]))
+            validate_seed_profiles(character_tag, data["profiles"])
+        con.execute("BEGIN")
+        per_seed: dict[str, dict[str, int]] = {}
+        totals = {"profiles": 0, "features": 0, "evidence_links": 0,
+                  "sources": 0, "conflicts": 0}
+        for path, data in loaded:
+            result = _promote_loaded(con, data, path)
+            per_seed[path.name] = result
+            for key in totals:
+                totals[key] += result[key]
+        _set_promotion_metadata(con, paths[-1])
+        con.commit()
+        return {"seeds": per_seed, "totals": totals}
     except Exception:
         con.rollback()
         raise

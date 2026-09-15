@@ -103,5 +103,38 @@ The character must already exist as an owned profile or canonical character
 tag. Profile keys and variant prefixes are checked, and every feature must
 name at least one source reference. Promotion is performed in one transaction
 and can be repeated safely. The example seed contains the Korone base
-appearance plus isolated `1st_costume`, `street`, and `new_year` profiles. Do
-not promote raw candidates without human/source review.
+appearance plus isolated `1st_costume`, `street`, and `new_year` profiles. Do not
+promote raw candidates without human/source review.
+
+## `promote_appearance_batch.py`
+
+Promotes multiple reviewed seeds in one canonical SQLite transaction:
+
+```bash
+.venv/Scripts/python.exe scripts/promote_appearance_batch.py \\
+  --input seeds/appearance/first.json \\
+  --input seeds/appearance/second.json
+```
+
+All seed JSON and profile invariants are validated before the transaction
+starts. If a later seed fails, no appearance profile, feature, evidence link,
+or source row from the batch is committed.
+
+## `general_appearance_worker.py`
+
+This is the lifecycle controller used by the general cron worker. Its durable
+manifest is stored under ignored `data/` runtime state. The normal sequence is:
+
+```bash
+python scripts/general_appearance_worker.py --prepare --run-id RUN_ID
+python scripts/general_appearance_worker.py --record-decision --run-id RUN_ID --character NAME --decision published --seed seeds/appearance/NAME.json
+python scripts/general_appearance_worker.py --publish --run-id RUN_ID
+python scripts/general_appearance_worker.py --close --run-id RUN_ID
+```
+
+The controller reserves at most five ranked characters, refuses a new batch
+while any earlier manifest is open, validates the complete batch before
+promotion, rebuilds all derived indexes, probes the read-only appearance
+runtime, writes the report close, and runs the final preflight before releasing
+the manifest. Use `--status` for inspection. An interrupted run is resumed by
+the next gate; only an explicitly aborted run may be cleared.

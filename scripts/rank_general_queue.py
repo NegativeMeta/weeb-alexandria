@@ -14,6 +14,7 @@ sys.path.insert(0, str(ROOT))
 from weeb_alexandria_mcp.appearance_schema import normalize_tag  # noqa: E402
 
 SITES = ("danbooru", "gelbooru", "e621")
+EXCLUSION_FILE = ROOT / "data" / "general_appearance_exclusions.json"
 EXCLUDED = {
     "remilia_scarlet", "miku_hatsune", "sensei_(blue_archive)",
     "admiral_(kancolle)", "fujiwara_no_mokou", "saigyouji_yuyuko",
@@ -26,6 +27,8 @@ EXCLUDED = {
     "ibuki_suika", "koakuma",
     "cloud_strife", "artoria_pendragon_(saber)_(fate)",
     "aether_(genshin_impact)", "princess_peach", "inkling_girl",
+    "corrin_(female)_(fire_emblem)", "jean_(genshin_impact)", "dio_brando",
+    "mudrock_(arknights)", "kama_(fate)",
     "illyasviel_von_einzbern", "chun-li",
     "nero_claudius_(fate)", "houjuu_nue",
     "ayanami_rei", "hijiri_byakuren",
@@ -119,6 +122,18 @@ EXCLUDED = {
     "w_(arknights)",
 }
 
+
+def load_dynamic_exclusions(path: Path = EXCLUSION_FILE) -> set[str]:
+    """Load worker-managed exclusions and fail closed on malformed state."""
+    if not path.exists():
+        return set()
+    with path.open("r", encoding="utf-8") as handle:
+        data = json.load(handle)
+    if not isinstance(data, list) or any(not isinstance(item, str) or not item.strip() for item in data):
+        raise ValueError(f"dynamic exclusions must be a JSON list of non-empty strings: {path}")
+    return {item.strip() for item in data}
+
+
 def rank(db: Path, limit: int) -> list[dict[str, int | str]]:
     con = sqlite3.connect(db)
     con.row_factory = sqlite3.Row
@@ -132,7 +147,7 @@ def rank(db: Path, limit: int) -> list[dict[str, int | str]]:
             ",".join("?" for _ in published), tuple(published)
         )
     } if published else set()
-    excluded_names = EXCLUDED | aliases_to_published
+    excluded_names = EXCLUDED | load_dynamic_exclusions() | aliases_to_published
     counts: dict[str, dict[str, int]] = defaultdict(lambda: defaultdict(int))
     for row in con.execute(
         "SELECT site, name, post_count FROM tags "
