@@ -143,6 +143,72 @@ python scripts/general_appearance_worker.py --close --run-id RUN_ID
 The controller reserves at most five ranked characters, refuses a new batch
 while any earlier manifest is open, validates the complete batch before
 promotion, rebuilds all derived indexes, probes the read-only appearance
-runtime, writes the report close, and runs the final preflight before releasing
-the manifest. Use `--status` for inspection. An interrupted run is resumed by
-the next gate; only an explicitly aborted run may be cleared.
+the report close, runs the final preflight before releasing the manifest, and
+archives the run's published seeds only after that final preflight succeeds.
+Use `--status` for inspection. An interrupted run is resumed by the next gate;
+only an explicitly aborted run may be cleared.
+
+## Automatic continuation and reconciliation
+
+The cron shim invokes the deterministic continuation entry point:
+
+```bash
+.venv/Scripts/python.exe scripts/general_appearance_worker.py --tick
+```
+
+`--tick` never clears an aborted manifest. When a prepared/reviewing manifest
+has all decisions, it validates every published seed against the candidate
+fingerprint. A seed with candidate, excerpt, profile, or source-reference
+errors is changed idempotently to `deferred`; the original decision, path, and
+literal validator errors remain in the manifest. Valid seeds continue through
+`--publish` and `--close`, so one bad seed cannot strand the batch or cause a
+partial promotion. Global fingerprint/index failures remain fail-closed.
+
+An aborted run requires an explicit, exact reconciliation command:
+
+```bash
+.venv/Scripts/python.exe scripts/general_appearance_worker.py \\
+  --reconcile-aborted --run-id RUN_ID
+```
+
+That command backs up the canonical DB outside the repository, checks its
+invariants, rebuilds candidate/search/context indexes, probes the read-only
+runtime, updates only the canonical metrics of the latest report section, and
+runs the final preflight before clearing that same `RUN_ID`. It never restores
+or mutates canonical appearance rows automatically.
+
+## Post-close seed archive
+
+A successful `close` archives only the seeds explicitly assigned to that run
+with a `published` decision and an exact matching row in
+`character_appearance_profiles` with `status='published'`:
+
+```text
+seeds/appearance/NAME.json
+  -> seeds/archive/RUN_ID/NAME.json
+```
+
+The worker uses an atomic same-volume move and records every operation in
+`data/appearance_seed_archive_manifest.json`, including the run and batch IDs,
+character, appearance key, original and destination paths, SHA-256 before and
+after the move, UTC movement time, and result. The archive operation is
+idempotent: a missing source is accepted only when the destination exists with
+the recorded SHA-256. A destination with a different hash, a changed seed, a
+non-published decision, or a canonical mismatch fails closed without deleting
+the source. Deferred, pending, invalid, aborted, and incomplete-run seeds stay
+under `seeds/appearance/`; an incomplete archive keeps the worker manifest
+active so the next tick can resume it.
+
+## Auditable script cleanup
+
+`cleanup_legacy_scripts.py` contains a closed allowlist of historical
+one-shot/debug helpers. Inventory is read-only; `--apply` moves only those
+confirmed files to an external quarantine and records their SHA-256 values:
+
+```bash
+.venv/Scripts/python.exe scripts/cleanup_legacy_scripts.py
+.venv/Scripts/python.exe scripts/cleanup_legacy_scripts.py --apply
+```
+
+The cleaner does not use broad globs and does not touch operational scripts,
+DBs, generated indexes, seeds, backups, worker state, manifests, or evidence.

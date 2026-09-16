@@ -32,7 +32,7 @@ from weeb_alexandria_mcp.owned_schema import ensure_owned_schema  # noqa: E402
 DEFAULT_DB = ROOT / "tag_library.db"
 WORKER_STATE_PATH = ROOT / "data" / "general_appearance_worker_state.json"
 _ACTIVE_WORKER_PHASES = {
-    "reserved", "prepared", "reviewing", "promoted", "finalizing", "closed",
+    "reserved", "prepared", "reviewing", "promoted", "finalizing", "archiving", "closed",
 }
 
 

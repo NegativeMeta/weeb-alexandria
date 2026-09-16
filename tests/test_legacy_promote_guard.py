@@ -24,6 +24,21 @@ class LegacyPromotionGuardTests(unittest.TestCase):
                 promote_appearance._guard_legacy_cli("alice", state_path)
 
             promote_appearance._guard_legacy_cli("bob", state_path)
+    def test_legacy_cli_is_blocked_during_seed_archiving(self):
+        with tempfile.TemporaryDirectory() as directory:
+            state_path = Path(directory) / "worker_state.json"
+            state_path.write_text(
+                json.dumps({
+                    "scope": "general_appearance",
+                    "run_id": "run-archive",
+                    "phase": "archiving",
+                    "selected": ["alice"],
+                }),
+                encoding="utf-8",
+            )
+
+            with self.assertRaisesRegex(RuntimeError, "use general_appearance_worker.py --publish"):
+                promote_appearance._guard_legacy_cli("alice", state_path)
 
 
 if __name__ == "__main__":

@@ -3405,3 +3405,162 @@ exclusions_added=["ibuki_(blue_archive)", "mercy_(overwatch)", "yuki_miku"]
 10. `artoria_caster_(fate)` — total=7104, danbooru=3014, gelbooru=4090, e621=0
 
 <!-- worker deterministic close; do not edit this section manually -->
+
+## General appearance batch 53 (worker deterministic close)
+
+worker_run_id=0633e80b4523419e8c90e249e47b7247
+batch_close=complete
+selected_characters=5
+source_snapshot_sha256=3c5734d3d5477189b9cefc14ec6a0b04ec467f81d575384eaa5653d63eefbe3a
+source_snapshot_size=869908480
+last_promoted_seed=apocrypha).json
+
+### Review reservation
+
+| character | total posts | decision | seed | reason |
+| --- | ---: | --- | --- | --- |
+| `futaba_anzu` | 7242 | deferred | `—` | Sin descripcin visual de faceta en el wiki local capturado; candidates observados (flower, idolmaster_cinderella_girls, cosplay) no son faceta base sin excerpt literal. |
+| `oguri_cap_(umamusume)` | 7217 | published | `oguri_cap_(umamusume).json` | 3 facetas visuales con excerpt literal en danbooru wiki: long_hair, grey_hair, blue_eyes. |
+| `renamon` | 7202 | published | `renamon.json` | 4 facetas visuales con excerpt literal en gelbooru+e621 wiki: blue_eyes, yellow_fur, white_fur, bridal_gauntlets. |
+| `mayuzumi_fuyuko` | 7174 | deferred | `—` | 0 candidates y wiki local sin descripcion facial/figural; solo personalidad y fotos de outfit. |
+| `jack_the_ripper_(fate/apocrypha)` | 7172 | published | `apocrypha).json` | 4 facetas visuales con excerpt literal en gelbooru wiki: white_hair, blue_eyes, green_eyes, tight_clothing. |
+
+review_observations=61
+review_candidates=20
+final_observations=61
+final_candidates=20
+
+### Canonical close metrics
+
+canonical_db_size=869916672
+canonical_db_sha256=93491b9fa576bcf2f10cb71760355227873f8bca80498e05e7bd7e9790e95bb6
+canonical_published_profiles=470
+canonical_published_features=4469
+canonical_all_evidence_links=7286
+canonical_published_evidence_links=7260
+canonical_retired_evidence_links=26
+canonical_unjoined_evidence_links=0
+canonical_integrity=ok
+canonical_foreign_key_errors=0
+exclusions_added=["futaba_anzu", "mayuzumi_fuyuko"]
+
+### Next ranked queue
+
+1. `misumi_uika` — total=7161, danbooru=1210, gelbooru=5951, e621=0
+2. `asui_tsuyu` — total=7152, danbooru=1906, gelbooru=5246, e621=0
+3. `akari_(pokemon)` — total=7144, danbooru=2907, gelbooru=4237, e621=0
+4. `nicole_demara` — total=7135, danbooru=2733, gelbooru=4402, e621=0
+5. `artoria_caster_(fate)` — total=7104, danbooru=3014, gelbooru=4090, e621=0
+6. `miyu_edelfelt` — total=7101, danbooru=2727, gelbooru=4374, e621=0
+7. `uehara_ayumu` — total=7090, danbooru=1863, gelbooru=5227, e621=0
+8. `sephiroth` — total=7081, danbooru=1319, gelbooru=5762, e621=0
+9. `female_admiral_(kancolle)` — total=7078, danbooru=2570, gelbooru=4508, e621=0
+10. `shu_(arknights)` — total=7077, danbooru=2673, gelbooru=4404, e621=0
+
+<!-- worker deterministic close; do not edit this section manually -->
+
+## General appearance batch 54 (worker deterministic close)
+
+worker_run_id=2066abc4b4b14ef192406ba417d95886
+batch_close=complete
+selected_characters=5
+source_snapshot_sha256=93491b9fa576bcf2f10cb71760355227873f8bca80498e05e7bd7e9790e95bb6
+source_snapshot_size=869916672
+last_promoted_seed=nicole_demara.json
+
+### Review reservation
+
+| character | total posts | decision | seed | reason |
+| --- | ---: | --- | --- | --- |
+| `misumi_uika` | 7161 | published | `misumi_uika.json` | — |
+| `asui_tsuyu` | 7152 | published | `asui_tsuyu.json` | — |
+| `akari_(pokemon)` | 7144 | deferred | `—` | Fuente wiki escasa: solo headscarf y scar; sin rasgos faciales/hair/eyes/cuerpo suficientes para un perfil base auditable. |
+| `nicole_demara` | 7135 | published | `nicole_demara.json` | — |
+| `artoria_caster_(fate)` | 7104 | deferred | `—` | Wiki describe ascensiones/costumes pero no provee descripcion de apariencia base con tags canonicos verificables; el candidato bikini proviene de una entrada de swimsuit variation, no de perfil base. |
+
+review_observations=93
+review_candidates=61
+final_observations=93
+final_candidates=61
+
+### Canonical close metrics
+
+canonical_db_size=869924864
+canonical_db_sha256=ace22324f4b830f67cf549a4b13f89ca0436d4b4396e6ec18495e885d67c0eda
+canonical_published_profiles=473
+canonical_published_features=4496
+canonical_all_evidence_links=7315
+canonical_published_evidence_links=7289
+canonical_retired_evidence_links=26
+canonical_unjoined_evidence_links=0
+canonical_integrity=ok
+canonical_foreign_key_errors=0
+exclusions_added=["akari_(pokemon)", "artoria_caster_(fate)"]
+
+### Next ranked queue
+
+1. `miyu_edelfelt` — total=7101, danbooru=2727, gelbooru=4374, e621=0
+2. `uehara_ayumu` — total=7090, danbooru=1863, gelbooru=5227, e621=0
+3. `sephiroth` — total=7081, danbooru=1319, gelbooru=5762, e621=0
+4. `female_admiral_(kancolle)` — total=7078, danbooru=2570, gelbooru=4508, e621=0
+5. `shu_(arknights)` — total=7077, danbooru=2673, gelbooru=4404, e621=0
+6. `hiei_(kancolle)` — total=7066, danbooru=2913, gelbooru=4153, e621=0
+7. `karin_(bunny)_(blue_archive)` — total=7064, danbooru=3074, gelbooru=3990, e621=0
+8. `tachikawa_mimi` — total=7054, danbooru=333, gelbooru=6721, e621=0
+9. `unicorn_(azur_lane)` — total=7042, danbooru=3305, gelbooru=3737, e621=0
+10. `yahata_umiri` — total=7040, danbooru=1212, gelbooru=5828, e621=0
+
+<!-- worker deterministic close; do not edit this section manually -->
+
+## General appearance batch 55 (worker deterministic close)
+
+worker_run_id=36aea004920b47beb54c02127b162b26
+batch_close=complete
+selected_characters=5
+source_snapshot_sha256=ace22324f4b830f67cf549a4b13f89ca0436d4b4396e6ec18495e885d67c0eda
+source_snapshot_size=869924864
+last_promoted_seed=sephiroth.json
+
+### Review reservation
+
+| character | total posts | decision | seed | reason |
+| --- | ---: | --- | --- | --- |
+| `miyu_edelfelt` | 7101 | published | `miyu_edelfelt.json` | — |
+| `uehara_ayumu` | 7090 | published | `uehara_ayumu.json` | — |
+| `sephiroth` | 7081 | published | `sephiroth.json` | — |
+| `female_admiral_(kancolle)` | 7078 | deferred | `—` | 0 candidatos estructurados; 1 observacion sin feature visual determinista |
+| `shu_(arknights)` | 7077 | deferred | `—` | 0 candidatos estructurados; 2 observaciones sin feature visual determinista |
+
+review_observations=349
+review_candidates=111
+final_observations=349
+final_candidates=111
+
+### Canonical close metrics
+
+canonical_db_size=869949440
+canonical_db_sha256=b634c9a6ea7169cba757bc942f4e2434dfd69f996991fc73f607491e800d65bb
+canonical_published_profiles=476
+canonical_published_features=4517
+canonical_all_evidence_links=7347
+canonical_published_evidence_links=7321
+canonical_retired_evidence_links=26
+canonical_unjoined_evidence_links=0
+canonical_integrity=ok
+canonical_foreign_key_errors=0
+exclusions_added=["female_admiral_(kancolle)", "shu_(arknights)"]
+
+### Next ranked queue
+
+1. `hiei_(kancolle)` — total=7066, danbooru=2913, gelbooru=4153, e621=0
+2. `karin_(bunny)_(blue_archive)` — total=7064, danbooru=3074, gelbooru=3990, e621=0
+3. `tachikawa_mimi` — total=7054, danbooru=333, gelbooru=6721, e621=0
+4. `unicorn_(azur_lane)` — total=7042, danbooru=3305, gelbooru=3737, e621=0
+5. `yahata_umiri` — total=7040, danbooru=1212, gelbooru=5828, e621=0
+6. `oda_nobunaga_(fate)` — total=7029, danbooru=3030, gelbooru=3999, e621=0
+7. `darkness_(konosuba)` — total=7028, danbooru=2505, gelbooru=4523, e621=0
+8. `izuna_(blue_archive)` — total=7028, danbooru=2938, gelbooru=4090, e621=0
+9. `kizuna_akari` — total=7014, danbooru=2632, gelbooru=4382, e621=0
+10. `jinx_(league_of_legends)` — total=7003, danbooru=2494, gelbooru=4509, e621=0
+
+<!-- worker deterministic close; do not edit this section manually -->

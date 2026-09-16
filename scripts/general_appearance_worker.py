@@ -28,8 +28,10 @@ if str(ROOT) not in sys.path:
 DB = ROOT / "tag_library.db"
 REPORT = ROOT / "reports" / "hololive_appearance_queue.md"
 SEEDS = ROOT / "seeds" / "appearance"
+SEED_ARCHIVE = ROOT / "seeds" / "archive"
 DATA = ROOT / "data"
 STATE_PATH = DATA / "general_appearance_worker_state.json"
+ARCHIVE_MANIFEST_PATH = DATA / "appearance_seed_archive_manifest.json"
 EXCLUSION_PATH = DATA / "general_appearance_exclusions.json"
 CANDIDATES = DATA / "character_appearance.sqlite"
 SEARCH_INDEX = DATA / "tag_search.sqlite"
@@ -44,7 +46,10 @@ BATCH_PROMOTER = ROOT / "scripts" / "promote_appearance_batch.py"
 MCP_PROBE = ROOT / "scripts" / "probe_appearance_runtime.py"
 BATCH_LIMIT = 5
 STATE_VERSION = 1
-ACTIVE_PHASES = {"reserved", "prepared", "reviewing", "promoted", "finalizing", "closed"}
+AUTO_DEFER_POLICY = "strict_validation_to_deferred_v1"
+ACTIVE_PHASES = {
+    "reserved", "prepared", "reviewing", "promoted", "finalizing", "archiving", "closed",
+}
 PROJECT_PYTHON = ROOT / ".venv" / "Scripts" / "python.exe"
 PYTHON = str(PROJECT_PYTHON if PROJECT_PYTHON.is_file() else Path(sys.executable))
 
@@ -206,19 +211,31 @@ def _print_gate_state(state: dict[str, Any], continuation: bool) -> None:
 def gate(*, dry_run: bool = False) -> int:
     state = load_state()
     if state and state["phase"] == "closed":
-        ready, output = _preflight()
-        print(output)
-        if ready and not dry_run:
-            STATE_PATH.unlink(missing_ok=True)
-            state = None
-        elif not ready and not dry_run:
+        if not _seed_archive_complete(state):
+            if dry_run:
+                _print_gate_state(state, continuation=True)
+                print("worker_dry_run=1")
+                print(json.dumps({"wakeAgent": False}, separators=(",", ":")))
+                return 0
             state["phase"] = "promoted"
-            state["last_error"] = "closed manifest failed its final preflight; retrying close"
+            state["last_error"] = (
+                "closed manifest has incomplete seed archive; retrying close"
+            )
             save_state(state)
         else:
-            _print_gate_state(state, continuation=True)
-            print(json.dumps({"wakeAgent": False}, separators=(",", ":")))
-            return 0
+            ready, output = _preflight()
+            print(output)
+            if ready and not dry_run:
+                STATE_PATH.unlink(missing_ok=True)
+                state = None
+            elif not ready and not dry_run:
+                state["phase"] = "promoted"
+                state["last_error"] = "closed manifest failed its final preflight; retrying close"
+                save_state(state)
+            else:
+                _print_gate_state(state, continuation=True)
+                print(json.dumps({"wakeAgent": False}, separators=(",", ":")))
+                return 0
 
     if state:
         _print_gate_state(state, continuation=True)
@@ -260,6 +277,7 @@ def gate(*, dry_run: bool = False) -> int:
         "next_queue": [],
         "mcp_probe": None,
         "canonical_metrics": None,
+        "seed_archive": None,
         "commands": [],
         "last_error": "",
     }
@@ -461,6 +479,572 @@ def _accepted_seed_paths(state: dict[str, Any]) -> list[Path]:
     ]
 
 
+def _seed_key(value: Path | str) -> str:
+    """Return a stable cross-platform key for a seed path in the manifest."""
+    return str(value).replace("\\", "/").lower()
+
+
+def _archive_result_complete(item: dict[str, Any]) -> bool:
+    return item.get("result") in {
+        "moved", "already_archived", "reconciled_existing_destination",
+    }
+
+
+def _seed_archive_complete(state: dict[str, Any]) -> bool:
+    archive = state.get("seed_archive")
+    if not isinstance(archive, dict):
+        return False
+    if archive.get("status") not in {"complete", "not_applicable"}:
+        return False
+    items = archive.get("items", [])
+    return isinstance(items, list) and all(
+        isinstance(item, dict)
+        and _archive_result_complete(item)
+        and item.get("sha256_before") == item.get("sha256_after_move")
+        and bool(item.get("moved_at"))
+        for item in items
+    )
+
+
+def _archive_source_path(value: str) -> Path:
+    raw = Path(value)
+    if not raw.is_absolute():
+        raw = ROOT / raw
+    if raw.is_symlink():
+        raise RuntimeError(f"seed archive source must not be a symlink: {raw}")
+    path = raw.resolve()
+    try:
+        relative = path.relative_to(SEEDS.resolve())
+    except ValueError as exc:
+        raise ValueError(f"seed archive source is outside seeds/appearance: {value}") from exc
+    if not relative.parts or path.suffix.lower() != ".json":
+        raise ValueError(f"seed archive source must be a JSON seed: {value}")
+    return path
+
+
+def _archive_destination_path(value: str, run_id: str, source_name: str) -> Path:
+    if not run_id or any(separator in run_id for separator in ("/", "\\")):
+        raise ValueError("archive run_id is not a safe directory name")
+    raw = Path(value)
+    if not raw.is_absolute():
+        raw = ROOT / raw
+    if raw.is_symlink():
+        raise RuntimeError(f"seed archive destination must not be a symlink: {raw}")
+    path = raw.resolve()
+    try:
+        relative = path.relative_to(SEED_ARCHIVE.resolve())
+    except ValueError as exc:
+        raise ValueError(f"seed archive destination is outside seeds/archive: {value}") from exc
+    if relative.parts != (run_id, source_name):
+        raise ValueError(
+            "seed archive destination must be exactly one run directory and the original filename"
+        )
+    return path
+
+
+def _archive_profile_key(seed_path: Path, character: str) -> str:
+    from scripts.promote_appearance import read_seed, stable_appearance_key
+
+    data = read_seed(seed_path)
+    if str(data.get("character_tag")) != character:
+        raise ValueError(
+            f"seed character_tag {data.get('character_tag')!r} does not match {character!r}"
+        )
+    profiles = data.get("profiles")
+    if not isinstance(profiles, list) or len(profiles) != 1:
+        raise ValueError("published seed must contain exactly one profile before archiving")
+    profile = profiles[0]
+    if not isinstance(profile, dict):
+        raise ValueError("published seed profile must be a JSON object before archiving")
+    if str(profile.get("status", "published")) != "published":
+        raise ValueError("only published seed profiles may be archived")
+    variant_tag = str(profile.get("variant_tag") or character)
+    return str(profile.get("appearance_key") or stable_appearance_key(character, variant_tag))
+
+
+def _load_archive_manifest() -> dict[str, Any]:
+    if not ARCHIVE_MANIFEST_PATH.exists():
+        return {
+            "schema_version": 1,
+            "policy": "closed_published_seeds_v1",
+            "runs": [],
+        }
+    try:
+        value = json.loads(ARCHIVE_MANIFEST_PATH.read_text(encoding="utf-8"))
+    except Exception as exc:
+        raise RuntimeError(
+            f"seed archive manifest is not valid JSON: {ARCHIVE_MANIFEST_PATH}: {exc}"
+        ) from exc
+    if not isinstance(value, dict) or value.get("schema_version") != 1:
+        raise RuntimeError("seed archive manifest has an unsupported schema")
+    if not isinstance(value.get("runs"), list) or any(
+        not isinstance(run, dict) for run in value["runs"]
+    ):
+        raise RuntimeError("seed archive manifest runs are malformed")
+    return value
+
+
+def _find_archive_run(manifest: dict[str, Any], run_id: str) -> dict[str, Any] | None:
+    matches = [run for run in manifest["runs"] if run.get("run_id") == run_id]
+    if len(matches) > 1:
+        raise RuntimeError(f"seed archive manifest contains duplicate run_id: {run_id}")
+    return matches[0] if matches else None
+
+
+def _build_archive_plan(
+    state: dict[str, Any], canonical: sqlite3.Connection
+) -> list[dict[str, Any]]:
+    run_id = str(state["run_id"])
+    if not run_id or any(separator in run_id for separator in ("/", "\\")):
+        raise ValueError("archive run_id is not a safe directory name")
+    plan: list[dict[str, Any]] = []
+    seen_sources: set[str] = set()
+    seen_destinations: set[str] = set()
+    for character in state["selected"]:
+        decision = state["decisions"][character]
+        if decision.get("decision") != "published":
+            continue
+        raw_seed = decision.get("seed_path")
+        if not raw_seed:
+            raise RuntimeError(f"published decision has no seed path: {character}")
+        source = _archive_source_path(str(raw_seed))
+        source_key = _seed_key(source)
+        if source_key in seen_sources:
+            raise RuntimeError(f"same seed is assigned more than once: {source}")
+        seen_sources.add(source_key)
+        if not source.is_file():
+            raise FileNotFoundError(source)
+        appearance_key = _archive_profile_key(source, character)
+        canonical_row = canonical.execute(
+            """SELECT 1 FROM character_appearance_profiles
+               WHERE appearance_key=? AND character_tag=? AND status='published'
+               LIMIT 1""",
+            (appearance_key, character),
+        ).fetchone()
+        if canonical_row is None:
+            raise RuntimeError(
+                "published seed is not present as an exact published canonical profile: "
+                f"{character}/{appearance_key}"
+            )
+        destination = SEED_ARCHIVE / run_id / source.name
+        destination_key = _seed_key(destination)
+        if destination_key in seen_destinations:
+            raise RuntimeError(f"multiple seeds target the same archive destination: {destination}")
+        seen_destinations.add(destination_key)
+        plan.append({
+            "run_id": run_id,
+            "batch_number": state["batch_number"],
+            "character": character,
+            "appearance_key": appearance_key,
+            "decision": "published",
+            "original_path": str(source),
+            "archive_path": str(destination),
+            "sha256_before": source_fingerprint(source)["sha256"],
+            "sha256_after_move": None,
+            "moved_at": None,
+            "result": "pending",
+        })
+    return plan
+
+
+def _validate_archive_plan_item(
+    state: dict[str, Any], item: dict[str, Any], canonical: sqlite3.Connection
+) -> tuple[Path, Path]:
+    run_id = str(state["run_id"])
+    if item.get("run_id") != run_id:
+        raise RuntimeError("seed archive plan contains a different run_id")
+    if item.get("batch_number") != state["batch_number"]:
+        raise RuntimeError("seed archive plan contains a different batch_number")
+    if item.get("decision") != "published":
+        raise RuntimeError("seed archive plan contains a non-published decision")
+    character = str(item.get("character") or "")
+    if character not in state["selected"]:
+        raise RuntimeError(f"seed archive plan contains an unselected character: {character}")
+    decision = state["decisions"].get(character, {})
+    if decision.get("decision") != "published":
+        raise RuntimeError(f"seed archive plan contains a non-published decision: {character}")
+    source = _archive_source_path(str(item.get("original_path") or ""))
+    decision_source = _archive_source_path(str(decision.get("seed_path") or ""))
+    if _seed_key(source) != _seed_key(decision_source):
+        raise RuntimeError(f"seed archive plan does not match the decision seed: {character}")
+    destination = _archive_destination_path(
+        str(item.get("archive_path") or ""), run_id, source.name
+    )
+    expected_sha = str(item.get("sha256_before") or "")
+    if not re.fullmatch(r"[0-9a-f]{64}", expected_sha):
+        raise RuntimeError(f"seed archive plan has an invalid SHA-256: {source}")
+    appearance_key = str(item.get("appearance_key") or "")
+    if not appearance_key:
+        raise RuntimeError(f"seed archive plan has no appearance_key: {source}")
+    canonical_row = canonical.execute(
+        """SELECT 1 FROM character_appearance_profiles
+           WHERE appearance_key=? AND character_tag=? AND status='published'
+           LIMIT 1""",
+        (appearance_key, character),
+    ).fetchone()
+    if canonical_row is None:
+        raise RuntimeError(
+            "seed archive plan no longer points to an exact published canonical profile: "
+            f"{character}/{appearance_key}"
+        )
+    if source.exists():
+        if not source.is_file():
+            raise RuntimeError(f"seed archive source is not a regular file: {source}")
+        if _archive_profile_key(source, character) != appearance_key:
+            raise RuntimeError(f"seed archive source profile changed: {source}")
+    return source, destination
+
+
+def _merge_archive_items(
+    plan: list[dict[str, Any]], previous: list[Any]
+) -> list[dict[str, Any]]:
+    previous_by_source: dict[str, dict[str, Any]] = {}
+    for raw_item in previous:
+        if not isinstance(raw_item, dict):
+            raise RuntimeError("seed archive manifest contains a malformed item")
+        source_key = _seed_key(str(raw_item.get("original_path") or ""))
+        if not source_key or source_key in previous_by_source:
+            raise RuntimeError("seed archive manifest contains duplicate original paths")
+        previous_by_source[source_key] = raw_item
+    merged: list[dict[str, Any]] = []
+    plan_sources = {_seed_key(str(item["original_path"])) for item in plan}
+    unexpected = set(previous_by_source) - plan_sources
+    if unexpected:
+        raise RuntimeError(
+            "seed archive manifest contains items absent from the worker plan: "
+            f"{sorted(unexpected)}"
+        )
+    for item in plan:
+        prior = previous_by_source.get(_seed_key(str(item["original_path"])))
+        if prior is not None:
+            for key in ("run_id", "batch_number", "archive_path", "sha256_before"):
+                if prior.get(key) != item.get(key):
+                    raise RuntimeError(f"seed archive manifest conflicts for {item['original_path']}")
+            item = dict(item)
+            if _archive_result_complete(prior):
+                for key in ("sha256_after_move", "moved_at", "result"):
+                    item[key] = prior.get(key)
+        merged.append(item)
+    return merged
+
+
+def _archive_one_seed(item: dict[str, Any], source: Path, destination: Path) -> dict[str, Any]:
+    expected_sha = str(item["sha256_before"])
+    if source.is_symlink():
+        raise RuntimeError(f"seed archive source must not be a symlink: {source}")
+    if destination.is_symlink():
+        raise RuntimeError(f"seed archive destination must not be a symlink: {destination}")
+    source_exists = source.exists()
+    destination_exists = destination.exists()
+    if source_exists and not source.is_file():
+        raise RuntimeError(f"seed archive source is not a regular file: {source}")
+    if destination_exists and not destination.is_file():
+        raise RuntimeError(f"seed archive destination exists but is not a regular file: {destination}")
+
+    if source_exists:
+        if source_fingerprint(source)["sha256"] != expected_sha:
+            raise RuntimeError(f"seed changed after archive plan was recorded: {source}")
+        if destination_exists:
+            if source_fingerprint(destination)["sha256"] != expected_sha:
+                raise RuntimeError(
+                    "seed archive destination exists with a different SHA-256: "
+                    f"{destination}"
+                )
+            result = "reconciled_existing_destination"
+        else:
+            result = "moved"
+        destination.parent.mkdir(parents=True, exist_ok=True)
+        os.replace(str(source), str(destination))
+    else:
+        if not destination_exists:
+            raise FileNotFoundError(
+                f"seed archive source and destination are both missing: {source}"
+            )
+        if source_fingerprint(destination)["sha256"] != expected_sha:
+            raise RuntimeError(f"seed archive destination SHA-256 mismatch: {destination}")
+        result = item.get("result") if _archive_result_complete(item) else "already_archived"
+
+    after_sha = source_fingerprint(destination)["sha256"]
+    if after_sha != expected_sha:
+        raise RuntimeError(f"SHA-256 changed during seed archive: {destination}")
+    updated = dict(item)
+    updated["sha256_after_move"] = after_sha
+    updated["moved_at"] = item.get("moved_at") or now()
+    updated["result"] = result
+    return updated
+
+
+def _archive_seeds_after_close(state: dict[str, Any]) -> dict[str, Any]:
+    """Move only this closed run's published seeds into its audited archive."""
+    if state.get("phase") not in {"archiving", "closed"}:
+        raise RuntimeError(f"cannot archive seeds from phase {state.get('phase')}")
+    if _seed_archive_complete(state):
+        return state["seed_archive"]
+
+    manifest = _load_archive_manifest()
+    run = _find_archive_run(manifest, str(state["run_id"]))
+    archive_state = state.get("seed_archive")
+    if isinstance(archive_state, dict) and isinstance(archive_state.get("items"), list) and archive_state["items"]:
+        plan = [dict(item) for item in archive_state["items"]]
+    elif run is not None and isinstance(run.get("items"), list) and run["items"]:
+        plan = [dict(item) for item in run["items"]]
+    else:
+        canonical = _connect_read_only(DB)
+        try:
+            plan = _build_archive_plan(state, canonical)
+        finally:
+            canonical.close()
+
+    if not plan:
+        result = {
+            "policy": "closed_published_seeds_v1",
+            "status": "not_applicable",
+            "items": [],
+            "completed_at": now(),
+        }
+        state["seed_archive"] = result
+        save_state(state)
+        if run is not None:
+            run["status"] = "complete"
+            run["items"] = []
+            run["updated_at"] = now()
+            run["finished_at"] = result["completed_at"]
+            atomic_write_json(ARCHIVE_MANIFEST_PATH, manifest)
+        return result
+
+    canonical = _connect_read_only(DB)
+    try:
+        validated_paths = [
+            _validate_archive_plan_item(state, item, canonical) for item in plan
+        ]
+    finally:
+        canonical.close()
+    source_keys = {_seed_key(source) for source, _ in validated_paths}
+    destination_keys = {_seed_key(destination) for _, destination in validated_paths}
+    if len(source_keys) != len(validated_paths) or len(destination_keys) != len(validated_paths):
+        raise RuntimeError("seed archive plan contains duplicate source or destination paths")
+
+    archive_state = {
+        "policy": "closed_published_seeds_v1",
+        "status": "in_progress",
+        "items": plan,
+        "started_at": (
+            archive_state.get("started_at")
+            if isinstance(archive_state, dict) else None
+        ) or now(),
+    }
+    state["seed_archive"] = archive_state
+    save_state(state)
+
+    if run is None:
+        run = {
+            "run_id": str(state["run_id"]),
+            "batch_number": state["batch_number"],
+            "policy": "closed_published_seeds_v1",
+            "status": "in_progress",
+            "started_at": archive_state["started_at"],
+            "items": [],
+        }
+        manifest["runs"].append(run)
+    elif run.get("batch_number") != state["batch_number"]:
+        raise RuntimeError("seed archive manifest batch_number conflicts with worker state")
+    plan = _merge_archive_items(plan, run.get("items", []))
+    archive_state["items"] = plan
+    run["items"] = plan
+    run["status"] = "in_progress"
+    run["updated_at"] = now()
+    atomic_write_json(ARCHIVE_MANIFEST_PATH, manifest)
+
+    try:
+        for index, item in enumerate(plan):
+            source, destination = validated_paths[index]
+            plan[index] = _archive_one_seed(item, source, destination)
+            archive_state["items"] = plan
+            save_state(state)
+            run["items"] = plan
+            run["updated_at"] = now()
+            atomic_write_json(ARCHIVE_MANIFEST_PATH, manifest)
+    except Exception as exc:
+        archive_state["status"] = "partial"
+        archive_state["last_error"] = str(exc)[-1200:]
+        save_state(state)
+        run["items"] = plan
+        run["status"] = "partial"
+        run["last_error"] = str(exc)[-1200:]
+        run["updated_at"] = now()
+        atomic_write_json(ARCHIVE_MANIFEST_PATH, manifest)
+        raise
+
+    completed_at = now()
+    archive_state["status"] = "complete"
+    archive_state["completed_at"] = completed_at
+    archive_state.pop("last_error", None)
+    run["items"] = plan
+    run["status"] = "complete"
+    run["updated_at"] = completed_at
+    run["finished_at"] = completed_at
+    atomic_write_json(ARCHIVE_MANIFEST_PATH, manifest)
+    save_state(state)
+    return archive_state
+
+
+def _strict_validate_seeds(state: dict[str, Any]) -> dict[str, Any]:
+    """Validate accepted seeds and return per-seed errors without writing."""
+    seeds = _accepted_seed_paths(state)
+    result: dict[str, Any] = {
+        "errors_by_seed": {},
+        "metrics_by_seed": {},
+    }
+    if not seeds:
+        return result
+
+    from scripts.validate_general_appearance_batch import load_seed, validate_seed
+
+    current_source = source_fingerprint()
+    snapshot = state.get("source_snapshot") or {}
+    if (
+        snapshot.get("sha256") != current_source["sha256"]
+        or str(snapshot.get("size")) != str(current_source["size"])
+    ):
+        raise RuntimeError(
+            "canonical DB fingerprint changed since manifest snapshot; "
+            "refusing automatic resolution"
+        )
+
+    canonical = _connect_read_only(DB)
+    candidates = _connect_read_only(CANDIDATES)
+    try:
+        metadata = dict(candidates.execute(
+            "SELECT key, value FROM appearance_index_metadata"
+        ).fetchall())
+        expected = current_source
+        if metadata.get("source_sha256") != expected["sha256"]:
+            raise RuntimeError(
+                "candidate database fingerprint mismatch; refusing automatic resolution"
+            )
+        if metadata.get("source_size") != str(expected["size"]):
+            raise RuntimeError(
+                "candidate database size mismatch; refusing automatic resolution"
+            )
+        source_keys = {
+            (row[0], row[1], row[2]) for row in canonical.execute(
+                "SELECT source_site, source_kind, source_key "
+                "FROM character_appearance_sources"
+            )
+        }
+        candidate_keys = {
+            (row[0], row[1], row[3]) for row in candidates.execute(
+                "SELECT character_tag, variant_tag, facet, canonical_tag "
+                "FROM appearance_candidates"
+            )
+        }
+        for seed_path in seeds:
+            key = _seed_key(seed_path)
+            if not seed_path.is_file():
+                result["errors_by_seed"][key] = [
+                    f"{seed_path.name}: seed file is missing"
+                ]
+                result["metrics_by_seed"][key] = {"accepted": 0, "candidates": 0}
+                continue
+            seed, load_errors = load_seed(seed_path)
+            if seed is None:
+                errors = load_errors
+                metrics = {"accepted": 0, "candidates": 0}
+            else:
+                errors, metrics = validate_seed(
+                    seed_path,
+                    seed,
+                    canonical,
+                    candidates,
+                    candidate_keys,
+                    source_keys,
+                )
+            result["errors_by_seed"][key] = errors
+            result["metrics_by_seed"][key] = metrics
+    finally:
+        candidates.close()
+        canonical.close()
+    return result
+
+
+def auto_resolve(run_id: str) -> dict[str, Any]:
+    """Defer only published seeds rejected by strict validation.
+
+    The original decision and seed path remain in ``auto_resolution`` so a
+    reviewer can repair the seed later without losing the audit trail.
+    """
+    state = _require_state(run_id)
+    if state["phase"] not in {"prepared", "reviewing"}:
+        raise RuntimeError(f"cannot auto-resolve from phase {state['phase']}")
+    _all_decisions(state)
+    validation = _strict_validate_seeds(state)
+    deferred: list[str] = []
+    validated: list[str] = []
+    errors_by_seed = {
+        _seed_key(key): list(value)
+        for key, value in validation["errors_by_seed"].items()
+    }
+
+    for character in state["selected"]:
+        decision = state["decisions"][character]
+        if decision["decision"] != "published":
+            continue
+        seed_path = Path(decision["seed_path"])
+        errors = list(errors_by_seed.get(_seed_key(seed_path), []))
+        if not errors:
+            validated.append(character)
+            continue
+        original = dict(decision)
+        decision["decision"] = "deferred"
+        decision["seed_path"] = None
+        decision["reason"] = (
+            "auto-deferred by strict validation: " + "; ".join(errors)
+        )[:1200]
+        decision["auto_resolution"] = {
+            "policy": AUTO_DEFER_POLICY,
+            "previous_decision": original.get("decision"),
+            "previous_seed_path": original.get("seed_path"),
+            "errors": errors,
+            "resolved_at": now(),
+        }
+        state.setdefault("auto_resolutions", []).append({
+            "character": character,
+            "seed_path": original.get("seed_path"),
+            "errors": errors,
+            "policy": AUTO_DEFER_POLICY,
+        })
+        deferred.append(character)
+
+    if deferred:
+        state["last_error"] = ""
+        save_state(state)
+    return {
+        "run_id": run_id,
+        "deferred": deferred,
+        "validated": validated,
+        "errors_by_seed": errors_by_seed,
+    }
+
+
+def _backup_reconciliation_database(run_id: str) -> Path:
+    """Create a uniquely named external SQLite backup before reconciliation."""
+    fingerprint = source_fingerprint()
+    destination = Path(tempfile.gettempdir()) / (
+        f"weeb_general_reconcile_{run_id}_{fingerprint['sha256'][:12]}.sqlite"
+    )
+    if destination.exists():
+        return destination
+    source = sqlite3.connect(str(DB), timeout=120)
+    target = sqlite3.connect(str(destination), timeout=120)
+    try:
+        source.backup(target)
+        target.commit()
+    finally:
+        target.close()
+        source.close()
+    return destination
+
+
 def _backup_database(run_id: str) -> Path:
     destination = Path(tempfile.gettempdir()) / f"weeb_general_worker_{run_id}_before.sqlite"
     if destination.exists():
@@ -615,8 +1199,7 @@ def _character_metrics(con: sqlite3.Connection, character: str) -> dict[str, int
     return {"profiles": profiles, "features": features, "evidence_links": evidence}
 
 
-def _validate_canonical(state: dict[str, Any]) -> dict[str, Any]:
-    metrics = _canonical_metrics()
+def _validate_canonical_invariants(metrics: dict[str, Any]) -> None:
     if metrics["integrity"] != "ok":
         raise RuntimeError(f"canonical integrity check failed: {metrics['integrity']}")
     if metrics["foreign_key_errors"]:
@@ -627,6 +1210,11 @@ def _validate_canonical(state: dict[str, Any]) -> dict[str, Any]:
         raise RuntimeError("canonical appearance facet invariants failed")
     if metrics["unjoined_evidence_links"]:
         raise RuntimeError("canonical appearance contains unjoined evidence links")
+
+
+def _validate_canonical(state: dict[str, Any]) -> dict[str, Any]:
+    metrics = _canonical_metrics()
+    _validate_canonical_invariants(metrics)
     con = _connect_read_only(DB)
     try:
         for character in state["selected"]:
@@ -681,6 +1269,33 @@ def _build_derived(state: dict[str, Any]) -> dict[str, Any]:
     if after != before:
         raise RuntimeError("canonical database changed during derived-index rebuild")
     return _candidate_metrics()
+
+
+def _reconciliation_indexes_fresh() -> bool:
+    """Check every derived index against the current canonical fingerprint."""
+    expected = source_fingerprint()
+    for path, metadata_table in (
+        (CANDIDATES, "appearance_index_metadata"),
+        (SEARCH_INDEX, "tag_search_metadata"),
+        (CONTEXT_INDEX, "context_index_metadata"),
+    ):
+        if not path.is_file():
+            return False
+        try:
+            con = _connect_read_only(path)
+            try:
+                metadata = dict(con.execute(
+                    f"SELECT key, value FROM {metadata_table}"
+                ).fetchall())
+            finally:
+                con.close()
+        except (OSError, sqlite3.Error):
+            return False
+        if metadata.get("source_sha256") != expected["sha256"]:
+            return False
+        if metadata.get("source_size") != str(expected["size"]):
+            return False
+    return True
 
 
 def _update_exclusions(state: dict[str, Any]) -> list[str]:
@@ -771,6 +1386,39 @@ def _report_metric(section: str, key: str) -> str | None:
     return match.group(1).strip() if match else None
 
 
+def _reconcile_latest_report(metrics: dict[str, Any]) -> None:
+    """Update canonical metrics in the latest close without inventing a batch."""
+    if not REPORT.exists():
+        raise FileNotFoundError(REPORT)
+    existing = REPORT.read_text(encoding="utf-8", errors="replace")
+    headings = list(re.finditer(r"^## .+$", existing, re.MULTILINE))
+    if not headings:
+        raise RuntimeError("appearance report has no section heading")
+    start = headings[-1].start()
+    prefix = existing[:start]
+    section = existing[start:]
+    values = {
+        "canonical_db_size": str(DB.stat().st_size),
+        "canonical_db_sha256": source_fingerprint()["sha256"],
+        "canonical_published_profiles": str(metrics["published_profiles"]),
+        "canonical_published_features": str(metrics["published_features"]),
+        "canonical_all_evidence_links": str(metrics["all_evidence_links"]),
+        "canonical_published_evidence_links": str(metrics["published_evidence_links"]),
+        "canonical_retired_evidence_links": str(metrics["retired_evidence_links"]),
+        "canonical_unjoined_evidence_links": str(metrics["unjoined_evidence_links"]),
+    }
+    for key, value in values.items():
+        section, replacements = re.subn(
+            rf"(?m)^{re.escape(key)}=.*$",
+            f"{key}={value}",
+            section,
+            count=1,
+        )
+        if replacements != 1:
+            raise RuntimeError(f"latest report is missing reconciliation metric: {key}")
+    atomic_write_text(REPORT, prefix + section)
+
+
 def _append_report(state: dict[str, Any], metrics: dict[str, Any], next_queue: list[dict[str, Any]]) -> None:
     if not REPORT.exists():
         raise FileNotFoundError(REPORT)
@@ -802,13 +1450,29 @@ def _append_report(state: dict[str, Any], metrics: dict[str, Any], next_queue: l
 def close(run_id: str) -> int:
     state = _require_state(run_id)
     if state["phase"] == "closed":
-        print("worker_close=already_closed")
-        return 0
-    if state["phase"] != "promoted":
+        if _seed_archive_complete(state):
+            print("worker_close=already_closed")
+            return 0
+        state["phase"] = "promoted"
+        state["last_error"] = "closed manifest has incomplete seed archive; retrying close"
+        save_state(state)
+    if state["phase"] not in {"promoted", "finalizing", "archiving"}:
         raise RuntimeError(f"cannot close from phase {state['phase']}")
     _all_decisions(state)
     state["phase"] = "finalizing"
     state["last_error"] = ""
+    archive_state = state.get("seed_archive")
+    if not _seed_archive_complete(state):
+        if isinstance(archive_state, dict):
+            archive_state["status"] = "pending"
+            archive_state.pop("last_error", None)
+            archive_state.setdefault("items", [])
+        else:
+            state["seed_archive"] = {
+                "policy": "closed_published_seeds_v1",
+                "status": "pending",
+                "items": [],
+            }
     save_state(state)
     try:
         if state.get("canonical_after_promotion") and source_fingerprint() != state["canonical_after_promotion"]:
@@ -826,6 +1490,11 @@ def close(run_id: str) -> int:
         print(output)
         if not ready:
             raise RuntimeError("final preflight did not return READY")
+        state["phase"] = "archiving"
+        save_state(state)
+        state["seed_archive"] = _archive_seeds_after_close(state)
+        state["phase"] = "closed"
+        save_state(state)
         STATE_PATH.unlink(missing_ok=True)
         print("worker_close=complete")
         print(json.dumps({
@@ -833,6 +1502,7 @@ def close(run_id: str) -> int:
             "batch_number": state["batch_number"],
             "next_queue": state["next_queue"],
             "canonical_metrics": state["canonical_metrics"],
+            "seed_archive": state["seed_archive"],
         }, ensure_ascii=False, indent=2, sort_keys=True))
         return 0
     except Exception as exc:
@@ -868,6 +1538,131 @@ def clear(run_id: str) -> int:
     return 0
 
 
+def reconcile_aborted(run_id: str) -> dict[str, Any]:
+    """Reconcile an explicitly named aborted run before clearing its lease."""
+    state = load_state()
+    if state is None:
+        raise RuntimeError("no active general appearance worker state")
+    if state["run_id"] != run_id:
+        raise RuntimeError(
+            f"run_id mismatch: active={state['run_id']} supplied={run_id}"
+        )
+    if state["phase"] != "aborted":
+        raise RuntimeError("reconciliation requires an explicitly aborted worker state")
+    if state.get("promotion") is not None or state.get("canonical_after_promotion"):
+        raise RuntimeError("aborted state contains promotion data; refusing reconciliation")
+
+    original = json.loads(json.dumps(state))
+    before = source_fingerprint()
+    backup = _backup_reconciliation_database(run_id)
+    state["phase"] = "reconciling"
+    state["reconciliation"] = {
+        "policy": "external_backup_indexes_report_runtime_v1",
+        "before": before,
+        "backup_path": str(backup),
+        "database_mutated": False,
+    }
+    state["last_error"] = ""
+    save_state(state)
+    cleared = False
+    try:
+        metrics = _canonical_metrics()
+        _validate_canonical_invariants(metrics)
+        state["canonical_metrics"] = metrics
+        save_state(state)
+
+        state["candidate_final"] = _build_derived(state)
+        state["mcp_probe"] = _probe_runtime(state)
+        after = source_fingerprint()
+        if after != before:
+            raise RuntimeError("canonical database changed during reconciliation")
+        _reconcile_latest_report(metrics)
+        if not _reconciliation_indexes_fresh():
+            raise RuntimeError("derived indexes are not fresh after reconciliation")
+
+        verified_metrics = _canonical_metrics()
+        _validate_canonical_invariants(verified_metrics)
+        verified_after = source_fingerprint()
+        if verified_after != before:
+            raise RuntimeError("canonical database changed during reconciliation verification")
+        state["canonical_metrics"] = verified_metrics
+        state["reconciliation"]["after"] = verified_after
+        state["reconciliation"]["status"] = "ready_to_clear"
+        state["phase"] = "aborted"
+        save_state(state)
+
+        clear(run_id)
+        cleared = True
+        ready, output = _preflight()
+        print(output)
+        if not ready:
+            raise RuntimeError("preflight did not return READY after reconciliation")
+        result = {
+            "run_id": run_id,
+            "backup_path": str(backup),
+            "database_mutated": False,
+            "canonical_metrics": verified_metrics,
+            "preflight_ready": True,
+        }
+        print(json.dumps(result, ensure_ascii=False, indent=2, sort_keys=True))
+        return result
+    except Exception as exc:
+        current = load_state()
+        restored = current if current and current.get("run_id") == run_id else original
+        restored["phase"] = "aborted"
+        restored["last_error"] = f"reconciliation failed: {exc}"[-1200:]
+        if current is None or current.get("run_id") != run_id:
+            create_state_exclusive(restored)
+        else:
+            save_state(restored)
+        raise
+
+
+def tick(*, dry_run: bool = False) -> int:
+    """Run the deterministic continuation policy used by the cron shim."""
+    state = load_state()
+    if state is None:
+        return gate(dry_run=dry_run)
+    phase = state["phase"]
+    if dry_run:
+        _print_gate_state(state, continuation=True)
+        print("worker_dry_run=1")
+        print(json.dumps({"wakeAgent": False}, separators=(",", ":")))
+        return 0
+    if phase == "aborted":
+        _print_gate_state(state, continuation=True)
+        print("worker_gate=aborted_requires_explicit_reconcile")
+        print(json.dumps({"wakeAgent": False}, separators=(",", ":")))
+        return 0
+    if phase == "reconciling":
+        _print_gate_state(state, continuation=True)
+        print("worker_gate=reconciliation_in_progress")
+        print(json.dumps({"wakeAgent": False}, separators=(",", ":")))
+        return 0
+    if phase == "reserved":
+        _print_gate_state(state, continuation=True)
+        print("worker_tick=awaiting_prepare_and_review")
+        print(json.dumps({"wakeAgent": True}, separators=(",", ":")))
+        return 0
+    if phase in {"prepared", "reviewing"}:
+        try:
+            _all_decisions(state)
+        except RuntimeError as exc:
+            _print_gate_state(state, continuation=True)
+            print(f"worker_tick=awaiting_decisions: {exc}")
+            print(json.dumps({"wakeAgent": True}, separators=(",", ":")))
+            return 0
+        resolution = auto_resolve(state["run_id"])
+        print(json.dumps(resolution, ensure_ascii=False, indent=2, sort_keys=True))
+        publish(state["run_id"])
+        return close(state["run_id"])
+    if phase in {"promoted", "finalizing", "archiving"}:
+        return close(state["run_id"])
+    if phase == "closed":
+        return gate()
+    raise RuntimeError(f"unsupported worker phase for tick: {phase}")
+
+
 def status() -> int:
     state = load_state()
     if state is None:
@@ -889,6 +1684,9 @@ def main(argv: list[str] | None = None) -> int:
     actions.add_argument("--close", action="store_true")
     actions.add_argument("--abort", action="store_true")
     actions.add_argument("--clear", action="store_true")
+    actions.add_argument("--tick", action="store_true")
+    actions.add_argument("--auto-resolve", action="store_true")
+    actions.add_argument("--reconcile-aborted", action="store_true")
     parser.add_argument("--run-id")
     parser.add_argument("--character")
     parser.add_argument("--decision", choices=("published", "deferred"))
@@ -913,12 +1711,20 @@ def main(argv: list[str] | None = None) -> int:
         action = "abort"
     elif args.clear:
         action = "clear"
+    elif args.tick:
+        action = "tick"
+    elif args.auto_resolve:
+        action = "auto-resolve"
+    elif args.reconcile_aborted:
+        action = "reconcile-aborted"
 
     try:
         if action == "gate":
             return gate(dry_run=args.dry_run)
         if action == "status":
             return status()
+        if action == "tick":
+            return tick(dry_run=args.dry_run)
         if not args.run_id:
             parser.error(f"--run-id is required for --{action}")
         if action == "prepare":
@@ -937,6 +1743,17 @@ def main(argv: list[str] | None = None) -> int:
             return abort(args.run_id, args.reason)
         if action == "clear":
             return clear(args.run_id)
+        if action == "auto-resolve":
+            print(json.dumps(
+                auto_resolve(args.run_id),
+                ensure_ascii=False,
+                indent=2,
+                sort_keys=True,
+            ))
+            return 0
+        if action == "reconcile-aborted":
+            reconcile_aborted(args.run_id)
+            return 0
         raise AssertionError(action)
     except Exception as exc:
         if args.run_id:
