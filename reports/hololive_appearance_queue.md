@@ -147,8 +147,7 @@ The next five base talents were processed by independent post-volume ranking:
 | 2 | `ninomae_ina'nis` | 8,690 | 0 | 0 | 8,690 | Base published; 13 features; 1 open conflict |
 | 3 | `mococo_abyssgard` | 3,283 | 5,377 | 0 | 8,660 | Base published; 13 features |
 | 4 | `hakui_koyori` | 3,408 | 4,918 | 0 | 8,326 | Base published; 12 features |
-| 5 | `natsuiro_matsuri` | 3,507 | 4,580 | 0 | 8,087 | Base published; 10 features; 1 open conflict |
-
+| 5 | `ninomae_ina'nis` | 8,690 | 0 | 0 | 8,690 | Base published; 13 features; 1 open conflict |
 Candidate generation produced 1,244 observations and 582 candidates. Only
 source-reviewed base features were promoted. Named outfits, shared agency
 uniforms, mascots, and fan marks remain deferred.
@@ -2799,3 +2798,610 @@ canonical_published_evidence_links=6746
 canonical_retired_evidence_links=26
 canonical_unjoined_evidence_links=0
 last_promoted_seed=kishin_sagume.json
+
+## General appearance batch 43 (reconciled close)
+
+The first post-reactivation worker tick left eight source records for the next
+queue in the canonical database, but it did not create any new profile,
+feature, or evidence row. Worker and monitor were paused, and those records
+were reconciled against their complete local wiki bodies before continuing.
+This remains the general appearance queue; the Hololive outfit queue was not
+resumed.
+
+### Ranking and candidate review
+
+| rank | character | danbooru | gelbooru | e621 | total | observations | candidates | decision |
+|---:|---|---:|---:|---:|---:|---:|---:|---|
+| 1 | `lily_white` | 3,097 | 4,680 | 0 | 7,777 | 13 | 5 | published |
+| 2 | `corrin_(female)_(fire_emblem)` | 3,065 | 4,706 | 0 | 7,771 | 0 | 0 | deferred: no structured candidates |
+| 3 | `barbara_(genshin_impact)` | 3,444 | 4,320 | 0 | 7,764 | 32 | 13 | published |
+| 4 | `marie_(splatoon)` | 2,660 | 5,104 | 0 | 7,764 | 32 | 12 | published |
+| 5 | `enoshima_junko` | 2,487 | 5,271 | 0 | 7,758 | 32 | 14 | published |
+
+The final candidate snapshot contains 109 observations and 44 pending
+candidates. The accepted subset contains 4 new default profiles and 33
+features: Lily (4), Barbara (12), Marie (8), and Junko (9). Marie's
+`thick_eyebrows` and `star_shaped_pupils` rows were rejected because they were
+not present in the character-scoped candidate projection. Corrin was deferred
+with zero observations/candidates and added exactly once to the ranker's
+exclusion set.
+
+The eight reviewed source records have site-specific literal excerpts and
+SHA-256 values matching their local wiki bodies: Lily (1), Barbara (2), Marie
+(3), and Junko (2). The accepted features have 61 active evidence links and
+zero conflicts. The first promotion pass and the repeated idempotence pass
+returned the same per-seed counts: 4 profiles, 33 features, 61 evidence links,
+and 8 source records.
+
+### Close verification
+
+The runtime bootstrap opened the canonical database read-only and left its
+hash and size unchanged. Search and context indexes were rebuilt serially,
+followed by the final batch candidate snapshot. Physical derived metadata
+matches the canonical source: search has 1,513,349 rows; context has 3,461,336
+rows and 766,021 work relations; the candidate snapshot has 109 observations
+and 44 candidates.
+
+`PRAGMA integrity_check` returned `ok`, `foreign_key_check` returned zero rows,
+active duplicate assignments/evidence gaps/missing facet links/unclassified
+rows are all zero, and the real MCP stdio probe returned `published` cards
+with exact canonical keys and evidence for all four accepted characters.
+Corrin returned `found=false` and no profile. The full regression suite passed:
+**65 tests, 65 OK**.
+
+The global seed checker still exits with 18 inherited errors in these six
+unrelated historical seeds: `a_chan_1st_costume_hololive.json`,
+`fujiwara_no_mokou.json`, `hakurei_reimu.json`, `inugami_korone.json`,
+`kirisame_marisa.json`, and `saigyouji_yuyuko.json`. They remain outside this
+batch's accepted-seed gate and were not modified.
+
+The corrected next queue after publishing this batch and deferring Corrin is:
+`akashi_(kancolle)` (3,216/4,530/0), `yuki_setsuna` (2,172/5,570/0),
+`hex_maniac_(pokemon_xy)` (0/7,741/0), `cyrene_(honkai:_star_rail)`
+(0/7,732/0), `ooi_(kancolle)` (3,281/4,451/0), `verniy_(kancolle)`
+(3,514/4,166/0), `florence_nightingale_(fate)` (3,182/4,495/0), `holo`
+(2,903/4,770/0), `jean_(genshin_impact)` (3,364/4,306/0), and `dio_brando`
+(984/6,685/0).
+
+batch_close=complete
+canonical_db_size=869707776
+canonical_db_sha256=85af4b45db18e54f442ec7962a71570fffd216ce9a65c70fba0002b153bd29c5
+canonical_published_profiles=441
+canonical_published_features=4203
+canonical_all_evidence_links=6833
+canonical_published_evidence_links=6807
+canonical_retired_evidence_links=26
+canonical_unjoined_evidence_links=0
+last_promoted_seed=enoshima_junko.json
+
+## General appearance batch 44 (reconciled close)
+
+The next general-queue tick had already promoted five profiles before the
+manual audit. Worker and monitor were paused immediately, and the publication
+was reconciled rather than duplicated. The Hololive outfit queue remained
+separate and was not resumed.
+
+### Ranking and candidate review
+
+| rank | character | danbooru | gelbooru | e621 | total | observations | candidates | decision |
+|---:|---|---:|---:|---:|---:|---:|---:|---|
+| 1 | `akashi_(kancolle)` | 3,216 | 4,530 | 0 | 7,746 | 40 | 16 | published |
+| 2 | `yuki_setsuna` | 2,172 | 5,570 | 0 | 7,742 | 54 | 33 | published |
+| 3 | `hex_maniac_(pokemon_xy)` | 0 | 7,741 | 0 | 7,741 | 21 | 8 | published |
+| 4 | `cyrene_(honkai:_star_rail)` | 0 | 7,732 | 0 | 7,732 | 22 | 5 | published |
+| 5 | `ooi_(kancolle)` | 3,281 | 4,451 | 0 | 7,732 | 32 | 13 | published |
+
+The final candidate snapshot contains 243 observations and 100 pending
+candidates. The accepted subset contains 5 new default profiles and 60
+features: Akashi (14), Yuki (23), Hex Maniac (7), Cyrene (3), and Ooi (13).
+All five passed the strict batch gate with zero errors. Cyrene's seed uses the
+Windows-safe filename `cyrene_(honkai_star_rail).json` while preserving the
+canonical character tag `cyrene_(honkai:_star_rail)`; the empty truncated
+residual was removed.
+
+The ten reviewed source records have site-specific literal excerpts and
+SHA-256 values matching their local wiki bodies: two each for all five
+characters. The accepted features have 110 active evidence links and zero
+conflicts. The first corrected promotion pass and the repeated idempotence
+pass returned identical per-seed counts.
+
+### Close verification
+
+The runtime bootstrap opened the canonical database read-only and left its
+hash and size unchanged. Search and context indexes were rebuilt serially,
+followed by the final batch candidate snapshot. Physical derived metadata
+matches the canonical source: search has 1,513,349 rows; context has
+3,461,336 rows and 766,021 work relations; the candidate snapshot has 243
+observations and 100 candidates.
+
+`PRAGMA integrity_check` returned `ok`, `foreign_key_check` returned zero rows,
+active duplicate assignments/evidence gaps/missing facet links/unclassified
+rows are all zero, and the real MCP stdio probe returned `published` cards
+with exact canonical keys and evidence for all five accepted characters.
+
+The global seed checker still exits with 18 inherited errors in these six
+unrelated historical seeds: `a_chan_1st_costume_hololive.json`,
+`fujiwara_no_mokou.json`, `hakurei_reimu.json`, `inugami_korone.json`,
+`kirisame_marisa.json`, and `saigyouji_yuyuko.json`. They remain outside this
+batch's accepted-seed gate and were not modified.
+
+The corrected next queue after publishing this batch is:
+`verniy_(kancolle)` (3,514/4,166/0), `florence_nightingale_(fate)`
+(3,182/4,495/0), `holo` (2,903/4,770/0), `jean_(genshin_impact)`
+(3,364/4,306/0), `dio_brando` (984/6,685/0), `mudrock_(arknights)`
+(3,361/4,300/0), `shokuhou_misaki` (3,119/4,524/0), `kama_(fate)`
+(3,384/4,243/0), `wakaba_mutsumi` (1,356/6,261/0), and
+`nice_nature_(umamusume)` (3,275/4,331/0).
+
+batch_close=complete
+canonical_db_size=869744640
+canonical_db_sha256=64d2c25f22bb65bc4b6024c0fc96f4ac4dbd6db6283ba6c159937914271fe4fc
+canonical_published_profiles=446
+canonical_published_features=4263
+canonical_all_evidence_links=6943
+canonical_published_evidence_links=6917
+canonical_retired_evidence_links=26
+canonical_unjoined_evidence_links=0
+last_promoted_seed=yuki_setsuna.json
+
+## General appearance batch 45 (reconciled close)
+
+The next general-queue tick selected the five highest independent post-volume
+rankings after batch 44. Worker and monitor were paused when the preflight
+reported that canonical data had advanced beyond the report. The partial
+publication was reconciled rather than duplicated; the Hololive outfit queue
+remained separate and was not resumed.
+
+### Ranking and candidate review
+
+| rank | character | danbooru | gelbooru | e621 | total | observations | candidates | decision |
+|---:|---|---:|---:|---:|---:|---:|---:|---|
+| 1 | `verniy_(kancolle)` | 3,514 | 4,166 | 0 | 7,680 | 12 | 2 | published |
+| 2 | `florence_nightingale_(fate)` | 3,182 | 4,495 | 0 | 7,677 | 35 | 15 | published |
+| 3 | `holo` | 2,903 | 4,770 | 0 | 7,673 | 20 | 12 | published |
+| 4 | `jean_(genshin_impact)` | 3,364 | 4,306 | 0 | 7,670 | 4 | 0 | deferred: no structured candidates |
+| 5 | `dio_brando` | 984 | 6,685 | 0 | 7,669 | 17 | 3 | deferred: no accepted base traits |
+
+The final candidate snapshot contains 88 observations and 32 pending
+candidates. The accepted subset contains 3 new default profiles and 19
+features: Verniy (1), Florence Nightingale (11), and Holo (7). The accepted
+seed projection contains 27 candidate rows; Jean has four observations and no
+candidates, while Dio has 17 observations but no accepted base-trait seed.
+Both deferrals were added exactly once to the ranker's exclusion ledger.
+
+The six reviewed source records have site-specific literal excerpts and
+SHA-256 values matching their local wiki bodies: two each for Verniy, Florence,
+and Holo. Holo's Gelbooru record is a disambiguation note without visual claims,
+so the seven accepted Holo features link only to its Danbooru evidence. The
+accepted features have 31 active evidence links and zero conflicts. The
+corrected promotion pass and repeated idempotence pass returned identical
+per-seed counts: Verniy (1 profile, 1 feature, 2 evidence links), Florence (1,
+11, 22), and Holo (1, 7, 7).
+
+### Close verification
+
+The runtime bootstrap opened the canonical database read-only and left its
+hash and size unchanged. Search and context indexes were rebuilt serially,
+followed by the final batch candidate snapshot. Physical derived metadata
+matches the canonical source: search has 1,513,349 rows; context has 3,462,709
+rows and 766,197 work relations; the candidate snapshot has 88 observations
+and 32 candidates.
+
+`PRAGMA integrity_check` returned `ok`, `foreign_key_check` returned zero rows,
+active duplicate assignments/evidence gaps/missing facet links/unclassified
+rows are all zero, and the real MCP stdio probe returned `published` cards with
+exact canonical keys and evidence for Verniy, Florence, and Holo. Jean and Dio
+returned `found=false` with no profile.
+
+The global seed checker still exits with 18 inherited errors in these six
+unrelated historical seeds: `a_chan_1st_costume_hololive.json`,
+`fujiwara_no_mokou.json`, `hakurei_reimu.json`, `inugami_korone.json`,
+`kirisame_marisa.json`, and `saigyouji_yuyuko.json`. They remain outside this
+batch's accepted-seed gate and were not modified.
+
+The corrected next queue after publishing this batch and adding the two new
+deferrals is: `mudrock_(arknights)` (3,361/4,300/0), `shokuhou_misaki`
+(3,119/4,524/0), `kama_(fate)` (3,384/4,243/0), `wakaba_mutsumi`
+(1,356/6,261/0), `nice_nature_(umamusume)` (3,275/4,331/0),
+`twilight_(spy_x_family)` (3,037/4,563/0), `weiss_schnee` (2,651/4,940/0),
+`amy_rose` (1,939/5,651/0), `matsumoto_rangiku` (1,008/6,582/0), and
+`yamashiro_(kancolle)` (3,155/4,427/0).
+
+batch_close=complete
+canonical_db_size=869752832
+canonical_db_sha256=d675c478844b6fb3e3746392fed0fe663332a844cc955c661bab8f09720a5e2b
+canonical_published_profiles=449
+canonical_published_features=4282
+canonical_all_evidence_links=6974
+canonical_published_evidence_links=6948
+canonical_retired_evidence_links=26
+canonical_unjoined_evidence_links=0
+last_promoted_seed=holo.json
+
+## General appearance batch 46 (reconciled close)
+
+The general worker advanced the canonical database before the report was
+updated. Worker and monitor were paused as soon as the preflight reported a
+close requirement; the partial publication was reconciled rather than
+repeated, and the separate Hololive outfit queue remained untouched.
+
+### Ranking and candidate review
+
+| rank | character | danbooru | gelbooru | e621 | total | observations | candidates | decision |
+|---:|---|---:|---:|---:|---:|---:|---:|---|
+| 1 | `mudrock_(arknights)` | 3,361 | 4,300 | 0 | 7,661 | 10 | 1 | deferred: no accepted base-trait evidence |
+| 2 | `shokuhou_misaki` | 3,119 | 4,524 | 0 | 7,643 | 68 | 24 | published |
+| 3 | `kama_(fate)` | 3,384 | 4,243 | 0 | 7,627 | 3 | 0 | deferred: no structured candidates |
+| 4 | `wakaba_mutsumi` | 1,356 | 6,261 | 0 | 7,617 | 15 | 5 | published |
+| 5 | `nice_nature_(umamusume)` | 3,275 | 4,331 | 0 | 7,606 | 10 | 4 | published |
+
+The final candidate snapshot contains 106 observations and 34 candidates.
+The accepted subset contains 3 new default profiles and 21 features:
+Shokuhou Misaki (14), Wakaba Mutsumi (4), and Nice Nature (3). The accepted
+seed projection contains 26 candidate rows. Mudrock has one jewelry candidate
+(`ring`), but the reviewed wiki bodies do not provide deterministic visual
+support for accepting it. Kama has no structured candidate rows; its sources
+are character narrative and costume links rather than appearance evidence.
+Both deferrals were retained as decisions in this report and added exactly
+once to the ranker's exclusion ledger. The worker-generated zero-feature seed
+artifacts for those deferred names were removed rather than retained as
+invalid placeholders.
+
+The six accepted source records have site-specific literal excerpts and
+SHA-256 values matching their local wiki bodies: two each for Shokuhou,
+Wakaba, and Nice Nature. The accepted features have 40 active evidence links
+and zero conflicts. The corrected promotion pass and repeated idempotence pass
+returned identical per-seed counts: Shokuhou (1 profile, 14 features, 28
+evidence links), Wakaba (1, 4, 7), and Nice Nature (1, 3, 5).
+
+### Close verification
+
+The runtime bootstrap opened the canonical database read-only without changing
+its source fingerprint. Search and context indexes were rebuilt serially,
+followed by the final batch candidate snapshot. Physical derived metadata
+matches the canonical source: search has 1,513,349 rows; context has 3,462,709
+rows and 766,197 work relations; the candidate snapshot has 106 observations
+and 34 candidates.
+
+`PRAGMA integrity_check` returned `ok`, `foreign_key_check` returned zero rows,
+active duplicate assignments/evidence gaps/missing facet links/unclassified
+rows are all zero, and the real MCP stdio probe returned `published` cards with
+exact canonical keys and evidence for Shokuhou, Wakaba, and Nice Nature. Mudrock
+and Kama returned `found=false` with no profile.
+
+The global seed checker still exits with 18 inherited errors in these six
+unrelated historical seeds: `a_chan_1st_costume_hololive.json`,
+`fujiwara_no_mokou.json`, `hakurei_reimu.json`, `inugami_korone.json`,
+`kirisame_marisa.json`, and `saigyouji_yuyuko.json`. They remain outside this
+batch's accepted-seed gate and were not modified.
+
+The corrected next queue after publishing this batch and adding the two new
+deferrals is: `twilight_(spy_x_family)`, `weiss_schnee`, `amy_rose`,
+`matsumoto_rangiku`, `yamashiro_(kancolle)`, `kay_(girls_und_panzer)`,
+`yoimiya_(genshin_impact)`, `hieda_no_akyuu`, `wakasagihime`, and
+`yuuki_makoto_(persona_3)`.
+
+batch_close=complete
+canonical_db_size=869769216
+canonical_db_sha256=8fb268bc029c1b097fd80f2fad072a12ce48453653a4e81af866b32fecc51732
+canonical_published_profiles=452
+canonical_published_features=4303
+canonical_all_evidence_links=7014
+canonical_published_evidence_links=6988
+canonical_retired_evidence_links=26
+canonical_unjoined_evidence_links=0
+last_promoted_seed=nice_nature_umamusume.json
+
+## General appearance batch 47 (worker deterministic close)
+
+worker_run_id=b00883cd0fa94ee8b72bfcdad2bfd120
+batch_close=complete
+selected_characters=5
+source_snapshot_sha256=5267fbb0d6399419237be85ce491d9280d22d0b6224eca66b25d4bfbc2a6d675
+source_snapshot_size=869773312
+last_promoted_seed=yamashiro_(kancolle).json
+
+### Review reservation
+
+| character | total posts | decision | seed | reason |
+| --- | ---: | --- | --- | --- |
+| `twilight_(spy_x_family)` | 7600 | deferred | `—` | Sin candidatos de apariencia estructurados en la DB derivada; el wiki tiene descripción pero no tags visuales canónicos mapeados por el builder. |
+| `weiss_schnee` | 7591 | deferred | `—` | Wiki rica pero el builder no emitió candidatos estructurados; sin feature-level evidence en la proyección derivada. |
+| `amy_rose` | 7590 | deferred | `—` | Wiki principal describe variantes/costumes oficiales; la base profile no tiene evidencia de apariencia canónica determinista. Candidatos presentes son mayormente variantes named costumes o tags muy genéricos. |
+| `matsumoto_rangiku` | 7590 | deferred | `—` | Solo 1 candidato (ring); evidencia visual insuficiente para perfil base publicado. |
+| `yamashiro_(kancolle)` | 7582 | published | `yamashiro_(kancolle).json` | — |
+
+review_observations=301
+review_candidates=139
+final_observations=301
+final_candidates=139
+
+### Canonical close metrics
+
+canonical_db_size=869777408
+canonical_db_sha256=7d0803d6be6ce328bb4f0d315a3fedff0bfdc6113b88d3affcc09b3b1be336e6
+canonical_published_profiles=453
+canonical_published_features=4321
+canonical_all_evidence_links=7037
+canonical_published_evidence_links=7011
+canonical_retired_evidence_links=26
+canonical_unjoined_evidence_links=0
+canonical_integrity=ok
+canonical_foreign_key_errors=0
+exclusions_added=["amy_rose", "matsumoto_rangiku", "twilight_(spy_x_family)", "weiss_schnee"]
+
+### Next ranked queue
+
+1. `kay_(girls_und_panzer)` — total=7580, danbooru=3059, gelbooru=4521, e621=0
+2. `yoimiya_(genshin_impact)` — total=7554, danbooru=3205, gelbooru=4349, e621=0
+3. `hieda_no_akyuu` — total=7522, danbooru=2938, gelbooru=4584, e621=0
+4. `wakasagihime` — total=7517, danbooru=3356, gelbooru=4161, e621=0
+5. `yuuki_makoto_(persona_3)` — total=7500, danbooru=2207, gelbooru=5293, e621=0
+6. `hinata_hajime` — total=7484, danbooru=1485, gelbooru=5999, e621=0
+7. `shampoo_(ranma_1/2)` — total=7477, danbooru=1443, gelbooru=6034, e621=0
+8. `columbina_(genshin_impact)` — total=7476, danbooru=695, gelbooru=6781, e621=0
+9. `sazanami_(kancolle)` — total=7475, danbooru=3040, gelbooru=4435, e621=0
+10. `jeanne_d&#039;arc_alter_(avenger)_(fate)` — total=7424, danbooru=0, gelbooru=7424, e621=0
+
+<!-- worker deterministic close; do not edit this section manually -->
+
+## General appearance batch 48 (worker deterministic close)
+
+worker_run_id=b06ba0011a694695b124d49b8a2eccd5
+batch_close=complete
+selected_characters=5
+source_snapshot_sha256=842af2a31d192c5b560659a0cdc84850d6a01d473e04d7338647136f36b22692
+source_snapshot_size=869777408
+last_promoted_seed=wakasagihime.json
+
+### Review reservation
+
+| character | total posts | decision | seed | reason |
+| --- | ---: | --- | --- | --- |
+| `kay_(girls_und_panzer)` | 7580 | deferred | `—` | sin rasgos visuales base publicables; el unico candidato es helmet (casco equipo) y m4_sherman (prop); wiki describe comando/personalidad no apariencia |
+| `yoimiya_(genshin_impact)` | 7554 | deferred | `—` | cero observaciones y cero candidatos en la DB derivada |
+| `hieda_no_akyuu` | 7522 | deferred | `—` | cero candidatos; unicamente cosplay observado |
+| `wakasagihime` | 7517 | published | `wakasagihime.json` | — |
+| `yuuki_makoto_(persona_3)` | 7500 | deferred | `—` | solo hair_over_one_eye como candidato visual, personaje masculino protagonista sin descripcion de apariencia completa; uniformes de escuela contextuales no son rasgos base publicables |
+
+review_observations=26
+review_candidates=8
+final_observations=26
+final_candidates=8
+
+### Canonical close metrics
+
+canonical_db_size=869777408
+canonical_db_sha256=02f87b070739774570392fc8d8c28787f139c6679717c664e283a83d7feb8590
+canonical_published_profiles=454
+canonical_published_features=4324
+canonical_all_evidence_links=7040
+canonical_published_evidence_links=7014
+canonical_retired_evidence_links=26
+canonical_unjoined_evidence_links=0
+canonical_integrity=ok
+canonical_foreign_key_errors=0
+exclusions_added=["hieda_no_akyuu", "kay_(girls_und_panzer)", "yoimiya_(genshin_impact)", "yuuki_makoto_(persona_3)"]
+
+### Next ranked queue
+
+1. `hinata_hajime` — total=7484, danbooru=1485, gelbooru=5999, e621=0
+2. `shampoo_(ranma_1/2)` — total=7477, danbooru=1443, gelbooru=6034, e621=0
+3. `columbina_(genshin_impact)` — total=7476, danbooru=695, gelbooru=6781, e621=0
+4. `sazanami_(kancolle)` — total=7475, danbooru=3040, gelbooru=4435, e621=0
+5. `jeanne_d&#039;arc_alter_(avenger)_(fate)` — total=7424, danbooru=0, gelbooru=7424, e621=0
+6. `narmaya_(granblue_fantasy)` — total=7412, danbooru=3235, gelbooru=4177, e621=0
+7. `suigintou` — total=7406, danbooru=2214, gelbooru=5192, e621=0
+8. `hinoshita_kaho` — total=7398, danbooru=841, gelbooru=6557, e621=0
+9. `kanzaki_ranko` — total=7381, danbooru=3272, gelbooru=4109, e621=0
+10. `shirai_kuroko` — total=7358, danbooru=2841, gelbooru=4517, e621=0
+
+<!-- worker deterministic close; do not edit this section manually -->
+
+## General appearance batch 49 (worker deterministic close)
+
+worker_run_id=38b1660b6dce428b881454970dfbbfa7
+batch_close=complete
+selected_characters=5
+source_snapshot_sha256=1719e23b11d5ddcb474f991a4206b07dd17a9797135c1bec9a7b0267d497fd3f
+source_snapshot_size=869777408
+last_promoted_seed=sazanami_kancolle.json
+
+### Review reservation
+
+| character | total posts | decision | seed | reason |
+| --- | ---: | --- | --- | --- |
+| `hinata_hajime` | 7484 | published | `hinata_hajime.json` | Wiki danbooru+gelbooru con excerpts explícitos de cabello castaño con ahoge, ojos verdes/amarillos, camisa blanca, corbata verde/negra, pantalón negro, zapatos rojos/blancos multicolor, zapatillas, chaqueta negra, uniforme escolar. Todos los features con respaldo literal cross-site. |
+| `shampoo_(ranma_1/2)` | 7477 | published | `shampoo_ranma.json` | Wiki danbooru+gelbooru coinciden: cabello morado largo, double buns, sidelocks, hair bows+bells, ojos rojos/morados/castaños, Chinese clothes/china dress, delantal (situacional), anillo. Todos los features con respaldo literal cross-site. |
+| `columbina_(genshin_impact)` | 7476 | deferred | `—` | Wiki danbooru provee outfit completo (very long black hair + purple inner color, closed eyes, white mask, white crossed hair ribbons, armlets, white dress, thigh strap, anklets); sin embargo gelbooru NO contiene excerpt de apariencia (solo lista de Harbingers). Marca 'scar' aparece solo en gelbooru sin respaldo en danbooru. Preservar observaciones para batch futuro con fuse completo; no publicar perfil parcial ahora. |
+| `sazanami_(kancolle)` | 7475 | published | `sazanami_kancolle.json` | Wiki danbooru+gelbooru coinciden: ojos rosados, cabello rosa corto, twintails con hair bobbles, badge de fresa, serafuku (uniforme compartido 7th Destroyer Division), anillo. Excerpts cross-site literales. |
+| `jeanne_d&#039;arc_alter_(avenger)_(fate)` | 7424 | deferred | `—` | Solo 1 candidate (upper_body:armor) con 1 source (gelbooru) y excerpt 'depicted in her iconic armor and wielding a sword' sin detalles visuales de cabello, ojos, colores o rasgos distintivos; evidence insuficiente para perfil de apariencia base |
+
+review_observations=119
+review_candidates=60
+final_observations=120
+final_candidates=60
+
+### Canonical close metrics
+
+canonical_db_size=869818368
+canonical_db_sha256=020a3dee9ea0d5efb5a6a9cde509a708b64d515b2f92992b3dff7168d5197025
+canonical_published_profiles=457
+canonical_published_features=4358
+canonical_all_evidence_links=7108
+canonical_published_evidence_links=7082
+canonical_retired_evidence_links=26
+canonical_unjoined_evidence_links=0
+canonical_integrity=ok
+canonical_foreign_key_errors=0
+exclusions_added=["columbina_(genshin_impact)", "jeanne_d&#039;arc_alter_(avenger)_(fate)"]
+
+### Next ranked queue
+
+1. `narmaya_(granblue_fantasy)` — total=7412, danbooru=3235, gelbooru=4177, e621=0
+2. `suigintou` — total=7406, danbooru=2214, gelbooru=5192, e621=0
+3. `hinoshita_kaho` — total=7398, danbooru=841, gelbooru=6557, e621=0
+4. `kanzaki_ranko` — total=7381, danbooru=3272, gelbooru=4109, e621=0
+5. `shirai_kuroko` — total=7358, danbooru=2841, gelbooru=4517, e621=0
+6. `kaedehara_kazuha` — total=7356, danbooru=3196, gelbooru=4160, e621=0
+7. `rotom` — total=7353, danbooru=2003, gelbooru=5350, e621=0
+8. `ichinose_shiki` — total=7351, danbooru=3455, gelbooru=3896, e621=0
+9. `matsuura_kanan` — total=7342, danbooru=2138, gelbooru=5204, e621=0
+10. `kitasan_black_(umamusume)` — total=7332, danbooru=3177, gelbooru=4155, e621=0
+
+<!-- worker deterministic close; do not edit this section manually -->
+
+## General appearance batch 50 (worker deterministic close)
+
+worker_run_id=5727fd5201c948aea66dc27b37f29c63
+batch_close=complete
+selected_characters=5
+source_snapshot_sha256=1b3ef52c8e2d34f630b79e6b54fd5ff246ee29257d039322606593f9eee1792f
+source_snapshot_size=869822464
+last_promoted_seed=shirai_kuroko.json
+
+### Review reservation
+
+| character | total posts | decision | seed | reason |
+| --- | ---: | --- | --- | --- |
+| `narmaya_(granblue_fantasy)` | 7412 | published | `narmaya_(granblue_fantasy).json` | — |
+| `suigintou` | 7406 | published | `suigintou.json` | — |
+| `hinoshita_kaho` | 7398 | published | `hinoshita_kaho.json` | — |
+| `kanzaki_ranko` | 7381 | deferred | `—` | Wiki provides only gothic_lolita style mention and non-visual tags (chuunibyou, elf). No deterministic visual features (hair color, eye color, specific clothing details) available from booru wiki sources. Candidate builder yielded 0 visual candidates from 4 observations. |
+| `shirai_kuroko` | 7358 | published | `shirai_kuroko.json` | — |
+
+review_observations=337
+review_candidates=141
+final_observations=0
+final_candidates=0
+
+### Canonical close metrics
+
+canonical_db_size=869871616
+canonical_db_sha256=04be4208f083750874affd3594ef025d940a46a17575a26f70aa4119c702d97b
+canonical_published_profiles=461
+canonical_published_features=4418
+canonical_all_evidence_links=7193
+canonical_published_evidence_links=7167
+canonical_retired_evidence_links=26
+canonical_unjoined_evidence_links=0
+canonical_integrity=ok
+canonical_foreign_key_errors=0
+exclusions_added=[]
+
+### Next ranked queue
+
+1. `kaedehara_kazuha` — total=7356, danbooru=3196, gelbooru=4160, e621=0
+2. `rotom` — total=7353, danbooru=2003, gelbooru=5350, e621=0
+3. `ichinose_shiki` — total=7351, danbooru=3455, gelbooru=3896, e621=0
+4. `matsuura_kanan` — total=7342, danbooru=2138, gelbooru=5204, e621=0
+5. `kitasan_black_(umamusume)` — total=7332, danbooru=3177, gelbooru=4155, e621=0
+
+<!-- worker deterministic close; do not edit this section manually -->
+
+## General appearance batch 51 (worker deterministic close)
+
+worker_run_id=a6132ffed02f4051bd2daf7d9ddbe942
+batch_close=complete
+selected_characters=5
+source_snapshot_sha256=8cbfd544eff3e20701f080d08ded1f58c346dab62457db0e998aa9a74e55967d
+source_snapshot_size=869875712
+last_promoted_seed=kitasan_black_(umamusume).json
+
+### Review reservation
+
+| character | total posts | decision | seed | reason |
+| --- | ---: | --- | --- | --- |
+| `kaedehara_kazuha` | 7356 | published | `kaedehara_kazuha.json` | — |
+| `rotom` | 7353 | deferred | `—` | 0 candidatos de apariencia: wikis de rotom son páginas de Pokédex con lista de formas (bicycle, microwave, etc.) sin rasgos visuales deterministas |
+| `ichinose_shiki` | 7351 | published | `ichinose_shiki.json` | — |
+| `matsuura_kanan` | 7342 | published | `matsuura_kanan.json` | — |
+| `kitasan_black_(umamusume)` | 7332 | published | `kitasan_black_(umamusume).json` | — |
+
+review_observations=88
+review_candidates=23
+final_observations=0
+final_candidates=0
+
+### Canonical close metrics
+
+canonical_db_size=869892096
+canonical_db_sha256=97b9ee99b82ba9cfcf944401e36d9334d076b8f6c4a526b9f33783a2e493c12c
+canonical_published_profiles=465
+canonical_published_features=4432
+canonical_all_evidence_links=7221
+canonical_published_evidence_links=7195
+canonical_retired_evidence_links=26
+canonical_unjoined_evidence_links=0
+canonical_integrity=ok
+canonical_foreign_key_errors=0
+exclusions_added=[]
+
+### Next ranked queue
+
+1. `furude_rika` — total=7324, danbooru=2588, gelbooru=4736, e621=0
+2. `ibuki_(blue_archive)` — total=7322, danbooru=2648, gelbooru=4674, e621=0
+3. `graf_zeppelin_(kancolle)` — total=7295, danbooru=3375, gelbooru=3920, e621=0
+4. `yuki_miku` — total=7262, danbooru=2376, gelbooru=4886, e621=0
+5. `mercy_(overwatch)` — total=7257, danbooru=2699, gelbooru=4558, e621=0
+6. `futaba_anzu` — total=7242, danbooru=2875, gelbooru=4367, e621=0
+7. `oguri_cap_(umamusume)` — total=7217, danbooru=2141, gelbooru=5076, e621=0
+8. `renamon` — total=7202, danbooru=461, gelbooru=6741, e621=0
+9. `mayuzumi_fuyuko` — total=7174, danbooru=3274, gelbooru=3900, e621=0
+10. `jack_the_ripper_(fate/apocrypha)` — total=7172, danbooru=3066, gelbooru=4106, e621=0
+
+<!-- worker deterministic close; do not edit this section manually -->
+
+## General appearance batch 52 (reconciled worker close)
+
+worker_run_id=0e88eeac085845aeaddc4658dde9ce92
+batch_close=complete
+selected_characters=5
+source_snapshot_sha256=97b9ee99b82ba9cfcf944401e36d9334d076b8f6c4a526b9f33783a2e493c12
+source_snapshot_size=869892096
+last_promoted_seed=graf_zeppelin_(kancolle).json
+reconciliation_note=The original close rejected new staged source refs as absent from the source table; two seeds were then written outside the manifest. This section reconciles those existing rows without re-promoting data.
+
+### Review reservation
+
+| character | total posts | decision | seed | reason |
+| --- | ---: | --- | --- | --- |
+| `furude_rika` | 7324 | published | `furude_rika.json` | — |
+| `ibuki_(blue_archive)` | 7322 | deferred | `—` | Wiki Appearance section contains only post references with no textual description of base visual traits |
+| `graf_zeppelin_(kancolle)` | 7295 | published | `graf_zeppelin_(kancolle).json` | — |
+| `yuki_miku` | 7262 | deferred | `—` | 16 annual versions (2010–2026) each with distinct design; 204 candidates span all variants. No single base profile without determining current official default version. |
+| `mercy_(overwatch)` | 7257 | deferred | `—` | No base visual traits in wiki; only armor candidate from e621 (Valkyrie combat skin, not base) |
+
+review_observations=759
+review_candidates=246
+final_observations=759
+final_candidates=246
+
+### Canonical close metrics
+
+canonical_db_size=869908480
+canonical_db_sha256=3c5734d3d5477189b9cefc14ec6a0b04ec467f81d575384eaa5653d63eefbe3a
+canonical_published_profiles=467
+canonical_published_features=4460
+canonical_all_evidence_links=7277
+canonical_published_evidence_links=7251
+canonical_retired_evidence_links=26
+canonical_unjoined_evidence_links=0
+canonical_integrity=ok
+canonical_foreign_key_errors=0
+exclusions_added=["ibuki_(blue_archive)", "mercy_(overwatch)", "yuki_miku"]
+
+### Next ranked queue
+
+1. `futaba_anzu` — total=7242, danbooru=2875, gelbooru=4367, e621=0
+2. `oguri_cap_(umamusume)` — total=7217, danbooru=2141, gelbooru=5076, e621=0
+3. `renamon` — total=7202, danbooru=461, gelbooru=6741, e621=0
+4. `mayuzumi_fuyuko` — total=7174, danbooru=3274, gelbooru=3900, e621=0
+5. `jack_the_ripper_(fate/apocrypha)` — total=7172, danbooru=3066, gelbooru=4106, e621=0
+6. `misumi_uika` — total=7161, danbooru=1210, gelbooru=5951, e621=0
+7. `asui_tsuyu` — total=7152, danbooru=1906, gelbooru=5246, e621=0
+8. `akari_(pokemon)` — total=7144, danbooru=2907, gelbooru=4237, e621=0
+9. `nicole_demara` — total=7135, danbooru=2733, gelbooru=4402, e621=0
+10. `artoria_caster_(fate)` — total=7104, danbooru=3014, gelbooru=4090, e621=0
+
+<!-- worker deterministic close; do not edit this section manually -->

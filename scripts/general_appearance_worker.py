@@ -44,7 +44,7 @@ BATCH_PROMOTER = ROOT / "scripts" / "promote_appearance_batch.py"
 MCP_PROBE = ROOT / "scripts" / "probe_appearance_runtime.py"
 BATCH_LIMIT = 5
 STATE_VERSION = 1
-ACTIVE_PHASES = {"reserved", "prepared", "reviewing", "promoted", "finalizing"}
+ACTIVE_PHASES = {"reserved", "prepared", "reviewing", "promoted", "finalizing", "closed"}
 PROJECT_PYTHON = ROOT / ".venv" / "Scripts" / "python.exe"
 PYTHON = str(PROJECT_PYTHON if PROJECT_PYTHON.is_file() else Path(sys.executable))
 

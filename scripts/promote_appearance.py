@@ -30,6 +30,10 @@ from weeb_alexandria_mcp.appearance_schema import (  # noqa: E402
 from weeb_alexandria_mcp.owned_schema import ensure_owned_schema  # noqa: E402
 
 DEFAULT_DB = ROOT / "tag_library.db"
+WORKER_STATE_PATH = ROOT / "data" / "general_appearance_worker_state.json"
+_ACTIVE_WORKER_PHASES = {
+    "reserved", "prepared", "reviewing", "promoted", "finalizing", "closed",
+}
 
 
 def read_seed(path: Path) -> dict[str, Any]:
@@ -44,6 +48,34 @@ def read_seed(path: Path) -> dict[str, Any]:
     if not isinstance(data.get("profiles"), list) or not data["profiles"]:
         raise ValueError("appearance seed requires a non-empty profiles list")
     return data
+
+
+def _guard_legacy_cli(character_tag: str, state_path: Path = WORKER_STATE_PATH) -> None:
+    """Prevent legacy writes for a character owned by an open general batch."""
+    if not state_path.exists():
+        return
+    try:
+        state = json.loads(state_path.read_text(encoding="utf-8"))
+    except Exception as exc:
+        raise RuntimeError(
+            f"cannot use legacy promoter while worker state is unreadable: {state_path}"
+        ) from exc
+    if not isinstance(state, dict):
+        raise RuntimeError(f"worker state is malformed: {state_path}")
+    scope = state.get("scope", "general_appearance")
+    if scope != "general_appearance":
+        return
+    if state.get("phase") not in _ACTIVE_WORKER_PHASES:
+        return
+    selected = state.get("selected")
+    if not isinstance(selected, list) or any(not isinstance(item, str) for item in selected):
+        raise RuntimeError(f"worker state selected list is malformed: {state_path}")
+    if character_tag in selected:
+        run_id = state.get("run_id", "unknown")
+        raise RuntimeError(
+            "legacy per-seed promotion is blocked for the active general worker "
+            f"run {run_id}; use general_appearance_worker.py --publish"
+        )
 
 
 def stable_appearance_key(character_tag: str, variant_tag: str) -> str:
@@ -475,6 +507,8 @@ def main() -> None:
     parser.add_argument("--db", type=Path, default=DEFAULT_DB)
     parser.add_argument("--input", type=Path, required=True)
     args = parser.parse_args()
+    data = read_seed(args.input)
+    _guard_legacy_cli(str(data["character_tag"]))
     for key, value in promote(args.db, args.input).items():
         print(f"{key}: {value}")
 

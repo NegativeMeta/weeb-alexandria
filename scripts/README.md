@@ -99,16 +99,20 @@ Promotes an explicitly reviewed JSON seed into the canonical appearance tables:
   --input seeds/appearance/inugami_korone.json
 ```
 
-The character must already exist as an owned profile or canonical character
-tag. Profile keys and variant prefixes are checked, and every feature must
-name at least one source reference. Promotion is performed in one transaction
-and can be repeated safely. The example seed contains the Korone base
-appearance plus isolated `1st_costume`, `street`, and `new_year` profiles. Do not
-promote raw candidates without human/source review.
+This is a legacy/maintenance entry point. **Do not call it from the general
+appearance cron or while a general worker lease is active**: it has no batch
+manifest and can desynchronize the report from the canonical database. The
+general queue must use `general_appearance_worker.py --publish`, which performs
+strict validation and one atomic multi-seed promotion. The character must
+already exist as an owned profile or canonical character tag. Profile keys and
+variant prefixes are checked, and every feature must name at least one source
+reference. Do not promote raw candidates without human/source review.
 
 ## `promote_appearance_batch.py`
 
-Promotes multiple reviewed seeds in one canonical SQLite transaction:
+Promotes multiple reviewed seeds in one canonical SQLite transaction. The
+lifecycle worker invokes it only after its lease, fingerprint, staged-source
+validation, and full seed validation have passed:
 
 ```bash
 .venv/Scripts/python.exe scripts/promote_appearance_batch.py \\
@@ -117,8 +121,12 @@ Promotes multiple reviewed seeds in one canonical SQLite transaction:
 ```
 
 All seed JSON and profile invariants are validated before the transaction
-starts. If a later seed fails, no appearance profile, feature, evidence link,
-or source row from the batch is committed.
+starts. New source records may be staged in the seed: their excerpts are
+checked against the canonical wiki body and the source rows are inserted in the
+same transaction. If a later seed fails, no appearance profile, feature,
+evidence link, or source row from the batch is committed. For the general
+queue, invoke this only through `general_appearance_worker.py --publish` so the
+manifest and report remain synchronized.
 
 ## `general_appearance_worker.py`
 

@@ -4,7 +4,9 @@
 The validator is intentionally stricter than the legacy seed checker. A seed
 may only be promoted when its source excerpts are literal slices of the raw
 wiki bodies and every accepted feature pair exists in the candidate projection
-built from the same canonical database snapshot.
+built from the same canonical database snapshot. Source rows may already be
+registered in the canonical database or be staged in the seed for insertion by
+the atomic promoter.
 """
 from __future__ import annotations
 
@@ -110,14 +112,11 @@ def validate_seed(
         if not refs:
             errors.append(f"{seed_path.name}: feature {pair[1]} has no source_refs")
         for ref in refs:
-            parsed = parse_source_ref(str(ref))
-            if parsed is None:
+            if parse_source_ref(str(ref)) is None:
                 errors.append(f"{seed_path.name}: bad source_ref {ref!r}")
-                continue
-            if parsed not in source_keys:
-                errors.append(f"{seed_path.name}: source_ref not in DB {ref!r}")
 
     seed_sources = seed.get("sources") or []
+    staged_source_keys: set[tuple[str, str, str]] = set()
     for source in seed_sources:
         if not isinstance(source, dict):
             errors.append(f"{seed_path.name}: source is not an object")
@@ -126,14 +125,32 @@ def validate_seed(
         kind = str(source.get("source_kind", ""))
         key = str(source.get("source_key", ""))
         excerpt = str(source.get("excerpt", ""))
-        if (site, kind, key) not in source_keys:
-            errors.append(f"{seed_path.name}: source not in DB {site}:{kind}:{key}")
+        source_key = (site, kind, key)
+        if not all(source_key):
+            errors.append(f"{seed_path.name}: source is missing site/kind/key")
             continue
+        staged_source_keys.add(source_key)
         body = source_body(canonical, site, key)
         if body is None:
             errors.append(f"{seed_path.name}: EXCERPT_FAIL missing wiki body {site}:{key}")
         elif not excerpt or excerpt not in body:
             errors.append(f"{seed_path.name}: EXCERPT_FAIL {site}:{key}")
+
+    available_source_keys = source_keys | staged_source_keys
+    for feature in features:
+        if not isinstance(feature, dict):
+            continue
+        refs = feature.get("source_refs") or []
+        if not refs:
+            continue
+        for ref in refs:
+            parsed = parse_source_ref(str(ref))
+            if parsed is None:
+                continue
+            if parsed not in available_source_keys:
+                errors.append(
+                    f"{seed_path.name}: source_ref unavailable {ref!r}"
+                )
 
     candidate_count = candidates.execute(
         "SELECT count(*) FROM appearance_candidates "
