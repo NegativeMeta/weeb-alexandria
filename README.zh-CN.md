@@ -8,6 +8,8 @@ Weeb Alexandria 是一个项目，旨在将动漫、御宅族、Weeb、NSFW 和 
 
 该项目整合了标签定义、别名、蕴含关系、角色、作品系列、艺术家、特征、外观/服装卡片、数据来源，以及其他适用于动漫研究和图像生成的有用信息。
 
+收录范围会逐步扩大。长期目标是为来源数据库中的每个角色及其每种有意义的外观或服装提供有来源依据的结构化信息。这是一项持续的大型工作：当前快照的标签和 wiki 覆盖较广，但经过审核的角色和外观档案目前只覆盖其中一部分。
+
 ## 当前快照
 
 当前 `tag_library.db` 快照大约包含：
@@ -47,6 +49,24 @@ https://github.com/NegativeMeta/weeb-alexandria
 
 选择 **Code → Download ZIP**，解压文件，并将解压后的文件夹作为 `<WEEB_ALEXANDRIA_DIR>`。
 
+### 1.1 准备 MCP 的 Python 环境
+
+安装 Python 3.10 或更高版本。在项目目录中创建本地环境，并安装 `requirements.txt` 中固定版本的 MCP 依赖：
+
+```powershell
+python -m venv .venv
+.\.venv\Scripts\python.exe -m pip install --upgrade pip
+.\.venv\Scripts\python.exe -m pip install -r requirements.txt
+```
+
+`.venv` 有意排除在 Git 之外；运行 `run.bat` 或构建索引前，请在每台电脑上创建该环境。
+
+如果要运行读取 Parquet 源文件的导入/融合脚本，请另外安装可选的数据依赖：
+
+```powershell
+.\.venv\Scripts\python.exe -m pip install -r requirements-data.txt
+```
+
 ### 2. 下载数据库
 
 从 Hugging Face 下载公开的数据库快照：
@@ -72,6 +92,15 @@ https://huggingface.co/datasets/negativemeta/weeb-alexandria
 ```text
 <WEEB_ALEXANDRIA_DIR>\tag_library.db
 ```
+
+如果使用按旧版共享类别映射生成的快照，请先预览按来源修正类别的迁移，再构建索引：
+
+```powershell
+.\.venv\Scripts\python.exe scripts\normalize_combined_tag_categories.py
+.\.venv\Scripts\python.exe scripts\normalize_combined_tag_categories.py --apply
+```
+
+预览会显示是否需要修改。`--apply` 会先在 `data/backups/` 中创建数据库备份，再写入更正。
 
 ### 2.1 构建角色上下文索引（推荐）
 

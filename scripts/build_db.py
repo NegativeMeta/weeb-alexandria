@@ -32,6 +32,7 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, ROOT)
 
 from weeb_alexandria_mcp.owned_schema import ensure_owned_schema  # noqa: E402
+from weeb_alexandria_mcp.tag_categories import category_name_for  # noqa: E402
 
 RAW = os.path.join(ROOT, "raw", "danbooru")
 RAW_GEL = os.path.join(ROOT, "raw", "gelbooru")
@@ -41,17 +42,6 @@ CSV_DANBOORU = os.path.join(RAW, "danbooru_tags.csv")
 WIKI_DANBOORU = os.path.join(RAW, "danbooru_wiki.jsonl")
 CSV_COMBINED = os.path.join(ROOT, "raw", "e621", "tags_enhanced.csv")
 GELBOORU_JSONL = os.path.join(RAW_GEL, "gelbooru_tags.jsonl")
-
-CAT_NAME = {
-    "0": "general",
-    "1": "artist",
-    "3": "copyright",
-    "4": "character",
-    "5": "meta",
-    "6": "alias",   # gelbooru: deprecated/alias tags
-    "7": "meta",
-}
-
 
 def main():
     con = sqlite3.connect(DB)
@@ -105,7 +95,7 @@ def main():
                     (
                         "danbooru", name,
                         int(cat) if cat.isdigit() else None,
-                        CAT_NAME.get(cat, cat or None),
+                        category_name_for("danbooru", cat),
                         int(c) if c.isdigit() else None,
                         row.get("alias") or None,
                     ),
@@ -157,7 +147,7 @@ def main():
                     (
                         "combined", name,
                         int(cat) if cat.isdigit() else None,
-                        CAT_NAME.get(cat, cat or None),
+                        category_name_for("combined", cat),
                         int(c) if c.isdigit() else None,
                         row.get("cn_name") or None,
                         int(nsfw) if nsfw.isdigit() else None,
@@ -171,7 +161,7 @@ def main():
                         "post_count,lang) "
                         "VALUES (?,?,?,?,?,?,?)",
                         ("combined", name, wiki_body, row.get("cn_name"),
-                         CAT_NAME.get(cat, cat or None),
+                         category_name_for("combined", cat),
                          int(c) if c.isdigit() else None, "zh"),
                     )
                 n_comb += 1
@@ -201,7 +191,7 @@ def main():
                     (
                         "gelbooru", name,
                         int(cat) if cat.isdigit() else None,
-                        CAT_NAME.get(cat, cat or None),
+                        category_name_for("gelbooru", cat),
                         int(c) if c.isdigit() else None,
                     ),
                 )

@@ -21,6 +21,8 @@ Son los bloques principales para buscar información o construir prompts.
 
 Las categorías indican qué tipo de tag es algo. Puede ser un concepto general, un personaje, una serie, un artista u otro tipo de información.
 
+Los nombres de categoría se normalizan según cada fuente. Pueden incluir `general`, `artist`, `contributor`, `copyright`, `character`, `species`, `invalid`, `meta` y `lore`; se conservan categorías heredadas como `alias` cuando la fuente las utiliza. Los identificadores numéricos no significan lo mismo en todas las fuentes.
+
 ### Definiciones
 
 Las definiciones explican qué significa una tag y cómo suele utilizarse.

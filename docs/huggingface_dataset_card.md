@@ -24,6 +24,8 @@ It gives local AI agents access to reliable information about the topics you ask
 
 The project combines tag definitions, aliases, implications, characters, franchises, artists, traits, sources, and other useful information for anime-related research and image generation.
 
+Coverage is growing incrementally. The long-term goal is to provide sourced, structured information for every character represented in the source databases and each meaningful appearance or outfit. This is a large ongoing effort: the current snapshot has broad tag and wiki coverage, while reviewed character and appearance profiles cover only part of that set.
+
 ## Current snapshot
 
 The current `tag_library.db` snapshot contains approximately:
@@ -63,6 +65,24 @@ https://github.com/NegativeMeta/weeb-alexandria
 
 Select **Code → Download ZIP**, extract the archive, and use the extracted folder as `<WEEB_ALEXANDRIA_DIR>`.
 
+### 1.1 Set up the MCP's Python environment
+
+Install Python 3.10 or newer. From the project directory, create the local environment and install the pinned MCP dependency:
+
+```powershell
+python -m venv .venv
+.\.venv\Scripts\python.exe -m pip install --upgrade pip
+.\.venv\Scripts\python.exe -m pip install -r requirements.txt
+```
+
+`.venv` is intentionally excluded from Git, so create it on each machine before running `run.bat` or the index-building commands.
+
+For source-import scripts that read Parquet files, install the optional data dependencies too:
+
+```powershell
+.\.venv\Scripts\python.exe -m pip install -r requirements-data.txt
+```
+
 ### 2. Download the database
 
 Download the public database snapshot from Hugging Face:
@@ -88,6 +108,15 @@ The database must be located at:
 ```text
 <WEEB_ALEXANDRIA_DIR>\tag_library.db
 ```
+
+For a snapshot created with the previous shared category map, preview the source-category repair before building indexes:
+
+```powershell
+.\.venv\Scripts\python.exe scripts\normalize_combined_tag_categories.py
+.\.venv\Scripts\python.exe scripts\normalize_combined_tag_categories.py --apply
+```
+
+The preview reports whether changes are needed. `--apply` creates a backup under `data/backups/` before updating the database.
 
 ### 2.1 Build the character-context index (recommended)
 
@@ -134,7 +163,7 @@ Open **Program → Install → Edit mcp.json** and add:
 }
 ```
 
-Start a new chat and confirm that the five Weeb Alexandria tools are available.
+Start a new chat and confirm that the six Weeb Alexandria tools are available.
 
 ### 5. Try it in a conversation
 

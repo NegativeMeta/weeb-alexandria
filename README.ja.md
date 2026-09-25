@@ -8,6 +8,8 @@ Weeb Alexandria は、アニメ、オタク、Weeb、NSFW、SFW に関する知�
 
 このプロジェクトには、タグの定義、エイリアス、包含関係、キャラクター、作品シリーズ、アーティスト、特徴、外見／衣装カード、情報源、そしてアニメ研究や画像生成に役立つその他の情報が統合されています。
 
+収録範囲は段階的に拡大しています。長期的には、各ソースデータベースに存在するすべてのキャラクターと、それぞれの意味のある外見や衣装について、出典付きの構造化情報を提供することが目標です。現在はタグと wiki の広い範囲を収録していますが、レビュー済みのキャラクター／外見プロフィールは一部に限られ、まだ網羅的ではありません。
+
 ## 現在のスナップショット
 
 現在の `tag_library.db` スナップショットには、およそ以下が含まれています。
@@ -47,6 +49,24 @@ https://github.com/NegativeMeta/weeb-alexandria
 
 **Code → Download ZIP** を選択してアーカイブを展開し、展開したフォルダーを `<WEEB_ALEXANDRIA_DIR>` として使用します。
 
+### 1.1 MCP 用 Python 環境を準備する
+
+Python 3.10 以降をインストールします。プロジェクトのフォルダーからローカル環境を作成し、`requirements.txt` に固定された MCP 依存関係をインストールします。
+
+```powershell
+python -m venv .venv
+.\.venv\Scripts\python.exe -m pip install --upgrade pip
+.\.venv\Scripts\python.exe -m pip install -r requirements.txt
+```
+
+`.venv` は Git の対象外です。`run.bat` や索引構築コマンドを実行する前に、各 PC で作成してください。
+
+Parquet 形式のソースファイルを読み込むインポート／統合スクリプトを使う場合は、オプションのデータ依存関係もインストールしてください。
+
+```powershell
+.\.venv\Scripts\python.exe -m pip install -r requirements-data.txt
+```
+
 ### 2. データベースをダウンロードする
 
 Hugging Face から公開されているデータベーススナップショットをダウンロードします。
@@ -72,6 +92,15 @@ https://huggingface.co/datasets/negativemeta/weeb-alexandria
 ```text
 <WEEB_ALEXANDRIA_DIR>\tag_library.db
 ```
+
+以前の共通カテゴリマップで作成したスナップショットを使う場合は、索引を構築する前にソース別カテゴリの移行を確認してください。
+
+```powershell
+.\.venv\Scripts\python.exe scripts\normalize_combined_tag_categories.py
+.\.venv\Scripts\python.exe scripts\normalize_combined_tag_categories.py --apply
+```
+
+プレビューで変更の有無を確認できます。`--apply` はデータベースを更新する前に `data/backups/` へバックアップを作成します。
 
 ### 2.1 キャラクター・コンテキスト索引を構築する（推奨）
 

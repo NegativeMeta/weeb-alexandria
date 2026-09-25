@@ -1,0 +1,2 @@
+# Runtime dependency for the local stdio MCP server.
+mcp==1.28.1

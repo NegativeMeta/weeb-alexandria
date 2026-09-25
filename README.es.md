@@ -8,6 +8,8 @@ Permite que los agentes de IA locales accedan a información confiable sobre los
 
 El proyecto combina definiciones de tags, aliases, implicaciones, personajes, franquicias, artistas, traits, cards de apariencia/vestimenta, fuentes y otra información útil para la investigación relacionada con anime y la generación de imágenes.
 
+La cobertura crece por etapas. El objetivo a largo plazo es ofrecer información estructurada y con fuentes para cada personaje presente en las bases de origen y para cada apariencia o vestimenta significativa. Es una tarea amplia y continua: el snapshot actual tiene una cobertura grande de tags y wikis, mientras que los perfiles de personajes y apariencias revisados cubren solo una parte.
+
 ## Snapshot actual
 
 El snapshot actual de `tag_library.db` contiene aproximadamente:
@@ -47,6 +49,24 @@ https://github.com/NegativeMeta/weeb-alexandria
 
 Selecciona **Code → Download ZIP**, extrae el archivo y utiliza la carpeta extraída como `<WEEB_ALEXANDRIA_DIR>`.
 
+### 1.1 Preparar el entorno Python del MCP
+
+Instala Python 3.10 o posterior. Desde la carpeta del proyecto, crea el entorno local e instala la dependencia MCP fijada en `requirements.txt`:
+
+```powershell
+python -m venv .venv
+.\.venv\Scripts\python.exe -m pip install --upgrade pip
+.\.venv\Scripts\python.exe -m pip install -r requirements.txt
+```
+
+`.venv` está excluido intencionalmente de Git; crea este entorno en cada equipo antes de ejecutar `run.bat` o los comandos para construir índices.
+
+Para los scripts que importan archivos Parquet de las fuentes, instala también las dependencias opcionales de datos:
+
+```powershell
+.\.venv\Scripts\python.exe -m pip install -r requirements-data.txt
+```
+
 ### 2. Descargar la base de datos
 
 Descarga el snapshot público desde Hugging Face:
@@ -72,6 +92,15 @@ La base debe quedar en:
 ```text
 <WEEB_ALEXANDRIA_DIR>\tag_library.db
 ```
+
+Si usas un snapshot creado con el mapa de categorías anterior, revisa primero la migración de categorías por fuente:
+
+```powershell
+.\.venv\Scripts\python.exe scripts\normalize_combined_tag_categories.py
+.\.venv\Scripts\python.exe scripts\normalize_combined_tag_categories.py --apply
+```
+
+La vista previa indica si hacen falta cambios. `--apply` crea una copia en `data/backups/` antes de actualizar la base.
 
 ### 2.1 Construir el índice de contexto de personajes (recomendado)
 

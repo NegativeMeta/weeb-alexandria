@@ -212,3 +212,16 @@ confirmed files to an external quarantine and records their SHA-256 values:
 
 The cleaner does not use broad globs and does not touch operational scripts,
 DBs, generated indexes, seeds, backups, worker state, manifests, or evidence.
+
+## Normalize combined-source tag categories
+
+`build_db.py` uses source-specific category maps. To repair an existing
+snapshot created with the old shared map, preview the combined-source changes:
+
+```bash
+.venv/Scripts/python.exe scripts/normalize_combined_tag_categories.py
+```
+
+Apply them with `--apply`. The script creates a SQLite backup under
+`data/backups/` before writing. Rebuild the optional search and character
+context indexes after applying the migration.

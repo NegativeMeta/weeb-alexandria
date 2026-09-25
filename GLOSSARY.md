@@ -21,6 +21,8 @@ Tags are the main building blocks used when searching for information or creatin
 
 Categories describe what kind of tag something is. A tag may represent a general concept, a character, a series, an artist, or another type of information.
 
+Category names are normalized per source. Depending on the source, they include `general`, `artist`, `contributor`, `copyright`, `character`, `species`, `invalid`, `meta`, and `lore`; legacy categories such as `alias` are retained where the source uses them. Numeric category IDs are not interchangeable between sources.
+
 ### Definitions
 
 Definitions explain what a tag means. They may include its usual meaning, how it is used, and useful distinctions from similar tags.
