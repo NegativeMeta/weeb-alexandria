@@ -277,26 +277,103 @@ def _copyright_tokens(con: sqlite3.Connection) -> set[str]:
     return _COPYRIGHT_TOKENS
 
 
-def _appearance_characters(con: sqlite3.Connection, query: str) -> list[dict]:
-    """Return modern appearance-only characters for a name query."""
-    normalized = _normalize_tag(query)
+_APPEARANCE_LENGTH_SLUGS = {
+    "very_short_hair", "short_hair", "medium_hair", "long_hair",
+    "very_long_hair", "absurdly_long_hair",
+}
+_APPEARANCE_GENDER_SLUGS = {
+    "female": "1girl", "woman": "1girl", "women": "1girl", "girl": "1girl",
+    "1girl": "1girl",
+    "male": "1boy", "man": "1boy", "men": "1boy", "boy": "1boy", "1boy": "1boy",
+}
+
+
+def _appearance_facet_rule(facet: str,
+                           value: str) -> Optional[tuple[str, str, Optional[bool]]]:
+    """Map a legacy trait filter onto an appearance facet + canonical slug.
+
+    Returns ``(appearance_facet, canonical_slug, require_length)`` where
+    ``require_length`` is True/False for hair filters (to keep colors and
+    lengths apart, both live in the ``hair`` facet) and None otherwise.
+    """
+    normalized = _normalize_tag(value)
     if not normalized:
+        return None
+    if facet == "gender":
+        slug = _APPEARANCE_GENDER_SLUGS.get(normalized)
+        return ("gender", slug, None) if slug else None
+    if facet == "eye_color":
+        slug = normalized if normalized.endswith("_eyes") else f"{normalized}_eyes"
+        return "eyes", slug, None
+    if facet in {"hair_color", "hair_length"}:
+        slug = normalized if normalized.endswith("_hair") else f"{normalized}_hair"
+        return "hair", slug, facet == "hair_length"
+    return None
+
+
+def _appearance_characters(con: sqlite3.Connection, query: str = "",
+                           filters: Optional[dict] = None,
+                           limit: int = 100) -> list[dict]:
+    """Return modern appearance-only characters, honoring trait filters."""
+    normalized = _normalize_tag(query)
+    rules = []
+    for facet, value in (filters or {}).items():
+        rule = _appearance_facet_rule(facet, value)
+        if rule is None:
+            return []
+        rules.append(rule)
+    if not normalized and not rules:
         return []
-    profiles = con.execute(
-        """SELECT character_tag, display_name, appearance_key, is_default
-           FROM character_appearance_profiles
-           WHERE status IN ('reviewed', 'published')
-           ORDER BY character_tag, is_default DESC, variant_tag"""
-    ).fetchall()
+
+    sql = ("SELECT character_tag, display_name, appearance_key, is_default "
+           "FROM character_appearance_profiles "
+           "WHERE status IN ('reviewed', 'published')")
+    params: list[Any] = []
+    if normalized:
+        sql += " AND (character_tag LIKE ? OR display_name LIKE ?)"
+        params.extend([f"%{normalized}%", f"%{normalized}%"])
+    rows = con.execute(sql, params).fetchall()
+
     selected: dict[str, sqlite3.Row] = {}
-    for profile in profiles:
-        character = profile["character_tag"]
-        display_normalized = _normalize_tag(profile["display_name"])
-        if normalized not in character and normalized not in display_normalized:
-            continue
-        current = selected.get(character)
-        if current is None or profile["is_default"] > current["is_default"]:
-            selected[character] = profile
+    for row in rows:
+        current = selected.get(row["character_tag"])
+        if current is None or row["is_default"] > current["is_default"]:
+            selected[row["character_tag"]] = row
+
+    if rules and selected:
+        keys = sorted({row["appearance_key"] for row in selected.values()})
+        placeholders = ", ".join("?" for _ in keys)
+        feature_rows = con.execute(
+            "SELECT appearance_key, facet, canonical_tag, value "
+            f"FROM character_appearance_features WHERE appearance_key IN ({placeholders}) "
+            "AND status IN ('reviewed', 'published')",
+            keys,
+        ).fetchall()
+        by_key: dict[str, list[sqlite3.Row]] = {}
+        for feature in feature_rows:
+            by_key.setdefault(feature["appearance_key"], []).append(feature)
+
+        def _matches(profile: sqlite3.Row) -> bool:
+            features = by_key.get(profile["appearance_key"], [])
+            for appearance_facet, slug, require_length in rules:
+                satisfied = False
+                for feature in features:
+                    if feature["facet"] != appearance_facet:
+                        continue
+                    canonical = _normalize_tag(feature["canonical_tag"] or "")
+                    if canonical != slug and _normalize_tag(feature["value"]) != slug:
+                        continue
+                    if require_length is True and canonical not in _APPEARANCE_LENGTH_SLUGS:
+                        continue
+                    if require_length is False and canonical in _APPEARANCE_LENGTH_SLUGS:
+                        continue
+                    satisfied = True
+                    break
+                if not satisfied:
+                    return False
+            return True
+
+        selected = {tag: prof for tag, prof in selected.items() if _matches(prof)}
 
     out = []
     for character, profile in selected.items():
@@ -329,7 +406,8 @@ def _appearance_characters(con: sqlite3.Connection, query: str) -> list[dict]:
             "tags": [],
             "traits": traits,
         })
-    return out
+    return out[:limit] if limit else out
+
 
 def _local_characters(con: sqlite3.Connection, query: str = "",
                       copyright: Optional[str] = None,
@@ -612,31 +690,45 @@ def _fts_tag_rows(con: sqlite3.Connection, query: str,
         if not valid:
             return None
         category_clause = ""
-        outer_category_clause = ""
         category_params: list[Any] = []
-        outer_category_params: list[Any] = []
         if category and category.lower() not in {"tag", "tags", "all"}:
             category_clause = " AND category_name = ?"
-            outer_category_clause = " WHERE t.category_name = ?"
             category_params.append(category)
-            outer_category_params.append(category)
+        # Two bounded steps: aggregate names first, then fetch details for just
+        # those names. The previous single CTE (inner ORDER BY + outer ORDER BY)
+        # made SQLite re-run the MATCH once per output row: 20s+ per query.
         candidate_limit = max(50, min(limit * 4, 400))
-        sql = (
-            "WITH matched_names AS ("
-            "SELECT name, MIN(rank) AS rank, "
-            "MAX(COALESCE(post_count, 0)) AS max_count "
+        name_rows = search.execute(
+            "SELECT name, MIN(rank) AS rank, MAX(COALESCE(post_count, 0)) AS max_count "
             "FROM tag_search WHERE tag_search MATCH ?"
             f"{category_clause} GROUP BY name "
-            "ORDER BY rank, max_count DESC, name LIMIT ?"
-            ") SELECT t.site, t.name, t.category_name, t.post_count, t.aliases, t.nsfw "
-            "FROM tag_search AS t JOIN matched_names AS m ON m.name = t.name"
-            f"{outer_category_clause} "
-            "ORDER BY m.rank, m.max_count DESC, t.post_count DESC NULLS LAST, t.name, t.site"
+            "ORDER BY rank, max_count DESC, name LIMIT ?",
+            [match_query, *category_params, candidate_limit],
+        ).fetchall()
+        if not name_rows:
+            return []
+        order = {
+            row["name"]: (index, row["rank"], row["max_count"])
+            for index, row in enumerate(name_rows)
+        }
+        placeholders = ", ".join("?" for _ in order)
+        detail_sql = (
+            "SELECT site, name, category_name, post_count, aliases, nsfw "
+            f"FROM tag_search WHERE name IN ({placeholders})"
+            + (" AND category_name = ?" if category_clause else "")
         )
-        params: list[Any] = [
-            match_query, *category_params, candidate_limit, *outer_category_params
-        ]
-        return search.execute(sql, params).fetchall()
+        detail_rows = search.execute(
+            detail_sql, [*order.keys(), *category_params]
+        ).fetchall()
+        return sorted(
+            detail_rows,
+            key=lambda row: (
+                order[row["name"]][0],
+                -(row["post_count"] or 0),
+                row["name"],
+                row["site"],
+            ),
+        )
     except (OSError, sqlite3.Error):
         return None
     finally:
@@ -865,6 +957,56 @@ def _tag_suggestions(con: sqlite3.Connection, query: str,
     return _alias_suggestions(con, query, limit) + fuzzy
 
 
+_WEAK_TAG_CATEGORIES = {"general", "invalid", "alias"}
+
+
+def _exact_tag_is_weak(con: sqlite3.Connection, name: str) -> bool:
+    """True when an exact tag is missing or too weak to trust over an alias."""
+    row = con.execute(
+        "SELECT category_name, COALESCE(post_count, 0) AS post_count "
+        "FROM tags WHERE name = ? ORDER BY post_count DESC LIMIT 1",
+        (name,),
+    ).fetchone()
+    if row is None:
+        return True
+    if row["category_name"] in _WEAK_TAG_CATEGORIES:
+        return True
+    return not row["post_count"]
+
+
+def _alias_column_target(con: sqlite3.Connection,
+                         current: str,
+                         categories: Optional[set[str]] = None) -> Optional[str]:
+    """Resolve a name listed only in the ``tags.aliases`` text column.
+
+    ``tag_aliases`` and wiki redirects do not cover every alias shipped in the
+    tag rows (``GawrGura``, ``gawrt``, ``がうるぐら`` live only in that column),
+    so the FTS index over ``aliases`` is the lookup of last resort.
+    """
+    rows = _fts_tag_rows(con, current, None, 20)
+    if not rows:
+        return None
+    best_name: Optional[str] = None
+    best_count = -1
+    for row in rows:
+        if row["category_name"] in _WEAK_TAG_CATEGORIES:
+            continue
+        if categories and row["category_name"] not in categories:
+            continue
+        count = row["post_count"] or 0
+        if count <= best_count:
+            continue
+        aliases = {
+            _normalize_tag(part)
+            for part in (row["aliases"] or "").split(",")
+            if part.strip()
+        }
+        if current in aliases or _normalize_tag(row["name"]) == current:
+            best_name = row["name"]
+            best_count = count
+    return best_name
+
+
 def _resolve_canonical_tag(con: sqlite3.Connection, requested: str) -> tuple[str, Optional[dict]]:
     """Follow active aliases and wiki ``Use X instead`` redirects safely."""
     current = _normalize_tag(requested)
@@ -923,6 +1065,14 @@ def _resolve_canonical_tag(con: sqlite3.Connection, requested: str) -> tuple[str
                     "from": current, "to": base, "type": "variant_base"
                 }
                 current = base
+                continue
+        if _exact_tag_is_weak(con, current):
+            alias_target = _alias_column_target(con, current)
+            if alias_target and alias_target != current:
+                first_resolution = first_resolution or {
+                    "from": current, "to": alias_target, "type": "alias_column"
+                }
+                current = alias_target
                 continue
         break
     return current, first_resolution
@@ -1038,8 +1188,8 @@ def _multi_tag_response(con: sqlite3.Connection, query: str,
 @mcp.tool()
 def search_knowledge(query: str, category: Optional[str] = None,
                      limit: int = 25) -> dict:
-    """Busca tags, personajes, artistas y franquicias en la base unificada."""
-    result: dict[str, Any] = {"query": query, "tag_library": {}, "entities": {}}
+    """Busca tags en la libreria unificada. Para personajes usa search_characters."""
+    result: dict[str, Any] = {"query": query, "tag_library": {}}
     try:
         con = _db()
         try:
@@ -1061,32 +1211,6 @@ def search_knowledge(query: str, category: Optional[str] = None,
                     ]
                 else:
                     result["tag_library"]["suggestions"] = full_suggestions
-            category_key = (category or "").strip().lower()
-            if category_key in {"character", "characters"}:
-                entities = {
-                    "characters": _local_characters(con, query, limit=limit),
-                    "artists": [],
-                    "copyrights": [],
-                }
-            elif category_key in {"artist", "artists"}:
-                entities = {
-                    "characters": [],
-                    "artists": _local_artists(con, query, limit=limit),
-                    "copyrights": [],
-                }
-            elif category_key in {"copyright", "copyrights", "franchise", "franchises"}:
-                entities = {
-                    "characters": [],
-                    "artists": [],
-                    "copyrights": _local_copyrights(con, query, limit=limit),
-                }
-            else:
-                entities = {
-                    "characters": _local_characters(con, query, limit=limit),
-                    "artists": _local_artists(con, query, limit=limit),
-                    "copyrights": _local_copyrights(con, query, limit=limit),
-                }
-            result["entities"] = entities
         finally:
             con.close()
     except Exception as exc:
@@ -1095,8 +1219,8 @@ def search_knowledge(query: str, category: Optional[str] = None,
 
 
 @mcp.tool()
-def get_tag_knowledge(tag: str, include_relations: bool = True,
-                       limit: int = 50) -> dict:
+def get_knowledge(tag: str, include_relations: bool = True,
+                  limit: int = 50) -> dict:
     """Devuelve la ficha combinada de una tag: definiciones, fuentes,
     aliases, implicaciones, categoría, frecuencia y estado NSFW.
     """
@@ -1173,16 +1297,44 @@ def search_characters(q: str = "", copyright: Optional[str] = None,
                        hair_length: Optional[str] = None,
                        eye_color: Optional[str] = None,
                        gender: Optional[str] = None,
-                       sort: str = "count", page: int = 1) -> dict:
-    """Search characters in the owned profile and trait tables."""
+                       sort: str = "count", page: int = 1,
+                       scope: str = "legacy") -> dict:
+    """Search characters in the owned profile and trait tables.
+
+    `scope` picks the source: "legacy" (default) reads only the owned
+    character_profiles/trait tables; "all" also merges reviewed appearance
+    profiles, which is what makes facet-only filters reach them (for example
+    hair_color="white" returns 4 legacy characters with scope="legacy" and
+    every reviewed white-haired character with scope="all"). The `copyright`
+    filter applies to legacy rows only, and appearance rows need either `q`
+    or at least one facet filter before they are considered.
+    `gender` only matches profiles that carry gender evidence; most reviewed
+    appearance profiles do not yet, so a character without it returns nothing
+    for that facet even when the wiki says 1girl/1boy.
+    """
+    scope = (scope or "legacy").strip().lower()
+    if scope not in {"legacy", "all"}:
+        raise ValueError(f"scope must be 'legacy' or 'all', got {scope!r}")
     con = _db()
     try:
         all_rows = _local_characters(con, q, copyright, hair_color, hair_length,
                                      eye_color, gender, sort, 100)
-        if q and not any(row["slug"] == _normalize_tag(q) for row in all_rows):
+        exact_legacy_match = bool(q) and any(
+            row["slug"] == _normalize_tag(q) for row in all_rows
+        )
+        merge_appearance = scope == "all" or (q and not exact_legacy_match)
+        if merge_appearance:
+            appearance_filters = {
+                key: value for key, value in (
+                    ("hair_color", hair_color),
+                    ("hair_length", hair_length),
+                    ("eye_color", eye_color),
+                    ("gender", gender),
+                ) if value
+            }
             existing = {row["slug"] for row in all_rows}
             all_rows.extend(
-                row for row in _appearance_characters(con, q)
+                row for row in _appearance_characters(con, q, appearance_filters)
                 if row["slug"] not in existing
             )
             if sort == "name":
@@ -1199,131 +1351,336 @@ def search_characters(q: str = "", copyright: Optional[str] = None,
         con.close()
 
 
+_MATCH_WEIGHTS = {
+    "exact": 4.0,
+    "normalized": 3.5,
+    "alias": 3.0,
+    "alias_column": 3.0,
+    "wiki_redirect": 3.0,
+    "variant_base": 3.0,
+    "contextual": 2.0,
+    "suffix": 1.2,
+    "fuzzy": 1.0,
+}
+
+
+def _tag_category(con: sqlite3.Connection, name: str) -> Optional[str]:
+    """Category of the most used tag row with this exact name."""
+    if not name:
+        return None
+    row = con.execute(
+        "SELECT category_name FROM tags WHERE name=? "
+        "ORDER BY post_count DESC LIMIT 1",
+        (name,),
+    ).fetchone()
+    return row["category_name"] if row else None
+
+
+def _owned_profile_source(con: sqlite3.Connection, tag: str) -> Optional[str]:
+    """Which owned structured source can serve this character tag, if any."""
+    if not tag:
+        return None
+    if con.execute(
+        "SELECT 1 FROM character_appearance_profiles "
+        "WHERE character_tag=? AND status IN ('reviewed', 'published') LIMIT 1",
+        (tag,),
+    ).fetchone():
+        return "appearance_profile"
+    if con.execute(
+        "SELECT 1 FROM character_profiles WHERE character_tag=? LIMIT 1", (tag,)
+    ).fetchone():
+        return "character_profile"
+    return None
+
+
+def _base_character_name(name: str) -> str:
+    """Strip Danbooru's franchise/variant suffix: ``furina_(genshin_impact)``."""
+    return name.split("_(", 1)[0]
+
+
+def _base_character_key(name: str) -> frozenset:
+    """Token set of the base name, so ``miku_hatsune`` and ``hatsune_miku`` agree."""
+    return frozenset(_base_character_name(name).split("_"))
+
+
+def _tag_post_count(con: sqlite3.Connection, name: str) -> int:
+    """Best (max) post_count for an exact tag name."""
+    if not name:
+        return 0
+    row = con.execute(
+        "SELECT MAX(post_count) FROM tags WHERE name=?", (name,)
+    ).fetchone()
+    return int(row[0] or 0) if row else 0
+
+
+def _match_score(item: dict, hinted: set[str], tokens: list[str]) -> float:
+    """Popularity x match strength x query-token coverage.
+
+    The old ranking preferred any match with a ``_(`` suffix last, which is
+    exactly what canonical character tags look like, so ``zero_two`` (3 posts)
+    beat ``zero_two_(darling_in_the_franxx)`` (5932). Multiplying post_count by
+    the match weight keeps an exact hit on top when its coverage is comparable
+    and lets a franchise-suffixed tag win when the bare tag is noise. Token
+    coverage stops a single-token candidate (``anya``, 39 posts) from being
+    recommended for a two-token query (``Anya Forger``).
+    """
+    weight = _MATCH_WEIGHTS.get(str(item.get("match_type") or "fuzzy").lower(), 1.0)
+    score = float(item.get("post_count") or 0) * weight
+    if tokens:
+        name_text = str(item.get("name") or "").lower()
+        matched = sum(1 for token in tokens if token in name_text)
+        score *= matched / len(tokens)
+    if item.get("name") in hinted:
+        score *= 6
+    if item.get("context_match"):
+        score *= 2
+    return round(score, 1)
+
+
+def _character_recommendation(con: sqlite3.Connection, query: str,
+                              category: Optional[str] = "character",
+                              limit: int = 5) -> dict:
+    """Resolve a loose character name to the canonical tag plus ranked candidates.
+
+    Evidence order: owned card for the literal name, then the alias/redirect
+    tables, then a ranked candidate pool where popularity multiplies the match
+    strength. A candidate is recommended even when the name is ambiguous; the
+    `ambiguous` flag then lists the competing bases instead of returning null.
+    """
+    requested = query
+    slug = _normalize_tag(query)
+    tokens = [token for token in slug.split("_") if len(token) >= 2]
+    limit = max(1, min(int(limit or 5), 25))
+    rows = _local_characters(con, slug, limit=100) if slug else []
+    candidates = [row.get("slug") for row in rows[:10]]
+
+    owned = next((row for row in rows if row.get("slug") == slug), None)
+    owned_source = _owned_profile_source(con, slug)
+    if owned_source:
+        return {
+            "query": requested,
+            "slug": slug,
+            "found": True,
+            "tag_match": True,
+            "tag": dict(owned) if owned is not None else None,
+            "recommended_tag": slug,
+            "recommendation": {"name": slug, "match_type": "exact",
+                               "confidence": "high", "source": owned_source},
+            "ambiguous": False,
+            "ambiguity": None,
+            "candidates": candidates,
+            "recommendations": [],
+            "notes": [],
+            "message": f"Owned {owned_source} already exists for {slug}.",
+        }
+
+    exact_row = None
+    if slug:
+        exact_row = con.execute(
+            "SELECT name, category_name, post_count, site, aliases, nsfw "
+            "FROM tags WHERE name=? ORDER BY post_count DESC LIMIT 1",
+            (slug,),
+        ).fetchone()
+    exact = dict(exact_row) if exact_row else None
+
+    # Aliases, the tag-row alias column and wiki redirects already know most
+    # franchise-suffixed names ("Furina" -> furina_(genshin_impact)); consult
+    # them before guessing from popularity.
+    canonical, resolution = _resolve_canonical_tag(con, slug) if slug else (slug, None)
+    alias_target: Optional[dict] = None
+    if slug and canonical and canonical != slug:
+        target_source = _owned_profile_source(con, canonical)
+        target_row = con.execute(
+            "SELECT category_name, post_count, site FROM tags WHERE name=? "
+            "ORDER BY post_count DESC LIMIT 1",
+            (canonical,),
+        ).fetchone()
+        target_category = target_row["category_name"] if target_row else None
+        if target_source or target_category == "character":
+            alias_target = {
+                "name": canonical,
+                "category": target_category,
+                "post_count": target_row["post_count"] if target_row else None,
+                "site": target_row["site"] if target_row else None,
+                "match_type": (resolution or {}).get("type") or "alias",
+                "confidence": "high",
+                "source": target_source,
+            }
+
+    hinted = {
+        name for work, names in _WORK_NAME_HINTS.items()
+        if work in slug for name in names
+    }
+    pool: list[dict] = []
+    if exact and exact["category_name"] not in _WEAK_TAG_CATEGORIES:
+        pool.append({
+            "name": exact["name"],
+            "category": exact["category_name"],
+            "post_count": exact["post_count"],
+            "site": exact["site"],
+            "match_type": ("exact" if exact["name"] == requested else "normalized"),
+            "confidence": "high",
+        })
+    for item in (_tag_suggestions(con, query, category, limit) if slug else []):
+        canonical_name, item_resolution = _resolve_canonical_tag(con, item["name"])
+        canonical_item = dict(item)
+        variant_suffix = ""
+        if "_(" in item["name"] and item["name"].endswith(")"):
+            variant_suffix = item["name"].split("_(", 1)[1][:-1].lower()
+        preserve_context = (
+            item_resolution and item_resolution.get("type") == "variant_base"
+            and (any(token in variant_suffix for token in slug.split("_") if len(token) >= 2)
+                 # A suffixed tag with more posts is the stronger identity: keep
+                 # anya_(spy_x_family) instead of collapsing to the 39-post anya.
+                 or (item.get("post_count") or 0) > _tag_post_count(con, canonical_name))
+        )
+        canonical_item["name"] = item["name"] if preserve_context else canonical_name
+        if item_resolution and not preserve_context:
+            canonical_item["resolution"] = item_resolution
+        pool.append(canonical_item)
+
+    # Nicknames are the last word of the canonical tag ("miku" -> hatsune_miku,
+    # "gura" -> gawr_gura). The candidate scan only walks prefixes, so those tags
+    # are invisible to it; one bounded suffix scan (~0.15 s) recovers them.
+    for token in ([tokens[-1]] if tokens and len(tokens[-1]) >= 4 else []):
+        suffix_rows = con.execute(
+            "SELECT name, category_name, MAX(post_count) AS pc FROM tags "
+            "WHERE category_name='character' AND name LIKE ? ESCAPE '!' "
+            "GROUP BY name ORDER BY pc DESC LIMIT 8",
+            (f"%!_{token}",),
+        ).fetchall()
+        for row in suffix_rows:
+            pool.append({
+                "name": row["name"],
+                "category": row["category_name"],
+                "post_count": row["pc"],
+                "site": None,
+                "match_type": "suffix",
+                "confidence": "medium",
+            })
+
+    deduped: dict[str, dict] = {}
+    for item in pool:
+        previous = deduped.get(item["name"])
+        if previous is None or _match_score(item, hinted, tokens) > _match_score(previous, hinted, tokens):
+            deduped[item["name"]] = item
+    ranked = sorted(
+        deduped.values(),
+        key=lambda item: (-_match_score(item, hinted, tokens),
+                          -(item.get("post_count") or 0), item["name"]),
+    )
+    for item in ranked:
+        item["score"] = _match_score(item, hinted, tokens)
+    if category and category.lower() not in {"tag", "tags", "all"}:
+        matching_category = [item for item in ranked if item.get("category") == category]
+        ranked = matching_category or ranked
+
+    if alias_target is not None:
+        alias_target.setdefault("score", _match_score(alias_target, hinted, tokens))
+        winner: Optional[dict] = alias_target
+        if not any(item["name"] == winner["name"] for item in ranked):
+            ranked.insert(0, winner)
+        else:
+            winner = next(item for item in ranked if item["name"] == alias_target["name"])
+    else:
+        winner = ranked[0] if ranked else None
+
+    bases = {_base_character_key(item["name"]) for item in ranked[:5]
+             if item.get("category") == "character"}
+    winner_base = _base_character_key(winner["name"]) if winner else frozenset()
+    top_score = ranked[0]["score"] if ranked else 0
+    # Only a candidate with a *different* base competes for the ambiguity ratio;
+    # miku_hatsune next to hatsune_miku is the same identity, not a rival.
+    rival_scores = [
+        item["score"] for item in ranked[1:]
+        if item.get("category") == "character"
+        and _base_character_key(item["name"]) != winner_base
+    ]
+    second_score = max(rival_scores) if rival_scores else 0
+    ambiguous = bool(
+        winner is not None
+        and alias_target is None
+        and len(slug) <= 7
+        and "_" not in slug
+        and len(bases) >= 2
+        and second_score
+        and top_score < 3 * second_score
+    )
+    alternatives = [item["name"] for item in ranked if item["name"] != winner["name"]][:3] \
+        if winner else []
+
+    winner_source = (winner or {}).get("source") or _owned_profile_source(
+        con, (winner or {}).get("name") or "")
+    found = bool(winner_source)
+
+    notes: list[str] = []
+    if exact and exact["category_name"] not in {None, "character"}:
+        notes.append(
+            f"the exact tag {exact['name']} is a '{exact['category_name']}' tag with "
+            f"{exact.get('post_count') or 0} posts, not a character tag; candidates "
+            "prefer character-category tags"
+        )
+    if alias_target is not None:
+        notes.append(
+            f"{slug} resolves to {alias_target['name']} through the "
+            f"{alias_target['match_type']} table"
+        )
+
+    if winner is None:
+        message = "No structured character record or matching character tag was found."
+    elif ambiguous:
+        message = (f"Several character bases match this short name; the strongest "
+                   f"candidate is {winner['name']}. Pass a franchise to pick another.")
+    else:
+        message = f"Recommended {winner['name']}."
+        if not found:
+            message += " No owned character card exists for it yet."
+    if notes:
+        message += " " + "; ".join(notes).capitalize() + "."
+
+    return {
+        "query": requested,
+        "slug": slug,
+        "found": found,
+        "tag_match": bool(exact),
+        "tag": exact,
+        "recommended_tag": winner["name"] if winner else None,
+        "recommendation": winner,
+        "ambiguous": ambiguous,
+        "ambiguity": ({
+            "reason": "short_name_with_competing_bases",
+            "candidates": alternatives,
+            "message": "Provide a franchise or other context to select one character.",
+        } if ambiguous else None),
+        "candidates": candidates,
+        "recommendations": ranked,
+        "notes": notes,
+        "message": message,
+    }
+
+
 @mcp.tool()
-def get_character(slug: str) -> dict:
-    """Return a complete owned character profile."""
+def resolve_character(query: str, category: Optional[str] = "character",
+                      limit: int = 5) -> dict:
+    """Resolve a free-form character name to the canonical tag to use.
+
+    Use it when a name is spelled loosely ("Anya Forger", "GawrGura",
+    "korone"), written in another language, or ambiguous across franchises.
+    It returns `recommended_tag` (or null), the winning `recommendation` with
+    match_type/confidence/source/score, the full ranked `recommendations`, the
+    competing bases in `ambiguity` when the name is short and unclear, and
+    `found` telling whether an owned character card can be served right now.
+
+    Evidence order: owned card, alias/redirect tables, then a candidate pool
+    ranked by post_count x match strength, so a bare 3-post tag no longer beats
+    the 5932-post canonical tag. `category` restricts the candidate pool
+    (default "character"; use "copyright" to resolve a franchise name).
+    """
     con = _db()
     try:
-        requested_slug = slug
-        slug = _normalize_tag(slug)
-        rows = _local_characters(con, slug, limit=100)
-        match = next((row for row in rows if row.get("slug") == slug), None)
-        if not match:
-            tag = con.execute(
-                "SELECT name, category_name, post_count, site, aliases, nsfw "
-                "FROM tags WHERE name=? ORDER BY post_count DESC LIMIT 1",
-                (slug,),
-            ).fetchone()
-            fallback = dict(tag) if tag else None
-            recommendations = _tag_suggestions(con, slug, "character", 5)
-            if fallback and fallback.get("category_name") != "alias":
-                exact_item = {
-                    "name": fallback["name"],
-                    "category": fallback["category_name"],
-                    "post_count": fallback["post_count"],
-                    "site": fallback["site"],
-                    "match_type": ("exact" if fallback["name"] == requested_slug
-                                   else "normalized"),
-                    "confidence": "high",
-                }
-                recommendations.insert(0, exact_item)
-            canonical_recommendations = []
-            for item in recommendations:
-                canonical, item_resolution = _resolve_canonical_tag(con, item["name"])
-                canonical_item = dict(item)
-                variant_suffix = ""
-                if "_(" in item["name"] and item["name"].endswith(")"):
-                    variant_suffix = item["name"].split("_(", 1)[1][:-1].lower()
-                preserve_context = (
-                    item_resolution and item_resolution.get("type") == "variant_base"
-                    and any(token in variant_suffix for token in slug.split("_") if len(token) >= 2)
-                )
-                canonical_item["name"] = item["name"] if preserve_context else canonical
-                if item_resolution and not preserve_context:
-                    canonical_item["resolution"] = item_resolution
-                if not any(existing["name"] == canonical for existing in canonical_recommendations):
-                    canonical_recommendations.append(canonical_item)
-            contextual_characters = [
-                item for item in canonical_recommendations
-                if item.get("category") == "character"
-                and item.get("confidence") in {"medium", "high"}
-            ]
-            hinted_characters = {
-                name for work, names in _WORK_NAME_HINTS.items()
-                if work in slug for name in names
-            }
-            contextual_characters.sort(
-                key=lambda item: (not item.get("context_match", False),
-                                  item["name"] not in hinted_characters,
-                                  "_(" in item["name"], -(item.get("post_count") or 0))
-            )
-            contextual_character = contextual_characters[0] if contextual_characters else None
-            hinted_recommendation = next(
-                (item for item in contextual_characters if item["name"] in hinted_characters),
-                None,
-            )
-            recommendation = (hinted_recommendation or (contextual_character if fallback and
-                              fallback.get("category_name") == "general" and
-                              contextual_character else next(
-                (item for item in canonical_recommendations
-                 if item.get("confidence") == "high"),
-                None,
-            ) or next(
-                (item for item in canonical_recommendations
-                 if item.get("category") == "character"),
-                None,
-            )))
-            strong_character_names = {
-                item["name"] for item in canonical_recommendations
-                if item.get("category") == "character"
-                and item.get("confidence") in {"medium", "high"}
-            }
-            has_contextual_evidence = (
-                len(slug.split("_")) > 1
-                and any(
-                    item.get("context_match") or item.get("match_type") == "contextual"
-                    for item in canonical_recommendations
-                )
-            )
-            ambiguous = (
-                len(slug) <= 7
-                and "_" not in slug
-                and len(strong_character_names) >= 2
-                and not has_contextual_evidence
-            )
-            if ambiguous:
-                recommendation = None
-            return {
-                "found": False,
-                "slug": slug,
-                "tag_match": bool(fallback),
-                "ambiguous": ambiguous,
-                "tag": fallback,
-                "recommended_tag": recommendation["name"] if recommendation else None,
-                "recommendation": recommendation,
-                "ambiguity": ({
-                    "reason": "short_name_multiple_character_candidates",
-                    "candidates": sorted(strong_character_names),
-                    "message": "Provide a franchise or other context to select one character."
-                } if ambiguous else None),
-                "message": (
-                    "The character name is ambiguous. Provide a franchise or other context."
-                    if ambiguous else
-                    "This name exists as a tag but has no owned structured character profile."
-                    if fallback else
-                    "No structured character record or exact character tag was found."
-                    + (" A likely character tag is included as a recommendation." if recommendation else "")
-                ),
-                "candidates": [row.get("slug") for row in rows[:10]],
-                "recommendations": canonical_recommendations,
-            }
-        # Appearance is additive: legacy character fields remain unchanged.
-        match["appearance"] = get_appearance_payload(con, slug)
-        match["loras"] = []
-        return {"found": True, **match}
+        return _character_recommendation(con, query, category, limit)
     finally:
         con.close()
-
 
 
 def _resolve_appearance_identity(con: sqlite3.Connection, requested: str) -> dict[str, Any]:
@@ -1466,6 +1823,16 @@ def _resolve_appearance_identity(con: sqlite3.Connection, requested: str) -> dic
                 "candidates": exact_names,
                 "message": "Provide a franchise or other context to select one character.",
             }
+        if _exact_tag_is_weak(con, current):
+            alias_target = _alias_column_target(con, current, {"character"})
+            if alias_target and alias_target != current:
+                first_resolution = first_resolution or {
+                    "from": current,
+                    "to": alias_target,
+                    "type": "alias_column",
+                }
+                current = alias_target
+                continue
         break
 
     suggestions = _tag_suggestions(con, requested, "character", 10)
@@ -1532,10 +1899,16 @@ def _resolve_appearance_target(con: sqlite3.Connection, character: str,
 
 
 @mcp.tool()
-def get_character_appearance(character: str, variant: Optional[str] = None,
-                              include_evidence: bool = True,
-                              limit: int = 100) -> dict:
-    """Return canonical appearance and outfit cards with source evidence."""
+def get_character(character: str, variant: Optional[str] = None,
+                  include_evidence: bool = False,
+                  evidence_limit: int = 100) -> dict:
+    """Return the canonical character card: appearance and outfit profiles,
+    features grouped by facet, and optional per-feature source evidence.
+
+    Name resolution follows appearance profiles, owned profiles, tag aliases
+    and wiki redirects. When it fails, `candidates` lists up to 10 owned
+    profiles matching the string; it is not a fuzzy resolver, so call
+    `resolve_character` first when the spelling is loose or ambiguous."""
     con = _db()
     try:
         target = _resolve_appearance_target(con, character, variant)
@@ -1565,7 +1938,7 @@ def get_character_appearance(character: str, variant: Optional[str] = None,
             character_tag,
             target.get("variant"),
             include_evidence,
-            limit,
+            evidence_limit,
         )
         result = {**base, **result}
         if target.get("resolution"):

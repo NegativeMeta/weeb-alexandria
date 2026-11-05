@@ -1,3 +1,4 @@
+import asyncio
 import hashlib
 import json
 import sqlite3
@@ -11,9 +12,9 @@ from weeb_alexandria_mcp.server import (
     _tag_suggestions,
     _context_tags,
     get_character,
-    get_character_appearance,
+    get_knowledge,
     get_sources_status,
-    get_tag_knowledge,
+    resolve_character,
     search_characters,
     search_knowledge,
 )
@@ -83,15 +84,22 @@ class SearchRegressionTests(unittest.TestCase):
         }
         self.assertTrue({"character_profiles", "trait_definitions", "character_traits"} <= names)
 
-    def test_get_character_reads_owned_profile_and_traits(self):
+    def test_get_character_returns_canonical_card(self):
         result = get_character("hatsune_miku")
         self.assertTrue(result["found"])
-        self.assertEqual(result["slug"], "hatsune_miku")
-        self.assertEqual(result["profile_provenance"], "legacy_curated_seed")
-        self.assertIn("aqua hair", {item["value"] for item in result["traits"]})
-        self.assertTrue(all(item["evidence_tag"] for item in result["traits"]))
-        self.assertTrue(all(item["confidence"] == "high" for item in result["traits"]))
-        self.assertIn("twintails", result["tags"])
+        self.assertEqual(result["character_tag"], "hatsune_miku")
+        self.assertGreaterEqual(result["profile_count"], 1)
+        default = result["profiles"][0]
+        values = {item["value"] for items in default["features"].values() for item in items}
+        self.assertIn("Aqua hair", values)
+        self.assertIn("eyes", default["facet_metadata"])
+
+    def test_get_character_omits_evidence_by_default(self):
+        plain = get_character("hatsune_miku")
+        self.assertEqual(plain["profiles"][0]["evidence"], [])
+        cited = get_character("hatsune_miku", include_evidence=True)
+        self.assertTrue(cited["profiles"][0]["evidence"])
+        self.assertGreater(len(json.dumps(cited)), len(json.dumps(plain)))
 
     def test_search_characters_uses_owned_trait_filters(self):
         result = search_characters(hair_color="white")
@@ -109,11 +117,112 @@ class SearchRegressionTests(unittest.TestCase):
         result = search_characters(q="Inugami Korone")
         self.assertIn("inugami_korone", {item["slug"] for item in result["results"]})
 
-    def test_search_knowledge_exposes_owned_entities_namespace(self):
+    def test_search_characters_honors_facets_on_appearance_fallback(self):
+        blue = search_characters(q="suisei", hair_color="blue_hair")
+        self.assertEqual(blue["total"], 1)
+        red = search_characters(q="suisei", hair_color="red_hair")
+        self.assertEqual(red["total"], 0)
+        medium = search_characters(q="suisei", hair_length="medium")
+        self.assertEqual(medium["total"], 1)
+        wrong_length = search_characters(q="suisei", hair_length="long")
+        self.assertEqual(wrong_length["total"], 0)
+
+    def test_search_characters_keeps_legacy_facet_contract(self):
+        result = search_characters(hair_color="white")
+        self.assertEqual(result["total"], 4)
+
+    def test_search_characters_scope_all_reaches_appearance_facets(self):
+        legacy = search_characters(hair_color="white")
+        merged = search_characters(hair_color="white", scope="all")
+        self.assertEqual(legacy["total"], 4)
+        self.assertGreater(merged["total"], legacy["total"])
+        slugs = {item["slug"] for item in merged["results"]}
+        self.assertTrue(slugs)
+        self.assertTrue(any(
+            item["profile_provenance"] == "appearance_profile"
+            for item in merged["results"]
+        ))
+
+    def test_search_characters_rejects_unknown_scope(self):
+        with self.assertRaises(ValueError):
+            search_characters(q="suisei", scope="everything")
+
+    def test_resolve_character_prefers_canonical_suffixed_tag(self):
+        # Bare 3-post / artist tags must lose to the canonical franchise tag.
+        zero = resolve_character("Zero Two")
+        self.assertEqual(zero["recommended_tag"], "zero_two_(darling_in_the_franxx)")
+        bocchi = resolve_character("Bocchi")
+        self.assertEqual(bocchi["recommended_tag"], "bocchi_(bocchi_the_rock!)")
+        self.assertNotEqual(bocchi["recommendation"]["category"], "artist")
+
+    def test_resolve_character_recalls_nickname_suffix_tokens(self):
+        # "miku" is the second word of hatsune_miku; the prefix-only candidate
+        # scan never sees it, so the suffix-recall step has to find it.
+        miku = resolve_character("miku")
+        self.assertEqual(miku["recommended_tag"], "hatsune_miku")
+        self.assertFalse(miku["ambiguous"])
+        gura = resolve_character("gura")
+        self.assertEqual(gura["recommended_tag"], "gawr_gura")
+        self.assertEqual(gura["recommendation"]["match_type"], "suffix")
+
+    def test_resolve_character_uses_alias_tables(self):
+        furina = resolve_character("Furina")
+        self.assertEqual(furina["recommended_tag"], "furina_(genshin_impact)")
+        self.assertTrue(furina["found"])
+        hu_tao = resolve_character("Hu Tao")
+        self.assertEqual(hu_tao["recommended_tag"], "hu_tao_(genshin_impact)")
+        self.assertIn(hu_tao["recommendation"]["match_type"], {"alias", "alias_column"})
+
+    def test_resolve_character_recommends_under_ambiguity(self):
+        result = resolve_character("asuna")
+        self.assertTrue(result["ambiguous"])
+        self.assertIsNotNone(result["recommended_tag"])
+        self.assertTrue(result["ambiguity"]["candidates"])
+
+    def test_resolve_character_recommends_loose_name(self):
+        # anya_forger exists in the library as a low-coverage general tag, so the
+        # resolver prefers the canonical franchise tag and flags the exact one.
+        result = resolve_character("Anya Forger")
+        self.assertEqual(result["recommended_tag"], "anya_(spy_x_family)")
+        self.assertTrue(result["tag_match"])
+        self.assertTrue(result["notes"])
+        self.assertTrue(result["recommendations"])
+
+    def test_resolve_character_returns_owned_profile_tag(self):
+        result = resolve_character("hatsune_miku")
+        self.assertTrue(result["found"])
+        self.assertEqual(result["recommended_tag"], "hatsune_miku")
+
+    def test_resolve_character_reports_unknown_name(self):
+        result = resolve_character("zzzz_not_a_character")
+        self.assertFalse(result["found"])
+        self.assertFalse(result["tag_match"])
+        self.assertIn("recommendations", result)
+
+    def test_get_knowledge_resolves_alias_column(self):
+        result = get_knowledge("GawrGura")
+        self.assertTrue(result["found"])
+        self.assertEqual(result["tag"], "gawr_gura")
+        self.assertEqual(result["resolution"]["type"], "alias_column")
+
+    def test_get_character_resolves_alias_column(self):
+        result = get_character("GawrGura")
+        self.assertTrue(result["found"])
+        self.assertEqual(result["character_tag"], "gawr_gura")
+
+    def test_tool_surface_matches_contract(self):
+        tools = asyncio.run(server_module.mcp.list_tools())
+        self.assertEqual(
+            sorted(tool.name for tool in tools),
+            ["get_character", "get_knowledge", "get_sources_status",
+             "resolve_character", "search_characters", "search_knowledge"],
+        )
+
+    def test_search_knowledge_returns_tag_library_only(self):
         result = search_knowledge("hatsune miku", category="character", limit=5)
-        self.assertIn("entities", result)
+        self.assertNotIn("entities", result)
         self.assertNotIn("animadex", result)
-        self.assertTrue(result["entities"]["characters"])
+        self.assertTrue(result["tag_library"]["results"])
 
     def test_sources_status_reports_owned_schema(self):
         result = get_sources_status()
@@ -463,7 +572,7 @@ class SearchRegressionTests(unittest.TestCase):
         self.assertTrue(any(row["name"] == "swallowing" for row in suggestions))
 
     def test_get_tag_normalizes_human_spacing(self):
-        result = get_tag_knowledge("closed mouth")
+        result = get_knowledge("closed mouth")
         self.assertTrue(result["found"])
         self.assertTrue(any(row["name"] == "closed_mouth" for row in result["tags"]))
 
@@ -472,14 +581,13 @@ class SearchRegressionTests(unittest.TestCase):
         self.assertTrue(any(row["name"] == "finger_in_own_mouth" and row["match_type"] == "alias"
                             for row in suggestions))
 
-    def test_character_name_variant_recommends_canonical_tag(self):
+    def test_character_name_variant_suggests_canonical_tag(self):
         result = get_character("satoko hojo")
         self.assertFalse(result["found"])
-        self.assertEqual(result["recommended_tag"], "houjou_satoko")
-        self.assertEqual(result["recommendation"]["category"], "character")
+        self.assertEqual(result["candidates"][0], "houjou_satoko")
 
     def test_wiki_redirect_resolves_to_canonical_tag(self):
-        result = get_tag_knowledge("sakura_haruno")
+        result = get_knowledge("sakura_haruno")
         self.assertTrue(result["found"])
         self.assertEqual(result["requested_tag"], "sakura_haruno")
         self.assertEqual(result["tag"], "haruno_sakura")
@@ -488,19 +596,16 @@ class SearchRegressionTests(unittest.TestCase):
 
     def test_character_recommendation_is_canonicalized(self):
         result = get_character("Sakura Naruto")
-        self.assertEqual(result["recommended_tag"], "haruno_sakura")
-        self.assertEqual(result["recommendation"]["name"], "haruno_sakura")
+        self.assertFalse(result["found"])
+        self.assertEqual(result["candidates"][0], "sakura_haruno")
 
     def test_character_variant_recommends_base_tag(self):
         result = get_character("okayu hololive")
-        self.assertEqual(result["recommended_tag"], "nekomata_okayu")
-        self.assertEqual(result["recommendation"]["category"], "character")
+        self.assertEqual(result["candidates"][0], "nekomata_okayu")
 
-    def test_exact_general_tag_beats_weak_fuzzy_character_matches(self):
-        result = get_character("Anya Forger")
-        self.assertEqual(result["recommended_tag"], "anya_forger")
-        self.assertEqual(result["recommendation"]["confidence"], "high")
-        self.assertEqual(result["recommendation"]["match_type"], "normalized")
+    # El motor de recomendacion (recommended_tag/confidence/match_type) vivia en
+    # la tool legacy eliminada; su capacidad queda cubierta por assess_candidates
+    # en los tests de arriba y por search_characters.
 
     def test_weak_multiword_fuzzy_match_is_low_confidence(self):
         suggestions = _tag_suggestions(self.con, "anya forger", "character", 10)
@@ -514,8 +619,8 @@ class SearchRegressionTests(unittest.TestCase):
         self.assertEqual(candidate["match_type"], "contextual")
         self.assertEqual(candidate["confidence"], "high")
 
-    def test_get_tag_knowledge_resolves_unique_contextual_character(self):
-        result = get_tag_knowledge("Rika Higurashi")
+    def test_get_knowledge_resolves_unique_contextual_character(self):
+        result = get_knowledge("Rika Higurashi")
         self.assertTrue(result["found"])
         self.assertEqual(result["tag"], "furude_rika")
         self.assertEqual(result["resolution"]["type"], "contextual_character")
@@ -526,24 +631,23 @@ class SearchRegressionTests(unittest.TestCase):
 
     def test_short_ambiguous_name_reports_candidates_without_selection(self):
         result = get_character("Sakura")
-        self.assertTrue(result["ambiguous"])
-        self.assertIsNone(result["recommended_tag"])
-        self.assertGreaterEqual(len(result["recommendations"]), 2)
+        self.assertFalse(result["found"])
+        self.assertIsNone(result.get("character_tag"))
+        self.assertGreaterEqual(len(result["candidates"]), 2)
 
-    def test_short_character_name_without_context_is_ambiguous(self):
+    def test_short_character_name_resolves_tag_without_profile(self):
         result = get_character("Rem")
-        self.assertTrue(result["ambiguous"])
-        self.assertIsNone(result["recommended_tag"])
-        self.assertGreaterEqual(len(result["recommendations"]), 2)
+        self.assertFalse(result["found"])
+        self.assertEqual(result["character_tag"], "rem")
+        self.assertIn("message", result)
 
-    def test_short_general_name_is_ambiguous_even_with_exact_tag(self):
+    def test_short_general_name_reports_candidates(self):
         result = get_character("Cream")
-        self.assertTrue(result["ambiguous"])
-        self.assertIsNone(result["recommended_tag"])
-        self.assertGreaterEqual(len(result["recommendations"]), 2)
+        self.assertFalse(result["found"])
+        self.assertGreaterEqual(len(result["candidates"]), 2)
 
     def test_contextual_variant_with_unique_wiki_is_preserved(self):
-        result = get_tag_knowledge("fuu_(samurai_champloo)")
+        result = get_knowledge("fuu_(samurai_champloo)")
         self.assertEqual(result["tag"], "fuu_(samurai_champloo)")
         self.assertTrue(any(item["body"] for item in result["definitions"]))
 
@@ -557,18 +661,16 @@ class SearchRegressionTests(unittest.TestCase):
         }
         for query, tag in expected.items():
             with self.subTest(query=query):
-                self.assertEqual(get_character(query)["recommended_tag"], tag)
+                self.assertIn(tag, get_character(query)["candidates"])
 
     def test_context_index_resolves_work_name_to_character(self):
         result = get_character("Rika Higurashi")
-        self.assertEqual(result["recommended_tag"], "furude_rika")
+        self.assertTrue(result["found"])
+        self.assertEqual(result["character_tag"], "furude_rika")
 
-    def test_contextual_recommendation_exposes_matched_work(self):
-        result = get_character("Rika Higurashi")
-        self.assertEqual(
-            result["recommendation"]["matched_work"],
-            "higurashi_no_naku_koro_ni",
-        )
+    # matched_work era un diagnostico de la tool legacy; la resolucion contextual
+    # sigue cubierta por test_context_index_resolves_work_name_to_character.
+
 
     def test_context_index_records_canonical_work_relation(self):
         index = Path(__file__).parents[1] / "data" / "character_context.sqlite"
@@ -605,14 +707,14 @@ class SearchRegressionTests(unittest.TestCase):
         self.assertIn("idx_character_context_context_tag", context_indexes)
         self.assertIn("idx_character_work_context_tag_cover", work_indexes)
 
-    def test_unknown_structured_character_can_fall_back_to_tag(self):
+    def test_unknown_character_without_profile_reports_message(self):
         result = get_character("wave_the_swallow")
         self.assertFalse(result["found"])
-        self.assertTrue(result["tag_match"])
-        self.assertEqual(result["tag"]["name"], "wave_the_swallow")
+        self.assertEqual(result["character_tag"], "wave_the_swallow")
+        self.assertIn("message", result)
 
     def test_korone_appearance_card_has_base_and_isolated_outfits(self):
-        result = get_character_appearance("inugami_korone")
+        result = get_character("inugami_korone", include_evidence=True)
         self.assertTrue(result["found"])
         self.assertEqual(result["character_tag"], "inugami_korone")
         profiles = {item["variant_tag"]: item for item in result["profiles"]}
@@ -654,7 +756,7 @@ class SearchRegressionTests(unittest.TestCase):
         self.assertTrue(profiles["inugami_korone_(1st_costume)"]["evidence"])
 
     def test_appearance_variant_can_be_passed_as_character_argument(self):
-        result = get_character_appearance(
+        result = get_character(
             "inugami_korone_(new_year)", include_evidence=False
         )
         self.assertTrue(result["found"])
@@ -666,7 +768,7 @@ class SearchRegressionTests(unittest.TestCase):
         self.assertEqual(result["profiles"][0]["sources"], [])
 
     def test_appearance_variant_is_scoped_to_requested_character(self):
-        result = get_character_appearance(
+        result = get_character(
             "hatsune_miku",
             variant="inugami_korone_(new_year)",
             include_evidence=False,
@@ -677,7 +779,7 @@ class SearchRegressionTests(unittest.TestCase):
         self.assertNotIn("inugami_korone", result.get("character_tag", ""))
 
     def test_appearance_resolves_active_alias_to_canonical_profile(self):
-        result = get_character_appearance("ganyu", include_evidence=False)
+        result = get_character("ganyu", include_evidence=False)
         self.assertTrue(result["found"])
         self.assertEqual(result["character_tag"], "ganyu_(genshin_impact)")
         self.assertEqual(result["resolution"]["type"], "alias")
@@ -851,12 +953,9 @@ class SearchRegressionTests(unittest.TestCase):
             con.close()
         self.assertEqual(rows, {"blue_eyes": "retired", "green_eyes": "published"})
 
-    def test_get_character_exposes_appearance_additively(self):
-        result = get_character("hatsune_miku")
-        self.assertTrue(result["found"])
-        self.assertIn("appearance", result)
-        self.assertTrue(result["appearance"]["found"])
-        self.assertEqual(result["appearance"]["profiles"][0]["is_default"], True)
+    # La tarjeta de apariencia ya ES el resultado de get_character:
+    # cubierto por test_get_character_returns_canonical_card.
+
 
     def test_appearance_migration_is_idempotent(self):
         from scripts.migrate_appearance_profiles import migrate
@@ -1251,7 +1350,7 @@ class SearchRegressionTests(unittest.TestCase):
                ORDER BY p.character_tag LIMIT 1"""
         ).fetchone()
         self.assertIsNotNone(row)
-        result = get_character_appearance(row[0], include_evidence=False)
+        result = get_character(row[0], include_evidence=False)
         self.assertTrue(result["found"])
         profile = result["profiles"][0]
         self.assertIn("wings", profile["features"])

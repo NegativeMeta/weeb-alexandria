@@ -154,7 +154,7 @@ Busca tags relacionadas con sostener una espada
 
 Los resultados priorizan coincidencias exactas, después coincidencias por prefijo y finalmente coincidencias parciales. Los resultados estructurados de personajes, artistas y franquicias aparecen dentro de `entities`. Si no encuentra un resultado directo, la herramienta también devuelve una lista `suggestions` con posibles tags para errores ortográficos o nombres no canónicos.
 
-### `get_tag_knowledge`
+### `get_knowledge`
 
 Úsala cuando ya conoces la tag exacta que quieres revisar.
 
@@ -176,9 +176,28 @@ Obtén toda la información de stuck_in_wall
 
 Es una herramienta precisa y funciona mejor con la escritura canónica de la tag, normalmente en minúsculas y con guiones bajos.
 
+### `resolve_character`
+
+Úsala cuando el nombre del personaje venga suelto, mal escrito, en otro idioma
+o sea ambiguo entre franquicias.
+
+Devuelve la `recommended_tag` que conviene usar (o `null`), la recomendación
+ganadora con su tipo de coincidencia, confianza y obra detectada, la lista
+completa de candidatos ordenados, los `candidates` de los perfiles propios y
+`ambiguous`/`ambiguity` cuando un nombre corto encaja con varios personajes. Si
+la tag exacta existe pero no es de categoría personaje, `notes` lo advierte.
+
+Ejemplo:
+
+```text
+¿Qué tag debo usar para Anya Forger?
+```
+
 ### `search_characters`
 
 Úsala para buscar personajes, especialmente cuando quieres aplicar filtros.
+Las búsquedas solo por filtros leen por defecto los perfiles legacy; añade
+`scope="all"` para incluir también los perfiles de apariencia revisados.
 
 Permite buscar o filtrar por:
 
@@ -198,25 +217,22 @@ Busca personajes femeninos de Genshin Impact con cabello azul
 
 ### `get_character`
 
-Úsala cuando conoces el slug exacto del personaje y quieres su registro completo.
+Úsala cuando conozcas el personaje y quieras su ficha canónica.
 
-Puede devolver:
+Devuelve:
 
-- Nombre.
-- Franquicia.
-- Trigger.
-- Core tags.
-- Traits.
-- Popularidad.
-- LoRAs relacionadas, si existen.
+- Los perfiles de apariencia publicados (el default y las variantes de vestuario).
+- Rasgos agrupados por faceta (ojos, pelo, prendas...), con metadatos de faceta.
+- Evidencia opcional por rasgo: URL de la fuente, nivel y extracto.
+- Resolución del nombre, incluidos los alias guardados en las filas de tags, como `GawrGura` -> `gawr_gura`.
 
 Ejemplo:
 
 ```text
-Obtén el registro completo de hatsune_miku
+Dame la ficha completa de inugami_korone
 ```
 
-Cuando el nombre de un personaje está escrito de una forma conocida pero no canónica, `get_character` puede recomendar una tag probable comparando sus partes, permitiendo invertir el orden y tolerar pequeñas variaciones. Por ejemplo, `satoko hojo` puede recomendar `houjou_satoko`. La recomendación no se considera un perfil estructurado propio hasta consultar la tag canónica.
+La evidencia está desactivada por defecto para no inflar el payload; usa `include_evidence=True` cuando necesites la cita.
 
 ### `get_sources_status`
 
@@ -228,7 +244,7 @@ Es útil para diagnosticar problemas o confirmar qué partes de la base están i
 
 ```text
 No sé exactamente qué necesito       → search_knowledge
-Conozco la tag exacta                → get_tag_knowledge
+Conozco la tag exacta                → get_knowledge
 Quiero buscar personajes             → search_characters
 Conozco el slug exacto del personaje → get_character
 Quiero revisar la instalación       → get_sources_status

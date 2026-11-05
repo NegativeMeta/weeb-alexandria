@@ -203,7 +203,7 @@ hermes mcp add weeb-alexandria \
   --input seeds/appearance/inugami_korone.json
 ```
 
-MCP 工具为 `get_character_appearance(character, variant=None, include_evidence=True, limit=100)`。例如 `get_character_appearance("inugami_korone")` 会返回基础外观以及已审核的 `1st_costume`、`street` 和 `new_year` 档案，不会混合不同服装的特征。
+MCP 工具为 `get_character(character, variant=None, include_evidence=False, evidence_limit=100)`。例如 `get_character("inugami_korone")` 会返回基础外观以及已审核的 `1st_costume`、`street` 和 `new_year` 档案，不会混合不同服装的特征。
 
 ## 项目结构
 
@@ -254,7 +254,7 @@ C:\Users\johin\Code_Library\AI\WeebAlexandria_legacy_archive
 
 `raw/animadex/animadex.db` 保留原始名称，仅用于审计和恢复初始种子。活跃的 MCP 不会打开它，也不需要任何旧版结构化数据表。
 
-历史种子和迁移记录见 [`docs/ANIMADEX_VALUE_ANALYSIS.md`](docs/ANIMADEX_VALUE_ANALYSIS.md)。`search_knowledge` 会在 `entities` 命名空间下返回结构化结果。
+历史种子和迁移记录见 [`docs/ANIMADEX_VALUE_ANALYSIS.md`](docs/ANIMADEX_VALUE_ANALYSIS.md)。`search_knowledge` 返回标签库结果；结构化角色数据位于 `search_characters`。
 
 ## MCP
 
@@ -267,10 +267,10 @@ run.bat
 可用工具：
 
 - `search_knowledge`
-- `get_tag_knowledge`
+- `get_knowledge`
 - `search_characters`
+- `resolve_character`
 - `get_character`
-- `get_character_appearance`
 - `get_sources_status`
 
 Weeb Alexandria 在本地执行查询，不需要运行原始的 AnimaDex Flask 服务器。

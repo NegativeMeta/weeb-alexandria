@@ -203,7 +203,7 @@ Inugami Korone がどのようなキャラクターか教えてください。We
   --input seeds/appearance/inugami_korone.json
 ```
 
-MCP ツールは `get_character_appearance(character, variant=None, include_evidence=True, limit=100)` です。`get_character_appearance("inugami_korone")` は基礎外見とレビュー済みの `1st_costume`、`street`、`new_year` を返し、異なる衣装の特徴を混在させません。
+MCP ツールは `get_character(character, variant=None, include_evidence=False, evidence_limit=100)` です。`get_character("inugami_korone")` は基礎外見とレビュー済みの `1st_costume`、`street`、`new_year` を返し、異なる衣装の特徴を混在させません。
 
 ## 構成
 
@@ -249,7 +249,7 @@ C:\Users\johin\Code_Library\AI\WeebAlexandria_legacy_archive
 
 `raw/animadex/animadex.db` は初期シードの監査・復旧専用として元の名前のまま保存されています。アクティブな MCP はこのファイルを開かず、旧構造化テーブルにも依存しません。
 
-履歴シードと移行記録は [`docs/ANIMADEX_VALUE_ANALYSIS.md`](docs/ANIMADEX_VALUE_ANALYSIS.md) に記載しています。`search_knowledge` は構造化結果を `entities` 名前空間で返します。
+履歴シードと移行記録は [`docs/ANIMADEX_VALUE_ANALYSIS.md`](docs/ANIMADEX_VALUE_ANALYSIS.md) に記載しています。`search_knowledge` はタグライブラリの結果を返します。構造化されたキャラクターは `search_characters` にあります。
 
 ## MCP
 
@@ -262,8 +262,9 @@ run.bat
 利用可能なツール：
 
 - `search_knowledge`
-- `get_tag_knowledge`
+- `get_knowledge`
 - `search_characters`
+- `resolve_character`
 - `get_character`
 - `get_sources_status`
 

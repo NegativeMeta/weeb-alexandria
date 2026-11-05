@@ -221,10 +221,10 @@ Promote only a reviewed seed:
 The MCP tool is:
 
 ```text
-get_character_appearance(character, variant=None, include_evidence=True, limit=100)
+get_character(character, variant=None, include_evidence=False, evidence_limit=100)
 ```
 
-For example, `get_character_appearance("inugami_korone")` returns the base appearance plus the reviewed `1st_costume`, `street`, and `new_year` profiles. Clothing from one variant is not merged into another variant's base profile.
+For example, `get_character("inugami_korone")` returns the base appearance plus the reviewed `1st_costume`, `street`, and `new_year` profiles. Clothing from one variant is not merged into another variant's base profile.
 
 The controlled taxonomy includes appendage facets such as `wings`, visual detail
 facets such as `markings` and `effects`, and non-visual audit facets such as
@@ -283,7 +283,7 @@ C:\Users\johin\Code_Library\AI\WeebAlexandria_legacy_archive
 
 `raw/animadex/animadex.db` is preserved under its original name for audit and seed recovery only. The active MCP does not open it and does not require any legacy structured tables.
 
-The historical structured seed and migration record are documented in [`docs/ANIMADEX_VALUE_ANALYSIS.md`](docs/ANIMADEX_VALUE_ANALYSIS.md). `search_knowledge` returns structured results under the `entities` namespace.
+The historical structured seed and migration record are documented in [`docs/ANIMADEX_VALUE_ANALYSIS.md`](docs/ANIMADEX_VALUE_ANALYSIS.md). `search_knowledge` returns tag-library results; structured characters live in `search_characters`.
 
 ## MCP
 
@@ -296,10 +296,10 @@ run.bat
 Available tools:
 
 - `search_knowledge`
-- `get_tag_knowledge`
+- `get_knowledge`
 - `search_characters`
+- `resolve_character`
 - `get_character`
-- `get_character_appearance`
 - `get_sources_status`
 
 Weeb Alexandria performs its queries locally and does not require the original AnimaDex Flask server.

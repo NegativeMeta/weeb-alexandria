@@ -206,7 +206,7 @@ La apariencia se divide entre un perfil base y perfiles separados para cada outf
 
 La taxonomía controlada incluye facetas de apéndices como `wings`, detalles visuales como `markings` y `effects`, y facetas de auditoría no visual como `context` y `expression`. Las nuevas seeds deben usar los nombres del catálogo; nombres heredados como `clothing` y `hair_style` se normalizan antes de promocionar. El MCP conserva la agrupación existente en `features` y añade `facet_metadata`.
 
-La herramienta MCP es `get_character_appearance(character, variant=None, include_evidence=True, limit=100)`. `get_character_appearance("inugami_korone")` devuelve la apariencia base y los perfiles revisados de `1st_costume`, `street` y `new_year` sin mezclar sus prendas.
+La herramienta MCP es `get_character(character, variant=None, include_evidence=False, evidence_limit=100)`. `get_character("inugami_korone")` devuelve la apariencia base y los perfiles revisados de `1st_costume`, `street` y `new_year` sin mezclar sus prendas.
 
 Para el contrato completo de cada profile, las reglas de evidencia, la checklist de revisión y la primera tanda de cinco personajes, consulta [`docs/CHARACTER_APPEARANCE_PROFILES.md`](docs/CHARACTER_APPEARANCE_PROFILES.md).
 
@@ -259,7 +259,7 @@ C:\Users\johin\Code_Library\AI\WeebAlexandria_legacy_archive
 
 `raw/animadex/animadex.db` se conserva con su nombre original solo para auditoría y recuperación de la semilla. El MCP activo no lo abre ni necesita tablas estructuradas legacy.
 
-El registro de la semilla histórica y de la migración está documentado en [`docs/ANIMADEX_VALUE_ANALYSIS.md`](docs/ANIMADEX_VALUE_ANALYSIS.md). `search_knowledge` devuelve los resultados estructurados dentro del namespace `entities`.
+El registro de la semilla histórica y de la migración está documentado en [`docs/ANIMADEX_VALUE_ANALYSIS.md`](docs/ANIMADEX_VALUE_ANALYSIS.md). `search_knowledge` devuelve resultados de la librería de tags; los personajes estructurados están en `search_characters`.
 
 ## MCP
 
@@ -272,10 +272,10 @@ run.bat
 Herramientas disponibles:
 
 - `search_knowledge`
-- `get_tag_knowledge`
+- `get_knowledge`
 - `search_characters`
+- `resolve_character`
 - `get_character`
-- `get_character_appearance`
 - `get_sources_status`
 
 Weeb Alexandria realiza sus consultas localmente y no necesita el servidor Flask original de AnimaDex.

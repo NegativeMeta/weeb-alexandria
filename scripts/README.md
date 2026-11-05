@@ -4,6 +4,49 @@ Standalone helper scripts used by the active Weeb Alexandria data
 pipeline. They are not imported by the MCP server; they are tools you run
 by hand (or get shelled out to by the orchestrator).
 
+## `mcp_surface_audit.py`
+
+Drives the real MCP over stdio with the same `run.bat` launcher Hermes uses and
+calls every exposed tool once, printing per-call latency and payload size. Exit
+code is 0 only when every tool answered without error, so it can gate
+maintenance work.
+
+```bash
+.venv/Scripts/python.exe scripts/mcp_surface_audit.py
+.venv/Scripts/python.exe scripts/mcp_surface_audit.py --repeat 2 --preview 600
+```
+
+`--calls calls.json` overrides the default battery; tools whose required
+arguments are missing are skipped instead of called with garbage.
+
+## `bench_mcp_tools.py`
+
+Latency guard for the helpers behind the MCP search tools. Cold and warm
+timings for the FTS, suggestion, and character paths; exits 1 when a cold call
+exceeds the budget (`--budget`, default 2.0 seconds). Run it before and after
+touching `_fts_tag_rows`, `_tag_rows`, `_tag_suggestions`,
+`_local_characters`, or `_appearance_characters`.
+
+```bash
+.venv/Scripts/python.exe scripts/bench_mcp_tools.py
+.venv/Scripts/python.exe scripts/bench_mcp_tools.py --budget 2.0 --json
+```
+
+## `mcp_character_bench.py`
+
+Regression bench for character resolution: runs `resolve_character` and
+`get_character` over 22 popular characters in their colloquial spelling and
+compares each recommendation with the tag the library actually holds. Exits 1 on
+any mismatch, so a change to the resolver cannot silently regress.
+
+```bash
+.venv/Scripts/python.exe scripts/mcp_character_bench.py
+.venv/Scripts/python.exe scripts/mcp_character_bench.py --json reports/mcp_character_bench.json
+```
+
+`card=False` is informational: most library characters are tag rows without a
+reviewed appearance profile yet.
+
 ## `generate_dataset.py`
 
 The ComfyUI driver. Renders character / artist images from a CSV using

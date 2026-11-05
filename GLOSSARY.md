@@ -152,9 +152,9 @@ Find characters from Genshin Impact
 Look for tags related to holding a sword
 ```
 
-Search results are ranked with exact matches first, followed by prefix and partial matches. Structured character, artist, and franchise results appear under `entities`. If no direct result is found, the tool also returns a `suggestions` list with likely tag names for spelling mistakes or non-canonical names.
+Search results are ranked with exact matches first, followed by prefix and partial matches. Search covers the tag library; characters live in `search_characters`. If no direct result is found, the tool also returns a `suggestions` list with likely tag names for spelling mistakes or non-canonical names.
 
-### `get_tag_knowledge`
+### `get_knowledge`
 
 Use this when you already know the exact tag you want to inspect.
 
@@ -176,9 +176,28 @@ Get the complete information for stuck_in_wall
 
 This tool is intentionally precise and works best with the canonical tag spelling, usually lowercase with underscores.
 
+### `resolve_character`
+
+Use this when the character name is loose, misspelled, written in another
+language, or ambiguous across franchises.
+
+It returns the `recommended_tag` to use (or `null`), the winning recommendation
+with its match type, confidence and matched work, the full ranked candidate
+list, `candidates` from the owned profiles, and `ambiguous`/`ambiguity` when a
+short name fits several characters. When the exact tag exists but is not a
+character tag, `notes` says so.
+
+Example:
+
+```text
+Which tag should I use for Anya Forger?
+```
+
 ### `search_characters`
 
 Use this to search the character database, especially when you want filters.
+Facet-only searches read the owned legacy profiles by default; pass
+`scope="all"` to include the reviewed appearance profiles as well.
 
 You can search or filter by:
 
@@ -198,25 +217,22 @@ Find female characters from Genshin Impact with blue hair
 
 ### `get_character`
 
-Use this when you know the exact character slug and want the complete record.
+Use this when you know the character and want the canonical card.
 
-It can return:
+It returns:
 
-- Character name.
-- Franchise.
-- Trigger.
-- Core tags.
-- Traits.
-- Popularity.
-- Related LoRAs, when available.
+- The published appearance profiles (default plus costume variants).
+- Features grouped by facet (eyes, hair, outfit pieces...), with facet metadata.
+- Optional per-feature evidence: source URL, tier and excerpt.
+- Name resolution, including aliases stored in the tag rows such as `GawrGura` -> `gawr_gura`.
 
 Example:
 
 ```text
-Get the complete record for hatsune_miku
+Get the complete card for inugami_korone
 ```
 
-When a character name is written in a familiar but non-canonical form, `get_character` can recommend a likely character tag by comparing name parts, allowing reordered names and small spelling variants. For example, `satoko hojo` can recommend `houjou_satoko`. The recommendation is not treated as an owned structured profile until the canonical tag is queried.
+Evidence is off by default to keep payloads small; pass `include_evidence=True` when you need the citation.
 
 ### `get_sources_status`
 
@@ -228,7 +244,7 @@ It is useful for troubleshooting or confirming which parts of the knowledge base
 
 ```text
 I am not sure what I need       → search_knowledge
-I know the exact tag            → get_tag_knowledge
+I know the exact tag            → get_knowledge
 I want to find characters       → search_characters
 I know the exact character slug → get_character
 I want to check the installation→ get_sources_status
