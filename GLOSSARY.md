@@ -135,6 +135,16 @@ These labels help agents and users understand the general content category of in
 
 Use this as the general-purpose search tool.
 
+Multi-word queries that look like several tags return `query_parts` plus
+`related_tags` (the tags that tie the parts together, such as the umbrella
+concept). Alias/invalid stub rows with negligible coverage are skipped, so a real
+tag answers instead of a 3-post redirect.
+
+Spanish phrasing is translated first: the phrases in
+`weeb_alexandria_mcp/query_aliases_es.json` are replaced by their English tag
+wording, and the response carries `query_translation` with the wording actually
+searched (`searched_as`).
+
 It searches across:
 
 - Tags.

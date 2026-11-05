@@ -110,7 +110,11 @@ NSFW 表示可能不适合工作场所或普通受众的内容；SFW 表示通�
 
 ### `search_knowledge`
 
-通用搜索工具。它可以搜索标签、角色、艺术家和作品或系列。结构化的角色、艺术家和作品结果位于 `entities` 命名空间中，适合查询范围较大、名称不确定的内容。
+通用搜索工具。它可以搜索标签、角色、艺术家和作品或系列，返回标签库结果；结构化角色位于 `search_characters`。
+
+看起来包含多个标签的查询会返回 `query_parts` 和 `related_tags`（连接各部分的概览标签），并会跳过投稿数极少的 `alias`/`invalid` 行，让真实标签作答而不是一条仅有 3 个投稿的重定向记录。
+
+西班牙语短语会先替换为英文标签措辞（`weeb_alexandria_mcp/query_aliases_es.json`），响应中的 `query_translation.searched_as` 显示实际检索的文本。
 
 如果没有直接结果，该工具还会返回 `suggestions` 列表，为拼写错误或非标准名称提供可能的标签。
 

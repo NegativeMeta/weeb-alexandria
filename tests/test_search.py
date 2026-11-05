@@ -199,6 +199,61 @@ class SearchRegressionTests(unittest.TestCase):
         self.assertFalse(result["tag_match"])
         self.assertIn("recommendations", result)
 
+    def test_search_knowledge_skips_alias_placeholder_rows(self):
+        # "mating" exists only as a 3-post alias stub; the real tags must win.
+        result = search_knowledge("mating")["tag_library"]["results"]
+        names = [item["name"] for item in result]
+        self.assertNotEqual(names[0], "mating")
+        self.assertIn("mating_(animal)", names)
+        self.assertNotIn("alias", {item["category"] for item in result})
+
+    def test_search_knowledge_resolves_past_alias_stub_by_prefix(self):
+        result = search_knowledge("2b")["tag_library"]["results"]
+        self.assertEqual(result[0]["name"], "2b_(nier:automata)")
+
+    def test_search_knowledge_multi_tag_proposes_umbrella_tag(self):
+        library = search_knowledge("dog mounting")["tag_library"]
+        self.assertEqual(library["query_mode"], "multi_tag")
+        self.assertIn("dog", {part["query"] for part in library["query_parts"]})
+        related = {item["name"] for item in library["related_tags"]}
+        self.assertIn("bestiality", related)
+
+    def test_search_knowledge_redirects_alias_stub_to_canonical_tag(self):
+        # "titjob" is a 193-post alias row; the real tag is paizuri (115 985).
+        result = search_knowledge("titjob")["tag_library"]["results"]
+        self.assertEqual(result[0]["name"], "paizuri")
+        self.assertEqual(result[0]["match_type"], "alias")
+        self.assertEqual(result[0]["confidence"], "high")
+
+    def test_search_knowledge_uses_tokens_when_exact_match_is_a_fragment(self):
+        library = search_knowledge("facial cum")["tag_library"]
+        self.assertEqual(library["results"][0]["name"], "facial")
+        self.assertEqual(library["results"][0]["match_type"], "token")
+        self.assertIn("thin answer facial_cumshot", library["notes"][0])
+
+    def test_search_knowledge_keeps_documented_small_tag_first(self):
+        # 204 posts, but three wikis document it: typing it must return it.
+        result = search_knowledge("mating_(animal)")["tag_library"]["results"]
+        self.assertEqual(result[0]["name"], "mating_(animal)")
+
+    def test_search_knowledge_translates_spanish_phrase(self):
+        library = search_knowledge("tetas grandes")["tag_library"]
+        self.assertEqual(library["results"][0]["name"], "large_breasts")
+        self.assertEqual(library["query_translation"]["searched_as"], "large breasts")
+
+    def test_search_knowledge_spanish_longest_phrase_wins(self):
+        # "sexo oral" must not be eaten by the shorter "sexo" entry.
+        library = search_knowledge("sexo oral")["tag_library"]
+        self.assertEqual(library["results"][0]["name"], "oral")
+
+    def test_multi_tag_segments_drop_stopwords(self):
+        library = search_knowledge("tied up with rope")["tag_library"]
+        self.assertEqual(library["query_mode"], "multi_tag")
+        self.assertEqual(
+            [part["query"] for part in library["query_parts"]],
+            ["tied up", "rope"],
+        )
+
     def test_get_knowledge_resolves_alias_column(self):
         result = get_knowledge("GawrGura")
         self.assertTrue(result["found"])

@@ -135,6 +135,16 @@ Estas etiquetas ayudan a entender la categoría general del contenido. No sustit
 
 Es la herramienta de búsqueda general.
 
+Las consultas de varias palabras que parecen varios tags devuelven `query_parts`
+y `related_tags` (los tags que unen las partes, como el concepto paraguas). Las
+filas `alias`/`invalid` con cobertura insignificante se omiten, así responde un
+tag real y no una redirección de 3 posts.
+
+El español se traduce primero: las frases de
+`weeb_alexandria_mcp/query_aliases_es.json` se sustituyen por su equivalente en
+tags en inglés, y la respuesta incluye `query_translation` con lo que se buscó
+realmente (`searched_as`).
+
 Busca entre:
 
 - Tags.

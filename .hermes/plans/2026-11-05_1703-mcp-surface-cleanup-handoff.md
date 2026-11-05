@@ -120,6 +120,69 @@ añadidos) y **99 tests OK**; costo +0,15 s por consulta con token final ≥4 ca
 
 ---
 
+## 0d. `search_knowledge`: alias stubs y tag paraguas
+
+Probando el MCP con temas reales salieron dos defectos de recall/lectura:
+
+1. **Filas `alias`/`invalid` ganaban por match exacto.** `search_knowledge("mating")` devolvía el
+   stub `mating` (categoría alias, **3 posts**) con `confidence: high`, y el tag útil
+   `mating_(animal)` solo aparecía si escribías "mating animal". Igual `2b` (stub de 54 posts).
+   Regla aplicada: una fila `alias`/`invalid` es placeholder solo si su cobertura es
+   insignificante (`< 1000` posts); `blushing` (2 599) y `saber` (20 415) son tags reales mal
+   categorizados por la fuente y se conservan. Se filtra el resultado fusionado, no solo el
+   exacto, porque el índice FTS también trae el stub.
+2. **El modo multi-tag no proponía el concepto paraguas.** "dog mounting" devolvía
+   `query_parts` (dog, mounting) y nada más. Ahora añade `related_tags`: tags que comparten un
+   *nombre extra* con alguna parte, hallados con **una sola** consulta FTS `OR` sobre los
+   aliases (`dog` y `bestiality` comparten 犬姦 → `bestiality`). Dos guardas:
+   - los nombres extra compartidos por ≥3 tags son genéricos y se descartan;
+   - el enlace solo corre si **todas** las partes resolvieron al tag que nombran
+     (`_part_tag_is_named`), porque enlazar desde un match equivocado produce ruido seguro de sí
+     mismo: "school uniform girl" proponía `cowgirl_position` y ahora no propone nada.
+
+Medido: `dog mounting` → `related_tags: [bestiality]` con coste ~1,0 s (solo en multi-tag);
+`mating` → `mating_press`, `mating_grip`, `mating_(animal)`; `2b` → `2b_(nier:automata)`;
+consultas de un tag siguen en 0,00 s. `102 tests OK`, bench de personajes 27/27, guardián de
+latencia dentro de presupuesto (FTS `miku` 1,55 s frío / 0,52 s tibio), auditoría stdio 7 ok.
+Docs: los cuatro GLOSSARYs documentan `related_tags` y el descarte de stubs; de paso se corrigió
+en ja/zh la mención obsoleta al namespace `entities`.
+
+---
+
+## 0e. Escaleras de calidad: alias, fragmentos, stopwords y español
+
+Tercera tanda sobre `search_knowledge`, toda medida contra la base local:
+
+1. **Alias-first cuando el exacto es placeholder** (`P3a`): `titjob` es alias de `paizuri`
+   (115 985) y el MCP devolvía `titjob_under_clothes` (9 687). Ahora devuelve `paizuri` con
+   `match_type: alias`, `confidence: high` y `note: alias of titjob`.
+2. **Suelo de cobertura con discriminante de wiki** (`P3b`): una respuesta se considera
+   fragmento si tiene `< 1000` posts **y** menos de 2 definiciones de wiki. Entonces se
+   responde con los tags que nombran las palabras de la consulta:
+   `ahegao face` → `ahegao` (72 137) en lugar de `ahegao_face` (13, 0 wikis);
+   `facial cum` → `facial` (115 172) en lugar de `facial_cumshot` (3, 1 wiki).
+   El discriminante importa: `mating_(animal)` tiene 204 posts pero 3 wikis, y sigue
+   devolviéndose primero cuando se escribe tal cual. Cada respuesta trae `notes` con la
+   sustitución.
+3. **Stopwords y categoría en multi-tag** (`P5`): `tied up with rope` ya no se parte como
+   `[tied up, with, rope]` sino `[tied up, rope]`, y los `related_tags` solo admiten categoría
+   `general`, así que desaparecen `rope_(arknights)` y `reed_(arknights)`; `dog mounting` sigue
+   devolviendo `bestiality`.
+4. **Diccionario español → inglés** (`P4`): `weeb_alexandria_mcp/query_aliases_es.json` con
+   **109 frases** generadas y verificadas por `scripts/build_query_aliases_es.py` (target con
+   ≥1000 posts o ≥2 wikis; `ALLOW_LOW_COVERAGE` para `see_through`). `search_knowledge` traduce
+   antes de buscar (frase más larga primero) y devuelve `query_translation.searched_as`.
+   Resultado: **25/26** consultas en español aciertan (`tetas grandes` → `large_breasts`,
+   `sexo` → `sex`, `corrida en la cara` → `facial`, `atada con cuerdas` → `bondage`,
+   `vendas en los ojos` → `blindfold`); antes eran basura o vacío.
+
+Medido: `108 tests OK` (6 nuevos), guardián de latencia dentro de presupuesto
+(FTS `miku` 1,48 s frío / 0,49 s tibio), auditoría stdio 7 ok / 6 tools, bench de personajes
+27/27. Latencia: consultas traducidas 0,00–0,02 s; multi-tag 1,0–2,0 s (una sola consulta FTS
+adicional para el paraguas). Docs: los cuatro GLOSSARYs + `scripts/README.md`.
+
+---
+
 ## 1. Lo que ya está hecho (no rehacer)
 
 Spec original: `.hermes/plans/2026-11-05_1310-mcp-surface-cleanup.md`

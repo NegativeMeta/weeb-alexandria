@@ -3,10 +3,12 @@ from __future__ import annotations
 
 import difflib
 import hashlib
+import json
 import math
 import os
 import re
 import sqlite3
+from functools import lru_cache
 from pathlib import Path
 from typing import Any, Optional
 
@@ -774,18 +776,228 @@ def _tag_rows(con: sqlite3.Connection, query: str,
     limit = max(1, min(int(limit), 100))
     normalized = _normalize_tag(query)
     if not normalized:
-        return _legacy_tag_rows(con, query, category, limit)
+        return _drop_placeholder_rows(_legacy_tag_rows(con, query, category, limit))
 
     exact_rows = _exact_tag_rows(con, normalized, category)
-    if exact_rows:
-        return _merge_tag_rows(exact_rows, query, normalized, limit)
+    usable_exact = [
+        row for row in exact_rows
+        if not _is_placeholder_item({"category": row["category_name"],
+                                     "post_count": row["post_count"]})
+    ]
+    if usable_exact:
+        return _merge_tag_rows(usable_exact, query, normalized, limit)
+
+    # The only exact row is a stub: follow the alias table before guessing
+    # (`titjob` is an alias of `paizuri`, 115 985 posts).
+    redirect, _redirect_meta = _resolve_canonical_tag(con, normalized)
+    if redirect and redirect != normalized:
+        redirect_rows = [
+            row for row in _exact_tag_rows(con, redirect, category)
+            if not _is_placeholder_item({"category": row["category_name"],
+                                         "post_count": row["post_count"]})
+        ]
+        if redirect_rows:
+            merged = _merge_tag_rows(redirect_rows, query, normalized, limit)
+            for item in merged:
+                item["match_type"] = "alias"
+                item["confidence"] = "high"
+                item["note"] = f"alias of {normalized}"
+            return merged
 
     fts_rows = _fts_tag_rows(con, query, category, limit)
     if fts_rows is None:
         # Keep installations without the derived index fully compatible.
-        return _legacy_tag_rows(con, query, category, limit)
+        return _drop_placeholder_rows(_legacy_tag_rows(con, query, category, limit))
     prefix_rows = _indexed_prefix_rows(con, normalized, category, limit)
-    return _merge_tag_rows(prefix_rows + fts_rows, query, normalized, limit)
+    merged = _merge_tag_rows(prefix_rows + fts_rows, query, normalized, min(100, limit + 4))
+    real_rows = [item for item in merged if not _is_placeholder_item(item)][:limit]
+    if real_rows:
+        return real_rows
+    # Nothing beats a placeholder row: return the stub rather than nothing.
+    if exact_rows:
+        return _merge_tag_rows(exact_rows, query, normalized, limit)
+    return merged
+
+
+def _split_extra_names(value: Optional[str]) -> list[str]:
+    """Split a tag's extra-name/alias column into individual names."""
+    if not value:
+        return []
+    return [part.strip() for part in re.split(r"[,;|]", value) if part.strip()]
+
+
+def _drop_placeholder_rows(rows: list[dict]) -> list[dict]:
+    """Alias/invalid stub rows are redirects, not search answers."""
+    kept = [row for row in rows if not _is_placeholder_item(row)]
+    return kept or rows
+
+
+def _fts_or_search(con: sqlite3.Connection, terms: list[str],
+                   limit: int = 30) -> list[dict]:
+    """One FTS query matching any of several extra names (OR), deduped by name.
+
+    Used only for multi-tag queries: ``dog`` and ``bestiality`` share the extra
+    name 犬姦, which is how the umbrella tag for "dog mounting" is found without
+    guessing from post counts.
+    """
+    cleaned = [term for term in terms if term and '"' not in term]
+    if not cleaned or not os.path.isfile(SEARCH_DB):
+        return []
+    match = " OR ".join(f'"{term}"' for term in cleaned)
+    search: Optional[sqlite3.Connection] = None
+    try:
+        search = sqlite3.connect(SEARCH_DB)
+        search.row_factory = sqlite3.Row
+        search.execute("PRAGMA query_only = ON")
+        valid = _derived_metadata_matches(
+            search, "tag_search_metadata", _FTS_SCHEMA_VERSION, source_con=con,
+        )
+        if not valid:
+            return []
+        rows = search.execute(
+            "SELECT name, MIN(rank) AS rank, MAX(COALESCE(post_count, 0)) AS max_count, "
+            "MAX(aliases) AS aliases, MAX(category_name) AS category_name "
+            "FROM tag_search WHERE tag_search MATCH ? GROUP BY name "
+            "ORDER BY rank, max_count DESC LIMIT ?",
+            (match, max(1, min(int(limit), 60))),
+        ).fetchall()
+    except sqlite3.Error:
+        return []
+    finally:
+        if search is not None:
+            search.close()
+    return [{"name": row["name"], "category": row["category_name"],
+             "post_count": row["max_count"], "aliases": row["aliases"]}
+            for row in rows]
+
+
+def _tag_wiki_count(con: sqlite3.Connection, name: str) -> int:
+    row = con.execute("SELECT count(*) FROM wiki WHERE title = ?", (name,)).fetchone()
+    return int(row[0]) if row else 0
+
+
+def _is_fragment_answer(con: sqlite3.Connection, item: dict) -> bool:
+    """True for a low-coverage tag that no wiki documents as a real tag.
+
+    ``ahegao_face`` (13 posts, 0 definitions) and ``facial_cumshot`` (3 posts,
+    1 definition) are fragments; ``mating_(animal)`` (204 posts) is small but
+    documented by three sites, so typing it must keep returning it first.
+    """
+    if (item.get("post_count") or 0) >= _MIN_ANSWER_POSTS:
+        return False
+    return _tag_wiki_count(con, str(item.get("name") or "")) < 2
+
+
+def _coverage_fallback(con: sqlite3.Connection, query: str,
+                       category: Optional[str], limit: int,
+                       current: list[dict]) -> tuple[list[dict], Optional[str]]:
+    """Answer with the tags the query's own words name when the match is a stub.
+
+    ``search_knowledge("facial cum")`` used to answer ``facial_cumshot`` (3
+    posts) while ``facial`` holds 115 172.
+    """
+    if not current or not _is_fragment_answer(con, current[0]):
+        return current, None
+    normalized = _normalize_tag(query)
+    tokens = [token for token in normalized.split("_") if len(token) >= 3]
+    picked: list[dict] = []
+    seen = {str(item.get("name") or "").lower() for item in current}
+    for token in tokens[:3]:
+        for row in _tag_rows(con, token, category, 3):
+            if (row.get("post_count") or 0) < _MIN_ANSWER_POSTS:
+                continue
+            key = str(row.get("name") or "").lower()
+            if key in seen:
+                break
+            seen.add(key)
+            row["match_type"] = "token"
+            row["confidence"] = "medium"
+            row["note"] = f"matched on token '{token}'"
+            picked.append(row)
+            break
+    if not picked:
+        return current, None
+    top = current[0]
+    note = (f"thin answer {top['name']} ({top.get('post_count') or 0} posts) "
+            f"replaced by per-token tags: "
+            f"{', '.join(item['name'] for item in picked)}")
+    merged: list[dict] = []
+    names: set[str] = set()
+    for item in picked + current:
+        key = str(item.get("name") or "").lower()
+        if key in names:
+            continue
+        names.add(key)
+        merged.append(item)
+    return merged[:limit], note
+
+
+def _part_tag_is_named(part: dict) -> bool:
+    """True when the part resolved to the tag it actually names.
+
+    Linking concepts through a part that matched something else ("girl" ->
+    ``girl_on_top``) produces confident nonsense, so the umbrella search only
+    runs when every part is trustworthy.
+    """
+    if not part.get("results"):
+        return False
+    name = str(part["results"][0]["name"]).lower().replace("-", "_")
+    slug = _normalize_tag(part.get("query") or "")
+    if not slug:
+        return False
+    if name == slug:
+        return True
+    if set(name.split("_")) == set(slug.split("_")):
+        return True  # hatsune_miku vs miku_hatsune
+    return name.startswith(f"{slug}_(")  # franchise-suffixed canonical tag
+
+
+def _concept_links(con: sqlite3.Connection,
+                   part_results: list[dict], limit: int = 3) -> list[dict]:
+    """Tags that tie the multi-tag parts together through a shared extra name."""
+    if not part_results or not all(_part_tag_is_named(part) for part in part_results):
+        return []
+    part_tags = [part["results"][0]["name"] for part in part_results]
+    part_names = {name.lower() for name in part_tags}
+    terms: list[str] = []
+    for part in part_results:
+        for alias in _split_extra_names(part["results"][0].get("aliases")):
+            if len(alias) >= 2 and alias.lower() not in part_names and alias not in terms:
+                terms.append(alias)
+    terms = sorted(terms, key=len, reverse=True)[:12]
+    if len(terms) < 2:
+        return []
+    rows = _fts_or_search(con, terms, limit=30)
+    if not rows:
+        return []
+    # An extra name shared by three or more tags is a generic word, not a link.
+    hits = {
+        term: sum(1 for row in rows if term in _split_extra_names(row.get("aliases")))
+        for term in terms
+    }
+    generic = {term for term, count in hits.items() if count >= 3}
+    links: list[dict] = []
+    for row in rows:
+        if row["name"].lower() in part_names:
+            continue
+        # A character/copyright tag that merely contains the word ("rope" ->
+        # `rope_(arknights)`) is not the umbrella concept.
+        if str(row.get("category") or "").lower() != "general":
+            continue
+        shared = [
+            term for term in _split_extra_names(row.get("aliases"))
+            if term in terms and term not in generic
+        ]
+        if not shared:
+            continue
+        links.append({
+            "name": row["name"],
+            "category": row["category"],
+            "post_count": row["post_count"],
+            "reason": "shares extra name with a query part: " + ", ".join(shared[:3]),
+        })
+    links.sort(key=lambda item: (-(item["post_count"] or 0), item["name"]))
+    return links[:limit]
 
 
 def _tag_suggestions(con: sqlite3.Connection, query: str,
@@ -959,6 +1171,84 @@ def _tag_suggestions(con: sqlite3.Connection, query: str,
 
 _WEAK_TAG_CATEGORIES = {"general", "invalid", "alias"}
 
+# Rows in these categories are redirect stubs / deprecated placeholders when they
+# also have negligible coverage: they may be returned as a last resort, but never
+# as the answer when a real tag matches. A high-coverage alias row (``saber``,
+# 20k posts; ``blushing``, 2.6k) is a real tag the source mis-categorised.
+_PLACEHOLDER_CATEGORIES = {"alias", "invalid"}
+_PLACEHOLDER_MIN_POSTS = 1000
+
+# An exact-ish answer below this coverage is not trusted as the answer: the
+# library holds plenty of 3-post fragments ("facial_cumshot") next to the real
+# tag ("facial", 115k).
+_MIN_ANSWER_POSTS = 1000
+
+# Words that glue a phrase together but are never a tag on their own. They are
+# dropped from multi-tag segments so "tied up with rope" does not become
+# ["tied up", "with", "rope"] and drag in `rope_(arknights)` as a concept link.
+_QUERY_STOPWORDS = {
+    "a", "an", "the", "of", "on", "in", "with", "and", "or", "for", "to", "at",
+    "by", "from", "into", "over", "under", "her", "his", "their",
+    "de", "del", "la", "el", "los", "las", "con", "en", "y", "o", "para", "por",
+    "un", "una", "unos", "unas", "al", "que", "su", "sus",
+}
+
+
+_ES_PHRASES_PATH = Path(__file__).with_name("query_aliases_es.json")
+
+
+@lru_cache(maxsize=1)
+def _es_phrases() -> dict[str, str]:
+    """Spanish phrase -> English tag wording, verified against the tag library.
+
+    The library only carries English plus Japanese/Chinese extra names per tag, so
+    a Spanish query hit random low-coverage Spanish-named tags ("tetas grandes",
+    5 posts) or nothing at all.
+    """
+    try:
+        payload = json.loads(_ES_PHRASES_PATH.read_text(encoding="utf-8"))
+    except (OSError, ValueError):
+        return {}
+    phrases = payload.get("phrases") if isinstance(payload, dict) else None
+    if not isinstance(phrases, dict):
+        return {}
+    return {
+        str(key).strip().lower(): str(value).strip()
+        for key, value in phrases.items()
+        if str(key).strip() and str(value).strip()
+    }
+
+
+def _translate_query(query: str) -> tuple[str, list[dict]]:
+    """Replace known Spanish phrases by their English tag wording.
+
+    Longest phrases win, so ``sexo oral`` is not eaten by the ``sexo`` entry.
+    """
+    phrases = _es_phrases()
+    if not phrases:
+        return query, []
+    translated = query.lower()
+    applied: list[dict] = []
+    for spanish in sorted(phrases, key=len, reverse=True):
+        pattern = r"(?<!\w)" + re.escape(spanish) + r"(?!\w)"
+        if not re.search(pattern, translated):
+            continue
+        translated = re.sub(pattern, f" {phrases[spanish]} ", translated)
+        applied.append({"spanish": spanish, "english": phrases[spanish]})
+    if not applied:
+        return query, []
+    translated = re.sub(r"\s+", " ", translated).strip()
+    return translated, applied
+
+
+def _is_placeholder_item(item: dict) -> bool:
+    """True for an alias/invalid row too thin to stand as a search answer."""
+    category = str(item.get("category") or "").lower()
+    if category == "invalid":
+        return True
+    return (category == "alias"
+            and (item.get("post_count") or 0) < _PLACEHOLDER_MIN_POSTS)
+
 
 def _exact_tag_is_weak(con: sqlite3.Connection, name: str) -> bool:
     """True when an exact tag is missing or too weak to trust over an alias."""
@@ -1016,11 +1306,15 @@ def _resolve_canonical_tag(con: sqlite3.Connection, requested: str) -> tuple[str
         if current in visited:
             break
         visited.add(current)
-        alias = con.execute(
-            "SELECT consequent_name FROM tag_aliases "
-            "WHERE antecedent_name = ? AND status='active' "
-            "ORDER BY consequent_name LIMIT 1", (current,)
-        ).fetchone()
+        try:
+            alias = con.execute(
+                "SELECT consequent_name FROM tag_aliases "
+                "WHERE antecedent_name = ? AND status='active' "
+                "ORDER BY consequent_name LIMIT 1", (current,)
+            ).fetchone()
+        except sqlite3.Error:
+            # Minimal fixtures may lack the alias table; nothing to redirect.
+            return requested, None
         if alias and alias["consequent_name"] != current:
             target = _normalize_tag(alias["consequent_name"])
             first_resolution = first_resolution or {
@@ -1139,8 +1433,14 @@ def _query_tag_segments(con: sqlite3.Connection, query: str,
             best[start] = min(candidates, key=lambda parts: (len(parts), -max(
                 len(part.split()) for part in parts
             )))
-    segments = best[0]
-    return segments if segments and len(segments) >= 2 else []
+    segments = best[0] or []
+    # Glue words are never tags: dropping them keeps the parts meaningful without
+    # breaking phrases that legitimately contain one ("day of the dead").
+    filtered = [
+        part for part in segments
+        if _normalize_tag(part) not in _QUERY_STOPWORDS
+    ]
+    return filtered if len(filtered) >= 2 else []
 
 
 def _has_strong_tag_recommendation(suggestions: list[dict]) -> bool:
@@ -1154,11 +1454,15 @@ def _has_strong_tag_recommendation(suggestions: list[dict]) -> bool:
 def _multi_tag_part(con: sqlite3.Connection, query: str,
                     category: Optional[str], limit: int) -> dict[str, Any]:
     rows = _tag_rows(con, query, category, limit)
-    return {
+    rows, coverage_note = _coverage_fallback(con, query, category, limit, rows)
+    part: dict[str, Any] = {
         "query": query,
         "results": rows,
         "suggestions": [] if rows else _tag_suggestions(con, query, category, limit),
     }
+    if coverage_note:
+        part["notes"] = [coverage_note]
+    return part
 
 
 def _multi_tag_response(con: sqlite3.Connection, query: str,
@@ -1167,20 +1471,28 @@ def _multi_tag_response(con: sqlite3.Connection, query: str,
     part_results = [
         _multi_tag_part(con, part, category, limit) for part in parts
     ]
+    concept_links = _concept_links(con, part_results)
+    message = (
+        "This looks like multiple tags in one query. Search each recommended "
+        "tag separately and combine the results for better recall."
+    )
+    if concept_links:
+        message += (
+            " `related_tags` lists tags that share an extra name with the parts "
+            "and usually act as the umbrella for the combination."
+        )
     recommendation = {
         "action": "search_each_tag_separately",
         "original_query": query,
         "queries": parts,
-        "message": (
-            "This looks like multiple tags in one query. Search each recommended "
-            "tag separately and combine the results for better recall."
-        ),
+        "message": message,
     }
     return {
         "results": [],
         "suggestions": [],
         "query_mode": "multi_tag",
         "query_parts": part_results,
+        "related_tags": concept_links,
         "recommendation": recommendation,
     }
 
@@ -1193,11 +1505,22 @@ def search_knowledge(query: str, category: Optional[str] = None,
     try:
         con = _db()
         try:
-            tag_results = _tag_rows(con, query, category, limit)
+            lookup_query, translations = _translate_query(query)
+            tag_results = _tag_rows(con, lookup_query, category, limit)
+            tag_results, coverage_note = _coverage_fallback(
+                con, lookup_query, category, limit, tag_results
+            )
             result["tag_library"] = {"results": tag_results}
+            if translations:
+                result["tag_library"]["query_translation"] = {
+                    "applied": translations,
+                    "searched_as": lookup_query,
+                }
+            if coverage_note:
+                result["tag_library"]["notes"] = [coverage_note]
             if not tag_results:
-                full_suggestions = _tag_suggestions(con, query, category, limit)
-                parts = _query_tag_segments(con, query, category)
+                full_suggestions = _tag_suggestions(con, lookup_query, category, limit)
+                parts = _query_tag_segments(con, lookup_query, category)
                 explicit_separator = bool(re.search(r"[,;|+\n]", query))
                 if parts and (
                     explicit_separator

@@ -268,3 +268,19 @@ snapshot created with the old shared map, preview the combined-source changes:
 Apply them with `--apply`. The script creates a SQLite backup under
 `data/backups/` before writing. Rebuild the optional search and character
 context indexes after applying the migration.
+
+## Spanish query aliases
+
+`build_query_aliases_es.py` verifies a Spanish -> English tag phrase map against
+the local library and (re)writes `weeb_alexandria_mcp/query_aliases_es.json`,
+which `search_knowledge` loads to translate Spanish phrasing before searching:
+
+```bash
+.venv/Scripts/python.exe scripts/build_query_aliases_es.py          # review table
+.venv/Scripts/python.exe scripts/build_query_aliases_es.py --write  # update JSON
+```
+
+A phrase is accepted only when its English target resolves to a tag with at
+least 1000 posts, or to a tag documented by two or more wikis (small but
+legitimate tags such as `rope_marks`). Targets listed in
+`ALLOW_LOW_COVERAGE` are kept deliberately even when neither rule passes.
