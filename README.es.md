@@ -278,6 +278,18 @@ Herramientas disponibles:
 - `get_character`
 - `get_sources_status`
 
+## Tamaño de las respuestas
+
+Cada respuesta entra en el contexto del modelo que llama, así que los payloads tienen tope:
+
+- `search_characters` muestra `page_size=25` filas por defecto y devuelve `detail: "summary"`
+  (cada rasgo como `{facet, value}`). Pide `detail: "full"` cuando necesites `evidence_tag`:
+  una página de 72 filas con la evidencia de cada rasgo pesaba 94 KB (~23 500 tokens).
+- `search_knowledge` devuelve como máximo 12 `query_parts` para un prompt escrito, y
+  `query_parts_total` informa cuántos segmentos se encontraron.
+- `scripts/mcp_payload_budget.py` mide las seis tools contra presupuestos de bytes por caso y
+  falla cuando una se pasa del suyo.
+
 Weeb Alexandria realiza sus consultas localmente y no necesita el servidor Flask original de AnimaDex.
 
 ## Glosario

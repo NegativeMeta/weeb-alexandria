@@ -291,6 +291,37 @@ tools). Docs: párrafo del contrato de idioma en los cuatro GLOSSARYs.
 
 ---
 
+## 0j. Prompts narrativos reales y presupuesto de payload
+
+Dos pruebas nuevas sobre datos reales, no sobre frases inventadas.
+
+**Corpus real**: se extrajeron los workflows de ComfyUI (`user/default/workflows`, 119
+archivos) → 34 prompts únicos de prosa narrativa de 30-80 palabras. Línea base: **0 de 12
+respondían** y cada llamada tardaba **34 s**.
+
+| Causa | Evidencia | Arreglo |
+|---|---|---|
+| `_tag_suggestions` recorría los 47 tokens del prompt (prefijo 2 000 filas + escaneo de sufijo por token) | 34,58 s en una sola consulta | Sugerencias solo si hay <3 segmentos y máximo 4 tokens (los más largos) |
+| El DP de spans se rendía con >12 palabras | prosa = 0 segmentos | Troceo por puntuación + ventanas de 12 palabras con solape |
+| Un prompt generaba 40-65 partes, cada una con FTS + resolver | 34-42 s | Tope de **12** partes (las más específicas) y resolver de personaje solo en las **4** primeras |
+| Cada parte pagaba una FTS aunque viniera de un tag exacto | ~0,5-2 s por parte | Lookup indexado exacto y FTS solo en caso de fallo |
+| `untranslated` contaba palabras de partes descartadas por el tope | 8 palabras "sin tag" que sí tenían | Se mide contra la lista completa; `query_parts_total` informa el total |
+
+Resultado: **33/34 prompts con segmentos (97 %), 32/34 con tag usable (94 %)**, 326 segmentos
+(67 % con ≥1000 posts), **p50 4,20 s · p95 7,87 s**.
+
+**Presupuesto de payload**: gate `scripts/mcp_payload_budget.py` con 11 casos y presupuesto
+por caso. Hallazgo: `search_characters(scope="all")` devolvía **94 231 B (~23 557 tokens)** en
+una sola respuesta. Arreglado con `page_size=25` (param nuevo, antes fijo en 72) y
+`detail="summary"` (rasgos como `{facet, value}`, sin `evidence_tag`; `detail="full"` lo
+conserva). Ahora **19 310 B** (−79 %) y **0 casos fuera de presupuesto**; el mayor es
+`get_character(include_evidence=True)` con 26 KB.
+
+Gates: `121 tests OK` (+4: page_size/detail, evidencia en full, `detail` inválido, tope de 12
+partes y payload <20 KB).
+
+---
+
 ## 1. Lo que ya está hecho (no rehacer)
 
 Spec original: `.hermes/plans/2026-11-05_1310-mcp-surface-cleanup.md`

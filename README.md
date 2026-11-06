@@ -304,6 +304,18 @@ Available tools:
 
 Weeb Alexandria performs its queries locally and does not require the original AnimaDex Flask server.
 
+## Response size
+
+Every answer lands in the calling model's context, so the payloads stay bounded:
+
+- `search_characters` shows `page_size=25` rows by default and returns `detail: "summary"`
+  (each trait as `{facet, value}`). Ask for `detail: "full"` when you need `evidence_tag`:
+  a 72-row page with per-trait evidence weighed 94 KB (~23 500 tokens).
+- `search_knowledge` returns at most 12 `query_parts` for a written prompt, while
+  `query_parts_total` reports how many segments were found.
+- `scripts/mcp_payload_budget.py` measures all six tools against per-case byte budgets and
+  fails when one grows past its limit.
+
 ## Glossary
 
 See [`GLOSSARY.md`](GLOSSARY.md) for a simple explanation of the database contents and MCP tools. Spanish, Simplified Chinese, and Japanese versions are available in [`GLOSSARY.es.md`](GLOSSARY.es.md), [`GLOSSARY.zh-CN.md`](GLOSSARY.zh-CN.md), and [`GLOSSARY.ja.md`](GLOSSARY.ja.md).

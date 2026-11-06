@@ -293,6 +293,39 @@ class SearchRegressionTests(unittest.TestCase):
             self.assertNotRegex(description, r"[áéíóúñ¿¡]", tool.name)
             self.assertNotRegex(description, r"\b(Busca|Devuelve|Comprueba|Para)\b", tool.name)
 
+    def test_search_characters_summary_drops_evidence_and_respects_page_size(self):
+        page = search_characters(hair_color="white", scope="all", page_size=5)
+        self.assertLessEqual(len(page["results"]), 5)
+        self.assertEqual(page["detail"], "summary")
+        self.assertEqual(page["page_size"], 5)
+        for row in page["results"]:
+            self.assertEqual(row["trait_count"], len(row["traits"]))
+            for trait in row["traits"]:
+                self.assertEqual(set(trait), {"facet", "value"})
+
+    def test_search_characters_full_detail_keeps_evidence(self):
+        page = search_characters(hair_color="white", scope="all", page_size=3,
+                                 detail="full")
+        trait_keys = {key for row in page["results"] for trait in row["traits"]
+                      for key in trait}
+        self.assertIn("evidence_tag", trait_keys)
+
+    def test_search_characters_rejects_unknown_detail(self):
+        with self.assertRaises(ValueError):
+            search_characters(q="gura", detail="everything")
+
+    def test_search_knowledge_caps_prose_parts_and_payload(self):
+        prose = ("Two girls in a nighttime onsen, wildly fucked in mating press by two "
+                 "men, steam rising, cinematic lighting, wet skin, from behind, wide "
+                 "shot, detailed faces, soft shadows, reflections on the water, "
+                 "warm colors, depth of field, motion blur")
+        library = search_knowledge(prose)["tag_library"]
+        self.assertEqual(library["query_mode"], "multi_tag")
+        self.assertLessEqual(len(library["query_parts"]), 12)
+        self.assertGreaterEqual(library["query_parts_total"],
+                                len(library["query_parts"]))
+        self.assertLess(len(json.dumps(library, ensure_ascii=False).encode()), 20_000)
+
     def test_search_knowledge_keeps_documented_small_tag_first(self):
         # 204 posts, but three wikis document it: typing it must return it.
         result = search_knowledge("mating_(animal)")["tag_library"]["results"]

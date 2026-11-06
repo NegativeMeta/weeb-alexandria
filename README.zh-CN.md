@@ -273,6 +273,14 @@ run.bat
 - `get_character`
 - `get_sources_status`
 
+## 响应大小
+
+每个响应都会进入调用方模型的上下文，因此负载有上限：
+
+- `search_characters` 默认每页 `page_size=25` 行，并返回 `detail: "summary"`（每个特征为 `{facet, value}`）。需要 `evidence_tag` 时才用 `detail: "full"`：72 行的整页带逐特征证据曾重达 94 KB（约 23 500 tokens）。
+- 对于写好的提示词，`search_knowledge` 最多返回 12 个 `query_parts`，`query_parts_total` 报告实际找到的片段数。
+- `scripts/mcp_payload_budget.py` 按每个用例的字节预算测量全部六个工具，超出即失败。
+
 Weeb Alexandria 在本地执行查询，不需要运行原始的 AnimaDex Flask 服务器。
 
 ## 术语表

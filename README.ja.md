@@ -268,6 +268,14 @@ run.bat
 - `get_character`
 - `get_sources_status`
 
+## レスポンスサイズ
+
+すべての応答は呼び出すモデルのコンテキストに入るため、ペイロードには上限があります。
+
+- `search_characters` は既定で `page_size=25` 件を返し、`detail: "summary"`（各特徴は `{facet, value}`）です。`evidence_tag` が必要なときだけ `detail: "full"` を指定してください。72 件のページに特徴ごとの証拠を含めると 94 KB（約 23 500 トークン）でした。
+- `search_knowledge` は書き起こしたプロンプトに対して最大 12 個の `query_parts` を返し、`query_parts_total` が見つかったセグメント数を示します。
+- `scripts/mcp_payload_budget.py` は 6 つのツールすべてをケースごとのバイト予算と比較し、超えた場合に失敗します。
+
 Weeb Alexandria はローカルでクエリを実行するため、元の AnimaDex Flask サーバーを起動する必要はありません。
 
 ## 用語集

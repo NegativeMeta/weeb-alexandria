@@ -1128,6 +1128,11 @@ def _tag_suggestions(con: sqlite3.Connection, query: str,
         return []
     tokens = [token for token in normalized.split("_") if len(token) >= 3]
     tokens = tokens or [normalized]
+    # A prose prompt is 40+ tokens: probing every one of them with a 2000-row prefix
+    # query plus a 1.5M-row suffix scan took 34 s. Suggestions answer misspellings,
+    # so four of the longest tokens are plenty.
+    if len(tokens) > 4:
+        tokens = sorted(dict.fromkeys(tokens), key=len, reverse=True)[:4]
     category_filter = ""
     category_params: list[Any] = []
     if category and category.lower() not in {"tag", "tags", "all"}:
@@ -1307,6 +1312,12 @@ _MIN_ANSWER_POSTS = 1000
 # variant wins on posts; above this volume the tag is canonical on its own and the
 # extra lookup is not worth it.
 _VARIANT_TIEBREAK_MAX_POSTS = 300_000
+
+# A narrative prompt produced 40-65 segments and took 34-42 s, because every part
+# costs a lookup. Only the most specific segments are kept, and the character
+# resolver (0.5-3 s per thin part) is tried for the first few only.
+_MAX_MULTI_TAG_PARTS = 12
+_MULTI_TAG_CHARACTER_PARTS = 4
 
 # Words that glue a phrase together but are never a tag on their own. They are
 # dropped from multi-tag segments so "tied up with rope" does not become
@@ -1633,7 +1644,24 @@ def _query_tag_segments(con: sqlite3.Connection, query: str,
         return filtered if len(filtered) >= 2 else []
 
     words = re.findall(r"[^\W_]+", query, re.UNICODE)
-    segments = _span_tag_segments(con, words, category)
+    if len(words) > 12:
+        # Narrative prompts run 40-80 words; the span DP only handles short queries,
+        # so cut on punctuation first and then into 12-word windows with an overlap.
+        pieces = [piece for piece in re.split(r"[.,;:!?\n—–]+", query) if piece.strip()]
+        segments = []
+        for piece in pieces:
+            piece_words = re.findall(r"[^\W_]+", piece, re.UNICODE)
+            if len(piece_words) <= 12:
+                segments.extend(_span_tag_segments(con, piece_words, category))
+                continue
+            step = 10
+            for start in range(0, len(piece_words), step):
+                window = piece_words[start:start + 12]
+                if len(window) < 2:
+                    break
+                segments.extend(_span_tag_segments(con, window, category))
+    else:
+        segments = _span_tag_segments(con, words, category)
     # Glue words are never tags: dropping them keeps the parts meaningful without
     # breaking phrases that legitimately contain one ("day of the dead").
     filtered = [
@@ -1652,10 +1680,22 @@ def _has_strong_tag_recommendation(suggestions: list[dict]) -> bool:
 
 
 def _multi_tag_part(con: sqlite3.Connection, query: str,
-                    category: Optional[str], limit: int) -> dict[str, Any]:
-    rows = _tag_rows(con, query, category, limit)
+                    category: Optional[str], limit: int,
+                    allow_character: bool = True) -> dict[str, Any]:
+    # Segments come from exact tag spans, so the indexed exact lookup answers most
+    # parts in milliseconds; only a miss needs the full FTS path.
+    normalized = _normalize_tag(query)
+    exact_rows = [
+        row for row in _exact_tag_rows(con, normalized, category)
+        if not _is_placeholder_item({"category": row["category_name"],
+                                     "post_count": row["post_count"]})
+    ]
+    if exact_rows:
+        rows = _merge_tag_rows(exact_rows, query, normalized, limit)
+    else:
+        rows = _tag_rows(con, query, category, limit)
     rows, coverage_note = _coverage_fallback(con, query, category, limit, rows,
-                                             allow_character=True)
+                                             allow_character=allow_character)
     # A tag every source reports with zero posts is scraping noise ("vestido_largo"),
     # not something to hand back as a prompt segment.
     if rows and all((row.get("post_count") or 0) == 0 for row in rows):
@@ -1673,8 +1713,21 @@ def _multi_tag_part(con: sqlite3.Connection, query: str,
 def _multi_tag_response(con: sqlite3.Connection, query: str,
                         parts: list[str], category: Optional[str],
                         limit: int) -> dict[str, Any]:
+    # A narrative prompt yields 40-65 segments, and each part costs a lookup plus a
+    # coverage check: the response took 34-42 s. Multi-word segments are the specific
+    # ones, so keep the twelve most specific and drop the rest.
+    unique: list[str] = []
+    for part in parts:
+        if part not in unique:
+            unique.append(part)
+    if len(unique) > _MAX_MULTI_TAG_PARTS:
+        unique = sorted(unique, key=lambda p: (len(p.split()), len(p)), reverse=True)
+        unique = unique[:_MAX_MULTI_TAG_PARTS]
+    parts = unique
     part_results = [
-        _multi_tag_part(con, part, category, limit) for part in parts
+        _multi_tag_part(con, part, category, limit,
+                        allow_character=index < _MULTI_TAG_CHARACTER_PARTS)
+        for index, part in enumerate(parts)
     ]
     concept_links = _concept_links(con, part_results)
     message = (
@@ -1697,6 +1750,7 @@ def _multi_tag_response(con: sqlite3.Connection, query: str,
         "suggestions": [],
         "query_mode": "multi_tag",
         "query_parts": part_results,
+        "query_parts_total": len(parts),
         "related_tags": concept_links,
         "recommendation": recommendation,
     }
@@ -1732,13 +1786,16 @@ def search_knowledge(query: str, category: Optional[str] = None,
             if coverage_note:
                 result["tag_library"]["notes"] = [coverage_note]
             if not tag_results:
-                full_suggestions = _tag_suggestions(con, lookup_query, category, limit)
+                # Segment first: a written prompt usually yields parts, and computing
+                # suggestions before that cost 34 s on a 47-word prose prompt.
                 parts = _query_tag_segments(con, lookup_query, category)
                 explicit_separator = bool(re.search(r"[,;|+\n]", query))
                 if parts and (
                     explicit_separator
                     or len(parts) >= 3
-                    or not _has_strong_tag_recommendation(full_suggestions)
+                    or not _has_strong_tag_recommendation(
+                        _tag_suggestions(con, lookup_query, category, limit)
+                    )
                 ):
                     result["tag_library"] = _multi_tag_response(
                         con, query, parts, category, limit
@@ -1747,10 +1804,16 @@ def search_knowledge(query: str, category: Optional[str] = None,
                         "recommendation"
                     ]
                 else:
-                    result["tag_library"]["suggestions"] = full_suggestions
+                    result["tag_library"]["suggestions"] = _tag_suggestions(
+                        con, lookup_query, category, limit
+                    )
             payload = result["tag_library"]
-            covered_segments = [part.get("query") for part in payload.get("query_parts") or []]
-            covered_segments += [row.get("name") for row in payload.get("results") or []]
+            if payload.get("query_mode") == "multi_tag":
+                # Segments were capped for cost; the words of the dropped ones are
+                # not "untranslated", so measure against the full segment list.
+                covered_segments = list(parts)
+            else:
+                covered_segments = [row.get("name") for row in payload.get("results") or []]
             untranslated = _unmatched_words(
                 query, [item for item in covered_segments if item], translations
             )
@@ -1845,6 +1908,18 @@ def get_knowledge(tag: str, include_relations: bool = True,
         con.close()
 
 
+def _summarize_character_row(row: dict) -> dict:
+    """Drop per-trait evidence so a character page fits in a caller's context."""
+    traits = [
+        {"facet": trait.get("facet"), "value": trait.get("value")}
+        for trait in row.get("traits") or []
+    ]
+    summary = {key: value for key, value in row.items() if key != "traits"}
+    summary["trait_count"] = len(traits)
+    summary["traits"] = traits
+    return summary
+
+
 @mcp.tool()
 def search_characters(q: str = "", copyright: Optional[str] = None,
                        hair_color: Optional[str] = None,
@@ -1852,7 +1927,8 @@ def search_characters(q: str = "", copyright: Optional[str] = None,
                        eye_color: Optional[str] = None,
                        gender: Optional[str] = None,
                        sort: str = "count", page: int = 1,
-                       scope: str = "legacy") -> dict:
+                       scope: str = "legacy", page_size: int = 25,
+                       detail: str = "summary") -> dict:
     """Search characters in the owned profile and trait tables.
 
     `scope` picks the source: "legacy" (default) reads only the owned
@@ -1865,7 +1941,14 @@ def search_characters(q: str = "", copyright: Optional[str] = None,
     `gender` only matches profiles that carry gender evidence; most reviewed
     appearance profiles do not yet, so a character without it returns nothing
     for that facet even when the wiki says 1girl/1boy.
+
+    `page_size` defaults to 25 and `detail` to "summary", which keeps each trait
+    as {facet, value}: a full 72-row page with per-trait evidence weighed 94 KB
+    (~23 500 tokens). Ask for detail="full" when you need `evidence_tag`.
     """
+    detail = (detail or "summary").strip().lower()
+    if detail not in {"summary", "full"}:
+        raise ValueError(f"detail must be 'summary' or 'full', got {detail!r}")
     scope = (scope or "legacy").strip().lower()
     if scope not in {"legacy", "all"}:
         raise ValueError(f"scope must be 'legacy' or 'all', got {scope!r}")
@@ -1896,11 +1979,15 @@ def search_characters(q: str = "", copyright: Optional[str] = None,
             elif sort != "random":
                 all_rows.sort(key=lambda row: (-row["count"], row["name"].lower()))
         page = max(1, int(page))
-        page_size = 72
+        page_size = max(1, min(int(page_size), 100))
         start = (page - 1) * page_size
+        rows = all_rows[start:start + page_size]
+        if detail != "full":
+            rows = [_summarize_character_row(row) for row in rows]
         return {"total": len(all_rows), "page": page, "page_size": page_size,
                 "pages": max(1, (len(all_rows) + page_size - 1) // page_size),
-                "results": all_rows[start:start + page_size]}
+                "detail": detail,
+                "results": rows}
     finally:
         con.close()
 

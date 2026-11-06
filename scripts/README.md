@@ -314,3 +314,28 @@ tag with at least 1000 posts:
 
 Baseline before the segmentation fixes was 89.3% useful (12/12 Spanish phrases at
 0%); the gate now reports 100% over 98 segments.
+
+## Payload budget
+
+`mcp_payload_budget.py` calls all six tools with realistic arguments and fails when an
+answer grows past its byte budget. A tool answer lands in the calling model's context,
+so a fat payload is a defect: `search_characters(scope="all")` returned 94 KB
+(~23 500 tokens) until `page_size=25` and `detail="summary"` became the defaults.
+
+```bash
+.venv/Scripts/python.exe scripts/mcp_payload_budget.py --json reports/mcp_payload_budget.json
+```
+
+## Real prompt corpus probe
+
+`mcp_real_prompt_probe.py` runs a private corpus of narrative prompts (30-80 words,
+kept outside the repo) and reports how many prompts get usable tags and how long each
+call takes:
+
+```bash
+.venv/Scripts/python.exe scripts/mcp_real_prompt_probe.py --corpus <corpus.json> \
+    --json reports/mcp_real_prompt_probe.json
+```
+
+Baseline: 0 of 12 prompts answered and 34 s each (`_tag_suggestions` probed 47 tokens).
+After the fixes: 32 of 34 prompts (94%) return a usable tag, p50 4.2 s, p95 7.9 s.

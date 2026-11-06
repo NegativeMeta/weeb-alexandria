@@ -1,0 +1,97 @@
+{
+  "cases": [
+    {
+      "case": "search_knowledge(limit=25)",
+      "bytes": 2786,
+      "budget": 12288,
+      "tokens_est": 696,
+      "ok": true,
+      "error": null
+    },
+    {
+      "case": "search_knowledge(prompt ES)",
+      "bytes": 3133,
+      "budget": 12288,
+      "tokens_est": 783,
+      "ok": true,
+      "error": null
+    },
+    {
+      "case": "search_knowledge(prose)",
+      "bytes": 4704,
+      "budget": 20480,
+      "tokens_est": 1176,
+      "ok": true,
+      "error": null
+    },
+    {
+      "case": "get_knowledge(+relations)",
+      "bytes": 3704,
+      "budget": 20480,
+      "tokens_est": 926,
+      "ok": true,
+      "error": null
+    },
+    {
+      "case": "get_knowledge(deep)",
+      "bytes": 11659,
+      "budget": 30720,
+      "tokens_est": 2914,
+      "ok": true,
+      "error": null
+    },
+    {
+      "case": "resolve_character",
+      "bytes": 2247,
+      "budget": 10240,
+      "tokens_est": 561,
+      "ok": true,
+      "error": null
+    },
+    {
+      "case": "search_characters(default)",
+      "bytes": 19310,
+      "budget": 30720,
+      "tokens_est": 4827,
+      "ok": true,
+      "error": null
+    },
+    {
+      "case": "search_characters(page)",
+      "bytes": 89,
+      "budget": 30720,
+      "tokens_est": 22,
+      "ok": true,
+      "error": null
+    },
+    {
+      "case": "get_character(card)",
+      "bytes": 3566,
+      "budget": 20480,
+      "tokens_est": 891,
+      "ok": true,
+      "error": null
+    },
+    {
+      "case": "get_character(+evidence)",
+      "bytes": 26018,
+      "budget": 40960,
+      "tokens_est": 6504,
+      "ok": true,
+      "error": null
+    },
+    {
+      "case": "get_sources_status",
+      "bytes": 638,
+      "budget": 6144,
+      "tokens_est": 159,
+      "ok": true,
+      "error": null
+    }
+  ],
+  "over_budget": 0,
+  "biggest": {
+    "case": "get_character(+evidence)",
+    "bytes": 26018
+  }
+}
