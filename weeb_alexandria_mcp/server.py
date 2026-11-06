@@ -10,7 +10,7 @@ import re
 import sqlite3
 from functools import lru_cache
 from pathlib import Path
-from typing import Any, Optional
+from typing import Any, Iterable, Optional
 
 from mcp.server.fastmcp import FastMCP
 from weeb_alexandria_mcp.appearance_runtime import get_appearance_payload
@@ -27,7 +27,29 @@ SEARCH_DB = os.path.abspath(os.environ.get(
     "SEARCH_DB", os.path.join(ROOT, "..", "data", "tag_search.sqlite")
 ))
 
-mcp = FastMCP("Weeb Alexandria")
+mcp = FastMCP(
+    "Weeb Alexandria",
+    instructions=(
+        "Weeb Alexandria answers questions about anime/manga tags and characters from a "
+        "local tag library (1.5M tags, 673k wiki definitions) and owned character profiles.\n"
+        "\n"
+        "Language: send tag-style ENGLISH whenever you know it, because the library is "
+        "built on English tags. Spanish queries are accepted too: the server translates a "
+        "curated vocabulary before searching and reports what it actually searched in "
+        "`query_translation.searched_as`. If `query_translation.untranslated` lists words, "
+        "those matched no tag - retry them in English.\n"
+        "\n"
+        "Routing: use `resolve_character` before any character-specific work (it resolves "
+        "loose spellings, nicknames, translations and franchise ambiguity), `get_character` "
+        "for the canonical card, `search_characters` to filter owned profiles by traits, and "
+        "`search_knowledge` / `get_knowledge` for tag knowledge.\n"
+        "\n"
+        "Prompts: `search_knowledge` accepts a whole prompt. A query that looks like several "
+        "tags comes back with `query_mode: multi_tag` and `query_parts` (one tag per part) "
+        "plus `related_tags` when an umbrella tag links the parts. Prefer the tags with the "
+        "highest `post_count`; answers under 1000 posts are flagged as thin."
+    ),
+)
 
 # A small set of natural-language franchise hints that are not consistently
 # copied into every source's alias column.
@@ -1526,6 +1548,28 @@ def _alias_suggestions(con: sqlite3.Connection, query: str,
     return suggestions
 
 
+def _unmatched_words(query: str, segments: Iterable[str],
+                     translations: Optional[list[dict]] = None) -> list[str]:
+    """Words of the query that neither a tag segment nor a translation covers.
+
+    Reported as ``query_translation.untranslated`` so the calling model can retry
+    exactly those words in English instead of guessing why an answer was thin.
+    """
+    covered: set[str] = set()
+    for segment in segments:
+        covered.update(re.findall(r"[^\W\d_]+", str(segment).lower()))
+    for item in translations or []:
+        covered.update(re.findall(r"[^\W\d_]+", str(item.get("spanish") or "").lower()))
+
+    unmatched: list[str] = []
+    for word in re.findall(r"[^\W\d_]+", query.lower()):
+        if word in covered or word in _QUERY_STOPWORDS or len(word) < 3:
+            continue
+        if word not in unmatched:
+            unmatched.append(word)
+    return unmatched
+
+
 def _span_tag_segments(con: sqlite3.Connection, words: list[str],
                        category: Optional[str]) -> list[str]:
     """Cover a word list with the fewest known tag spans (dynamic programming)."""
@@ -1661,7 +1705,15 @@ def _multi_tag_response(con: sqlite3.Connection, query: str,
 @mcp.tool()
 def search_knowledge(query: str, category: Optional[str] = None,
                      limit: int = 25) -> dict:
-    """Busca tags en la libreria unificada. Para personajes usa search_characters."""
+    """Search the unified tag library. Use search_characters for characters.
+
+    Accepts a single tag, a Spanish phrase, or a whole written prompt. A query
+    that looks like several tags returns `query_mode: multi_tag` with
+    `query_parts` (one tag per part) and `related_tags`; otherwise `results`
+    holds the ranked tags. Answers whose best tag has under 1000 posts come with
+    a `note`, and `query_translation` shows the text actually searched plus any
+    `untranslated` words that matched no tag.
+    """
     result: dict[str, Any] = {"query": query, "tag_library": {}}
     try:
         con = _db()
@@ -1677,11 +1729,6 @@ def search_knowledge(query: str, category: Optional[str] = None,
             if variant_note:
                 coverage_note = "; ".join(filter(None, [coverage_note, variant_note]))
             result["tag_library"] = {"results": tag_results}
-            if translations:
-                result["tag_library"]["query_translation"] = {
-                    "applied": translations,
-                    "searched_as": lookup_query,
-                }
             if coverage_note:
                 result["tag_library"]["notes"] = [coverage_note]
             if not tag_results:
@@ -1696,18 +1743,24 @@ def search_knowledge(query: str, category: Optional[str] = None,
                     result["tag_library"] = _multi_tag_response(
                         con, query, parts, category, limit
                     )
-                    if translations:
-                        # Keep the translation visible: the multi-tag payload replaces
-                        # the single-query dict that carried it.
-                        result["tag_library"]["query_translation"] = {
-                            "applied": translations,
-                            "searched_as": lookup_query,
-                        }
                     result["query_recommendation"] = result["tag_library"][
                         "recommendation"
                     ]
                 else:
                     result["tag_library"]["suggestions"] = full_suggestions
+            payload = result["tag_library"]
+            covered_segments = [part.get("query") for part in payload.get("query_parts") or []]
+            covered_segments += [row.get("name") for row in payload.get("results") or []]
+            untranslated = _unmatched_words(
+                query, [item for item in covered_segments if item], translations
+            )
+            if translations or untranslated:
+                translation_block = payload.setdefault("query_translation", {})
+                if translations:
+                    translation_block["applied"] = translations
+                    translation_block["searched_as"] = lookup_query
+                if untranslated:
+                    translation_block["untranslated"] = untranslated
         finally:
             con.close()
     except Exception as exc:
@@ -1718,8 +1771,12 @@ def search_knowledge(query: str, category: Optional[str] = None,
 @mcp.tool()
 def get_knowledge(tag: str, include_relations: bool = True,
                   limit: int = 50) -> dict:
-    """Devuelve la ficha combinada de una tag: definiciones, fuentes,
-    aliases, implicaciones, categoría, frecuencia y estado NSFW.
+    """Return the combined card for one tag: wiki definitions, sources, aliases,
+    implications, category, post count and NSFW status.
+
+    Use it to explain a tag you already resolved; use search_knowledge to find
+    the tag name first. `related_tags` may suggest an umbrella tag when the name
+    you passed is a narrow variant.
     """
     con = _db()
     try:
@@ -2447,7 +2504,12 @@ def get_character(character: str, variant: Optional[str] = None,
 
 @mcp.tool()
 def get_sources_status() -> dict:
-    """Comprueba las fuentes locales de Weeb Alexandria."""
+    """Report which local sources are present and usable.
+
+    Returns the database paths, the structured-source mode, row counts per table
+    and whether caching is active. Call it when another tool looks wrong before
+    assuming the query was bad.
+    """
     global _SOURCE_STATUS_CACHE
     source_key = _source_cache_key()
     if _SOURCE_STATUS_CACHE and _SOURCE_STATUS_CACHE[0] == source_key:

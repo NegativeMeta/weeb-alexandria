@@ -273,6 +273,26 @@ class SearchRegressionTests(unittest.TestCase):
             for row in part.get("results") or []:
                 self.assertGreaterEqual(row["post_count"], 1000)
 
+    def test_search_knowledge_reports_untranslated_words(self):
+        library = search_knowledge("pirata con parche en el ojo y loro")["tag_library"]
+        self.assertEqual(library["query_translation"]["untranslated"],
+                         ["pirata", "parche", "ojo", "loro"])
+
+    def test_search_knowledge_has_no_untranslated_words_when_covered(self):
+        library = search_knowledge(
+            "chica con kimono rojo sentada en la nieve, vista amplia"
+        )["tag_library"]
+        self.assertNotIn("untranslated", library["query_translation"])
+
+    def test_tool_descriptions_are_written_in_english(self):
+        # The calling model reads these strings, so they must not drift back to Spanish.
+        tools = asyncio.run(server_module.mcp.list_tools())
+        self.assertEqual(len(tools), 6)
+        for tool in tools:
+            description = tool.description or ""
+            self.assertNotRegex(description, r"[áéíóúñ¿¡]", tool.name)
+            self.assertNotRegex(description, r"\b(Busca|Devuelve|Comprueba|Para)\b", tool.name)
+
     def test_search_knowledge_keeps_documented_small_tag_first(self):
         # 204 posts, but three wikis document it: typing it must return it.
         result = search_knowledge("mating_(animal)")["tag_library"]["results"]

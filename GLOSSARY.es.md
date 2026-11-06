@@ -160,6 +160,12 @@ segmentación, `dos chicas` se convierte en `2girls`, y las frases en español s
 traducen antes de segmentar, así que un prompt completo vuelve como `query_parts`
 con un tag por parte.
 
+Las descripciones de las tools y las instrucciones del servidor están en inglés
+porque las lee el modelo que llama; solo esta documentación está traducida. Manda
+tags en inglés cuando los sepas (la librería está construida en inglés) y, cuando
+`query_translation.untranslated` liste palabras, significa que no encontraron tag:
+reinténtalas en inglés.
+
 Busca entre:
 
 - Tags.

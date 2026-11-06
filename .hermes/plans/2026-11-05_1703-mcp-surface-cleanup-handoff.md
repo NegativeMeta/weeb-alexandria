@@ -269,6 +269,28 @@ personajes 27/27. Docs: `scripts/README.md` (sección del probe) y los cuatro GL
 
 ---
 
+## 0i. El contrato que lee el modelo, en inglés
+
+Tres de las seis tools tenían la descripción en **español** (`search_knowledge`,
+`get_knowledge`, `get_sources_status`): el docstring es lo que el modelo que llama lee como
+descripción, así que el contrato estaba partido por idioma. Traducidas las tres al inglés y
+enriquecidas con lo que devuelven hoy (`query_mode`, `query_parts`, `related_tags`, `notes`,
+`query_translation`).
+
+Añadido `FastMCP(instructions=...)` en inglés, que el cliente ve antes de cualquier llamada, con
+tres reglas: idioma (manda tags en inglés; el español se acepta y se traduce), enrutado
+(`resolve_character` antes de trabajo de personaje) y prompts (`multi_tag` + `query_parts`).
+
+Campo nuevo `query_translation.untranslated`: las palabras que no cubrió ni un segmento ni una
+traducción. Medido: `pirata con parche en el ojo y loro` → `["pirata","parche","ojo","loro"]`;
+`chica con kimono rojo sentada en la nieve` → sin campo, porque todo quedó cubierto. Es la señal
+para que el modelo reintente exactamente esas palabras en inglés.
+
+Gates: `117 tests OK` (3 nuevos, uno vigila que las descripciones sigan en inglés y que haya seis
+tools). Docs: párrafo del contrato de idioma en los cuatro GLOSSARYs.
+
+---
+
 ## 1. Lo que ya está hecho (no rehacer)
 
 Spec original: `.hermes/plans/2026-11-05_1310-mcp-surface-cleanup.md`

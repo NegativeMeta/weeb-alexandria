@@ -158,6 +158,12 @@ skipped instead of voiding the segmentation, `two girls` becomes `2girls`, and
 Spanish sentences are translated before segmenting, so a full prompt comes back as
 `query_parts` with one tag per part.
 
+The tool descriptions and the server instructions are written in English because the
+calling model reads them; only this documentation is translated. Send tag-style
+English when you know it — the library is built on English tags — and when
+`query_translation.untranslated` lists words, those matched no tag: retry them in
+English.
+
 It searches across:
 
 - Tags.
