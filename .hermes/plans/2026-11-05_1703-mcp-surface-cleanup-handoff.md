@@ -183,6 +183,59 @@ adicional para el paraguas). Docs: los cuatro GLOSSARYs + `scripts/README.md`.
 
 ---
 
+## 0f. Consistencia entre tools y gate permanente
+
+Dos pruebas nuevas, ambas commiteadas como scripts:
+
+1. **`scripts/mcp_consistency_probe.py`** compara `search_knowledge`,
+   `resolve_character` y `get_knowledge` sobre 20 personajes y 15 tags ambiguos.
+   Primera pasada: **6/20** de acuerdo y **11 casos** donde el search respondía un tag
+   ínfimo mientras el resolver conocía el canónico (`Anya Forger` →
+   `anya_forger`, 17 posts, vs `anya_(spy_x_family)`, 8 796).
+   Causa: el discriminante de wiki trataba los nombres desnudos como tags legítimos
+   (`nahida` 1 post con 4 wikis), así que el fallback no se disparaba.
+   Arreglo: con `allow_character=True`, un top-1 **thin** (sin importar wiki) consulta
+   `_character_recommendation` y elige su tag si tiene ≥1000 posts
+   (`match_type: character`). El paso por tokens sigue reservado a fragmentos.
+   Resultado: **17/20** de acuerdo, **0** respuestas flojas, **0** casos donde el
+   resolver sabe más. Las 3 diferencias restantes son variantes con volumen
+   (`hu_tao` 1 301 vs `hu_tao_(genshin_impact)` 14 950, `saber` 20 415 vs
+   `saber_(fate)` 23 972, `miku_hatsune` 88 545 vs `hatsune_miku` 144 723): no son
+   stubs y se aceptan como empate.
+2. **`scripts/mcp_knowledge_bench.py`** — gate con **52 casos dorados** (12 personajes,
+   17 tags EN, 12 en español, 4 paraguas multi-tag, 1 de segmentos, 2 vacíos) que
+   falla si alguna respuesta baja de 1000 posts sin dos wikis, si el paraguas no
+   aparece en `related_tags`, si los segmentos no son los esperados o si una consulta
+   sin respuesta devuelve algo. Pasada actual: **52/52 (100%)**, exit 0.
+
+Medido: `109 tests OK`, bench de personajes 27/27, knowledge bench 52/52,
+consistencia 17/20 con cero respuestas flojas. Docs: `scripts/README.md` (dos
+secciones nuevas) y los cuatro GLOSSARYs (regla de sustitución por resolver).
+
+---
+
+## 0g. Desempate por cobertura (bare name y permutación de tokens)
+
+Los tres "empates legítimos" de la sección 0f se resuelven ahora por posts, sin llamar al
+resolver (medido: 0,5–3,5 s incluso en caliente, y devuelve personajes absurdos para tags
+como `blowjob` → `bloodberry`). Regla `_prefer_richer_variant`:
+
+- Si el top es un **nombre desnudo** (sin `_(`) por debajo de 300 000 posts, se busca su
+  variante `base_(%` con una consulta indexada (~0,15 s) y gana la de más posts:
+  `saber` (20 415) → `saber_(fate)` (23 972), `hu_tao` (1 301) →
+  `hu_tao_(genshin_impact)` (14 950), con `match_type: variant` y `note`.
+- Si el nombre tiene **dos tokens y no está ordenado** alfabéticamente (la librería escribe
+  nombres ordenados), una única búsqueda `%token%` (0,17 s) busca la permutación y exige
+  mismo conjunto de tokens: `miku_hatsune` (88 545) → `hatsune_miku` (144 723).
+- Nunca toca tags con franquicia, ni los que superan 300 000 posts, ni nombres ya ordenados
+  (`mating_press`, `spread_legs`, `school_uniform` quedan intactos y en 0,00–0,15 s).
+
+Medido: consistencia **20/20** de acuerdo con el resolver, **0** respuestas flojas, knowledge
+bench **54/54 (100%)** con tres casos nuevos (`saber`, `hu tao`, `miku`), `111 tests OK`
+(dos nuevos), bench de personajes 27/27. Docs: cuatro GLOSSARYs con la regla de desempate.
+
+---
+
 ## 1. Lo que ya está hecho (no rehacer)
 
 Spec original: `.hermes/plans/2026-11-05_1310-mcp-surface-cleanup.md`

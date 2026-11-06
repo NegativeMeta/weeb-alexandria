@@ -145,6 +145,15 @@ El español se traduce primero: las frases de
 tags en inglés, y la respuesta incluye `query_translation` con lo que se buscó
 realmente (`searched_as`).
 
+Cuando el tag que coincide tiene cobertura ínfima (<1000 posts) la respuesta se
+sustituye por el tag canónico que conoce el resolver de personajes o por los tags
+que nombran las palabras, y `notes` explica la sustitución.
+
+Los empates se rompen por cobertura: un agregado de nombre desnudo (`saber`,
+20 415) cede ante su variante con franquicia (`saber_(fate)`, 23 972), y la
+grafía ordenada de la librería gana sobre la desordenada (`hatsune_miku` sobre
+`miku_hatsune`).
+
 Busca entre:
 
 - Tags.

@@ -1,0 +1,629 @@
+{
+  "passed": 54,
+  "total": 54,
+  "accuracy": 1.0,
+  "thin_answers": [],
+  "failures": [],
+  "cases": [
+    {
+      "query": "Anya Forger",
+      "group": "tag",
+      "expect": "anya_(spy_x_family)",
+      "top": "anya_(spy_x_family)",
+      "top_posts": 8796,
+      "related": [],
+      "parts": [],
+      "ok": true,
+      "seconds": 2.78
+    },
+    {
+      "query": "Yor Forger",
+      "group": "tag",
+      "expect": "yor_briar",
+      "top": "yor_briar",
+      "top_posts": 14147,
+      "related": [],
+      "parts": [],
+      "ok": true,
+      "seconds": 0.72
+    },
+    {
+      "query": "Furina",
+      "group": "tag",
+      "expect": "furina_(genshin_impact)",
+      "top": "furina_(genshin_impact)",
+      "top_posts": 13067,
+      "related": [],
+      "parts": [],
+      "ok": true,
+      "seconds": 1.42
+    },
+    {
+      "query": "Nahida",
+      "group": "tag",
+      "expect": "nahida_(genshin_impact)",
+      "top": "nahida_(genshin_impact)",
+      "top_posts": 12656,
+      "related": [],
+      "parts": [],
+      "ok": true,
+      "seconds": 1.38
+    },
+    {
+      "query": "Zero Two",
+      "group": "tag",
+      "expect": "zero_two_(darling_in_the_franxx)",
+      "top": "zero_two_(darling_in_the_franxx)",
+      "top_posts": 5932,
+      "related": [],
+      "parts": [],
+      "ok": true,
+      "seconds": 0.69
+    },
+    {
+      "query": "Asuka Langley",
+      "group": "tag",
+      "expect": "souryuu_asuka_langley",
+      "top": "souryuu_asuka_langley",
+      "top_posts": 27609,
+      "related": [],
+      "parts": [],
+      "ok": true,
+      "seconds": 0.82
+    },
+    {
+      "query": "Rem",
+      "group": "tag",
+      "expect": "rem_(re:zero)",
+      "top": "rem_(re:zero)",
+      "top_posts": 11072,
+      "related": [],
+      "parts": [],
+      "ok": true,
+      "seconds": 0.14
+    },
+    {
+      "query": "Makima",
+      "group": "tag",
+      "expect": "makima_(chainsaw_man)",
+      "top": "makima_(chainsaw_man)",
+      "top_posts": 12394,
+      "related": [],
+      "parts": [],
+      "ok": true,
+      "seconds": 1.42
+    },
+    {
+      "query": "Bocchi",
+      "group": "tag",
+      "expect": "bocchi_(bocchi_the_rock!)",
+      "top": "bocchi_(bocchi_the_rock!)",
+      "top_posts": 10691,
+      "related": [],
+      "parts": [],
+      "ok": true,
+      "seconds": 0.44
+    },
+    {
+      "query": "Marin Kitagawa",
+      "group": "tag",
+      "expect": "kitagawa_marin",
+      "top": "kitagawa_marin",
+      "top_posts": 8744,
+      "related": [],
+      "parts": [],
+      "ok": true,
+      "seconds": 1.0
+    },
+    {
+      "query": "gura",
+      "group": "tag",
+      "expect": "gawr_gura",
+      "top": "gawr_gura",
+      "top_posts": 17354,
+      "related": [],
+      "parts": [],
+      "ok": true,
+      "seconds": 0.43
+    },
+    {
+      "query": "Hatsune Miku",
+      "group": "tag",
+      "expect": "hatsune_miku",
+      "top": "hatsune_miku",
+      "top_posts": 144723,
+      "related": [],
+      "parts": [],
+      "ok": true,
+      "seconds": 0.13
+    },
+    {
+      "query": "blowjob",
+      "group": "tag",
+      "expect": "blowjob",
+      "top": "blowjob",
+      "top_posts": 183477,
+      "related": [],
+      "parts": [],
+      "ok": true,
+      "seconds": 0.14
+    },
+    {
+      "query": "handjob",
+      "group": "tag",
+      "expect": "handjob",
+      "top": "handjob",
+      "top_posts": 107485,
+      "related": [],
+      "parts": [],
+      "ok": true,
+      "seconds": 0.13
+    },
+    {
+      "query": "cum inside",
+      "group": "tag",
+      "expect": "cum_inside",
+      "top": "cum_inside",
+      "top_posts": 481662,
+      "related": [],
+      "parts": [],
+      "ok": true,
+      "seconds": 0.0
+    },
+    {
+      "query": "spread legs",
+      "group": "tag",
+      "expect": "spread_legs",
+      "top": "spread_legs",
+      "top_posts": 546869,
+      "related": [],
+      "parts": [],
+      "ok": true,
+      "seconds": 0.0
+    },
+    {
+      "query": "mosaic censoring",
+      "group": "tag",
+      "expect": "mosaic_censoring",
+      "top": "mosaic_censoring",
+      "top_posts": 272622,
+      "related": [],
+      "parts": [],
+      "ok": true,
+      "seconds": 0.29
+    },
+    {
+      "query": "clothed sex",
+      "group": "tag",
+      "expect": "clothed_sex",
+      "top": "clothed_sex",
+      "top_posts": 120277,
+      "related": [],
+      "parts": [],
+      "ok": true,
+      "seconds": 0.13
+    },
+    {
+      "query": "tentacle sex",
+      "group": "tag",
+      "expect": "tentacle_sex",
+      "top": "tentacle_sex",
+      "top_posts": 24548,
+      "related": [],
+      "parts": [],
+      "ok": true,
+      "seconds": 0.3
+    },
+    {
+      "query": "body writing",
+      "group": "tag",
+      "expect": "body_writing",
+      "top": "body_writing",
+      "top_posts": 22547,
+      "related": [],
+      "parts": [],
+      "ok": true,
+      "seconds": 0.14
+    },
+    {
+      "query": "pregnant belly",
+      "group": "tag",
+      "expect": "pregnant_belly",
+      "top": "pregnant_belly",
+      "top_posts": 22664,
+      "related": [],
+      "parts": [],
+      "ok": true,
+      "seconds": 0.29
+    },
+    {
+      "query": "censored penis",
+      "group": "tag",
+      "expect": "censored_penis",
+      "top": "censored_penis",
+      "top_posts": 778440,
+      "related": [],
+      "parts": [],
+      "ok": true,
+      "seconds": 0.0
+    },
+    {
+      "query": "monster cock",
+      "group": "tag",
+      "expect": "monster_cock",
+      "top": "monster_cock",
+      "top_posts": 753075,
+      "related": [],
+      "parts": [],
+      "ok": true,
+      "seconds": 0.0
+    },
+    {
+      "query": "big tits",
+      "group": "tag",
+      "expect": "large_breasts",
+      "top": "large_breasts",
+      "top_posts": 2067038,
+      "related": [],
+      "parts": [],
+      "ok": true,
+      "seconds": 0.49
+    },
+    {
+      "query": "huge breasts",
+      "group": "tag",
+      "expect": "huge_breasts",
+      "top": "huge_breasts",
+      "top_posts": 610494,
+      "related": [],
+      "parts": [],
+      "ok": true,
+      "seconds": 0.0
+    },
+    {
+      "query": "blushing",
+      "group": "tag",
+      "expect": "blushing",
+      "top": "blushing",
+      "top_posts": 2599,
+      "related": [],
+      "parts": [],
+      "ok": true,
+      "seconds": 0.14
+    },
+    {
+      "query": "saber",
+      "group": "tag",
+      "expect": "saber_(fate)",
+      "top": "saber_(fate)",
+      "top_posts": 23972,
+      "related": [],
+      "parts": [],
+      "ok": true,
+      "seconds": 0.15
+    },
+    {
+      "query": "hu tao",
+      "group": "tag",
+      "expect": "hu_tao_(genshin_impact)",
+      "top": "hu_tao_(genshin_impact)",
+      "top_posts": 14950,
+      "related": [],
+      "parts": [],
+      "ok": true,
+      "seconds": 0.14
+    },
+    {
+      "query": "miku",
+      "group": "tag",
+      "expect": "hatsune_miku",
+      "top": "hatsune_miku",
+      "top_posts": 144723,
+      "related": [],
+      "parts": [],
+      "ok": true,
+      "seconds": 1.3
+    },
+    {
+      "query": "2b",
+      "group": "tag",
+      "expect": "2b_(nier:automata)",
+      "top": "2b_(nier:automata)",
+      "top_posts": 16123,
+      "related": [],
+      "parts": [],
+      "ok": true,
+      "seconds": 1.1
+    },
+    {
+      "query": "creampie",
+      "group": "tag",
+      "expect": "creampie",
+      "top": "creampie",
+      "top_posts": 462368,
+      "related": [],
+      "parts": [],
+      "ok": true,
+      "seconds": 0.0
+    },
+    {
+      "query": "titjob",
+      "group": "tag",
+      "expect": "paizuri",
+      "top": "paizuri",
+      "top_posts": 115985,
+      "related": [],
+      "parts": [],
+      "ok": true,
+      "seconds": 0.13
+    },
+    {
+      "query": "ahegao face",
+      "group": "tag",
+      "expect": "ahegao",
+      "top": "ahegao",
+      "top_posts": 72137,
+      "related": [],
+      "parts": [],
+      "ok": true,
+      "seconds": 1.92
+    },
+    {
+      "query": "facial cum",
+      "group": "tag",
+      "expect": "facial",
+      "top": "facial",
+      "top_posts": 115172,
+      "related": [],
+      "parts": [],
+      "ok": true,
+      "seconds": 2.09
+    },
+    {
+      "query": "mating_(animal)",
+      "group": "tag",
+      "expect": "mating_(animal)",
+      "top": "mating_(animal)",
+      "top_posts": 204,
+      "related": [],
+      "parts": [],
+      "ok": true,
+      "seconds": 1.43
+    },
+    {
+      "query": "tetas grandes",
+      "group": "tag",
+      "expect": "large_breasts",
+      "top": "large_breasts",
+      "top_posts": 2067038,
+      "related": [],
+      "parts": [],
+      "ok": true,
+      "seconds": 0.0
+    },
+    {
+      "query": "sexo oral",
+      "group": "tag",
+      "expect": "oral",
+      "top": "oral",
+      "top_posts": 355220,
+      "related": [],
+      "parts": [],
+      "ok": true,
+      "seconds": 0.0
+    },
+    {
+      "query": "corrida en la cara",
+      "group": "tag",
+      "expect": "facial",
+      "top": "facial",
+      "top_posts": 115172,
+      "related": [],
+      "parts": [],
+      "ok": true,
+      "seconds": 0.13
+    },
+    {
+      "query": "atada con cuerdas",
+      "group": "tag",
+      "expect": "bondage",
+      "top": "bondage",
+      "top_posts": 152178,
+      "related": [],
+      "parts": [],
+      "ok": true,
+      "seconds": 0.13
+    },
+    {
+      "query": "vendas en los ojos",
+      "group": "tag",
+      "expect": "blindfold",
+      "top": "blindfold",
+      "top_posts": 40282,
+      "related": [],
+      "parts": [],
+      "ok": true,
+      "seconds": 0.13
+    },
+    {
+      "query": "ropa mojada",
+      "group": "tag",
+      "expect": "wet_clothes",
+      "top": "wet_clothes",
+      "top_posts": 69008,
+      "related": [],
+      "parts": [],
+      "ok": true,
+      "seconds": 0.31
+    },
+    {
+      "query": "sexo",
+      "group": "tag",
+      "expect": "sex",
+      "top": "sex",
+      "top_posts": 1238190,
+      "related": [],
+      "parts": [],
+      "ok": true,
+      "seconds": 0.0
+    },
+    {
+      "query": "mamada",
+      "group": "tag",
+      "expect": "fellatio",
+      "top": "fellatio",
+      "top_posts": 194939,
+      "related": [],
+      "parts": [],
+      "ok": true,
+      "seconds": 0.14
+    },
+    {
+      "query": "piernas abiertas",
+      "group": "tag",
+      "expect": "spread_legs",
+      "top": "spread_legs",
+      "top_posts": 546869,
+      "related": [],
+      "parts": [],
+      "ok": true,
+      "seconds": 0.0
+    },
+    {
+      "query": "embarazada",
+      "group": "tag",
+      "expect": "pregnant",
+      "top": "pregnant",
+      "top_posts": 52409,
+      "related": [],
+      "parts": [],
+      "ok": true,
+      "seconds": 0.13
+    },
+    {
+      "query": "colegiala",
+      "group": "tag",
+      "expect": "school_uniform",
+      "top": "school_uniform",
+      "top_posts": 1006204,
+      "related": [],
+      "parts": [],
+      "ok": true,
+      "seconds": 0.0
+    },
+    {
+      "query": "sin censura",
+      "group": "tag",
+      "expect": "uncensored",
+      "top": "uncensored",
+      "top_posts": 180466,
+      "related": [],
+      "parts": [],
+      "ok": true,
+      "seconds": 0.13
+    },
+    {
+      "query": "dog mounting",
+      "group": "umbrella",
+      "expect": "bestiality",
+      "top": null,
+      "top_posts": 0,
+      "related": [
+        "bestiality"
+      ],
+      "parts": [
+        "dog",
+        "mounting"
+      ],
+      "ok": true,
+      "seconds": 1.01
+    },
+    {
+      "query": "group sex threesome",
+      "group": "umbrella",
+      "expect": "fivesome",
+      "top": null,
+      "top_posts": 0,
+      "related": [
+        "fivesome"
+      ],
+      "parts": [
+        "group sex",
+        "threesome"
+      ],
+      "ok": true,
+      "seconds": 1.43
+    },
+    {
+      "query": "lactation milking",
+      "group": "umbrella",
+      "expect": "projectile_lactation",
+      "top": null,
+      "top_posts": 0,
+      "related": [
+        "projectile_lactation"
+      ],
+      "parts": [
+        "lactation",
+        "milking"
+      ],
+      "ok": true,
+      "seconds": 1.0
+    },
+    {
+      "query": "blindfold leash",
+      "group": "umbrella",
+      "expect": "reins",
+      "top": null,
+      "top_posts": 0,
+      "related": [
+        "reins"
+      ],
+      "parts": [
+        "blindfold",
+        "leash"
+      ],
+      "ok": true,
+      "seconds": 0.97
+    },
+    {
+      "query": "tied up with rope",
+      "group": "parts",
+      "expect": [
+        "tied up",
+        "rope"
+      ],
+      "top": null,
+      "top_posts": 0,
+      "related": [],
+      "parts": [
+        "tied up",
+        "rope"
+      ],
+      "ok": true,
+      "seconds": 1.3
+    },
+    {
+      "query": "asdfqwer zxcvbn",
+      "group": "empty",
+      "expect": null,
+      "top": null,
+      "top_posts": 0,
+      "related": [],
+      "parts": [],
+      "ok": true,
+      "seconds": 0.67
+    },
+    {
+      "query": "pene azul volador",
+      "group": "empty",
+      "expect": null,
+      "top": null,
+      "top_posts": 0,
+      "related": [],
+      "parts": [],
+      "ok": true,
+      "seconds": 0.97
+    }
+  ]
+}

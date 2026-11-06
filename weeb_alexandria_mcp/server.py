@@ -890,19 +890,51 @@ def _is_fragment_answer(con: sqlite3.Connection, item: dict) -> bool:
 
 def _coverage_fallback(con: sqlite3.Connection, query: str,
                        category: Optional[str], limit: int,
-                       current: list[dict]) -> tuple[list[dict], Optional[str]]:
+                       current: list[dict],
+                       allow_character: bool = False) -> tuple[list[dict], Optional[str]]:
     """Answer with the tags the query's own words name when the match is a stub.
 
     ``search_knowledge("facial cum")`` used to answer ``facial_cumshot`` (3
-    posts) while ``facial`` holds 115 172.
+    posts) while ``facial`` holds 115 172. ``allow_character`` additionally asks
+    the character resolver, because ``"Anya Forger"`` used to answer the 17-post
+    ``anya_forger`` while ``anya_(spy_x_family)`` has 8 796.
     """
-    if not current or not _is_fragment_answer(con, current[0]):
+    if not current:
         return current, None
-    normalized = _normalize_tag(query)
-    tokens = [token for token in normalized.split("_") if len(token) >= 3]
+    thin = (current[0].get("post_count") or 0) < _MIN_ANSWER_POSTS
+    fragment = _is_fragment_answer(con, current[0])
+    # The resolver is decisive evidence for a bare character name whose tag row is
+    # thin, even when that row is wiki-documented (`nahida`, 1 post, 4 wikis).
+    if not fragment and not (allow_character and thin):
+        return current, None
+    notes: list[str] = []
     picked: list[dict] = []
     seen = {str(item.get("name") or "").lower() for item in current}
-    for token in tokens[:3]:
+
+    if allow_character and thin:
+        try:
+            recommendation = _character_recommendation(con, query, "character", 3)
+        except Exception:  # the resolver is best-effort enrichment here
+            recommendation = {}
+        tag = recommendation.get("recommended_tag") if recommendation else None
+        if tag and str(tag).lower() not in seen:
+            rows = [
+                row for row in _exact_tag_rows(con, tag, category)
+                if not _is_placeholder_item({"category": row["category_name"],
+                                             "post_count": row["post_count"]})
+            ]
+            if rows and (rows[0]["post_count"] or 0) >= _MIN_ANSWER_POSTS:
+                for item in _merge_tag_rows(rows, query, tag, 1):
+                    item["match_type"] = "character"
+                    item["confidence"] = "medium"
+                    item["note"] = f"character tag for {query!r}"
+                    picked.append(item)
+                    seen.add(str(item["name"]).lower())
+                notes.append(f"character tag {tag} used for {query!r}")
+
+    normalized = _normalize_tag(query)
+    tokens = [token for token in normalized.split("_") if len(token) >= 3]
+    for token in (tokens[:3] if fragment else []):
         for row in _tag_rows(con, token, category, 3):
             if (row.get("post_count") or 0) < _MIN_ANSWER_POSTS:
                 continue
@@ -915,12 +947,12 @@ def _coverage_fallback(con: sqlite3.Connection, query: str,
             row["note"] = f"matched on token '{token}'"
             picked.append(row)
             break
+
     if not picked:
         return current, None
     top = current[0]
-    note = (f"thin answer {top['name']} ({top.get('post_count') or 0} posts) "
-            f"replaced by per-token tags: "
-            f"{', '.join(item['name'] for item in picked)}")
+    notes.insert(0, f"thin answer {top['name']} ({top.get('post_count') or 0} posts) "
+                    f"replaced by: {', '.join(item['name'] for item in picked)}")
     merged: list[dict] = []
     names: set[str] = set()
     for item in picked + current:
@@ -929,7 +961,69 @@ def _coverage_fallback(con: sqlite3.Connection, query: str,
             continue
         names.add(key)
         merged.append(item)
-    return merged[:limit], note
+    return merged[:limit], "; ".join(notes)
+
+
+def _prefer_richer_variant(con: sqlite3.Connection,
+                           current: list[dict]) -> tuple[list[dict], Optional[str]]:
+    """Prefer ``name_(franchise)`` when it has more posts than the bare name.
+
+    ``saber`` (20 415) and ``hu_tao`` (1 301) are legacy bare-name aggregates;
+    the canonical character tags ``saber_(fate)`` (23 972) and
+    ``hu_tao_(genshin_impact)`` (14 950) carry more evidence. The rule only
+    applies to bare names, never to tags that already carry a franchise suffix or
+    to descriptive tags, and it costs one indexed prefix lookup.
+    """
+    if not current:
+        return current, None
+    top = current[0]
+    name = str(top.get("name") or "")
+    top_posts = int(top.get("post_count") or 0)
+    if not name or "_(" in name or top_posts >= _VARIANT_TIEBREAK_MAX_POSTS:
+        return current, None
+    base = name
+    pattern = base.replace("\\", "\\\\").replace("_", "\\_").replace("%", "\\%") + "\\_(%"
+    rows = con.execute(
+        "SELECT name, MAX(site) AS site, MAX(category_name) AS category_name, "
+        "MAX(post_count) AS post_count, MAX(aliases) AS aliases, MAX(nsfw) AS nsfw "
+        "FROM tags WHERE name LIKE ? ESCAPE '\\' GROUP BY name "
+        "ORDER BY post_count DESC LIMIT 1",
+        (pattern,),
+    ).fetchall()
+    variant = rows[0] if rows else None
+    tokens = base.split("_")
+    # Token order can flip: `miku_hatsune` (88 545) vs `hatsune_miku` (144 723).
+    # The library writes sorted names, so only unsorted ones are worth a lookup,
+    # and one contains-scan (0.17 s) is enough.
+    if variant is None and len(tokens) == 2 and tokens != sorted(tokens):
+        probe = max(tokens, key=len).replace("\\", "\\\\").replace("_", "\\_").replace("%", "\\%")
+        rows = con.execute(
+            "SELECT name, MAX(site) AS site, MAX(category_name) AS category_name, "
+            "MAX(post_count) AS post_count, MAX(aliases) AS aliases, MAX(nsfw) AS nsfw "
+            "FROM tags WHERE name LIKE ? ESCAPE '\\' AND name NOT LIKE '%(%' "
+            "GROUP BY name ORDER BY post_count DESC LIMIT 30",
+            (f"%{probe}%",),
+        ).fetchall()
+        want = frozenset(tokens)
+        for row in rows:
+            if frozenset(str(row["name"]).split("_")) == want:
+                variant = row
+                break
+    if variant is None:
+        return current, None
+    variant_posts = int(variant["post_count"] or 0)
+    if variant_posts <= top_posts or variant_posts < _MIN_ANSWER_POSTS:
+        return current, None
+    replacement = _merge_tag_rows([variant], name, name, 1)
+    if not replacement:
+        return current, None
+    item = replacement[0]
+    item["match_type"] = "variant"
+    item["confidence"] = "high"
+    item["note"] = (f"richer franchise variant: {variant['name']} ({variant_posts}) "
+                    f"over {name} ({top_posts})")
+    note = f"{name} is a bare-name aggregate; answered with {variant['name']} ({variant_posts} posts)"
+    return [item] + [row for row in current if row.get("name") != variant["name"]], note
 
 
 def _part_tag_is_named(part: dict) -> bool:
@@ -1182,6 +1276,11 @@ _PLACEHOLDER_MIN_POSTS = 1000
 # library holds plenty of 3-post fragments ("facial_cumshot") next to the real
 # tag ("facial", 115k).
 _MIN_ANSWER_POSTS = 1000
+
+# Bare-name aggregates (`saber`, `hu_tao`) are only demoted when the franchise
+# variant wins on posts; above this volume the tag is canonical on its own and the
+# extra lookup is not worth it.
+_VARIANT_TIEBREAK_MAX_POSTS = 300_000
 
 # Words that glue a phrase together but are never a tag on their own. They are
 # dropped from multi-tag segments so "tied up with rope" does not become
@@ -1508,8 +1607,12 @@ def search_knowledge(query: str, category: Optional[str] = None,
             lookup_query, translations = _translate_query(query)
             tag_results = _tag_rows(con, lookup_query, category, limit)
             tag_results, coverage_note = _coverage_fallback(
-                con, lookup_query, category, limit, tag_results
+                con, lookup_query, category, limit, tag_results,
+                allow_character=True,
             )
+            tag_results, variant_note = _prefer_richer_variant(con, tag_results)
+            if variant_note:
+                coverage_note = "; ".join(filter(None, [coverage_note, variant_note]))
             result["tag_library"] = {"results": tag_results}
             if translations:
                 result["tag_library"]["query_translation"] = {

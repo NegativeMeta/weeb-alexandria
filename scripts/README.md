@@ -284,3 +284,20 @@ A phrase is accepted only when its English target resolves to a tag with at
 least 1000 posts, or to a tag documented by two or more wikis (small but
 legitimate tags such as `rope_marks`). Targets listed in
 `ALLOW_LOW_COVERAGE` are kept deliberately even when neither rule passes.
+
+## Search-quality gate and consistency probe
+
+`mcp_knowledge_bench.py` runs a golden set of 54 queries (characters, English
+colloquial, Spanish, alias stubs, fragments, multi-tag umbrellas, empty queries)
+and fails if any answer lands below 1000 posts without two wiki definitions:
+
+```bash
+.venv/Scripts/python.exe scripts/mcp_knowledge_bench.py --json reports/mcp_knowledge_bench.json
+```
+
+`mcp_consistency_probe.py` compares `search_knowledge` against
+`resolve_character` and `get_knowledge` to catch the tools disagreeing:
+
+```bash
+.venv/Scripts/python.exe scripts/mcp_consistency_probe.py --json reports/mcp_consistency_probe.json
+```

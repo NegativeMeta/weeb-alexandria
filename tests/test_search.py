@@ -231,6 +231,20 @@ class SearchRegressionTests(unittest.TestCase):
         self.assertEqual(library["results"][0]["match_type"], "token")
         self.assertIn("thin answer facial_cumshot", library["notes"][0])
 
+    def test_search_knowledge_prefers_richer_franchise_variant(self):
+        # Bare-name aggregates lose to the franchise tag when it has more posts.
+        for query, expected in (("saber", "saber_(fate)"),
+                                ("hu tao", "hu_tao_(genshin_impact)")):
+            with self.subTest(query=query):
+                result = search_knowledge(query)["tag_library"]["results"]
+                self.assertEqual(result[0]["name"], expected)
+                self.assertEqual(result[0]["match_type"], "variant")
+
+    def test_search_knowledge_prefers_sorted_name_permutation(self):
+        # The library writes sorted names: miku_hatsune (88 545) is not canonical.
+        result = search_knowledge("miku")["tag_library"]["results"]
+        self.assertEqual(result[0]["name"], "hatsune_miku")
+
     def test_search_knowledge_keeps_documented_small_tag_first(self):
         # 204 posts, but three wikis document it: typing it must return it.
         result = search_knowledge("mating_(animal)")["tag_library"]["results"]
@@ -245,6 +259,12 @@ class SearchRegressionTests(unittest.TestCase):
         # "sexo oral" must not be eaten by the shorter "sexo" entry.
         library = search_knowledge("sexo oral")["tag_library"]
         self.assertEqual(library["results"][0]["name"], "oral")
+
+    def test_search_knowledge_uses_character_resolver_for_thin_name(self):
+        # "Nahida" is a 1-post tag row but a documented name; the resolver wins.
+        result = search_knowledge("Nahida")["tag_library"]["results"]
+        self.assertEqual(result[0]["name"], "nahida_(genshin_impact)")
+        self.assertEqual(result[0]["match_type"], "character")
 
     def test_multi_tag_segments_drop_stopwords(self):
         library = search_knowledge("tied up with rope")["tag_library"]

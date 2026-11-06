@@ -145,6 +145,14 @@ Spanish phrasing is translated first: the phrases in
 wording, and the response carries `query_translation` with the wording actually
 searched (`searched_as`).
 
+When the query's own tag row is thin (under 1000 posts) the answer is replaced by
+the canonical tag the character resolver knows or by the tags the words name, and
+`notes` explains the substitution.
+
+Ties are broken by coverage: a bare-name aggregate (`saber`, 20 415) gives way to
+its franchise variant (`saber_(fate)`, 23 972), and the library's sorted spelling
+wins over an unsorted one (`hatsune_miku` over `miku_hatsune`).
+
 It searches across:
 
 - Tags.

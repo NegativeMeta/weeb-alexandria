@@ -116,6 +116,10 @@ NSFW 表示可能不适合工作场所或普通受众的内容；SFW 表示通�
 
 西班牙语短语会先替换为英文标签措辞（`weeb_alexandria_mcp/query_aliases_es.json`），响应中的 `query_translation.searched_as` 显示实际检索的文本。
 
+当匹配到的标签投稿数极低（少于 1000）时，会用角色解析给出的规范标签或词语本身的标签替换，并在 `notes` 中说明替换原因。
+
+并列时按投稿数决胜：仅有名字的汇总标签（`saber`，20 415）让位给带作品的规范标签（`saber_(fate)`，23 972），库中已排序的写法（`hatsune_miku`）优先于未排序的写法（`miku_hatsune`）。
+
 如果没有直接结果，该工具还会返回 `suggestions` 列表，为拼写错误或非标准名称提供可能的标签。
 
 ### `get_knowledge`
