@@ -164,6 +164,8 @@ English when you know it — the library is built on English tags — and when
 `query_translation.untranslated` lists words, those matched no tag: retry them in
 English.
 
+Quality adjectives such as `finished`, `cinematic` or `sharp` are dropped from prompt parts, and some phrases are rewritten (`adult woman` → `mature_female`) because the words are real tags but the combination is not.
+
 It searches across:
 
 - Tags.

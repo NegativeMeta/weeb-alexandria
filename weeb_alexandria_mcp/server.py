@@ -1319,9 +1319,27 @@ _VARIANT_TIEBREAK_MAX_POSTS = 300_000
 _MAX_MULTI_TAG_PARTS = 12
 _MULTI_TAG_CHARACTER_PARTS = 4
 
+# Match types that mean "this tag is the word asked for", as opposed to a prefix,
+# partial or fuzzy guess (`skin` -> `skin_fang`).
+_NAME_MATCH_TYPES = {"exact", "normalized", "alias", "alias_column",
+                     "wiki_redirect", "variant_base", "character"}
+
 # Words that glue a phrase together but are never a tag on their own. They are
 # dropped from multi-tag segments so "tied up with rope" does not become
 # ["tied up", "with", "rope"] and drag in `rope_(arknights)` as a concept link.
+# Words that are real tags but never carry a written prompt: quality markers,
+# render settings and bare adjectives. Keeping them made a prompt return
+# `finished` (27 724), `cinematic` (4) and `controlled` (111) as if they were
+# content. Only single-word segments are checked, so `depth of field` survives.
+_PROMPT_QUALIFIERS = {
+    "finished", "detailed", "detail", "cinematic", "controlled", "quality",
+    "masterpiece", "best_quality", "high_quality", "highres", "absurdres",
+    "lowres", "realistic", "photorealistic", "sharp", "precise", "high", "low",
+    "editorial", "rembrandt", "professional", "award", "winning", "official",
+    "extremely", "very", "ultra", "hyper", "stylized", "8k", "4k", "uhd", "hdr",
+    "resolution", "lighting", "focus", "shallow", "muted", "controlled",
+}
+
 _QUERY_STOPWORDS = {
     "a", "an", "the", "of", "on", "in", "with", "and", "or", "for", "to", "at",
     "by", "from", "into", "over", "under", "her", "his", "their",
@@ -1335,6 +1353,23 @@ _QUERY_STOPWORDS = {
 
 
 _ES_PHRASES_PATH = Path(__file__).with_name("query_aliases_es.json")
+
+
+@lru_cache(maxsize=1)
+def _en_phrases() -> dict[str, str]:
+    """English phrases that are not tags as written, mapped to the tag that is.
+
+    `adult woman` splits into `adult` (9 248, an alias) and misses
+    `mature_female` (110 035); `adult_woman` itself holds 2 posts.
+    """
+    try:
+        payload = json.loads(_ES_PHRASES_PATH.read_text(encoding="utf-8"))
+    except (OSError, ValueError):
+        return {}
+    phrases = payload.get("english_phrases") if isinstance(payload, dict) else None
+    if not isinstance(phrases, dict):
+        return {}
+    return {str(key): str(value) for key, value in phrases.items() if key and value}
 
 
 @lru_cache(maxsize=1)
@@ -1360,21 +1395,25 @@ def _es_phrases() -> dict[str, str]:
 
 
 def _translate_query(query: str) -> tuple[str, list[dict]]:
-    """Replace known Spanish phrases by their English tag wording.
+    """Replace known phrases by their English tag wording.
 
-    Longest phrases win, so ``sexo oral`` is not eaten by the ``sexo`` entry.
+    Spanish phrases come from `query_aliases_es.json` (curated and verified against
+    the library); English rewrites cover phrases whose words are real tags but whose
+    combination is not (`adult woman` -> `mature female`, 110 035 posts, while
+    `adult_woman` has 2). Longest phrases win, so ``sexo oral`` is not eaten by the
+    ``sexo`` entry.
     """
-    phrases = _es_phrases()
+    phrases = {**_es_phrases(), **_en_phrases()}
     if not phrases:
         return query, []
     translated = query.lower()
     applied: list[dict] = []
-    for spanish in sorted(phrases, key=len, reverse=True):
-        pattern = r"(?<!\w)" + re.escape(spanish) + r"(?!\w)"
+    for source in sorted(phrases, key=len, reverse=True):
+        pattern = r"(?<!\w)" + re.escape(source) + r"(?!\w)"
         if not re.search(pattern, translated):
             continue
-        translated = re.sub(pattern, f" {phrases[spanish]} ", translated)
-        applied.append({"spanish": spanish, "english": phrases[spanish]})
+        translated = re.sub(pattern, f" {phrases[source]} ", translated)
+        applied.append({"source": source, "target": phrases[source]})
     if not applied:
         return query, []
     translated = re.sub(r"\s+", " ", translated)
@@ -1559,6 +1598,16 @@ def _alias_suggestions(con: sqlite3.Connection, query: str,
     return suggestions
 
 
+def _keep_segment(part: str) -> bool:
+    """Drop glue words and bare quality adjectives from a prompt segment."""
+    normalized = _normalize_tag(part)
+    if not normalized or normalized in _QUERY_STOPWORDS:
+        return False
+    if "_" not in normalized and normalized in _PROMPT_QUALIFIERS:
+        return False
+    return True
+
+
 def _unmatched_words(query: str, segments: Iterable[str],
                      translations: Optional[list[dict]] = None) -> list[str]:
     """Words of the query that neither a tag segment nor a translation covers.
@@ -1570,11 +1619,16 @@ def _unmatched_words(query: str, segments: Iterable[str],
     for segment in segments:
         covered.update(re.findall(r"[^\W\d_]+", str(segment).lower()))
     for item in translations or []:
-        covered.update(re.findall(r"[^\W\d_]+", str(item.get("spanish") or "").lower()))
+        source = item.get("source") or item.get("spanish") or ""
+        covered.update(re.findall(r"[^\W\d_]+", str(source).lower()))
 
     unmatched: list[str] = []
     for word in re.findall(r"[^\W\d_]+", query.lower()):
         if word in covered or word in _QUERY_STOPWORDS or len(word) < 3:
+            continue
+        # Quality adjectives are dropped on purpose, not missing: don't ask the
+        # caller to retry "finished" or "cinematic" in English.
+        if word in _PROMPT_QUALIFIERS:
             continue
         if word not in unmatched:
             unmatched.append(word)
@@ -1637,10 +1691,7 @@ def _query_tag_segments(con: sqlite3.Connection, query: str,
                 continue
             words = re.findall(r"[^\W_]+", part, re.UNICODE)
             segments.extend(_span_tag_segments(con, words, category))
-        filtered = [
-            part for part in segments
-            if _normalize_tag(part) not in _QUERY_STOPWORDS
-        ]
+        filtered = [part for part in segments if _keep_segment(part)]
         return filtered if len(filtered) >= 2 else []
 
     words = re.findall(r"[^\W_]+", query, re.UNICODE)
@@ -1664,10 +1715,7 @@ def _query_tag_segments(con: sqlite3.Connection, query: str,
         segments = _span_tag_segments(con, words, category)
     # Glue words are never tags: dropping them keeps the parts meaningful without
     # breaking phrases that legitimately contain one ("day of the dead").
-    filtered = [
-        part for part in segments
-        if _normalize_tag(part) not in _QUERY_STOPWORDS
-    ]
+    filtered = [part for part in segments if _keep_segment(part)]
     return filtered if len(filtered) >= 2 else []
 
 
@@ -1696,6 +1744,11 @@ def _multi_tag_part(con: sqlite3.Connection, query: str,
         rows = _tag_rows(con, query, category, limit)
     rows, coverage_note = _coverage_fallback(con, query, category, limit, rows,
                                              allow_character=allow_character)
+    if "_" not in normalized:
+        # A bare word must resolve to a tag that really is that word: the prefix
+        # and partial guesses turned "skin" into `skin_fang` and a 0-post `skin_`.
+        rows = [row for row in rows
+                if row.get("match_type", "exact") in _NAME_MATCH_TYPES]
     # A tag every source reports with zero posts is scraping noise ("vestido_largo"),
     # not something to hand back as a prompt segment.
     if rows and all((row.get("post_count") or 0) == 0 for row in rows):

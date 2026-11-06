@@ -322,6 +322,29 @@ partes y payload <20 KB).
 
 ---
 
+## 0k. Ruido de calidad fuera y frases que no son tags
+
+Sobre el ejemplo real (`A finished cinematic editorial portrait of an adult woman, …`), la
+respuesta seguía trayendo adjetivos como `finished` (27 724), `cinematic` (4) y `controlled`
+(111) presentados como contenido, y `adult woman` resolvía a `adult` (9 248, alias) en vez de
+`mature_female` (110 035). Además `skin` devolvía `skin_fang` por coincidencia de prefijo.
+
+| Arreglo | Detalle |
+|---|---|
+| `_PROMPT_QUALIFIERS` | Calificadores y marcadores de render descartados como parte (solo palabras sueltas, así `depth of field` sobrevive) |
+| `_keep_segment` | Un único punto de filtrado para palabras de unión y calificadores |
+| `query_aliases_es.json` → `english_phrases` | 6 reescrituras en inglés verificadas: `adult woman/adult women/grown woman` → `mature_female`, `adult man/adult men/grown man` → `mature_male` |
+| `_NAME_MATCH_TYPES` | Una parte de una sola palabra solo mantiene tags que **son** esa palabra (exact/normalized/alias/wiki_redirect/variant_base/character); prefijo, partial y fuzzy quedan fuera |
+| `untranslated` | Ya no lista los calificadores descartados a propósito |
+
+Medición sobre el mismo prompt: **17,53 s → 3,53 s**, partes `portrait`, `mature female`,
+`facial`, `natural`, `texture` (sin `finished`/`cinematic`/`controlled`, sin `skin_fang`).
+Corpus de 34: 33/34 con segmentos, 32/34 con tag usable, p50 4,00 s · p95 7,66 s, 1 caso sobre
+8 s. Probe de 25 frases: 100 % tras añadir `character` a los match types (Gura volvía a
+resolverse). Gates: `124 tests OK` (+3).
+
+---
+
 ## 1. Lo que ya está hecho (no rehacer)
 
 Spec original: `.hermes/plans/2026-11-05_1310-mcp-surface-cleanup.md`

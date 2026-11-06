@@ -173,6 +173,8 @@ El modelo puede utilizar la herramienta adecuada, como `get_character`, `search_
 
 Si `search_knowledge` recibe varias tags unidas en una sola consulta, por ejemplo `blushing red face`, puede devolver `query_mode: "multi_tag"`, partes separadas en `tag_library.query_parts` y una `query_recommendation` de nivel superior. El agente debe leer `query_recommendation.queries`, llamar a `search_knowledge` una vez por cada consulta y combinar los resultados solo después de realizar esas búsquedas independientes.
 
+Un prompt escrito se trata igual: la consulta se corta por puntuación y en ventanas cortas, los adjetivos de calidad (`finished`, `cinematic`, `controlled`, `sharp`, `focus`) se descartan, las reescrituras corrigen combinaciones que no son tags (`adult woman` → `mature_female`) y vuelven como máximo 12 de las partes más específicas, con `query_parts_total` informando cuántas se encontraron. Una parte cuya palabra solo coincidió por prefijo se queda sin resultado en vez de responder con una adivinanza (`skin` devolvía `skin_fang`).
+
 ```json
 {
   "query_recommendation": {

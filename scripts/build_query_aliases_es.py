@@ -208,6 +208,18 @@ CANDIDATES: dict[str, str] = {
 # Documented by the wikis but under the 1000-post floor; kept deliberately.
 ALLOW_LOW_COVERAGE = {"see_through", "soft_lighting"}
 
+# English phrases whose words are real tags but whose combination is not:
+# `adult woman` split into `adult` (9 248) and missed `mature_female` (110 035),
+# while `adult_woman` itself holds 2 posts.
+CANDIDATES_EN = {
+    "adult woman": "mature female",
+    "adult women": "mature female",
+    "grown woman": "mature female",
+    "adult man": "mature male",
+    "adult men": "mature male",
+    "grown man": "mature male",
+}
+
 
 def is_acceptable(con, top: dict) -> bool:
     posts = top.get("post_count") or 0
@@ -225,6 +237,7 @@ def main() -> int:
 
     con = S._db()
     accepted: dict[str, str] = {}
+    accepted_en: dict[str, str] = {}
     rejected: list[tuple[str, str, str]] = []
     try:
         for spanish, english in sorted(CANDIDATES.items()):
@@ -236,10 +249,19 @@ def main() -> int:
                 continue
             accepted[spanish] = top["name"].replace("_", " ")
             print(f"  ok   {spanish:22} -> {top['name']:24} {top['post_count']:>8}")
+        for source, english in sorted(CANDIDATES_EN.items()):
+            rows = S._tag_rows(con, english, None, 3)
+            top = rows[0] if rows else None
+            if not top or not is_acceptable(con, top):
+                got = f"{top['name']} ({top.get('post_count')})" if top else "sin resultado"
+                rejected.append((source, english, got))
+                continue
+            accepted_en[source] = top["name"].replace("_", " ")
+            print(f"  ok EN {source:21} -> {top['name']:24} {top['post_count']:>8}")
     finally:
         con.close()
 
-    print(f"\naceptados {len(accepted)} / rechazados {len(rejected)}")
+    print(f"\naceptados {len(accepted)} ES + {len(accepted_en)} EN / rechazados {len(rejected)}")
     for spanish, english, got in rejected:
         print(f"  DROP {spanish:22} pedido={english:22} obtenido={got}")
 
@@ -247,11 +269,13 @@ def main() -> int:
         target = REPO / "weeb_alexandria_mcp" / "query_aliases_es.json"
         payload = {
             "_comment": (
-                "Spanish phrase -> English tag phrase. Generated from the local tag "
-                "library: every target was verified to resolve to a tag with >=1000 "
-                "posts. Edit freely; the loader only needs 'phrases'."
+                "Phrase -> English tag phrase. Generated from the local tag library: "
+                "every target was verified to resolve to a tag with >=1000 posts. "
+                "'phrases' holds Spanish sources, 'english_phrases' English ones. "
+                "Edit freely; the loader only needs those keys."
             ),
             "phrases": dict(sorted(accepted.items())),
+            "english_phrases": dict(sorted(accepted_en.items())),
         }
         target.write_text(json.dumps(payload, ensure_ascii=False, indent=2) + "\n",
                           encoding="utf-8")

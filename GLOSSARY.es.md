@@ -166,6 +166,8 @@ tags en inglés cuando los sepas (la librería está construida en inglés) y, c
 `query_translation.untranslated` liste palabras, significa que no encontraron tag:
 reinténtalas en inglés.
 
+Los adjetivos de calidad como `finished`, `cinematic` o `sharp` se descartan de las partes de un prompt, y algunas frases se reescriben (`adult woman` → `mature_female`) porque las palabras son tags reales pero la combinación no.
+
 Busca entre:
 
 - Tags.

@@ -326,6 +326,31 @@ class SearchRegressionTests(unittest.TestCase):
                                 len(library["query_parts"]))
         self.assertLess(len(json.dumps(library, ensure_ascii=False).encode()), 20_000)
 
+    def test_search_knowledge_drops_quality_adjectives_from_prompt_parts(self):
+        prose = ("A finished cinematic editorial portrait of an adult woman, controlled "
+                 "studio lighting, sharp focus, shallow depth of field, muted color palette")
+        library = search_knowledge(prose)["tag_library"]
+        parts = [part["query"] for part in library["query_parts"]]
+        for qualifier in ("finished", "cinematic", "controlled", "sharp", "focus"):
+            self.assertNotIn(qualifier, parts)
+        # Dropped on purpose, so they are not reported as missing words to retry.
+        self.assertNotIn("finished", library["query_translation"].get("untranslated", []))
+        self.assertIn("depth of field", parts)
+
+    def test_search_knowledge_rewrites_adult_woman_to_mature_female(self):
+        library = search_knowledge("adult woman standing in a studio")["tag_library"]
+        tags = [part["results"][0]["name"] for part in library["query_parts"]
+                if part.get("results")]
+        self.assertIn("mature_female", tags)
+        self.assertNotIn("adult", tags)
+
+    def test_multi_tag_part_does_not_answer_a_bare_word_with_a_prefix_guess(self):
+        # "skin" used to come back as `skin_fang` (a character tag) by prefix.
+        library = search_knowledge("glossy skin, natural texture, portrait")["tag_library"]
+        by_query = {part["query"]: part["results"] for part in library["query_parts"]}
+        if "skin" in by_query:
+            self.assertEqual(by_query["skin"], [])
+
     def test_search_knowledge_keeps_documented_small_tag_first(self):
         # 204 posts, but three wikis document it: typing it must return it.
         result = search_knowledge("mating_(animal)")["tag_library"]["results"]

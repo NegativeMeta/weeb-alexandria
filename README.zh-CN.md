@@ -173,6 +173,8 @@ hermes mcp add weeb-alexandria \
 
 如果 `search_knowledge` 收到的是多个连在一起的标签，例如 `blushing red face`，它可能返回 `query_mode: "multi_tag"`、`tag_library.query_parts` 中的独立部分，以及顶层的 `query_recommendation`。智能体应读取 `query_recommendation.queries`，针对每个查询分别调用一次 `search_knowledge`，然后再合并这些独立搜索的结果。
 
+写好的提示词也照此处理：查询会按标点切分并切成短窗口，质量形容词（`finished`、`cinematic`、`controlled`、`sharp`、`focus`）被丢弃，不是标签的组合会被改写（`adult woman` → `mature_female`），最多返回 12 个最具体的部分，并由 `query_parts_total` 报告共找到多少。仅靠前缀匹配的单词部分不会给出猜测结果，而是保持为空（`skin` 以前会返回 `skin_fang`）。
+
 ```json
 {
   "query_recommendation": {

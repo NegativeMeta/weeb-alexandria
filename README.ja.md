@@ -173,6 +173,8 @@ Inugami Korone がどのようなキャラクターか教えてください。We
 
 `search_knowledge` に `blushing red face` のような複数のタグを連結したクエリを渡すと、`query_mode: "multi_tag"`、`tag_library.query_parts` の分割結果、トップレベルの `query_recommendation` が返る場合があります。エージェントは `query_recommendation.queries` を読み、それぞれのクエリについて `search_knowledge` を個別に一度ずつ呼び出し、その後で独立した検索結果をまとめてください。
 
+書き起こしたプロンプトも同じ扱いです。クエリは句読点と短いウィンドウに分割され、品質形容詞（`finished`、`cinematic`、`controlled`、`sharp`、`focus`）は捨てられ、タグにならない組み合わせは言い換えで補正され（`adult woman` → `mature_female`）、最も具体的な 12 個までの部分が `query_parts_total` とともに返ります。単語が前方一致だけで一致した部分は、推測で答える代わりに結果なしになります（`skin` は以前 `skin_fang` を返していました）。
+
 ```json
 {
   "query_recommendation": {

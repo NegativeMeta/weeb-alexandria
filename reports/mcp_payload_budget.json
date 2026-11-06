@@ -10,9 +10,9 @@
     },
     {
       "case": "search_knowledge(prompt ES)",
-      "bytes": 3133,
+      "bytes": 3121,
       "budget": 12288,
-      "tokens_est": 783,
+      "tokens_est": 780,
       "ok": true,
       "error": null
     },

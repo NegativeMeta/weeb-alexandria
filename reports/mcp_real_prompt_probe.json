@@ -2,11 +2,11 @@
   "prompts": 34,
   "with_segments": 33,
   "useful": 32,
-  "segments": 326,
-  "useful_segments": 218,
+  "segments": 324,
+  "useful_segments": 197,
   "useful_prompt_rate": 0.941,
-  "useful_segment_rate": 0.669,
-  "p50_seconds": 4.04,
+  "useful_segment_rate": 0.608,
+  "p50_seconds": 4.01,
   "over_budget": 2,
   "dropped_words": [
     [
@@ -122,9 +122,9 @@
         "keep",
         "consistent"
       ],
-      "seconds": 4.05,
+      "seconds": 4.28,
       "tags": [
-        "hairstyle_switch",
+        null,
         "outfit",
         "pose",
         "expression",
@@ -142,21 +142,17 @@
       "segments": 12,
       "useful": 6,
       "best_posts": 244452,
-      "untranslated": [
-        "editorial",
-        "precise",
-        "rembrandt"
-      ],
-      "seconds": 4.6,
+      "untranslated": [],
+      "seconds": 2.39,
       "tags": [
         "depth_of_field",
         "dark_background",
-        "adult",
+        "mature_female",
         "sharp_eyes",
         "photography",
-        "controlled",
-        "cinematic",
-        "finished"
+        "portrait",
+        "natural",
+        "texture"
       ]
     },
     {
@@ -165,7 +161,7 @@
       "words": 78,
       "mode": "multi_tag",
       "segments": 12,
-      "useful": 8,
+      "useful": 7,
       "best_posts": 150010,
       "untranslated": [
         "fast",
@@ -213,11 +209,10 @@
         "exit",
         "frame",
         "right",
-        "high",
         "contrast",
         "style"
       ],
-      "seconds": 6.26,
+      "seconds": 6.23,
       "tags": [
         "lighting",
         "motion_blur",
@@ -225,8 +220,8 @@
         "composition",
         "moonlight",
         "animation",
-        "cinematic",
-        "breaking"
+        "breaking",
+        null
       ]
     },
     {
@@ -235,7 +230,7 @@
       "words": 109,
       "mode": "multi_tag",
       "segments": 12,
-      "useful": 7,
+      "useful": 6,
       "best_posts": 2741731,
       "untranslated": [
         "extreme",
@@ -267,7 +262,6 @@
         "chain",
         "tightly",
         "left",
-        "focus",
         "action",
         "fingers",
         "rhythmically",
@@ -299,16 +293,16 @@
         "hard",
         "fidelity"
       ],
-      "seconds": 2.08,
+      "seconds": 4.07,
       "tags": [
         "teeth_clenched",
         "pleasure",
         "heavy_blush",
         "anime_style",
         "elasticity",
-        "realistic",
         null,
-        "covering"
+        "covering",
+        "dripping"
       ]
     },
     {
@@ -317,7 +311,7 @@
       "words": 212,
       "mode": "multi_tag",
       "segments": 12,
-      "useful": 9,
+      "useful": 8,
       "best_posts": 440480,
       "untranslated": [
         "massive",
@@ -340,7 +334,6 @@
         "thrusts",
         "repeatedly",
         "pounds",
-        "extremely",
         "long",
         "cock",
         "continuous",
@@ -399,7 +392,6 @@
         "naturally",
         "performs",
         "steady",
-        "low",
         "side",
         "rear",
         "orbiting",
@@ -418,7 +410,7 @@
         "exaggerated",
         "fidelity"
       ],
-      "seconds": 2.35,
+      "seconds": 2.22,
       "tags": [
         "stretched_vagina",
         "size_difference",
@@ -427,7 +419,7 @@
         "anime_style",
         "wide_eyed",
         "in_a",
-        "realistic"
+        "clenched"
       ]
     },
     {
@@ -436,7 +428,7 @@
       "words": 106,
       "mode": "multi_tag",
       "segments": 12,
-      "useful": 6,
+      "useful": 5,
       "best_posts": 2434810,
       "untranslated": [
         "fidelity",
@@ -492,7 +484,7 @@
         "glistening",
         "skin"
       ],
-      "seconds": 1.49,
+      "seconds": 1.46,
       "tags": [
         "eyes_wide_open",
         "anime_style",
@@ -500,8 +492,8 @@
         "embarrassed",
         null,
         "terrified",
-        "realistic",
-        "friction"
+        "friction",
+        null
       ]
     },
     {
@@ -534,7 +526,7 @@
         "deeply",
         "motions"
       ],
-      "seconds": 6.5,
+      "seconds": 6.34,
       "tags": [
         null,
         "along",
@@ -555,7 +547,7 @@
       "useful": 3,
       "best_posts": 41055,
       "untranslated": [],
-      "seconds": 2.3,
+      "seconds": 2.23,
       "tags": [
         "she",
         "is",
@@ -585,9 +577,7 @@
         "cheeks",
         "slightly",
         "gasps",
-        "high",
         "saturation",
-        "lighting",
         "floods",
         "scene",
         "warm",
@@ -625,7 +615,7 @@
         "urban",
         "setting"
       ],
-      "seconds": 8.16,
+      "seconds": 7.9,
       "tags": [
         "surrounded",
         "view",
@@ -646,9 +636,6 @@
       "useful": 9,
       "best_posts": 671226,
       "untranslated": [
-        "hyper",
-        "stylized",
-        "editorial",
         "portrait",
         "shot",
         "against",
@@ -753,12 +740,11 @@
         "predatory",
         "alertness",
         "studio",
-        "lighting",
         "hard",
         "theatrical",
         "iconic"
       ],
-      "seconds": 4.03,
+      "seconds": 3.92,
       "tags": [
         "thigh",
         "black_bikini_bottom",
@@ -823,7 +809,7 @@
         "zooms",
         "out"
       ],
-      "seconds": 1.5,
+      "seconds": 1.45,
       "tags": [
         "old",
         "completely",
@@ -839,7 +825,7 @@
       "mode": "multi_tag",
       "segments": 12,
       "useful": 4,
-      "best_posts": 1746376,
+      "best_posts": 119058,
       "untranslated": [
         "dynamic",
         "deep",
@@ -874,16 +860,16 @@
         "immersive",
         "glittering"
       ],
-      "seconds": 7.01,
+      "seconds": 6.95,
       "tags": [
         "flowey_the_flower",
         "blue_tone",
         "translucent",
         null,
-        "cinematic",
         "wrapping",
         "serenity",
-        "pulsing"
+        "pulsing",
+        "trembling"
       ]
     },
     {
@@ -892,10 +878,10 @@
       "words": 15,
       "mode": "multi_tag",
       "segments": 9,
-      "useful": 8,
+      "useful": 7,
       "best_posts": 1887817,
       "untranslated": [],
-      "seconds": 6.77,
+      "seconds": 6.66,
       "tags": [
         "roxanne_wolf",
         "rubbing",
@@ -903,7 +889,7 @@
         "ass",
         "monster",
         "roar",
-        "girl_on_girl",
+        null,
         "screaming"
       ]
     },
@@ -913,16 +899,16 @@
       "words": 9,
       "mode": "multi_tag",
       "segments": 6,
-      "useful": 3,
-      "best_posts": 302132,
+      "useful": 2,
+      "best_posts": 4802,
       "untranslated": [
         "childish"
       ],
-      "seconds": 4.34,
+      "seconds": 4.37,
       "tags": [
         "pc_game",
         "console",
-        "game_cg",
+        null,
         "video_game",
         "toon_(style)",
         "ugly"
@@ -942,7 +928,7 @@
         "poundings",
         "throughout"
       ],
-      "seconds": 7.99,
+      "seconds": 7.62,
       "tags": [
         null,
         null,
@@ -960,20 +946,20 @@
       "words": 16,
       "mode": "multi_tag",
       "segments": 9,
-      "useful": 6,
+      "useful": 5,
       "best_posts": 562231,
       "untranslated": [
         "fucks",
         "wildly"
       ],
-      "seconds": 1.15,
+      "seconds": 1.26,
       "tags": [
         "large",
         "muscular",
         "dog",
         "doggy_style_position",
         "scared",
-        "girl_on_girl",
+        null,
         "who",
         "scream"
       ]
@@ -987,15 +973,15 @@
       "useful": 6,
       "best_posts": 3059401,
       "untranslated": [],
-      "seconds": 4.0,
+      "seconds": 3.13,
       "tags": [
         "female",
         "wavy_hair",
         "close_up",
-        "cinematic",
         "seaside",
         "harbor",
         "pastel_(artwork)",
+        null,
         null
       ]
     },
@@ -1005,13 +991,12 @@
       "words": 58,
       "mode": "multi_tag",
       "segments": 7,
-      "useful": 5,
-      "best_posts": 1985097,
+      "useful": 3,
+      "best_posts": 24393,
       "untranslated": [
         "one",
         "leg",
         "lifted",
-        "high",
         "held",
         "dominant",
         "erect",
@@ -1042,12 +1027,12 @@
         "glistening",
         "contact"
       ],
-      "seconds": 3.51,
+      "seconds": 3.73,
       "tags": [
         "scared",
-        "brown_hair_female",
         null,
-        "girl_on_girl",
+        null,
+        null,
         "stands",
         "pressed",
         "wall"
@@ -1059,7 +1044,7 @@
       "words": 65,
       "mode": "multi_tag",
       "segments": 12,
-      "useful": 10,
+      "useful": 8,
       "best_posts": 190035,
       "untranslated": [
         "slowly",
@@ -1076,7 +1061,7 @@
         "panty",
         "drop"
       ],
-      "seconds": 5.54,
+      "seconds": 6.54,
       "tags": [
         "lighting",
         "black_panties",
@@ -1084,8 +1069,8 @@
         "inkling_girl",
         "skirt_up",
         "close_up",
-        "realistic",
-        "sequence"
+        "sequence",
+        "exposing"
       ]
     },
     {
@@ -1094,10 +1079,10 @@
       "words": 13,
       "mode": "multi_tag",
       "segments": 8,
-      "useful": 7,
+      "useful": 6,
       "best_posts": 1887817,
       "untranslated": [],
-      "seconds": 5.76,
+      "seconds": 5.79,
       "tags": [
         "roxanne_wolf",
         "rubbing",
@@ -1105,7 +1090,7 @@
         "ass",
         "monster",
         "roar",
-        "girl_on_girl",
+        null,
         "screaming"
       ]
     },
@@ -1115,18 +1100,18 @@
       "words": 12,
       "mode": "multi_tag",
       "segments": 9,
-      "useful": 7,
+      "useful": 6,
       "best_posts": 195454,
       "untranslated": [
         "meanwhile"
       ],
-      "seconds": 7.41,
+      "seconds": 7.52,
       "tags": [
         "2d_animated",
         "short",
         "inkling_girl",
-        "say_(saynamari)",
-        "hello_kitty",
+        null,
+        null,
         "anon",
         "she",
         "is"
@@ -1137,9 +1122,9 @@
       "prompt": null,
       "words": 49,
       "mode": "multi_tag",
-      "segments": 5,
+      "segments": 3,
       "useful": 0,
-      "best_posts": 355,
+      "best_posts": 144,
       "untranslated": [
         "safe",
         "anime",
@@ -1172,11 +1157,9 @@
         "sky",
         "clouds"
       ],
-      "seconds": 5.17,
+      "seconds": 3.95,
       "tags": [
-        "rosa",
         "best",
-        "quality",
         "score",
         "7"
       ]
@@ -1187,11 +1170,9 @@
       "words": 143,
       "mode": "multi_tag",
       "segments": 12,
-      "useful": 9,
+      "useful": 8,
       "best_posts": 152322,
       "untranslated": [
-        "hyper",
-        "detailed",
         "cybernetic",
         "prototype",
         "standing",
@@ -1236,7 +1217,6 @@
         "through",
         "embedded",
         "circuits",
-        "cinematic",
         "camera",
         "movement",
         "blurred",
@@ -1245,7 +1225,6 @@
         "lab",
         "equipment",
         "faintly",
-        "lighting",
         "strong",
         "rim",
         "outlining",
@@ -1253,7 +1232,7 @@
         "volumetric",
         "sci"
       ],
-      "seconds": 6.02,
+      "seconds": 5.97,
       "tags": [
         "depth_of_field",
         "holo",
@@ -1262,7 +1241,7 @@
         "concept_art",
         "from_above",
         "film_grain",
-        "illustration_room_nagi"
+        null
       ]
     },
     {
@@ -1285,7 +1264,7 @@
         "pussies",
         "screams"
       ],
-      "seconds": 0.58,
+      "seconds": 0.56,
       "tags": [
         "2girls",
         "in_a",
@@ -1303,7 +1282,7 @@
       "words": 158,
       "mode": "multi_tag",
       "segments": 12,
-      "useful": 8,
+      "useful": 6,
       "best_posts": 2741731,
       "untranslated": [
         "first",
@@ -1377,7 +1356,7 @@
         "slightly",
         "fidelity"
       ],
-      "seconds": 2.26,
+      "seconds": 2.3,
       "tags": [
         "eyes_rolling_back",
         "heavy_metal",
@@ -1386,7 +1365,7 @@
         "anal",
         "in_a",
         "animation",
-        "realistic"
+        "overflow"
       ]
     },
     {
@@ -1440,7 +1419,7 @@
         "body",
         "slightly"
       ],
-      "seconds": 2.18,
+      "seconds": 2.06,
       "tags": [
         null,
         "city",
@@ -1455,7 +1434,7 @@
       "words": 121,
       "mode": "multi_tag",
       "segments": 12,
-      "useful": 5,
+      "useful": 4,
       "best_posts": 150010,
       "untranslated": [
         "fidelity",
@@ -1486,7 +1465,6 @@
         "body",
         "reach",
         "something",
-        "low",
         "down",
         "slightly",
         "leans",
@@ -1507,23 +1485,22 @@
         "intimate",
         "warm",
         "ambient",
-        "lighting",
         "reflecting",
         "off",
         "bottles",
         "background",
         "simulating"
       ],
-      "seconds": 7.29,
+      "seconds": 7.51,
       "tags": [
         "short",
         "animation",
         null,
         "anime_style",
-        "realistic",
         null,
         "forward",
-        "gravity"
+        "gravity",
+        "physics"
       ]
     },
     {
@@ -1555,7 +1532,7 @@
         "背景人很多",
         "倒着走"
       ],
-      "seconds": 1.36,
+      "seconds": 1.47,
       "tags": []
     },
     {
@@ -1564,7 +1541,7 @@
       "words": 55,
       "mode": "multi_tag",
       "segments": 12,
-      "useful": 10,
+      "useful": 8,
       "best_posts": 4544975,
       "untranslated": [
         "depicting",
@@ -1585,12 +1562,12 @@
         "against",
         "will"
       ],
-      "seconds": 9.44,
+      "seconds": 11.17,
       "tags": [
         "2d_animated",
         "fat",
         "inkling_girl",
-        "explicit_text",
+        null,
         "fellatio",
         "between",
         "escape",
@@ -1617,7 +1594,7 @@
         "pussies",
         "screams"
       ],
-      "seconds": 0.56,
+      "seconds": 0.63,
       "tags": [
         "2girls",
         "in_a",
@@ -1679,14 +1656,12 @@
         "undone",
         "suggest",
         "sensuality",
-        "detail",
         "eye",
         "reflections",
         "highlights",
         "ffffff",
         "designed",
         "resembling",
-        "professional",
         "acting",
         "draws",
         "center",
@@ -1701,7 +1676,7 @@
         "scene",
         "randomly"
       ],
-      "seconds": 7.57,
+      "seconds": 8.38,
       "tags": [
         "chromatic_aberration",
         "seductive",
@@ -1719,7 +1694,7 @@
       "words": 80,
       "mode": "multi_tag",
       "segments": 12,
-      "useful": 7,
+      "useful": 6,
       "best_posts": 2434810,
       "untranslated": [
         "fidelity",
@@ -1757,7 +1732,7 @@
         "heavily",
         "slightly"
       ],
-      "seconds": 3.98,
+      "seconds": 4.18,
       "tags": [
         "eyes_wide_open",
         "water",
@@ -1765,8 +1740,8 @@
         "wet_clothes",
         "glistening",
         "trembling",
-        "realistic",
-        "clinging"
+        "clinging",
+        "movement"
       ]
     },
     {
@@ -1775,17 +1750,17 @@
       "words": 15,
       "mode": "multi_tag",
       "segments": 9,
-      "useful": 5,
-      "best_posts": 7273990,
+      "useful": 4,
+      "best_posts": 2137924,
       "untranslated": [],
-      "seconds": 2.11,
+      "seconds": 2.28,
       "tags": [
         "change",
         "furniture",
         "leather",
         "difference",
         null,
-        "1_girl",
+        null,
         "fur",
         "material"
       ]
@@ -1811,7 +1786,7 @@
         "place",
         "steady"
       ],
-      "seconds": 1.46,
+      "seconds": 1.52,
       "tags": [
         "anime_style",
         "animation",

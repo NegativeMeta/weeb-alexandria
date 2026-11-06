@@ -124,6 +124,8 @@ NSFW 表示可能不适合工作场所或普通受众的内容；SFW 表示通�
 
 工具说明和服务器指令使用英语，因为阅读它们的是调用方模型；只有本文档被翻译。已知标签请用英语发送；当 `query_translation.untranslated` 列出词语时，说明这些词没有匹配到标签，请用英语重试。
 
+`finished`、`cinematic`、`sharp` 之类的质量形容词会从提示词部分中丢弃；有些组合词本身是标签但组合不是，会被改写（`adult woman` → `mature_female`）。
+
 如果没有直接结果，该工具还会返回 `suggestions` 列表，为拼写错误或非标准名称提供可能的标签。
 
 ### `get_knowledge`

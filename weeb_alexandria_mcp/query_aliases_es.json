@@ -1,5 +1,5 @@
 {
-  "_comment": "Spanish phrase -> English tag phrase. Generated from the local tag library: every target was verified to resolve to a tag with >=1000 posts. Edit freely; the loader only needs 'phrases'.",
+  "_comment": "Phrase -> English tag phrase. Generated from the local tag library: every target was verified to resolve to a tag with >=1000 posts. 'phrases' holds Spanish sources, 'english_phrases' English ones. Edit freely; the loader only needs those keys.",
   "phrases": {
     "a cuatro patas": "on all fours",
     "abrazadas": "hug",
@@ -169,5 +169,13 @@
     "vestido largo": "long dress",
     "vibrador": "vibrator",
     "vista amplia": "wide shot"
+  },
+  "english_phrases": {
+    "adult man": "mature male",
+    "adult men": "mature male",
+    "adult woman": "mature female",
+    "adult women": "mature female",
+    "grown man": "mature male",
+    "grown woman": "mature female"
   }
 }

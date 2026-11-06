@@ -173,6 +173,8 @@ The model can use the appropriate Weeb Alexandria tool, such as `get_character`,
 
 If `search_knowledge` receives several tags joined in one query, for example `blushing red face`, it can return `query_mode: "multi_tag"`, separate `tag_library.query_parts`, and a top-level `query_recommendation`. Agents should read `query_recommendation.queries`, call `search_knowledge` once for each query, and combine the results only after those independent searches.
 
+A written prompt is handled the same way: the query is cut on punctuation and into short windows, quality adjectives (`finished`, `cinematic`, `controlled`, `sharp`, `focus`) are dropped, phrase rewrites fix combinations that are not tags (`adult woman` → `mature_female`), and at most 12 of the most specific parts come back, with `query_parts_total` reporting how many were found. A part whose word only matched by prefix keeps no result rather than answering with a guess (`skin` used to return `skin_fang`).
+
 ```json
 {
   "query_recommendation": {
