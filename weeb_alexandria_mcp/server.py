@@ -938,6 +938,10 @@ def _coverage_fallback(con: sqlite3.Connection, query: str,
         for row in _tag_rows(con, token, category, 3):
             if (row.get("post_count") or 0) < _MIN_ANSWER_POSTS:
                 continue
+            # A single word must not be answered with a phrase that merely starts
+            # with it: "two" must not become `two_piece_swimsuit`.
+            if len(str(row.get("name") or "").split("_")) != 1:
+                break
             key = str(row.get("name") or "").lower()
             if key in seen:
                 break
@@ -1290,6 +1294,10 @@ _QUERY_STOPWORDS = {
     "by", "from", "into", "over", "under", "her", "his", "their",
     "de", "del", "la", "el", "los", "las", "con", "en", "y", "o", "para", "por",
     "un", "una", "unos", "unas", "al", "que", "su", "sus",
+    # Spanish verbs/particles left after translation: they are never tags.
+    "mostrando", "mirando", "bajo", "sobre", "desde", "hasta", "muy", "sin",
+    "entre", "hacia", "tras", "mientras", "como", "mas", "pero", "ya",
+    "vista", "escena", "gran", "grande", "pequeña", "pequeño",
 }
 
 
@@ -1336,8 +1344,34 @@ def _translate_query(query: str) -> tuple[str, list[dict]]:
         applied.append({"spanish": spanish, "english": phrases[spanish]})
     if not applied:
         return query, []
-    translated = re.sub(r"\s+", " ", translated).strip()
-    return translated, applied
+    translated = re.sub(r"\s+", " ", translated)
+    # The injected spaces must not break comma-separated prompt lists
+    # (`1girl, kimono , sitting` is not segmentable).
+    translated = re.sub(r"\s+([,;|])", r"\1", translated)
+    translated = re.sub(r"([,;|])(?=\S)", r"\1 ", translated)
+    return translated.strip(), applied
+
+
+_NUMBER_WORDS = {"one": "1", "two": "2", "three": "3", "four": "4",
+                 "five": "5", "six": "6", "seven": "7"}
+
+
+def _normalize_count_words(query: str) -> str:
+    """Turn ``two girls`` into ``2girls``, the tag the library actually holds.
+
+    ``two_girls`` is a 69-post fragment while ``2girls`` has 1 320 802.
+    """
+    pattern = re.compile(
+        r"\b(one|two|three|four|five|six|seven)\s+(girls?|boys?)\b", re.IGNORECASE)
+    digits = re.compile(r"\b(\d)\s+(girls?|boys?)\b", re.IGNORECASE)
+
+    def from_word(match: re.Match[str]) -> str:
+        return _NUMBER_WORDS[match.group(1).lower()] + match.group(2).lower()
+
+    def from_digit(match: re.Match[str]) -> str:
+        return match.group(1) + match.group(2).lower()
+
+    return digits.sub(from_digit, pattern.sub(from_word, query))
 
 
 def _is_placeholder_item(item: dict) -> bool:
@@ -1492,24 +1526,9 @@ def _alias_suggestions(con: sqlite3.Connection, query: str,
     return suggestions
 
 
-def _query_tag_segments(con: sqlite3.Connection, query: str,
-                        category: Optional[str]) -> list[str]:
-    """Find known tag phrases inside a glued multi-tag query.
-
-    The full-query resolver runs first. This helper is only used after that
-    resolver found no strong result, so legitimate multi-word tags such as
-    ``red face`` remain intact.
-    """
-    separator = re.compile(r"[,;|+\n]+")
-    if separator.search(query):
-        parts = [part.strip() for part in separator.split(query) if part.strip()]
-        if len(parts) < 2:
-            return []
-        if all(_exact_tag_rows(con, _normalize_tag(part), category) for part in parts):
-            return parts
-        return []
-
-    words = re.findall(r"[^\W_]+", query, re.UNICODE)
+def _span_tag_segments(con: sqlite3.Connection, words: list[str],
+                       category: Optional[str]) -> list[str]:
+    """Cover a word list with the fewest known tag spans (dynamic programming)."""
     if len(words) < 2 or len(words) > 12:
         return []
     known_spans: dict[tuple[int, int], bool] = {}
@@ -1532,7 +1551,45 @@ def _query_tag_segments(con: sqlite3.Connection, query: str,
             best[start] = min(candidates, key=lambda parts: (len(parts), -max(
                 len(part.split()) for part in parts
             )))
-    segments = best[0] or []
+        elif best[start + 1] is not None:
+            # An unknown word ("escena", "grande") must not void the whole prompt:
+            # skip it and keep the spans around it.
+            best[start] = best[start + 1]
+    return best[0] or []
+
+
+def _query_tag_segments(con: sqlite3.Connection, query: str,
+                        category: Optional[str]) -> list[str]:
+    """Find known tag phrases inside a glued multi-tag query.
+
+    The full-query resolver runs first. This helper is only used after that
+    resolver found no strong result, so legitimate multi-word tags such as
+    ``red face`` remain intact.
+
+    A comma list used to be all-or-nothing: one unknown entry
+    ("sitting in snow") discarded the whole prompt, so a written prompt block
+    returned nothing. Unknown entries are now segmented word by word instead.
+    """
+    separator = re.compile(r"[,;|+\n]+")
+    if separator.search(query):
+        raw_parts = [part.strip() for part in separator.split(query) if part.strip()]
+        if len(raw_parts) < 2:
+            return []
+        segments: list[str] = []
+        for part in raw_parts:
+            if _exact_tag_rows(con, _normalize_tag(part), category):
+                segments.append(part)
+                continue
+            words = re.findall(r"[^\W_]+", part, re.UNICODE)
+            segments.extend(_span_tag_segments(con, words, category))
+        filtered = [
+            part for part in segments
+            if _normalize_tag(part) not in _QUERY_STOPWORDS
+        ]
+        return filtered if len(filtered) >= 2 else []
+
+    words = re.findall(r"[^\W_]+", query, re.UNICODE)
+    segments = _span_tag_segments(con, words, category)
     # Glue words are never tags: dropping them keeps the parts meaningful without
     # breaking phrases that legitimately contain one ("day of the dead").
     filtered = [
@@ -1553,7 +1610,12 @@ def _has_strong_tag_recommendation(suggestions: list[dict]) -> bool:
 def _multi_tag_part(con: sqlite3.Connection, query: str,
                     category: Optional[str], limit: int) -> dict[str, Any]:
     rows = _tag_rows(con, query, category, limit)
-    rows, coverage_note = _coverage_fallback(con, query, category, limit, rows)
+    rows, coverage_note = _coverage_fallback(con, query, category, limit, rows,
+                                             allow_character=True)
+    # A tag every source reports with zero posts is scraping noise ("vestido_largo"),
+    # not something to hand back as a prompt segment.
+    if rows and all((row.get("post_count") or 0) == 0 for row in rows):
+        rows = []
     part: dict[str, Any] = {
         "query": query,
         "results": rows,
@@ -1605,6 +1667,7 @@ def search_knowledge(query: str, category: Optional[str] = None,
         con = _db()
         try:
             lookup_query, translations = _translate_query(query)
+            lookup_query = _normalize_count_words(lookup_query)
             tag_results = _tag_rows(con, lookup_query, category, limit)
             tag_results, coverage_note = _coverage_fallback(
                 con, lookup_query, category, limit, tag_results,
@@ -1627,11 +1690,19 @@ def search_knowledge(query: str, category: Optional[str] = None,
                 explicit_separator = bool(re.search(r"[,;|+\n]", query))
                 if parts and (
                     explicit_separator
+                    or len(parts) >= 3
                     or not _has_strong_tag_recommendation(full_suggestions)
                 ):
                     result["tag_library"] = _multi_tag_response(
                         con, query, parts, category, limit
                     )
+                    if translations:
+                        # Keep the translation visible: the multi-tag payload replaces
+                        # the single-query dict that carried it.
+                        result["tag_library"]["query_translation"] = {
+                            "applied": translations,
+                            "searched_as": lookup_query,
+                        }
                     result["query_recommendation"] = result["tag_library"][
                         "recommendation"
                     ]

@@ -301,3 +301,16 @@ and fails if any answer lands below 1000 posts without two wiki definitions:
 ```bash
 .venv/Scripts/python.exe scripts/mcp_consistency_probe.py --json reports/mcp_consistency_probe.json
 ```
+
+## Prompt-phrase probe
+
+`mcp_prompt_phrase_probe.py` runs 25 prompt-style phrases (Spanish sentences and
+English comma lists) and reports what share of the produced segments resolve to a
+tag with at least 1000 posts:
+
+```bash
+.venv/Scripts/python.exe scripts/mcp_prompt_phrase_probe.py --json reports/mcp_prompt_phrase_probe.json
+```
+
+Baseline before the segmentation fixes was 89.3% useful (12/12 Spanish phrases at
+0%); the gate now reports 100% over 98 segments.

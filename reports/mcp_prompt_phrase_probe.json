@@ -1,0 +1,848 @@
+{
+  "phrases": 25,
+  "multi_tag": 25,
+  "single": 0,
+  "segments": 98,
+  "useful": 98,
+  "useful_rate": 1.0,
+  "cases": [
+    {
+      "phrase": "chica con kimono rojo sentada en la nieve, vista amplia",
+      "mode": "multi_tag",
+      "results": 0,
+      "segments": [
+        {
+          "segment": "1girl",
+          "tag": "1girl",
+          "posts": 7735514,
+          "useful": true
+        },
+        {
+          "segment": "red kimono",
+          "tag": "red_kimono",
+          "posts": 25320,
+          "useful": true
+        },
+        {
+          "segment": "sitting",
+          "tag": "sitting",
+          "posts": 1214365,
+          "useful": true
+        },
+        {
+          "segment": "snow",
+          "tag": "snow",
+          "posts": 56267,
+          "useful": true
+        },
+        {
+          "segment": "wide shot",
+          "tag": "wide_shot",
+          "posts": 21573,
+          "useful": true
+        }
+      ],
+      "usable": 5,
+      "coverage": 1.0,
+      "translated_as": null
+    },
+    {
+      "phrase": "gura de espaldas mirando el mar al atardecer",
+      "mode": "multi_tag",
+      "results": 0,
+      "segments": [
+        {
+          "segment": "gura",
+          "tag": "gawr_gura",
+          "posts": 17354,
+          "useful": true
+        },
+        {
+          "segment": "from behind",
+          "tag": "from_behind",
+          "posts": 385108,
+          "useful": true
+        },
+        {
+          "segment": "ocean",
+          "tag": "ocean",
+          "posts": 144872,
+          "useful": true
+        },
+        {
+          "segment": "sunset",
+          "tag": "sunset",
+          "posts": 39660,
+          "useful": true
+        }
+      ],
+      "usable": 4,
+      "coverage": 1.0,
+      "translated_as": null
+    },
+    {
+      "phrase": "dos chicas abrazadas en la cama con luz suave",
+      "mode": "multi_tag",
+      "results": 0,
+      "segments": [
+        {
+          "segment": "2girls",
+          "tag": "2girls",
+          "posts": 1320802,
+          "useful": true
+        },
+        {
+          "segment": "hug",
+          "tag": "hug",
+          "posts": 171083,
+          "useful": true
+        },
+        {
+          "segment": "on bed",
+          "tag": "on_bed",
+          "posts": 205106,
+          "useful": true
+        },
+        {
+          "segment": "soft lighting",
+          "tag": "lighting",
+          "posts": 25610,
+          "useful": true
+        }
+      ],
+      "usable": 4,
+      "coverage": 1.0,
+      "translated_as": null
+    },
+    {
+      "phrase": "primer plano de cara con ahegao y lengua fuera",
+      "mode": "multi_tag",
+      "results": 0,
+      "segments": [
+        {
+          "segment": "close up",
+          "tag": "close_up",
+          "posts": 53207,
+          "useful": true
+        },
+        {
+          "segment": "face",
+          "tag": "face",
+          "posts": 27427,
+          "useful": true
+        },
+        {
+          "segment": "ahegao",
+          "tag": "ahegao",
+          "posts": 72137,
+          "useful": true
+        },
+        {
+          "segment": "tongue out",
+          "tag": "tongue_out",
+          "posts": 677809,
+          "useful": true
+        }
+      ],
+      "usable": 4,
+      "coverage": 1.0,
+      "translated_as": null
+    },
+    {
+      "phrase": "cuerpo completo en la playa con traje de baño blanco",
+      "mode": "multi_tag",
+      "results": 0,
+      "segments": [
+        {
+          "segment": "full body",
+          "tag": "full_body",
+          "posts": 1248725,
+          "useful": true
+        },
+        {
+          "segment": "beach",
+          "tag": "beach",
+          "posts": 149111,
+          "useful": true
+        },
+        {
+          "segment": "white bikini",
+          "tag": "white_bikini",
+          "posts": 133164,
+          "useful": true
+        }
+      ],
+      "usable": 3,
+      "coverage": 1.0,
+      "translated_as": null
+    },
+    {
+      "phrase": "chica gato con medias negras y falda corta",
+      "mode": "multi_tag",
+      "results": 0,
+      "segments": [
+        {
+          "segment": "cat girl",
+          "tag": "cat_girl",
+          "posts": 156836,
+          "useful": true
+        },
+        {
+          "segment": "black thighhighs",
+          "tag": "black_thighhighs",
+          "posts": 472891,
+          "useful": true
+        },
+        {
+          "segment": "miniskirt",
+          "tag": "miniskirt",
+          "posts": 359783,
+          "useful": true
+        }
+      ],
+      "usable": 3,
+      "coverage": 1.0,
+      "translated_as": null
+    },
+    {
+      "phrase": "escena de oficina con camisa blanca arremangada",
+      "mode": "multi_tag",
+      "results": 0,
+      "segments": [
+        {
+          "segment": "office",
+          "tag": "office",
+          "posts": 8348,
+          "useful": true
+        },
+        {
+          "segment": "white shirt",
+          "tag": "white_shirt",
+          "posts": 1292976,
+          "useful": true
+        },
+        {
+          "segment": "rolled up sleeves",
+          "tag": "rolled_up_sleeves",
+          "posts": 2665,
+          "useful": true
+        }
+      ],
+      "usable": 3,
+      "coverage": 1.0,
+      "translated_as": null
+    },
+    {
+      "phrase": "vista desde arriba de una chica acostada en sábanas",
+      "mode": "multi_tag",
+      "results": 0,
+      "segments": [
+        {
+          "segment": "from above",
+          "tag": "from_above",
+          "posts": 152322,
+          "useful": true
+        },
+        {
+          "segment": "1girl",
+          "tag": "1girl",
+          "posts": 7735514,
+          "useful": true
+        },
+        {
+          "segment": "lying",
+          "tag": "lying",
+          "posts": 761104,
+          "useful": true
+        },
+        {
+          "segment": "bedsheet",
+          "tag": "bedsheet",
+          "posts": 128434,
+          "useful": true
+        }
+      ],
+      "usable": 4,
+      "coverage": 1.0,
+      "translated_as": null
+    },
+    {
+      "phrase": "retrato nocturno con luces de neón y lluvia",
+      "mode": "multi_tag",
+      "results": 0,
+      "segments": [
+        {
+          "segment": "portrait",
+          "tag": "portrait",
+          "posts": 244452,
+          "useful": true
+        },
+        {
+          "segment": "night",
+          "tag": "night",
+          "posts": 169613,
+          "useful": true
+        },
+        {
+          "segment": "neon lights",
+          "tag": "neon_lights",
+          "posts": 3919,
+          "useful": true
+        },
+        {
+          "segment": "rain",
+          "tag": "rain",
+          "posts": 44834,
+          "useful": true
+        }
+      ],
+      "usable": 4,
+      "coverage": 1.0,
+      "translated_as": null
+    },
+    {
+      "phrase": "chica pelirroja con gafas y suéter grande",
+      "mode": "multi_tag",
+      "results": 0,
+      "segments": [
+        {
+          "segment": "1girl",
+          "tag": "1girl",
+          "posts": 7735514,
+          "useful": true
+        },
+        {
+          "segment": "red hair",
+          "tag": "red_hair",
+          "posts": 823159,
+          "useful": true
+        },
+        {
+          "segment": "glasses",
+          "tag": "glasses",
+          "posts": 538324,
+          "useful": true
+        },
+        {
+          "segment": "sweater",
+          "tag": "sweater",
+          "posts": 286265,
+          "useful": true
+        }
+      ],
+      "usable": 4,
+      "coverage": 1.0,
+      "translated_as": null
+    },
+    {
+      "phrase": "plano medio de espaldas mostrando la espalda y el culo",
+      "mode": "multi_tag",
+      "results": 0,
+      "segments": [
+        {
+          "segment": "cowboy shot",
+          "tag": "cowboy_shot",
+          "posts": 782300,
+          "useful": true
+        },
+        {
+          "segment": "from behind",
+          "tag": "from_behind",
+          "posts": 385108,
+          "useful": true
+        },
+        {
+          "segment": "back",
+          "tag": "back",
+          "posts": 140240,
+          "useful": true
+        },
+        {
+          "segment": "ass",
+          "tag": "ass",
+          "posts": 1233621,
+          "useful": true
+        }
+      ],
+      "usable": 4,
+      "coverage": 1.0,
+      "translated_as": null
+    },
+    {
+      "phrase": "kimono blanco con flores y paraguas bajo la lluvia",
+      "mode": "multi_tag",
+      "results": 0,
+      "segments": [
+        {
+          "segment": "white kimono",
+          "tag": "white_kimono",
+          "posts": 50722,
+          "useful": true
+        },
+        {
+          "segment": "flower",
+          "tag": "flower",
+          "posts": 849543,
+          "useful": true
+        },
+        {
+          "segment": "umbrella",
+          "tag": "umbrella",
+          "posts": 113619,
+          "useful": true
+        },
+        {
+          "segment": "rain",
+          "tag": "rain",
+          "posts": 44834,
+          "useful": true
+        }
+      ],
+      "usable": 4,
+      "coverage": 1.0,
+      "translated_as": null
+    },
+    {
+      "phrase": "1girl, kimono, sitting in snow, wide shot",
+      "mode": "multi_tag",
+      "results": 0,
+      "segments": [
+        {
+          "segment": "1girl",
+          "tag": "1girl",
+          "posts": 7735514,
+          "useful": true
+        },
+        {
+          "segment": "kimono",
+          "tag": "kimono",
+          "posts": 319634,
+          "useful": true
+        },
+        {
+          "segment": "sitting",
+          "tag": "sitting",
+          "posts": 1214365,
+          "useful": true
+        },
+        {
+          "segment": "snow",
+          "tag": "snow",
+          "posts": 56267,
+          "useful": true
+        },
+        {
+          "segment": "wide shot",
+          "tag": "wide_shot",
+          "posts": 21573,
+          "useful": true
+        }
+      ],
+      "usable": 5,
+      "coverage": 1.0,
+      "translated_as": null
+    },
+    {
+      "phrase": "from behind, looking at viewer, beach, sunset",
+      "mode": "multi_tag",
+      "results": 0,
+      "segments": [
+        {
+          "segment": "from behind",
+          "tag": "from_behind",
+          "posts": 385108,
+          "useful": true
+        },
+        {
+          "segment": "looking at viewer",
+          "tag": "looking_at_viewer",
+          "posts": 4472063,
+          "useful": true
+        },
+        {
+          "segment": "beach",
+          "tag": "beach",
+          "posts": 149111,
+          "useful": true
+        },
+        {
+          "segment": "sunset",
+          "tag": "sunset",
+          "posts": 39660,
+          "useful": true
+        }
+      ],
+      "usable": 4,
+      "coverage": 1.0,
+      "translated_as": null
+    },
+    {
+      "phrase": "two girls, hugging, bed, soft lighting",
+      "mode": "multi_tag",
+      "results": 0,
+      "segments": [
+        {
+          "segment": "2girls",
+          "tag": "2girls",
+          "posts": 1320802,
+          "useful": true
+        },
+        {
+          "segment": "hugging",
+          "tag": "hugging",
+          "posts": 93839,
+          "useful": true
+        },
+        {
+          "segment": "bed",
+          "tag": "bed",
+          "posts": 243741,
+          "useful": true
+        },
+        {
+          "segment": "soft lighting",
+          "tag": "lighting",
+          "posts": 25610,
+          "useful": true
+        }
+      ],
+      "usable": 4,
+      "coverage": 1.0,
+      "translated_as": null
+    },
+    {
+      "phrase": "close-up, ahegao, tongue out",
+      "mode": "multi_tag",
+      "results": 0,
+      "segments": [
+        {
+          "segment": "close-up",
+          "tag": "close_up",
+          "posts": 53207,
+          "useful": true
+        },
+        {
+          "segment": "ahegao",
+          "tag": "ahegao",
+          "posts": 72137,
+          "useful": true
+        },
+        {
+          "segment": "tongue out",
+          "tag": "tongue_out",
+          "posts": 677809,
+          "useful": true
+        }
+      ],
+      "usable": 3,
+      "coverage": 1.0,
+      "translated_as": null
+    },
+    {
+      "phrase": "full body, swimsuit, beach, white bikini",
+      "mode": "multi_tag",
+      "results": 0,
+      "segments": [
+        {
+          "segment": "full body",
+          "tag": "full_body",
+          "posts": 1248725,
+          "useful": true
+        },
+        {
+          "segment": "swimsuit",
+          "tag": "swimsuit",
+          "posts": 833502,
+          "useful": true
+        },
+        {
+          "segment": "beach",
+          "tag": "beach",
+          "posts": 149111,
+          "useful": true
+        },
+        {
+          "segment": "white bikini",
+          "tag": "white_bikini",
+          "posts": 133164,
+          "useful": true
+        }
+      ],
+      "usable": 4,
+      "coverage": 1.0,
+      "translated_as": null
+    },
+    {
+      "phrase": "cat girl, black thighhighs, miniskirt",
+      "mode": "multi_tag",
+      "results": 0,
+      "segments": [
+        {
+          "segment": "cat girl",
+          "tag": "cat_girl",
+          "posts": 156836,
+          "useful": true
+        },
+        {
+          "segment": "black thighhighs",
+          "tag": "black_thighhighs",
+          "posts": 472891,
+          "useful": true
+        },
+        {
+          "segment": "miniskirt",
+          "tag": "miniskirt",
+          "posts": 359783,
+          "useful": true
+        }
+      ],
+      "usable": 3,
+      "coverage": 1.0,
+      "translated_as": null
+    },
+    {
+      "phrase": "office lady, white shirt, rolled-up sleeves",
+      "mode": "multi_tag",
+      "results": 0,
+      "segments": [
+        {
+          "segment": "office lady",
+          "tag": "office_lady",
+          "posts": 21800,
+          "useful": true
+        },
+        {
+          "segment": "white shirt",
+          "tag": "white_shirt",
+          "posts": 1292976,
+          "useful": true
+        },
+        {
+          "segment": "rolled-up sleeves",
+          "tag": "rolled_up_sleeves",
+          "posts": 2665,
+          "useful": true
+        }
+      ],
+      "usable": 3,
+      "coverage": 1.0,
+      "translated_as": null
+    },
+    {
+      "phrase": "from above, lying, bedsheet",
+      "mode": "multi_tag",
+      "results": 0,
+      "segments": [
+        {
+          "segment": "from above",
+          "tag": "from_above",
+          "posts": 152322,
+          "useful": true
+        },
+        {
+          "segment": "lying",
+          "tag": "lying",
+          "posts": 761104,
+          "useful": true
+        },
+        {
+          "segment": "bedsheet",
+          "tag": "bedsheet",
+          "posts": 128434,
+          "useful": true
+        }
+      ],
+      "usable": 3,
+      "coverage": 1.0,
+      "translated_as": null
+    },
+    {
+      "phrase": "night, neon lights, rain, portrait",
+      "mode": "multi_tag",
+      "results": 0,
+      "segments": [
+        {
+          "segment": "night",
+          "tag": "night",
+          "posts": 169613,
+          "useful": true
+        },
+        {
+          "segment": "neon lights",
+          "tag": "neon_lights",
+          "posts": 3919,
+          "useful": true
+        },
+        {
+          "segment": "rain",
+          "tag": "rain",
+          "posts": 44834,
+          "useful": true
+        },
+        {
+          "segment": "portrait",
+          "tag": "portrait",
+          "posts": 244452,
+          "useful": true
+        }
+      ],
+      "usable": 4,
+      "coverage": 1.0,
+      "translated_as": null
+    },
+    {
+      "phrase": "red hair, glasses, oversized sweater",
+      "mode": "multi_tag",
+      "results": 0,
+      "segments": [
+        {
+          "segment": "red hair",
+          "tag": "red_hair",
+          "posts": 823159,
+          "useful": true
+        },
+        {
+          "segment": "glasses",
+          "tag": "glasses",
+          "posts": 538324,
+          "useful": true
+        },
+        {
+          "segment": "oversized sweater",
+          "tag": "sweater",
+          "posts": 286265,
+          "useful": true
+        }
+      ],
+      "usable": 3,
+      "coverage": 1.0,
+      "translated_as": null
+    },
+    {
+      "phrase": "from behind, bare back, ass",
+      "mode": "multi_tag",
+      "results": 0,
+      "segments": [
+        {
+          "segment": "from behind",
+          "tag": "from_behind",
+          "posts": 385108,
+          "useful": true
+        },
+        {
+          "segment": "bare back",
+          "tag": "bare_back",
+          "posts": 26439,
+          "useful": true
+        },
+        {
+          "segment": "ass",
+          "tag": "ass",
+          "posts": 1233621,
+          "useful": true
+        }
+      ],
+      "usable": 3,
+      "coverage": 1.0,
+      "translated_as": null
+    },
+    {
+      "phrase": "white kimono, floral print, umbrella, rain",
+      "mode": "multi_tag",
+      "results": 0,
+      "segments": [
+        {
+          "segment": "white kimono",
+          "tag": "white_kimono",
+          "posts": 50722,
+          "useful": true
+        },
+        {
+          "segment": "floral print",
+          "tag": "floral_print",
+          "posts": 118610,
+          "useful": true
+        },
+        {
+          "segment": "umbrella",
+          "tag": "umbrella",
+          "posts": 113619,
+          "useful": true
+        },
+        {
+          "segment": "rain",
+          "tag": "rain",
+          "posts": 44834,
+          "useful": true
+        }
+      ],
+      "usable": 4,
+      "coverage": 1.0,
+      "translated_as": null
+    },
+    {
+      "phrase": "1girl, solo, long hair, blue eyes, large breasts, looking at viewer, from side, indoors, morning light",
+      "mode": "multi_tag",
+      "results": 0,
+      "segments": [
+        {
+          "segment": "1girl",
+          "tag": "1girl",
+          "posts": 7735514,
+          "useful": true
+        },
+        {
+          "segment": "solo",
+          "tag": "solo",
+          "posts": 7205637,
+          "useful": true
+        },
+        {
+          "segment": "long hair",
+          "tag": "long_hair",
+          "posts": 5695616,
+          "useful": true
+        },
+        {
+          "segment": "blue eyes",
+          "tag": "blue_eyes",
+          "posts": 2693065,
+          "useful": true
+        },
+        {
+          "segment": "large breasts",
+          "tag": "large_breasts",
+          "posts": 2067038,
+          "useful": true
+        },
+        {
+          "segment": "looking at viewer",
+          "tag": "looking_at_viewer",
+          "posts": 4472063,
+          "useful": true
+        },
+        {
+          "segment": "from side",
+          "tag": "from_side",
+          "posts": 308101,
+          "useful": true
+        },
+        {
+          "segment": "indoors",
+          "tag": "indoors",
+          "posts": 590855,
+          "useful": true
+        },
+        {
+          "segment": "morning light",
+          "tag": "morning",
+          "posts": 4007,
+          "useful": true
+        }
+      ],
+      "usable": 9,
+      "coverage": 1.0,
+      "translated_as": null
+    }
+  ]
+}

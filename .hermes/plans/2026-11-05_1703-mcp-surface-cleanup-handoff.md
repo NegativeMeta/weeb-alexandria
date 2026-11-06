@@ -236,6 +236,39 @@ bench **54/54 (100%)** con tres casos nuevos (`saber`, `hu tao`, `miku`), `111 t
 
 ---
 
+## 0h. Prompts escritos: segmentación tolerante y vocabulario de escena
+
+Prueba 3 con **25 frases de prompt reales** (12 sentencias en español, 12 listas de tags en
+inglés, 1 bloque canónico) midiendo qué porcentaje de los segmentos producidos resuelve a un
+tag con ≥1000 posts. Línea base: **89,3 %** útil, con **12/12 frases en español al 0 %** y 11
+de 25 consultas quedándose en modo single sin segmentos.
+
+Causas encontradas y arregladas:
+
+1. **La traducción inyectaba espacios** (`kimono ,`) y rompía las listas con comas. Se
+   normaliza la puntuación después de traducir.
+2. **La lista con comas era todo-o-nada**: `all(_exact_tag_rows(...))` obligaba a que *todas*
+   las entradas fueran tags exactos; una sola desconocida (`sitting in snow`) descartaba el
+   prompt entero. Ahora cada entrada se resuelve y, si no es un tag exacto, se segmenta palabra
+   por palabra.
+3. **El DP exigía cubrir todas las palabras**: `escena`, `grande`, `vista` anulaban la
+   segmentación. Ahora una palabra desconocida se salta y los spans de alrededor se conservan.
+4. **Una sugerencia fuerte bloqueaba el multi-tag**: `retrato nocturno…` devolvía `neon` como
+   sugerencia en vez de 4 segmentos. Con ≥3 segmentos la segmentación gana.
+5. **Números en palabras**: `two girls` caía en `two_girls` (69 posts) y el fallback por token
+   lo "arreglaba" con `two_piece_swimsuit` (574k). Se normaliza a `2girls` (1 320 802) y el
+   fallback por token ya solo acepta tags de **una** palabra.
+6. **Vocabulario de escena**: el mapa ES pasó de 109 a **161 frases** (ropa, colores
+   combinados, encuadres, escenarios, verbos). Los colores sueltos se descartaron porque
+   resolvían a `red_eyes`/`black_hair`/`pink_nipples`; ahora van en compuestos
+   (`kimono rojo` → `red kimono`, `falda roja` → `red skirt`).
+
+Resultado: **100 % útil (98/98 segmentos)**, **25/25** frases en modo multi_tag, **0** frases
+bajo 60 %. Gates: `114 tests OK` (3 nuevos), knowledge bench 54/54, consistencia 20/20, bench de
+personajes 27/27. Docs: `scripts/README.md` (sección del probe) y los cuatro GLOSSARYs.
+
+---
+
 ## 1. Lo que ya está hecho (no rehacer)
 
 Spec original: `.hermes/plans/2026-11-05_1310-mcp-surface-cleanup.md`

@@ -245,6 +245,34 @@ class SearchRegressionTests(unittest.TestCase):
         result = search_knowledge("miku")["tag_library"]["results"]
         self.assertEqual(result[0]["name"], "hatsune_miku")
 
+    def test_search_knowledge_normalizes_count_words(self):
+        # "two_girls" is a 69-post fragment; the real tag is 2girls (1 320 802).
+        result = search_knowledge("two girls")["tag_library"]["results"]
+        self.assertEqual(result[0]["name"], "2girls")
+
+    def test_search_knowledge_segments_prompt_list_with_unknown_entry(self):
+        # One unknown entry ("sitting in snow") used to discard the whole prompt.
+        library = search_knowledge("1girl, kimono, sitting in snow, wide shot")["tag_library"]
+        self.assertEqual(library["query_mode"], "multi_tag")
+        parts = [part["query"] for part in library["query_parts"]]
+        self.assertIn("kimono", parts)
+        self.assertIn("wide shot", parts)
+
+    def test_search_knowledge_segments_spanish_prompt_phrase(self):
+        library = search_knowledge(
+            "chica con kimono rojo sentada en la nieve, vista amplia"
+        )["tag_library"]
+        self.assertEqual(library["query_mode"], "multi_tag")
+        tags = [part["results"][0]["name"] for part in library["query_parts"]
+                if part.get("results")]
+        self.assertIn("1girl", tags)
+        self.assertIn("red_kimono", tags)
+        self.assertEqual(library["query_translation"]["searched_as"],
+                         "1girl con red kimono sitting en la snow, wide shot")
+        for part in library["query_parts"]:
+            for row in part.get("results") or []:
+                self.assertGreaterEqual(row["post_count"], 1000)
+
     def test_search_knowledge_keeps_documented_small_tag_first(self):
         # 204 posts, but three wikis document it: typing it must return it.
         result = search_knowledge("mating_(animal)")["tag_library"]["results"]

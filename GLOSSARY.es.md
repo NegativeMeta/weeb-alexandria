@@ -154,6 +154,12 @@ Los empates se rompen por cobertura: un agregado de nombre desnudo (`saber`,
 grafía ordenada de la librería gana sobre la desordenada (`hatsune_miku` sobre
 `miku_hatsune`).
 
+Los prompts escritos también funcionan: las listas con comas sobreviven a una
+entrada desconocida, las palabras que no son tags se omiten en vez de anular la
+segmentación, `dos chicas` se convierte en `2girls`, y las frases en español se
+traducen antes de segmentar, así que un prompt completo vuelve como `query_parts`
+con un tag por parte.
+
 Busca entre:
 
 - Tags.

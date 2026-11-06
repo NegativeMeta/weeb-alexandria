@@ -153,6 +153,11 @@ Ties are broken by coverage: a bare-name aggregate (`saber`, 20 415) gives way t
 its franchise variant (`saber_(fate)`, 23 972), and the library's sorted spelling
 wins over an unsorted one (`hatsune_miku` over `miku_hatsune`).
 
+Written prompts work too: comma lists survive an unknown entry, unknown words are
+skipped instead of voiding the segmentation, `two girls` becomes `2girls`, and
+Spanish sentences are translated before segmenting, so a full prompt comes back as
+`query_parts` with one tag per part.
+
 It searches across:
 
 - Tags.
